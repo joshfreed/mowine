@@ -16,10 +16,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        UINavigationBar.appearance().tintColor = UIColor.white
+        preLoadData()
         return true
     }
 
+    private func preLoadData() {
+        let context = persistentContainer.viewContext
+        
+        removeAllData()
+        
+        let redWine = Type(context: context)
+        redWine.name = "Red"
+        redWine.addToVarieties(makeVariety(name: "Cabernet Sauvignon"))
+        redWine.addToVarieties(makeVariety(name: "Chianti"))
+        
+        let whiteWine = Type(context: context)
+        whiteWine.name = "White"
+        whiteWine.addToVarieties(makeVariety(name: "Pinot Blanc"))
+        whiteWine.addToVarieties(makeVariety(name: "Pinot Grigio"))
+        
+        let bubbly = Type(context: context)
+        bubbly.name = "Bubbly"
+        bubbly.addToVarieties(makeVariety(name: "Champagne"))
+        bubbly.addToVarieties(makeVariety(name: "Prosecco"))
+
+        saveContext()
+    }
+    
+    private func makeVariety(name: String) -> Variety {
+        let variety = Variety(context: persistentContainer.viewContext)
+        variety.name = name
+        return variety
+    }
+    
+    private func removeAllData() {
+        deleteAllEntity("Variety")
+        deleteAllEntity("Type")
+    }
+    
+    private func deleteAllEntity(_ entityName: String) {
+        let context = persistentContainer.viewContext
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            try context.execute(request)
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
