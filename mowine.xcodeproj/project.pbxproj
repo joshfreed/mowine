@@ -14,6 +14,9 @@
 		535793631E21A1EB00FDD56A /* MyWinesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357935C1E21A1EB00FDD56A /* MyWinesRouter.swift */; };
 		535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357935D1E21A1EB00FDD56A /* MyWinesViewController.swift */; };
 		535793651E21A1EB00FDD56A /* MyWinesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357935E1E21A1EB00FDD56A /* MyWinesWorker.swift */; };
+		53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8EDCF1E4185B000696FAE /* RatingRow.swift */; };
+		53D8EDD21E41868E00696FAE /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD11E41868E00696FAE /* RatingCell.xib */; };
+		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
 		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
@@ -64,6 +67,9 @@
 		5357935C1E21A1EB00FDD56A /* MyWinesRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesRouter.swift; path = Scenes/MyWines/MyWinesRouter.swift; sourceTree = "<group>"; };
 		5357935D1E21A1EB00FDD56A /* MyWinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesViewController.swift; path = Scenes/MyWines/MyWinesViewController.swift; sourceTree = "<group>"; };
 		5357935E1E21A1EB00FDD56A /* MyWinesWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesWorker.swift; path = Scenes/MyWines/MyWinesWorker.swift; sourceTree = "<group>"; };
+		53D8EDCF1E4185B000696FAE /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingRow.swift; path = EurekaRows/RatingRow.swift; sourceTree = "<group>"; };
+		53D8EDD11E41868E00696FAE /* RatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RatingCell.xib; path = EurekaRows/RatingCell.xib; sourceTree = "<group>"; };
+		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,9 +148,19 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		53D8EDCE1E41857100696FAE /* EurekaRows */ = {
+			isa = PBXGroup;
+			children = (
+				53D8EDCF1E4185B000696FAE /* RatingRow.swift */,
+				53D8EDD11E41868E00696FAE /* RatingCell.xib */,
+			);
+			name = EurekaRows;
+			sourceTree = "<group>";
+		};
 		53F5ABE71E2176080067AB62 = {
 			isa = PBXGroup;
 			children = (
+				53D8EDD31E4186A300696FAE /* Podfile */,
 				53F5ABF21E2176080067AB62 /* mowine */,
 				53F5AC0A1E2176090067AB62 /* mowineTests */,
 				53F5AC151E2176090067AB62 /* mowineUITests */,
@@ -167,6 +183,7 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
+				53D8EDCE1E41857100696FAE /* EurekaRows */,
 				535C0B1D1E3579EB008A8117 /* Models */,
 				53F5AC251E2185750067AB62 /* Extensions */,
 				53F5AC241E217E210067AB62 /* Scenes */,
@@ -314,6 +331,7 @@
 				53F5AC0F1E2176090067AB62 /* Frameworks */,
 				53F5AC101E2176090067AB62 /* Resources */,
 				AFDF6D76E4EBF5FB84746361 /* [CP] Copy Pods Resources */,
+				F847DFEC184BB770BB2AB128 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -379,6 +397,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53D8EDD41E4186A300696FAE /* Podfile in Resources */,
+				53D8EDD21E41868E00696FAE /* RatingCell.xib in Resources */,
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
@@ -444,7 +464,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A9AE12F1F31609777605FA92 /* [CP] Embed Pods Frameworks */ = {
@@ -489,7 +509,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F33352C28B2E27A47C525D64 /* [CP] Check Pods Manifest.lock */ = {
@@ -504,7 +524,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F77494430CD0EC0621FC36D6 /* [CP] Copy Pods Resources */ = {
@@ -522,6 +542,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F847DFEC184BB770BB2AB128 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -536,6 +571,7 @@
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,
 				53F5AC371E2188170067AB62 /* AddWineRouter.swift in Sources */,
+				53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */,
 				53F5AC341E2188170067AB62 /* AddWineInteractor.swift in Sources */,
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				535793621E21A1EB00FDD56A /* MyWinesPresenter.swift in Sources */,
@@ -698,7 +734,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C229246CC7D6CF9239D2004A /* Pods-mowine.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowine/Info.plist;
@@ -713,7 +748,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4398BA28CCE6264B4FB742A1 /* Pods-mowine.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowine/Info.plist;

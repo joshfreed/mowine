@@ -13,10 +13,12 @@ import UIKit
 
 protocol AddWinePresenterInput {
     func presentForm(response: AddWine.FetchForm.Response)
+    func presentWine(response: AddWine.SaveWine.Response)
 }
 
 protocol AddWinePresenterOutput: class {
     func displayForm(viewModel: AddWine.FetchForm.ViewModel)
+    func displayNewWine()
 }
 
 class AddWinePresenter: AddWinePresenterInput {
@@ -45,5 +47,9 @@ class AddWinePresenter: AddWinePresenterInput {
         let viewModel = AddWine.FetchForm.ViewModel(types: types)
         
         output.displayForm(viewModel: viewModel)
+    }
+    
+    func presentWine(response: AddWine.SaveWine.Response) {
+        output.displayNewWine()
     }
 }

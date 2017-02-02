@@ -42,11 +42,24 @@ struct AddWine {
     
     struct SaveWine {
         struct Request {
+            let name: String
+            let rating: Double
+            let type: AddWine.FetchForm.ViewModel.WineType
+            let variety: String
+            var location: String?
+            var price: Double?
+            var notes: String?
             
+            init(name: String, rating: Double, type: AddWine.FetchForm.ViewModel.WineType, variety: String) {
+                self.name = name
+                self.rating = rating
+                self.type = type
+                self.variety = variety
+            }
         }
         
         struct Response {
-            
+            let wine: Wine
         }
         
         struct ViewModel {

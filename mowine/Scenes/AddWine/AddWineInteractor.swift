@@ -18,6 +18,7 @@ protocol AddWineInteractorInput {
 
 protocol AddWineInteractorOutput {
     func presentForm(response: AddWine.FetchForm.Response)
+    func presentWine(response: AddWine.SaveWine.Response)
 }
 
 class AddWineInteractor: AddWineInteractorInput {
@@ -34,6 +35,7 @@ class AddWineInteractor: AddWineInteractorInput {
     }
     
     func addWine(request: AddWine.SaveWine.Request) {
-        
+        let wine = worker.createWine(request: request)
+        output.presentWine(response: AddWine.SaveWine.Response(wine: wine))
     }
 }

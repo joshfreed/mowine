@@ -14,6 +14,7 @@ import Eureka
 
 protocol AddWineViewControllerInput {
     func displayForm(viewModel: AddWine.FetchForm.ViewModel)
+    func displayNewWine()
 }
 
 protocol AddWineViewControllerOutput {
@@ -48,7 +49,36 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
     }
     
     @IBAction func saveWineAction(_ sender: UIBarButtonItem) {
+        let valuesDictionary = form.values()
         
+        guard let name = valuesDictionary["name"] as? String else {
+            return
+        }
+        guard let rating = valuesDictionary["rating"] as? Double else {
+            return
+        }
+        guard let type = valuesDictionary["type"] as? AddWine.FetchForm.ViewModel.WineType else {
+            return
+        }
+        guard let variety = valuesDictionary["variety"] as? String else {
+            return
+        }
+        
+        let location = valuesDictionary["location"] as? String
+        let price = valuesDictionary["price"] as? Double
+        let notes = valuesDictionary["notes"] as? String
+        
+        var request = AddWine.SaveWine.Request(
+            name: name,
+            rating: rating,
+            type: type,
+            variety: variety
+        )
+        request.location = location
+        request.price = price
+        request.notes = notes
+        
+        output.addWine(request: request)
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
@@ -67,6 +97,10 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
             <<< TextRow("name") {
                 $0.title = "Name"
                 $0.placeholder = "Fancy Wine Name"
+            }
+            <<< RatingRow("rating") {
+                $0.title = "Rating"
+                $0.cell.selectionStyle = .none
             }
             +++ Section()
             <<< PushRow<AddWine.FetchForm.ViewModel.WineType>("type") {
@@ -93,6 +127,10 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
             }
             +++ Section("Pairs well with")
             +++ Section("Notes")
-            <<< TextAreaRow()
+            <<< TextAreaRow("notes")
+    }
+    
+    func displayNewWine() {
+        router.navigateToMainMenu()
     }
 }

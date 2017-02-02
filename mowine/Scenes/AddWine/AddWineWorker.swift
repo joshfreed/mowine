@@ -39,4 +39,32 @@ class AddWineWorker {
         
         return types
     }
+    
+    func createWine(request: AddWine.SaveWine.Request) -> Wine {
+        
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Variety> = Variety.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name = %@", request.variety)
+        
+        var variety: Variety?
+        do {
+            variety = try context.fetch(fetchRequest).first
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        
+        print("\(variety?.name)")
+        
+        let wine = NSEntityDescription.insertNewObject(forEntityName: "Wine", into: context) as! Wine
+        
+//        let wine = Wine()
+        wine.name = request.name
+        wine.rating = Int16(request.rating)
+        wine.variety = variety
+        appDelegate.saveContext()
+        return wine
+    }
 }

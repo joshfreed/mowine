@@ -1,12 +1,15 @@
 PODS:
+  - Cosmos (8.0.2)
   - Eureka (2.0.0-beta.1)
 
 DEPENDENCIES:
+  - Cosmos (~> 8.0)
   - Eureka (= 2.0.0-beta.1)
 
 SPEC CHECKSUMS:
+  Cosmos: 007c0b8e33a85e5363911bdd933571bbe221f7ef
   Eureka: d014adf16406745e1a78d5790ea37ed130a0a8e5
 
-PODFILE CHECKSUM: 0d1abec51c0679a633b4cb5c2e600270d3de7779
+PODFILE CHECKSUM: 2ee7fdd2a33ab9e0f19fdfdb4097b746bc00b0b7
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0
