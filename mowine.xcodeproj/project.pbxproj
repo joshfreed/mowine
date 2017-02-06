@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5320BF361E42B0BB00F2405E /* PhotoCell.xib */; };
+		5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5320BF381E436FF200F2405E /* PhotoRow.swift */; };
 		5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535793581E21A1EB00FDD56A /* MyWinesConfigurator.swift */; };
 		535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535793591E21A1EB00FDD56A /* MyWinesInteractor.swift */; };
 		535793611E21A1EB00FDD56A /* MyWinesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357935A1E21A1EB00FDD56A /* MyWinesModels.swift */; };
@@ -60,6 +62,8 @@
 		2FA374DDFB53A0C1DAA61952 /* Pods-mowineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		36539C48DA1F84502E2FD95D /* Pods_mowineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4398BA28CCE6264B4FB742A1 /* Pods-mowine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.release.xcconfig"; sourceTree = "<group>"; };
+		5320BF361E42B0BB00F2405E /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoCell.xib; path = EurekaRows/PhotoCell.xib; sourceTree = "<group>"; };
+		5320BF381E436FF200F2405E /* PhotoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoRow.swift; path = EurekaRows/PhotoRow.swift; sourceTree = "<group>"; };
 		535793581E21A1EB00FDD56A /* MyWinesConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesConfigurator.swift; path = Scenes/MyWines/MyWinesConfigurator.swift; sourceTree = "<group>"; };
 		535793591E21A1EB00FDD56A /* MyWinesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesInteractor.swift; path = Scenes/MyWines/MyWinesInteractor.swift; sourceTree = "<group>"; };
 		5357935A1E21A1EB00FDD56A /* MyWinesModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesModels.swift; path = Scenes/MyWines/MyWinesModels.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 			children = (
 				53D8EDCF1E4185B000696FAE /* RatingRow.swift */,
 				53D8EDD11E41868E00696FAE /* RatingCell.xib */,
+				5320BF361E42B0BB00F2405E /* PhotoCell.xib */,
+				5320BF381E436FF200F2405E /* PhotoRow.swift */,
 			);
 			name = EurekaRows;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
+				5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +586,7 @@
 				535793611E21A1EB00FDD56A /* MyWinesModels.swift in Sources */,
 				53F5AC361E2188170067AB62 /* AddWinePresenter.swift in Sources */,
 				535793631E21A1EB00FDD56A /* MyWinesRouter.swift in Sources */,
+				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
 				53F5AC381E2188170067AB62 /* AddWineViewController.swift in Sources */,
 				53F5AC351E2188170067AB62 /* AddWineModels.swift in Sources */,
 				53F5AC331E2188170067AB62 /* AddWineConfigurator.swift in Sources */,

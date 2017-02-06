@@ -27,16 +27,17 @@ class AddWineWorker {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-        
-        for type in types {
-            print(type.name ?? "no name")
-            if let varieties = type.varieties {
-                for variety in varieties {
-                    print((variety as? Variety)?.name ?? "no variety name")
-                }
-            }
-        }
-        
+ 
+//        
+//        for type in types {
+//            print(type.name ?? "no name")
+//            if let varieties = type.varieties {
+//                for variety in varieties {
+//                    print((variety as? Variety)?.name ?? "no variety name")
+//                }
+//            }
+//        }
+//        
         return types
     }
     
@@ -59,8 +60,6 @@ class AddWineWorker {
         print("\(variety?.name)")
         
         let wine = NSEntityDescription.insertNewObject(forEntityName: "Wine", into: context) as! Wine
-        
-//        let wine = Wine()
         wine.name = request.name
         wine.rating = Int16(request.rating)
         wine.variety = variety

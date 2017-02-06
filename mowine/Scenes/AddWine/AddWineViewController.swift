@@ -26,6 +26,15 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
     var output: AddWineViewControllerOutput!
     var router: AddWineRouter!
 
+    let varietyRow = PushRow<String>("variety") {
+        $0.title = "Variety"
+        $0.options = []
+    }
+    let typeRow = PushRow<AddWine.FetchForm.ViewModel.WineType>("type") {
+        $0.title = "Type"
+        $0.options = []
+    }
+    
     // MARK: - Object lifecycle
 
     override func awakeFromNib() {
@@ -38,7 +47,50 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        buildForm()
         fetchFormOnLoad()
+    }
+    
+    func buildForm() {
+        typeRow.onChange { row in
+            if let value = row.value {
+                self.varietyRow.options = value.varieties
+            } else {
+                self.varietyRow.options = []
+            }
+            
+            self.varietyRow.value = nil
+            self.varietyRow.updateCell()
+        }
+        
+        form = Section(header: "Photo", footer: "Take or select a photo of this wine.")
+            <<< PhotoRow("photo") {
+                $0.title = nil
+            }
+            +++ Section()
+            <<< TextRow("name") {
+                $0.title = "Name"
+                $0.placeholder = "Fancy Wine Name"
+            }
+            <<< RatingRow("rating") {
+                $0.title = "Rating"
+                $0.cell.selectionStyle = .none
+            }
+            +++ Section()
+            <<< typeRow
+            <<< varietyRow
+            <<< TextRow("location") {
+                $0.title = "Location"
+                $0.placeholder = "Where did I find this wine?"
+            }
+            <<< DecimalRow("price") {
+                $0.title = "Price"
+                $0.placeholder = "How much was this wine?"
+            }
+            +++ Section("Pairs well with")
+            +++ Section("Notes")
+            <<< TextAreaRow("notes")
+
     }
 
     // MARK: - Event handling
@@ -88,46 +140,7 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
     // MARK: - Display logic
 
     func displayForm(viewModel: AddWine.FetchForm.ViewModel) {
-        let varietyRow = PushRow<String>("variety") {
-            $0.title = "Variety"
-            $0.options = []
-        }
-        
-        form = Section()
-            <<< TextRow("name") {
-                $0.title = "Name"
-                $0.placeholder = "Fancy Wine Name"
-            }
-            <<< RatingRow("rating") {
-                $0.title = "Rating"
-                $0.cell.selectionStyle = .none
-            }
-            +++ Section()
-            <<< PushRow<AddWine.FetchForm.ViewModel.WineType>("type") {
-                $0.title = "Type"
-                $0.options = viewModel.types
-                }.onChange { row in
-                    if let value = row.value {
-                        varietyRow.options = value.varieties
-                    } else {
-                        varietyRow.options = []
-                    }
-                    
-                    varietyRow.value = nil
-                    varietyRow.updateCell()
-                }
-            <<< varietyRow
-            <<< TextRow("location") {
-                $0.title = "Location"
-                $0.placeholder = "Where did I find this wine?"
-            }
-            <<< DecimalRow("price") {
-                $0.title = "Price"
-                $0.placeholder = "How much was this wine?"
-            }
-            +++ Section("Pairs well with")
-            +++ Section("Notes")
-            <<< TextAreaRow("notes")
+        typeRow.options = viewModel.types
     }
     
     func displayNewWine() {

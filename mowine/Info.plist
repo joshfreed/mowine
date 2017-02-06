@@ -47,5 +47,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Choose a photo of your wine from your Photo Library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>mo wine uses the camera so you can take a picture of your wine</string>
 </dict>
 </plist>

@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         preLoadData()
         
+        /*
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request: NSFetchRequest<Wine> = Wine.fetchRequest()
@@ -33,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for wine in wines {
             print("\(wine.id), \(wine.name), \(wine.variety), \(wine.variety?.name)")
         }
+         */
         
         return true
     }
