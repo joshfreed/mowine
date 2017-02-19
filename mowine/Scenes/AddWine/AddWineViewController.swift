@@ -26,6 +26,10 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
     var output: AddWineViewControllerOutput!
     var router: AddWineRouter!
 
+    let nameRow = TextRow("name") {
+        $0.title = "Name"
+        $0.placeholder = "Fancy Wine Name"
+    }
     let varietyRow = PushRow<String>("variety") {
         $0.title = "Variety"
         $0.options = []
@@ -63,18 +67,15 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
             self.varietyRow.updateCell()
         }
         
-        form = Section(header: "Photo", footer: "Take or select a photo of this wine.")
-            <<< PhotoRow("photo") {
-                $0.title = nil
-            }
-            +++ Section()
-            <<< TextRow("name") {
-                $0.title = "Name"
-                $0.placeholder = "Fancy Wine Name"
-            }
+        form = Section()
+            <<< nameRow
             <<< RatingRow("rating") {
                 $0.title = "Rating"
                 $0.cell.selectionStyle = .none
+            }
+            +++ Section(header: "Photo", footer: "Take or select a photo of this wine.")
+            <<< PhotoRow("photo") {
+                $0.title = nil
             }
             +++ Section()
             <<< typeRow
@@ -90,6 +91,8 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
             +++ Section("Pairs well with")
             +++ Section("Notes")
             <<< TextAreaRow("notes")
+        
+        nameRow.cell.textField.becomeFirstResponder()
 
     }
 
@@ -129,6 +132,9 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
         request.location = location
         request.price = price
         request.notes = notes
+        
+        request.image = valuesDictionary["photo"] as? UIImage
+        
         
         output.addWine(request: request)
     }

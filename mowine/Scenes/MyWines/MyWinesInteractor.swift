@@ -12,28 +12,23 @@
 import UIKit
 
 protocol MyWinesInteractorInput {
-    func doSomething(request: MyWines.Something.Request)
+    func fetchMyWines(request: MyWines.FetchMyWines.Request)
 }
 
 protocol MyWinesInteractorOutput {
-    func presentSomething(response: MyWines.Something.Response)
+    func presentMyWines(response: MyWines.FetchMyWines.Response)
 }
 
 class MyWinesInteractor: MyWinesInteractorInput {
     var output: MyWinesInteractorOutput!
-    var worker: MyWinesWorker!
+    let worker = MyWinesWorker()
 
     // MARK: - Business logic
 
-    func doSomething(request: MyWines.Something.Request) {
-        // NOTE: Create some Worker to do the work
+    func fetchMyWines(request: MyWines.FetchMyWines.Request) {
+        let wines = worker.fetchMyWines()
 
-        worker = MyWinesWorker()
-        worker.doSomeWork()
-
-        // NOTE: Pass the result to the Presenter
-
-        let response = MyWines.Something.Response()
-        output.presentSomething(response: response)
+        let response = MyWines.FetchMyWines.Response(wines: wines)
+        output.presentMyWines(response: response)
     }
 }

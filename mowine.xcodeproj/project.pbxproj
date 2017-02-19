@@ -35,6 +35,8 @@
 		53F5AC371E2188170067AB62 /* AddWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC301E2188170067AB62 /* AddWineRouter.swift */; };
 		53F5AC381E2188170067AB62 /* AddWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC311E2188170067AB62 /* AddWineViewController.swift */; };
 		53F5AC391E2188170067AB62 /* AddWineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC321E2188170067AB62 /* AddWineWorker.swift */; };
+		53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FD50B01E4947CD00F474A6 /* WineTableViewCell.swift */; };
+		53FD50B31E4947CD00F474A6 /* WineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53FD50B11E4947CD00F474A6 /* WineTableViewCell.xib */; };
 		96978BDAF7F046BA9286928D /* Pods_mowineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EA782740BFA91CCEF1AC4D /* Pods_mowineUITests.framework */; };
 		B500BD18172521E08D129103 /* Pods_mowine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0D2FACD3CCEEB7590312C1 /* Pods_mowine.framework */; };
 		B6E58F72C6EBC87828F360B8 /* Pods_mowineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36539C48DA1F84502E2FD95D /* Pods_mowineTests.framework */; };
@@ -96,6 +98,8 @@
 		53F5AC301E2188170067AB62 /* AddWineRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddWineRouter.swift; path = Scenes/AddWine/AddWineRouter.swift; sourceTree = "<group>"; };
 		53F5AC311E2188170067AB62 /* AddWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddWineViewController.swift; path = Scenes/AddWine/AddWineViewController.swift; sourceTree = "<group>"; };
 		53F5AC321E2188170067AB62 /* AddWineWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddWineWorker.swift; path = Scenes/AddWine/AddWineWorker.swift; sourceTree = "<group>"; };
+		53FD50B01E4947CD00F474A6 /* WineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineTableViewCell.swift; path = Scenes/MyWines/WineTableViewCell.swift; sourceTree = "<group>"; };
+		53FD50B11E4947CD00F474A6 /* WineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WineTableViewCell.xib; path = Scenes/MyWines/WineTableViewCell.xib; sourceTree = "<group>"; };
 		6D0D2FACD3CCEEB7590312C1 /* Pods_mowine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79EA782740BFA91CCEF1AC4D /* Pods_mowineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C229246CC7D6CF9239D2004A /* Pods-mowine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				5357935C1E21A1EB00FDD56A /* MyWinesRouter.swift */,
 				5357935D1E21A1EB00FDD56A /* MyWinesViewController.swift */,
 				5357935E1E21A1EB00FDD56A /* MyWinesWorker.swift */,
+				53FD50B01E4947CD00F474A6 /* WineTableViewCell.swift */,
+				53FD50B11E4947CD00F474A6 /* WineTableViewCell.xib */,
 			);
 			name = MyWines;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53D8EDD41E4186A300696FAE /* Podfile in Resources */,
+				53FD50B31E4947CD00F474A6 /* WineTableViewCell.xib in Resources */,
 				53D8EDD21E41868E00696FAE /* RatingCell.xib in Resources */,
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
@@ -578,6 +585,7 @@
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,
 				53F5AC371E2188170067AB62 /* AddWineRouter.swift in Sources */,
+				53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */,
 				53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */,
 				53F5AC341E2188170067AB62 /* AddWineInteractor.swift in Sources */,
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,

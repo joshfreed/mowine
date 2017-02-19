@@ -13,15 +13,24 @@ import UIKit
 
 struct MyWines {
 
-    struct Something {
+    struct FetchMyWines {
 
         struct Request {
         }
 
         struct Response {
+            var wines: [Wine]
         }
 
         struct ViewModel {
+            var wines: [WineViewModel]
+            
+            struct WineViewModel {
+                var thumbnail: UIImage?
+                var name: String
+                var variety: String
+                var rating: Double
+            }
         }
 
     }

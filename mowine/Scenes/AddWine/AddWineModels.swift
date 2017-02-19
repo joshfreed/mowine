@@ -49,6 +49,7 @@ struct AddWine {
             var location: String?
             var price: Double?
             var notes: String?
+            var image: UIImage?
             
             init(name: String, rating: Double, type: AddWine.FetchForm.ViewModel.WineType, variety: String) {
                 self.name = name

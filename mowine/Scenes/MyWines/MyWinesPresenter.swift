@@ -12,11 +12,11 @@
 import UIKit
 
 protocol MyWinesPresenterInput {
-    func presentSomething(response: MyWines.Something.Response)
+    func presentMyWines(response: MyWines.FetchMyWines.Response)
 }
 
 protocol MyWinesPresenterOutput: class {
-    func displaySomething(viewModel: MyWines.Something.ViewModel)
+    func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel)
 }
 
 class MyWinesPresenter: MyWinesPresenterInput {
@@ -24,10 +24,26 @@ class MyWinesPresenter: MyWinesPresenterInput {
 
     // MARK: - Presentation logic
 
-    func presentSomething(response: MyWines.Something.Response) {
-        // NOTE: Format the response from the Interactor and pass the result back to the View Controller
+    func presentMyWines(response: MyWines.FetchMyWines.Response) {
+        let wineViewModels: [MyWines.FetchMyWines.ViewModel.WineViewModel] = response.wines.map { wine in
+            let name = wine.name ?? ""
+            var varietyName = ""
+            if let variety = wine.variety {
+                varietyName = variety.name ?? ""
+            }
+            var image: UIImage?
+            if let imageData = wine.image as? Data {
+                image = UIImage(data: imageData)
+            }
+            return MyWines.FetchMyWines.ViewModel.WineViewModel(
+                thumbnail: image,
+                name: name,
+                variety: varietyName,
+                rating: wine.rating
+            )
+        }
 
-        let viewModel = MyWines.Something.ViewModel()
-        output.displaySomething(viewModel: viewModel)
+        let viewModel = MyWines.FetchMyWines.ViewModel(wines: wineViewModels)
+        output.displayMyWines(viewModel: viewModel)
     }
 }

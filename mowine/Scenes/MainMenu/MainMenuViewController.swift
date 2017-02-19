@@ -14,9 +14,13 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var newWineView: UIView!
     @IBOutlet weak var myWinesView: UIView!
 
+    private var showNavBar = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.isNavigationBarHidden = true
+        
         newWineImage.fixTintIssue()
         myWinesImage.fixTintIssue()
         
@@ -24,9 +28,14 @@ class MainMenuViewController: UIViewController {
         myWinesView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedMyWines)))
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if showNavBar {
+            navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
     }
     
 
@@ -41,10 +50,12 @@ class MainMenuViewController: UIViewController {
     */
 
     func tappedNewWine() {
+        showNavBar = false
         performSegue(withIdentifier: "newWine", sender: nil)
     }
     
     func tappedMyWines() {
+        showNavBar = true
         performSegue(withIdentifier: "myWines", sender: nil)
     }
 }

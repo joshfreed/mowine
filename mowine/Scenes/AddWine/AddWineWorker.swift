@@ -61,8 +61,25 @@ class AddWineWorker {
         
         let wine = NSEntityDescription.insertNewObject(forEntityName: "Wine", into: context) as! Wine
         wine.name = request.name
-        wine.rating = Int16(request.rating)
+        wine.rating = request.rating
         wine.variety = variety
+        
+        if let image = request.image {
+            var proper: UIImage? = image
+            
+            if !(image.imageOrientation == .up || image.imageOrientation == .upMirrored) {
+                let imgsize = image.size
+                UIGraphicsBeginImageContext(imgsize)
+                image.draw(in: CGRect(x: 0, y: 0, width: imgsize.width, height: imgsize.height))
+                proper = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+            }
+            
+            if let proper = proper {
+                wine.image = UIImagePNGRepresentation(proper) as NSData?
+            }
+        }
+        
         appDelegate.saveContext()
         return wine
     }

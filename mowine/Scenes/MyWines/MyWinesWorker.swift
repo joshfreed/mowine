@@ -10,11 +10,24 @@
 //
 
 import UIKit
+import CoreData
 
 class MyWinesWorker {
     // MARK: - Business Logic
 
-    func doSomeWork() {
-        // NOTE: Do the work
+    func fetchMyWines() -> [Wine] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request: NSFetchRequest<Wine> = Wine.fetchRequest()
+        
+        let wines: [Wine]
+        do {
+            wines = try context.fetch(request)
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        
+        return wines
     }
 }

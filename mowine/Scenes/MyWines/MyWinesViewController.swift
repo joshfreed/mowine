@@ -12,16 +12,17 @@
 import UIKit
 
 protocol MyWinesViewControllerInput {
-    func displaySomething(viewModel: MyWines.Something.ViewModel)
+    func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel)
 }
 
 protocol MyWinesViewControllerOutput {
-    func doSomething(request: MyWines.Something.Request)
+    func fetchMyWines(request: MyWines.FetchMyWines.Request)
 }
 
 class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
     var output: MyWinesViewControllerOutput!
     var router: MyWinesRouter!
+    var wines: [MyWines.FetchMyWines.ViewModel.WineViewModel] = []
 
     // MARK: - Object lifecycle
 
@@ -34,23 +35,40 @@ class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomethingOnLoad()
+        
+        tableView.register(UINib(nibName: "WineTableViewCell", bundle: nil), forCellReuseIdentifier: "WineTableViewCell")
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 144
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        fetchWinesOnLoad()
     }
 
     // MARK: - Event handling
 
-    func doSomethingOnLoad() {
+    func fetchWinesOnLoad() {
         // NOTE: Ask the Interactor to do some work
 
-        let request = MyWines.Something.Request()
-        output.doSomething(request: request)
+        let request = MyWines.FetchMyWines.Request()
+        output.fetchMyWines(request: request)
     }
 
     // MARK: - Display logic
 
-    func displaySomething(viewModel: MyWines.Something.ViewModel) {
-        // NOTE: Display the result from the Presenter
-
-        // nameTextField.text = viewModel.name
+    func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel) {
+        wines = viewModel.wines
+        tableView.reloadData()
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return wines.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WineTableViewCell", for: indexPath) as! WineTableViewCell
+        cell.configure(wine: wines[indexPath.row])
+        return cell
     }
 }
