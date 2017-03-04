@@ -17,10 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = UIColor.white
-//        preLoadData()        
+//        deleteDatabase()
+//        preLoadData()
         return true
     }
 
+    private func deleteDatabase() {
+        var url = NSPersistentContainer.defaultDirectoryURL()
+        url.appendPathComponent("mowine.sqlite")
+        
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
     private func preLoadData() {
         let context = persistentContainer.viewContext
         
@@ -37,13 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let whiteWine = Type(context: context)
         whiteWine.name = "White"
+        whiteWine.addToVarieties(makeVariety(name: "Chardonnay"))
+        whiteWine.addToVarieties(makeVariety(name: "Gewürztraminer"))
         whiteWine.addToVarieties(makeVariety(name: "Pinot Blanc"))
         whiteWine.addToVarieties(makeVariety(name: "Pinot Grigio"))
-        whiteWine.addToVarieties(makeVariety(name: "Sauvignon Blanc"))
         whiteWine.addToVarieties(makeVariety(name: "Riesling"))
+        whiteWine.addToVarieties(makeVariety(name: "Sauvignon Blanc"))
         whiteWine.addToVarieties(makeVariety(name: "Moscato"))
-        whiteWine.addToVarieties(makeVariety(name: "Gewürztraminer"))
-        whiteWine.addToVarieties(makeVariety(name: "Chardonnay"))
         whiteWine.addToVarieties(makeVariety(name: "White Blend"))
         
         let bubbly = Type(context: context)
