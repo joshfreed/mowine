@@ -30,6 +30,7 @@
 		537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A91E5BD58A00A1D282 /* WineImageWorker.swift */; };
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		539196981E6B68EE001AE149 /* WineTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196971E6B68EE001AE149 /* WineTypeWorker.swift */; };
+		539196A01E6B7A1D001AE149 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391969F1E6B7A1D001AE149 /* Delay.swift */; };
 		53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8EDCF1E4185B000696FAE /* RatingRow.swift */; };
 		53D8EDD21E41868E00696FAE /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD11E41868E00696FAE /* RatingCell.xib */; };
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
@@ -101,6 +102,7 @@
 		537740A91E5BD58A00A1D282 /* WineImageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineImageWorker.swift; path = Shared/WineImageWorker.swift; sourceTree = "<group>"; };
 		539196951E6B612D001AE149 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Models/Notifications.swift; sourceTree = "<group>"; };
 		539196971E6B68EE001AE149 /* WineTypeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineTypeWorker.swift; path = Shared/WineTypeWorker.swift; sourceTree = "<group>"; };
+		5391969F1E6B7A1D001AE149 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Delay.swift; path = Utilities/Delay.swift; sourceTree = "<group>"; };
 		53D8EDCF1E4185B000696FAE /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingRow.swift; path = EurekaRows/RatingRow.swift; sourceTree = "<group>"; };
 		53D8EDD11E41868E00696FAE /* RatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RatingCell.xib; path = EurekaRows/RatingCell.xib; sourceTree = "<group>"; };
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -213,6 +215,14 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
+		5391969C1E6B79F6001AE149 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5391969F1E6B7A1D001AE149 /* Delay.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		53D8EDCE1E41857100696FAE /* EurekaRows */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +260,7 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
+				5391969C1E6B79F6001AE149 /* Utilities */,
 				537614CF1E591F31005AABF0 /* Shared */,
 				53D8EDCE1E41857100696FAE /* EurekaRows */,
 				535C0B1D1E3579EB008A8117 /* Models */,
@@ -669,6 +680,7 @@
 				537740A61E5BD11C00A1D282 /* UIViewController.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,
+				539196A01E6B7A1D001AE149 /* Delay.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				537614C91E591887005AABF0 /* EditWineInteractor.swift in Sources */,
 			);

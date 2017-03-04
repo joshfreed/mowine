@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,28 +22,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mo wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MO4-Ga-AQT">
-                                <rect key="frame" x="112" y="52" width="152" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mo' wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MO4-Ga-AQT">
+                                <rect key="frame" x="107" y="52" width="161" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="37"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1v-bt-JHh" userLabel="Top Spacer">
-                                <rect key="frame" x="182" y="97" width="10" height="49"/>
+                                <rect key="frame" x="182" y="96.5" width="10" height="65.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="CBA-bX-H9P"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CD-c3-WCJ">
-                                <rect key="frame" x="0.0" y="146" width="375" height="211.5"/>
+                                <rect key="frame" x="0.0" y="162" width="375" height="211.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="glass-and-bottle-of-wine" translatesAutoresizingMaskIntoConstraints="NO" id="lEx-o4-hdv">
                                         <rect key="frame" x="0.0" y="16" width="375" height="130"/>
                                         <color key="tintColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxs-Km-Kig">
-                                        <rect key="frame" x="152.5" y="162" width="69" height="33.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="add a wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxs-Km-Kig">
+                                        <rect key="frame" x="121.5" y="162" width="131.5" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -59,21 +60,21 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuT-xg-2mi" userLabel="Middle Spacer">
-                                <rect key="frame" x="182" y="357.5" width="10" height="49"/>
+                                <rect key="frame" x="182" y="373.5" width="10" height="65.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="PNh-6c-5sy"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qn5-9x-o5P">
-                                <rect key="frame" x="0.0" y="406.5" width="375" height="211.5"/>
+                                <rect key="frame" x="0.0" y="439" width="375" height="162.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="VY4-74-5yL">
-                                        <rect key="frame" x="145.5" y="16" width="84" height="130"/>
+                                        <rect key="frame" x="145.5" y="16" width="84" height="81"/>
                                         <color key="tintColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="drunk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-hv-OIu">
-                                        <rect key="frame" x="152.5" y="162" width="70" height="33.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="my wines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8T-hv-OIu">
+                                        <rect key="frame" x="130.5" y="113" width="114" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -89,12 +90,29 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWa-0t-gSr" userLabel="Bottom Spacer">
-                                <rect key="frame" x="182.5" y="618" width="10" height="49"/>
+                                <rect key="frame" x="182.5" y="601.5" width="10" height="65.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="PAK-am-Pcx"/>
                                 </constraints>
                             </view>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="HCo-pT-SyR">
+                                <rect key="frame" x="24" y="245.5" width="327" height="177"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mo' wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXM-dj-Mhk">
+                                        <rect key="frame" x="83" y="0.0" width="161" height="44.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="37"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate and remember the wines you drink.  Because you drink a lot of wine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4M-qP-GJu">
+                                        <rect key="frame" x="1" y="76.5" width="325" height="100.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -102,28 +120,41 @@
                             <constraint firstAttribute="trailing" secondItem="3CD-c3-WCJ" secondAttribute="trailing" id="2Af-Yl-z9S"/>
                             <constraint firstItem="Qn5-9x-o5P" firstAttribute="top" secondItem="wuT-xg-2mi" secondAttribute="bottom" id="2vv-U1-T8g"/>
                             <constraint firstItem="ZWa-0t-gSr" firstAttribute="top" secondItem="Qn5-9x-o5P" secondAttribute="bottom" id="ABH-ev-HgY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HCo-pT-SyR" secondAttribute="trailing" constant="8" id="DZc-8w-XgH"/>
                             <constraint firstAttribute="trailing" secondItem="Qn5-9x-o5P" secondAttribute="trailing" id="E0U-aA-VK9"/>
+                            <constraint firstItem="HCo-pT-SyR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ILv-Qf-GTE"/>
                             <constraint firstItem="3CD-c3-WCJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Smd-gq-YQ2"/>
                             <constraint firstItem="Qn5-9x-o5P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="X4q-Jb-LGM"/>
                             <constraint firstItem="3CD-c3-WCJ" firstAttribute="top" secondItem="z1v-bt-JHh" secondAttribute="bottom" id="XlU-vw-MAH"/>
                             <constraint firstItem="MO4-Ga-AQT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="32" id="ezh-ga-Sdg"/>
                             <constraint firstItem="z1v-bt-JHh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fBG-gu-bF6"/>
                             <constraint firstItem="wuT-xg-2mi" firstAttribute="top" secondItem="3CD-c3-WCJ" secondAttribute="bottom" id="fZl-ww-uyH"/>
+                            <constraint firstItem="HCo-pT-SyR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="32" id="fbC-Y4-Tsr"/>
                             <constraint firstItem="ZWa-0t-gSr" firstAttribute="height" secondItem="wuT-xg-2mi" secondAttribute="height" id="gl8-ef-Kl0"/>
                             <constraint firstItem="z1v-bt-JHh" firstAttribute="top" secondItem="MO4-Ga-AQT" secondAttribute="bottom" id="ieS-w1-DPv"/>
+                            <constraint firstItem="HCo-pT-SyR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="iyw-FM-YsO"/>
                             <constraint firstItem="wuT-xg-2mi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p2F-OL-r3a"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZWa-0t-gSr" secondAttribute="bottom" id="u6w-Yt-QaG"/>
                             <constraint firstItem="MO4-Ga-AQT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vfD-N8-e8m"/>
-                            <constraint firstItem="lEx-o4-hdv" firstAttribute="height" secondItem="VY4-74-5yL" secondAttribute="height" id="yWq-Z6-Vfj"/>
                             <constraint firstItem="wuT-xg-2mi" firstAttribute="height" secondItem="z1v-bt-JHh" secondAttribute="height" id="zYJ-4l-lst"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fbC-Y4-Tsr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="lj8-8y-huM"/>
                     <connections>
+                        <outlet property="launchScreenCenterConstraint" destination="ILv-Qf-GTE" id="Y1r-td-4S7"/>
+                        <outlet property="launchScreenStackView" destination="HCo-pT-SyR" id="EpH-CQ-Bgj"/>
+                        <outlet property="launchScreenTopConstraint" destination="fbC-Y4-Tsr" id="NFZ-Nj-8lZ"/>
                         <outlet property="myWinesImage" destination="VY4-74-5yL" id="BNU-hy-Zet"/>
                         <outlet property="myWinesView" destination="Qn5-9x-o5P" id="Pr1-6v-lgA"/>
                         <outlet property="newWineImage" destination="lEx-o4-hdv" id="HAu-vz-1JS"/>
                         <outlet property="newWineView" destination="3CD-c3-WCJ" id="PAK-aE-dcv"/>
+                        <outlet property="tagLineLabel" destination="R4M-qP-GJu" id="AzB-hY-ymG"/>
+                        <outlet property="titleLabel" destination="MO4-Ga-AQT" id="bai-x9-FWJ"/>
                         <segue destination="D0Z-l0-L48" kind="presentation" identifier="newWine" id="zTP-JC-YFg"/>
                         <segue destination="qOI-mG-2k4" kind="show" identifier="myWines" id="MGM-zE-0Nd"/>
                     </connections>

@@ -13,6 +13,11 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var myWinesImage: UIImageView!
     @IBOutlet weak var newWineView: UIView!
     @IBOutlet weak var myWinesView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var launchScreenStackView: UIStackView!
+    @IBOutlet weak var launchScreenTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var launchScreenCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagLineLabel: UILabel!
 
     private var showNavBar = false
     
@@ -20,6 +25,11 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
 
         navigationController?.isNavigationBarHidden = true
+        
+        newWineView.alpha = 0
+        myWinesView.alpha = 0
+        titleLabel.isHidden = true
+        launchScreenStackView.isHidden = false
         
         newWineImage.fixTintIssue()
         myWinesImage.fixTintIssue()
@@ -32,12 +42,40 @@ class MainMenuViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        delay(seconds: 1) {
+            self.animateLaunchScreenToMainMenu()
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         if showNavBar {
             navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }
     
+    func animateLaunchScreenToMainMenu() {
+        view.layoutIfNeeded()
+        
+        launchScreenCenterConstraint.isActive = false
+        launchScreenTopConstraint.isActive = true
+        
+        UIView.animate(withDuration: 0.1) {
+            self.tagLineLabel.alpha = 0
+        }
+        
+        UIView.animate(withDuration: 0.85, delay: 0, options: [UIViewAnimationOptions.curveEaseOut], animations: {
+            self.view.layoutIfNeeded()
+        }, completion: { success in
+            self.launchScreenStackView.isHidden = true
+            self.titleLabel.isHidden = false
+        })
+        
+        UIView.animate(withDuration: 0.60, delay: 0.25, options: [], animations: {
+            self.newWineView.alpha = 1
+            self.myWinesView.alpha = 1
+        }, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
