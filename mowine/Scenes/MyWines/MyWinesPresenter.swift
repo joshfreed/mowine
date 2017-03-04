@@ -32,14 +32,14 @@ class MyWinesPresenter: MyWinesPresenterInput {
         if let variety = wine.variety {
             varietyName = variety.name ?? ""
         }
-        var image: UIImage?
-        if let imageData = wine.image as? Data {
-            image = UIImage(data: imageData)
+        var thumbnail: UIImage?
+        if let imageData = wine.thumbnail as? Data {
+            thumbnail = UIImage(data: imageData)
         }
         
         return MyWines.FetchMyWines.ViewModel.WineViewModel(
             id: wine.objectID.uriRepresentation().absoluteString,
-            thumbnail: image,
+            thumbnail: thumbnail,
             name: name,
             variety: varietyName,
             rating: wine.rating

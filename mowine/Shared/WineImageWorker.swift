@@ -26,4 +26,23 @@ class WineImageWorker: NSObject {
             return nil
         }
     }
+    
+    func createThumbnail(from image: UIImage) -> NSData? {
+        let thumbSize = CGSize(width: 150, height: 150)
+        let scale = min( thumbSize.width / image.size.width, thumbSize.height / image.size.height)
+        let newSize = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+        
+        var thumbnail: UIImage? = image
+
+        UIGraphicsBeginImageContext(newSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        thumbnail = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let thumbnail = thumbnail {
+            return UIImagePNGRepresentation(thumbnail) as NSData?
+        } else {
+            return nil
+        }
+    }
 }

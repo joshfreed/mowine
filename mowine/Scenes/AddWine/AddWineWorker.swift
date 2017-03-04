@@ -29,8 +29,10 @@ class AddWineWorker {
         wine.rating = request.rating
         wine.variety = varietyTranslator.toCoreData(input: request.variety)
         
+        let imageWorker = WineImageWorker()
         if let image = request.image {
-            wine.image = WineImageWorker().convertToPNGData(image: image)
+            wine.image = imageWorker.convertToPNGData(image: image)
+            wine.thumbnail = imageWorker.createThumbnail(from: image)
         }
         
         try wine.managedObjectContext?.save()
