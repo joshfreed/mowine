@@ -9,26 +9,48 @@
 //  clean architecture to your iOS and Mac projects, see http://clean-swift.com
 //
 
-import UIKit
+import Foundation
 
 protocol MyWinesInteractorInput {
+    var selectedWine: Wine? { get set }
     func fetchMyWines(request: MyWines.FetchMyWines.Request)
+    func selectWine(atIndex index: Int)
 }
 
 protocol MyWinesInteractorOutput {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
+    func presentUpdatedWine(wine: Wine)
 }
 
 class MyWinesInteractor: MyWinesInteractorInput {
     var output: MyWinesInteractorOutput!
     let worker = MyWinesWorker()
+    var selectedWine: Wine?
+    
+    private var wines: [Wine] = []
 
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
+    }
+    
+    @objc func wineUpdated(notification: Notification) {
+        guard let updatedWine = notification.userInfo?["wine"] as? Wine else {
+            return
+        }
+        
+        output.presentUpdatedWine(wine: updatedWine)
+    }
+    
     // MARK: - Business logic
 
     func fetchMyWines(request: MyWines.FetchMyWines.Request) {
-        let wines = worker.fetchMyWines()
+        wines = worker.fetchMyWines()
 
         let response = MyWines.FetchMyWines.Response(wines: wines)
         output.presentMyWines(response: response)
+    }
+    
+    func selectWine(atIndex index: Int) {
+        selectedWine = wines[index]
     }
 }

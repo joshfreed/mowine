@@ -13,10 +13,12 @@ import UIKit
 
 protocol MyWinesPresenterInput {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
+    func presentUpdatedWine(wine: Wine)
 }
 
 protocol MyWinesPresenterOutput: class {
     func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel)
+    func displayUpdatedWine(viewModel: MyWines.FetchMyWines.ViewModel.WineViewModel)
 }
 
 class MyWinesPresenter: MyWinesPresenterInput {
@@ -24,26 +26,36 @@ class MyWinesPresenter: MyWinesPresenterInput {
 
     // MARK: - Presentation logic
 
+    private func buildWineViewModel(fromModel wine: Wine) -> MyWines.FetchMyWines.ViewModel.WineViewModel {
+        let name = wine.name ?? ""
+        var varietyName = ""
+        if let variety = wine.variety {
+            varietyName = variety.name ?? ""
+        }
+        var image: UIImage?
+        if let imageData = wine.image as? Data {
+            image = UIImage(data: imageData)
+        }
+        
+        return MyWines.FetchMyWines.ViewModel.WineViewModel(
+            id: wine.objectID.uriRepresentation().absoluteString,
+            thumbnail: image,
+            name: name,
+            variety: varietyName,
+            rating: wine.rating
+        )
+    }
+    
     func presentMyWines(response: MyWines.FetchMyWines.Response) {
         let wineViewModels: [MyWines.FetchMyWines.ViewModel.WineViewModel] = response.wines.map { wine in
-            let name = wine.name ?? ""
-            var varietyName = ""
-            if let variety = wine.variety {
-                varietyName = variety.name ?? ""
-            }
-            var image: UIImage?
-            if let imageData = wine.image as? Data {
-                image = UIImage(data: imageData)
-            }
-            return MyWines.FetchMyWines.ViewModel.WineViewModel(
-                thumbnail: image,
-                name: name,
-                variety: varietyName,
-                rating: wine.rating
-            )
+            buildWineViewModel(fromModel: wine)
         }
 
         let viewModel = MyWines.FetchMyWines.ViewModel(wines: wineViewModels)
         output.displayMyWines(viewModel: viewModel)
+    }
+    
+    func presentUpdatedWine(wine: Wine) {
+        output.displayUpdatedWine(viewModel: buildWineViewModel(fromModel: wine))
     }
 }

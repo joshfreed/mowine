@@ -30,11 +30,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         redWine.name = "Red"
         redWine.addToVarieties(makeVariety(name: "Cabernet Sauvignon"))
         redWine.addToVarieties(makeVariety(name: "Chianti"))
+        redWine.addToVarieties(makeVariety(name: "Malbec"))
+        redWine.addToVarieties(makeVariety(name: "Merlot"))
+        redWine.addToVarieties(makeVariety(name: "Pinot Nior"))
+        redWine.addToVarieties(makeVariety(name: "Red Blend"))
         
         let whiteWine = Type(context: context)
         whiteWine.name = "White"
         whiteWine.addToVarieties(makeVariety(name: "Pinot Blanc"))
         whiteWine.addToVarieties(makeVariety(name: "Pinot Grigio"))
+        whiteWine.addToVarieties(makeVariety(name: "Sauvignon Blanc"))
+        whiteWine.addToVarieties(makeVariety(name: "Riesling"))
+        whiteWine.addToVarieties(makeVariety(name: "Moscato"))
+        whiteWine.addToVarieties(makeVariety(name: "Gewürztraminer"))
+        whiteWine.addToVarieties(makeVariety(name: "Chardonnay"))
+        whiteWine.addToVarieties(makeVariety(name: "White Blend"))
         
         let bubbly = Type(context: context)
         bubbly.name = "Bubbly"

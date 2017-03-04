@@ -25,11 +25,16 @@ struct MyWines {
         struct ViewModel {
             var wines: [WineViewModel]
             
-            struct WineViewModel {
+            struct WineViewModel: Equatable {
+                var id: String
                 var thumbnail: UIImage?
                 var name: String
                 var variety: String
                 var rating: Double
+                
+                public static func ==(lhs: WineViewModel, rhs: WineViewModel) -> Bool {
+                    return lhs.id == rhs.id
+                }
             }
         }
 

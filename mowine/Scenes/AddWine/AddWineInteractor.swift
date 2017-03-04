@@ -19,23 +19,34 @@ protocol AddWineInteractorInput {
 protocol AddWineInteractorOutput {
     func presentForm(response: AddWine.FetchForm.Response)
     func presentWine(response: AddWine.SaveWine.Response)
+    func presentError(_ error: Error)
 }
 
 class AddWineInteractor: AddWineInteractorInput {
     var output: AddWineInteractorOutput!
-    let worker = AddWineWorker()
+    let worker: AddWineWorker
+    let wineTypeWorker: WineTypeWorker
 
+    init(worker: AddWineWorker, wineTypeWorker: WineTypeWorker) {
+        self.worker = worker
+        self.wineTypeWorker = wineTypeWorker
+    }
+    
     // MARK: - Business logic
 
     func fetchForm(request: AddWine.FetchForm.Request) {
-        let wineTypes = worker.getWineTypes()
+        let wineTypes = wineTypeWorker.getWineTypes()
 
         let response = AddWine.FetchForm.Response(wineTypes: wineTypes)
         output.presentForm(response: response)
     }
     
     func addWine(request: AddWine.SaveWine.Request) {
-        let wine = worker.createWine(request: request)
-        output.presentWine(response: AddWine.SaveWine.Response(wine: wine))
+        do {
+            let wine = try worker.createWine(request: request)
+            output.presentWine(response: AddWine.SaveWine.Response(wine: wine))
+        } catch {
+            output.presentError(error)
+        }
     }
 }

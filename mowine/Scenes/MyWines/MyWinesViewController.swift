@@ -13,10 +13,13 @@ import UIKit
 
 protocol MyWinesViewControllerInput {
     func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel)
+    func displayUpdatedWine(viewModel: MyWines.FetchMyWines.ViewModel.WineViewModel)
 }
 
 protocol MyWinesViewControllerOutput {
+    var selectedWine: Wine? { get set }
     func fetchMyWines(request: MyWines.FetchMyWines.Request)
+    func selectWine(atIndex index: Int)
 }
 
 class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
@@ -60,6 +63,13 @@ class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
         tableView.reloadData()
     }
     
+    func displayUpdatedWine(viewModel: MyWines.FetchMyWines.ViewModel.WineViewModel) {
+        if let index = wines.index(of: viewModel) {
+            wines[index] = viewModel
+        }
+        tableView.reloadData()
+    }
+    
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,5 +80,10 @@ class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WineTableViewCell", for: indexPath) as! WineTableViewCell
         cell.configure(wine: wines[indexPath.row])
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        output.selectWine(atIndex: indexPath.row)
+        router.navigateToEditWine()
     }
 }

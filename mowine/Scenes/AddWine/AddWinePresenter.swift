@@ -14,11 +14,13 @@ import UIKit
 protocol AddWinePresenterInput {
     func presentForm(response: AddWine.FetchForm.Response)
     func presentWine(response: AddWine.SaveWine.Response)
+    func presentError(_ error: Error)
 }
 
 protocol AddWinePresenterOutput: class {
     func displayForm(viewModel: AddWine.FetchForm.ViewModel)
     func displayNewWine()
+    func displayError(_ error: Error)
 }
 
 class AddWinePresenter: AddWinePresenterInput {
@@ -27,7 +29,7 @@ class AddWinePresenter: AddWinePresenterInput {
     // MARK: - Presentation logic
 
     func presentForm(response: AddWine.FetchForm.Response) {
-        var types: [AddWine.FetchForm.ViewModel.WineType] = []
+        var types: [WineTypeViewModel] = []
         
         for type in response.wineTypes {
             guard let name = type.name,
@@ -41,7 +43,7 @@ class AddWinePresenter: AddWinePresenterInput {
                 .filter({ $0.name != nil })
                 .map({ $0.name! })
             
-            types.append(AddWine.FetchForm.ViewModel.WineType(name: name, varieties: varietyNames))
+            types.append(WineTypeViewModel(name: name, varieties: varietyNames))
         }
         
         let viewModel = AddWine.FetchForm.ViewModel(types: types)
@@ -51,5 +53,9 @@ class AddWinePresenter: AddWinePresenterInput {
     
     func presentWine(response: AddWine.SaveWine.Response) {
         output.displayNewWine()
+    }
+    
+    func presentError(_ error: Error) {
+        output.displayError(error)
     }
 }

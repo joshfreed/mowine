@@ -19,6 +19,11 @@ class RatingCell: Cell<Double>, CellType {
             self.row.value = rating
         }
     }
+    
+    public override func update() {
+        super.update()
+        cosmosView.rating = (row as! RatingRow).value ?? 0
+    }
 }
 
 final class RatingRow: Row<RatingCell>, RowType {
