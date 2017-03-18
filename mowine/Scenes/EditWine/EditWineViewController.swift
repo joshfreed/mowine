@@ -103,6 +103,9 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         wineForm.typeRow.options = viewModel.wineTypes
         wineForm.typeRow.value = viewModel.wineViewModel.type
         wineForm.varietyRow.value = viewModel.wineViewModel.variety
+        wineForm.locationRow.value = viewModel.wineViewModel.location
+        wineForm.priceRow.value = viewModel.wineViewModel.price
+        wineForm.noteRow.value = viewModel.wineViewModel.notes
     }
     
     func navigateToMyWines() {

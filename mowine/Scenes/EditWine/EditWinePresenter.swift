@@ -32,6 +32,12 @@ class EditWinePresenter: EditWinePresenterInput {
         let  wineTypes = buildWineTypeViewModels(fromModel: response.wineTypes)
 
         var wineViewModel = WineViewModel(name: response.wine.name ?? "", rating: response.wine.rating)
+        wineViewModel.location = response.wine.location
+        wineViewModel.notes = response.wine.notes
+        
+        if let price = response.wine.price {
+            wineViewModel.price = Double(price)
+        }
         
         if let data = response.wine.image {
             wineViewModel.image = UIImage(data: data as Data)

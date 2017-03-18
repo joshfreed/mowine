@@ -28,6 +28,12 @@ class AddWineWorker {
         wine.name = request.name
         wine.rating = request.rating
         wine.variety = varietyTranslator.toCoreData(input: request.variety)
+        wine.location = request.location
+        wine.notes = request.notes        
+        
+        if let price = request.price {
+            wine.price = NSDecimalNumber(value: price)
+        }
         
         let imageWorker = WineImageWorker()
         if let image = request.image {
