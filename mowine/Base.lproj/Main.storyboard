@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -97,7 +98,7 @@
                                 </constraints>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="HCo-pT-SyR">
-                                <rect key="frame" x="24" y="245.5" width="327" height="177"/>
+                                <rect key="frame" x="24" y="270.5" width="327" height="127"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mo' wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXM-dj-Mhk">
                                         <rect key="frame" x="83" y="0.0" width="161" height="44.5"/>
@@ -105,8 +106,8 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate and remember the wines you drink.  Because you drink a lot of wine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4M-qP-GJu">
-                                        <rect key="frame" x="1" y="76.5" width="325" height="100.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate and remember the wines you drink." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4M-qP-GJu">
+                                        <rect key="frame" x="1" y="76.5" width="325" height="50.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -163,6 +164,47 @@
             </objects>
             <point key="canvasLocation" x="1079.2" y="137.18140929535232"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="zkc-eU-13r">
+            <objects>
+                <viewController id="7BD-Fv-3pQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bV0-Br-hwo"/>
+                        <viewControllerLayoutGuide type="bottom" id="odh-9K-Ef9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HAC-js-Lk0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Z-2v-kUC">
+                                <rect key="frame" x="24" y="135" width="327" height="127"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="mo' wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykO-zL-oVD">
+                                        <rect key="frame" x="83" y="0.0" width="161" height="44.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="37"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Rate and remember all the wines you drink." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNy-Dy-I46">
+                                        <rect key="frame" x="8" y="76.5" width="311.5" height="50.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.54000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Q4Z-2v-kUC" firstAttribute="leading" secondItem="HAC-js-Lk0" secondAttribute="leadingMargin" constant="8" id="Gsi-l1-b2M"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Q4Z-2v-kUC" secondAttribute="trailing" constant="8" id="kKX-KZ-rIl"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mBT-cm-B32" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="921"/>
+        </scene>
         <!--Add a Wine-->
         <scene sceneID="8iK-Hw-4hZ">
             <objects>
@@ -172,7 +214,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wBc-xN-wub"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="COQ-hc-Kne">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -198,12 +240,13 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D0Z-l0-L48" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oQF-wv-YYZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="oQF-wv-YYZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" white="1" alpha="0.87" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -238,7 +281,13 @@
                             <outlet property="delegate" destination="qOI-mG-2k4" id="ldU-3q-z59"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Wines" id="yLx-Nm-MNc"/>
+                    <navigationItem key="navigationItem" title="My Wines" id="yLx-Nm-MNc">
+                        <barButtonItem key="rightBarButtonItem" image="controls-svg" id="OTr-VJ-rFu">
+                            <connections>
+                                <segue destination="J41-ez-T68" kind="presentation" id="91o-46-beF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="ZQf-Ib-L0c" kind="show" identifier="EditWine" id="vOb-0C-98C"/>
@@ -247,6 +296,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B6H-pi-VlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2081" y="570"/>
+        </scene>
+        <!--Sort And Filter View Controller-->
+        <scene sceneID="NkZ-0B-JPF">
+            <objects>
+                <tableViewController id="ja6-ew-sp1" customClass="SortAndFilterViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="5Z0-0p-gbc">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gVX-OK-SjZ">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gVX-OK-SjZ" id="pN8-g7-v87">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjT-Th-Iff">
+                                            <rect key="frame" x="8" y="8" width="27" height="27"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="WjT-Th-Iff" secondAttribute="height" multiplier="1:1" id="fCv-QL-DwM"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="WjT-Th-Iff" secondAttribute="bottom" id="Gpg-dn-alq"/>
+                                        <constraint firstItem="WjT-Th-Iff" firstAttribute="top" secondItem="pN8-g7-v87" secondAttribute="topMargin" id="lOp-fU-B0y"/>
+                                        <constraint firstItem="WjT-Th-Iff" firstAttribute="leading" secondItem="pN8-g7-v87" secondAttribute="leadingMargin" id="uZ8-da-aDe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ja6-ew-sp1" id="ZT0-FB-leF"/>
+                            <outlet property="delegate" destination="ja6-ew-sp1" id="AbV-87-fQr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="2r8-rg-FE0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="TVG-rr-vnD"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CzG-wR-3LE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3020" y="1420.8395802098951"/>
         </scene>
         <!--Edit Wine-->
         <scene sceneID="MJw-el-CeI">
@@ -283,12 +376,12 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ScF-Wh-pzT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MTN-x5-gf8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="MTN-x5-gf8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -300,8 +393,31 @@
             </objects>
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qhV-NX-y58">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J41-ez-T68" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="fKj-8r-0eT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="0.87" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ja6-ew-sp1" kind="relationship" relationship="rootViewController" id="kpL-jM-VKE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZdK-1S-5Ha" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2080.8000000000002" y="1420.8395802098951"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="controls-svg" width="22" height="22"/>
         <image name="glass-and-bottle-of-wine" width="99" height="130"/>
         <image name="search" width="84" height="81"/>
     </resources>

@@ -28,6 +28,13 @@
 		537740A61E5BD11C00A1D282 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A51E5BD11C00A1D282 /* UIViewController.swift */; };
 		537740A81E5BD35E00A1D282 /* VarietyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A71E5BD35E00A1D282 /* VarietyTranslator.swift */; };
 		537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A91E5BD58A00A1D282 /* WineImageWorker.swift */; };
+		538F779F1E7DCC0D00C08263 /* SortAndFilterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */; };
+		538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */; };
+		538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */; };
+		538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779B1E7DCC0D00C08263 /* SortAndFilterPresenter.swift */; };
+		538F77A31E7DCC0D00C08263 /* SortAndFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779C1E7DCC0D00C08263 /* SortAndFilterRouter.swift */; };
+		538F77A41E7DCC0D00C08263 /* SortAndFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779D1E7DCC0D00C08263 /* SortAndFilterViewController.swift */; };
+		538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779E1E7DCC0D00C08263 /* SortAndFilterWorker.swift */; };
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		539196981E6B68EE001AE149 /* WineTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196971E6B68EE001AE149 /* WineTypeWorker.swift */; };
 		539196A01E6B7A1D001AE149 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391969F1E6B7A1D001AE149 /* Delay.swift */; };
@@ -100,6 +107,13 @@
 		537740A51E5BD11C00A1D282 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Extensions/UIViewController.swift; sourceTree = "<group>"; };
 		537740A71E5BD35E00A1D282 /* VarietyTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VarietyTranslator.swift; path = Shared/VarietyTranslator.swift; sourceTree = "<group>"; };
 		537740A91E5BD58A00A1D282 /* WineImageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineImageWorker.swift; path = Shared/WineImageWorker.swift; sourceTree = "<group>"; };
+		538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterConfigurator.swift; path = Scenes/SortAndFilter/SortAndFilterConfigurator.swift; sourceTree = "<group>"; };
+		538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterInteractor.swift; path = Scenes/SortAndFilter/SortAndFilterInteractor.swift; sourceTree = "<group>"; };
+		538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterModels.swift; path = Scenes/SortAndFilter/SortAndFilterModels.swift; sourceTree = "<group>"; };
+		538F779B1E7DCC0D00C08263 /* SortAndFilterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterPresenter.swift; path = Scenes/SortAndFilter/SortAndFilterPresenter.swift; sourceTree = "<group>"; };
+		538F779C1E7DCC0D00C08263 /* SortAndFilterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterRouter.swift; path = Scenes/SortAndFilter/SortAndFilterRouter.swift; sourceTree = "<group>"; };
+		538F779D1E7DCC0D00C08263 /* SortAndFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterViewController.swift; path = Scenes/SortAndFilter/SortAndFilterViewController.swift; sourceTree = "<group>"; };
+		538F779E1E7DCC0D00C08263 /* SortAndFilterWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterWorker.swift; path = Scenes/SortAndFilter/SortAndFilterWorker.swift; sourceTree = "<group>"; };
 		539196951E6B612D001AE149 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Models/Notifications.swift; sourceTree = "<group>"; };
 		539196971E6B68EE001AE149 /* WineTypeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineTypeWorker.swift; path = Shared/WineTypeWorker.swift; sourceTree = "<group>"; };
 		5391969F1E6B7A1D001AE149 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Delay.swift; path = Utilities/Delay.swift; sourceTree = "<group>"; };
@@ -215,6 +229,20 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
+		538F77971E7DCBC200C08263 /* SortAndFilter */ = {
+			isa = PBXGroup;
+			children = (
+				538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */,
+				538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */,
+				538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */,
+				538F779B1E7DCC0D00C08263 /* SortAndFilterPresenter.swift */,
+				538F779C1E7DCC0D00C08263 /* SortAndFilterRouter.swift */,
+				538F779D1E7DCC0D00C08263 /* SortAndFilterViewController.swift */,
+				538F779E1E7DCC0D00C08263 /* SortAndFilterWorker.swift */,
+			);
+			name = SortAndFilter;
+			sourceTree = "<group>";
+		};
 		5391969C1E6B79F6001AE149 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +325,7 @@
 		53F5AC241E217E210067AB62 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				538F77971E7DCBC200C08263 /* SortAndFilter */,
 				537614C01E591867005AABF0 /* EditWine */,
 				535793571E21A1CD00FDD56A /* MyWines */,
 				53F5AC2B1E2187F90067AB62 /* AddWine */,
@@ -647,10 +676,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */,
+				538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */,
 				537740A81E5BD35E00A1D282 /* VarietyTranslator.swift in Sources */,
+				538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */,
 				53F5AC391E2188170067AB62 /* AddWineWorker.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				53F5AC2A1E2185C00067AB62 /* MainMenuViewController.swift in Sources */,
+				538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */,
 				53F5AC271E2185830067AB62 /* UIImageView.swift in Sources */,
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
@@ -662,7 +695,9 @@
 				53F5AC341E2188170067AB62 /* AddWineInteractor.swift in Sources */,
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				539196981E6B68EE001AE149 /* WineTypeWorker.swift in Sources */,
+				538F77A41E7DCC0D00C08263 /* SortAndFilterViewController.swift in Sources */,
 				535793621E21A1EB00FDD56A /* MyWinesPresenter.swift in Sources */,
+				538F779F1E7DCC0D00C08263 /* SortAndFilterConfigurator.swift in Sources */,
 				535793651E21A1EB00FDD56A /* MyWinesWorker.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,
 				535793611E21A1EB00FDD56A /* MyWinesModels.swift in Sources */,
@@ -674,6 +709,7 @@
 				537614CD1E591887005AABF0 /* EditWineViewController.swift in Sources */,
 				537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */,
 				53F5AC381E2188170067AB62 /* AddWineViewController.swift in Sources */,
+				538F77A31E7DCC0D00C08263 /* SortAndFilterRouter.swift in Sources */,
 				53F5AC351E2188170067AB62 /* AddWineModels.swift in Sources */,
 				537614CA1E591887005AABF0 /* EditWineModels.swift in Sources */,
 				53F5AC331E2188170067AB62 /* AddWineConfigurator.swift in Sources */,
