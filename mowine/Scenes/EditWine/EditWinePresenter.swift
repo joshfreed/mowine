@@ -49,6 +49,14 @@ class EditWinePresenter: EditWinePresenterInput {
             wineViewModel.variety = varietyName
             wineViewModel.type = selectedTypeViewModel
         }
+
+        if let set = response.wine.pairings, let pairings = Array(set) as? [Food] {
+            for pairing in pairings {
+                if let name = pairing.name {
+                    wineViewModel.pairings.append(name)
+                }
+            }
+        }
         
         let viewModel = EditWine.FetchWine.ViewModel(
             wineViewModel: wineViewModel,

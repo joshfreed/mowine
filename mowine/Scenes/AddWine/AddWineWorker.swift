@@ -41,6 +41,12 @@ class AddWineWorker {
             wine.thumbnail = imageWorker.createThumbnail(from: image)
         }
         
+        for foodName in request.pairings {
+            let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: context) as! Food
+            food.name = foodName
+            wine.addToPairings(food)
+        }
+        
         try wine.managedObjectContext?.save()
 
         return wine

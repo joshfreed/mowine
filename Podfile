@@ -1,13 +1,12 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '10.2'
 
 target 'mowine' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for mowine
-  pod 'Eureka', '2.0.0-beta.1'
-  pod 'Cosmos', '~> 8.0'
+  pod 'Eureka'
+  pod 'Cosmos', '~> 9.0'
 
   target 'mowineTests' do
     inherit! :search_paths

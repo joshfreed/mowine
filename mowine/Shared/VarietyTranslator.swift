@@ -9,7 +9,12 @@
 import UIKit
 import CoreData
 
-class VarietyTranslator {
+protocol CoreDataTranslator {
+    associatedtype Model
+    func toCoreData(input: String) -> Model?
+}
+
+class VarietyTranslator: CoreDataTranslator {
     let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext) {

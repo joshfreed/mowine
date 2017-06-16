@@ -45,6 +45,10 @@ class SortAndFilterViewController: UITableViewController, SortAndFilterViewContr
         let request = SortAndFilter.Something.Request()
         output.doSomething(request: request)
     }
+    
+    @IBAction func tappedDone(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
 
     // MARK: - Display logic
 

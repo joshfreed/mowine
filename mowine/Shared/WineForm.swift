@@ -38,6 +38,8 @@ class WineForm: NSObject {
         $0.placeholder = "How much was this wine?"
     }
     let noteRow = TextAreaRow("notes")
+    
+    var pairingsSection: MultivaluedSection!
 
     func makeWineForm() -> Form {
         typeRow.onChange { row in
@@ -51,6 +53,15 @@ class WineForm: NSObject {
             self.varietyRow.updateCell()
         }
         
+        pairingsSection = MultivaluedSection(multivaluedOptions: [.Insert, .Delete], header: "Pairs well with", footer: "List some foods that this wine pairs well with.") {
+            $0.tag = "pairings"
+            $0.multivaluedRowToInsertAt = { index in
+                return NameRow("pairing_\(index + 1)") {
+                    $0.placeholder = "e.g. Sushi, Cheese, etc"
+                }
+            }
+        }
+        
         let form = Section()
             <<< nameRow
             <<< ratingRow
@@ -61,7 +72,7 @@ class WineForm: NSObject {
             <<< varietyRow
             <<< locationRow
             <<< priceRow
-            +++ Section("Pairs well with")
+            +++ pairingsSection
             +++ Section("Notes")
             <<< noteRow
         

@@ -28,6 +28,12 @@
 		537740A61E5BD11C00A1D282 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A51E5BD11C00A1D282 /* UIViewController.swift */; };
 		537740A81E5BD35E00A1D282 /* VarietyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A71E5BD35E00A1D282 /* VarietyTranslator.swift */; };
 		537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A91E5BD58A00A1D282 /* WineImageWorker.swift */; };
+		538995B01EE475EF00CF1330 /* EditWineInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AC1EE475EF00CF1330 /* EditWineInteractorTests.swift */; };
+		538995B11EE475EF00CF1330 /* EditWinePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AD1EE475EF00CF1330 /* EditWinePresenterTests.swift */; };
+		538995B21EE475EF00CF1330 /* EditWineViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AE1EE475EF00CF1330 /* EditWineViewControllerTests.swift */; };
+		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
+		538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B41EE476A100CF1330 /* TestDoubles.swift */; };
+		538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */; };
 		538F779F1E7DCC0D00C08263 /* SortAndFilterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */; };
 		538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */; };
 		538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */; };
@@ -107,6 +113,12 @@
 		537740A51E5BD11C00A1D282 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Extensions/UIViewController.swift; sourceTree = "<group>"; };
 		537740A71E5BD35E00A1D282 /* VarietyTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VarietyTranslator.swift; path = Shared/VarietyTranslator.swift; sourceTree = "<group>"; };
 		537740A91E5BD58A00A1D282 /* WineImageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineImageWorker.swift; path = Shared/WineImageWorker.swift; sourceTree = "<group>"; };
+		538995AC1EE475EF00CF1330 /* EditWineInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditWineInteractorTests.swift; path = Scenes/EditWine/EditWineInteractorTests.swift; sourceTree = "<group>"; };
+		538995AD1EE475EF00CF1330 /* EditWinePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditWinePresenterTests.swift; path = Scenes/EditWine/EditWinePresenterTests.swift; sourceTree = "<group>"; };
+		538995AE1EE475EF00CF1330 /* EditWineViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditWineViewControllerTests.swift; path = Scenes/EditWine/EditWineViewControllerTests.swift; sourceTree = "<group>"; };
+		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditWineWorkerTests.swift; path = Scenes/EditWine/EditWineWorkerTests.swift; sourceTree = "<group>"; };
+		538995B41EE476A100CF1330 /* TestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
+		538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterConfigurator.swift; path = Scenes/SortAndFilter/SortAndFilterConfigurator.swift; sourceTree = "<group>"; };
 		538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterInteractor.swift; path = Scenes/SortAndFilter/SortAndFilterInteractor.swift; sourceTree = "<group>"; };
 		538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortAndFilterModels.swift; path = Scenes/SortAndFilter/SortAndFilterModels.swift; sourceTree = "<group>"; };
@@ -229,6 +241,25 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
+		538995AA1EE475BB00CF1330 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				538995AB1EE475C200CF1330 /* EditWine */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		538995AB1EE475C200CF1330 /* EditWine */ = {
+			isa = PBXGroup;
+			children = (
+				538995AC1EE475EF00CF1330 /* EditWineInteractorTests.swift */,
+				538995AD1EE475EF00CF1330 /* EditWinePresenterTests.swift */,
+				538995AE1EE475EF00CF1330 /* EditWineViewControllerTests.swift */,
+				538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */,
+			);
+			name = EditWine;
+			sourceTree = "<group>";
+		};
 		538F77971E7DCBC200C08263 /* SortAndFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,8 +338,11 @@
 		53F5AC0A1E2176090067AB62 /* mowineTests */ = {
 			isa = PBXGroup;
 			children = (
+				538995AA1EE475BB00CF1330 /* Scenes */,
 				53F5AC0B1E2176090067AB62 /* mowineTests.swift */,
 				53F5AC0D1E2176090067AB62 /* Info.plist */,
+				538995B41EE476A100CF1330 /* TestDoubles.swift */,
+				538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */,
 			);
 			path = mowineTests;
 			sourceTree = "<group>";
@@ -576,7 +610,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A9AE12F1F31609777605FA92 /* [CP] Embed Pods Frameworks */ = {
@@ -621,7 +655,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F33352C28B2E27A47C525D64 /* [CP] Check Pods Manifest.lock */ = {
@@ -636,7 +670,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F77494430CD0EC0621FC36D6 /* [CP] Copy Pods Resources */ = {
@@ -726,7 +760,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */,
 				53F5AC0C1E2176090067AB62 /* mowineTests.swift in Sources */,
+				538995B21EE475EF00CF1330 /* EditWineViewControllerTests.swift in Sources */,
+				538995B11EE475EF00CF1330 /* EditWinePresenterTests.swift in Sources */,
+				538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */,
+				538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */,
+				538995B01EE475EF00CF1330 /* EditWineInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

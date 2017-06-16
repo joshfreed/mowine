@@ -17,6 +17,7 @@ struct WineViewModel {
     var price: Double?
     var notes: String?
     var image: UIImage?
+    var pairings: [String] = []
     
     init(name: String, rating: Double) {
         self.name = name

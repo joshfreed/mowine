@@ -91,6 +91,12 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         
         request.image = valuesDictionary["photo"] as? UIImage
         
+        for (name, value) in valuesDictionary {
+            if name.hasPrefix("pairing_"), let food = value as? String {
+                request.pairings.append(food)
+            }
+        }
+        
         output.saveWine(request: request)
     }
 
@@ -106,6 +112,14 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         wineForm.locationRow.value = viewModel.wineViewModel.location
         wineForm.priceRow.value = viewModel.wineViewModel.price
         wineForm.noteRow.value = viewModel.wineViewModel.notes
+        
+        for (index, name) in viewModel.wineViewModel.pairings.enumerated() {
+            let newRow = NameRow("pairing_\(index + 1)") {
+                $0.placeholder = "e.g. Sushi, Cheese, etc"
+                $0.value = name
+            }
+            wineForm.pairingsSection.insert(newRow, at: index)
+        }
     }
     
     func navigateToMyWines() {

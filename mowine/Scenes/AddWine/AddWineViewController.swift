@@ -57,24 +57,26 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
     }
     
     @IBAction func saveWineAction(_ sender: UIBarButtonItem) {
-        let valuesDictionary = form.values()
+        let values = form.values()
         
-        guard let name = valuesDictionary["name"] as? String else {
+        print(values)
+        
+        guard let name = values["name"] as? String else {
             return
         }
-        guard let rating = valuesDictionary["rating"] as? Double else {
+        guard let rating = values["rating"] as? Double else {
             return
         }
-        guard let type = valuesDictionary["type"] as? WineTypeViewModel else {
+        guard let type = values["type"] as? WineTypeViewModel else {
             return
         }
-        guard let variety = valuesDictionary["variety"] as? String else {
+        guard let variety = values["variety"] as? String else {
             return
         }
         
-        let location = valuesDictionary["location"] as? String
-        let price = valuesDictionary["price"] as? Double
-        let notes = valuesDictionary["notes"] as? String
+        let location = values["location"] as? String
+        let price = values["price"] as? Double
+        let notes = values["notes"] as? String
         
         var request = AddWine.SaveWine.Request(
             name: name,
@@ -86,8 +88,13 @@ class AddWineViewController: FormViewController, AddWineViewControllerInput {
         request.price = price
         request.notes = notes
         
-        request.image = valuesDictionary["photo"] as? UIImage
+        request.image = values["photo"] as? UIImage
         
+        for (name, value) in values {
+            if name.hasPrefix("pairing_"), let food = value as? String {
+                request.pairings.append(food)
+            }
+        }
         
         output.addWine(request: request)
     }

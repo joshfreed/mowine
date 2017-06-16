@@ -27,12 +27,20 @@ class WineTableViewCell: UITableViewCell {
     }
     
     func configure(wine: MyWines.FetchMyWines.ViewModel.WineViewModel) {
-        thumbnailImageView.image = wine.thumbnail
+        if let thumbnail = wine.thumbnail {
+            thumbnailImageView.image = thumbnail
+            thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.size.width / 2
+            thumbnailImageView.clipsToBounds = true
+            thumbnailImageView.contentMode = .scaleAspectFill
+        } else {
+            thumbnailImageView.image = #imageLiteral(resourceName: "bottle-of-wine")
+            thumbnailImageView.clipsToBounds = false
+            thumbnailImageView.contentMode = .scaleAspectFit
+            thumbnailImageView.tintColor = UIColor.lightGray
+        }
+        
         nameLabel.text = wine.name
         varietyLabel.text = wine.variety
         cosmosView.rating = wine.rating
-        
-        thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.size.width / 2
-        thumbnailImageView.clipsToBounds = true
     }
 }

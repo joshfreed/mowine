@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ScF-Wh-pzT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ScF-Wh-pzT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -176,7 +176,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Z-2v-kUC">
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Q4Z-2v-kUC">
                                 <rect key="frame" x="24" y="135" width="327" height="127"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="mo' wine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykO-zL-oVD">
@@ -240,7 +240,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D0Z-l0-L48" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="oQF-wv-YYZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="oQF-wv-YYZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="0.54000000000000004" colorSpace="calibratedWhite"/>
@@ -271,7 +271,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i3W-S1-Cbr" id="uUa-b3-YPD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -281,13 +281,7 @@
                             <outlet property="delegate" destination="qOI-mG-2k4" id="ldU-3q-z59"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Wines" id="yLx-Nm-MNc">
-                        <barButtonItem key="rightBarButtonItem" image="controls-svg" id="OTr-VJ-rFu">
-                            <connections>
-                                <segue destination="J41-ez-T68" kind="presentation" id="91o-46-beF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="My Wines" id="yLx-Nm-MNc"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="ZQf-Ib-L0c" kind="show" identifier="EditWine" id="vOb-0C-98C"/>
@@ -307,10 +301,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gVX-OK-SjZ">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gVX-OK-SjZ" id="pN8-g7-v87">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WjT-Th-Iff">
@@ -334,7 +328,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="2r8-rg-FE0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="TVG-rr-vnD"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="TVG-rr-vnD">
+                            <connections>
+                                <action selector="tappedDone:" destination="ja6-ew-sp1" id="Owd-b0-X50"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CzG-wR-3LE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -344,7 +342,7 @@
         <!--Edit Wine-->
         <scene sceneID="MJw-el-CeI">
             <objects>
-                <viewController id="ZQf-Ib-L0c" customClass="EditWineViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditWineViewController" id="ZQf-Ib-L0c" customClass="EditWineViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qwq-oB-0cc"/>
                         <viewControllerLayoutGuide type="bottom" id="Ijl-Zr-nVW"/>
@@ -376,7 +374,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="ScF-Wh-pzT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="MTN-x5-gf8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="MTN-x5-gf8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -398,7 +396,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J41-ez-T68" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="fKj-8r-0eT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fKj-8r-0eT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -417,7 +415,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="controls-svg" width="22" height="22"/>
         <image name="glass-and-bottle-of-wine" width="99" height="130"/>
         <image name="search" width="84" height="81"/>
     </resources>

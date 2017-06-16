@@ -14,11 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = UIColor.white.withAlphaComponent(0.54)
-//        deleteDatabase()
-//        preLoadData()
+        
+        let defaults = UserDefaults.standard
+        let isPreloaded = defaults.bool(forKey: "isPreloaded")
+        if !isPreloaded {
+            preLoadData()
+            defaults.set(true, forKey: "isPreloaded")
+        }
+        
         return true
     }
 
@@ -36,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func preLoadData() {
         let context = persistentContainer.viewContext
         
-        removeAllData()
+        deleteAllEntity("Variety")
+        deleteAllEntity("Type")
         
         let redWine = Type(context: context)
         redWine.name = "Red"
@@ -71,12 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         variety.name = name
         return variety
     }
-    
-    private func removeAllData() {
-        deleteAllEntity("Variety")
-        deleteAllEntity("Type")
-    }
-    
+
     private func deleteAllEntity(_ entityName: String) {
         let context = persistentContainer.viewContext
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

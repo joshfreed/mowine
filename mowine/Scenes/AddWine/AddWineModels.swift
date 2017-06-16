@@ -38,6 +38,7 @@ struct AddWine {
             var price: Double?
             var notes: String?
             var image: UIImage?
+            var pairings: [String] = []
             
             init(name: String, rating: Double, type: WineTypeViewModel, variety: String) {
                 self.name = name

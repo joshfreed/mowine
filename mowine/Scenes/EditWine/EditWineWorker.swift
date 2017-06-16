@@ -10,12 +10,20 @@
 //
 
 import UIKit
+import CoreData
 
 class EditWineWorker {
     let varietyTranslator: VarietyTranslator
+    let imageWorker: WineImageWorker
     
     init(varietyTranslator: VarietyTranslator) {
         self.varietyTranslator = varietyTranslator
+        self.imageWorker = WineImageWorker()
+    }
+    
+    init(varietyTranslator: VarietyTranslator, imageWorker: WineImageWorker) {
+        self.varietyTranslator = varietyTranslator
+        self.imageWorker = imageWorker
     }
     
     // MARK: - Business Logic
@@ -29,15 +37,42 @@ class EditWineWorker {
         
         if let price = request.price {
             wine.price = NSDecimalNumber(value: price)
-        }else {
+        } else {
             wine.price = nil
         }
         
-        let imageWorker = WineImageWorker()
         if let image = request.image {
             wine.image = imageWorker.convertToPNGData(image: image)
             wine.thumbnail = imageWorker.createThumbnail(from: image)
         }
+        
+        mergePairings(wine: wine, pairings: request.pairings)
+        
         try wine.managedObjectContext?.save()
+    }
+    
+    func mergePairings(wine: Wine, pairings: [String]) {
+        guard let context = wine.managedObjectContext else {
+            return
+        }
+        guard let currentFoods = Array(wine.pairings ?? []) as? [Food] else {
+            return
+        }
+        
+        for foodName in pairings {
+            if currentFoods.contains(where: { $0.name?.lowercased() == foodName.lowercased() }) {
+                continue
+            }
+            
+            let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: context) as! Food
+            food.name = foodName
+            wine.addToPairings(food)
+        }
+        
+        for food in currentFoods {
+            if !pairings.contains(where: { $0.lowercased() == food.name?.lowercased() }) {
+                wine.removeFromPairings(food)
+            }
+        }
     }
 }
