@@ -126,6 +126,6 @@ class SelectVarietyViewController: UICollectionViewController, SelectVarietyDisp
     }
     
     func displaySelectedVariety(viewModel: SelectVariety.SelectVariety.ViewModel) {
-        router?.routeToSnapPhoto()
+        performSegue(withIdentifier: "SnapPhoto", sender: nil)
     }
 }

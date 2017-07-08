@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol SelectVarietyRoutingLogic {
-    func routeToSnapPhoto()
+    func routeToSnapPhoto(segue: UIStoryboardSegue)
 }
 
 protocol SelectVarietyDataPassing {
@@ -26,25 +26,12 @@ class SelectVarietyRouter: NSObject, SelectVarietyRoutingLogic, SelectVarietyDat
 
     // MARK: Routing
 
-    func routeToSnapPhoto() {
-        
+    func routeToSnapPhoto(segue: UIStoryboardSegue) {
+        let destinationVC = segue.destination as! SnapPhotoViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToSnapPhoto(source: dataStore!, destination: &destinationDS)
     }
     
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-
     // MARK: Navigation
 
     //func navigateToSomewhere(source: SelectVarietyViewController, destination: SomewhereViewController)
@@ -54,8 +41,9 @@ class SelectVarietyRouter: NSObject, SelectVarietyRoutingLogic, SelectVarietyDat
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: SelectVarietyDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToSnapPhoto(source: SelectVarietyDataStore, destination: inout SnapPhotoDataStore)
+    {
+        destination.wineType = source.wineType
+        destination.variety = source.selectedVariety
+    }
 }
