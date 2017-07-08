@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UINavigationBar.appearance().tintColor = UIColor.white.withAlphaComponent(0.54)
+        UINavigationBar.appearance().tintColor = UIColor.mwButtonSecondary
         
         let defaults = UserDefaults.standard
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
