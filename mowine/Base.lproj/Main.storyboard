@@ -314,8 +314,8 @@
         <!--Select Variety View Controller-->
         <scene sceneID="ebT-ub-5pw">
             <objects>
-                <collectionViewController id="EFJ-E8-FVd" customClass="SelectVarietyViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="y3Z-1Q-BIz">
+                <collectionViewController storyboardIdentifier="SelectVarietyViewController" id="EFJ-E8-FVd" customClass="SelectVarietyViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="y3Z-1Q-BIz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -333,14 +333,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24N-j6-Mn9" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="166" height="68"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <action selector="tappedButton:" destination="RXQ-pG-jqS" eventType="touchUpInside" id="gjc-gL-fV2"/>
-                                            </connections>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iQB-Ir-f1Y">
                                             <rect key="frame" x="0.0" y="0.0" width="166" height="68"/>
                                             <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -351,17 +343,12 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="24N-j6-Mn9" firstAttribute="top" secondItem="RXQ-pG-jqS" secondAttribute="top" id="DZg-cs-eRI"/>
                                     <constraint firstItem="iQB-Ir-f1Y" firstAttribute="top" secondItem="RXQ-pG-jqS" secondAttribute="top" id="Ic6-n8-nou"/>
-                                    <constraint firstAttribute="bottom" secondItem="24N-j6-Mn9" secondAttribute="bottom" id="O91-rh-yiG"/>
                                     <constraint firstAttribute="bottom" secondItem="iQB-Ir-f1Y" secondAttribute="bottom" id="Ruy-fB-IkK"/>
                                     <constraint firstItem="iQB-Ir-f1Y" firstAttribute="leading" secondItem="RXQ-pG-jqS" secondAttribute="leading" id="YG0-4w-fp0"/>
-                                    <constraint firstItem="24N-j6-Mn9" firstAttribute="leading" secondItem="RXQ-pG-jqS" secondAttribute="leading" id="aj6-Rb-C5w"/>
                                     <constraint firstAttribute="trailing" secondItem="iQB-Ir-f1Y" secondAttribute="trailing" id="pfq-h1-zwz"/>
-                                    <constraint firstAttribute="trailing" secondItem="24N-j6-Mn9" secondAttribute="trailing" id="yPN-eE-ONj"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="button" destination="24N-j6-Mn9" id="kGX-pt-rg7"/>
                                     <outlet property="varietyLabel" destination="iQB-Ir-f1Y" id="aQx-fl-YxZ"/>
                                 </connections>
                             </collectionViewCell>

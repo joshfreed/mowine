@@ -11,6 +11,7 @@ target 'mowine' do
   target 'mowineTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Nimble'
   end
 
   target 'mowineUITests' do

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Nimble.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-mowine.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,12 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79F6F2357430537347335D507BB06CDB</key>
+		<key>CC82ABBD75C36830CE8615D4329ED2AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC82ABBD75C36830CE8615D4329ED2AB</key>
+		<key>DD7C8BF89FE8053D0A2A2D88BB49CF07</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD02B067F52E547C60C02ADD0823AFAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

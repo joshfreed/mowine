@@ -23,11 +23,17 @@ class SelectVarietyPresenter: SelectVarietyPresentationLogic {
     // MARK: Present varieties
 
     func presentVarieties(response: SelectVariety.FetchVarieties.Response) {
-        let varieties = response.varieties.filter({ $0.name != nil }).map({ $0.name! })
+        let varieties = response.varieties
+            .filter({ $0.name != nil })
+            .map({ $0.name! })
+            .sorted()
+        
         let viewModel = SelectVariety.FetchVarieties.ViewModel(varieties: varieties)
         viewController?.displayVarieties(viewModel: viewModel)
     }
 
+    // MARK: Present selected variety
+    
     func presentSelectedVariety(response: SelectVariety.SelectVariety.Response) {
         let viewModel = SelectVariety.SelectVariety.ViewModel()
         viewController?.displaySelectedVariety(viewModel: viewModel)

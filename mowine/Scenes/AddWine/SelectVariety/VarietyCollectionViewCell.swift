@@ -10,16 +10,10 @@ import UIKit
 
 class VarietyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var varietyLabel: UILabel!
-    @IBOutlet weak var button: ButtonPrimary!
     
     func configure(variety: String) {
         varietyLabel.text = variety
         varietyLabel.layer.cornerRadius = 5
         varietyLabel.clipsToBounds = true
-        
-        button.setTitle(variety, for: .normal)
-    }
-    
-    @IBAction func tappedButton(_ sender: ButtonPrimary) {
     }
 }

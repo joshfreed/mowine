@@ -14,13 +14,11 @@
 		5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB911F0BEE27001D2040 /* SelectTypePresenter.swift */; };
 		5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB921F0BEE27001D2040 /* SelectTypeRouter.swift */; };
 		5321FB991F0BEE27001D2040 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB931F0BEE27001D2040 /* SelectTypeViewController.swift */; };
-		5321FB9A1F0BEE27001D2040 /* SelectTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB941F0BEE27001D2040 /* SelectTypeWorker.swift */; };
 		5321FBA21F0BF594001D2040 /* SelectVarietyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9C1F0BF594001D2040 /* SelectVarietyInteractor.swift */; };
 		5321FBA31F0BF594001D2040 /* SelectVarietyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9D1F0BF594001D2040 /* SelectVarietyModels.swift */; };
 		5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */; };
 		5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */; };
 		5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */; };
-		5321FBA71F0BF594001D2040 /* SelectVarietyWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA11F0BF594001D2040 /* SelectVarietyWorker.swift */; };
 		5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */; };
 		5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535793581E21A1EB00FDD56A /* MyWinesConfigurator.swift */; };
 		535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535793591E21A1EB00FDD56A /* MyWinesInteractor.swift */; };
@@ -57,6 +55,9 @@
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		539196981E6B68EE001AE149 /* WineTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196971E6B68EE001AE149 /* WineTypeWorker.swift */; };
 		539196A01E6B7A1D001AE149 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391969F1E6B7A1D001AE149 /* Delay.swift */; };
+		53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */; };
+		53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */; };
+		53B564CD1F11879500459BB8 /* SelectVarietyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
 		53C88BFC1F085D56009B7D29 /* ButtonPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */; };
 		53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8EDCF1E4185B000696FAE /* RatingRow.swift */; };
@@ -67,7 +68,6 @@
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
 		53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
-		53F5AC0C1E2176090067AB62 /* mowineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC0B1E2176090067AB62 /* mowineTests.swift */; };
 		53F5AC171E2176090067AB62 /* mowineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* mowineUITests.swift */; };
 		53F5AC271E2185830067AB62 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC261E2185830067AB62 /* UIImageView.swift */; };
 		53F5AC2A1E2185C00067AB62 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC291E2185C00067AB62 /* MainMenuViewController.swift */; };
@@ -107,13 +107,11 @@
 		5321FB911F0BEE27001D2040 /* SelectTypePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectTypePresenter.swift; path = Scenes/AddWine/SelectType/SelectTypePresenter.swift; sourceTree = "<group>"; };
 		5321FB921F0BEE27001D2040 /* SelectTypeRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectTypeRouter.swift; path = Scenes/AddWine/SelectType/SelectTypeRouter.swift; sourceTree = "<group>"; };
 		5321FB931F0BEE27001D2040 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectTypeViewController.swift; path = Scenes/AddWine/SelectType/SelectTypeViewController.swift; sourceTree = "<group>"; };
-		5321FB941F0BEE27001D2040 /* SelectTypeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectTypeWorker.swift; path = Scenes/AddWine/SelectType/SelectTypeWorker.swift; sourceTree = "<group>"; };
 		5321FB9C1F0BF594001D2040 /* SelectVarietyInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyInteractor.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyInteractor.swift; sourceTree = "<group>"; };
 		5321FB9D1F0BF594001D2040 /* SelectVarietyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyModels.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyModels.swift; sourceTree = "<group>"; };
 		5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyPresenter.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyPresenter.swift; sourceTree = "<group>"; };
 		5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyRouter.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyRouter.swift; sourceTree = "<group>"; };
 		5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyViewController.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyViewController.swift; sourceTree = "<group>"; };
-		5321FBA11F0BF594001D2040 /* SelectVarietyWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyWorker.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyWorker.swift; sourceTree = "<group>"; };
 		5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VarietyCollectionViewCell.swift; path = Scenes/AddWine/SelectVariety/VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
 		535793581E21A1EB00FDD56A /* MyWinesConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesConfigurator.swift; path = Scenes/MyWines/MyWinesConfigurator.swift; sourceTree = "<group>"; };
 		535793591E21A1EB00FDD56A /* MyWinesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesInteractor.swift; path = Scenes/MyWines/MyWinesInteractor.swift; sourceTree = "<group>"; };
@@ -150,6 +148,9 @@
 		539196951E6B612D001AE149 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Models/Notifications.swift; sourceTree = "<group>"; };
 		539196971E6B68EE001AE149 /* WineTypeWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineTypeWorker.swift; path = Shared/WineTypeWorker.swift; sourceTree = "<group>"; };
 		5391969F1E6B7A1D001AE149 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Delay.swift; path = Utilities/Delay.swift; sourceTree = "<group>"; };
+		53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyInteractorTests.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyInteractorTests.swift; sourceTree = "<group>"; };
+		53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyPresenterTests.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyPresenterTests.swift; sourceTree = "<group>"; };
+		53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyViewControllerTests.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyViewControllerTests.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonPrimary.swift; path = Views/ButtonPrimary.swift; sourceTree = "<group>"; };
 		53D8EDCF1E4185B000696FAE /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingRow.swift; path = EurekaRows/RatingRow.swift; sourceTree = "<group>"; };
@@ -163,7 +164,6 @@
 		53F5AC001E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53F5AC021E2176080067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F5AC071E2176090067AB62 /* mowineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53F5AC0B1E2176090067AB62 /* mowineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mowineTests.swift; sourceTree = "<group>"; };
 		53F5AC0D1E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F5AC121E2176090067AB62 /* mowineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5AC161E2176090067AB62 /* mowineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mowineUITests.swift; sourceTree = "<group>"; };
@@ -210,6 +210,8 @@
 		5321FB661F0BE5D9001D2040 /* AddWine */ = {
 			isa = PBXGroup;
 			children = (
+				53B564C41F11858800459BB8 /* SelectType */,
+				53B564C51F11859300459BB8 /* SelectVariety */,
 			);
 			name = AddWine;
 			sourceTree = "<group>";
@@ -222,7 +224,6 @@
 				5321FB911F0BEE27001D2040 /* SelectTypePresenter.swift */,
 				5321FB921F0BEE27001D2040 /* SelectTypeRouter.swift */,
 				5321FB931F0BEE27001D2040 /* SelectTypeViewController.swift */,
-				5321FB941F0BEE27001D2040 /* SelectTypeWorker.swift */,
 			);
 			name = SelectType;
 			sourceTree = "<group>";
@@ -235,7 +236,6 @@
 				5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */,
 				5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */,
 				5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */,
-				5321FBA11F0BF594001D2040 /* SelectVarietyWorker.swift */,
 				5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */,
 			);
 			name = SelectVariety;
@@ -333,6 +333,30 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		53B564C41F11858800459BB8 /* SelectType */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SelectType;
+			sourceTree = "<group>";
+		};
+		53B564C51F11859300459BB8 /* SelectVariety */ = {
+			isa = PBXGroup;
+			children = (
+				53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */,
+				53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */,
+				53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */,
+			);
+			name = SelectVariety;
+			sourceTree = "<group>";
+		};
+		53B564C61F1186A100459BB8 /* SnapPhoto */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SnapPhoto;
+			sourceTree = "<group>";
+		};
 		53C88BFA1F085D17009B7D29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,7 +423,6 @@
 			isa = PBXGroup;
 			children = (
 				538995AA1EE475BB00CF1330 /* Scenes */,
-				53F5AC0B1E2176090067AB62 /* mowineTests.swift */,
 				53F5AC0D1E2176090067AB62 /* Info.plist */,
 				538995B41EE476A100CF1330 /* TestDoubles.swift */,
 				538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */,
@@ -451,6 +474,7 @@
 			children = (
 				5321FB8E1F0BEE09001D2040 /* SelectType */,
 				5321FB9B1F0BF2F2001D2040 /* SelectVariety */,
+				53B564C61F1186A100459BB8 /* SnapPhoto */,
 			);
 			name = AddWine;
 			sourceTree = "<group>";
@@ -778,7 +802,6 @@
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
-				5321FB9A1F0BEE27001D2040 /* SelectTypeWorker.swift in Sources */,
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,
 				53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */,
 				537740A41E5BC73600A1D282 /* Models.swift in Sources */,
@@ -811,7 +834,6 @@
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				539196A01E6B7A1D001AE149 /* Delay.swift in Sources */,
-				5321FBA71F0BF594001D2040 /* SelectVarietyWorker.swift in Sources */,
 				5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
@@ -825,12 +847,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */,
-				53F5AC0C1E2176090067AB62 /* mowineTests.swift in Sources */,
+				53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */,
 				538995B21EE475EF00CF1330 /* EditWineViewControllerTests.swift in Sources */,
+				53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */,
 				538995B11EE475EF00CF1330 /* EditWinePresenterTests.swift in Sources */,
 				538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */,
 				538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */,
 				538995B01EE475EF00CF1330 /* EditWineInteractorTests.swift in Sources */,
+				53B564CD1F11879500459BB8 /* SelectVarietyViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -108,7 +108,6 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
     }
 
     func displaySelectedType(viewModel: SelectType.SelectType.ViewModel) {
-//        router?.routeToSelectVariety()
         performSegue(withIdentifier: "SelectVariety", sender: nil)
     }
 }

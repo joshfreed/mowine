@@ -30,14 +30,14 @@ class SelectTypeRouter: NSObject, SelectTypeRoutingLogic, SelectTypeDataPassing 
     {
         let destinationVC = segue?.destination as! SelectVarietyViewController
         var destinationDS = destinationVC.router!.dataStore!
-        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+        passDataToSelectVariety(source: dataStore!, destination: &destinationDS)
     }
 
     // MARK: Navigation
 
     // MARK: Passing data
 
-    func passDataToSomewhere(source: SelectTypeDataStore, destination: inout SelectVarietyDataStore)
+    func passDataToSelectVariety(source: SelectTypeDataStore, destination: inout SelectVarietyDataStore)
     {
         destination.wineType = source.selectedType
     }

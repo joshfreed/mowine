@@ -24,7 +24,6 @@ protocol SelectVarietyDataStore {
 
 class SelectVarietyInteractor: SelectVarietyBusinessLogic, SelectVarietyDataStore {
     var presenter: SelectVarietyPresentationLogic?
-    var worker: SelectVarietyWorker?
     var wineType: Type!
     var varieties: [Variety] = []
     var selectedVariety: Variety?
