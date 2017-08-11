@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SnapPhotoPresentationLogic {
-    func presentSomething(response: SnapPhoto.Something.Response)
+    func presentUsedImage(response: SnapPhoto.UseImage.Response)
 }
 
 class SnapPhotoPresenter: SnapPhotoPresentationLogic {
@@ -21,8 +21,8 @@ class SnapPhotoPresenter: SnapPhotoPresentationLogic {
 
     // MARK: Do something
 
-    func presentSomething(response: SnapPhoto.Something.Response) {
-        let viewModel = SnapPhoto.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentUsedImage(response: SnapPhoto.UseImage.Response) {
+        let viewModel = SnapPhoto.UseImage.ViewModel()
+        viewController?.displayUsedImage(viewModel: viewModel)
     }
 }

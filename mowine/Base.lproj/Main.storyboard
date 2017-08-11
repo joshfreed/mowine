@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ScF-Wh-pzT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ScF-Wh-pzT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -315,7 +315,7 @@
         <scene sceneID="ebT-ub-5pw">
             <objects>
                 <collectionViewController storyboardIdentifier="SelectVarietyViewController" id="EFJ-E8-FVd" customClass="SelectVarietyViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="y3Z-1Q-BIz">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="y3Z-1Q-BIz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -422,6 +422,7 @@
                                 <state key="normal" title="Take Photo"/>
                                 <connections>
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="ohN-d9-tyT"/>
+                                    <action selector="takePhoto:" destination="Ndr-H1-xxV" eventType="touchUpInside" id="Iyx-4I-tuC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-xk-Q56" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
@@ -435,6 +436,7 @@
                                 <color key="tintColor" white="1" alpha="0.87" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Choose from Library"/>
                                 <connections>
+                                    <action selector="chooseFromLibrary:" destination="Ndr-H1-xxV" eventType="touchUpInside" id="U4m-Iw-huJ"/>
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="oWm-5K-d1P"/>
                                 </connections>
                             </button>
@@ -444,6 +446,9 @@
                                 <state key="normal" title="Take Later">
                                     <color key="titleColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="VEu-kc-eUB" kind="show" identifier="NameAndRate" id="da1-QC-BUO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -461,10 +466,111 @@
                             <constraint firstItem="biG-MD-lma" firstAttribute="leading" secondItem="D3e-Ic-IN1" secondAttribute="leadingMargin" id="zQG-hS-Azc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="61x-xl-9Rt" kind="show" identifier="ConfirmPhoto" id="rdv-2h-nz7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pq9-Ez-3AA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3918" y="-310"/>
+        </scene>
+        <!--Confirm Photo View Controller-->
+        <scene sceneID="h4z-yZ-khO">
+            <objects>
+                <viewController id="61x-xl-9Rt" customClass="ConfirmPhotoViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dud-CK-Y4c"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fah-27-pb0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c02-xa-DMc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How's that look?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RfP-dM-ZPw">
+                                <rect key="frame" x="32" y="80" width="311" height="45"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-YG-dd1">
+                                <rect key="frame" x="66" y="156.5" width="243" height="243"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XDS-YG-dd1" secondAttribute="height" multiplier="1:1" id="FPx-BW-AEA"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-D3-y0b" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="46.5" y="431.5" width="281" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="Dhr-Iz-C6I"/>
+                                    <constraint firstAttribute="height" constant="74" id="yjY-ac-anv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <state key="normal" title="Nailed It"/>
+                                <connections>
+                                    <segue destination="VEu-kc-eUB" kind="show" identifier="NameAndRate" id="7pM-bq-uHV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtj-94-vbb">
+                                <rect key="frame" x="136" y="575" width="104" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="takeAnotherPhoto:" destination="61x-xl-9Rt" eventType="touchUpInside" id="kFg-ML-AWH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp3-nv-tEI">
+                                <rect key="frame" x="92" y="621" width="191" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Choose from Library">
+                                    <color key="titleColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseFromLibrary:" destination="61x-xl-9Rt" eventType="touchUpInside" id="AYf-SV-gai"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dp3-nv-tEI" firstAttribute="top" secondItem="Gtj-94-vbb" secondAttribute="bottom" constant="8" id="8Iu-Os-zrd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XDS-YG-dd1" secondAttribute="trailing" constant="50" id="H37-ri-t4v"/>
+                            <constraint firstItem="Fah-27-pb0" firstAttribute="top" secondItem="dp3-nv-tEI" secondAttribute="bottom" constant="8" id="IjU-Lr-WO5"/>
+                            <constraint firstItem="XDS-YG-dd1" firstAttribute="leading" secondItem="c02-xa-DMc" secondAttribute="leadingMargin" constant="50" id="MOJ-ib-7Ls"/>
+                            <constraint firstItem="RfP-dM-ZPw" firstAttribute="centerX" secondItem="c02-xa-DMc" secondAttribute="centerX" id="NHo-se-lcj"/>
+                            <constraint firstItem="iEc-D3-y0b" firstAttribute="centerX" secondItem="c02-xa-DMc" secondAttribute="centerX" id="d1Y-9p-hBO"/>
+                            <constraint firstItem="dp3-nv-tEI" firstAttribute="centerX" secondItem="c02-xa-DMc" secondAttribute="centerX" id="egS-g6-hRy"/>
+                            <constraint firstItem="Gtj-94-vbb" firstAttribute="centerX" secondItem="c02-xa-DMc" secondAttribute="centerX" id="l6Z-IO-yaX"/>
+                            <constraint firstItem="RfP-dM-ZPw" firstAttribute="top" secondItem="Dud-CK-Y4c" secondAttribute="bottom" constant="16" id="pad-I0-Nwr"/>
+                            <constraint firstItem="XDS-YG-dd1" firstAttribute="top" secondItem="RfP-dM-ZPw" secondAttribute="bottom" constant="32" id="pq4-VD-3Lv"/>
+                            <constraint firstItem="iEc-D3-y0b" firstAttribute="top" secondItem="XDS-YG-dd1" secondAttribute="bottom" constant="32" id="x1C-MF-Jsy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="previewImageView" destination="XDS-YG-dd1" id="sJp-em-lG0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oDA-4G-gaC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4952" y="-1195"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xMM-u7-Cmp">
+            <objects>
+                <viewController id="VEu-kc-eUB" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cxU-Fb-hbv"/>
+                        <viewControllerLayoutGuide type="bottom" id="XDs-uR-esg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mp7-E1-m2S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZFP-C5-TmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4951" y="-310"/>
         </scene>
         <!--My Wines-->
         <scene sceneID="z8d-Kc-csk">
@@ -623,4 +729,7 @@
         <image name="add-wine-header" width="248" height="93"/>
         <image name="wine-rack" width="176" height="134"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="7pM-bq-uHV"/>
+    </inferredMetricsTieBreakers>
 </document>

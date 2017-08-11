@@ -13,27 +13,27 @@
 import UIKit
 
 protocol SnapPhotoBusinessLogic {
-    func doSomething(request: SnapPhoto.Something.Request)
+    func useImage(request: SnapPhoto.UseImage.Request)
 }
 
 protocol SnapPhotoDataStore {
     var wineType: Type! { get set }
     var variety: Variety! { get set }
+    var photo: UIImage? { get }
 }
 
 class SnapPhotoInteractor: SnapPhotoBusinessLogic, SnapPhotoDataStore {
     var presenter: SnapPhotoPresentationLogic?
-    var worker: SnapPhotoWorker?
     var wineType: Type!
     var variety: Variety!
+    var photo: UIImage?
 
-    // MARK: Do something
+    // MARK: Use image
 
-    func doSomething(request: SnapPhoto.Something.Request) {
-        worker = SnapPhotoWorker()
-        worker?.doSomeWork()
+    func useImage(request: SnapPhoto.UseImage.Request) {
+        photo = request.image
 
-        let response = SnapPhoto.Something.Response()
-        presenter?.presentSomething(response: response)
+        let response = SnapPhoto.UseImage.Response()
+        presenter?.presentUsedImage(response: response)
     }
 }

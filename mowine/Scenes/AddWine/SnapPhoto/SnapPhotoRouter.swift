@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol SnapPhotoRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToConfirmPhoto(segue: UIStoryboardSegue)
 }
 
 protocol SnapPhotoDataPassing {
@@ -26,20 +26,12 @@ class SnapPhotoRouter: NSObject, SnapPhotoRoutingLogic, SnapPhotoDataPassing {
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToConfirmPhoto(segue: UIStoryboardSegue)
+    {
+        let destinationVC = segue.destination as! ConfirmPhotoViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToConfirmPhoto(source: dataStore!, destination: &destinationDS)
+    }
 
     // MARK: Navigation
 
@@ -50,8 +42,10 @@ class SnapPhotoRouter: NSObject, SnapPhotoRoutingLogic, SnapPhotoDataPassing {
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: SnapPhotoDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToConfirmPhoto(source: SnapPhotoDataStore, destination: inout ConfirmPhotoDataStore)
+    {
+        destination.wineType = source.wineType
+        destination.variety = source.variety
+        destination.photo = source.photo
+    }
 }

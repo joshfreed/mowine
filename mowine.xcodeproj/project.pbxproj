@@ -63,9 +63,13 @@
 		53B564D91F11952D00459BB8 /* SnapPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */; };
 		53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */; };
 		53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */; };
-		53B564DC1F11952D00459BB8 /* SnapPhotoWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D61F11952D00459BB8 /* SnapPhotoWorker.swift */; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
 		53C88BFC1F085D56009B7D29 /* ButtonPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */; };
+		53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */; };
+		53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */; };
+		53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */; };
+		53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */; };
+		53CDB5181F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */; };
 		53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8EDCF1E4185B000696FAE /* RatingRow.swift */; };
 		53D8EDD21E41868E00696FAE /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD11E41868E00696FAE /* RatingCell.xib */; };
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
@@ -162,9 +166,13 @@
 		53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoPresenter.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoPresenter.swift; sourceTree = "<group>"; };
 		53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoRouter.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoRouter.swift; sourceTree = "<group>"; };
 		53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoViewController.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoViewController.swift; sourceTree = "<group>"; };
-		53B564D61F11952D00459BB8 /* SnapPhotoWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoWorker.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoWorker.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonPrimary.swift; path = Views/ButtonPrimary.swift; sourceTree = "<group>"; };
+		53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoInteractor.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoInteractor.swift; sourceTree = "<group>"; };
+		53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoModels.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoModels.swift; sourceTree = "<group>"; };
+		53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoPresenter.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoPresenter.swift; sourceTree = "<group>"; };
+		53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoRouter.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoRouter.swift; sourceTree = "<group>"; };
+		53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoViewController.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoViewController.swift; sourceTree = "<group>"; };
 		53D8EDCF1E4185B000696FAE /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingRow.swift; path = EurekaRows/RatingRow.swift; sourceTree = "<group>"; };
 		53D8EDD11E41868E00696FAE /* RatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RatingCell.xib; path = EurekaRows/RatingCell.xib; sourceTree = "<group>"; };
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -365,12 +373,11 @@
 		53B564C61F1186A100459BB8 /* SnapPhoto */ = {
 			isa = PBXGroup;
 			children = (
-				53B564D11F11952D00459BB8 /* SnapPhotoInteractor.swift */,
-				53B564D21F11952D00459BB8 /* SnapPhotoModels.swift */,
-				53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */,
-				53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */,
 				53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */,
-				53B564D61F11952D00459BB8 /* SnapPhotoWorker.swift */,
+				53B564D11F11952D00459BB8 /* SnapPhotoInteractor.swift */,
+				53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */,
+				53B564D21F11952D00459BB8 /* SnapPhotoModels.swift */,
+				53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */,
 			);
 			name = SnapPhoto;
 			sourceTree = "<group>";
@@ -381,6 +388,25 @@
 				53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		53CDB50C1F3E263D00EF9CF6 /* ConfirmPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */,
+				53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */,
+				53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */,
+				53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */,
+				53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */,
+			);
+			name = ConfirmPhoto;
+			sourceTree = "<group>";
+		};
+		53CDB50D1F3E264800EF9CF6 /* NameAndRate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = NameAndRate;
 			sourceTree = "<group>";
 		};
 		53D8EDCE1E41857100696FAE /* EurekaRows */ = {
@@ -493,6 +519,8 @@
 				5321FB8E1F0BEE09001D2040 /* SelectType */,
 				5321FB9B1F0BF2F2001D2040 /* SelectVariety */,
 				53B564C61F1186A100459BB8 /* SnapPhoto */,
+				53CDB50C1F3E263D00EF9CF6 /* ConfirmPhoto */,
+				53CDB50D1F3E264800EF9CF6 /* NameAndRate */,
 			);
 			name = AddWine;
 			sourceTree = "<group>";
@@ -808,6 +836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
 				538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */,
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
 				538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */,
@@ -815,12 +844,15 @@
 				537740A81E5BD35E00A1D282 /* VarietyTranslator.swift in Sources */,
 				538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
+				53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				53F5AC2A1E2185C00067AB62 /* MainMenuViewController.swift in Sources */,
 				538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */,
+				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,
 				53F5AC271E2185830067AB62 /* UIImageView.swift in Sources */,
 				5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */,
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
+				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
 				53B564D81F11952D00459BB8 /* SnapPhotoModels.swift in Sources */,
@@ -844,6 +876,7 @@
 				5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */,
 				535793611E21A1EB00FDD56A /* MyWinesModels.swift in Sources */,
 				537614C81E591887005AABF0 /* EditWineConfigurator.swift in Sources */,
+				53CDB5181F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift in Sources */,
 				537614CC1E591887005AABF0 /* EditWineRouter.swift in Sources */,
 				535793631E21A1EB00FDD56A /* MyWinesRouter.swift in Sources */,
 				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
@@ -852,7 +885,6 @@
 				538F77A31E7DCC0D00C08263 /* SortAndFilterRouter.swift in Sources */,
 				5321FB961F0BEE27001D2040 /* SelectTypeModels.swift in Sources */,
 				537614CA1E591887005AABF0 /* EditWineModels.swift in Sources */,
-				53B564DC1F11952D00459BB8 /* SnapPhotoWorker.swift in Sources */,
 				537740A61E5BD11C00A1D282 /* UIViewController.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,

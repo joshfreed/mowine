@@ -8,17 +8,24 @@
 
 import UIKit
 
+@IBDesignable
 class ButtonPrimary: UIButton {
     let defaultFontSize: CGFloat = 37
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        setup()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        setup()
+    }
+
+    private func setup() {
         backgroundColor = .mwButtonPrimary
-        tintColor = .white        
+        tintColor = .white
         layer.cornerRadius = 5
         let fontSize = titleLabel?.font.pointSize ?? defaultFontSize
         titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
     }
-
 }
