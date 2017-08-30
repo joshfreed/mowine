@@ -70,6 +70,12 @@
 		53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */; };
 		53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */; };
 		53CDB5181F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */; };
+		53CDB5201F3E312400EF9CF6 /* NameAndRateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB51A1F3E312400EF9CF6 /* NameAndRateInteractor.swift */; };
+		53CDB5211F3E312400EF9CF6 /* NameAndRateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB51B1F3E312400EF9CF6 /* NameAndRateModels.swift */; };
+		53CDB5221F3E312400EF9CF6 /* NameAndRatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB51C1F3E312400EF9CF6 /* NameAndRatePresenter.swift */; };
+		53CDB5231F3E312400EF9CF6 /* NameAndRateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB51D1F3E312400EF9CF6 /* NameAndRateRouter.swift */; };
+		53CDB5241F3E312400EF9CF6 /* NameAndRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB51E1F3E312400EF9CF6 /* NameAndRateViewController.swift */; };
+		53CDB5251F3E312400EF9CF6 /* NameAndRateWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB51F1F3E312400EF9CF6 /* NameAndRateWorker.swift */; };
 		53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D8EDCF1E4185B000696FAE /* RatingRow.swift */; };
 		53D8EDD21E41868E00696FAE /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD11E41868E00696FAE /* RatingCell.xib */; };
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
@@ -173,6 +179,12 @@
 		53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoPresenter.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoPresenter.swift; sourceTree = "<group>"; };
 		53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoRouter.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoRouter.swift; sourceTree = "<group>"; };
 		53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoViewController.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoViewController.swift; sourceTree = "<group>"; };
+		53CDB51A1F3E312400EF9CF6 /* NameAndRateInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameAndRateInteractor.swift; path = Scenes/NameAndRate/NameAndRateInteractor.swift; sourceTree = "<group>"; };
+		53CDB51B1F3E312400EF9CF6 /* NameAndRateModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameAndRateModels.swift; path = Scenes/NameAndRate/NameAndRateModels.swift; sourceTree = "<group>"; };
+		53CDB51C1F3E312400EF9CF6 /* NameAndRatePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameAndRatePresenter.swift; path = Scenes/NameAndRate/NameAndRatePresenter.swift; sourceTree = "<group>"; };
+		53CDB51D1F3E312400EF9CF6 /* NameAndRateRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameAndRateRouter.swift; path = Scenes/NameAndRate/NameAndRateRouter.swift; sourceTree = "<group>"; };
+		53CDB51E1F3E312400EF9CF6 /* NameAndRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameAndRateViewController.swift; path = Scenes/NameAndRate/NameAndRateViewController.swift; sourceTree = "<group>"; };
+		53CDB51F1F3E312400EF9CF6 /* NameAndRateWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameAndRateWorker.swift; path = Scenes/NameAndRate/NameAndRateWorker.swift; sourceTree = "<group>"; };
 		53D8EDCF1E4185B000696FAE /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingRow.swift; path = EurekaRows/RatingRow.swift; sourceTree = "<group>"; };
 		53D8EDD11E41868E00696FAE /* RatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RatingCell.xib; path = EurekaRows/RatingCell.xib; sourceTree = "<group>"; };
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -405,6 +417,12 @@
 		53CDB50D1F3E264800EF9CF6 /* NameAndRate */ = {
 			isa = PBXGroup;
 			children = (
+				53CDB51A1F3E312400EF9CF6 /* NameAndRateInteractor.swift */,
+				53CDB51B1F3E312400EF9CF6 /* NameAndRateModels.swift */,
+				53CDB51C1F3E312400EF9CF6 /* NameAndRatePresenter.swift */,
+				53CDB51D1F3E312400EF9CF6 /* NameAndRateRouter.swift */,
+				53CDB51E1F3E312400EF9CF6 /* NameAndRateViewController.swift */,
+				53CDB51F1F3E312400EF9CF6 /* NameAndRateWorker.swift */,
 			);
 			name = NameAndRate;
 			sourceTree = "<group>";
@@ -842,7 +860,9 @@
 				538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */,
 				53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */,
 				537740A81E5BD35E00A1D282 /* VarietyTranslator.swift in Sources */,
+				53CDB5231F3E312400EF9CF6 /* NameAndRateRouter.swift in Sources */,
 				538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */,
+				53CDB5221F3E312400EF9CF6 /* NameAndRatePresenter.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
 				53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
@@ -854,10 +874,12 @@
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
+				53CDB5211F3E312400EF9CF6 /* NameAndRateModels.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
 				53B564D81F11952D00459BB8 /* SnapPhotoModels.swift in Sources */,
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,
 				53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */,
+				53CDB5241F3E312400EF9CF6 /* NameAndRateViewController.swift in Sources */,
 				537740A41E5BC73600A1D282 /* Models.swift in Sources */,
 				53D8EDD01E4185B000696FAE /* RatingRow.swift in Sources */,
 				5321FBA21F0BF594001D2040 /* SelectVarietyInteractor.swift in Sources */,
@@ -889,7 +911,9 @@
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
+				53CDB5201F3E312400EF9CF6 /* NameAndRateInteractor.swift in Sources */,
 				539196A01E6B7A1D001AE149 /* Delay.swift in Sources */,
+				53CDB5251F3E312400EF9CF6 /* NameAndRateWorker.swift in Sources */,
 				5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,

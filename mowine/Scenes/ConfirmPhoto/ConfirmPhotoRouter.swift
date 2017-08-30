@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol ConfirmPhotoRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToNameAndRate(segue: UIStoryboardSegue)
 }
 
 protocol ConfirmPhotoDataPassing {
@@ -26,20 +26,12 @@ class ConfirmPhotoRouter: NSObject, ConfirmPhotoRoutingLogic, ConfirmPhotoDataPa
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToNameAndRate(segue: UIStoryboardSegue)
+    {
+        let destinationVC = segue.destination as! NameAndRateViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToNameAndRate(source: dataStore!, destination: &destinationDS)    
+    }
 
     // MARK: Navigation
 
@@ -50,8 +42,10 @@ class ConfirmPhotoRouter: NSObject, ConfirmPhotoRoutingLogic, ConfirmPhotoDataPa
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: ConfirmPhotoDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToNameAndRate(source: ConfirmPhotoDataStore, destination: inout NameAndRateDataStore)
+    {
+        destination.wineType = source.wineType
+        destination.variety = source.variety
+        destination.photo = source.photo
+    }
 }
