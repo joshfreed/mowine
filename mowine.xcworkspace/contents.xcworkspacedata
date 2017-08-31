@@ -5,6 +5,9 @@
       location = "group:mowine.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../JFLib/JFLib.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

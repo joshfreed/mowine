@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JFLib
 
 class MainMenuViewController: UIViewController {
     @IBOutlet weak var newWineImage: UIImageView!
