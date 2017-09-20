@@ -1,5 +1,5 @@
 //
-//  NameAndRateInteractor.swift
+//  NameWineInteractor.swift
 //  mowine
 //
 //  Created by Josh Freed on 8/11/17.
@@ -12,27 +12,29 @@
 
 import UIKit
 
-protocol NameAndRateBusinessLogic {
-    func getPhotoPreview(request: NameAndRate.GetPhotoPreview.Request)
+protocol NameWineBusinessLogic {
+    func getPhotoPreview(request: NameWine.GetPhotoPreview.Request)
 }
 
-protocol NameAndRateDataStore {
+protocol NameWineDataStore {
     var wineType: Type! { get set }
     var variety: Variety! { get set }
     var photo: UIImage? { get set }
+    var name: String { get }
 }
 
-class NameAndRateInteractor: NameAndRateBusinessLogic, NameAndRateDataStore {
-    var presenter: NameAndRatePresentationLogic?
-    var worker: NameAndRateWorker?
+class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
+    var presenter: NameWinePresentationLogic?
+    var worker: NameWineWorker?
     var wineType: Type!
     var variety: Variety!
     var photo: UIImage?
+    var name: String = ""
 
     // MARK: Get photo preview
 
-    func getPhotoPreview(request: NameAndRate.GetPhotoPreview.Request) {
-        let response = NameAndRate.GetPhotoPreview.Response(photo: photo)
+    func getPhotoPreview(request: NameWine.GetPhotoPreview.Request) {
+        let response = NameWine.GetPhotoPreview.Response(photo: photo)
         presenter?.presentPhotoPreview(response: response)
     }
 }

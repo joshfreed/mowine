@@ -1,5 +1,5 @@
 //
-//  NameAndRateWorker.swift
+//  NameWineWorker.swift
 //  mowine
 //
 //  Created by Josh Freed on 8/11/17.
@@ -12,7 +12,7 @@
 
 import UIKit
 
-class NameAndRateWorker {
+class NameWineWorker {
     func doSomeWork() {
     }
 }

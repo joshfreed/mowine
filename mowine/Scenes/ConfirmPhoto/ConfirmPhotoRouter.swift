@@ -28,7 +28,7 @@ class ConfirmPhotoRouter: NSObject, ConfirmPhotoRoutingLogic, ConfirmPhotoDataPa
 
     func routeToNameAndRate(segue: UIStoryboardSegue)
     {
-        let destinationVC = segue.destination as! NameAndRateViewController
+        let destinationVC = segue.destination as! NameWineViewController
         var destinationDS = destinationVC.router!.dataStore!
         passDataToNameAndRate(source: dataStore!, destination: &destinationDS)    
     }
@@ -42,7 +42,7 @@ class ConfirmPhotoRouter: NSObject, ConfirmPhotoRoutingLogic, ConfirmPhotoDataPa
 
     // MARK: Passing data
 
-    func passDataToNameAndRate(source: ConfirmPhotoDataStore, destination: inout NameAndRateDataStore)
+    func passDataToNameAndRate(source: ConfirmPhotoDataStore, destination: inout NameWineDataStore)
     {
         destination.wineType = source.wineType
         destination.variety = source.variety
