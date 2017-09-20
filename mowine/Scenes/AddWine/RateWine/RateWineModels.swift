@@ -15,15 +15,19 @@ import UIKit
 enum RateWine {
     // MARK: Use cases
 
-    enum Something {
+    enum GetWine {
 
         struct Request {
         }
 
         struct Response {
+            var photo: UIImage?
+            var name: String
         }
 
         struct ViewModel {
+            var photo: UIImage?
+            var name: String
         }
 
     }

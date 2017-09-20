@@ -11,9 +11,10 @@
 //
 
 import UIKit
+import Cosmos
 
 protocol RateWineDisplayLogic: class {
-    func displaySomething(viewModel: RateWine.Something.ViewModel)
+    func displayWine(viewModel: RateWine.GetWine.ViewModel)
 }
 
 class RateWineViewController: UIViewController, RateWineDisplayLogic {
@@ -62,19 +63,56 @@ class RateWineViewController: UIViewController, RateWineDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        
+        doneButton.isHidden = true
+        doneButton.alpha = 0
+        
+        getWine()
     }
 
-    // MARK: Do something
+    // MARK: Get wine
 
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var doneButton: ButtonPrimary!
+    @IBOutlet weak var ratingView: CosmosView!
 
-    func doSomething() {
-        let request = RateWine.Something.Request()
-        interactor?.doSomething(request: request)
+    func getWine() {
+        let request = RateWine.GetWine.Request()
+        interactor?.getWine(request: request)
     }
 
-    func displaySomething(viewModel: RateWine.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayWine(viewModel: RateWine.GetWine.ViewModel) {
+        if let photo = viewModel.photo {
+            photoImageView.image = photo
+            photoImageView.layer.cornerRadius = photoImageView.frame.size.width / 2
+            photoImageView.clipsToBounds = true
+            photoImageView.contentMode = .scaleAspectFill
+        } else {
+            photoImageView.image = #imageLiteral(resourceName: "bottle-of-wine")
+            photoImageView.clipsToBounds = false
+            photoImageView.contentMode = .scaleAspectFit
+            photoImageView.tintColor = UIColor.lightGray
+        }
+        
+        nameLabel.text = viewModel.name
+    }
+    
+    // MARK: Helper funcs
+    
+    func showDoneButton() {
+        doneButton.isHidden = false
+        
+        UIView.animate(withDuration: 0.1) {
+            self.doneButton.alpha = 1.0
+        }
+    }
+    
+    func hideDoneButton() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.doneButton.alpha = 0
+        }, completion: { _ in
+            self.doneButton.isHidden = true
+        })
     }
 }

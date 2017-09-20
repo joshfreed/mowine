@@ -85,7 +85,7 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     // MARK: Keyboard
     
     func keyboardWillShow(notification: Notification) {
-        if let keyboardEndFrame = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardEndFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             view.layoutIfNeeded()
             
             let animationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.35

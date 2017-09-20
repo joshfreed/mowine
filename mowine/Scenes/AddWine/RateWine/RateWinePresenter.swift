@@ -13,16 +13,16 @@
 import UIKit
 
 protocol RateWinePresentationLogic {
-    func presentSomething(response: RateWine.Something.Response)
+    func presentWine(response: RateWine.GetWine.Response)
 }
 
 class RateWinePresenter: RateWinePresentationLogic {
     weak var viewController: RateWineDisplayLogic?
 
-    // MARK: Do something
+    // MARK: Get wine
 
-    func presentSomething(response: RateWine.Something.Response) {
-        let viewModel = RateWine.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentWine(response: RateWine.GetWine.Response) {
+        let viewModel = RateWine.GetWine.ViewModel(photo: response.photo, name: response.name)
+        viewController?.displayWine(viewModel: viewModel)
     }
 }

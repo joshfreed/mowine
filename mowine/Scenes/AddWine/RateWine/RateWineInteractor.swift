@@ -13,7 +13,7 @@
 import UIKit
 
 protocol RateWineBusinessLogic {
-    func doSomething(request: RateWine.Something.Request)
+    func getWine(request: RateWine.GetWine.Request)
 }
 
 protocol RateWineDataStore {
@@ -31,13 +31,10 @@ class RateWineInteractor: RateWineBusinessLogic, RateWineDataStore {
     var photo: UIImage?
     var name: String = ""
 
-    // MARK: Do something
+    // MARK: Get wine
 
-    func doSomething(request: RateWine.Something.Request) {
-        worker = RateWineWorker()
-        worker?.doSomeWork()
-
-        let response = RateWine.Something.Response()
-        presenter?.presentSomething(response: response)
+    func getWine(request: RateWine.GetWine.Request) {
+        let response = RateWine.GetWine.Response(photo: photo, name: name)
+        presenter?.presentWine(response: response)
     }
 }

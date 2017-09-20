@@ -40,12 +40,12 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
 
         let segmentedControl = UISegmentedControl()
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.setContentHuggingPriority(250, for: .horizontal)
+        segmentedControl.setContentHuggingPriority(UILayoutPriority(rawValue: 250), for: .horizontal)
         self.segmentedControl = segmentedControl
 
         self.titleLabel = self.textLabel
         self.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel?.setContentHuggingPriority(500, for: .horizontal)
+        self.titleLabel?.setContentHuggingPriority(UILayoutPriority(rawValue: 500), for: .horizontal)
 
         NotificationCenter.default.addObserver(forName: Notification.Name.UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] _ in
             guard let me = self else { return }
@@ -61,6 +61,7 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
         }
 
         NotificationCenter.default.addObserver(forName: Notification.Name.UIContentSizeCategoryDidChange, object: nil, queue: nil) { [weak self] _ in
+            self?.titleLabel = self?.textLabel
             self?.setNeedsUpdateConstraints()
         }
         contentView.addSubview(titleLabel!)
@@ -112,7 +113,7 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
         segmentedControl.isEnabled = !row.isDisabled
     }
 
-    func valueChanged() {
+    @objc func valueChanged() {
         row.value =  (row as! SegmentedRow<T>).options[segmentedControl.selectedSegmentIndex]
     }
 
@@ -128,7 +129,14 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
 
     func updateSegmentedControl() {
         segmentedControl.removeAllSegments()
-        items().enumerated().forEach { segmentedControl.insertSegment(withTitle: $0.element, at: $0.offset, animated: false) }
+        
+        (row as! SegmentedRow<T>).options.reversed().forEach {
+            if let image = $0 as? UIImage {
+                segmentedControl.insertSegment(with: image, at: 0, animated: false)
+            } else {
+                segmentedControl.insertSegment(withTitle: row.displayValueFor?($0) ?? "", at: 0, animated: false)
+            }
+        }
     }
 
     open override func updateConstraints() {
@@ -164,14 +172,6 @@ open class SegmentedCell<T: Equatable> : Cell<T>, CellType {
         }
         contentView.addConstraints(dynamicConstraints)
         super.updateConstraints()
-    }
-
-    func items() -> [String] {// or create protocol for options
-        var result = [String]()
-        for object in (row as! SegmentedRow<T>).options {
-            result.append(row.displayValueFor?(object) ?? "")
-        }
-        return result
     }
 
     func selectedIndex() -> Int? {
