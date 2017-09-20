@@ -15,6 +15,7 @@ import Cosmos
 
 protocol NameWineDisplayLogic: class {
     func displayPhotoPreview(viewModel: NameWine.GetPhotoPreview.ViewModel)
+    func displayName(viewModel: NameWine.UpdateName.ViewModel)
 }
 
 class NameWineViewController: UIViewController, NameWineDisplayLogic {
@@ -135,6 +136,17 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
             photoImageView.contentMode = .scaleAspectFit
             photoImageView.tintColor = UIColor.lightGray
         }        
+    }
+    
+    // MARK: Update name
+    
+    @IBAction func tappedNext(_ sender: ButtonPrimary) {
+        let request = NameWine.UpdateName.Request(name: nameTextField.text)
+        interactor?.updateName(request: request)
+    }
+    
+    func displayName(viewModel: NameWine.UpdateName.ViewModel) {
+        performSegue(withIdentifier: "RateWine", sender: nil)
     }
     
     // MARK: Helper funcs

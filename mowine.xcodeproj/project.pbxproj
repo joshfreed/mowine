@@ -21,6 +21,7 @@
 		5301D5481F72D215004A66A9 /* RateWineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5421F72D215004A66A9 /* RateWineWorker.swift */; };
 		531550DF1F5848C70017DA70 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
 		531550E01F5848C70017DA70 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5318D6A41F730BA600B137BD /* WineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D6A31F730BA600B137BD /* WineWorker.swift */; };
 		5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5320BF361E42B0BB00F2405E /* PhotoCell.xib */; };
 		5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5320BF381E436FF200F2405E /* PhotoRow.swift */; };
 		5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB8F1F0BEE27001D2040 /* SelectTypeInteractor.swift */; };
@@ -148,6 +149,7 @@
 		5301D5411F72D215004A66A9 /* RateWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineViewController.swift; path = Scenes/AddWine/RateWine/RateWineViewController.swift; sourceTree = "<group>"; };
 		5301D5421F72D215004A66A9 /* RateWineWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineWorker.swift; path = Scenes/AddWine/RateWine/RateWineWorker.swift; sourceTree = "<group>"; };
 		531550DE1F5848C70017DA70 /* JFLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JFLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5318D6A31F730BA600B137BD /* WineWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WineWorker.swift; path = Shared/WineWorker.swift; sourceTree = "<group>"; };
 		5320BF361E42B0BB00F2405E /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoCell.xib; path = EurekaRows/PhotoCell.xib; sourceTree = "<group>"; };
 		5320BF381E436FF200F2405E /* PhotoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoRow.swift; path = EurekaRows/PhotoRow.swift; sourceTree = "<group>"; };
 		5321FB8F1F0BEE27001D2040 /* SelectTypeInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectTypeInteractor.swift; path = Scenes/AddWine/SelectType/SelectTypeInteractor.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				537740A71E5BD35E00A1D282 /* VarietyTranslator.swift */,
 				537740A91E5BD58A00A1D282 /* WineImageWorker.swift */,
 				539196971E6B68EE001AE149 /* WineTypeWorker.swift */,
+				5318D6A31F730BA600B137BD /* WineWorker.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */,
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
 				538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */,
+				5318D6A41F730BA600B137BD /* WineWorker.swift in Sources */,
 				53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */,
 				537740A81E5BD35E00A1D282 /* VarietyTranslator.swift in Sources */,
 				538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */,

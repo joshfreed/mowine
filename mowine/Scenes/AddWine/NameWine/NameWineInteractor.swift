@@ -14,6 +14,7 @@ import UIKit
 
 protocol NameWineBusinessLogic {
     func getPhotoPreview(request: NameWine.GetPhotoPreview.Request)
+    func updateName(request: NameWine.UpdateName.Request)
 }
 
 protocol NameWineDataStore {
@@ -36,5 +37,14 @@ class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
     func getPhotoPreview(request: NameWine.GetPhotoPreview.Request) {
         let response = NameWine.GetPhotoPreview.Response(photo: photo)
         presenter?.presentPhotoPreview(response: response)
+    }
+    
+    // MARK: Update name
+    
+    func updateName(request: NameWine.UpdateName.Request) {
+        name = request.name ?? ""
+        
+        let response = NameWine.UpdateName.Response()
+        presenter?.presentName(response: response)
     }
 }

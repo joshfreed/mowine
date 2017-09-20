@@ -32,4 +32,31 @@ enum RateWine {
 
     }
 
+    enum UpdateRating {
+        struct Request {
+            var rating: Double
+        }
+        
+        struct Response {
+            
+        }
+        
+        struct ViewModel {
+            
+        }
+    }
+    
+    enum SaveWine {
+        struct Request {
+            
+        }
+        
+        struct Response {
+            
+        }
+        
+        struct ViewModel {
+            
+        }
+    }
 }

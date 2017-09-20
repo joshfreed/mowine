@@ -30,4 +30,17 @@ enum NameWine {
 
     }
 
+    enum UpdateName {
+        struct Request {
+            var name: String?
+        }
+        
+        struct Response {
+            
+        }
+        
+        struct ViewModel {
+            
+        }
+    }
 }

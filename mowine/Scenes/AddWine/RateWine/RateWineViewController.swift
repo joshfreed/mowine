@@ -15,6 +15,7 @@ import Cosmos
 
 protocol RateWineDisplayLogic: class {
     func displayWine(viewModel: RateWine.GetWine.ViewModel)
+    func displayRating(viewModel: RateWine.UpdateRating.ViewModel)
 }
 
 class RateWineViewController: UIViewController, RateWineDisplayLogic {
@@ -67,6 +68,10 @@ class RateWineViewController: UIViewController, RateWineDisplayLogic {
         doneButton.isHidden = true
         doneButton.alpha = 0
         
+        ratingView.didFinishTouchingCosmos = { rating in
+            self.showDoneButton()
+        }
+        
         getWine()
     }
 
@@ -96,6 +101,17 @@ class RateWineViewController: UIViewController, RateWineDisplayLogic {
         }
         
         nameLabel.text = viewModel.name
+    }
+    
+    // MARK: Update rating
+    
+    @IBAction func tappedDone(_ sender: ButtonPrimary) {
+        let request = RateWine.UpdateRating.Request(rating: ratingView.rating)
+        interactor?.updateRating(request: request)
+    }
+    
+    func displayRating(viewModel: RateWine.UpdateRating.ViewModel) {
+        //performSegue(withIdentifier: "NewWineSummary", sender: nil)
     }
     
     // MARK: Helper funcs

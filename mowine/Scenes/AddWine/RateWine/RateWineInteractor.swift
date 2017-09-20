@@ -14,6 +14,7 @@ import UIKit
 
 protocol RateWineBusinessLogic {
     func getWine(request: RateWine.GetWine.Request)
+    func updateRating(request: RateWine.UpdateRating.Request)
 }
 
 protocol RateWineDataStore {
@@ -25,16 +26,25 @@ protocol RateWineDataStore {
 
 class RateWineInteractor: RateWineBusinessLogic, RateWineDataStore {
     var presenter: RateWinePresentationLogic?
-    var worker: RateWineWorker?
     var wineType: Type!
     var variety: Variety!
     var photo: UIImage?
     var name: String = ""
+    var rating: Double = 0
 
     // MARK: Get wine
 
     func getWine(request: RateWine.GetWine.Request) {
         let response = RateWine.GetWine.Response(photo: photo, name: name)
         presenter?.presentWine(response: response)
+    }
+    
+    // MARK: Update rating
+    
+    func updateRating(request: RateWine.UpdateRating.Request) {
+        rating = request.rating
+
+        let response = RateWine.UpdateRating.Response()
+        presenter?.presentRating(response: response)
     }
 }

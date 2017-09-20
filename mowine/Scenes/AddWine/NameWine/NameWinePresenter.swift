@@ -14,15 +14,23 @@ import UIKit
 
 protocol NameWinePresentationLogic {
     func presentPhotoPreview(response: NameWine.GetPhotoPreview.Response)
+    func presentName(response: NameWine.UpdateName.Response)
 }
 
 class NameWinePresenter: NameWinePresentationLogic {
     weak var viewController: NameWineDisplayLogic?
 
-    // MARK: Do something
+    // MARK: Get photo preview
 
     func presentPhotoPreview(response: NameWine.GetPhotoPreview.Response) {
         let viewModel = NameWine.GetPhotoPreview.ViewModel(photo: response.photo)
         viewController?.displayPhotoPreview(viewModel: viewModel)
+    }
+    
+    // MARK: Update name
+    
+    func presentName(response: NameWine.UpdateName.Response) {
+        let viewModel = NameWine.UpdateName.ViewModel()
+        viewController?.displayName(viewModel: viewModel)
     }
 }
