@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol RateWineRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToAddWineSummary(segue: UIStoryboardSegue)
 }
 
 protocol RateWineDataPassing {
@@ -26,20 +26,12 @@ class RateWineRouter: NSObject, RateWineRoutingLogic, RateWineDataPassing {
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToAddWineSummary(segue: UIStoryboardSegue)
+    {
+        let destinationVC = segue.destination as! AddWineSummaryViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToAddWineSummary(source: dataStore!, destination: &destinationDS)
+    }
 
     // MARK: Navigation
 
@@ -50,8 +42,12 @@ class RateWineRouter: NSObject, RateWineRoutingLogic, RateWineDataPassing {
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: RateWineDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToAddWineSummary(source: RateWineDataStore, destination: inout AddWineSummaryDataStore)
+    {
+        destination.wineType = source.wineType
+        destination.variety = source.variety
+        destination.photo = source.photo
+        destination.name = source.name
+        destination.rating = source.rating
+    }
 }

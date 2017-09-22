@@ -111,7 +111,7 @@ class RateWineViewController: UIViewController, RateWineDisplayLogic {
     }
     
     func displayRating(viewModel: RateWine.UpdateRating.ViewModel) {
-        //performSegue(withIdentifier: "NewWineSummary", sender: nil)
+        performSegue(withIdentifier: "AddWineSummary", sender: nil)
     }
     
     // MARK: Helper funcs

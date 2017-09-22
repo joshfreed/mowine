@@ -82,7 +82,7 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.isTranslucent = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

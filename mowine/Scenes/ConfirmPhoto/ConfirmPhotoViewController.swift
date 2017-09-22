@@ -62,7 +62,16 @@ class ConfirmPhotoViewController: UIViewController, ConfirmPhotoDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        previewImageView.clipsToBounds = true
+        previewImageView.contentMode = .scaleAspectFill
+        
         getPhotoPreview()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        previewImageView.layer.cornerRadius = previewImageView.frame.size.width / 2
     }
 
     // MARK: Get photo preview
@@ -76,9 +85,6 @@ class ConfirmPhotoViewController: UIViewController, ConfirmPhotoDisplayLogic {
 
     func displayPhotoPreview(viewModel: ConfirmPhoto.GetPhotoPreview.ViewModel) {
         previewImageView.image = viewModel.photo
-        previewImageView.layer.cornerRadius = previewImageView.frame.size.width / 2
-        previewImageView.clipsToBounds = true
-        previewImageView.contentMode = .scaleAspectFill
     }
     
     // MARK: Use a different image

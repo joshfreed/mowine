@@ -14,6 +14,7 @@ import UIKit
 
 @objc protocol SnapPhotoRoutingLogic {
     func routeToConfirmPhoto(segue: UIStoryboardSegue)
+    func routeToNameWine(segue: UIStoryboardSegue)
 }
 
 protocol SnapPhotoDataPassing {
@@ -32,6 +33,13 @@ class SnapPhotoRouter: NSObject, SnapPhotoRoutingLogic, SnapPhotoDataPassing {
         var destinationDS = destinationVC.router!.dataStore!
         passDataToConfirmPhoto(source: dataStore!, destination: &destinationDS)
     }
+    
+    func routeToNameWine(segue: UIStoryboardSegue)
+    {
+        let destinationVC = segue.destination as! NameWineViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToNameWine(source: dataStore!, destination: &destinationDS)
+    }
 
     // MARK: Navigation
 
@@ -47,5 +55,12 @@ class SnapPhotoRouter: NSObject, SnapPhotoRoutingLogic, SnapPhotoDataPassing {
         destination.wineType = source.wineType
         destination.variety = source.variety
         destination.photo = source.photo
+    }
+    
+    func passDataToNameWine(source: SnapPhotoDataStore, destination: inout NameWineDataStore)
+    {
+        destination.wineType = source.wineType
+        destination.variety = source.variety
+        destination.photo = nil
     }
 }

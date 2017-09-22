@@ -15,6 +15,7 @@ import UIKit
 protocol NameWinePresentationLogic {
     func presentPhotoPreview(response: NameWine.GetPhotoPreview.Response)
     func presentName(response: NameWine.UpdateName.Response)
+    func presentRating(response: NameWine.UpdateRating.Response)
 }
 
 class NameWinePresenter: NameWinePresentationLogic {
@@ -32,5 +33,12 @@ class NameWinePresenter: NameWinePresentationLogic {
     func presentName(response: NameWine.UpdateName.Response) {
         let viewModel = NameWine.UpdateName.ViewModel()
         viewController?.displayName(viewModel: viewModel)
+    }
+    
+    // MARK: Update rating
+    
+    func presentRating(response: NameWine.UpdateRating.Response) {
+        let viewModel = NameWine.UpdateRating.ViewModel()
+        viewController?.displayRating(viewModel: viewModel)
     }
 }

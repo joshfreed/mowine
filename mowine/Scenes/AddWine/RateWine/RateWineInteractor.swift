@@ -22,6 +22,7 @@ protocol RateWineDataStore {
     var variety: Variety! { get set }
     var photo: UIImage? { get set }
     var name: String { get set }
+    var rating: Double { get }
 }
 
 class RateWineInteractor: RateWineBusinessLogic, RateWineDataStore {

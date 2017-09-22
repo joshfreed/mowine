@@ -21,7 +21,11 @@ class EditWineRouter: EditWineRouterInput {
     // MARK: - Navigation
 
     func navigateToMyWines() {
-        let _ = viewController.navigationController?.popViewController(animated: true)
+        if viewController.isModal() {
+            viewController.dismiss(animated: true, completion: nil)
+        } else {
+            let _ = viewController.navigationController?.popViewController(animated: true)
+        }
     }
 
     // MARK: - Communication

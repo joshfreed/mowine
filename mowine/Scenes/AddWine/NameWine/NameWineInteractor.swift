@@ -15,6 +15,7 @@ import UIKit
 protocol NameWineBusinessLogic {
     func getPhotoPreview(request: NameWine.GetPhotoPreview.Request)
     func updateName(request: NameWine.UpdateName.Request)
+    func updateRating(request: NameWine.UpdateRating.Request)
 }
 
 protocol NameWineDataStore {
@@ -22,15 +23,16 @@ protocol NameWineDataStore {
     var variety: Variety! { get set }
     var photo: UIImage? { get set }
     var name: String { get }
+    var rating: Double { get }
 }
 
 class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
     var presenter: NameWinePresentationLogic?
-    var worker: NameWineWorker?
     var wineType: Type!
     var variety: Variety!
     var photo: UIImage?
     var name: String = ""
+    var rating: Double = 0
 
     // MARK: Get photo preview
 
@@ -46,5 +48,14 @@ class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
         
         let response = NameWine.UpdateName.Response()
         presenter?.presentName(response: response)
+    }
+    
+    // MARK: Update rating
+    
+    func updateRating(request: NameWine.UpdateRating.Request) {
+        rating = request.rating
+        
+        let response = NameWine.UpdateRating.Response()
+        presenter?.presentRating(response: response)
     }
 }

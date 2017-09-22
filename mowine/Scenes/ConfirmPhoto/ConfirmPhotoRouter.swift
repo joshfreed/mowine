@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol ConfirmPhotoRoutingLogic {
-    func routeToNameAndRate(segue: UIStoryboardSegue)
+    func routeToNameWine(segue: UIStoryboardSegue)
 }
 
 protocol ConfirmPhotoDataPassing {
@@ -26,11 +26,11 @@ class ConfirmPhotoRouter: NSObject, ConfirmPhotoRoutingLogic, ConfirmPhotoDataPa
 
     // MARK: Routing
 
-    func routeToNameAndRate(segue: UIStoryboardSegue)
+    func routeToNameWine(segue: UIStoryboardSegue)
     {
         let destinationVC = segue.destination as! NameWineViewController
         var destinationDS = destinationVC.router!.dataStore!
-        passDataToNameAndRate(source: dataStore!, destination: &destinationDS)    
+        passDataToNameWine(source: dataStore!, destination: &destinationDS)
     }
 
     // MARK: Navigation
@@ -42,7 +42,7 @@ class ConfirmPhotoRouter: NSObject, ConfirmPhotoRoutingLogic, ConfirmPhotoDataPa
 
     // MARK: Passing data
 
-    func passDataToNameAndRate(source: ConfirmPhotoDataStore, destination: inout NameWineDataStore)
+    func passDataToNameWine(source: ConfirmPhotoDataStore, destination: inout NameWineDataStore)
     {
         destination.wineType = source.wineType
         destination.variety = source.variety

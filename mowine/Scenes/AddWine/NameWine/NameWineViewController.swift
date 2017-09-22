@@ -16,6 +16,7 @@ import Cosmos
 protocol NameWineDisplayLogic: class {
     func displayPhotoPreview(viewModel: NameWine.GetPhotoPreview.ViewModel)
     func displayName(viewModel: NameWine.UpdateName.ViewModel)
+    func displayRating(viewModel: NameWine.UpdateRating.ViewModel)
 }
 
 class NameWineViewController: UIViewController, NameWineDisplayLogic {
@@ -75,6 +76,10 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
         doneButton.isHidden = true
         doneButton.alpha = 0
         
+        ratingView.didFinishTouchingCosmos = { [weak self] rating in
+            self?.updateRating(rating: rating)
+        }
+        
         getPhotoPreview()
     }
     
@@ -86,38 +91,27 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     // MARK: Keyboard
     
     func keyboardWillShow(notification: Notification) {
-        if let keyboardEndFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            view.layoutIfNeeded()
-            
-            let animationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.35
-            
-            let convertedKeyboardEndFrame = view.convert(keyboardEndFrame, from: view.window)
-            bottomContraint.constant = convertedKeyboardEndFrame.size.height + 16
-
-            UIView.animate(withDuration: animationDuration, animations: {
-                self.view.layoutIfNeeded()
-            })
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            let kbSize = keyboardSize.size
+            let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
         }
     }
     
     func keyboardWillHide(notification: Notification) {
-        view.layoutIfNeeded()
-        
-        let animationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.35
-        
-        bottomContraint.constant = 32
-        
-        UIView.animate(withDuration: animationDuration, animations: {
-            self.view.layoutIfNeeded()
-        })
+        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
 
     // MARK: Get photo preview
 
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var bottomContraint: NSLayoutConstraint!
+//    @IBOutlet weak var bottomContraint: NSLayoutConstraint!
     @IBOutlet weak var doneButton: ButtonPrimary!
+    @IBOutlet weak var ratingView: CosmosView!
     
     func getPhotoPreview() {
         let request = NameWine.GetPhotoPreview.Request()
@@ -125,17 +119,17 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     }
 
     func displayPhotoPreview(viewModel: NameWine.GetPhotoPreview.ViewModel) {
-        if let photo = viewModel.photo {
-            photoImageView.image = photo
-            photoImageView.layer.cornerRadius = photoImageView.frame.size.width / 2
-            photoImageView.clipsToBounds = true
-            photoImageView.contentMode = .scaleAspectFill
-        } else {
-            photoImageView.image = #imageLiteral(resourceName: "bottle-of-wine")
-            photoImageView.clipsToBounds = false
-            photoImageView.contentMode = .scaleAspectFit
-            photoImageView.tintColor = UIColor.lightGray
-        }        
+//        if let photo = viewModel.photo {
+//            photoImageView.image = photo
+//            photoImageView.layer.cornerRadius = photoImageView.frame.size.width / 2
+//            photoImageView.clipsToBounds = true
+//            photoImageView.contentMode = .scaleAspectFill
+//        } else {
+//            photoImageView.image = #imageLiteral(resourceName: "bottle-of-wine")
+//            photoImageView.clipsToBounds = false
+//            photoImageView.contentMode = .scaleAspectFit
+//            photoImageView.tintColor = UIColor.lightGray
+//        }
     }
     
     // MARK: Update name
@@ -146,12 +140,28 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     }
     
     func displayName(viewModel: NameWine.UpdateName.ViewModel) {
-        performSegue(withIdentifier: "RateWine", sender: nil)
+        performSegue(withIdentifier: "AddWineSummary", sender: nil)
+    }
+    
+    // MARK: Update rating
+    
+    func updateRating(rating: Double) {
+        let request = NameWine.UpdateRating.Request(rating: rating)
+        interactor?.updateRating(request: request)
+    }
+    
+    func displayRating(viewModel: NameWine.UpdateRating.ViewModel) {
+        showDoneButton()
     }
     
     // MARK: Helper funcs
     
     func showDoneButton() {
+        guard let name = nameTextField.text, !name.isEmpty, ratingView.rating > 0 else {        
+            hideDoneButton()
+            return
+        }
+        
         doneButton.isHidden = false
         
         UIView.animate(withDuration: 0.1) {

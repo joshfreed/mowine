@@ -12,13 +12,12 @@
 		5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */; };
 		5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */; };
 		5301D53A1F72D0F6004A66A9 /* NameWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */; };
-		5301D53B1F72D0F6004A66A9 /* NameWineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5351F72D0F6004A66A9 /* NameWineWorker.swift */; };
 		5301D5431F72D215004A66A9 /* RateWineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D53D1F72D215004A66A9 /* RateWineInteractor.swift */; };
 		5301D5441F72D215004A66A9 /* RateWineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D53E1F72D215004A66A9 /* RateWineModels.swift */; };
 		5301D5451F72D215004A66A9 /* RateWinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D53F1F72D215004A66A9 /* RateWinePresenter.swift */; };
 		5301D5461F72D215004A66A9 /* RateWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5401F72D215004A66A9 /* RateWineRouter.swift */; };
 		5301D5471F72D215004A66A9 /* RateWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5411F72D215004A66A9 /* RateWineViewController.swift */; };
-		5301D5481F72D215004A66A9 /* RateWineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5421F72D215004A66A9 /* RateWineWorker.swift */; };
+		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
 		531550DF1F5848C70017DA70 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
 		531550E01F5848C70017DA70 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5318D6A41F730BA600B137BD /* WineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D6A31F730BA600B137BD /* WineWorker.swift */; };
@@ -35,6 +34,11 @@
 		5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */; };
 		5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */; };
 		5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */; };
+		53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */; };
+		53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */; };
+		53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */; };
+		53423DE11F740B6B00655A7F /* AddWineSummaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */; };
+		53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */; };
 		5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535793581E21A1EB00FDD56A /* MyWinesConfigurator.swift */; };
 		535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535793591E21A1EB00FDD56A /* MyWinesInteractor.swift */; };
 		535793611E21A1EB00FDD56A /* MyWinesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357935A1E21A1EB00FDD56A /* MyWinesModels.swift */; };
@@ -141,13 +145,12 @@
 		5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameWinePresenter.swift; path = Scenes/AddWine/NameWine/NameWinePresenter.swift; sourceTree = "<group>"; };
 		5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameWineRouter.swift; path = Scenes/AddWine/NameWine/NameWineRouter.swift; sourceTree = "<group>"; };
 		5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameWineViewController.swift; path = Scenes/AddWine/NameWine/NameWineViewController.swift; sourceTree = "<group>"; };
-		5301D5351F72D0F6004A66A9 /* NameWineWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameWineWorker.swift; path = Scenes/AddWine/NameWine/NameWineWorker.swift; sourceTree = "<group>"; };
 		5301D53D1F72D215004A66A9 /* RateWineInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineInteractor.swift; path = Scenes/AddWine/RateWine/RateWineInteractor.swift; sourceTree = "<group>"; };
 		5301D53E1F72D215004A66A9 /* RateWineModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineModels.swift; path = Scenes/AddWine/RateWine/RateWineModels.swift; sourceTree = "<group>"; };
 		5301D53F1F72D215004A66A9 /* RateWinePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWinePresenter.swift; path = Scenes/AddWine/RateWine/RateWinePresenter.swift; sourceTree = "<group>"; };
 		5301D5401F72D215004A66A9 /* RateWineRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineRouter.swift; path = Scenes/AddWine/RateWine/RateWineRouter.swift; sourceTree = "<group>"; };
 		5301D5411F72D215004A66A9 /* RateWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineViewController.swift; path = Scenes/AddWine/RateWine/RateWineViewController.swift; sourceTree = "<group>"; };
-		5301D5421F72D215004A66A9 /* RateWineWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineWorker.swift; path = Scenes/AddWine/RateWine/RateWineWorker.swift; sourceTree = "<group>"; };
+		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Extensions/UIViewController.swift; sourceTree = "<group>"; };
 		531550DE1F5848C70017DA70 /* JFLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JFLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5318D6A31F730BA600B137BD /* WineWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WineWorker.swift; path = Shared/WineWorker.swift; sourceTree = "<group>"; };
 		5320BF361E42B0BB00F2405E /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoCell.xib; path = EurekaRows/PhotoCell.xib; sourceTree = "<group>"; };
@@ -163,6 +166,11 @@
 		5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyRouter.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyRouter.swift; sourceTree = "<group>"; };
 		5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyViewController.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyViewController.swift; sourceTree = "<group>"; };
 		5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VarietyCollectionViewCell.swift; path = Scenes/AddWine/SelectVariety/VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
+		53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryInteractor.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryInteractor.swift; sourceTree = "<group>"; };
+		53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryModels.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryModels.swift; sourceTree = "<group>"; };
+		53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryPresenter.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryPresenter.swift; sourceTree = "<group>"; };
+		53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryRouter.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryRouter.swift; sourceTree = "<group>"; };
+		53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryViewController.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryViewController.swift; sourceTree = "<group>"; };
 		535793581E21A1EB00FDD56A /* MyWinesConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesConfigurator.swift; path = Scenes/MyWines/MyWinesConfigurator.swift; sourceTree = "<group>"; };
 		535793591E21A1EB00FDD56A /* MyWinesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesInteractor.swift; path = Scenes/MyWines/MyWinesInteractor.swift; sourceTree = "<group>"; };
 		5357935A1E21A1EB00FDD56A /* MyWinesModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyWinesModels.swift; path = Scenes/MyWines/MyWinesModels.swift; sourceTree = "<group>"; };
@@ -273,7 +281,6 @@
 				5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */,
 				5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */,
 				5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */,
-				5301D5351F72D0F6004A66A9 /* NameWineWorker.swift */,
 			);
 			name = NameWine;
 			sourceTree = "<group>";
@@ -286,7 +293,6 @@
 				5301D53F1F72D215004A66A9 /* RateWinePresenter.swift */,
 				5301D5401F72D215004A66A9 /* RateWineRouter.swift */,
 				5301D5411F72D215004A66A9 /* RateWineViewController.swift */,
-				5301D5421F72D215004A66A9 /* RateWineWorker.swift */,
 			);
 			name = RateWine;
 			sourceTree = "<group>";
@@ -323,6 +329,18 @@
 				5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */,
 			);
 			name = SelectVariety;
+			sourceTree = "<group>";
+		};
+		53423DD71F740B4000655A7F /* AddWineSummary */ = {
+			isa = PBXGroup;
+			children = (
+				53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */,
+				53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */,
+				53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */,
+				53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */,
+				53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */,
+			);
+			name = AddWineSummary;
 			sourceTree = "<group>";
 		};
 		535793571E21A1CD00FDD56A /* MyWines */ = {
@@ -548,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				53C88BF81F084FDB009B7D29 /* UIColor.swift */,
+				531265101F75B04E006353CB /* UIViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -569,6 +588,7 @@
 				53CDB50C1F3E263D00EF9CF6 /* ConfirmPhoto */,
 				5301D52F1F72D0D8004A66A9 /* NameWine */,
 				5301D53C1F72D1C3004A66A9 /* RateWine */,
+				53423DD71F740B4000655A7F /* AddWineSummary */,
 			);
 			name = AddWine;
 			sourceTree = "<group>";
@@ -886,6 +906,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
 				538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */,
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
@@ -896,6 +917,7 @@
 				538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
 				53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */,
+				53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				53F5AC2A1E2185C00067AB62 /* MainMenuViewController.swift in Sources */,
 				538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */,
@@ -903,7 +925,6 @@
 				5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */,
 				5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */,
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
-				5301D5481F72D215004A66A9 /* RateWineWorker.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
@@ -911,7 +932,10 @@
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,
 				53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */,
 				537740A41E5BC73600A1D282 /* Models.swift in Sources */,
+				53423DE11F740B6B00655A7F /* AddWineSummaryRouter.swift in Sources */,
+				53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */,
 				5301D5451F72D215004A66A9 /* RateWinePresenter.swift in Sources */,
+				53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */,
 				5321FBA21F0BF594001D2040 /* SelectVarietyInteractor.swift in Sources */,
 				53B564D91F11952D00459BB8 /* SnapPhotoPresenter.swift in Sources */,
 				5321FB991F0BEE27001D2040 /* SelectTypeViewController.swift in Sources */,
@@ -948,9 +972,9 @@
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,
 				5301D5431F72D215004A66A9 /* RateWineInteractor.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
+				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
 				5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
-				5301D53B1F72D0F6004A66A9 /* NameWineWorker.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
 				537614C91E591887005AABF0 /* EditWineInteractor.swift in Sources */,
