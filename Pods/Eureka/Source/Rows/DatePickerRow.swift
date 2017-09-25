@@ -71,7 +71,7 @@ open class DatePickerCell: Cell<Date>, CellType {
         }
     }
 
-    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+    func datePickerValueChanged(_ sender: UIDatePicker) {
         row?.value = sender.date
     }
 

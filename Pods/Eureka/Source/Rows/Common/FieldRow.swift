@@ -137,8 +137,8 @@ open class _FieldCell<T> : Cell<T>, UITextFieldDelegate, TextFieldCell where T: 
 
         titleLabel = self.textLabel
         titleLabel?.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel?.setContentHuggingPriority(UILayoutPriority(rawValue: 500), for: .horizontal)
-        titleLabel?.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
+        titleLabel?.setContentHuggingPriority(500, for: .horizontal)
+        titleLabel?.setContentCompressionResistancePriority(1000, for: .horizontal)
 
         contentView.addSubview(titleLabel!)
         contentView.addSubview(textField)
@@ -217,7 +217,7 @@ open class _FieldCell<T> : Cell<T>, UITextFieldDelegate, TextFieldCell where T: 
         textField.font = .preferredFont(forTextStyle: .body)
         if let placeholder = (row as? FieldRowConformance)?.placeholder {
             if let color = (row as? FieldRowConformance)?.placeholderColor {
-                textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
+                textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSForegroundColorAttributeName: color])
             } else {
                 textField.placeholder = (row as? FieldRowConformance)?.placeholder
             }
@@ -302,7 +302,7 @@ open class _FieldCell<T> : Cell<T>, UITextFieldDelegate, TextFieldCell where T: 
         super.updateConstraints()
     }
 
-    @objc open func textFieldDidChange(_ textField: UITextField) {
+    open func textFieldDidChange(_ textField: UITextField) {
 
         guard let textValue = textField.text else {
             row.value = nil
