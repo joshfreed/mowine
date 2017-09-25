@@ -127,6 +127,6 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
     }
     
     func presentError(_ error: Error) {
-        showAlert(error: error)
+//        showAlert(error: error)
     }
 }

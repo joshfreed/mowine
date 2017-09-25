@@ -42,8 +42,8 @@ class EditWineWorker {
         }
         
         if let image = request.image {
-            wine.image = imageWorker.convertToPNGData(image: image)
-            wine.thumbnail = imageWorker.createThumbnail(from: image)
+            wine.image = imageWorker.convertToPNGData(image: image) as Data?
+            wine.thumbnail = imageWorker.createThumbnail(from: image) as Data?
         }
         
         mergePairings(wine: wine, pairings: request.pairings)

@@ -59,11 +59,11 @@ class PhotoCell: Cell<UIImage>, CellType {
         photoView.image = (row as? PhotoRow)?.value
     }
     
-    func openCamera() {
+    @objc func openCamera() {
         (row as? PhotoRow)?.displayImagePickerController(.camera)
     }
     
-    func openPhotoLibrary() {
+    @objc func openPhotoLibrary() {
         (row as? PhotoRow)?.displayImagePickerController(.photoLibrary)
     }
 }

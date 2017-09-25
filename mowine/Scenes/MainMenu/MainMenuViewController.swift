@@ -88,12 +88,12 @@ class MainMenuViewController: UIViewController {
     }
     */
 
-    func tappedNewWine() {
+    @objc func tappedNewWine() {
         showNavBar = true
         performSegue(withIdentifier: "addWine", sender: nil)
     }
     
-    func tappedMyWines() {
+    @objc func tappedMyWines() {
         showNavBar = true
         performSegue(withIdentifier: "myWines", sender: nil)
     }

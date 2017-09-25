@@ -20,8 +20,6 @@
 		5301D5461F72D215004A66A9 /* RateWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5401F72D215004A66A9 /* RateWineRouter.swift */; };
 		5301D5471F72D215004A66A9 /* RateWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5411F72D215004A66A9 /* RateWineViewController.swift */; };
 		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
-		531550DF1F5848C70017DA70 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
-		531550E01F5848C70017DA70 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5318D6A41F730BA600B137BD /* WineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D6A31F730BA600B137BD /* WineWorker.swift */; };
 		5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5320BF361E42B0BB00F2405E /* PhotoCell.xib */; };
 		5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5320BF381E436FF200F2405E /* PhotoRow.swift */; };
@@ -84,6 +82,8 @@
 		53B564D91F11952D00459BB8 /* SnapPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */; };
 		53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */; };
 		53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */; };
+		53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
+		53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
 		53C88BFC1F085D56009B7D29 /* ButtonPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */; };
 		53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */; };
@@ -122,13 +122,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		531550E11F5848C70017DA70 /* Embed Frameworks */ = {
+		53C50BC11F795FC50049AC92 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				531550E01F5848C70017DA70 /* JFLib.framework in Embed Frameworks */,
+				53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,7 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				531550DF1F5848C70017DA70 /* JFLib.framework in Frameworks */,
+				53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */,
 				1C33EC4601A67960533A7ADB /* Pods_mowine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,9 +628,9 @@
 				53F5ABEC1E2176080067AB62 /* Sources */,
 				53F5ABED1E2176080067AB62 /* Frameworks */,
 				53F5ABEE1E2176080067AB62 /* Resources */,
-				531550E11F5848C70017DA70 /* Embed Frameworks */,
 				3CC2C3C1E16E051F202F77AA /* [CP] Embed Pods Frameworks */,
 				39E769D53F8697FF026C4F9D /* [CP] Copy Pods Resources */,
+				53C50BC11F795FC50049AC92 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -696,17 +696,20 @@
 					53F5ABEF1E2176080067AB62 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Q96RZM5NAK;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					53F5AC061E2176090067AB62 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Q96RZM5NAK;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 53F5ABEF1E2176080067AB62;
 					};
 					53F5AC111E2176090067AB62 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Q96RZM5NAK;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 53F5ABEF1E2176080067AB62;
 					};
@@ -1162,9 +1165,10 @@
 				);
 				INFOPLIST_FILE = mowine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshfreed.mowine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1182,9 +1186,10 @@
 				);
 				INFOPLIST_FILE = mowine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshfreed.mowine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1199,7 +1204,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mowine.app/mowine";
 			};
 			name = Debug;
@@ -1215,7 +1221,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mowine.app/mowine";
 			};
 			name = Release;
@@ -1230,7 +1237,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = mowine;
 			};
 			name = Debug;
@@ -1245,7 +1253,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = mowine;
 			};
 			name = Release;

@@ -90,7 +90,7 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     
     // MARK: Keyboard
     
-    func keyboardWillShow(notification: Notification) {
+    @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let kbSize = keyboardSize.size
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
@@ -99,7 +99,7 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
         }
     }
     
-    func keyboardWillHide(notification: Notification) {
+    @objc func keyboardWillHide(notification: Notification) {
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }

@@ -26,8 +26,8 @@ class WineWorker {
         
         let imageWorker = WineImageWorker()
         if let image = photo {
-            wine.image = imageWorker.convertToPNGData(image: image)
-            wine.thumbnail = imageWorker.createThumbnail(from: image)
+            wine.image = imageWorker.convertToPNGData(image: image) as Data?
+            wine.thumbnail = imageWorker.createThumbnail(from: image) as Data?
         }
         
         try wine.managedObjectContext?.save()

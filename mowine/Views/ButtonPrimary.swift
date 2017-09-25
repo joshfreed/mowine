@@ -26,6 +26,6 @@ class ButtonPrimary: UIButton {
         tintColor = .white
         layer.cornerRadius = 5
         let fontSize = titleLabel?.font.pointSize ?? defaultFontSize
-        titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)
     }
 }
