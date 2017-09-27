@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import JFLib
+import PureLayout
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

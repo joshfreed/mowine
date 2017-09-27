@@ -28,4 +28,12 @@ class ButtonPrimary: UIButton {
         let fontSize = titleLabel?.font.pointSize ?? defaultFontSize
         titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)
     }
+    
+    func useDefaultFontSize() {
+        titleLabel?.font = UIFont.systemFont(ofSize: defaultFontSize, weight: UIFont.Weight.light)
+    }
+    
+    func useFont(ofSize size: CGFloat, weight: UIFont.Weight) {
+        titleLabel?.font = UIFont.systemFont(ofSize: size, weight: weight)
+    }
 }
