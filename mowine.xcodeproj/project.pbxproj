@@ -19,6 +19,7 @@
 		5301D5451F72D215004A66A9 /* RateWinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D53F1F72D215004A66A9 /* RateWinePresenter.swift */; };
 		5301D5461F72D215004A66A9 /* RateWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5401F72D215004A66A9 /* RateWineRouter.swift */; };
 		5301D5471F72D215004A66A9 /* RateWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5411F72D215004A66A9 /* RateWineViewController.swift */; };
+		530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */; };
 		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
 		5318D6A41F730BA600B137BD /* WineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318D6A31F730BA600B137BD /* WineWorker.swift */; };
 		5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5320BF361E42B0BB00F2405E /* PhotoCell.xib */; };
@@ -32,7 +33,7 @@
 		5321FBA31F0BF594001D2040 /* SelectVarietyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9D1F0BF594001D2040 /* SelectVarietyModels.swift */; };
 		5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */; };
 		5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */; };
-		5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */; };
+		5321FBA61F0BF594001D2040 /* SelectVarietyViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA01F0BF594001D2040 /* SelectVarietyViewController2.swift */; };
 		5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */; };
 		53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */; };
 		53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */; };
@@ -151,6 +152,7 @@
 		5301D53F1F72D215004A66A9 /* RateWinePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWinePresenter.swift; path = Scenes/AddWine/RateWine/RateWinePresenter.swift; sourceTree = "<group>"; };
 		5301D5401F72D215004A66A9 /* RateWineRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineRouter.swift; path = Scenes/AddWine/RateWine/RateWineRouter.swift; sourceTree = "<group>"; };
 		5301D5411F72D215004A66A9 /* RateWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateWineViewController.swift; path = Scenes/AddWine/RateWine/RateWineViewController.swift; sourceTree = "<group>"; };
+		530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectVarietyViewController.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyViewController.swift; sourceTree = "<group>"; };
 		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIViewController.swift; path = Extensions/UIViewController.swift; sourceTree = "<group>"; };
 		531550DE1F5848C70017DA70 /* JFLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JFLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5318D6A31F730BA600B137BD /* WineWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WineWorker.swift; path = Shared/WineWorker.swift; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 		5321FB9D1F0BF594001D2040 /* SelectVarietyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyModels.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyModels.swift; sourceTree = "<group>"; };
 		5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyPresenter.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyPresenter.swift; sourceTree = "<group>"; };
 		5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyRouter.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyRouter.swift; sourceTree = "<group>"; };
-		5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyViewController.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyViewController.swift; sourceTree = "<group>"; };
+		5321FBA01F0BF594001D2040 /* SelectVarietyViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectVarietyViewController2.swift; path = Scenes/AddWine/SelectVariety/SelectVarietyViewController2.swift; sourceTree = "<group>"; };
 		5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VarietyCollectionViewCell.swift; path = Scenes/AddWine/SelectVariety/VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
 		53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryInteractor.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryInteractor.swift; sourceTree = "<group>"; };
 		53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddWineSummaryModels.swift; path = Scenes/AddWine/AddWineSummary/AddWineSummaryModels.swift; sourceTree = "<group>"; };
@@ -325,7 +327,8 @@
 				5321FB9D1F0BF594001D2040 /* SelectVarietyModels.swift */,
 				5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */,
 				5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */,
-				5321FBA01F0BF594001D2040 /* SelectVarietyViewController.swift */,
+				530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */,
+				5321FBA01F0BF594001D2040 /* SelectVarietyViewController2.swift */,
 				5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */,
 			);
 			name = SelectVariety;
@@ -803,9 +806,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -818,13 +828,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mowine-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		62ADF68B18886309CDD6C979 /* [CP] Embed Pods Frameworks */ = {
@@ -848,9 +861,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -863,13 +879,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mowineTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CC5EBDBAD70D1AB047DEFCC1 /* [CP] Check Pods Manifest.lock */ = {
@@ -878,13 +897,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mowineUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DF17E31B53DE0FBDDDA4B7CD /* [CP] Copy Pods Resources */ = {
@@ -946,6 +968,7 @@
 				5301D5461F72D215004A66A9 /* RateWineRouter.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				539196981E6B68EE001AE149 /* WineTypeWorker.swift in Sources */,
+				530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */,
 				538F77A41E7DCC0D00C08263 /* SortAndFilterViewController.swift in Sources */,
 				5321FBA31F0BF594001D2040 /* SelectVarietyModels.swift in Sources */,
 				53C88BFC1F085D56009B7D29 /* ButtonPrimary.swift in Sources */,
@@ -976,7 +999,7 @@
 				5301D5431F72D215004A66A9 /* RateWineInteractor.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
-				5321FBA61F0BF594001D2040 /* SelectVarietyViewController.swift in Sources */,
+				5321FBA61F0BF594001D2040 /* SelectVarietyViewController2.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,

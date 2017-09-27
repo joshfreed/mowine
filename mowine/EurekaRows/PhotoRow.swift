@@ -10,7 +10,7 @@ import UIKit
 import Eureka
 
 /// Selector Controller used to pick an image
-open class ImagePickerController : UIImagePickerController, TypedRowControllerType, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+open class ImagePickerController: UIImagePickerController, TypedRowControllerType, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     /// The row that pushed or presented this controller
     public var row: RowOf<UIImage>!
@@ -68,8 +68,10 @@ class PhotoCell: Cell<UIImage>, CellType {
     }
 }
 
-//final class PhotoRow: Row<PhotoCell>, RowType {
-final class PhotoRow: SelectorRow<PhotoCell, ImagePickerController>, RowType {
+final class PhotoRow: OptionsRow<PhotoCell>, PresenterRowType, RowType {
+    var presentationMode: PresentationMode<ImagePickerController>?
+    var onPresentCallback: ((FormViewController, ImagePickerController) -> Void)?
+    
     public required init(tag: String?) {
         super.init(tag: tag)
         

@@ -5,8 +5,9 @@ target 'mowine' do
   use_frameworks!
 
   # Pods for mowine
-  pod 'Eureka', :git => 'https://github.com/xmartlabs/Eureka.git', :branch => 'feature/Xcode9-Swift3_2'
-  pod 'Cosmos', '~> 11.0'
+  pod 'Eureka'
+  pod 'Cosmos'
+  pod 'PureLayout'
 
   target 'mowineTests' do
     inherit! :search_paths
