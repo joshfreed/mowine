@@ -40,7 +40,7 @@ class MainMenuViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +53,10 @@ class MainMenuViewController: UIViewController {
         if showNavBar {
             navigationController?.setNavigationBarHidden(false, animated: animated)
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func animateLaunchScreenToMainMenu() {

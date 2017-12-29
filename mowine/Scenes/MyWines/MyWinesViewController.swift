@@ -46,6 +46,11 @@ class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
         
         fetchWinesOnLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hideNavigationBar()
+    }
 
     // MARK: - Event handling
 

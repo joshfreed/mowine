@@ -37,7 +37,7 @@ class SelectVarietyViewControllerTests: XCTestCase {
     func setupSelectVarietyViewController() {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier:"SelectVarietyViewController") as! SelectVarietyViewController
+        sut = storyboard.instantiateViewController(withIdentifier: "SelectVarietyViewController") as! SelectVarietyViewController
     }
 
     func loadView() {

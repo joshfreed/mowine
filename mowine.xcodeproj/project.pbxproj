@@ -82,6 +82,7 @@
 		53B564D91F11952D00459BB8 /* SnapPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */; };
 		53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */; };
 		53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */; };
+		53C3E66E1FF6E048003F6676 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C3E66D1FF6E048003F6676 /* UINavigationController.swift */; };
 		53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
 		53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
@@ -215,6 +216,7 @@
 		53B564D31F11952D00459BB8 /* SnapPhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoPresenter.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoPresenter.swift; sourceTree = "<group>"; };
 		53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoRouter.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoRouter.swift; sourceTree = "<group>"; };
 		53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapPhotoViewController.swift; path = Scenes/AddWine/SnapPhoto/SnapPhotoViewController.swift; sourceTree = "<group>"; };
+		53C3E66D1FF6E048003F6676 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UINavigationController.swift; path = Extensions/UINavigationController.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = Extensions/UIColor.swift; sourceTree = "<group>"; };
 		53C88BFB1F085D56009B7D29 /* ButtonPrimary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonPrimary.swift; path = Views/ButtonPrimary.swift; sourceTree = "<group>"; };
 		53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmPhotoInteractor.swift; path = Scenes/ConfirmPhoto/ConfirmPhotoInteractor.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 			children = (
 				53C88BF81F084FDB009B7D29 /* UIColor.swift */,
 				531265101F75B04E006353CB /* UIViewController.swift */,
+				53C3E66D1FF6E048003F6676 /* UINavigationController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				539196981E6B68EE001AE149 /* WineTypeWorker.swift in Sources */,
 				530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */,
 				538F77A41E7DCC0D00C08263 /* SortAndFilterViewController.swift in Sources */,
+				53C3E66E1FF6E048003F6676 /* UINavigationController.swift in Sources */,
 				5321FBA31F0BF594001D2040 /* SelectVarietyModels.swift in Sources */,
 				53C88BFC1F085D56009B7D29 /* ButtonPrimary.swift in Sources */,
 				5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */,

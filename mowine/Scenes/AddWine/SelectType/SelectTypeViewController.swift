@@ -79,12 +79,9 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.hideNavigationBar()
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }

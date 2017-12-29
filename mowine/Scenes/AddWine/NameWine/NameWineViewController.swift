@@ -66,8 +66,6 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        nameTextField.becomeFirstResponder()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
 

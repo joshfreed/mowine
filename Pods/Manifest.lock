@@ -1,7 +1,7 @@
 PODS:
   - Cosmos (12.0.1)
   - Eureka (4.0.0)
-  - Nimble (7.0.1)
+  - Nimble (7.0.3)
   - PureLayout (3.0.2)
 
 DEPENDENCIES:
@@ -13,7 +13,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Cosmos: 4a9f57998a08788a1062c7b8eefbc62d2b590f39
   Eureka: c0b55d2aec82050c1400c7d65960b700be8d10ef
-  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
 
 PODFILE CHECKSUM: 6aaa7ed39398b8a2a6cafb25e64eaa5a2424a407
