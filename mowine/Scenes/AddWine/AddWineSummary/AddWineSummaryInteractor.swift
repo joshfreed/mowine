@@ -19,30 +19,30 @@ protocol AddWineSummaryBusinessLogic {
 }
 
 protocol AddWineSummaryDataStore {
-    var wineType: Type! { get set }
-    var variety: Variety! { get set }
+    var wineType: ManagedWineType! { get set }
+    var variety: ManagedWineVariety! { get set }
     var photo: UIImage? { get set }
     var name: String { get set }
     var rating: Double { get set }
-    var wine: Wine? { get }
+    var wine: ManagedWine? { get }
 }
 
 class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataStore {
     var presenter: AddWineSummaryPresentationLogic?
     var worker: WineWorker?
-    var wineType: Type!
-    var variety: Variety!
+    var wineType: ManagedWineType!
+    var variety: ManagedWineVariety!
     var photo: UIImage?
     var name: String = ""
     var rating: Double = 0
-    private(set) var wine: Wine?
+    private(set) var wine: ManagedWine?
 
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
     }
     
     @objc func wineUpdated(notification: Notification) {
-        guard let updatedWine = notification.userInfo?["wine"] as? Wine else {
+        guard let updatedWine = notification.userInfo?["wine"] as? ManagedWine else {
             return
         }
         

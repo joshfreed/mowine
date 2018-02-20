@@ -28,7 +28,7 @@ class EditWineWorker {
     
     // MARK: - Business Logic
 
-    func saveWine(wine: Wine, request: EditWine.SaveWine.Request) throws {
+    func saveWine(wine: ManagedWine, request: EditWine.SaveWine.Request) throws {
         wine.name = request.name
         wine.rating = request.rating
         wine.variety = varietyTranslator.toCoreData(input: request.variety)
@@ -51,11 +51,11 @@ class EditWineWorker {
         try wine.managedObjectContext?.save()
     }
     
-    func mergePairings(wine: Wine, pairings: [String]) {
+    func mergePairings(wine: ManagedWine, pairings: [String]) {
         guard let context = wine.managedObjectContext else {
             return
         }
-        guard let currentFoods = Array(wine.pairings ?? []) as? [Food] else {
+        guard let currentFoods = Array(wine.pairings ?? []) as? [ManagedFood] else {
             return
         }
         
@@ -64,7 +64,7 @@ class EditWineWorker {
                 continue
             }
             
-            let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: context) as! Food
+            let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: context) as! ManagedFood
             food.name = foodName
             wine.addToPairings(food)
         }

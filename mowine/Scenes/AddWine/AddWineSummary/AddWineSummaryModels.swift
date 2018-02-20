@@ -21,7 +21,7 @@ enum AddWineSummary {
         }
 
         struct Response {
-            var wine: Wine?
+            var wine: ManagedWine?
         }
 
         struct ViewModel {

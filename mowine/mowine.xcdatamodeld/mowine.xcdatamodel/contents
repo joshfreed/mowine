@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Food" representedClassName="Food" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Food" representedClassName="ManagedFood" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Type" representedClassName="Type" syncable="YES" codeGenerationType="class">
+    <entity name="Type" representedClassName="ManagedWineType" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="varieties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Variety" inverseName="type" inverseEntity="Variety" syncable="YES"/>
     </entity>
-    <entity name="Variety" representedClassName="Variety" syncable="YES" codeGenerationType="class">
+    <entity name="Variety" representedClassName="ManagedWineVariety" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" inverseName="varieties" inverseEntity="Type" syncable="YES"/>
     </entity>
-    <entity name="Wine" representedClassName="Wine" syncable="YES" codeGenerationType="class">
+    <entity name="Wine" representedClassName="ManagedWine" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,8 +25,8 @@
     </entity>
     <elements>
         <element name="Food" positionX="-171" positionY="-258" width="128" height="60"/>
-        <element name="Type" positionX="61" positionY="-36" width="128" height="73"/>
-        <element name="Variety" positionX="-2" positionY="132" width="128" height="73"/>
+        <element name="Type" positionX="61" positionY="-36" width="128" height="75"/>
+        <element name="Variety" positionX="-2" positionY="132" width="128" height="75"/>
         <element name="Wine" positionX="-297" positionY="-99" width="128" height="195"/>
     </elements>
 </model>

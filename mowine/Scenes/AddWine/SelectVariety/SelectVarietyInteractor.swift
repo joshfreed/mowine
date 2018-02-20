@@ -18,20 +18,20 @@ protocol SelectVarietyBusinessLogic {
 }
 
 protocol SelectVarietyDataStore {
-    var wineType: Type! { get set }
-    var selectedVariety: Variety? { get }
+    var wineType: ManagedWineType! { get set }
+    var selectedVariety: ManagedWineVariety? { get }
 }
 
 class SelectVarietyInteractor: SelectVarietyBusinessLogic, SelectVarietyDataStore {
     var presenter: SelectVarietyPresentationLogic?
-    var wineType: Type!
-    var varieties: [Variety] = []
-    var selectedVariety: Variety?
+    var wineType: ManagedWineType!
+    var varieties: [ManagedWineVariety] = []
+    var selectedVariety: ManagedWineVariety?
 
     // MARK: Fetch Varieties
 
     func fetchVarieties(request: SelectVariety.FetchVarieties.Request) {
-        guard let varieties = wineType.varieties?.allObjects as? [Variety] else {
+        guard let varieties = wineType.varieties?.allObjects as? [ManagedWineVariety] else {
             return
         }
         

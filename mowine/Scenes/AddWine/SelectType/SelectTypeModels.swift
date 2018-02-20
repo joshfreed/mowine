@@ -21,7 +21,7 @@ enum SelectType {
         }
 
         struct Response {
-            var wineTypes: [Type]
+            var wineTypes: [ManagedWineType]
         }
 
         struct ViewModel {
@@ -35,7 +35,7 @@ enum SelectType {
         }
         
         struct Response {
-            var type: Type
+            var type: ManagedWineType
         }
         
         struct ViewModel {

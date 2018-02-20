@@ -13,7 +13,7 @@
 import UIKit
 
 protocol SelectTypePresentationLogic {
-    func presentWineTypes(response: SelectType.FetchTypes.Response)
+//    func presentWineTypes(response: SelectType.FetchTypes.Response)
     func presentSelectedType(response: SelectType.SelectType.Response)
 }
 
@@ -22,10 +22,10 @@ class SelectTypePresenter: SelectTypePresentationLogic {
 
     // MARK: Do something
 
-    func presentWineTypes(response: SelectType.FetchTypes.Response) {
-        let viewModel = SelectType.FetchTypes.ViewModel()
+//    func presentWineTypes(response: SelectType.FetchTypes.Response) {
+//        let viewModel = SelectType.FetchTypes.ViewModel()
 //        viewController?.displaySomething(viewModel: viewModel)
-    }
+//    }
     
     func presentSelectedType(response: SelectType.SelectType.Response) {
         let viewModel = SelectType.SelectType.ViewModel()

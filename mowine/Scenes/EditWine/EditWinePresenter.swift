@@ -50,7 +50,7 @@ class EditWinePresenter: EditWinePresenterInput {
             wineViewModel.type = selectedTypeViewModel
         }
 
-        if let set = response.wine.pairings, let pairings = Array(set) as? [Food] {
+        if let set = response.wine.pairings, let pairings = Array(set) as? [ManagedFood] {
             for pairing in pairings {
                 if let name = pairing.name {
                     wineViewModel.pairings.append(name)
@@ -66,13 +66,13 @@ class EditWinePresenter: EditWinePresenterInput {
         output.displayWine(viewModel: viewModel)
     }
     
-    private func buildWineTypeViewModels(fromModel wineTypes: [Type]) -> [WineTypeViewModel] {
+    private func buildWineTypeViewModels(fromModel wineTypes: [ManagedWineType]) -> [WineTypeViewModel] {
         var types: [WineTypeViewModel] = []
         
         for type in wineTypes {
             guard let name = type.name,
                 let nsset = type.varieties,
-                let varieties = nsset.allObjects as? [Variety]
+                let varieties = nsset.allObjects as? [ManagedWineVariety]
                 else {
                     continue
             }

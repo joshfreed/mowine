@@ -13,7 +13,7 @@ import UIKit
 
 protocol MyWinesPresenterInput {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
-    func presentUpdatedWine(wine: Wine)
+    func presentUpdatedWine(wine: ManagedWine)
 }
 
 protocol MyWinesPresenterOutput: class {
@@ -26,7 +26,7 @@ class MyWinesPresenter: MyWinesPresenterInput {
 
     // MARK: - Presentation logic
 
-    private func buildWineViewModel(fromModel wine: Wine) -> MyWines.FetchMyWines.ViewModel.WineViewModel {
+    private func buildWineViewModel(fromModel wine: ManagedWine) -> MyWines.FetchMyWines.ViewModel.WineViewModel {
         let name = wine.name ?? ""
         var varietyName = ""
         if let variety = wine.variety {
@@ -55,7 +55,7 @@ class MyWinesPresenter: MyWinesPresenterInput {
         output.displayMyWines(viewModel: viewModel)
     }
     
-    func presentUpdatedWine(wine: Wine) {
+    func presentUpdatedWine(wine: ManagedWine) {
         output.displayUpdatedWine(viewModel: buildWineViewModel(fromModel: wine))
     }
 }

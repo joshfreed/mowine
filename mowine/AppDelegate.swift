@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         deleteAllEntity("Variety")
         deleteAllEntity("Type")
         
-        let redWine = Type(context: context)
+        let redWine = ManagedWineType(context: context)
         redWine.name = "Red"
         redWine.addToVarieties(makeVariety(name: "Cabernet Sauvignon"))
         redWine.addToVarieties(makeVariety(name: "Chianti"))
@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         redWine.addToVarieties(makeVariety(name: "Pinot Nior"))
         redWine.addToVarieties(makeVariety(name: "Red Blend"))
         
-        let whiteWine = Type(context: context)
+        let whiteWine = ManagedWineType(context: context)
         whiteWine.name = "White"
         whiteWine.addToVarieties(makeVariety(name: "Chardonnay"))
         whiteWine.addToVarieties(makeVariety(name: "Gewürztraminer"))
@@ -66,16 +66,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         whiteWine.addToVarieties(makeVariety(name: "Moscato"))
         whiteWine.addToVarieties(makeVariety(name: "White Blend"))
         
-        let bubbly = Type(context: context)
+        let bubbly = ManagedWineType(context: context)
         bubbly.name = "Bubbly"
         bubbly.addToVarieties(makeVariety(name: "Champagne"))
         bubbly.addToVarieties(makeVariety(name: "Prosecco"))
 
+        let rose = ManagedWineType(context: context)
+        rose.name = "Rosé"
+        
+        let other = ManagedWineType(context: context)
+        other.name = "Other"
+        
         saveContext()
     }
     
-    private func makeVariety(name: String) -> Variety {
-        let variety = Variety(context: persistentContainer.viewContext)
+    private func makeVariety(name: String) -> ManagedWineVariety {
+        let variety = ManagedWineVariety(context: persistentContainer.viewContext)
         variety.name = name
         return variety
     }

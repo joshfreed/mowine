@@ -12,7 +12,7 @@
 import UIKit
 
 protocol EditWineInteractorInput {
-    var wine: Wine! { get set }
+    var wine: ManagedWine! { get set }
     func fetchWine(request: EditWine.FetchWine.Request)
     func saveWine(request: EditWine.SaveWine.Request)
 }
@@ -27,7 +27,7 @@ class EditWineInteractor: EditWineInteractorInput {
     var output: EditWineInteractorOutput!
     let worker: EditWineWorker
     let wineTypeWorker: WineTypeWorker
-    var wine: Wine!
+    var wine: ManagedWine!
 
     init(worker: EditWineWorker, wineTypeWorker: WineTypeWorker) {
         self.worker = worker

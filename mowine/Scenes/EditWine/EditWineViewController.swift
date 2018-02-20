@@ -19,7 +19,7 @@ protocol EditWineViewControllerInput {
 }
 
 protocol EditWineViewControllerOutput {
-    var wine: Wine! { get set }
+    var wine: ManagedWine! { get set }
     func fetchWine(request: EditWine.FetchWine.Request)
     func saveWine(request: EditWine.SaveWine.Request)
 }

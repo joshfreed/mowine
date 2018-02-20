@@ -21,11 +21,11 @@ class VarietyTranslator: CoreDataTranslator {
         self.context = context
     }
     
-    func toCoreData(input: String) -> Variety? {
-        let fetchRequest: NSFetchRequest<Variety> = Variety.fetchRequest()
+    func toCoreData(input: String) -> ManagedWineVariety? {
+        let fetchRequest: NSFetchRequest<ManagedWineVariety> = ManagedWineVariety.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name = %@", input)
         
-        var variety: Variety?
+        var variety: ManagedWineVariety?
         do {
             variety = try context.fetch(fetchRequest).first
         } catch {

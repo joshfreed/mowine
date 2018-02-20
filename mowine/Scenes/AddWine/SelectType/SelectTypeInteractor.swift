@@ -18,14 +18,14 @@ protocol SelectTypeBusinessLogic {
 }
 
 protocol SelectTypeDataStore {
-    var selectedType: Type? { get }
+    var selectedType: ManagedWineType? { get }
 }
 
 class SelectTypeInteractor: SelectTypeBusinessLogic, SelectTypeDataStore {
     var presenter: SelectTypePresentationLogic?
     var wineTypesWorker: WineTypeWorker?
-    var wineTypes: [Type]?
-    var selectedType: Type?
+    var wineTypes: [ManagedWineType]?
+    var selectedType: ManagedWineType?
 
     func fetchWineTypes(request: SelectType.FetchTypes.Request) {
         guard let wineTypes = wineTypesWorker?.getWineTypes() else {
@@ -34,8 +34,8 @@ class SelectTypeInteractor: SelectTypeBusinessLogic, SelectTypeDataStore {
 
         self.wineTypes = wineTypes
         
-        let response = SelectType.FetchTypes.Response(wineTypes: wineTypes)
-        presenter?.presentWineTypes(response: response)
+//        let response = SelectType.FetchTypes.Response(wineTypes: wineTypes)
+//        presenter?.presentWineTypes(response: response)
     }
     
     func selectType(request: SelectType.SelectType.Request) {
@@ -47,7 +47,7 @@ class SelectTypeInteractor: SelectTypeBusinessLogic, SelectTypeDataStore {
         }
     }
     
-    func getTypeFromString(_ type: String) -> Type? {
+    func getTypeFromString(_ type: String) -> ManagedWineType? {
         return wineTypes?.first(where: { $0.name == type })
     }
 }

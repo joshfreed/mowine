@@ -16,10 +16,10 @@ class WineTypeWorker {
         self.context = context
     }
     
-    func getWineTypes() -> [Type] {
-        let request: NSFetchRequest<Type> = Type.fetchRequest()
+    func getWineTypes() -> [ManagedWineType] {
+        let request: NSFetchRequest<ManagedWineType> = ManagedWineType.fetchRequest()
         
-        let types: [Type]
+        let types: [ManagedWineType]
         do {
             types = try context.fetch(request)
         } catch {

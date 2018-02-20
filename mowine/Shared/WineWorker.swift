@@ -18,8 +18,8 @@ class WineWorker {
         self.varietyTranslator = varietyTranslator
     }
     
-    func addWine(type: Type, variety: Variety, photo: UIImage?, name: String, rating: Double) throws -> Wine {        
-        let wine = NSEntityDescription.insertNewObject(forEntityName: "Wine", into: context) as! Wine
+    func addWine(type: ManagedWineType, variety: ManagedWineVariety, photo: UIImage?, name: String, rating: Double) throws -> ManagedWine {
+        let wine = NSEntityDescription.insertNewObject(forEntityName: "Wine", into: context) as! ManagedWine
         wine.name = name
         wine.rating = rating
         wine.variety = variety

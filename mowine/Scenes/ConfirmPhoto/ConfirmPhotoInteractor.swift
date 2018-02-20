@@ -18,15 +18,15 @@ protocol ConfirmPhotoBusinessLogic {
 }
 
 protocol ConfirmPhotoDataStore {
-    var wineType: Type! { get set }
-    var variety: Variety! { get set }
+    var wineType: ManagedWineType! { get set }
+    var variety: ManagedWineVariety! { get set }
     var photo: UIImage! { get set }
 }
 
 class ConfirmPhotoInteractor: ConfirmPhotoBusinessLogic, ConfirmPhotoDataStore {
     var presenter: ConfirmPhotoPresentationLogic?
-    var wineType: Type!
-    var variety: Variety!
+    var wineType: ManagedWineType!
+    var variety: ManagedWineVariety!
     var photo: UIImage!
 
     // MARK: Get photo preview

@@ -15,12 +15,12 @@ import CoreData
 class MyWinesWorker {
     // MARK: - Business Logic
 
-    func fetchMyWines() -> [Wine] {
+    func fetchMyWines() -> [ManagedWine] {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        let request: NSFetchRequest<Wine> = Wine.fetchRequest()
+        let request: NSFetchRequest<ManagedWine> = ManagedWine.fetchRequest()
         
-        let wines: [Wine]
+        let wines: [ManagedWine]
         do {
             wines = try context.fetch(request)
         } catch {

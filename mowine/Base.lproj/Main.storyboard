@@ -277,6 +277,19 @@
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="aVy-xO-LVa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18U-0z-6pQ" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="32" y="533" width="311" height="74"/>
+                                <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="qTe-TV-2eD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
+                                <color key="tintColor" white="1" alpha="0.87" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Other"/>
+                                <connections>
+                                    <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="uKC-tq-qlA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -293,10 +306,13 @@
                             <constraint firstItem="dO5-ju-Dj0" firstAttribute="leading" secondItem="6dI-vg-0qA" secondAttribute="leadingMargin" constant="16" id="R5f-0e-kcw"/>
                             <constraint firstItem="dO5-ju-Dj0" firstAttribute="centerX" secondItem="6dI-vg-0qA" secondAttribute="centerX" id="W5B-fd-qTd"/>
                             <constraint firstItem="EYO-r0-CxB" firstAttribute="top" secondItem="tbM-Mf-vYF" secondAttribute="bottom" id="Xnx-Rq-fho"/>
+                            <constraint firstItem="18U-0z-6pQ" firstAttribute="leading" secondItem="6dI-vg-0qA" secondAttribute="leadingMargin" constant="16" id="Zu1-XT-8hy"/>
                             <constraint firstItem="EYO-r0-CxB" firstAttribute="leading" secondItem="6dI-vg-0qA" secondAttribute="leadingMargin" id="jJC-vp-Koz"/>
+                            <constraint firstItem="18U-0z-6pQ" firstAttribute="top" secondItem="cyM-gb-5Da" secondAttribute="bottom" constant="16" id="pKi-er-woG"/>
                             <constraint firstItem="U7M-ux-Bld" firstAttribute="leading" secondItem="6dI-vg-0qA" secondAttribute="leadingMargin" constant="16" id="rZm-a7-oSK"/>
                             <constraint firstItem="z6g-m6-cAg" firstAttribute="centerX" secondItem="6dI-vg-0qA" secondAttribute="centerX" id="snk-6X-cvl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cyM-gb-5Da" secondAttribute="trailing" constant="16" id="uOe-q6-i2f"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="18U-0z-6pQ" secondAttribute="trailing" constant="16" id="veC-ao-gm1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EYO-r0-CxB" secondAttribute="trailing" id="w91-lN-IAH"/>
                             <constraint firstItem="U7M-ux-Bld" firstAttribute="centerX" secondItem="6dI-vg-0qA" secondAttribute="centerX" id="yNN-9a-Ua9"/>
                         </constraints>
@@ -838,9 +854,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPj-6D-Kms">
-                                <rect key="frame" x="116.5" y="567" width="142" height="38"/>
+                                <rect key="frame" x="169.5" y="567" width="36" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Make a Change">
+                                <state key="normal" title="Edit">
                                     <color key="titleColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
