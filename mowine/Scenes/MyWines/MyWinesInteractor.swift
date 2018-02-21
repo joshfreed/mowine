@@ -12,29 +12,29 @@
 import Foundation
 
 protocol MyWinesInteractorInput {
-    var selectedWine: ManagedWine? { get set }
+    var selectedWine: Wine? { get set }
     func fetchMyWines(request: MyWines.FetchMyWines.Request)
     func selectWine(atIndex index: Int)
 }
 
 protocol MyWinesInteractorOutput {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
-    func presentUpdatedWine(wine: ManagedWine)
+    func presentUpdatedWine(wine: Wine)
 }
 
 class MyWinesInteractor: MyWinesInteractorInput {
     var output: MyWinesInteractorOutput!
-    let worker = MyWinesWorker()
-    var selectedWine: ManagedWine?
+    var worker: MyWinesWorker?
+    var selectedWine: Wine?
     
-    private var wines: [ManagedWine] = []
+    private var wines: [Wine] = []
 
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
     }
     
     @objc func wineUpdated(notification: Notification) {
-        guard let updatedWine = notification.userInfo?["wine"] as? ManagedWine else {
+        guard let updatedWine = notification.userInfo?["wine"] as? Wine else {
             return
         }
         
@@ -44,10 +44,15 @@ class MyWinesInteractor: MyWinesInteractorInput {
     // MARK: - Business logic
 
     func fetchMyWines(request: MyWines.FetchMyWines.Request) {
-        wines = worker.fetchMyWines()
-
-        let response = MyWines.FetchMyWines.Response(wines: wines)
-        output.presentMyWines(response: response)
+        worker?.fetchMyWines() { result in
+            switch result {
+            case .success(let wines):
+                self.wines = wines
+                let response = MyWines.FetchMyWines.Response(wines: wines)
+                self.output.presentMyWines(response: response)
+            case .failure(let error): break
+            }
+        }
     }
     
     func selectWine(atIndex index: Int) {

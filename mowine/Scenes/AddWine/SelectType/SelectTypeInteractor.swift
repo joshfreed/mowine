@@ -13,41 +13,37 @@
 import UIKit
 
 protocol SelectTypeBusinessLogic {
-    func fetchWineTypes(request: SelectType.FetchTypes.Request)
     func selectType(request: SelectType.SelectType.Request)
 }
 
 protocol SelectTypeDataStore {
-    var selectedType: ManagedWineType? { get }
+    var selectedType: WineType? { get }
 }
 
 class SelectTypeInteractor: SelectTypeBusinessLogic, SelectTypeDataStore {
     var presenter: SelectTypePresentationLogic?
-    var wineTypesWorker: WineTypeWorker?
-    var wineTypes: [ManagedWineType]?
-    var selectedType: ManagedWineType?
+    var worker: SelectTypeWorker?
+    var selectedType: WineType?
 
-    func fetchWineTypes(request: SelectType.FetchTypes.Request) {
-        guard let wineTypes = wineTypesWorker?.getWineTypes() else {
-            return
-        }
-
-        self.wineTypes = wineTypes
-        
-//        let response = SelectType.FetchTypes.Response(wineTypes: wineTypes)
-//        presenter?.presentWineTypes(response: response)
-    }
+    // MARK: Select wine type
     
     func selectType(request: SelectType.SelectType.Request) {
-        selectedType = getTypeFromString(request.type)
-        
-        if let type = selectedType {
-            let response = SelectType.SelectType.Response(type: type)
-            presenter?.presentSelectedType(response: response)
+        worker?.getWineType(named: request.type) { result in
+            switch result {
+            case .success(let type): self.didSelectType(type: type)
+            case .failure(let error): fatalError("\(error)")
+            }
         }
     }
     
-    func getTypeFromString(_ type: String) -> ManagedWineType? {
-        return wineTypes?.first(where: { $0.name == type })
+    private func didSelectType(type: WineType?) {
+        guard let type = type else {
+            return
+        }
+        
+        selectedType = type
+        
+        let response = SelectType.SelectType.Response(type: type)
+        presenter?.presentSelectedType(response: response)
     }
 }

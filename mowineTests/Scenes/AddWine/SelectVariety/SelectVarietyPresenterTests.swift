@@ -12,7 +12,6 @@
 
 @testable import mowine
 import XCTest
-import CoreData
 import Nimble
 
 class SelectVarietyPresenterTests: XCTestCase {
@@ -20,29 +19,19 @@ class SelectVarietyPresenterTests: XCTestCase {
 
     var sut: SelectVarietyPresenter!
     let viewController = MockDisplayLogic()
-    var context: NSManagedObjectContext!
-    var variety1: Variety!
-    var variety2: Variety!
-    var variety3: Variety!
-    var unnamedVariety: Variety!
+    var variety1: WineVariety!
+    var variety2: WineVariety!
+    var variety3: WineVariety!
 
     // MARK: Test lifecycle
 
     override func setUp() {
         super.setUp()
         setupSelectVarietyPresenter()
-        context = setUpInMemoryManagedObjectContext()
         
-        variety1 = Variety(context: context)
-        variety1.name = "Z Variety"
-        
-        variety2 = Variety(context: context)
-        variety2.name = "A Variety"
-        
-        variety3 = Variety(context: context)
-        variety3.name = "Q Variety"
-        
-        unnamedVariety = Variety(context: context)
+        variety1 = WineVariety(name: "Z Variety")
+        variety2 = WineVariety(name: "A Variety")
+        variety3 = WineVariety(name: "Q Variety")
     }
 
     override func tearDown() {
@@ -82,7 +71,7 @@ class SelectVarietyPresenterTests: XCTestCase {
 
     func testPresentVarieties_returnsArrayOfNames() {
         // Given
-        let varieties: [Variety] = [variety2, variety3, variety1]
+        let varieties: [WineVariety] = [variety2, variety3, variety1]
         let response = SelectVariety.FetchVarieties.Response(varieties: varieties)
 
         // When
@@ -97,22 +86,7 @@ class SelectVarietyPresenterTests: XCTestCase {
     
     func testPresentVarieties_alphabetizesTheVarietyNames() {
         // Given
-        let varieties: [Variety] = [variety1, variety3, variety2]
-        let response = SelectVariety.FetchVarieties.Response(varieties: varieties)
-        
-        // When
-        sut.presentVarieties(response: response)
-        
-        // Then
-        viewController.verifyDisplayVarieties(
-            callCount: 1,
-            varieties: ["A Variety", "Q Variety", "Z Variety"]
-        )
-    }
-    
-    func testPresentVarieties_excludesVarietiesWhereNameIsNil() {
-        // Given
-        let varieties: [Variety] = [variety2, unnamedVariety, variety3, variety1]
+        let varieties: [WineVariety] = [variety1, variety3, variety2]
         let response = SelectVariety.FetchVarieties.Response(varieties: varieties)
         
         // When

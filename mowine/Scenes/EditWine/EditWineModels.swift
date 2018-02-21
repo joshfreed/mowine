@@ -19,8 +19,8 @@ struct EditWine {
         }
 
         struct Response {
-            let wine: ManagedWine
-            let wineTypes: [ManagedWineType]
+            let wine: Wine
+            let wineTypes: [WineType]
         }
 
         struct ViewModel {

@@ -10,24 +10,16 @@
 //
 
 import UIKit
-import CoreData
+import JFLib
 
 class MyWinesWorker {
-    // MARK: - Business Logic
+    let wineRepository: WineRepository
+    
+    init(wineRepository: WineRepository) {
+        self.wineRepository = wineRepository
+    }
 
-    func fetchMyWines() -> [ManagedWine] {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let request: NSFetchRequest<ManagedWine> = ManagedWine.fetchRequest()
-        
-        let wines: [ManagedWine]
-        do {
-            wines = try context.fetch(request)
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        
-        return wines
+    func fetchMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
+        wineRepository.getMyWines(completion: completion)
     }
 }

@@ -7,24 +7,8 @@
 //
 
 import Foundation
-import CoreData
 @testable import mowine
 import UIKit
-
-class MockVarietyTranslator: VarietyTranslator {
-    init() {
-        super.init(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
-    }
-    
-    var calledToCoreData = false
-    var toCoreDataInput: String?
-    var toCoreDataVarietyResult: Variety?
-    override func toCoreData(input: String) -> Variety? {
-        calledToCoreData = true
-        toCoreDataInput = input
-        return toCoreDataVarietyResult
-    }
-}
 
 class MockWineImageWorker: WineImageWorker {
     override func convertToPNGData(image: UIImage) -> NSData? {
@@ -38,12 +22,12 @@ class MockWineImageWorker: WineImageWorker {
 
 class MockEditWineWorker: EditWineWorker {
     init() {
-        super.init(varietyTranslator: MockVarietyTranslator(), imageWorker: MockWineImageWorker())
+        super.init(
+            wineRepository: MockWineRepository(),
+            wineTypeRepository: MockWineTypeRepository(),
+            wineVarietyRepository: MockWineVarietyRepository(),
+            imageWorker: MockWineImageWorker()
+        )
     }
 }
 
-class MockWineTypeWorker: WineTypeWorker {
-    init() {
-        super.init(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
-    }
-}

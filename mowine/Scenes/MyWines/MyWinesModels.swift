@@ -19,7 +19,7 @@ struct MyWines {
         }
 
         struct Response {
-            var wines: [ManagedWine]
+            var wines: [Wine]
         }
 
         struct ViewModel {

@@ -18,8 +18,8 @@ protocol RateWineBusinessLogic {
 }
 
 protocol RateWineDataStore {
-    var wineType: ManagedWineType! { get set }
-    var variety: ManagedWineVariety! { get set }
+    var wineType: WineType! { get set }
+    var variety: WineVariety! { get set }
     var photo: UIImage? { get set }
     var name: String { get set }
     var rating: Double { get }
@@ -27,8 +27,8 @@ protocol RateWineDataStore {
 
 class RateWineInteractor: RateWineBusinessLogic, RateWineDataStore {
     var presenter: RateWinePresentationLogic?
-    var wineType: ManagedWineType!
-    var variety: ManagedWineVariety!
+    var wineType: WineType!
+    var variety: WineVariety!
     var photo: UIImage?
     var name: String = ""
     var rating: Double = 0

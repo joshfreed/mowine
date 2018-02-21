@@ -17,15 +17,15 @@ protocol SnapPhotoBusinessLogic {
 }
 
 protocol SnapPhotoDataStore {
-    var wineType: ManagedWineType! { get set }
-    var variety: ManagedWineVariety! { get set }
+    var wineType: WineType! { get set }
+    var variety: WineVariety! { get set }
     var photo: UIImage? { get }
 }
 
 class SnapPhotoInteractor: SnapPhotoBusinessLogic, SnapPhotoDataStore {
     var presenter: SnapPhotoPresentationLogic?
-    var wineType: ManagedWineType!
-    var variety: ManagedWineVariety!
+    var wineType: WineType!
+    var variety: WineVariety!
     var photo: UIImage?
 
     // MARK: Use image

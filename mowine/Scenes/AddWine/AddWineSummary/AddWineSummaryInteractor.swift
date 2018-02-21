@@ -19,30 +19,30 @@ protocol AddWineSummaryBusinessLogic {
 }
 
 protocol AddWineSummaryDataStore {
-    var wineType: ManagedWineType! { get set }
-    var variety: ManagedWineVariety! { get set }
+    var wineType: WineType! { get set }
+    var variety: WineVariety! { get set }
     var photo: UIImage? { get set }
     var name: String { get set }
     var rating: Double { get set }
-    var wine: ManagedWine? { get }
+    var wine: Wine? { get }
 }
 
 class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataStore {
     var presenter: AddWineSummaryPresentationLogic?
-    var worker: WineWorker?
-    var wineType: ManagedWineType!
-    var variety: ManagedWineVariety!
+    var worker: AddWineSummaryWorker?
+    var wineType: WineType!
+    var variety: WineVariety!
     var photo: UIImage?
     var name: String = ""
     var rating: Double = 0
-    private(set) var wine: ManagedWine?
+    private(set) var wine: Wine?
 
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
     }
     
     @objc func wineUpdated(notification: Notification) {
-        guard let updatedWine = notification.userInfo?["wine"] as? ManagedWine else {
+        guard let updatedWine = notification.userInfo?["wine"] as? Wine else {
             return
         }
         
@@ -55,27 +55,28 @@ class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataS
     // MARK: Create wine
 
     func createWine(request: AddWineSummary.CreateWine.Request) {
-        do {
-            wine = try worker?.addWine(type: wineType, variety: variety, photo: photo, name: name, rating: rating)
-        } catch {
-            
-        }
         
-        let response = AddWineSummary.CreateWine.Response(wine: wine)
-        presenter?.presentWine(response: response)
+        worker?.createWine(type: wineType, variety: variety, photo: photo, name: name, rating: rating) { result in
+            switch result {
+            case .success(let wine):
+                self.wine = wine
+                let response = AddWineSummary.CreateWine.Response(wine: wine)
+                self.presenter?.presentWine(response: response)
+            case .failure(let error):
+                fatalError("\(error)")
+            }
+        }
     }
     
     // MARK: Update rating
     
     func updateRating(request: AddWineSummary.UpdateRating.Request) {
         rating = request.rating
-        wine?.rating = rating
-        do {
-            try wine?.managedObjectContext?.save()
-        } catch {
-            // rut ro?
+
+        if let wine = wine {
+            worker?.updateRating(of: wine, to: request.rating)
         }
-        
+
         let response = AddWineSummary.UpdateRating.Response()
         presenter?.presentRating(response: response)
     }
@@ -87,11 +88,7 @@ class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataS
             return
         }
         
-        do {
-            try wine.managedObjectContext?.delete(wine)
-        } catch {
-            // rut ro?
-        }
+        worker?.delete(wine: wine)
         
         let response = AddWineSummary.DeleteWine.Response()
         presenter?.presentWineDeleted(response: response)

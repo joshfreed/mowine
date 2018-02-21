@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WineImageWorker: NSObject {
+class WineImageWorker {
     func convertToPNGData(image: UIImage) -> NSData? {
         var proper: UIImage? = image
         

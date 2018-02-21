@@ -24,8 +24,7 @@ class SelectVarietyPresenter: SelectVarietyPresentationLogic {
 
     func presentVarieties(response: SelectVariety.FetchVarieties.Response) {
         let varieties = response.varieties
-            .filter({ $0.name != nil })
-            .map({ $0.name! })
+            .map({ $0.name })
             .sorted()
         
         let viewModel = SelectVariety.FetchVarieties.ViewModel(varieties: varieties)

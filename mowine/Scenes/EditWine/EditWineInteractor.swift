@@ -12,7 +12,7 @@
 import UIKit
 
 protocol EditWineInteractorInput {
-    var wine: ManagedWine! { get set }
+    var wine: Wine! { get set }
     func fetchWine(request: EditWine.FetchWine.Request)
     func saveWine(request: EditWine.SaveWine.Request)
 }
@@ -26,29 +26,40 @@ protocol EditWineInteractorOutput {
 class EditWineInteractor: EditWineInteractorInput {
     var output: EditWineInteractorOutput!
     let worker: EditWineWorker
-    let wineTypeWorker: WineTypeWorker
-    var wine: ManagedWine!
+    var wine: Wine!
 
-    init(worker: EditWineWorker, wineTypeWorker: WineTypeWorker) {
+    init(worker: EditWineWorker) {
         self.worker = worker
-        self.wineTypeWorker = wineTypeWorker
     }
     
-    // MARK: - Business logic
+    // MARK: - Fetch wine
 
     func fetchWine(request: EditWine.FetchWine.Request) {
-        let wineTypes = wineTypeWorker.getWineTypes()
-        let response = EditWine.FetchWine.Response(wine: wine, wineTypes: wineTypes)
-        output.presentWine(response: response)
+        worker.getWineTypes() { result in
+            switch result {
+            case .success(let wineTypes):
+                let response = EditWine.FetchWine.Response(wine: self.wine, wineTypes: wineTypes)
+                self.output.presentWine(response: response)
+            case .failure(let error):
+                fatalError("\(error)")
+            }
+        }
+        
     }
     
-    func saveWine(request: EditWine.SaveWine.Request) {        
-        do {
-            try worker.saveWine(wine: wine, request: request)
-            NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wine": wine])
-            output.navigateToMyWines()
-        } catch {
-            output.presentError(error)
+    // MARK: - Save wine
+    
+    func saveWine(request: EditWine.SaveWine.Request) {
+        worker.updateWine(wine: wine, from: request) { result in
+            switch result {
+            case .success(let wine): self.saveWineSuccess(wine)
+            case .failure(let error): self.output.presentError(error)
+            }
         }
+    }
+    
+    private func saveWineSuccess(_ wine: Wine) {
+        NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wine": wine])
+        output.navigateToMyWines()
     }
 }

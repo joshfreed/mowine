@@ -31,7 +31,7 @@ class EditWinePresenter: EditWinePresenterInput {
     func presentWine(response: EditWine.FetchWine.Response) {
         let  wineTypes = buildWineTypeViewModels(fromModel: response.wineTypes)
 
-        var wineViewModel = WineViewModel(name: response.wine.name ?? "", rating: response.wine.rating)
+        var wineViewModel = WineViewModel(name: response.wine.name, rating: response.wine.rating)
         wineViewModel.location = response.wine.location
         wineViewModel.notes = response.wine.notes
         
@@ -39,24 +39,17 @@ class EditWinePresenter: EditWinePresenterInput {
             wineViewModel.price = Double(price)
         }
         
-        if let data = response.wine.image {
+        if let data = response.wine.photo {
             wineViewModel.image = UIImage(data: data as Data)
         }
         
-        if let varietyName = response.wine.variety?.name,
-            let selectedTypeViewModel = wineTypes.filter({ $0.varieties.contains(varietyName) }).first
-        {
+        let varietyName = response.wine.variety.name
+        if let selectedTypeViewModel = wineTypes.filter({ $0.varieties.contains(varietyName) }).first {
             wineViewModel.variety = varietyName
             wineViewModel.type = selectedTypeViewModel
         }
 
-        if let set = response.wine.pairings, let pairings = Array(set) as? [ManagedFood] {
-            for pairing in pairings {
-                if let name = pairing.name {
-                    wineViewModel.pairings.append(name)
-                }
-            }
-        }
+        wineViewModel.pairings = response.wine.pairings
         
         let viewModel = EditWine.FetchWine.ViewModel(
             wineViewModel: wineViewModel,
@@ -66,22 +59,12 @@ class EditWinePresenter: EditWinePresenterInput {
         output.displayWine(viewModel: viewModel)
     }
     
-    private func buildWineTypeViewModels(fromModel wineTypes: [ManagedWineType]) -> [WineTypeViewModel] {
+    private func buildWineTypeViewModels(fromModel wineTypes: [WineType]) -> [WineTypeViewModel] {
         var types: [WineTypeViewModel] = []
         
         for type in wineTypes {
-            guard let name = type.name,
-                let nsset = type.varieties,
-                let varieties = nsset.allObjects as? [ManagedWineVariety]
-                else {
-                    continue
-            }
-            
-            let varietyNames: [String] = varieties
-                .filter({ $0.name != nil })
-                .map({ $0.name! })
-            
-            types.append(WineTypeViewModel(name: name, varieties: varietyNames))
+            let varietyNames: [String] = type.varieties.map({ $0.name })
+            types.append(WineTypeViewModel(name: type.name, varieties: varietyNames))
         }
         
         return types

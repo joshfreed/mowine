@@ -15,27 +15,13 @@ import UIKit
 enum SelectType {
     // MARK: Use cases
 
-    enum FetchTypes {
-
-        struct Request {
-        }
-
-        struct Response {
-            var wineTypes: [ManagedWineType]
-        }
-
-        struct ViewModel {
-        }
-
-    }
-
     enum SelectType {
         struct Request {
             var type: String
         }
         
         struct Response {
-            var type: ManagedWineType
+            var type: WineType
         }
         
         struct ViewModel {

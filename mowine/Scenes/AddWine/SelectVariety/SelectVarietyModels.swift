@@ -21,7 +21,7 @@ enum SelectVariety {
         }
 
         struct Response {
-            var varieties: [ManagedWineVariety]
+            var varieties: [WineVariety]
         }
 
         struct ViewModel {

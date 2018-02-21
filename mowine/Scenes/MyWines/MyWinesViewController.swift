@@ -17,7 +17,7 @@ protocol MyWinesViewControllerInput {
 }
 
 protocol MyWinesViewControllerOutput {
-    var selectedWine: ManagedWine? { get set }
+    var selectedWine: Wine? { get set }
     func fetchMyWines(request: MyWines.FetchMyWines.Request)
     func selectWine(atIndex index: Int)
 }

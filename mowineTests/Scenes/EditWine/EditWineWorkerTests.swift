@@ -11,24 +11,30 @@
 
 @testable import mowine
 import XCTest
-import CoreData
+import JFLib
+import Nimble
 
 class EditWineWorkerTests: XCTestCase {
     // MARK: - Subject under test
 
     var sut: EditWineWorker!
-    var varietyTranslator = MockVarietyTranslator()
     var imageWorker = MockWineImageWorker()
-    var context: NSManagedObjectContext!
     var wine: Wine!
+    let wineRepo = MockWineRepository()
+    let typeRepo = MockWineTypeRepository()
+    let varietyRepo = MockWineVarietyRepository()
 
     // MARK: - Test lifecycle
 
     override func setUp() {
         super.setUp()
         setupEditWineWorker()
-        context = setUpInMemoryManagedObjectContext()
-        wine = NSEntityDescription.insertNewObject(forEntityName: "Wine", into: context) as! Wine
+        wine = Wine(
+            type: WineType(name: "Red", varieties: []),
+            variety: WineVariety(name: "Merlot"),
+            name: "Test Wine",
+            rating: 5
+        )
     }
 
     override func tearDown() {
@@ -39,7 +45,9 @@ class EditWineWorkerTests: XCTestCase {
 
     func setupEditWineWorker() {
         sut = EditWineWorker(
-            varietyTranslator: varietyTranslator,
+            wineRepository: wineRepo,
+            wineTypeRepository: typeRepo,
+            wineVarietyRepository: varietyRepo,
             imageWorker: imageWorker
         )
     }
@@ -48,30 +56,42 @@ class EditWineWorkerTests: XCTestCase {
 
     // MARK: - Tests
 
-    func testSaveWine() {
+    func testUpdateWine() {
         // Given
-        var request = EditWine.SaveWine.Request(name: "New Name", rating: 4, type: WineTypeViewModel(name: "Thing", varieties: []), variety: "Merlot")
+        var request = EditWine.SaveWine.Request(
+            name: "New Name",
+            rating: 4,
+            type: WineTypeViewModel(name: "Thing", varieties: []),
+            variety: "Merlot"
+        )
         request.location = "Wegmans"
         request.notes = "Wine tasted good"
         request.price = 400
+        request.pairings = ["Tacos", "Sushi"]
+        var updatedWine: Wine?
+        varietyRepo.varieties = [WineVariety(name: "Merlot")]
 
         // When
-        do {
-            try sut.saveWine(wine: wine, request: request)
-        } catch {
-            XCTAssert(false)
+        sut.updateWine(wine: wine, from: request) { result in            
+            if case let .success(w) = result {
+                updatedWine = w
+            }
         }
 
         // Then
-        XCTAssertEqual(wine.name, request.name)
-        XCTAssertEqual(wine.rating, request.rating)
-        XCTAssertEqual(wine.location, request.location)
-        XCTAssertEqual(wine.notes, request.notes)
-        XCTAssertEqual(wine.price, 400)
-        XCTAssertNil(wine.image)
-        XCTAssertNil(wine.thumbnail)
+        expect(updatedWine).toNot(beNil())
+        expect(updatedWine?.name).to(equal(request.name))
+        expect(updatedWine?.rating).to(equal(request.rating))
+        expect(updatedWine?.location).to(equal(request.location))
+        expect(updatedWine?.notes).to(equal(request.notes))
+        expect(updatedWine?.price).to(equal(400))
+        expect(updatedWine?.pairings).to(haveCount(2))
+        expect(updatedWine?.pairings).to(contain(["Tacos", "Sushi"]))
+        XCTAssertNil(updatedWine?.photo)
+        XCTAssertNil(updatedWine?.thumbnail)
     }
     
+    /*
     func testMergePairingsAddsNewPairings() {
         sut.mergePairings(wine: wine, pairings: ["Sushi", "Cheese"])
 
@@ -127,4 +147,5 @@ class EditWineWorkerTests: XCTestCase {
         food.name = foodName
         wine.addToPairings(food)
     }
+     */
 }

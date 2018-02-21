@@ -20,13 +20,8 @@ protocol SelectTypePresentationLogic {
 class SelectTypePresenter: SelectTypePresentationLogic {
     weak var viewController: SelectTypeDisplayLogic?
 
-    // MARK: Do something
+    // MARK: Select wine type
 
-//    func presentWineTypes(response: SelectType.FetchTypes.Response) {
-//        let viewModel = SelectType.FetchTypes.ViewModel()
-//        viewController?.displaySomething(viewModel: viewModel)
-//    }
-    
     func presentSelectedType(response: SelectType.SelectType.Response) {
         let viewModel = SelectType.SelectType.ViewModel()
         viewController?.displaySelectedType(viewModel: viewModel)

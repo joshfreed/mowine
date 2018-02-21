@@ -13,21 +13,24 @@
 @testable import mowine
 import XCTest
 import Nimble
-import CoreData
 
 class SelectVarietyInteractorTests: XCTestCase {
     // MARK: Subject under test
 
-    var context: NSManagedObjectContext!
     var sut: SelectVarietyInteractor!
     let presenter = MockPresenter()
+    let variety1 = WineVariety(name: "Variety 1")
+    let variety2 = WineVariety(name: "Variety 2")
+    let variety3 = WineVariety(name: "Variety 3")
 
     // MARK: Test lifecycle
 
     override func setUp() {
         super.setUp()
         setupSelectVarietyInteractor()
-        context = setUpInMemoryManagedObjectContext()
+        
+        let wineType = WineType(name: "Red", varieties: [variety1, variety2, variety3])
+        sut.wineType = wineType
     }
 
     override func tearDown() {
@@ -45,8 +48,10 @@ class SelectVarietyInteractorTests: XCTestCase {
     
     class MockPresenter: SelectVarietyPresentationLogic {
         var presentVarietiesWasCalled = false
+        var presentedVarieties: [WineVariety] = []
         func presentVarieties(response: SelectVariety.FetchVarieties.Response) {
             presentVarietiesWasCalled = true
+            presentedVarieties = response.varieties
         }
         
         var presentSelectedVarietyWasCalled = false
@@ -59,61 +64,35 @@ class SelectVarietyInteractorTests: XCTestCase {
 
     func testFetchVarieties() {
         // Given
-        let wineType = Type(context: context)
-        wineType.name = "Red"
-        let variety1 = Variety(context: context)
-        variety1.name = "Variety 1"
-        let variety2 = Variety(context: context)
-        variety2.name = "Variety 2"
-        let variety3 = Variety(context: context)
-        variety3.name = "Variety 3"
-        wineType.addToVarieties(variety1)
-        wineType.addToVarieties(variety2)
-        wineType.addToVarieties(variety3)
-        sut.wineType = wineType
-
-        // When
         let request = SelectVariety.FetchVarieties.Request()
+        
+        // When
         sut.fetchVarieties(request: request)
 
         // Then
-        expect(self.sut.varieties).to(haveCount(3))
-        expect(self.sut.varieties).to(contain(variety1))
-        expect(self.sut.varieties).to(contain(variety2))
-        expect(self.sut.varieties).to(contain(variety3))
         expect(self.presenter.presentVarietiesWasCalled).to(equal(true))
+        expect(self.presenter.presentedVarieties).to(haveCount(3))
+        expect(self.presenter.presentedVarieties).to(contain(variety1))
+        expect(self.presenter.presentedVarieties).to(contain(variety2))
+        expect(self.presenter.presentedVarieties).to(contain(variety3))
     }
     
     // MARK: selectVariety
     
     func testSelectVariety() {
         // Given
-        let variety1 = Variety(context: context)
-        variety1.name = "Variety 1"
-        let variety2 = Variety(context: context)
-        variety2.name = "Variety 2"
-        let variety3 = Variety(context: context)
-        variety3.name = "Variety 3"
-        sut.varieties = [variety1, variety2, variety3]
         let request = SelectVariety.SelectVariety.Request(variety: "Variety 2")
         
         // When
         sut.selectVariety(request: request)
         
         // Then
-        expect(self.sut.selectedVariety).to(beIdenticalTo(variety2))
+        expect(self.sut.selectedVariety).to(equal(variety2))
         expect(self.presenter.presentSelectedVarietyWasCalled).to(equal(true))
     }
     
     func testSelectVariety_doesNothingIfTheNameIsNotValid() {
         // Given
-        let variety1 = Variety(context: context)
-        variety1.name = "Variety 1"
-        let variety2 = Variety(context: context)
-        variety2.name = "Variety 2"
-        let variety3 = Variety(context: context)
-        variety3.name = "Variety 3"
-        sut.varieties = [variety1, variety2, variety3]
         let request = SelectVariety.SelectVariety.Request(variety: "Turkey")
         
         // When

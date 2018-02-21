@@ -13,7 +13,7 @@ import UIKit
 
 protocol MyWinesPresenterInput {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
-    func presentUpdatedWine(wine: ManagedWine)
+    func presentUpdatedWine(wine: Wine)
 }
 
 protocol MyWinesPresenterOutput: class {
@@ -26,19 +26,17 @@ class MyWinesPresenter: MyWinesPresenterInput {
 
     // MARK: - Presentation logic
 
-    private func buildWineViewModel(fromModel wine: ManagedWine) -> MyWines.FetchMyWines.ViewModel.WineViewModel {
-        let name = wine.name ?? ""
-        var varietyName = ""
-        if let variety = wine.variety {
-            varietyName = variety.name ?? ""
-        }
+    private func buildWineViewModel(fromModel wine: Wine) -> MyWines.FetchMyWines.ViewModel.WineViewModel {
+        let name = wine.name
+        let varietyName = wine.variety.name
+        
         var thumbnail: UIImage?
-        if let imageData = wine.thumbnail as? Data {
+        if let imageData = wine.thumbnail {
             thumbnail = UIImage(data: imageData)
         }
         
         return MyWines.FetchMyWines.ViewModel.WineViewModel(
-            id: wine.objectID.uriRepresentation().absoluteString,
+            id: wine.id.uuidString,
             thumbnail: thumbnail,
             name: name,
             variety: varietyName,
@@ -55,7 +53,7 @@ class MyWinesPresenter: MyWinesPresenterInput {
         output.displayMyWines(viewModel: viewModel)
     }
     
-    func presentUpdatedWine(wine: ManagedWine) {
+    func presentUpdatedWine(wine: Wine) {
         output.displayUpdatedWine(viewModel: buildWineViewModel(fromModel: wine))
     }
 }

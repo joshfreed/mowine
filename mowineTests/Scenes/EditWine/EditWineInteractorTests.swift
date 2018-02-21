@@ -17,7 +17,6 @@ class EditWineInteractorTests: XCTestCase {
 
     var sut: EditWineInteractor!
     let worker = MockEditWineWorker()
-    let wineTypeWorker = MockWineTypeWorker()
 
     // MARK: - Test lifecycle
 
@@ -33,7 +32,7 @@ class EditWineInteractorTests: XCTestCase {
     // MARK: - Test setup
 
     func setupEditWineInteractor() {
-        sut = EditWineInteractor(worker: worker, wineTypeWorker: wineTypeWorker)
+        sut = EditWineInteractor(worker: worker)
     }
 
     // MARK: - Test doubles

@@ -45,13 +45,10 @@ class AddWineSummaryViewController: UIViewController, AddWineSummaryDisplayLogic
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
+        interactor.worker = AddWineSummaryWorker(wineRepository: Container.shared.wineRepository, imageWorker: Container.shared.wineImageWorker)
         presenter.viewController = viewController
         router.viewController = viewController
-        router.dataStore = interactor
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        interactor.worker = WineWorker(context: context, varietyTranslator: VarietyTranslator(context: context))
+        router.dataStore = interactor        
     }
 
     // MARK: Routing

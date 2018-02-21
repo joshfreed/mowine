@@ -11,67 +11,49 @@
 
 import UIKit
 import CoreData
+import JFLib
 
 class EditWineWorker {
-    let varietyTranslator: VarietyTranslator
+    let wineRepository: WineRepository
+    let wineTypeRepository: WineTypeRepository
+    let wineVarietyRepository: WineVarietyRepository
     let imageWorker: WineImageWorker
     
-    init(varietyTranslator: VarietyTranslator) {
-        self.varietyTranslator = varietyTranslator
-        self.imageWorker = WineImageWorker()
-    }
-    
-    init(varietyTranslator: VarietyTranslator, imageWorker: WineImageWorker) {
-        self.varietyTranslator = varietyTranslator
+    init(
+        wineRepository: WineRepository,
+        wineTypeRepository: WineTypeRepository,
+        wineVarietyRepository: WineVarietyRepository,
+        imageWorker: WineImageWorker
+    ) {
+        self.wineRepository = wineRepository
+        self.wineTypeRepository = wineTypeRepository
+        self.wineVarietyRepository = wineVarietyRepository
         self.imageWorker = imageWorker
     }
     
-    // MARK: - Business Logic
-
-    func saveWine(wine: ManagedWine, request: EditWine.SaveWine.Request) throws {
+    func getWineTypes(completion: @escaping (Result<[WineType]>) -> ()) {
+        wineTypeRepository.getAll(completion: completion)
+    }
+    
+    func updateWine(wine: Wine, from request: EditWine.SaveWine.Request, completion: @escaping (Result<Wine>) -> ()) {
         wine.name = request.name
         wine.rating = request.rating
-        wine.variety = varietyTranslator.toCoreData(input: request.variety)
         wine.location = request.location
         wine.notes = request.notes
-        
-        if let price = request.price {
-            wine.price = NSDecimalNumber(value: price)
-        } else {
-            wine.price = nil
-        }
+        wine.price = request.price
+        wine.pairings = request.pairings
         
         if let image = request.image {
-            wine.image = imageWorker.convertToPNGData(image: image) as Data?
+            wine.photo = imageWorker.convertToPNGData(image: image) as Data?
             wine.thumbnail = imageWorker.createThumbnail(from: image) as Data?
         }
         
-        mergePairings(wine: wine, pairings: request.pairings)
-        
-        try wine.managedObjectContext?.save()
-    }
-    
-    func mergePairings(wine: ManagedWine, pairings: [String]) {
-        guard let context = wine.managedObjectContext else {
-            return
-        }
-        guard let currentFoods = Array(wine.pairings ?? []) as? [ManagedFood] else {
-            return
-        }
-        
-        for foodName in pairings {
-            if currentFoods.contains(where: { $0.name?.lowercased() == foodName.lowercased() }) {
-                continue
-            }
-            
-            let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: context) as! ManagedFood
-            food.name = foodName
-            wine.addToPairings(food)
-        }
-        
-        for food in currentFoods {
-            if !pairings.contains(where: { $0.lowercased() == food.name?.lowercased() }) {
-                wine.removeFromPairings(food)
+        wineVarietyRepository.getVariety(named: request.variety) { result in
+            switch result {
+            case .success(let variety):
+                wine.variety = variety
+                self.wineRepository.save(wine, completion: completion)
+            case .failure(let error): completion(.failure(error))
             }
         }
     }

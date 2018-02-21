@@ -42,11 +42,7 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let wineTypeWorker = WineTypeWorker(context: context)
-        interactor.wineTypesWorker = wineTypeWorker
+        interactor.worker = SelectTypeWorker(wineTypeRepository: Container.shared.wineTypeRepository)
         
         presenter.viewController = viewController
         router.viewController = viewController
@@ -73,8 +69,6 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
         super.viewDidLoad()
         
         headerImage.fixTintIssue()
-        
-        fetchWineTypesOnLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,13 +78,6 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
-    }
-    
-    // MARK: Fetch wine types
-    
-    func fetchWineTypesOnLoad() {
-        let request = SelectType.FetchTypes.Request()
-        interactor?.fetchWineTypes(request: request)
     }
     
     // MARK: Select wine type

@@ -44,6 +44,7 @@ class MyWinesConfigurator {
 
         let interactor = MyWinesInteractor()
         interactor.output = presenter
+        interactor.worker = MyWinesWorker(wineRepository: Container.shared.wineRepository)
 
         viewController.output = interactor
         viewController.router = router
