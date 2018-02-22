@@ -20,6 +20,7 @@
         <attribute name="price" optional="YES" attributeType="Decimal" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="wineId" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="pairings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" syncable="YES"/>
         <relationship name="variety" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Variety" syncable="YES"/>
     </entity>
@@ -27,6 +28,6 @@
         <element name="Food" positionX="-171" positionY="-258" width="128" height="60"/>
         <element name="Type" positionX="61" positionY="-36" width="128" height="75"/>
         <element name="Variety" positionX="-2" positionY="132" width="128" height="75"/>
-        <element name="Wine" positionX="-297" positionY="-99" width="128" height="195"/>
+        <element name="Wine" positionX="-297" positionY="-99" width="128" height="210"/>
     </elements>
 </model>

@@ -18,7 +18,17 @@ class CoreDataWineTypeRepository: WineTypeRepository {
     }
     
     func getAll(completion: @escaping (Result<[WineType]>) -> ()) {
+        let context = container.viewContext
+        let request: NSFetchRequest<ManagedWineType> = ManagedWineType.fetchRequest()
         
+        do {
+            let types: [ManagedWineType] = try context.fetch(request)
+            let models: [WineType] = types.flatMap { CoreDataWineTypeTranslator.makeModel(from: $0) }
+            completion(.success(models))
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
     
     func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ()) {
@@ -51,18 +61,14 @@ class CoreDataWineTypeTranslator {
         return WineType(name: name, varieties: varieties)
     }
     
-    static func makeEntity(from model: WineType, in context: NSManagedObjectContext) -> ManagedWineType {
-        let entity = NSEntityDescription.insertNewObject(forEntityName: "WineType", into: context) as! ManagedWineType
+    static func insert(model: WineType, in context: NSManagedObjectContext) -> ManagedWineType {
+        let entity = NSEntityDescription.insertNewObject(forEntityName: "Type", into: context) as! ManagedWineType
         entity.name = model.name
-        return entity
-    }
-}
-
-class CoreDataVarietyTranslator {
-    static func makeModel(from entity: ManagedWineVariety) -> WineVariety? {
-        guard let name = entity.name else {
-            return nil
+        for variety in model.varieties {
+            let managedVariety = ManagedWineVariety(context: context)
+            managedVariety.name = variety.name
+            entity.addToVarieties(managedVariety)
         }
-        return WineVariety(name: name)
+        return entity
     }
 }

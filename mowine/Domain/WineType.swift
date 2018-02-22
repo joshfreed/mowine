@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct WineType {
+struct WineType: Equatable {
     var name: String
     var varieties: [WineVariety] = []
+    
+    static func ==(lhs: WineType, rhs: WineType) -> Bool {
+        return lhs.name == rhs.name
+    }
 }

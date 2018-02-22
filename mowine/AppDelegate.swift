@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = UIColor.mwButtonSecondary
-        
+
         let defaults = UserDefaults.standard
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
         if !isPreloaded {
@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             fatalError("\(error)")
         }
+        
+        UserDefaults.standard.set(false, forKey: "isPreloaded")
     }
     
     private func preLoadData() {

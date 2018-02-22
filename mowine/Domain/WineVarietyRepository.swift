@@ -10,6 +10,9 @@ import Foundation
 import JFLib
 
 protocol WineVarietyRepository {
-    func getVarieties(of type: WineType, completion: @escaping (Result<[WineVariety]>) -> ())
     func getVariety(named name: String, completion: @escaping (Result<WineVariety>) -> ())
+}
+
+enum WineVarietyRepositoryError: Error {
+    case notFound
 }

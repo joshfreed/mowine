@@ -1,4 +1,4 @@
-platform :ios, '10.2'
+platform :ios, '11.0'
 
 target 'mowine' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks

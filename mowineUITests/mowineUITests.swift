@@ -28,9 +28,43 @@ class mowineUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testAddWine() {
+        let app = XCUIApplication()
+        
+        let element = app
+            .children(matching: .window)
+            .element(boundBy: 0).children(matching: .other)
+            .element.children(matching: .other)
+            .element.children(matching: .other)
+            .element.children(matching: .other)
+            .element
+        element.children(matching: .other).element(boundBy: 0).tap()
+        
+        app.buttons["Red"].tap()
+        
+        let scrollViewsQuery = app.scrollViews
+        let elementsQuery = scrollViewsQuery.otherElements
+        elementsQuery.buttons["Malbec"].tap()
+        
+        // Photo - take it later
+        app.buttons["Take Later"].tap()
+        
+        // Name and Rate
+        
+        scrollViewsQuery.otherElements.containing(.staticText, identifier:"Name and Rate").children(matching: .textField).element.typeText("My Test Wine")
+        elementsQuery.otherElements["Rating"].tap()
+        elementsQuery.buttons["Next"].tap()
+        
+        // Verify the wine's info is displayed here
+        
+        
+        app.buttons["Looks Good"].tap()
+        
+        // Open your wine cellar
+        element.children(matching: .other).element(boundBy: 1).tap()
+        
+        // Make sure the new wine is in there
+        
     }
     
 }

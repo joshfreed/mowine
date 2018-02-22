@@ -37,10 +37,6 @@ class MockWineTypeRepository: WineTypeRepository {
 class MockWineVarietyRepository: WineVarietyRepository {
     var varieties: [WineVariety] = []
     
-    func getVarieties(of type: WineType, completion: @escaping (Result<[WineVariety]>) -> ()) {
-        
-    }
-    
     func getVariety(named name: String, completion: @escaping (Result<WineVariety>) -> ()) {
         if let found = varieties.first(where: { $0.name == name }) {
             completion(.success(found))

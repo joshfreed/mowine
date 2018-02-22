@@ -61,14 +61,6 @@ class MemoryWineTypeRepository: WineTypeRepository, WineVarietyRepository {
     
     // MARK: WineVarietyRepository
     
-    func getVarieties(of type: WineType, completion: @escaping (Result<[WineVariety]>) -> ()) {
-        if let found = types.first(where: { $0.name == type.name }) {
-            completion(.success(found.varieties))
-        } else {
-            completion(.success([]))
-        }
-    }
-    
     func getVariety(named name: String, completion: @escaping (Result<WineVariety>) -> ()) {
         for type in types {
             for variety in type.varieties {
