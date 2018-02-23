@@ -13,7 +13,6 @@
 import UIKit
 
 protocol SelectTypePresentationLogic {
-//    func presentWineTypes(response: SelectType.FetchTypes.Response)
     func presentSelectedType(response: SelectType.SelectType.Response)
 }
 
@@ -23,7 +22,7 @@ class SelectTypePresenter: SelectTypePresentationLogic {
     // MARK: Select wine type
 
     func presentSelectedType(response: SelectType.SelectType.Response) {
-        let viewModel = SelectType.SelectType.ViewModel()
+        let viewModel = SelectType.SelectType.ViewModel(hasVarieties: response.type.varieties.count > 0)
         viewController?.displaySelectedType(viewModel: viewModel)
     }
 }

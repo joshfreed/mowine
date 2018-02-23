@@ -14,6 +14,7 @@ import UIKit
 
 @objc protocol SelectTypeRoutingLogic {
     func routeToSelectVariety(segue: UIStoryboardSegue?)
+    func routeToSnapPhoto(segue: UIStoryboardSegue?)
 }
 
 protocol SelectTypeDataPassing {
@@ -32,6 +33,12 @@ class SelectTypeRouter: NSObject, SelectTypeRoutingLogic, SelectTypeDataPassing 
         var destinationDS = destinationVC.router!.dataStore!
         passDataToSelectVariety(source: dataStore!, destination: &destinationDS)
     }
+    
+    func routeToSnapPhoto(segue: UIStoryboardSegue?) {
+        let destinationVC = segue?.destination as! SnapPhotoViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToSnapPhoto(source: dataStore!, destination: &destinationDS)
+    }
 
     // MARK: Navigation
 
@@ -40,5 +47,11 @@ class SelectTypeRouter: NSObject, SelectTypeRoutingLogic, SelectTypeDataPassing 
     func passDataToSelectVariety(source: SelectTypeDataStore, destination: inout SelectVarietyDataStore)
     {
         destination.wineType = source.selectedType
+    }
+    
+    func passDataToSnapPhoto(source: SelectTypeDataStore, destination: inout SnapPhotoDataStore)
+    {
+        destination.wineType = source.selectedType
+        destination.variety = nil
     }
 }

@@ -74,13 +74,6 @@ class CoreDataWineRepository: WineRepository {
         }
         
         container.viewContext.delete(managedWine)
-        
-        do {
-//            try container.viewContext.save()
-            completion(.success)
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
+        completion(.success)
     }
 }

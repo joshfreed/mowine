@@ -36,6 +36,25 @@ class EditWineWorker {
     }
     
     func updateWine(wine: Wine, from request: EditWine.SaveWine.Request, completion: @escaping (Result<Wine>) -> ()) {
+        wineTypeRepository.getWineType(named: request.type) { result in
+            switch result {
+            case .success(let newType):
+                if let newType = newType {
+                    self.updateWineWithType(wine: wine, from: request, newType: newType, completion: completion)
+                } else {
+                    completion(.failure(EditWineWorkerError.invalidWineType))
+                }
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    private func updateWineWithType(
+        wine: Wine,
+        from request: EditWine.SaveWine.Request,
+        newType: WineType,
+        completion: @escaping (Result<Wine>) -> ()
+    ) {
         wine.name = request.name
         wine.rating = request.rating
         wine.location = request.location
@@ -47,14 +66,19 @@ class EditWineWorker {
             wine.photo = imageWorker.convertToPNGData(image: image) as Data?
             wine.thumbnail = imageWorker.createThumbnail(from: image) as Data?
         }
+
+        wine.type = newType
         
-        wineVarietyRepository.getVariety(named: request.variety) { result in
-            switch result {
-            case .success(let variety):
-                wine.variety = variety
-                self.wineRepository.save(wine, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
+        if let varietyName = request.variety, let variety = wine.type.getVariety(named: varietyName) {
+            wine.variety = variety
+        } else {
+            wine.variety = nil
         }
+        
+        wineRepository.save(wine, completion: completion)
     }
+}
+
+enum EditWineWorkerError: Error {
+    case invalidWineType
 }

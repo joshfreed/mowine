@@ -11,7 +11,7 @@ import UIKit
 class Wine: Equatable {
     let id: UUID
     var type: WineType
-    var variety: WineVariety
+    var variety: WineVariety?
     var name: String
     var rating: Double
     var photo: Data?
@@ -21,10 +21,13 @@ class Wine: Equatable {
     var price: Double?
     var pairings: [String] = []
     
-    init(id: UUID, type: WineType, variety: WineVariety, name: String, rating: Double) {
+    var varietyName: String {
+        return variety?.name ?? type.name
+    }
+    
+    init(id: UUID, type: WineType, name: String, rating: Double) {
         self.id = id
         self.type = type
-        self.variety = variety
         self.name = name
         self.rating = rating
     }
@@ -35,6 +38,13 @@ class Wine: Equatable {
         self.variety = variety
         self.name = name
         self.rating = rating        
+    }
+    
+    init(type: WineType, name: String, rating: Double) {
+        self.id = UUID()
+        self.type = type
+        self.name = name
+        self.rating = rating
     }
     
     public static func ==(lhs: Wine, rhs: Wine) -> Bool {

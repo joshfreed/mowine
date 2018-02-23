@@ -76,20 +76,14 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         guard let type = valuesDictionary["type"] as? WineTypeViewModel else {
             return
         }
-        guard let variety = valuesDictionary["variety"] as? String else {
-            return
-        }
         
+        let variety = valuesDictionary["variety"] as? String
         let location = valuesDictionary["location"] as? String
         let price = valuesDictionary["price"] as? Double
         let notes = valuesDictionary["notes"] as? String
         
-        var request = EditWine.SaveWine.Request(
-            name: name,
-            rating: rating,
-            type: type,
-            variety: variety
-        )
+        var request = EditWine.SaveWine.Request(name: name, rating: rating, type: type.name)
+        request.variety = variety
         request.location = location
         request.price = price
         request.notes = notes
@@ -117,6 +111,15 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         wineForm.locationRow.value = viewModel.wineViewModel.location
         wineForm.priceRow.value = viewModel.wineViewModel.price
         wineForm.noteRow.value = viewModel.wineViewModel.notes
+
+        wineForm.varietyRow.hidden = Condition.function(["type"], { form in
+            if let value = self.wineForm.typeRow.value {
+                return value.varieties.count == 0
+            } else {
+                return true
+            }
+        })
+        wineForm.varietyRow.evaluateHidden()
         
         for (index, name) in viewModel.wineViewModel.pairings.enumerated() {
             let newRow = NameRow("pairing_\(index + 1)") {

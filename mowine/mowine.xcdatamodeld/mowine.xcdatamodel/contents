@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Food" representedClassName="ManagedFood" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -22,12 +22,13 @@
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="wineId" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="pairings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" syncable="YES"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" syncable="YES"/>
         <relationship name="variety" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Variety" syncable="YES"/>
     </entity>
     <elements>
         <element name="Food" positionX="-171" positionY="-258" width="128" height="60"/>
         <element name="Type" positionX="61" positionY="-36" width="128" height="75"/>
         <element name="Variety" positionX="-2" positionY="132" width="128" height="75"/>
-        <element name="Wine" positionX="-297" positionY="-99" width="128" height="210"/>
+        <element name="Wine" positionX="-297" positionY="-99" width="128" height="225"/>
     </elements>
 </model>

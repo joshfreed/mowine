@@ -20,7 +20,7 @@ protocol NameWineBusinessLogic {
 
 protocol NameWineDataStore {
     var wineType: WineType! { get set }
-    var variety: WineVariety! { get set }
+    var variety: WineVariety? { get set }
     var photo: UIImage? { get set }
     var name: String { get }
     var rating: Double { get }
@@ -29,7 +29,7 @@ protocol NameWineDataStore {
 class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
     var presenter: NameWinePresentationLogic?
     var wineType: WineType!
-    var variety: WineVariety!
+    var variety: WineVariety?
     var photo: UIImage?
     var name: String = ""
     var rating: Double = 0

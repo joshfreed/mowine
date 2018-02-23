@@ -25,12 +25,15 @@ class MockWineRepository: WineRepository {
 }
 
 class MockWineTypeRepository: WineTypeRepository {
+    var types: [WineType] = []
+    
     func getAll(completion: @escaping (Result<[WineType]>) -> ()) {
-        
+        completion(.success(types))
     }
     
     func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ()) {
-        
+        let type = types.first(where: { $0.name == name })
+        completion(.success(type))        
     }
 }
 

@@ -25,6 +25,7 @@ enum SelectType {
         }
         
         struct ViewModel {
+            var hasVarieties: Bool
         }
     }
     

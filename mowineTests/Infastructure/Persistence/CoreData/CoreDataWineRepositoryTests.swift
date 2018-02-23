@@ -26,9 +26,9 @@ class CoreDataWineRepositoryTests: XCTestCase {
         let wineEntityMapper = CoreDataWineTranslator(context: coreData.container.viewContext)
         sut = CoreDataWineRepository(container: coreData.container, wineEntityMapper: wineEntityMapper)
         
-        type = WineType(name: "Red", varieties: [])
         variety = WineVariety(name: "Merlot")
         variety2 = WineVariety(name: "Chianti")
+        type = WineType(name: "Red", varieties: [variety, variety2])
         wine = Wine(type: type, variety: variety, name: "Freed 2015", rating: 5)
         wine.location = "Wegman's"
         wine.notes = "These are some notes about this delicious wine"
@@ -48,6 +48,8 @@ class CoreDataWineRepositoryTests: XCTestCase {
     func testSaveNewWine() {
         // Given
         coreData.insert(variety)
+        coreData.insert(variety2)
+        coreData.insert(type)
         coreData.save()
         
         // When
@@ -59,6 +61,8 @@ class CoreDataWineRepositoryTests: XCTestCase {
         expect(actual?.wineId).to(equal(wine.id))
         expect(actual?.name).to(equal("Freed 2015"))
         expect(actual?.rating).to(equal(5))
+        expect(actual?.type).toNot(beNil())
+        expect(actual?.type?.name).to(equal("Red"))
         expect(actual?.variety).toNot(beNil())
         expect(actual?.variety?.name).to(equal("Merlot"))
         expect(actual?.location).to(equal("Wegman's"))
@@ -75,6 +79,7 @@ class CoreDataWineRepositoryTests: XCTestCase {
         // Given
         coreData.insert(variety)
         coreData.insert(variety2)
+        coreData.insert(type)
         coreData.insert(wine)
         coreData.save()
         let updated: Wine = wine
@@ -115,11 +120,10 @@ class CoreDataWineRepositoryTests: XCTestCase {
     
     func testGetMyWines() {
         // Given
-        let wine1 = WineBuilder.aWine().withVariety(variety).build()
-        let wine2 = WineBuilder.aWine().withVariety(variety2).build()
-        let wine3 = WineBuilder.aWine().withVariety(variety).build()
-        coreData.insert(variety)
-        coreData.insert(variety2)
+        let wine1 = WineBuilder.aWine().withType(type).build()
+        let wine2 = WineBuilder.aWine().withType(type).build()
+        let wine3 = WineBuilder.aWine().withType(type).build()
+        coreData.insert(type)
         coreData.insert(wine1)
         coreData.insert(wine2)
         coreData.insert(wine3)

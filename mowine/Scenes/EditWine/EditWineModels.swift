@@ -35,19 +35,18 @@ struct EditWine {
         struct Request {
             let name: String
             let rating: Double
-            let type: WineTypeViewModel
-            let variety: String
+            let type: String
+            var variety: String?
             var location: String?
             var price: Double?
             var notes: String?
             var image: UIImage?
             var pairings: [String] = []
             
-            init(name: String, rating: Double, type: WineTypeViewModel, variety: String) {
+            init(name: String, rating: Double, type: String) {
                 self.name = name
                 self.rating = rating
                 self.type = type
-                self.variety = variety
             }
         }
         

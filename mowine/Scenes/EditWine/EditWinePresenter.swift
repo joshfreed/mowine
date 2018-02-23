@@ -43,12 +43,14 @@ class EditWinePresenter: EditWinePresenterInput {
             wineViewModel.image = UIImage(data: data as Data)
         }
         
-        let varietyName = response.wine.variety.name
-        if let selectedTypeViewModel = wineTypes.filter({ $0.varieties.contains(varietyName) }).first {
-            wineViewModel.variety = varietyName
+        if let selectedTypeViewModel = wineTypes.filter({ $0.name == response.wine.type.name }).first {
             wineViewModel.type = selectedTypeViewModel
         }
-
+        
+        if let variety = response.wine.variety {
+            wineViewModel.variety = variety.name
+        }
+    
         wineViewModel.pairings = response.wine.pairings
         
         let viewModel = EditWine.FetchWine.ViewModel(

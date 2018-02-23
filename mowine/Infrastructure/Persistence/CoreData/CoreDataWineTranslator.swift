@@ -31,7 +31,13 @@ class CoreDataWineTranslator {
             entity.price = nil
         }
         
-        entity.variety = getManagedVariety(for: wine.variety)
+        entity.type = getManagedType(for: wine.type)
+        
+        if let variety = wine.variety {
+            entity.variety = getManagedVariety(for: variety)
+        } else {
+            entity.variety = nil
+        }
         
         let pairings: [ManagedFood] = wine.pairings.map {
             let mf = ManagedFood(context: context)
@@ -41,6 +47,18 @@ class CoreDataWineTranslator {
         entity.pairings = NSSet(array: pairings)
     }
 
+    private func getManagedType(for type: WineType) -> ManagedWineType? {
+        let fetchRequest: NSFetchRequest<ManagedWineType> = ManagedWineType.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name = %@", type.name)
+        
+        do {
+            return try context.fetch(fetchRequest).first
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
     private func getManagedVariety(for variety: WineVariety) -> ManagedWineVariety? {
         let fetchRequest: NSFetchRequest<ManagedWineVariety> = ManagedWineVariety.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "name = %@", variety.name)
@@ -56,20 +74,18 @@ class CoreDataWineTranslator {
     func map(from entity: ManagedWine) -> Wine? {
         guard
             let id = entity.wineId,
-            let managedVariety = entity.variety,
-            let variety = CoreDataVarietyTranslator.map(from: managedVariety),
-            let name = entity.name
+            let name = entity.name,
+            let managedType = entity.type,
+            let type = CoreDataWineTypeTranslator.makeModel(from: managedType)
         else {
             return nil
         }
         
-        let wine = Wine(
-            id: id,
-            type: WineType(name: "Fuck", varieties: []),
-            variety: variety,
-            name: name,
-            rating: entity.rating
-        )
+        let wine = Wine(id: id, type: type, name: name, rating: entity.rating)
+        
+        if let managedVariety = entity.variety {
+            wine.variety = CoreDataVarietyTranslator.map(from: managedVariety)
+        }
         
         wine.location = entity.location
         wine.price = entity.price != nil ? Double(truncating: entity.price!) : nil

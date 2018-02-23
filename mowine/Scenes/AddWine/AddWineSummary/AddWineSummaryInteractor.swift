@@ -20,7 +20,7 @@ protocol AddWineSummaryBusinessLogic {
 
 protocol AddWineSummaryDataStore {
     var wineType: WineType! { get set }
-    var variety: WineVariety! { get set }
+    var variety: WineVariety? { get set }
     var photo: UIImage? { get set }
     var name: String { get set }
     var rating: Double { get set }
@@ -31,7 +31,7 @@ class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataS
     var presenter: AddWineSummaryPresentationLogic?
     var worker: AddWineSummaryWorker?
     var wineType: WineType!
-    var variety: WineVariety!
+    var variety: WineVariety?
     var photo: UIImage?
     var name: String = ""
     var rating: Double = 0

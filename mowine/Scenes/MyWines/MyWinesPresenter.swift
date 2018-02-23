@@ -28,7 +28,7 @@ class MyWinesPresenter: MyWinesPresenterInput {
 
     private func buildWineViewModel(fromModel wine: Wine) -> MyWines.FetchMyWines.ViewModel.WineViewModel {
         let name = wine.name
-        let varietyName = wine.variety.name
+        let varietyName = wine.varietyName
         
         var thumbnail: UIImage?
         if let imageData = wine.thumbnail {

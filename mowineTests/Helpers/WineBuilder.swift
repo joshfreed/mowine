@@ -12,7 +12,7 @@ import Foundation
 class WineBuilder {
     private var id: UUID?
     private var type = WineType(name: "Red", varieties: [])
-    private var variety = WineVariety(name: "Merlot")
+    private var variety: WineVariety?
     private var name: String?
     private var rating: Double = 3
     private var location: String?
@@ -35,11 +35,12 @@ class WineBuilder {
         var wine: Wine
         
         if let id = id {
-            wine = Wine(id: id, type: type, variety: variety, name: name!, rating: rating)
+            wine = Wine(id: id, type: type, name: name!, rating: rating)
         } else {
-            wine = Wine(type: type, variety: variety, name: name!, rating: rating)
+            wine = Wine(type: type, name: name!, rating: rating)
         }
         
+        wine.variety = variety
         wine.location = location
         wine.notes = notes
         wine.price = price

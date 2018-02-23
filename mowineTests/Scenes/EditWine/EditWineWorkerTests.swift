@@ -23,18 +23,30 @@ class EditWineWorkerTests: XCTestCase {
     let wineRepo = MockWineRepository()
     let typeRepo = MockWineTypeRepository()
     let varietyRepo = MockWineVarietyRepository()
+    
+    var red: WineType!
+    var other: WineType!
 
     // MARK: - Test lifecycle
 
     override func setUp() {
         super.setUp()
         setupEditWineWorker()
+        
+        let merlot = WineVariety(name: "Merlot")
+        let variety2 = WineVariety(name: "Other Variety")
+        
+        red = WineType(name: "Red", varieties: [merlot, variety2])
+        other = WineType(name: "Other", varieties: [])
+        
         wine = Wine(
-            type: WineType(name: "Red", varieties: []),
-            variety: WineVariety(name: "Merlot"),
+            type: red,
+            variety: merlot,
             name: "Test Wine",
             rating: 5
         )
+        
+        typeRepo.types = [red, other]
     }
 
     override func tearDown() {
@@ -58,18 +70,13 @@ class EditWineWorkerTests: XCTestCase {
 
     func testUpdateWine() {
         // Given
-        var request = EditWine.SaveWine.Request(
-            name: "New Name",
-            rating: 4,
-            type: WineTypeViewModel(name: "Thing", varieties: []),
-            variety: "Merlot"
-        )
+        var request = EditWine.SaveWine.Request(name: "New Name", rating: 4, type: "Red")
+        request.variety = "Other Variety"
         request.location = "Wegmans"
         request.notes = "Wine tasted good"
         request.price = 400
         request.pairings = ["Tacos", "Sushi"]
         var updatedWine: Wine?
-        varietyRepo.varieties = [WineVariety(name: "Merlot")]
 
         // When
         sut.updateWine(wine: wine, from: request) { result in            
@@ -80,6 +87,7 @@ class EditWineWorkerTests: XCTestCase {
 
         // Then
         expect(updatedWine).toNot(beNil())
+        expect(updatedWine?.variety?.name).to(equal("Other Variety"))
         expect(updatedWine?.name).to(equal(request.name))
         expect(updatedWine?.rating).to(equal(request.rating))
         expect(updatedWine?.location).to(equal(request.location))
@@ -91,61 +99,60 @@ class EditWineWorkerTests: XCTestCase {
         XCTAssertNil(updatedWine?.thumbnail)
     }
     
-    /*
-    func testMergePairingsAddsNewPairings() {
-        sut.mergePairings(wine: wine, pairings: ["Sushi", "Cheese"])
-
-        let pairings = getPairings()
-        XCTAssertEqual(2, pairings.count)
-        XCTAssertTrue(pairings.contains(where: { $0.name == "Sushi" }))
-        XCTAssertTrue(pairings.contains(where: { $0.name == "Cheese" }))
-    }
-
-    func testMergePairingsDoesNotAddTheSamePairingTwice() {
-        addPairing("Sushi")
+    func testUpdateWine_changeType() {
+        // Given
+        var request = EditWine.SaveWine.Request(name: "Test Wine", rating: 5, type: "Other")
+        request.variety = "Other Variety"
+        var updatedWine: Wine?
         
-        sut.mergePairings(wine: wine, pairings: ["Sushi"])
-        
-        let pairings = getPairings()
-        XCTAssertEqual(1, pairings.count)
-        XCTAssertTrue(pairings.contains(where: { $0.name == "Sushi" }))
-    }
-    
-    func testMergePairingsRemovesMissingPairing() {
-        addPairing("Sushi")
-        addPairing("Cheese")
-        
-        sut.mergePairings(wine: wine, pairings: ["Cheese"])
-        
-        let pairings = getPairings()
-        XCTAssertEqual(1, pairings.count)
-        XCTAssertTrue(pairings.contains(where: { $0.name == "Cheese" }))
-    }
-
-    func testMergePairingsIsNotCaseSensative() {
-        addPairing("Sushi")
-        
-        sut.mergePairings(wine: wine, pairings: ["sUSHi"])
-        
-        let pairings = getPairings()
-        XCTAssertEqual(1, pairings.count)
-        XCTAssertTrue(pairings.contains(where: { $0.name == "Sushi" }))
-    }
-    
-    private func getPairings() -> [Food] {
-        if let pairings = Array(wine.pairings ?? []) as? [Food] {
-            XCTAssertNotNil(pairings)
-            return pairings
-        } else {
-            XCTFail("Could not unwrap pairings nset")
-            return []
+        // When
+        sut.updateWine(wine: wine, from: request) { result in
+            if case let .success(w) = result {
+                updatedWine = w
+            } else {
+                fail("Update failed")
+            }
         }
+        
+        // Then
+        expect(updatedWine?.type.name).to(equal("Other"))
     }
     
-    private func addPairing(_ foodName: String) {
-        let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: context) as! Food
-        food.name = foodName
-        wine.addToPairings(food)
+    func testUpdateWine_returnsErrorIfTypeNotInRepo() {
+        // Given
+        let request = EditWine.SaveWine.Request(name: "Test Wine", rating: 5, type: "UNKNOWN")
+        var error: Error?
+        
+        // When
+        sut.updateWine(wine: wine, from: request) { result in
+            if case let .failure(err) = result {
+                error = err
+            } else {
+                fail("Update SHOULD have failed")
+            }
+        }
+        
+        // Then
+        expect(error).to(matchError(EditWineWorkerError.invalidWineType))
     }
-     */
+    
+    func testUpdateWine_nilVariety() {
+        // Given
+        var request = EditWine.SaveWine.Request(name: "Test Wine", rating: 5, type: "Red")
+        request.variety = nil
+        var updatedWine: Wine?
+        
+        // When
+        sut.updateWine(wine: wine, from: request) { result in
+            if case let .success(w) = result {
+                updatedWine = w
+            } else {
+                fail("Update failed")
+            }
+        }
+        
+        // Then
+        expect(updatedWine?.variety).to(beNil())
+    }
+    
 }

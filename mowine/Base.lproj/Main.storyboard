@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -209,7 +208,7 @@
         <!--Select Type View Controller-->
         <scene sceneID="EWt-ss-5bo">
             <objects>
-                <viewController id="0F1-Cv-DyL" customClass="SelectTypeViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectTypeViewController" id="0F1-Cv-DyL" customClass="SelectTypeViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tbM-Mf-vYF"/>
                         <viewControllerLayoutGuide type="bottom" id="wYJ-Tx-5KX"/>
@@ -326,6 +325,7 @@
                         <outletCollection property="wineTypeButtons" destination="dO5-ju-Dj0" collectionClass="NSMutableArray" id="D71-Ra-wlw"/>
                         <outletCollection property="wineTypeButtons" destination="cyM-gb-5Da" collectionClass="NSMutableArray" id="Adg-GX-ueM"/>
                         <segue destination="ymJ-qF-T1t" kind="show" identifier="SelectVariety" id="bw1-v2-Jur"/>
+                        <segue destination="Ndr-H1-xxV" kind="show" identifier="SnapPhoto" id="dpv-GH-y8o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C6l-kQ-NOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1134,5 +1134,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="tRu-N2-7Vv"/>
         <segue reference="7pM-bq-uHV"/>
+        <segue reference="dpv-GH-y8o"/>
     </inferredMetricsTieBreakers>
 </document>

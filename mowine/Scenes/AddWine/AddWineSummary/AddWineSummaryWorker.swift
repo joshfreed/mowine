@@ -18,8 +18,9 @@ class AddWineSummaryWorker {
         self.imageWorker = imageWorker
     }
     
-    func createWine(type: WineType, variety: WineVariety, photo: UIImage?, name: String, rating: Double, completion: @escaping (Result<Wine>) -> ()) {
-        let wine = Wine(type: type, variety: variety, name: name, rating: rating)
+    func createWine(type: WineType, variety: WineVariety?, photo: UIImage?, name: String, rating: Double, completion: @escaping (Result<Wine>) -> ()) {
+        let wine = Wine(type: type, name: name, rating: rating)
+        wine.variety = variety
         
         if let image = photo {
             wine.photo = imageWorker.convertToPNGData(image: image) as Data?

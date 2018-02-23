@@ -33,10 +33,13 @@ class CoreDataWineTranslatorTests: XCTestCase {
         let wineId = UUID()
         let photo = Data(repeating: 77, count: 10)
         let thumbnail = Data(repeating: 77, count: 2)
+        let type = ManagedWineType(context: coreData.context)
+        type.name = "My Wine Type"
         let variety = ManagedWineVariety(context: coreData.context)
         variety.name = "Buttsex"
         let managedWine = ManagedWine(context: coreData.context)
         managedWine.wineId = wineId
+        managedWine.type = type
         managedWine.variety = variety
         managedWine.name = "My Cool Wine"
         managedWine.rating = 3
@@ -60,6 +63,7 @@ class CoreDataWineTranslatorTests: XCTestCase {
         expect(mapped?.id).to(equal(wineId))
         expect(mapped?.name).to(equal("My Cool Wine"))
         expect(mapped?.rating).to(equal(3))
+        expect(mapped?.type.name).to(equal("My Wine Type"))
         expect(mapped?.variety).to(equal(WineVariety(name: "Buttsex")))
         expect(mapped?.location).to(equal("Wine and Spirits"))
         expect(mapped?.price).to(beCloseTo(46.77))
@@ -68,5 +72,25 @@ class CoreDataWineTranslatorTests: XCTestCase {
         expect(mapped?.thumbnail).to(equal(thumbnail))
         expect(mapped?.pairings).to(haveCount(2))
         expect(mapped?.pairings).to(contain(["Sushi", "Pasta"]))
+    }
+    
+    func testTranslateEntityWithNoVariety() {
+        // Given
+        let wineId = UUID()
+        let type = ManagedWineType(context: coreData.context)
+        type.name = "My Wine Type"
+        let managedWine = ManagedWine(context: coreData.context)
+        managedWine.wineId = wineId
+        managedWine.type = type
+        managedWine.name = "My Cool Wine"
+        managedWine.rating = 3
+        
+        // When
+        let mapped = sut.map(from: managedWine)
+        
+        // Then
+        expect(mapped).toNot(beNil())
+        expect(mapped?.type.name).to(equal("My Wine Type"))
+        expect(mapped?.variety).to(beNil())
     }
 }

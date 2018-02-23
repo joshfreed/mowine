@@ -92,6 +92,10 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
     }
 
     func displaySelectedType(viewModel: SelectType.SelectType.ViewModel) {
-        performSegue(withIdentifier: "SelectVariety", sender: nil)
+        if viewModel.hasVarieties {
+            performSegue(withIdentifier: "SelectVariety", sender: nil)
+        } else {
+            performSegue(withIdentifier: "SnapPhoto", sender: nil)
+        }
     }
 }
