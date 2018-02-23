@@ -22,7 +22,6 @@ class EditWineWorkerTests: XCTestCase {
     var wine: Wine!
     let wineRepo = MockWineRepository()
     let typeRepo = MockWineTypeRepository()
-    let varietyRepo = MockWineVarietyRepository()
     
     var red: WineType!
     var other: WineType!
@@ -59,7 +58,6 @@ class EditWineWorkerTests: XCTestCase {
         sut = EditWineWorker(
             wineRepository: wineRepo,
             wineTypeRepository: typeRepo,
-            wineVarietyRepository: varietyRepo,
             imageWorker: imageWorker
         )
     }

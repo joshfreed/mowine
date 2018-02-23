@@ -14,7 +14,6 @@ class Container {
     private init() {}
 
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer)
-    lazy var wineVarietyRepository: WineVarietyRepository = CoreDataWineVarietyRepository(container: persistentContainer)
     lazy var wineRepository: WineRepository = {
         let wineTranslator = CoreDataWineTranslator(context: persistentContainer.viewContext)
         return CoreDataWineRepository(container: persistentContainer, wineEntityMapper: wineTranslator)

@@ -9,7 +9,7 @@
 import Foundation
 import JFLib
 
-class MemoryWineTypeRepository: WineTypeRepository, WineVarietyRepository {
+class MemoryWineTypeRepository: WineTypeRepository {
     private lazy var types: [WineType] = {
         let red = WineType(name: "Red", varieties: [
             WineVariety(name: "Cabernet Sauvignon"),
@@ -57,19 +57,5 @@ class MemoryWineTypeRepository: WineTypeRepository, WineVarietyRepository {
         }
         
         completion(.success(nil))
-    }
-    
-    // MARK: WineVarietyRepository
-    
-    func getVariety(named name: String, completion: @escaping (Result<WineVariety>) -> ()) {
-        for type in types {
-            for variety in type.varieties {
-                if variety.name == name {
-                    completion(.success(variety))
-                }
-            }
-        }
-        
-//        completion(.failure())
     }
 }

@@ -25,7 +25,6 @@ class MockEditWineWorker: EditWineWorker {
         super.init(
             wineRepository: MockWineRepository(),
             wineTypeRepository: MockWineTypeRepository(),
-            wineVarietyRepository: MockWineVarietyRepository(),
             imageWorker: MockWineImageWorker()
         )
     }

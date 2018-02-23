@@ -47,7 +47,6 @@ class EditWineConfigurator {
         let worker = EditWineWorker(
             wineRepository: Container.shared.wineRepository,
             wineTypeRepository: Container.shared.wineTypeRepository,
-            wineVarietyRepository: Container.shared.wineVarietyRepository,
             imageWorker: Container.shared.wineImageWorker
         )
         let interactor = EditWineInteractor(worker: worker)

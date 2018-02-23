@@ -40,13 +40,11 @@
 		53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */; };
 		534895F1203CBAA400B7547A /* Wine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F0203CBAA400B7547A /* Wine.swift */; };
 		534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F3203CBB4200B7547A /* WineTypeRepository.swift */; };
-		534895F6203CBB6E00B7547A /* WineVarietyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F5203CBB6E00B7547A /* WineVarietyRepository.swift */; };
 		534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */; };
 		534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F9203CBF7100B7547A /* CoreDataWineTypeRepository.swift */; };
 		534895FD203CBFB900B7547A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* Container.swift */; };
 		53489600203CF10500B7547A /* AddWineSummaryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FF203CF10500B7547A /* AddWineSummaryWorker.swift */; };
 		53489602203DD11F00B7547A /* WineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489601203DD11F00B7547A /* WineRepository.swift */; };
-		53489604203DD75200B7547A /* CoreDataWineVarietyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489603203DD75200B7547A /* CoreDataWineVarietyRepository.swift */; };
 		53489607203DD86800B7547A /* CoreDataWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489606203DD86800B7547A /* CoreDataWineRepository.swift */; };
 		53489609203DDFF000B7547A /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489608203DDFF000B7547A /* MainMenuViewController.swift */; };
 		5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348960A203DE3A400B7547A /* ButtonPrimary.swift */; };
@@ -56,7 +54,6 @@
 		5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489619203DE5C000B7547A /* MemoryWineRepository.swift */; };
 		5348961D203E0FA600B7547A /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348961C203E0FA600B7547A /* Mocks.swift */; };
 		53489623203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */; };
-		5350B589203F191200C6B2D2 /* CoreDataWineVarietyRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B588203F191200C6B2D2 /* CoreDataWineVarietyRepositoryTests.swift */; };
 		5350B58B203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */; };
 		5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */; };
 		5350B592203F56FE00C6B2D2 /* CoreDataWineTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */; };
@@ -111,6 +108,7 @@
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
 		53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */; };
 		53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */; };
+		53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */; };
 		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
@@ -191,13 +189,11 @@
 		53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryViewController.swift; sourceTree = "<group>"; };
 		534895F0203CBAA400B7547A /* Wine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wine.swift; sourceTree = "<group>"; };
 		534895F3203CBB4200B7547A /* WineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeRepository.swift; sourceTree = "<group>"; };
-		534895F5203CBB6E00B7547A /* WineVarietyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineVarietyRepository.swift; sourceTree = "<group>"; };
 		534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeWorker.swift; sourceTree = "<group>"; };
 		534895F9203CBF7100B7547A /* CoreDataWineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineTypeRepository.swift; sourceTree = "<group>"; };
 		534895FC203CBFB900B7547A /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		534895FF203CF10500B7547A /* AddWineSummaryWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryWorker.swift; sourceTree = "<group>"; };
 		53489601203DD11F00B7547A /* WineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineRepository.swift; sourceTree = "<group>"; };
-		53489603203DD75200B7547A /* CoreDataWineVarietyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineVarietyRepository.swift; sourceTree = "<group>"; };
 		53489606203DD86800B7547A /* CoreDataWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineRepository.swift; sourceTree = "<group>"; };
 		53489608203DDFF000B7547A /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		5348960A203DE3A400B7547A /* ButtonPrimary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonPrimary.swift; sourceTree = "<group>"; };
@@ -207,7 +203,6 @@
 		53489619203DE5C000B7547A /* MemoryWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWineRepository.swift; sourceTree = "<group>"; };
 		5348961C203E0FA600B7547A /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineTypeRepositoryTests.swift; sourceTree = "<group>"; };
-		5350B588203F191200C6B2D2 /* CoreDataWineVarietyRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineVarietyRepositoryTests.swift; sourceTree = "<group>"; };
 		5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineRepositoryTests.swift; sourceTree = "<group>"; };
 		5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
 		5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineTranslator.swift; sourceTree = "<group>"; };
@@ -260,6 +255,7 @@
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewControllerTests.swift; sourceTree = "<group>"; };
 		53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypePresenterTests.swift; sourceTree = "<group>"; };
+		53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataVarietyTranslator.swift; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -385,9 +381,9 @@
 			isa = PBXGroup;
 			children = (
 				534895F9203CBF7100B7547A /* CoreDataWineTypeRepository.swift */,
-				53489603203DD75200B7547A /* CoreDataWineVarietyRepository.swift */,
 				53489606203DD86800B7547A /* CoreDataWineRepository.swift */,
 				5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */,
+				53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -467,7 +463,6 @@
 			isa = PBXGroup;
 			children = (
 				53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */,
-				5350B588203F191200C6B2D2 /* CoreDataWineVarietyRepositoryTests.swift */,
 				5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */,
 				5350B593203F5F3B00C6B2D2 /* CoreDataWineTranslatorTests.swift */,
 			);
@@ -498,7 +493,6 @@
 				53489611203DE54500B7547A /* WineType.swift */,
 				53489613203DE55000B7547A /* WineVariety.swift */,
 				534895F3203CBB4200B7547A /* WineTypeRepository.swift */,
-				534895F5203CBB6E00B7547A /* WineVarietyRepository.swift */,
 				53489601203DD11F00B7547A /* WineRepository.swift */,
 			);
 			path = Domain;
@@ -1128,13 +1122,12 @@
 				537614CA1E591887005AABF0 /* EditWineModels.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,
+				53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */,
 				5301D5431F72D215004A66A9 /* RateWineInteractor.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
-				53489604203DD75200B7547A /* CoreDataWineVarietyRepository.swift in Sources */,
 				534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */,
-				534895F6203CBB6E00B7547A /* WineVarietyRepository.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
@@ -1151,7 +1144,6 @@
 				538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */,
 				53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */,
 				53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */,
-				5350B589203F191200C6B2D2 /* CoreDataWineVarietyRepositoryTests.swift in Sources */,
 				53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */,
 				538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */,
 				5350B594203F5F3B00C6B2D2 /* CoreDataWineTranslatorTests.swift in Sources */,
