@@ -13,7 +13,6 @@
 import UIKit
 
 protocol NameWineBusinessLogic {
-    func getPhotoPreview(request: NameWine.GetPhotoPreview.Request)
     func updateName(request: NameWine.UpdateName.Request)
     func updateRating(request: NameWine.UpdateRating.Request)
 }
@@ -34,12 +33,6 @@ class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
     var name: String = ""
     var rating: Double = 0
 
-    // MARK: Get photo preview
-
-    func getPhotoPreview(request: NameWine.GetPhotoPreview.Request) {
-        let response = NameWine.GetPhotoPreview.Response(photo: photo)
-        presenter?.presentPhotoPreview(response: response)
-    }
     
     // MARK: Update name
     

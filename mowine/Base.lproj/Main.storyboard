@@ -720,108 +720,12 @@
                         <outlet property="nameTextField" destination="BcE-1d-zAB" id="DvD-TH-v31"/>
                         <outlet property="ratingView" destination="FfA-FT-ZCV" id="zpS-YF-nLW"/>
                         <outlet property="scrollView" destination="zp3-Q6-Rby" id="p04-Un-EaN"/>
-                        <segue destination="ewB-JO-RZn" kind="show" identifier="RateWine" id="1Cd-Xo-VrZ"/>
                         <segue destination="zob-5b-4jf" kind="show" identifier="AddWineSummary" id="tRu-N2-7Vv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFP-C5-TmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4949.6000000000004" y="-310.79460269865069"/>
-        </scene>
-        <!--Rate Wine View Controller-->
-        <scene sceneID="SgX-Ow-dmy">
-            <objects>
-                <viewController id="ewB-JO-RZn" customClass="RateWineViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="07Y-ji-87U"/>
-                        <viewControllerLayoutGuide type="bottom" id="7cL-Lv-yEb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pbI-Xb-sTF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qhk-q6-OY7">
-                                <rect key="frame" x="137.5" y="64" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="5gz-xC-ZBe"/>
-                                    <constraint firstAttribute="height" constant="100" id="ehD-Qi-n26"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="5gz-xC-ZBe"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHA-oE-bEV">
-                                <rect key="frame" x="24" y="180" width="327" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How'd you like it?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBM-4k-HSh">
-                                <rect key="frame" x="65" y="231.5" width="245" height="34"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWi-cm-91l" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="65" y="273.5" width="245" height="45"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="kwI-1K-HQs"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                        <real key="value" value="45"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urf-zf-6mI" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="36" y="590" width="303" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="dWR-Rx-uCH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="tappedDone:" destination="ewB-JO-RZn" eventType="touchUpInside" id="8NA-r3-KVr"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Urf-zf-6mI" firstAttribute="leading" secondItem="pbI-Xb-sTF" secondAttribute="leadingMargin" constant="20" id="1BN-D8-Ebp"/>
-                            <constraint firstItem="Qhk-q6-OY7" firstAttribute="centerX" secondItem="pbI-Xb-sTF" secondAttribute="centerX" id="951-gV-6ka"/>
-                            <constraint firstItem="zWi-cm-91l" firstAttribute="top" secondItem="OBM-4k-HSh" secondAttribute="bottom" constant="8" id="A9g-Ra-pNp"/>
-                            <constraint firstItem="OBM-4k-HSh" firstAttribute="centerX" secondItem="pbI-Xb-sTF" secondAttribute="centerX" id="WXU-nJ-UQl"/>
-                            <constraint firstItem="UHA-oE-bEV" firstAttribute="leading" secondItem="pbI-Xb-sTF" secondAttribute="leadingMargin" constant="8" id="Yrf-MT-XEq"/>
-                            <constraint firstItem="Qhk-q6-OY7" firstAttribute="width" secondItem="Qhk-q6-OY7" secondAttribute="height" multiplier="1:1" id="Zn9-9h-haI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Urf-zf-6mI" secondAttribute="trailing" constant="20" id="aKd-ga-zu8"/>
-                            <constraint firstItem="zWi-cm-91l" firstAttribute="centerX" secondItem="pbI-Xb-sTF" secondAttribute="centerX" id="baC-Ci-71L"/>
-                            <constraint firstItem="OBM-4k-HSh" firstAttribute="top" secondItem="UHA-oE-bEV" secondAttribute="bottom" constant="32" id="hkE-E8-r3n"/>
-                            <constraint firstItem="7cL-Lv-yEb" firstAttribute="top" secondItem="Urf-zf-6mI" secondAttribute="bottom" constant="32" id="tOA-bt-bxu"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UHA-oE-bEV" secondAttribute="trailing" constant="8" id="uJT-Bh-hSF"/>
-                            <constraint firstItem="Qhk-q6-OY7" firstAttribute="top" secondItem="07Y-ji-87U" secondAttribute="bottom" id="uML-XC-mn2"/>
-                            <constraint firstItem="UHA-oE-bEV" firstAttribute="top" secondItem="Qhk-q6-OY7" secondAttribute="bottom" constant="16" id="wQ6-uR-Khq"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="doneButton" destination="Urf-zf-6mI" id="k1A-0X-Liz"/>
-                        <outlet property="nameLabel" destination="UHA-oE-bEV" id="BCo-Zx-gd9"/>
-                        <outlet property="photoImageView" destination="Qhk-q6-OY7" id="SmA-q4-Qof"/>
-                        <outlet property="ratingView" destination="zWi-cm-91l" id="ObY-NR-9kp"/>
-                        <segue destination="zob-5b-4jf" kind="show" identifier="AddWineSummary" id="yeU-6E-gk6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QrQ-sP-YR1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5996" y="-310.79460269865069"/>
         </scene>
         <!--Add Wine Summary View Controller-->
         <scene sceneID="rDA-4s-j8s">
@@ -854,9 +758,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPj-6D-Kms">
-                                <rect key="frame" x="169.5" y="567" width="36" height="38"/>
+                                <rect key="frame" x="161.5" y="567" width="52" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Edit">
+                                <state key="normal" title="Edit It">
                                     <color key="titleColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1132,7 +1036,6 @@
         <image name="wine-rack" width="176" height="134"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tRu-N2-7Vv"/>
         <segue reference="7pM-bq-uHV"/>
         <segue reference="dpv-GH-y8o"/>
     </inferredMetricsTieBreakers>

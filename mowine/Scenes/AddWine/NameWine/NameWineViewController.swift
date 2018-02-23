@@ -14,7 +14,6 @@ import UIKit
 import Cosmos
 
 protocol NameWineDisplayLogic: class {
-    func displayPhotoPreview(viewModel: NameWine.GetPhotoPreview.ViewModel)
     func displayName(viewModel: NameWine.UpdateName.ViewModel)
     func displayRating(viewModel: NameWine.UpdateRating.ViewModel)
 }
@@ -76,9 +75,7 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
         
         ratingView.didFinishTouchingCosmos = { [weak self] rating in
             self?.updateRating(rating: rating)
-        }
-        
-        getPhotoPreview()
+        }        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,30 +102,9 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     // MARK: Get photo preview
 
     @IBOutlet weak var scrollView: UIScrollView!
-//    @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
-//    @IBOutlet weak var bottomContraint: NSLayoutConstraint!
     @IBOutlet weak var doneButton: ButtonPrimary!
     @IBOutlet weak var ratingView: CosmosView!
-    
-    func getPhotoPreview() {
-        let request = NameWine.GetPhotoPreview.Request()
-        interactor?.getPhotoPreview(request: request)
-    }
-
-    func displayPhotoPreview(viewModel: NameWine.GetPhotoPreview.ViewModel) {
-//        if let photo = viewModel.photo {
-//            photoImageView.image = photo
-//            photoImageView.layer.cornerRadius = photoImageView.frame.size.width / 2
-//            photoImageView.clipsToBounds = true
-//            photoImageView.contentMode = .scaleAspectFill
-//        } else {
-//            photoImageView.image = #imageLiteral(resourceName: "bottle-of-wine")
-//            photoImageView.clipsToBounds = false
-//            photoImageView.contentMode = .scaleAspectFit
-//            photoImageView.tintColor = UIColor.lightGray
-//        }
-    }
     
     // MARK: Update name
     

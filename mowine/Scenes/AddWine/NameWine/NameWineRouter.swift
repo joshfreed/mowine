@@ -13,7 +13,6 @@
 import UIKit
 
 @objc protocol NameWineRoutingLogic {
-    func routeToRateWine(segue: UIStoryboardSegue)
     func routeToAddWineSummary(segue: UIStoryboardSegue)
 }
 
@@ -27,13 +26,6 @@ class NameWineRouter: NSObject, NameWineRoutingLogic, NameWineDataPassing {
 
     // MARK: Routing
 
-    func routeToRateWine(segue: UIStoryboardSegue)
-    {
-        let destinationVC = segue.destination as! RateWineViewController
-        var destinationDS = destinationVC.router!.dataStore!
-        passDataToRateWine(source: dataStore!, destination: &destinationDS)    
-    }
-    
     func routeToAddWineSummary(segue: UIStoryboardSegue)
     {
         let destinationVC = segue.destination as! AddWineSummaryViewController
@@ -50,14 +42,6 @@ class NameWineRouter: NSObject, NameWineRoutingLogic, NameWineDataPassing {
 
     // MARK: Passing data
 
-    func passDataToRateWine(source: NameWineDataStore, destination: inout RateWineDataStore)
-    {
-        destination.wineType = source.wineType
-        destination.variety = source.variety
-        destination.photo = source.photo
-        destination.name = source.name
-    }
-    
     func passDataToAddWineSummary(source: NameWineDataStore, destination: inout AddWineSummaryDataStore)
     {
         destination.wineType = source.wineType

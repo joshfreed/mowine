@@ -13,7 +13,6 @@
 import UIKit
 
 protocol NameWinePresentationLogic {
-    func presentPhotoPreview(response: NameWine.GetPhotoPreview.Response)
     func presentName(response: NameWine.UpdateName.Response)
     func presentRating(response: NameWine.UpdateRating.Response)
 }
@@ -21,13 +20,6 @@ protocol NameWinePresentationLogic {
 class NameWinePresenter: NameWinePresentationLogic {
     weak var viewController: NameWineDisplayLogic?
 
-    // MARK: Get photo preview
-
-    func presentPhotoPreview(response: NameWine.GetPhotoPreview.Response) {
-        let viewModel = NameWine.GetPhotoPreview.ViewModel(photo: response.photo)
-        viewController?.displayPhotoPreview(viewModel: viewModel)
-    }
-    
     // MARK: Update name
     
     func presentName(response: NameWine.UpdateName.Response) {

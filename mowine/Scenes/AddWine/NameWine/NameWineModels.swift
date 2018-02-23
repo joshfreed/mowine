@@ -15,21 +15,6 @@ import UIKit
 enum NameWine {
     // MARK: Use cases
 
-    enum GetPhotoPreview {
-
-        struct Request {
-        }
-
-        struct Response {
-            var photo: UIImage?
-        }
-
-        struct ViewModel {
-            var photo: UIImage?
-        }
-
-    }
-
     enum UpdateName {
         struct Request {
             var name: String?
