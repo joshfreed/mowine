@@ -2,14 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "glass-and-bottle-of-wine.pdf"
+      "filename" : "Wine Cellar Icon.pdf"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

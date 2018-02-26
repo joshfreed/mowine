@@ -104,6 +104,8 @@
 		53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */; };
 		53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */; };
 		53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */; };
+		53F100E12040B7CE00B29FAF /* MenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53F100E02040B7CE00B29FAF /* MenuItem.xib */; };
+		53F100E32040B81200B29FAF /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100E22040B81200B29FAF /* MenuItem.swift */; };
 		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
@@ -246,6 +248,8 @@
 		53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewControllerTests.swift; sourceTree = "<group>"; };
 		53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypePresenterTests.swift; sourceTree = "<group>"; };
 		53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataVarietyTranslator.swift; sourceTree = "<group>"; };
+		53F100E02040B7CE00B29FAF /* MenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuItem.xib; sourceTree = "<group>"; };
+		53F100E22040B81200B29FAF /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -673,6 +677,8 @@
 			isa = PBXGroup;
 			children = (
 				53489608203DDFF000B7547A /* MainMenuViewController.swift */,
+				53F100E02040B7CE00B29FAF /* MenuItem.xib */,
+				53F100E22040B81200B29FAF /* MenuItem.swift */,
 			);
 			name = MainMenu;
 			path = MainMenu.swift;
@@ -838,6 +844,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F100E12040B7CE00B29FAF /* MenuItem.xib in Resources */,
 				53D8EDD41E4186A300696FAE /* Podfile in Resources */,
 				53FD50B31E4947CD00F474A6 /* WineTableViewCell.xib in Resources */,
 				538F29431F72EB1F006EEDB1 /* RatingCell.xib in Resources */,
@@ -1050,6 +1057,7 @@
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
+				53F100E32040B81200B29FAF /* MenuItem.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
 				53B564D81F11952D00459BB8 /* SnapPhotoModels.swift in Sources */,
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,

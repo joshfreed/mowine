@@ -10,16 +10,12 @@ import UIKit
 import JFLib
 
 class MainMenuViewController: UIViewController {
-    @IBOutlet weak var newWineImage: UIImageView!
-    @IBOutlet weak var myWinesImage: UIImageView!
-    @IBOutlet weak var newWineView: UIView!
-    @IBOutlet weak var myWinesView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var launchScreenStackView: UIStackView!
-    @IBOutlet weak var launchScreenTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var launchScreenCenterConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tagLineLabel: UILabel!
-
+    @IBOutlet weak var addWineMenuItem: MenuItem!
+    @IBOutlet weak var myWinesMenuItem: MenuItem!
+    @IBOutlet weak var myAccountMenuItem: MenuItem!
+    @IBOutlet weak var friendsMenuItem: MenuItem!
+    
     private var showNavBar = false
     
     override func viewDidLoad() {
@@ -27,26 +23,14 @@ class MainMenuViewController: UIViewController {
 
         navigationController?.isNavigationBarHidden = true
         
-        newWineView.alpha = 0
-        myWinesView.alpha = 0
-        titleLabel.isHidden = true
-        launchScreenStackView.isHidden = false
-        
-        newWineImage.fixTintIssue()
-        myWinesImage.fixTintIssue()
-        
-        newWineView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedNewWine)))
-        myWinesView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedMyWines)))
+        addWineMenuItem.delegate = self
+        myWinesMenuItem.delegate = self
+        myAccountMenuItem.delegate = self
+        friendsMenuItem.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        delay(seconds: 1) {
-            self.animateLaunchScreenToMainMenu()
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,50 +39,35 @@ class MainMenuViewController: UIViewController {
         }
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    func animateLaunchScreenToMainMenu() {
-        view.layoutIfNeeded()
-        
-        launchScreenCenterConstraint.isActive = false
-        launchScreenTopConstraint.isActive = true
-        
-        UIView.animate(withDuration: 0.1) {
-            self.tagLineLabel.alpha = 0
-        }
-        
-        UIView.animate(withDuration: 0.85, delay: 0, options: [UIViewAnimationOptions.curveEaseOut], animations: {
-            self.view.layoutIfNeeded()
-        }, completion: { success in
-            self.launchScreenStackView.isHidden = true
-            self.titleLabel.isHidden = false
-        })
-        
-        UIView.animate(withDuration: 0.60, delay: 0.25, options: [], animations: {
-            self.newWineView.alpha = 1
-            self.myWinesView.alpha = 1
-        }, completion: nil)
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @objc func tappedNewWine() {
+    func showAddWine() {
         showNavBar = true
         performSegue(withIdentifier: "addWine", sender: nil)
     }
     
-    @objc func tappedMyWines() {
+    func showMyWines() {
         showNavBar = true
         performSegue(withIdentifier: "myWines", sender: nil)
+    }
+    
+    func showMyAccount() {
+        
+    }
+    
+    func showFriends() {
+        
+    }
+}
+
+extension MainMenuViewController: MenuItemDelegate {
+    func didSelect(menuItem: MenuItem) {
+        if menuItem == addWineMenuItem {
+            showAddWine()
+        } else if menuItem == myWinesMenuItem {
+            showMyWines()
+        } else if menuItem == myAccountMenuItem {
+            showMyAccount()
+        } else if menuItem == friendsMenuItem {
+            showFriends()
+        }
     }
 }
