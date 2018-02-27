@@ -65,9 +65,9 @@ class SignInViewControllerTests: XCTestCase {
     class MockSignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
         var dataStore: SignInDataStore?
         
-        var routedToMainMenu = false
-        func routeToMainMenu() {
-            routedToMainMenu = true
+        var routedToMyAccount = false
+        func routeToMyAccount() {
+            routedToMyAccount = true
         }
     }
 
@@ -86,7 +86,7 @@ class SignInViewControllerTests: XCTestCase {
         // Then
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beTrue())
-        expect(self.router.routedToMainMenu).to(beTrue())
+        expect(self.router.routedToMyAccount).to(beTrue())
     }
     
     func testDisplaySignInResult_loginFailed() {
@@ -103,7 +103,7 @@ class SignInViewControllerTests: XCTestCase {
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beFalse())
         expect(self.sut.errorLabel.text).to(equal("Login failed. Please check your email and password and try again."))
-        expect(self.router.routedToMainMenu).to(beFalse())
+        expect(self.router.routedToMyAccount).to(beFalse())
     }
     
     func testDisplaySignInResult_withError() {
@@ -120,6 +120,6 @@ class SignInViewControllerTests: XCTestCase {
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beFalse())
         expect(self.sut.errorLabel.text).to(equal("An error occurred while trying to log you in. Please try again in a few minutes."))
-        expect(self.router.routedToMainMenu).to(beFalse())
+        expect(self.router.routedToMyAccount).to(beFalse())
     }
 }

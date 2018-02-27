@@ -1,5 +1,5 @@
 //
-//  SignInRouter.swift
+//  MyAccountRouter.swift
 //  mowine
 //
 //  Created by Josh Freed on 2/27/18.
@@ -12,28 +12,20 @@
 
 import UIKit
 
-@objc protocol SignInRoutingLogic {
-    func routeToMyAccount()
+@objc protocol MyAccountRoutingLogic {
+    //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol SignInDataPassing {
-    var dataStore: SignInDataStore? { get }
+protocol MyAccountDataPassing {
+    var dataStore: MyAccountDataStore? { get }
 }
 
-class SignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
-    weak var viewController: SignInViewController?
-    var dataStore: SignInDataStore?
+class MyAccountRouter: NSObject, MyAccountRoutingLogic, MyAccountDataPassing {
+    weak var viewController: MyAccountViewController?
+    var dataStore: MyAccountDataStore?
 
     // MARK: Routing
 
-    func routeToMyAccount() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let destinationVC = storyboard.instantiateViewController(withIdentifier: "MyAccountViewController")
-        let nc = viewController?.navigationController
-        nc?.popToRootViewController(animated: false)
-        nc?.pushViewController(destinationVC, animated: true)
-    }
-    
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     //{
     //  if let segue = segue {
@@ -51,14 +43,14 @@ class SignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
 
     // MARK: Navigation
 
-    //func navigateToSomewhere(source: SignInViewController, destination: SomewhereViewController)
+    //func navigateToSomewhere(source: MyAccountViewController, destination: SomewhereViewController)
     //{
     //  source.show(destination, sender: nil)
     //}
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: SignInDataStore, destination: inout SomewhereDataStore)
+    //func passDataToSomewhere(source: MyAccountDataStore, destination: inout SomewhereDataStore)
     //{
     //  destination.name = source.name
     //}

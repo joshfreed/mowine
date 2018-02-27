@@ -92,6 +92,8 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
+    
+    
     // MARK: Sign In
 
     @IBOutlet weak var emailAddressTextField: FloatingLabelTextField!
@@ -146,7 +148,7 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         if viewModel.error != nil {
             showErrorLabel("An error occurred while trying to log you in. Please try again in a few minutes.")
         } else if viewModel.isLoggedIn {
-            router?.routeToMainMenu()
+            router?.routeToMyAccount()
         } else {
             showErrorLabel("Login failed. Please check your email and password and try again.")
         }        

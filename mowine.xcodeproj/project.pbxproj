@@ -78,6 +78,12 @@
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
+		53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */; };
+		53A8D5F7204611A1000AD7A3 /* MyAccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F1204611A1000AD7A3 /* MyAccountWorker.swift */; };
+		53A8D5F8204611A1000AD7A3 /* MyAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F2204611A1000AD7A3 /* MyAccountRouter.swift */; };
+		53A8D5F9204611A1000AD7A3 /* MyAccountModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F3204611A1000AD7A3 /* MyAccountModels.swift */; };
+		53A8D5FA204611A1000AD7A3 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F4204611A1000AD7A3 /* MyAccountViewController.swift */; };
+		53A8D5FB204611A1000AD7A3 /* MyAccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F5204611A1000AD7A3 /* MyAccountInteractor.swift */; };
 		53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */; };
 		53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */; };
 		53B564CD1F11879500459BB8 /* SelectVarietyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */; };
@@ -228,6 +234,12 @@
 		539196951E6B612D001AE149 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
+		53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountPresenter.swift; sourceTree = "<group>"; };
+		53A8D5F1204611A1000AD7A3 /* MyAccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountWorker.swift; sourceTree = "<group>"; };
+		53A8D5F2204611A1000AD7A3 /* MyAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountRouter.swift; sourceTree = "<group>"; };
+		53A8D5F3204611A1000AD7A3 /* MyAccountModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountModels.swift; sourceTree = "<group>"; };
+		53A8D5F4204611A1000AD7A3 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		53A8D5F5204611A1000AD7A3 /* MyAccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountInteractor.swift; sourceTree = "<group>"; };
 		53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyInteractorTests.swift; sourceTree = "<group>"; };
 		53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyPresenterTests.swift; sourceTree = "<group>"; };
 		53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyViewControllerTests.swift; sourceTree = "<group>"; };
@@ -531,6 +543,19 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		53A8D5EF20461181000AD7A3 /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */,
+				53A8D5F1204611A1000AD7A3 /* MyAccountWorker.swift */,
+				53A8D5F2204611A1000AD7A3 /* MyAccountRouter.swift */,
+				53A8D5F3204611A1000AD7A3 /* MyAccountModels.swift */,
+				53A8D5F4204611A1000AD7A3 /* MyAccountViewController.swift */,
+				53A8D5F5204611A1000AD7A3 /* MyAccountInteractor.swift */,
+			);
+			path = MyAccount;
+			sourceTree = "<group>";
+		};
 		53B564C51F11859300459BB8 /* SelectVariety */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +711,7 @@
 				53F5AC2B1E2187F90067AB62 /* AddWine */,
 				535793571E21A1CD00FDD56A /* MyWines */,
 				537614C01E591867005AABF0 /* EditWine */,
+				53A8D5EF20461181000AD7A3 /* MyAccount */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1067,6 +1093,7 @@
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
+				53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */,
 				53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */,
 				53489612203DE54500B7547A /* WineType.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
@@ -1079,9 +1106,12 @@
 				534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */,
 				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,
 				5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */,
+				53A8D5FB204611A1000AD7A3 /* MyAccountInteractor.swift in Sources */,
 				5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */,
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
+				53A8D5F8204611A1000AD7A3 /* MyAccountRouter.swift in Sources */,
+				53A8D5F7204611A1000AD7A3 /* MyAccountWorker.swift in Sources */,
 				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
 				53F100F22044C19E00B29FAF /* MainMenuRouter.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
@@ -1125,6 +1155,7 @@
 				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
 				537614CD1E591887005AABF0 /* EditWineViewController.swift in Sources */,
 				537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */,
+				53A8D5F9204611A1000AD7A3 /* MyAccountModels.swift in Sources */,
 				53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */,
 				5301D53A1F72D0F6004A66A9 /* NameWineViewController.swift in Sources */,
 				5321FB961F0BEE27001D2040 /* SelectTypeModels.swift in Sources */,
@@ -1139,6 +1170,7 @@
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
 				534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
+				53A8D5FA204611A1000AD7A3 /* MyAccountViewController.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
 				534895FD203CBFB900B7547A /* Container.swift in Sources */,

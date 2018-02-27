@@ -15,7 +15,7 @@ protocol EmailAuthenticationService {
 
 class FakeEmailAuth: EmailAuthenticationService {
     func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
+        (Container.shared.session as? FakeSession)?.loggedIn()
         completion(.success(true))
-//        completion(.success(false))
     }
 }
