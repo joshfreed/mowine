@@ -75,14 +75,9 @@
 		538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */; };
 		538F29431F72EB1F006EEDB1 /* RatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 538F29411F72EB1E006EEDB1 /* RatingCell.xib */; };
 		538F29441F72EB1F006EEDB1 /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F29421F72EB1E006EEDB1 /* RatingRow.swift */; };
-		538F779F1E7DCC0D00C08263 /* SortAndFilterConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */; };
-		538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */; };
-		538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */; };
-		538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779B1E7DCC0D00C08263 /* SortAndFilterPresenter.swift */; };
-		538F77A31E7DCC0D00C08263 /* SortAndFilterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779C1E7DCC0D00C08263 /* SortAndFilterRouter.swift */; };
-		538F77A41E7DCC0D00C08263 /* SortAndFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779D1E7DCC0D00C08263 /* SortAndFilterViewController.swift */; };
-		538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538F779E1E7DCC0D00C08263 /* SortAndFilterWorker.swift */; };
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
+		53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */; };
+		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
 		53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */; };
 		53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */; };
 		53B564CD1F11879500459BB8 /* SelectVarietyViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */; };
@@ -106,6 +101,15 @@
 		53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */; };
 		53F100E12040B7CE00B29FAF /* MenuItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53F100E02040B7CE00B29FAF /* MenuItem.xib */; };
 		53F100E32040B81200B29FAF /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100E22040B81200B29FAF /* MenuItem.swift */; };
+		53F100E72044BFAF00B29FAF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100E62044BFAF00B29FAF /* Session.swift */; };
+		53F100ED2044C0EA00B29FAF /* MainMenuViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100E92044C0EA00B29FAF /* MainMenuViewControllerTests.swift */; };
+		53F100F22044C19E00B29FAF /* MainMenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F12044C19E00B29FAF /* MainMenuRouter.swift */; };
+		53F100FA2045E08F00B29FAF /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F42045E08F00B29FAF /* SignInPresenter.swift */; };
+		53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F52045E08F00B29FAF /* SignInWorker.swift */; };
+		53F100FC2045E08F00B29FAF /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F62045E08F00B29FAF /* SignInRouter.swift */; };
+		53F100FD2045E08F00B29FAF /* SignInModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F72045E08F00B29FAF /* SignInModels.swift */; };
+		53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F82045E08F00B29FAF /* SignInViewController.swift */; };
+		53F100FF2045E08F00B29FAF /* SignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F92045E08F00B29FAF /* SignInInteractor.swift */; };
 		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
@@ -221,14 +225,9 @@
 		538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		538F29411F72EB1E006EEDB1 /* RatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingCell.xib; sourceTree = "<group>"; };
 		538F29421F72EB1E006EEDB1 /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingRow.swift; sourceTree = "<group>"; };
-		538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterConfigurator.swift; sourceTree = "<group>"; };
-		538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterInteractor.swift; sourceTree = "<group>"; };
-		538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterModels.swift; sourceTree = "<group>"; };
-		538F779B1E7DCC0D00C08263 /* SortAndFilterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterPresenter.swift; sourceTree = "<group>"; };
-		538F779C1E7DCC0D00C08263 /* SortAndFilterRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterRouter.swift; sourceTree = "<group>"; };
-		538F779D1E7DCC0D00C08263 /* SortAndFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterViewController.swift; sourceTree = "<group>"; };
-		538F779E1E7DCC0D00C08263 /* SortAndFilterWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortAndFilterWorker.swift; sourceTree = "<group>"; };
 		539196951E6B612D001AE149 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
+		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
 		53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyInteractorTests.swift; sourceTree = "<group>"; };
 		53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyPresenterTests.swift; sourceTree = "<group>"; };
 		53B564C91F11879500459BB8 /* SelectVarietyViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyViewControllerTests.swift; sourceTree = "<group>"; };
@@ -250,6 +249,15 @@
 		53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataVarietyTranslator.swift; sourceTree = "<group>"; };
 		53F100E02040B7CE00B29FAF /* MenuItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuItem.xib; sourceTree = "<group>"; };
 		53F100E22040B81200B29FAF /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		53F100E62044BFAF00B29FAF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		53F100E92044C0EA00B29FAF /* MainMenuViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewControllerTests.swift; sourceTree = "<group>"; };
+		53F100F12044C19E00B29FAF /* MainMenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuRouter.swift; sourceTree = "<group>"; };
+		53F100F42045E08F00B29FAF /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
+		53F100F52045E08F00B29FAF /* SignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWorker.swift; sourceTree = "<group>"; };
+		53F100F62045E08F00B29FAF /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
+		53F100F72045E08F00B29FAF /* SignInModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModels.swift; sourceTree = "<group>"; };
+		53F100F82045E08F00B29FAF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		53F100F92045E08F00B29FAF /* SignInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInteractor.swift; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -476,6 +484,8 @@
 				53489613203DE55000B7547A /* WineVariety.swift */,
 				534895F3203CBB4200B7547A /* WineTypeRepository.swift */,
 				53489601203DD11F00B7547A /* WineRepository.swift */,
+				53F100E62044BFAF00B29FAF /* Session.swift */,
+				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -497,6 +507,8 @@
 		538995AA1EE475BB00CF1330 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				53A8D5E42046023D000AD7A3 /* SignIn */,
+				53F100E82044C0D700B29FAF /* MainMenu */,
 				5321FB661F0BE5D9001D2040 /* AddWine */,
 				538995AB1EE475C200CF1330 /* EditWine */,
 			);
@@ -511,18 +523,12 @@
 			path = EditWine;
 			sourceTree = "<group>";
 		};
-		538F77971E7DCBC200C08263 /* SortAndFilter */ = {
+		53A8D5E42046023D000AD7A3 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				538F77981E7DCC0D00C08263 /* SortAndFilterConfigurator.swift */,
-				538F77991E7DCC0D00C08263 /* SortAndFilterInteractor.swift */,
-				538F779A1E7DCC0D00C08263 /* SortAndFilterModels.swift */,
-				538F779B1E7DCC0D00C08263 /* SortAndFilterPresenter.swift */,
-				538F779C1E7DCC0D00C08263 /* SortAndFilterRouter.swift */,
-				538F779D1E7DCC0D00C08263 /* SortAndFilterViewController.swift */,
-				538F779E1E7DCC0D00C08263 /* SortAndFilterWorker.swift */,
+				53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */,
 			);
-			path = SortAndFilter;
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		53B564C51F11859300459BB8 /* SelectVariety */ = {
@@ -585,6 +591,27 @@
 				53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */,
 			);
 			path = SelectType;
+			sourceTree = "<group>";
+		};
+		53F100E82044C0D700B29FAF /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				53F100E92044C0EA00B29FAF /* MainMenuViewControllerTests.swift */,
+			);
+			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		53F100F32045E04700B29FAF /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				53F100F42045E08F00B29FAF /* SignInPresenter.swift */,
+				53F100F52045E08F00B29FAF /* SignInWorker.swift */,
+				53F100F62045E08F00B29FAF /* SignInRouter.swift */,
+				53F100F72045E08F00B29FAF /* SignInModels.swift */,
+				53F100F82045E08F00B29FAF /* SignInViewController.swift */,
+				53F100F92045E08F00B29FAF /* SignInInteractor.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 		53F5ABE71E2176080067AB62 = {
@@ -654,11 +681,11 @@
 			isa = PBXGroup;
 			children = (
 				53489610203DE52200B7547A /* Shared */,
-				538F77971E7DCBC200C08263 /* SortAndFilter */,
-				537614C01E591867005AABF0 /* EditWine */,
-				535793571E21A1CD00FDD56A /* MyWines */,
-				53F5AC2B1E2187F90067AB62 /* AddWine */,
 				53F5AC281E2185950067AB62 /* MainMenu */,
+				53F100F32045E04700B29FAF /* SignIn */,
+				53F5AC2B1E2187F90067AB62 /* AddWine */,
+				535793571E21A1CD00FDD56A /* MyWines */,
+				537614C01E591867005AABF0 /* EditWine */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -679,6 +706,7 @@
 				53489608203DDFF000B7547A /* MainMenuViewController.swift */,
 				53F100E02040B7CE00B29FAF /* MenuItem.xib */,
 				53F100E22040B81200B29FAF /* MenuItem.swift */,
+				53F100F12044C19E00B29FAF /* MainMenuRouter.swift */,
 			);
 			name = MainMenu;
 			path = MainMenu.swift;
@@ -1036,31 +1064,32 @@
 				5350B592203F56FE00C6B2D2 /* CoreDataWineTranslator.swift in Sources */,
 				53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
-				538F77A21E7DCC0D00C08263 /* SortAndFilterPresenter.swift in Sources */,
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
-				538F77A51E7DCC0D00C08263 /* SortAndFilterWorker.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
 				53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */,
 				53489612203DE54500B7547A /* WineType.swift in Sources */,
-				538F77A11E7DCC0D00C08263 /* SortAndFilterModels.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
+				53F100FD2045E08F00B29FAF /* SignInModels.swift in Sources */,
 				53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */,
 				53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				53489607203DD86800B7547A /* CoreDataWineRepository.swift in Sources */,
+				53F100FF2045E08F00B29FAF /* SignInInteractor.swift in Sources */,
 				534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */,
-				538F77A01E7DCC0D00C08263 /* SortAndFilterInteractor.swift in Sources */,
 				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,
 				5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */,
 				5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */,
 				5357935F1E21A1EB00FDD56A /* MyWinesConfigurator.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
+				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
+				53F100F22044C19E00B29FAF /* MainMenuRouter.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
 				53F100E32040B81200B29FAF /* MenuItem.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
 				53B564D81F11952D00459BB8 /* SnapPhotoModels.swift in Sources */,
 				535793641E21A1EB00FDD56A /* MyWinesViewController.swift in Sources */,
+				53F100FA2045E08F00B29FAF /* SignInPresenter.swift in Sources */,
 				53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */,
 				537740A41E5BC73600A1D282 /* Models.swift in Sources */,
 				534895F1203CBAA400B7547A /* Wine.swift in Sources */,
@@ -1075,12 +1104,10 @@
 				534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */,
-				538F77A41E7DCC0D00C08263 /* SortAndFilterViewController.swift in Sources */,
 				53C3E66E1FF6E048003F6676 /* UINavigationController.swift in Sources */,
 				5321FBA31F0BF594001D2040 /* SelectVarietyModels.swift in Sources */,
 				5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */,
 				535793621E21A1EB00FDD56A /* MyWinesPresenter.swift in Sources */,
-				538F779F1E7DCC0D00C08263 /* SortAndFilterConfigurator.swift in Sources */,
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
 				535793651E21A1EB00FDD56A /* MyWinesWorker.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,
@@ -1091,18 +1118,21 @@
 				53489616203DE5A100B7547A /* MemoryWineTypeRepository.swift in Sources */,
 				537614CC1E591887005AABF0 /* EditWineRouter.swift in Sources */,
 				538F29441F72EB1F006EEDB1 /* RatingRow.swift in Sources */,
+				53F100E72044BFAF00B29FAF /* Session.swift in Sources */,
 				535793631E21A1EB00FDD56A /* MyWinesRouter.swift in Sources */,
 				53489609203DDFF000B7547A /* MainMenuViewController.swift in Sources */,
 				53489602203DD11F00B7547A /* WineRepository.swift in Sources */,
 				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
 				537614CD1E591887005AABF0 /* EditWineViewController.swift in Sources */,
 				537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */,
+				53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */,
 				5301D53A1F72D0F6004A66A9 /* NameWineViewController.swift in Sources */,
-				538F77A31E7DCC0D00C08263 /* SortAndFilterRouter.swift in Sources */,
 				5321FB961F0BEE27001D2040 /* SelectTypeModels.swift in Sources */,
 				537614CA1E591887005AABF0 /* EditWineModels.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				535793601E21A1EB00FDD56A /* MyWinesInteractor.swift in Sources */,
+				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
+				53F100FC2045E08F00B29FAF /* SignInRouter.swift in Sources */,
 				53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
@@ -1121,6 +1151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F100ED2044C0EA00B29FAF /* MainMenuViewControllerTests.swift in Sources */,
 				538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */,
 				53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */,
 				53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */,
@@ -1130,6 +1161,7 @@
 				5350B58B203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift in Sources */,
 				538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */,
 				53B564CD1F11879500459BB8 /* SelectVarietyViewControllerTests.swift in Sources */,
+				53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */,
 				53489623203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift in Sources */,
 				5348961D203E0FA600B7547A /* Mocks.swift in Sources */,
 				53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */,

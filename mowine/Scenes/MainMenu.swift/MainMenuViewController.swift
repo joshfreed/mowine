@@ -16,12 +16,50 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var myAccountMenuItem: MenuItem!
     @IBOutlet weak var friendsMenuItem: MenuItem!
     
-    private var showNavBar = false
+    var session: Session!
+    var router: (NSObjectProtocol & MainMenuRoutingLogic)?
+    
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController = self
+        let router = MainMenuRouter()
+        
+        viewController.session = Container.shared.session
+        viewController.router = router
+        
+        router.viewController = viewController
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
+    }
+    
+    // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.hideNavigationBar()
         
         addWineMenuItem.delegate = self
         myWinesMenuItem.delegate = self
@@ -29,28 +67,20 @@ class MainMenuViewController: UIViewController {
         friendsMenuItem.delegate = self
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: animated)        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        if showNavBar {
-            navigationController?.setNavigationBarHidden(false, animated: animated)
-        }
-    }
-    
     func showAddWine() {
-        showNavBar = true
-        performSegue(withIdentifier: "addWine", sender: nil)
+        performSegue(withIdentifier: "AddWine", sender: nil)
     }
     
     func showMyWines() {
-        showNavBar = true
-        performSegue(withIdentifier: "myWines", sender: nil)
+        performSegue(withIdentifier: "MyWines", sender: nil)
     }
     
     func showMyAccount() {
-        
+        if session.isLoggedIn {
+            performSegue(withIdentifier: "MyAccount", sender: nil)
+        } else {
+            performSegue(withIdentifier: "SignIn", sender: nil)
+        }
     }
     
     func showFriends() {

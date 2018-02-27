@@ -13,12 +13,14 @@ class Container {
     static let shared = Container()
     private init() {}
 
+    lazy var session: Session = FakeSession()
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer)
     lazy var wineRepository: WineRepository = {
         let wineTranslator = CoreDataWineTranslator(context: persistentContainer.viewContext)
         return CoreDataWineRepository(container: persistentContainer, wineEntityMapper: wineTranslator)
     }()
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
+    lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
     
     // MARK: Core Data Stack
     

@@ -70,16 +70,7 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
         
         headerImage.fixTintIssue()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.hideNavigationBar()
-    }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
-    }
-    
     // MARK: Select wine type
     
     @IBAction func selectWineType(_ sender: ButtonPrimary) {

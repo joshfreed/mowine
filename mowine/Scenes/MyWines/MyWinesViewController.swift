@@ -49,6 +49,8 @@ class MyWinesViewController: UITableViewController, MyWinesViewControllerInput {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Needed for now because EditWine shows the navigation bar
         navigationController?.hideNavigationBar()
     }
 
