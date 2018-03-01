@@ -13,7 +13,7 @@ import UIKit
     func routeToMyWines(segue: UIStoryboardSegue)
     func routeToMyAccount(segue: UIStoryboardSegue)
     func routeToFriends(segue: UIStoryboardSegue)
-    func routeToSignIn(segue: UIStoryboardSegue)
+    func routeToSignInScreen(segue: UIStoryboardSegue)
 }
 
 class MainMenuRouter: NSObject, MainMenuRoutingLogic {
@@ -41,7 +41,7 @@ class MainMenuRouter: NSObject, MainMenuRoutingLogic {
         
     }
     
-    func routeToSignIn(segue: UIStoryboardSegue)
+    func routeToSignInScreen(segue: UIStoryboardSegue)
     {
         
     }

@@ -79,7 +79,7 @@ class MainMenuViewController: UIViewController {
         if session.isLoggedIn {
             performSegue(withIdentifier: "MyAccount", sender: nil)
         } else {
-            performSegue(withIdentifier: "SignIn", sender: nil)
+            performSegue(withIdentifier: "SignInScreen", sender: nil)
         }
     }
     

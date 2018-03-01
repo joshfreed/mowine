@@ -75,7 +75,7 @@ class MainMenuViewControllerTests: XCTestCase {
             routedToFriends = true
         }
         
-        func routeToSignIn(segue: UIStoryboardSegue) {
+        func routeToSignInScreen(segue: UIStoryboardSegue) {
             routedToSignIn = true
         }
     }
@@ -104,7 +104,7 @@ class MainMenuViewControllerTests: XCTestCase {
         sut.showMyAccount()
 
         // Then
-        expect(self.router.routedToSignIn).to(beTrue())
         expect(self.router.routedToMyAccount).to(beFalse())
+        expect(self.router.routedToSignIn).to(beTrue())
     }
 }
