@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(true, forKey: "isPreloaded")
         }
         
+        Container.shared.session.resume()
+        
         return true
     }
 

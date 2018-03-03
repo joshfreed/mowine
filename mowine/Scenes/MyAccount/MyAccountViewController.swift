@@ -13,7 +13,8 @@
 import UIKit
 
 protocol MyAccountDisplayLogic: class {
-    func displaySomething(viewModel: MyAccount.Something.ViewModel)
+    func displayUser(viewModel: MyAccount.GetUser.ViewModel)
+    func displayErrorGettingUser()
 }
 
 class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
@@ -42,6 +43,7 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
+        interactor.worker = MyAccountWorker(session: Container.shared.session)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -62,19 +64,27 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        getUser()
     }
 
     // MARK: Do something
 
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var fullNameLabel: UILabel!
+    @IBOutlet weak var emailAddressLabel: UILabel!
 
-    func doSomething() {
-        let request = MyAccount.Something.Request()
-        interactor?.doSomething(request: request)
+    func getUser() {
+        let request = MyAccount.GetUser.Request()
+        interactor?.getUser(request: request)
     }
 
-    func displaySomething(viewModel: MyAccount.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayUser(viewModel: MyAccount.GetUser.ViewModel) {
+        fullNameLabel.text = viewModel.fullName
+        emailAddressLabel.text = viewModel.emailAddress
+        profilePictureImageView.image = viewModel.profilePicture
+    }
+    
+    func displayErrorGettingUser() {
+        
     }
 }

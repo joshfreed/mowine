@@ -11,8 +11,16 @@
 //
 
 import UIKit
+import JFLib
 
 class MyAccountWorker {
-    func doSomeWork() {
+    let session: Session
+    
+    init(session: Session) {
+        self.session = session
+    }
+    
+    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+        session.getCurrentUser(completion: completion)
     }
 }

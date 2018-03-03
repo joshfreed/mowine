@@ -15,14 +15,18 @@ import UIKit
 enum MyAccount {
     // MARK: Use cases
 
-    enum Something {
+    enum GetUser {
         struct Request {
         }
 
         struct Response {
+            var user: User
         }
 
         struct ViewModel {
+            var fullName: String
+            var emailAddress: String
+            var profilePicture: UIImage
         }
     }
 }

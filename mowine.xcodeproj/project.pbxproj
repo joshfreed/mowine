@@ -102,6 +102,7 @@
 		53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */; };
 		53CDB5181F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */; };
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
+		53ED1F7C20489DBD00C129BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED1F7B20489DBD00C129BC /* User.swift */; };
 		53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */; };
 		53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */; };
 		53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */; };
@@ -256,6 +257,7 @@
 		53CDB5111F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoRouter.swift; sourceTree = "<group>"; };
 		53CDB5121F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoViewController.swift; sourceTree = "<group>"; };
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		53ED1F7B20489DBD00C129BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewControllerTests.swift; sourceTree = "<group>"; };
 		53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypePresenterTests.swift; sourceTree = "<group>"; };
 		53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataVarietyTranslator.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				53489601203DD11F00B7547A /* WineRepository.swift */,
 				53F100E62044BFAF00B29FAF /* Session.swift */,
 				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
+				53ED1F7B20489DBD00C129BC /* User.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1155,6 +1158,7 @@
 				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
 				537614CD1E591887005AABF0 /* EditWineViewController.swift in Sources */,
 				537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */,
+				53ED1F7C20489DBD00C129BC /* User.swift in Sources */,
 				53A8D5F9204611A1000AD7A3 /* MyAccountModels.swift in Sources */,
 				53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */,
 				5301D53A1F72D0F6004A66A9 /* NameWineViewController.swift in Sources */,

@@ -13,16 +13,25 @@
 import UIKit
 
 protocol MyAccountPresentationLogic {
-    func presentSomething(response: MyAccount.Something.Response)
+    func presentUser(response: MyAccount.GetUser.Response)
+    func presentErrorGettingUser()
 }
 
 class MyAccountPresenter: MyAccountPresentationLogic {
     weak var viewController: MyAccountDisplayLogic?
 
-    // MARK: Do something
+    // MARK: Get User
 
-    func presentSomething(response: MyAccount.Something.Response) {
-        let viewModel = MyAccount.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentUser(response: MyAccount.GetUser.Response) {
+        let viewModel = MyAccount.GetUser.ViewModel(
+            fullName: response.user.fullName,
+            emailAddress: response.user.emailAddress,
+            profilePicture: response.user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture")
+        )
+        viewController?.displayUser(viewModel: viewModel)
+    }
+    
+    func presentErrorGettingUser() {
+        viewController?.displayErrorGettingUser()
     }
 }

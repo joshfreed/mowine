@@ -13,7 +13,7 @@
 import UIKit
 
 protocol MyAccountBusinessLogic {
-    func doSomething(request: MyAccount.Something.Request)
+    func getUser(request: MyAccount.GetUser.Request)
 }
 
 protocol MyAccountDataStore {
@@ -23,15 +23,20 @@ protocol MyAccountDataStore {
 class MyAccountInteractor: MyAccountBusinessLogic, MyAccountDataStore {
     var presenter: MyAccountPresentationLogic?
     var worker: MyAccountWorker?
-    //var name: String = ""
 
-    // MARK: Do something
+    // MARK: Get User
 
-    func doSomething(request: MyAccount.Something.Request) {
-        worker = MyAccountWorker()
-        worker?.doSomeWork()
-
-        let response = MyAccount.Something.Response()
-        presenter?.presentSomething(response: response)
+    func getUser(request: MyAccount.GetUser.Request) {        
+        worker?.getCurrentUser() { result in
+            switch result {
+            case .success(let user):
+                let response = MyAccount.GetUser.Response(user: user)
+                self.presenter?.presentUser(response: response)
+            case .failure(let error):
+                print("\(error)")
+                self.presenter?.presentErrorGettingUser()
+                break
+            }
+        }
     }
 }

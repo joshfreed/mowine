@@ -969,6 +969,11 @@
                             <constraint firstItem="lsS-7n-sso" firstAttribute="top" secondItem="roF-1c-W3I" secondAttribute="bottom" id="fkO-nj-PQ8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailAddressLabel" destination="JTH-vv-Tnr" id="ZRb-fa-Av3"/>
+                        <outlet property="fullNameLabel" destination="XwB-2M-xFA" id="BJ9-LQ-smQ"/>
+                        <outlet property="profilePictureImageView" destination="O4U-AK-LI4" id="vWQ-Mq-tBs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMs-cN-fB5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
