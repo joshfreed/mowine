@@ -84,7 +84,11 @@ class MainMenuViewController: UIViewController {
     }
     
     func showFriends() {
-        
+        if session.isLoggedIn {
+            performSegue(withIdentifier: "Friends", sender: nil)
+        } else {
+            performSegue(withIdentifier: "SignInScreen", sender: nil)
+        }
     }
 }
 

@@ -21,6 +21,7 @@ class Container {
     }()
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
     lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
+    lazy var userRepository: UserRepository = FakeUserRepository()
     
     // MARK: Core Data Stack
     

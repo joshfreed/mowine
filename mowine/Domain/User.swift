@@ -9,6 +9,7 @@
 import UIKit
 
 struct User {
+    let id: UserId
     var firstName: String?
     var lastName: String?
     var emailAddress: String
@@ -24,5 +25,43 @@ struct User {
         }
         _fullName += lastName
         return _fullName
+    }
+    
+    init(id: UserId, emailAddress: String) {
+        self.id = id
+        self.emailAddress = emailAddress
+    }
+    
+    init(id: UserId, emailAddress: String, firstName: String, lastName: String) {
+        self.id = id
+        self.emailAddress = emailAddress
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+}
+
+protocol UserId {
+    
+}
+
+class UUIDUserId: UserId {
+    let uuid: UUID
+
+    init() {
+        uuid = UUID()
+    }
+    
+    init(uuid: UUID) {
+        self.uuid = uuid
+    }
+}
+
+extension UUIDUserId: Hashable {
+    var hashValue: Int {
+        return uuid.hashValue
+    }
+    
+    static func ==(lhs: UUIDUserId, rhs: UUIDUserId) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }

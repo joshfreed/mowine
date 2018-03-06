@@ -155,6 +155,7 @@
                         <segue destination="0F1-Cv-DyL" kind="show" identifier="AddWine" id="lj3-Tx-rKI"/>
                         <segue destination="z2X-n5-Odb" kind="show" identifier="SignInScreen" id="Hn9-9I-QEg"/>
                         <segue destination="iPY-a6-bIw" kind="show" identifier="MyAccount" id="mym-HL-gO2"/>
+                        <segue destination="Mly-Yv-kTl" kind="show" identifier="Friends" id="8OO-ag-nWW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -977,7 +978,72 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMs-cN-fB5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2080.8000000000002" y="1530.5847076461771"/>
+            <point key="canvasLocation" x="1932" y="1496"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="tsU-q8-lcS">
+            <objects>
+                <tableViewController storyboardIdentifier="FriendsViewController" id="Mly-Yv-kTl" customClass="FriendsViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K0D-Xn-lln">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendCell" id="fhY-9m-IXb" customClass="UserTableViewCell" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fhY-9m-IXb" id="28T-tN-pex">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="STe-5q-EiJ">
+                                            <rect key="frame" x="16" y="8" width="43.5" height="43.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="STe-5q-EiJ" secondAttribute="height" multiplier="1:1" id="2VM-cy-3r1"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZT-nu-Cgy">
+                                            <rect key="frame" x="67.5" y="17" width="261.5" height="25.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBa-HF-n6b">
+                                            <rect key="frame" x="337" y="18" width="22" height="22"/>
+                                            <color key="tintColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="tappedAddFriend:" destination="fhY-9m-IXb" eventType="touchUpInside" id="mbu-PR-e3o"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="HZT-nu-Cgy" firstAttribute="leading" secondItem="STe-5q-EiJ" secondAttribute="trailing" constant="8" id="7XM-A0-EmO"/>
+                                        <constraint firstItem="STe-5q-EiJ" firstAttribute="leading" secondItem="28T-tN-pex" secondAttribute="leading" constant="16" id="9S4-SO-cqE"/>
+                                        <constraint firstItem="HZT-nu-Cgy" firstAttribute="centerY" secondItem="28T-tN-pex" secondAttribute="centerY" id="EJY-Xe-cTy"/>
+                                        <constraint firstItem="YBa-HF-n6b" firstAttribute="centerY" secondItem="28T-tN-pex" secondAttribute="centerY" id="L9b-5v-4op"/>
+                                        <constraint firstAttribute="trailing" secondItem="YBa-HF-n6b" secondAttribute="trailing" constant="16" id="Neo-JR-jib"/>
+                                        <constraint firstAttribute="bottom" secondItem="STe-5q-EiJ" secondAttribute="bottom" constant="8" id="O1M-Kh-RM2"/>
+                                        <constraint firstItem="YBa-HF-n6b" firstAttribute="leading" secondItem="HZT-nu-Cgy" secondAttribute="trailing" constant="8" id="Sq5-pU-bQ5"/>
+                                        <constraint firstItem="STe-5q-EiJ" firstAttribute="top" secondItem="28T-tN-pex" secondAttribute="top" constant="8" id="f1S-qK-dTD"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="addFriendButton" destination="YBa-HF-n6b" id="DEC-JH-VGJ"/>
+                                    <outlet property="fullNameLabel" destination="HZT-nu-Cgy" id="pSV-7g-2IT"/>
+                                    <outlet property="profilePictureImageView" destination="STe-5q-EiJ" id="mPi-LO-9qi"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mly-Yv-kTl" id="stM-RE-Udu"/>
+                            <outlet property="delegate" destination="Mly-Yv-kTl" id="IEw-bY-fq4"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Friends" id="ood-TV-3lY"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z32-je-8RS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1348" y="2297.9010494752624"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="X5i-oU-3CZ">
