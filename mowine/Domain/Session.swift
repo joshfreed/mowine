@@ -14,4 +14,5 @@ protocol Session {
     var currentUserId: UserId? { get }
     func resume()
     func getCurrentUser(completion: @escaping (Result<User>) -> ())
+    func end()
 }

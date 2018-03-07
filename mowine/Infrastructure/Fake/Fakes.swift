@@ -70,6 +70,13 @@ class FakeSession: Session {
             completion(.success(currentUser))
         }
     }
+    
+    func end() {
+        _isLoggedIn = false
+        _currentUser = nil
+        UserDefaults.standard.removeObject(forKey: "emailAddress")
+        UserDefaults.standard.removeObject(forKey: "loggedIn")
+    }
 }
 
 class FakeEmailAuth: EmailAuthenticationService {

@@ -29,4 +29,15 @@ enum MyAccount {
             var profilePicture: UIImage
         }
     }
+    
+    enum SignOut {
+        struct Request {
+        }
+        
+        struct Response {
+        }
+        
+        struct ViewModel {            
+        }
+    }
 }

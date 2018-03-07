@@ -14,6 +14,7 @@ import UIKit
 
 @objc protocol MyAccountRoutingLogic {
     //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToMainMenu()
 }
 
 protocol MyAccountDataPassing {
@@ -25,7 +26,10 @@ class MyAccountRouter: NSObject, MyAccountRoutingLogic, MyAccountDataPassing {
     var dataStore: MyAccountDataStore?
 
     // MARK: Routing
-
+    func routeToMainMenu() {
+        viewController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     //{
     //  if let segue = segue {

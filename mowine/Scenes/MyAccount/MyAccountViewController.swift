@@ -15,6 +15,7 @@ import UIKit
 protocol MyAccountDisplayLogic: class {
     func displayUser(viewModel: MyAccount.GetUser.ViewModel)
     func displayErrorGettingUser()
+    func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel)
 }
 
 class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
@@ -86,5 +87,25 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     
     func displayErrorGettingUser() {
         
+    }
+    
+    // MARK: Sign Out
+    
+    @IBAction func tappedSignOut(_ sender: UIButton) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { _ in
+            self.signOut()
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func signOut() {
+        let request = MyAccount.SignOut.Request()
+        interactor?.signOut(request: request)
+    }
+    
+    func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel) {
+        router?.routeToMainMenu()
     }
 }

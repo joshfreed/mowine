@@ -23,4 +23,8 @@ class MyAccountWorker {
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
         session.getCurrentUser(completion: completion)
     }
+    
+    func signOut() {
+        session.end()
+    }
 }

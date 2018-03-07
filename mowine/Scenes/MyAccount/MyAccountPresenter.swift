@@ -15,6 +15,7 @@ import UIKit
 protocol MyAccountPresentationLogic {
     func presentUser(response: MyAccount.GetUser.Response)
     func presentErrorGettingUser()
+    func presentSignedOut(response: MyAccount.SignOut.Response)
 }
 
 class MyAccountPresenter: MyAccountPresentationLogic {
@@ -33,5 +34,12 @@ class MyAccountPresenter: MyAccountPresentationLogic {
     
     func presentErrorGettingUser() {
         viewController?.displayErrorGettingUser()
+    }
+    
+    // MARK: Sign out
+    
+    func presentSignedOut(response: MyAccount.SignOut.Response) {
+        let viewModel = MyAccount.SignOut.ViewModel()
+        viewController?.displaySignedOut(viewModel: viewModel)
     }
 }

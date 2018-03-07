@@ -14,6 +14,7 @@ import UIKit
 
 protocol MyAccountBusinessLogic {
     func getUser(request: MyAccount.GetUser.Request)
+    func signOut(request: MyAccount.SignOut.Request)
 }
 
 protocol MyAccountDataStore {
@@ -38,5 +39,14 @@ class MyAccountInteractor: MyAccountBusinessLogic, MyAccountDataStore {
                 break
             }
         }
+    }
+    
+    // MARK: Sign Out
+    
+    func signOut(request: MyAccount.SignOut.Request) {
+        worker?.signOut()
+        
+        let response = MyAccount.SignOut.Response()
+        presenter?.presentSignedOut(response: response)
     }
 }
