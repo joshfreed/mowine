@@ -37,3 +37,58 @@ class MockWineTypeRepository: WineTypeRepository {
     }
 }
 
+class MockUserRepository: UserRepository {
+    var getFriendsOfResult: Result<[User]>?
+    var getFriendsOf_userId: UserId?
+    var getFriendsOfWasCalled = false
+    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
+        getFriendsOfWasCalled = true
+        getFriendsOf_userId = userId
+        if let result = getFriendsOfResult {
+            completion(result)
+        }
+    }
+    
+    var searchUsersResult: Result<[User]>?
+    var searchUsers_searchString: String?
+    var searchUsersWasCalled = false
+    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+        searchUsersWasCalled = true
+        searchUsers_searchString = searchString
+        if let result = searchUsersResult {
+            completion(result)
+        }
+    }
+}
+
+class MockSession: Session {
+    private var _currentUser: User?
+    
+    var isLoggedIn: Bool {
+        return _currentUser != nil
+    }
+    
+    var currentUserId: UserId? {
+        return _currentUser?.id
+    }
+    
+    func resume() {
+        
+    }
+    
+    func login(user: User) {
+        _currentUser = user
+    }
+    
+    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+        if let currentUser = _currentUser {
+            completion(.success(currentUser))
+        } else {
+            // ??DF?DF?
+        }
+    }
+    
+    func end() {
+        _currentUser = nil
+    }
+}

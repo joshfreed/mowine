@@ -17,6 +17,8 @@ class FriendsWorker {
     let userRepository: UserRepository
     let session: Session
     
+    private(set) var friends: [User] = []
+    
     init(userRepository: UserRepository, session: Session) {
         self.userRepository = userRepository
         self.session = session
@@ -26,6 +28,32 @@ class FriendsWorker {
         guard let currentUserId = session.currentUserId else {
             return
         }
-        userRepository.getFriendsOf(userId: currentUserId, completion: completion)
+        
+        userRepository.getFriendsOf(userId: currentUserId) { result in
+            if case let .success(friends) = result {
+                self.friends = friends
+            }
+            completion(result)
+        }
+    }
+    
+    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            return
+        }
+        
+        guard !searchString.isEmpty else {
+            completion(.success(friends))
+            return
+        }
+        
+        userRepository.searchUsers(searchString: searchString) { result in
+            switch result {
+            case .success(let users):
+                let usersWithoutCurrent = users.filter({ $0.id != currentUserId })
+                completion(.success(usersWithoutCurrent))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
     }
 }

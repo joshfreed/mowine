@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct User {
+struct User: Equatable {
     let id: UserId
     var firstName: String?
     var lastName: String?
@@ -38,15 +38,15 @@ struct User {
         self.firstName = firstName
         self.lastName = lastName
     }
-}
-
-protocol UserId {
     
+    static func ==(lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
-class UUIDUserId: UserId {
-    let uuid: UUID
-
+struct UserId: Hashable {
+    private let uuid: UUID
+    
     init() {
         uuid = UUID()
     }
@@ -54,14 +54,12 @@ class UUIDUserId: UserId {
     init(uuid: UUID) {
         self.uuid = uuid
     }
-}
-
-extension UUIDUserId: Hashable {
+    
     var hashValue: Int {
         return uuid.hashValue
     }
     
-    static func ==(lhs: UUIDUserId, rhs: UUIDUserId) -> Bool {
+    static func ==(lhs: UserId, rhs: UserId) -> Bool {
         return lhs.uuid == rhs.uuid
     }
 }

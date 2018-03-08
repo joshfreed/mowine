@@ -10,19 +10,39 @@ import Foundation
 import JFLib
 
 let usersDB: [User] = [
-    User(id: UUIDUserId(), emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed"),
-    User(id: UUIDUserId(), emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
-    User(id: UUIDUserId(), emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley"),
-    User(id: UUIDUserId(), emailAddress: "test1@test.com", firstName: "Test", lastName: "User1"),
+    User(id: UserId(), emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed"),
+    User(id: UserId(), emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
+    User(id: UserId(), emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley"),
+    User(id: UserId(), emailAddress: "mbananas@gmail.com", firstName: "Maurice", lastName: "Bananas"),
+    User(id: UserId(), emailAddress: "test1@test.com", firstName: "Test", lastName: "User1"),
+    User(id: UserId(), emailAddress: "test2@test.com", firstName: "Test", lastName: "User2"),
+    User(id: UserId(), emailAddress: "test3@test.com", firstName: "Test", lastName: "User3"),
+    User(id: UserId(), emailAddress: "test4@test.com", firstName: "Test", lastName: "User4"),
+    User(id: UserId(), emailAddress: "test5@test.com", firstName: "Test", lastName: "User5"),
+    User(id: UserId(), emailAddress: "test6@test.com", firstName: "Test", lastName: "User6"),
+    User(id: UserId(), emailAddress: "test7@test.com", firstName: "Test", lastName: "User7"),
+    User(id: UserId(), emailAddress: "test8@test.com", firstName: "Test", lastName: "User8"),
+    User(id: UserId(), emailAddress: "test9@test.com", firstName: "Test", lastName: "User9"),
+    User(id: UserId(), emailAddress: "test10@test.com", firstName: "Test", lastName: "User10"),
+    User(id: UserId(), emailAddress: "test11@test.com", firstName: "Test", lastName: "User12"),
+    User(id: UserId(), emailAddress: "test12@test.com", firstName: "Test", lastName: "User13"),
+    User(id: UserId(), emailAddress: "test13@test.com", firstName: "Test", lastName: "User14"),
+    User(id: UserId(), emailAddress: "test14@test.com", firstName: "Test", lastName: "User15"),
+    User(id: UserId(), emailAddress: "test15@test.com", firstName: "Test", lastName: "User16"),
+    User(id: UserId(), emailAddress: "test16@test.com", firstName: "Test", lastName: "User17"),
+    User(id: UserId(), emailAddress: "test17@test.com", firstName: "Test", lastName: "User18"),
+    User(id: UserId(), emailAddress: "test18@test.com", firstName: "Test", lastName: "User19"),
+    User(id: UserId(), emailAddress: "test19@test.com", firstName: "Test", lastName: "User19"),
+    User(id: UserId(), emailAddress: "test20@test.com", firstName: "Test", lastName: "User20"),
 ]
 
-let friendsDB: [UUIDUserId: [UUIDUserId]] = [
-    (usersDB[0].id as! UUIDUserId): [
-        usersDB[1].id as! UUIDUserId,
-        usersDB[2].id as! UUIDUserId
+let friendsDB: [UserId: [UserId]] = [
+    usersDB[0].id: [
+        usersDB[1].id,
+        usersDB[2].id
     ],
-    (usersDB[2].id as! UUIDUserId): [
-        usersDB[0].id as! UUIDUserId
+    usersDB[2].id: [
+        usersDB[0].id
     ]
 ]
 
@@ -92,13 +112,29 @@ class FakeEmailAuth: EmailAuthenticationService {
 
 class FakeUserRepository: UserRepository {
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
-        let friendIds = friendsDB[userId as! UUIDUserId] ?? []
+        let friendIds = friendsDB[userId] ?? []
         var friends: [User] = []
         for friendId in friendIds {
-            if let friend = usersDB.first(where: { ($0.id as! UUIDUserId) == friendId }) {
+            if let friend = usersDB.first(where: { $0.id == friendId }) {
                 friends.append(friend)
             }
         }
         completion(.success(friends))
+    }
+    
+    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+        let words = searchString.split(separator: " ")
+        var matches: [User] = []
+        
+        for word in words {
+            let m = usersDB.filter {
+                let firstName = $0.firstName ?? ""
+                let lastName = $0.lastName ?? ""
+                return firstName.starts(with: word) || lastName.starts(with: word)
+            }
+            matches.append(contentsOf: m)
+        }
+        
+        completion(.success(matches))
     }
 }

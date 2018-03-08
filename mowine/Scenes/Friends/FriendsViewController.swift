@@ -11,15 +11,19 @@
 //
 
 import UIKit
+import JFLib
 
 protocol FriendsDisplayLogic: class {
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel)
+    func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel)
 }
 
 class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var interactor: FriendsBusinessLogic?
     var router: (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing)?
 
+    var searchTimer: Timer?
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -69,6 +73,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for friends"
         navigationItem.searchController = searchController
@@ -117,13 +122,70 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
 
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel) {
         displayedUsers = viewModel.friends
+        
+        if displayedUsers.count > 0 {
+            hideEmptyMessage()
+        } else {
+            showEmptyMessage("You don't have any friends, loser.")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    // MARK: Search users
+    
+    func searchUsers(searchString: String) {
+        let request = Friends.SearchUsers.Request(searchString: searchString)
+        interactor?.searchUsers(request: request)
+    }
+    
+    func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel) {
+        displayedUsers = viewModel.matches
+        
+        if displayedUsers.count > 0 {
+            hideEmptyMessage()
+        } else {
+            showEmptyMessage("No users match your search.")
+        }        
+        
         tableView.reloadData()
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension FriendsViewController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO
+        let text = searchController.searchBar.text ?? ""
+        
+        print("updateSearchResults with text: \(text)")
+        
+        searchTimer?.invalidate()
+        
+        if text.isEmpty {
+            searchUsers(searchString: text)
+        } else {
+            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+                self.searchUsers(searchString: text)
+            })
+        }
+    }
+}
+
+//MARK: - UISearchControllerDelegate
+extension FriendsViewController: UISearchControllerDelegate {
+    func willPresentSearchController(_ searchController: UISearchController) {
+//        print("willPresentSearchController")
+    }
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+//        print("didPresentSearchController")
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+//        print("willDismissSearchController")
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+//        print("didDismissSearchController")
     }
 }

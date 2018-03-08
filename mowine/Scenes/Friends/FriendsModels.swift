@@ -34,4 +34,18 @@ enum Friends {
             var friends: [DisplayedUser]
         }
     }
+    
+    enum SearchUsers {
+        struct Request {
+            var searchString: String
+        }
+        
+        struct Response {
+            var matches: [User]
+        }
+        
+        struct ViewModel {
+            var matches: [DisplayedUser]
+        }
+    }
 }

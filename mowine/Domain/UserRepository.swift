@@ -11,4 +11,5 @@ import JFLib
 
 protocol UserRepository {
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ())
+    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ())
 }

@@ -14,29 +14,46 @@ import UIKit
 
 protocol FriendsBusinessLogic {
     func fetchFriends(request: Friends.FetchFriends.Request)
+    func searchUsers(request: Friends.SearchUsers.Request)
 }
 
 protocol FriendsDataStore {
-    //var name: String { get set }
+    
 }
 
 class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     var presenter: FriendsPresentationLogic?
     var worker: FriendsWorker?
-    //var name: String = ""
 
     // MARK: Fetch Friends
 
     func fetchFriends(request: Friends.FetchFriends.Request) {        
         worker?.fetchMyFriends() { result in
             switch result {
-            case .success(let friends):
-                let response = Friends.FetchFriends.Response(friends: friends)
-                self.presenter?.presentFriends(response: response)
-            case .failure(let error):
-                print("\(error)")
-                break
+            case .success(let friends): self.handleFriends(friends: friends)
+            case .failure(let error): print("\(error)")
             }
         }
+    }
+    
+    private func handleFriends(friends: [User]) {
+        let response = Friends.FetchFriends.Response(friends: friends)
+        presenter?.presentFriends(response: response)
+    }
+    
+    // MARK: Search Users
+    
+    func searchUsers(request: Friends.SearchUsers.Request) {
+        worker?.searchUsers(searchString: request.searchString) { result in
+            switch result {
+            case .success(let users): self.handleSearchResults(users: users)
+            case .failure(let error): print("\(error)")
+            }
+        }
+    }
+    
+    private func handleSearchResults(users: [User]) {
+        let response = Friends.SearchUsers.Response(matches: users)
+        presenter?.presentSearchResults(response: response)
     }
 }

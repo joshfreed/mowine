@@ -14,6 +14,7 @@ import UIKit
 
 protocol FriendsPresentationLogic {
     func presentFriends(response: Friends.FetchFriends.Response)
+    func presentSearchResults(response: Friends.SearchUsers.Response)
 }
 
 class FriendsPresenter: FriendsPresentationLogic {
@@ -33,5 +34,24 @@ class FriendsPresenter: FriendsPresentationLogic {
         }
         let viewModel = Friends.FetchFriends.ViewModel(friends: friends)
         viewController?.displayFriends(viewModel: viewModel)
+    }
+    
+    // MARK: Search users
+    
+    func presentSearchResults(response: Friends.SearchUsers.Response) {
+        let matches = response.matches.map { makeDisplayedUser(from: $0) }
+        let viewModel = Friends.SearchUsers.ViewModel(matches: matches)
+        viewController?.displaySearchResults(viewModel: viewModel)
+    }
+    
+    // MARK: Helpers
+    
+    private func makeDisplayedUser(from user: User) -> Friends.DisplayedUser {
+        return Friends.DisplayedUser(
+            userId: "",
+            fullName: user.fullName,
+            profilePicture: user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture"),
+            isFriend: false
+        )
     }
 }
