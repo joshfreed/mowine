@@ -69,13 +69,18 @@ class SignInViewControllerTests: XCTestCase {
         func routeToMyAccount() {
             routedToMyAccount = true
         }
+        
+        var routedToFriends = false
+        func routeToFriends() {
+            routedToFriends = true
+        }
     }
 
     // MARK: Tests
 
     func testDisplaySignInResult_loginSuccess() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil)
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil, routeTo: .myAccount)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
@@ -87,11 +92,29 @@ class SignInViewControllerTests: XCTestCase {
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beTrue())
         expect(self.router.routedToMyAccount).to(beTrue())
+        expect(self.router.routedToFriends).to(beFalse())
+    }
+    
+    func testDisplaySignInResult_loginSuccess_routesToFriends() {
+        // Given
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil, routeTo: .friends)
+        loadView()
+        sut.logInButton.displayLoading()
+        sut.hideErrorLabel()
+        
+        // When
+        sut.displaySignInResult(viewModel: viewModel)
+        
+        // Then
+        expect(self.sut.logInButton.isLoading).to(beFalse())
+        expect(self.sut.errorLabel.isHidden).to(beTrue())
+        expect(self.router.routedToMyAccount).to(beFalse())
+        expect(self.router.routedToFriends).to(beTrue())
     }
     
     func testDisplaySignInResult_loginFailed() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: nil)
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: nil, routeTo: .myAccount)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
@@ -108,7 +131,7 @@ class SignInViewControllerTests: XCTestCase {
     
     func testDisplaySignInResult_withError() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: MyFakeError.somethingWentWrong)
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: MyFakeError.somethingWentWrong, routeTo: .myAccount)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()

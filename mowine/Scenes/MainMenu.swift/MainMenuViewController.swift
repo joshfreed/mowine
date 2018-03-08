@@ -18,6 +18,7 @@ class MainMenuViewController: UIViewController {
     
     var session: Session!
     var router: (NSObjectProtocol & MainMenuRoutingLogic)?
+    var signInDestination: SignInDestination?
     
     // MARK: Object lifecycle
     
@@ -79,6 +80,7 @@ class MainMenuViewController: UIViewController {
         if session.isLoggedIn {
             performSegue(withIdentifier: "MyAccount", sender: nil)
         } else {
+            signInDestination = .myAccount
             performSegue(withIdentifier: "SignInScreen", sender: nil)
         }
     }
@@ -87,6 +89,7 @@ class MainMenuViewController: UIViewController {
         if session.isLoggedIn {
             performSegue(withIdentifier: "Friends", sender: nil)
         } else {
+            signInDestination = .friends
             performSegue(withIdentifier: "SignInScreen", sender: nil)
         }
     }

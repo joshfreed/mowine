@@ -24,11 +24,13 @@ enum SignIn {
         struct Response {
             var isLoggedIn: Bool
             var error: Error?
+            var routeTo: SignInDestination
         }
 
         struct ViewModel {
             var isLoggedIn: Bool
             var error: Error?
+            var routeTo: SignInDestination
         }
     }
 }

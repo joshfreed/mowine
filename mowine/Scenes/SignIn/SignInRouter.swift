@@ -14,6 +14,7 @@ import UIKit
 
 @objc protocol SignInRoutingLogic {
     func routeToMyAccount()
+    func routeToFriends()
 }
 
 protocol SignInDataPassing {
@@ -29,9 +30,13 @@ class SignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
     func routeToMyAccount() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let destinationVC = storyboard.instantiateViewController(withIdentifier: "MyAccountViewController")
-        let nc = viewController?.navigationController
-        nc?.popToRootViewController(animated: false)
-        nc?.pushViewController(destinationVC, animated: true)
+        navigateToMyAccount(source: viewController!, destination: destinationVC)
+    }
+    
+    func routeToFriends() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "FriendsViewController")
+        navigateToFriends(source: viewController!, destination: destinationVC)
     }
     
     //func routeToSomewhere(segue: UIStoryboardSegue?)
@@ -51,10 +56,19 @@ class SignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
 
     // MARK: Navigation
 
-    //func navigateToSomewhere(source: SignInViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToMyAccount(source: SignInViewController, destination: UIViewController)
+    {
+        let nc = viewController?.navigationController
+        nc?.popToRootViewController(animated: false)
+        nc?.pushViewController(destination, animated: true)
+    }
+    
+    func navigateToFriends(source: SignInViewController, destination: UIViewController)
+    {
+        let nc = viewController?.navigationController
+        nc?.popToRootViewController(animated: false)
+        nc?.pushViewController(destination, animated: true)
+    }
 
     // MARK: Passing data
 

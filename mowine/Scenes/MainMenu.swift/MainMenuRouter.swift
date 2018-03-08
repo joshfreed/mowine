@@ -43,7 +43,9 @@ class MainMenuRouter: NSObject, MainMenuRoutingLogic {
     
     func routeToSignInScreen(segue: UIStoryboardSegue)
     {
-        
+        let destinationVC = segue.destination as! SignInViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        destinationDS.routeTo = viewController?.signInDestination ?? .myAccount
     }
     
     // MARK: Navigation
