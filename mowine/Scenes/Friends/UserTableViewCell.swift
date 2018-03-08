@@ -8,10 +8,18 @@
 
 import UIKit
 
+protocol UserTableViewCellDelegate: class {
+    func addFriend(cell: UserTableViewCell, userId: String)
+}
+
 class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var addFriendButton: UIButton!
+    
+    weak var delegate: UserTableViewCellDelegate?
+    
+    private var user: Friends.DisplayedUser?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,11 +33,27 @@ class UserTableViewCell: UITableViewCell {
     }
     
     func configure(user: Friends.DisplayedUser) {
+        self.user = user
         profilePictureImageView.image = user.profilePicture
         fullNameLabel.text = user.fullName
         addFriendButton.isHidden = user.isFriend
     }
     
     @IBAction func tappedAddFriend(_ sender: UIButton) {
+        guard let userId = user?.userId else {
+            return
+        }
+        
+        addFriendButton.isHidden = true
+        
+        delegate?.addFriend(cell: self, userId: userId)
+    }
+    
+    func displayFriendAdded() {
+        addFriendButton.isHidden = true
+    }
+    
+    func displayAddFriendFailed() {
+        addFriendButton.isHidden = false
     }
 }

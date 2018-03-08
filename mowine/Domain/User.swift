@@ -44,8 +44,12 @@ struct User: Equatable {
     }
 }
 
-struct UserId: Hashable {
+struct UserId: Hashable, CustomStringConvertible {
     private let uuid: UUID
+    
+    var description: String {
+        return uuid.uuidString
+    }
     
     init() {
         uuid = UUID()
@@ -53,6 +57,14 @@ struct UserId: Hashable {
     
     init(uuid: UUID) {
         self.uuid = uuid
+    }
+    
+    init?(string: String) {
+        guard let uuid = UUID(uuidString: string) else {
+            return nil
+        }
+        
+        self.init(uuid: uuid)
     }
     
     var hashValue: Int {

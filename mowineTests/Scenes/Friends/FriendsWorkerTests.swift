@@ -148,4 +148,54 @@ class FriendsWorkerTests: XCTestCase {
         expect(foundUsers).to(contain(friend1))
         expect(foundUsers).to(contain(friend2))
     }
+    
+    // MARK: addFriend
+    
+    func testAddFriend() {
+        // Given
+        let me = UserBuilder.aUser().build()
+        session.login(user: me)
+        let friendId = UserId()
+        
+        // When
+        sut.addFriend(userId: friendId) { result in }
+        
+        // Then
+        expect(self.userRepository.addFriendCalled).to(beTrue())
+        expect(self.userRepository.addFriend_owningUserId).to(equal(me.id))
+        expect(self.userRepository.addFriend_friendId).to(equal(friendId))
+    }
+    
+    func testAddFriend_addsFriendToTheLocalArray() {
+        // Given
+        let me = UserBuilder.aUser().build()
+        let friend = UserBuilder.aUser().build()
+        session.login(user: me)
+        userRepository.getUserByIdResult = .success(friend)
+        
+        // When
+        sut.addFriend(userId: friend.id) { result in
+        }
+        
+        // Then
+        expect(self.sut.friends).to(contain(friend))
+    }
+    
+    func testAddFriend_failsIfNoCurrentUser() {
+        // Given
+        session.end()
+        let friendId = UserId()
+        var foundError: Error?
+        
+        // When
+        sut.addFriend(userId: friendId) { result in
+            if case let .failure(error) = result {
+                foundError = error
+            }
+        }
+        
+        // Then
+        expect(self.userRepository.addFriendCalled).to(beFalse())
+        expect(foundError).to(matchError(FriendsWorkerError.notLoggedIn))
+    }
 }

@@ -12,12 +12,14 @@
 
 @testable import mowine
 import XCTest
+import Nimble
 
 class FriendsViewControllerTests: XCTestCase {
     // MARK: Subject under test
 
     var sut: FriendsViewController!
     var window: UIWindow!
+    let spy = FriendsBusinessLogicSpy()
 
     // MARK: Test lifecycle
 
@@ -38,6 +40,7 @@ class FriendsViewControllerTests: XCTestCase {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
         sut = storyboard.instantiateViewController(withIdentifier:"FriendsViewController") as! FriendsViewController
+        sut.interactor = spy
     }
 
     func loadView() {
@@ -56,14 +59,31 @@ class FriendsViewControllerTests: XCTestCase {
         func searchUsers(request: Friends.SearchUsers.Request) {
             
         }
+        
+        var addFriendCalled = false
+        var addFriendRequest: Friends.AddFriend.Request?
+        func addFriend(request: Friends.AddFriend.Request) {
+            addFriendCalled = true
+            addFriendRequest = request
+        }
+    }
+    
+    class MockUserCell: UserTableViewCell {
+        var displayFriendAddedCalled = false
+        override func displayFriendAdded() {
+            displayFriendAddedCalled = true
+        }
+        
+        var displayAddFriendFailedCalled = false
+        override func displayAddFriendFailed() {
+            displayAddFriendFailedCalled = true
+        }
     }
 
     // MARK: Tests
 
     func testShouldDoSomethingWhenViewIsLoaded() {
         // Given
-        let spy = FriendsBusinessLogicSpy()
-        sut.interactor = spy
 
         // When
         loadView()
@@ -82,5 +102,87 @@ class FriendsViewControllerTests: XCTestCase {
 
         // Then
         //XCTAssertEqual(sut.nameTextField.text, "", "displaySomething(viewModel:) should update the name text field")
+    }
+    
+    func testAddFriend() {
+        // Given
+        
+        // When
+        loadView()
+        sut.addFriend(userId: "12345")
+        
+        // Then
+        expect(self.spy.addFriendCalled).to(beTrue())
+        expect(self.spy.addFriendRequest?.userId).to(equal("12345"))
+    }
+    
+    func testAddFriendWithCellCallsInteractor() {
+        // Given
+        let userId = "12345"
+        let cell = MockUserCell()
+        
+        // When
+        sut.addFriend(cell: cell, userId: userId)
+        
+        // Then
+        expect(self.spy.addFriendCalled).to(beTrue())
+        expect(self.spy.addFriendRequest?.userId).to(equal("12345"))
+    }
+    
+    func testAddFriendSavesTheCellThatTriggeredIt() {
+        // Given
+        let userId = "12345"
+        let cell = MockUserCell()
+        
+        // When
+        sut.addFriend(cell: cell, userId: userId)
+        
+        // Then
+        expect(self.sut.friendCells[userId]).to(be(cell))
+    }
+    
+    func testDisplayFriendAdded_shouldCallDisplayFriendAddedOnTheCell() {
+        // Given
+        let userId = "12345"
+        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
+        let cell = MockUserCell()
+        sut.friendCells[userId] = cell
+        
+        // When
+        loadView()
+        sut.displayFriendAdded(viewModel: viewModel)
+        
+        // Then
+        expect(cell.displayFriendAddedCalled).to(beTrue())        
+    }
+    
+    func testDisplayFriendAdded_shouldUpdateTheDisplayedUser() {
+        // Given
+        let userId = "12345"
+        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
+        let userModel = Friends.DisplayedUser(userId: "12345", fullName: "Whatever", profilePicture: UIImage(), isFriend: false)
+        sut.displayedUsers.append(userModel)
+        
+        // When
+        loadView()
+        sut.displayFriendAdded(viewModel: viewModel)
+        
+        // Then
+        expect(self.sut.displayedUsers[0].isFriend).to(beTrue())
+    }
+    
+    func testDisplayAddFriendError() {
+        // Given
+        let userId = "12345"
+        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
+        let cell = MockUserCell()
+        sut.friendCells[userId] = cell
+        
+        // When
+        loadView()
+        sut.displayAddFriendError(viewModel: viewModel)
+        
+        // Then
+        expect(cell.displayAddFriendFailedCalled).to(beTrue())
     }
 }

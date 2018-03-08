@@ -36,7 +36,7 @@ let usersDB: [User] = [
     User(id: UserId(), emailAddress: "test20@test.com", firstName: "Test", lastName: "User20"),
 ]
 
-let friendsDB: [UserId: [UserId]] = [
+var friendsDB: [UserId: [UserId]] = [
     usersDB[0].id: [
         usersDB[1].id,
         usersDB[2].id
@@ -136,5 +136,18 @@ class FakeUserRepository: UserRepository {
         }
         
         completion(.success(matches))
+    }
+    
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        if friendsDB[owningUserId] == nil {
+            friendsDB[owningUserId] = []
+        }
+        friendsDB[owningUserId]!.append(friendId)
+        completion(.success)
+    }
+    
+    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
+        let user = usersDB.first(where: { $0.id == id })
+        completion(.success(user))
     }
 }

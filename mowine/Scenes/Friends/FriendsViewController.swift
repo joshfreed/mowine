@@ -16,12 +16,15 @@ import JFLib
 protocol FriendsDisplayLogic: class {
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel)
     func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel)
+    func displayFriendAdded(viewModel: Friends.AddFriend.ViewModel)
+    func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel)
 }
 
 class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var interactor: FriendsBusinessLogic?
     var router: (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing)?
 
+    var displayedUsers: [Friends.DisplayedUser] = []
     var searchTimer: Timer?
     
     // MARK: Object lifecycle
@@ -73,13 +76,11 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for friends"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-//        tableView.register(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "UserTableViewCell")
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         fetchFriends()
@@ -107,14 +108,13 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! UserTableViewCell
+        cell.delegate = self
         cell.configure(user: displayedUsers[indexPath.row])
         return cell
     }
 
     // MARK: Fetch friends
 
-    var displayedUsers: [Friends.DisplayedUser] = []
-    
     func fetchFriends() {
         let request = Friends.FetchFriends.Request()
         interactor?.fetchFriends(request: request)
@@ -150,14 +150,33 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         
         tableView.reloadData()
     }
+    
+    // MARK: Add friend
+    
+    var friendCells: [String: UserTableViewCell] = [:]
+    
+    func addFriend(userId: String) {
+        let request = Friends.AddFriend.Request(userId: userId)
+        interactor?.addFriend(request: request)
+    }
+    
+    func displayFriendAdded(viewModel: Friends.AddFriend.ViewModel) {
+        if let index = displayedUsers.index(where: { $0.userId == viewModel.userId }) {
+            displayedUsers[index].isFriend = true
+        }
+        friendCells[viewModel.userId]?.displayFriendAdded()
+    }
+    
+    func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel) {
+        friendCells[viewModel.userId]?.displayAddFriendFailed()
+        // TODO: display an error message
+    }
 }
 
 // MARK: - UISearchResultsUpdating
 extension FriendsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text ?? ""
-        
-        print("updateSearchResults with text: \(text)")
         
         searchTimer?.invalidate()
         
@@ -171,21 +190,9 @@ extension FriendsViewController: UISearchResultsUpdating {
     }
 }
 
-//MARK: - UISearchControllerDelegate
-extension FriendsViewController: UISearchControllerDelegate {
-    func willPresentSearchController(_ searchController: UISearchController) {
-//        print("willPresentSearchController")
-    }
-    
-    func didPresentSearchController(_ searchController: UISearchController) {
-//        print("didPresentSearchController")
-    }
-    
-    func willDismissSearchController(_ searchController: UISearchController) {
-//        print("willDismissSearchController")
-    }
-    
-    func didDismissSearchController(_ searchController: UISearchController) {
-//        print("didDismissSearchController")
+extension FriendsViewController: UserTableViewCellDelegate {
+    func addFriend(cell: UserTableViewCell, userId: String) {
+        friendCells[userId] = cell
+        addFriend(userId: userId)
     }
 }

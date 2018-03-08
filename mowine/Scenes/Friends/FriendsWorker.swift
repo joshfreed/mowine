@@ -13,6 +13,10 @@
 import UIKit
 import JFLib
 
+enum FriendsWorkerError: Error {
+    case notLoggedIn
+}
+
 class FriendsWorker {
     let userRepository: UserRepository
     let session: Session
@@ -26,6 +30,7 @@ class FriendsWorker {
     
     func fetchMyFriends(completion: @escaping (Result<[User]>) -> ()) {
         guard let currentUserId = session.currentUserId else {
+            completion(.failure(FriendsWorkerError.notLoggedIn))
             return
         }
         
@@ -39,6 +44,7 @@ class FriendsWorker {
     
     func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
         guard let currentUserId = session.currentUserId else {
+            completion(.failure(FriendsWorkerError.notLoggedIn))
             return
         }
         
@@ -53,6 +59,24 @@ class FriendsWorker {
                 let usersWithoutCurrent = users.filter({ $0.id != currentUserId })
                 completion(.success(usersWithoutCurrent))
             case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func addFriend(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(FriendsWorkerError.notLoggedIn))
+            return
+        }
+        
+        userRepository.addFriend(owningUserId: currentUserId, friendId: userId) { result1 in
+            self.userRepository.getUserById(userId) { result2 in
+                if case let .success(newFriend) = result2 {
+                    if let newFriend = newFriend {
+                        self.friends.append(newFriend)
+                    }
+                }
+                completion(result1)
             }
         }
     }

@@ -13,6 +13,7 @@
 @testable import mowine
 import XCTest
 import JFLib
+import Nimble
 
 class FriendsInteractorTests: XCTestCase {
     // MARK: Subject under test
@@ -52,6 +53,16 @@ class FriendsInteractorTests: XCTestCase {
         func presentSearchResults(response: Friends.SearchUsers.Response) {
             
         }
+        
+        var presentAddFriendCalled = false
+        func presentAddFriend(response: Friends.AddFriend.Response) {
+            presentAddFriendCalled = true
+        }
+        
+        var presentAddFriendErrorCalled = false
+        func presentAddFriendError(response: Friends.AddFriend.Response) {
+            presentAddFriendErrorCalled = true
+        }
     }
     
     class MockFriendsWorker: FriendsWorker {
@@ -69,6 +80,22 @@ class FriendsInteractorTests: XCTestCase {
         override func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
             
         }
+        
+        var addFriendResult: EmptyResult?
+        var addFriendCalled = false
+        var addFriendUserId: UserId?
+        override func addFriend(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+            addFriendCalled = true
+            addFriendUserId = userId
+            if let result = addFriendResult {
+                completion(result)
+            }
+        }
+        
+        func verifyAddFriendCalled(userId: UserId) {
+            expect(self.addFriendCalled).to(beTrue())
+            expect(self.addFriendUserId).to(equal(userId))
+        }
     }
 
     // MARK: Tests
@@ -84,4 +111,47 @@ class FriendsInteractorTests: XCTestCase {
         // Then
         XCTAssertTrue(spy.presentFriendsCalled, "fetchFriends(request:) should ask the presenter to format the result")
     }
+    
+    func testAddFriend() {
+        // Given
+        let userId = UserId()
+        let request = Friends.AddFriend.Request(userId: String(describing: userId))
+        worker.addFriendResult = .success
+        
+        // When
+        sut.addFriend(request: request)
+        
+        // Then
+        worker.verifyAddFriendCalled(userId: userId)
+        expect(self.spy.presentAddFriendCalled).to(beTrue())
+    }
+    
+    func testAddFriendFailsIfGivenInvalidUserId() {
+        // Given
+        let request = Friends.AddFriend.Request(userId: "not a uuid")
+        
+        // When
+        sut.addFriend(request: request)
+        
+        // Then
+        expect(self.worker.addFriendCalled).to(beFalse())
+        expect(self.spy.presentAddFriendCalled).to(beFalse())
+    }
+    
+    func testAddFriendShouldPresentAnError() {
+        // Given
+        let userId = UserId()
+        let request = Friends.AddFriend.Request(userId: String(describing: userId))
+        worker.addFriendResult = .failure(TestingError.someError)
+        
+        // When
+        sut.addFriend(request: request)
+        
+        // Then
+        worker.verifyAddFriendCalled(userId: userId)
+        expect(self.spy.presentAddFriendCalled).to(beFalse())
+        expect(self.spy.presentAddFriendErrorCalled).to(beTrue())
+    }
 }
+
+

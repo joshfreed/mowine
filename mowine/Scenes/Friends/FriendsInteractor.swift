@@ -15,6 +15,7 @@ import UIKit
 protocol FriendsBusinessLogic {
     func fetchFriends(request: Friends.FetchFriends.Request)
     func searchUsers(request: Friends.SearchUsers.Request)
+    func addFriend(request: Friends.AddFriend.Request)
 }
 
 protocol FriendsDataStore {
@@ -53,7 +54,27 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     }
     
     private func handleSearchResults(users: [User]) {
-        let response = Friends.SearchUsers.Response(matches: users)
+        let response = Friends.SearchUsers.Response(matches: users, myFriends: worker?.friends ?? [])
         presenter?.presentSearchResults(response: response)
+    }
+    
+    // MARK: Add friend
+    
+    func addFriend(request: Friends.AddFriend.Request) {
+        guard let userId = UserId(string: request.userId) else {
+            return
+        }
+        
+        worker?.addFriend(userId: userId) { result in
+            switch result {
+            case .success:
+                let response = Friends.AddFriend.Response(userId: request.userId)
+                self.presenter?.presentAddFriend(response: response)
+            case .failure(let error):
+                print("\(error)")
+                let response = Friends.AddFriend.Response(userId: request.userId)
+                self.presenter?.presentAddFriendError(response: response)
+            }
+        }
     }
 }

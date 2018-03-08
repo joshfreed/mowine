@@ -15,6 +15,8 @@ import UIKit
 protocol FriendsPresentationLogic {
     func presentFriends(response: Friends.FetchFriends.Response)
     func presentSearchResults(response: Friends.SearchUsers.Response)
+    func presentAddFriend(response: Friends.AddFriend.Response)
+    func presentAddFriendError(response: Friends.AddFriend.Response)
 }
 
 class FriendsPresenter: FriendsPresentationLogic {
@@ -23,35 +25,43 @@ class FriendsPresenter: FriendsPresentationLogic {
     // MARK: Fetch friends
 
     func presentFriends(response: Friends.FetchFriends.Response) {
-        let friends: [Friends.DisplayedUser] = response.friends.map {
-            let displayed = Friends.DisplayedUser(
-                userId: "",
-                fullName: $0.fullName,
-                profilePicture: $0.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture"),
-                isFriend: true
-            )
-            return displayed
+        let friendIds = response.friends.map { $0.id }
+        let friends = response.friends.map {
+            makeDisplayedUser(from: $0, friends: friendIds)
         }
         let viewModel = Friends.FetchFriends.ViewModel(friends: friends)
         viewController?.displayFriends(viewModel: viewModel)
     }
     
     // MARK: Search users
-    
+
     func presentSearchResults(response: Friends.SearchUsers.Response) {
-        let matches = response.matches.map { makeDisplayedUser(from: $0) }
+        let friendIds = response.myFriends.map { $0.id }
+        let matches = response.matches.map { makeDisplayedUser(from: $0, friends: friendIds) }
         let viewModel = Friends.SearchUsers.ViewModel(matches: matches)
         viewController?.displaySearchResults(viewModel: viewModel)
     }
     
+    // MARK: Add friend
+    
+    func presentAddFriend(response: Friends.AddFriend.Response) {
+        let viewModel = Friends.AddFriend.ViewModel(userId: response.userId)
+        viewController?.displayFriendAdded(viewModel: viewModel)
+    }
+    
+    func presentAddFriendError(response: Friends.AddFriend.Response) {
+        let viewModel = Friends.AddFriend.ViewModel(userId: response.userId)
+        viewController?.displayAddFriendError(viewModel: viewModel)
+    }
+    
     // MARK: Helpers
     
-    private func makeDisplayedUser(from user: User) -> Friends.DisplayedUser {
+    private func makeDisplayedUser(from user: User, friends: [UserId]) -> Friends.DisplayedUser {
         return Friends.DisplayedUser(
-            userId: "",
+            userId: String(describing: user.id),
             fullName: user.fullName,
             profilePicture: user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture"),
-            isFriend: false
+            isFriend: friends.contains(user.id)
         )
     }
 }

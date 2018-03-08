@@ -59,6 +59,27 @@ class MockUserRepository: UserRepository {
             completion(result)
         }
     }
+    
+    var addFriendCalled = false
+    var addFriend_owningUserId: UserId?
+    var addFriend_friendId: UserId?
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        addFriendCalled = true
+        addFriend_owningUserId = owningUserId
+        addFriend_friendId = friendId
+        completion(.success)
+    }
+    
+    var getUserByIdResult: Result<User?>?
+    var getUserByIdCalled = false
+    var getUserById_id: UserId?
+    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
+        getUserByIdCalled = true
+        getUserById_id = id
+        if let result = getUserByIdResult {
+            completion(result)
+        }
+    }
 }
 
 class MockSession: Session {

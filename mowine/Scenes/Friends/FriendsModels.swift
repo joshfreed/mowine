@@ -42,10 +42,25 @@ enum Friends {
         
         struct Response {
             var matches: [User]
+            var myFriends: [User]
         }
         
         struct ViewModel {
             var matches: [DisplayedUser]
+        }
+    }
+    
+    enum AddFriend {
+        struct Request {
+            var userId: String
+        }
+        
+        struct Response {
+            var userId: String
+        }
+        
+        struct ViewModel {
+            var userId: String
         }
     }
 }
