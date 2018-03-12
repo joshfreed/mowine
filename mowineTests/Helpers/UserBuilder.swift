@@ -28,4 +28,9 @@ class UserBuilder {
         var user = User(id: userId!, emailAddress: emailAddress!)
         return user
     }
+    
+    func withEmail(_ email: String) -> UserBuilder {
+        emailAddress = email
+        return self
+    }
 }

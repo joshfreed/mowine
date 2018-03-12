@@ -60,6 +60,10 @@ class FriendsViewControllerTests: XCTestCase {
             
         }
         
+        func cancelSearch() {
+            
+        }
+        
         var addFriendCalled = false
         var addFriendRequest: Friends.AddFriend.Request?
         func addFriend(request: Friends.AddFriend.Request) {

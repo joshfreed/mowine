@@ -40,10 +40,14 @@ class FriendsPresenterTests: XCTestCase {
 
     // MARK: Test doubles
 
-    class FriendsDisplayLogicSpy: FriendsDisplayLogic {
+    class FriendsDisplayLogicSpy: FriendsDisplayLogic {        
         var displayFriendsCalled = false
         func displayFriends(viewModel: Friends.FetchFriends.ViewModel) {
             displayFriendsCalled = true
+        }
+        
+        func displayLoadingSearchResults() {
+            
         }
         
         var displaySearchResultsCalled = false

@@ -46,6 +46,12 @@ var friendsDB: [UserId: [UserId]] = [
     ]
 ]
 
+func randomDelay(action: @escaping () -> ()) {
+//    let wait = Double(arc4random_uniform(4) + 1)
+//    delay(seconds: wait, action: action)
+    action()
+}
+
 class FakeSession: Session {
     private var _isLoggedIn = false
     
@@ -119,7 +125,10 @@ class FakeUserRepository: UserRepository {
                 friends.append(friend)
             }
         }
-        completion(.success(friends))
+        
+        randomDelay {
+            completion(.success(friends))
+        }
     }
     
     func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
@@ -135,7 +144,9 @@ class FakeUserRepository: UserRepository {
             matches.append(contentsOf: m)
         }
         
-        completion(.success(matches))
+        randomDelay {
+            completion(.success(matches))
+        }
     }
     
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {

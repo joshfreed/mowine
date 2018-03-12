@@ -15,6 +15,7 @@ import JFLib
 
 protocol FriendsDisplayLogic: class {
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel)
+    func displayLoadingSearchResults()
     func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel)
     func displayFriendAdded(viewModel: Friends.AddFriend.ViewModel)
     func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel)
@@ -24,8 +25,15 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var interactor: FriendsBusinessLogic?
     var router: (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing)?
 
-    var displayedUsers: [Friends.DisplayedUser] = []
-    var searchTimer: Timer?
+    enum DisplayMode {
+        case friends
+        case searchResult
+    }
+    
+    var canSearch = false
+    var displayedUsers: [Friends.DisplayedUser] = []    
+    var activityIndicator: UIActivityIndicatorView?
+    var activityIndicatorBottom: NSLayoutConstraint?
     
     // MARK: Object lifecycle
 
@@ -74,8 +82,12 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpActivityIndicator()
+
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for friends"
         navigationItem.searchController = searchController
@@ -84,6 +96,15 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         fetchFriends()
+    }
+    
+    private func setUpActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator!.hidesWhenStopped = true
+        view.addSubview(activityIndicator!)
+        activityIndicator!.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator!.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
+        activityIndicator!.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,17 +137,20 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     // MARK: Fetch friends
 
     func fetchFriends() {
+        activityIndicator?.startAnimating()
+        
         let request = Friends.FetchFriends.Request()
         interactor?.fetchFriends(request: request)
     }
 
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel) {
+        activityIndicator?.stopAnimating()
         displayedUsers = viewModel.friends
         
         if displayedUsers.count > 0 {
-            hideEmptyMessage()
+            hideEmptyMessageFromHeader()
         } else {
-            showEmptyMessage("You don't have any friends, loser.")
+            showEmptyMessageInHeader("You don't have any friends, loser.")
         }
         
         tableView.reloadData()
@@ -139,13 +163,21 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         interactor?.searchUsers(request: request)
     }
     
+    func displayLoadingSearchResults() {
+        activityIndicator?.startAnimating()
+        displayedUsers = []
+        hideEmptyMessageFromHeader()
+        tableView.reloadData()
+    }
+    
     func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel) {
+        activityIndicator?.stopAnimating()
         displayedUsers = viewModel.matches
         
         if displayedUsers.count > 0 {
-            hideEmptyMessage()
+            hideEmptyMessageFromHeader()
         } else {
-            showEmptyMessage("No users match your search.")
+            showEmptyMessageInHeader("No users match your search.")
         }        
         
         tableView.reloadData()
@@ -176,17 +208,30 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
 // MARK: - UISearchResultsUpdating
 extension FriendsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        let text = searchController.searchBar.text ?? ""
-        
-        searchTimer?.invalidate()
-        
-        if text.isEmpty {
-            searchUsers(searchString: text)
-        } else {
-            searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-                self.searchUsers(searchString: text)
-            })
+        guard canSearch else {
+            return
         }
+
+        let text = searchController.searchBar.text ?? ""
+        searchUsers(searchString: text)
+    }
+}
+
+extension FriendsViewController: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        canSearch = true
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        canSearch = false
+        interactor?.cancelSearch()
+    }
+}
+
+extension FriendsViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let text = searchBar.text ?? ""
+        searchUsers(searchString: text)
     }
 }
 

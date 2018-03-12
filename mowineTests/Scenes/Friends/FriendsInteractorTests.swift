@@ -45,13 +45,22 @@ class FriendsInteractorTests: XCTestCase {
 
     class FriendsPresentationLogicSpy: FriendsPresentationLogic {
         var presentFriendsCalled = false
-
         func presentFriends(response: Friends.FetchFriends.Response) {
             presentFriendsCalled = true
         }
         
+        var presentLoadingSearchResultsCalled = false
+        func presentLoadingSearchResults() {
+            presentLoadingSearchResultsCalled = true
+        }
+        
+        var presentSearchResultsCalled = false
+        var presentSearchResultsCallCount = 0
+        var presentSearchResultsResponse: Friends.SearchUsers.Response?
         func presentSearchResults(response: Friends.SearchUsers.Response) {
-            
+            presentSearchResultsCallCount += 1
+            presentSearchResultsCalled = true
+            presentSearchResultsResponse = response
         }
         
         var presentAddFriendCalled = false
@@ -70,6 +79,11 @@ class FriendsInteractorTests: XCTestCase {
             super.init(userRepository: MockUserRepository(), session: MockSession())
         }
         
+        var _friends: [User] = []
+        override var friends: [User] {
+            return _friends
+        }
+        
         var fetchMyFriendsResult: Result<[User]>?
         override func fetchMyFriends(completion: @escaping (Result<[User]>) -> ()) {
             if let result = fetchMyFriendsResult {
@@ -77,8 +91,30 @@ class FriendsInteractorTests: XCTestCase {
             }
         }
         
+        var searchUsersDelay: Double = 0
+        var searchUsers_searchString: String?
+        var searchUsersCallCount = 0
+        private var searchUsersResults: [Int: Result<[User]>] = [:]
         override func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
-            
+            searchUsersCallCount += 1
+            searchUsers_searchString = searchString
+            if let result = searchUsersResults[searchUsersCallCount] {
+                if searchUsersDelay > 0 {
+                    delay(seconds: searchUsersDelay) {
+                        completion(result)
+                    }
+                } else {
+                    completion(result)
+                }
+            }
+        }
+        
+        func mockSearchUsers(result: Result<[User]>) {
+            searchUsersResults[1] = result
+        }
+        
+        func mockSearchUsers(callCount: Int, result: Result<[User]>) {
+            searchUsersResults[callCount] = result
         }
         
         var addFriendResult: EmptyResult?
@@ -98,7 +134,7 @@ class FriendsInteractorTests: XCTestCase {
         }
     }
 
-    // MARK: Tests
+    // MARK: Fetch friends
 
     func testFetchFriends() {
         // Given
@@ -151,6 +187,89 @@ class FriendsInteractorTests: XCTestCase {
         worker.verifyAddFriendCalled(userId: userId)
         expect(self.spy.presentAddFriendCalled).to(beFalse())
         expect(self.spy.presentAddFriendErrorCalled).to(beTrue())
+    }
+    
+    // MARK: Search users
+    
+//    func testSearchUsers_shouldDisplayTheLoadingView() {
+//        // Given
+//        let request = Friends.SearchUsers.Request(searchString: "momo")
+//
+//        // When
+//        sut.searchUsers(request: request)
+//
+//        // Then
+//        expect(self.spy.presentLoadingSearchResultsCalled).to(beTrue())
+//    }
+    
+    func testSearchUsers_shouldDisplayTheSearchResults() {
+        // Given
+        let user1 = UserBuilder.aUser().build()
+        let user2 = UserBuilder.aUser().build()
+        worker.mockSearchUsers(result: .success([user1, user2]))
+        let request = Friends.SearchUsers.Request(searchString: "momo")
+        
+        // When
+        sut.searchUsers(request: request)
+        
+        // Then
+        expect(self.worker.searchUsers_searchString).toEventually(equal("momo"))
+        expect(self.spy.presentSearchResultsCalled).toEventually(beTrue())
+        expect(self.spy.presentSearchResultsResponse?.matches).toEventually(equal([user1, user2]))
+    }
+    
+    func testSearchUsers_shouldReturnTheFriendsListIfTheSearchStringIsEmpty() {
+        // Given
+        let friend1 = UserBuilder.aUser().build()
+        let friend2 = UserBuilder.aUser().build()
+        worker._friends = [friend1, friend2]
+        let request = Friends.SearchUsers.Request(searchString: "")
+        
+        // When
+        sut.searchUsers(request: request)
+        
+        // Then
+        expect(self.spy.presentFriendsCalled).to(beTrue())
+        expect(self.spy.presentLoadingSearchResultsCalled).to(beFalse())
+        expect(self.spy.presentSearchResultsCalled).to(beFalse())
+    }
+    
+    func testSearchUser_shouldOnlySearchOnceIfCalledMultipleTimeWithinTheQuietPeriod() {
+        // Given
+        let user1 = UserBuilder.aUser().build()
+        let user2 = UserBuilder.aUser().build()
+        worker.mockSearchUsers(callCount: 1, result: .success([user1, user2]))
+        worker.mockSearchUsers(callCount: 2, result: .success([user1, user2]))
+        let request = Friends.SearchUsers.Request(searchString: "momo")
+
+        // When
+        sut.searchUsers(request: request)
+        sut.searchUsers(request: request)
+        
+        // Then
+        expect(self.spy.presentSearchResultsCallCount).toEventually(equal(1))
+    }
+    
+    func testSearchUser_shouldNotPresentResultForACancelledSearch() {
+        // Given
+        let user1 = UserBuilder.aUser().withEmail("u1@test.com").build()
+        let user2 = UserBuilder.aUser().withEmail("u2@test.com").build()
+        let user3 = UserBuilder.aUser().withEmail("u3@test.com").build()
+        let user4 = UserBuilder.aUser().withEmail("u4@test.com").build()
+        let request1 = Friends.SearchUsers.Request(searchString: "mo")
+        let request2 = Friends.SearchUsers.Request(searchString: "momo")
+        worker.searchUsersDelay = 1
+        worker.mockSearchUsers(callCount: 1, result: .success([user1, user2]))
+        worker.mockSearchUsers(callCount: 2, result: .success([user3, user4]))
+        
+        // When
+        sut.searchUsers(request: request1)
+        sut.searchTimer?.fire()
+        sut.searchUsers(request: request2)
+        
+        // Then
+        expect(self.spy.presentSearchResultsCallCount).toEventually(equal(1), timeout: 3, pollInterval: 3)
+        expect(self.spy.presentSearchResultsResponse?.matches).to(equal([user3, user4]))
     }
 }
 

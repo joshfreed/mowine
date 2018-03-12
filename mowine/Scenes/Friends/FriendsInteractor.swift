@@ -15,6 +15,7 @@ import UIKit
 protocol FriendsBusinessLogic {
     func fetchFriends(request: Friends.FetchFriends.Request)
     func searchUsers(request: Friends.SearchUsers.Request)
+    func cancelSearch()
     func addFriend(request: Friends.AddFriend.Request)
 }
 
@@ -26,36 +27,87 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     var presenter: FriendsPresentationLogic?
     var worker: FriendsWorker?
 
+    private var friends: [User] {
+        return worker?.friends ?? []
+    }
+    private(set) var searchTimer: Timer?
+    private(set) var debounceTime = 0.25
+    
     // MARK: Fetch Friends
 
     func fetchFriends(request: Friends.FetchFriends.Request) {        
         worker?.fetchMyFriends() { result in
             switch result {
-            case .success(let friends): self.handleFriends(friends: friends)
+            case .success(let friends): self.presentFriends(friends)
             case .failure(let error): print("\(error)")
             }
         }
     }
     
-    private func handleFriends(friends: [User]) {
+    private func presentFriends(_ friends: [User]) {
         let response = Friends.FetchFriends.Response(friends: friends)
         presenter?.presentFriends(response: response)
     }
     
     // MARK: Search Users
+
+    private var searches: [UUID] = []
     
     func searchUsers(request: Friends.SearchUsers.Request) {
+        print("Searching for: \(request.searchString)")
+
+        cancelSearchTimer()
+        
+        guard !request.searchString.isEmpty else {
+            presentFriends(friends)
+            return
+        }
+
+        print("Scheduling a search after \(debounceTime) seconds")
+        
+        searchTimer = Timer.scheduledTimer(withTimeInterval: debounceTime, repeats: false, block: { _ in
+            self.doSearch(request: request)
+        })
+    }
+    
+    private func doSearch(request: Friends.SearchUsers.Request) {
+        let searchJobId = UUID()
+        
+        print("doSearch \(searchJobId) \(request.searchString)")
+        
+        searches.append(searchJobId)
+        
         worker?.searchUsers(searchString: request.searchString) { result in
+            print("Work complete for \(request.searchString)")
+            
             switch result {
-            case .success(let users): self.handleSearchResults(users: users)
+            case .success(let users):
+                guard self.searches.contains(searchJobId) else {
+                    return
+                }
+                print("Presenting search results for \(searchJobId), \(request.searchString)")
+                self.presentSearchResults(users: users)
             case .failure(let error): print("\(error)")
             }
         }
     }
     
-    private func handleSearchResults(users: [User]) {
-        let response = Friends.SearchUsers.Response(matches: users, myFriends: worker?.friends ?? [])
+    private func presentSearchResults(users: [User]) {
+        let response = Friends.SearchUsers.Response(matches: users, myFriends: friends)
         presenter?.presentSearchResults(response: response)
+    }
+    
+    private func cancelSearchTimer() {
+        searchTimer?.invalidate()
+        searchTimer = nil
+        searches = []
+    }
+    
+    // MARK: Cancel search
+    
+    func cancelSearch() {
+        cancelSearchTimer()
+        presentFriends(friends)
     }
     
     // MARK: Add friend

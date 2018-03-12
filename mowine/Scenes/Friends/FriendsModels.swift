@@ -48,7 +48,7 @@ enum Friends {
         struct ViewModel {
             var matches: [DisplayedUser]
         }
-    }
+    }    
     
     enum AddFriend {
         struct Request {
