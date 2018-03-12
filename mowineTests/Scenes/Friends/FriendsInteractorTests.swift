@@ -49,6 +49,11 @@ class FriendsInteractorTests: XCTestCase {
             presentFriendsCalled = true
         }
         
+        var presentEmptySearchCalled = false
+        func presentEmptySearch() {
+            presentEmptySearchCalled = true
+        }
+        
         var presentLoadingSearchResultsCalled = false
         func presentLoadingSearchResults() {
             presentLoadingSearchResultsCalled = true
@@ -220,16 +225,13 @@ class FriendsInteractorTests: XCTestCase {
     
     func testSearchUsers_shouldReturnTheFriendsListIfTheSearchStringIsEmpty() {
         // Given
-        let friend1 = UserBuilder.aUser().build()
-        let friend2 = UserBuilder.aUser().build()
-        worker._friends = [friend1, friend2]
         let request = Friends.SearchUsers.Request(searchString: "")
         
         // When
         sut.searchUsers(request: request)
         
         // Then
-        expect(self.spy.presentFriendsCalled).to(beTrue())
+        expect(self.spy.presentEmptySearchCalled).to(beTrue())
         expect(self.spy.presentLoadingSearchResultsCalled).to(beFalse())
         expect(self.spy.presentSearchResultsCalled).to(beFalse())
     }

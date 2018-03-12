@@ -15,6 +15,7 @@ import JFLib
 
 protocol FriendsDisplayLogic: class {
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel)
+    func displayEmptySearch()
     func displayLoadingSearchResults()
     func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel)
     func displayFriendAdded(viewModel: Friends.AddFriend.ViewModel)
@@ -95,7 +96,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        fetchFriends()
+        fetchFriendsOnLoad()
     }
     
     private func setUpActivityIndicator() {
@@ -140,9 +141,12 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
 
     // MARK: Fetch friends
 
-    func fetchFriends() {
+    func fetchFriendsOnLoad() {
         activityIndicator?.startAnimating()
-        
+        fetchFriends()
+    }
+    
+    func fetchFriends() {
         let request = Friends.FetchFriends.Request()
         interactor?.fetchFriends(request: request)
     }
@@ -187,6 +191,12 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         tableView.reloadData()
     }
     
+    func displayEmptySearch() {
+        displayedUsers = []
+        showEmptyMessageInHeader("Try searching for people you know")
+        tableView.reloadData()
+    }
+    
     // MARK: Add friend
     
     var friendCells: [String: UserTableViewCell] = [:]
@@ -206,7 +216,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel) {
         friendCells[viewModel.userId]?.displayAddFriendFailed()
         // TODO: display an error message
-    }
+    }    
 }
 
 // MARK: - UISearchResultsUpdating
@@ -222,6 +232,10 @@ extension FriendsViewController: UISearchResultsUpdating {
 }
 
 extension FriendsViewController: UISearchControllerDelegate {
+    func willPresentSearchController(_ searchController: UISearchController) {
+        displayEmptySearch()
+    }
+    
     func didPresentSearchController(_ searchController: UISearchController) {
         canSearch = true
     }

@@ -46,6 +46,11 @@ class FriendsPresenterTests: XCTestCase {
             displayFriendsCalled = true
         }
         
+        var displayEmptySearchCalled = false
+        func displayEmptySearch() {
+            displayEmptySearchCalled = true
+        }
+        
         func displayLoadingSearchResults() {
             
         }

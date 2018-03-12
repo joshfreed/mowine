@@ -15,6 +15,7 @@ import UIKit
 protocol FriendsPresentationLogic {
     func presentFriends(response: Friends.FetchFriends.Response)
     func presentSearchResults(response: Friends.SearchUsers.Response)
+    func presentEmptySearch()
     func presentLoadingSearchResults()
     func presentAddFriend(response: Friends.AddFriend.Response)
     func presentAddFriendError(response: Friends.AddFriend.Response)
@@ -41,6 +42,10 @@ class FriendsPresenter: FriendsPresentationLogic {
         let matches = response.matches.map { makeDisplayedUser(from: $0, friends: friendIds) }
         let viewModel = Friends.SearchUsers.ViewModel(matches: matches)
         viewController?.displaySearchResults(viewModel: viewModel)
+    }
+    
+    func presentEmptySearch() {
+        viewController?.displayEmptySearch()
     }
     
     func presentLoadingSearchResults() {

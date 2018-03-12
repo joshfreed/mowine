@@ -59,7 +59,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
         cancelSearchTimer()
         
         guard !request.searchString.isEmpty else {
-            presentFriends(friends)
+            presenter?.presentEmptySearch()
             return
         }
 
