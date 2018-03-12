@@ -133,6 +133,10 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         cell.configure(user: displayedUsers[indexPath.row])
         return cell
     }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        navigationItem.searchController?.searchBar.resignFirstResponder()
+    }
 
     // MARK: Fetch friends
 
