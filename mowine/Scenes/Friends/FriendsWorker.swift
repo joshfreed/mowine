@@ -70,14 +70,33 @@ class FriendsWorker {
         }
         
         userRepository.addFriend(owningUserId: currentUserId, friendId: userId) { result1 in
-            self.userRepository.getUserById(userId) { result2 in
-                if case let .success(newFriend) = result2 {
-                    if let newFriend = newFriend {
-                        self.friends.append(newFriend)
-                    }
-                }
+            self.fetchFriendUser(userId: userId) { _ in
                 completion(result1)
             }
+        }
+    }
+    
+    func friendWasAdded(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        fetchFriendUser(userId: userId) { result in
+            switch result {
+            case .success: completion(.success)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func friendWasRemoved(userId: UserId) {
+        if let index = friends.index(where: { $0.id == userId }) {
+            friends.remove(at: index)
+        }
+    }
+    
+    private func fetchFriendUser(userId: UserId, completion: @escaping (Result<User?>) -> ()) {
+        self.userRepository.getUserById(userId) { result in
+            if case let .success(f) = result, let newFriend = f {
+                self.friends.append(newFriend)
+            }
+            completion(result)
         }
     }
 }

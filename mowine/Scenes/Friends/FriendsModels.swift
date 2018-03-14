@@ -63,4 +63,16 @@ enum Friends {
             var userId: String
         }
     }
+    
+    enum SelectUser {
+        struct Request {
+            var userId: String
+        }
+        
+        struct Response {            
+        }
+        
+        struct ViewModel {
+        }
+    }
 }

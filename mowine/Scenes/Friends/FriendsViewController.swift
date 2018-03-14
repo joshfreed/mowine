@@ -20,17 +20,13 @@ protocol FriendsDisplayLogic: class {
     func displaySearchResults(viewModel: Friends.SearchUsers.ViewModel)
     func displayFriendAdded(viewModel: Friends.AddFriend.ViewModel)
     func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel)
+    func displaySelectedUser(viewModel: Friends.SelectUser.ViewModel)
 }
 
 class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var interactor: FriendsBusinessLogic?
     var router: (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing)?
 
-    enum DisplayMode {
-        case friends
-        case searchResult
-    }
-    
     var canSearch = false
     var displayedUsers: [Friends.DisplayedUser] = []    
     var activityIndicator: UIActivityIndicatorView?
@@ -138,6 +134,13 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         navigationItem.searchController?.searchBar.resignFirstResponder()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userId = displayedUsers[indexPath.row].userId
+        
+        let request = Friends.SelectUser.Request(userId: userId)
+        interactor?.selectUser(request: request)
+    }
 
     // MARK: Fetch friends
 
@@ -216,7 +219,13 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel) {
         friendCells[viewModel.userId]?.displayAddFriendFailed()
         // TODO: display an error message
-    }    
+    }
+    
+    // MARK: Select user
+    
+    func displaySelectedUser(viewModel: Friends.SelectUser.ViewModel) {
+        performSegue(withIdentifier: "UserProfile", sender: nil)
+    }
 }
 
 // MARK: - UISearchResultsUpdating
@@ -225,6 +234,8 @@ extension FriendsViewController: UISearchResultsUpdating {
         guard canSearch else {
             return
         }
+
+        print("updateSearchResults(for:)")
 
         let text = searchController.searchBar.text ?? ""
         searchUsers(searchString: text)

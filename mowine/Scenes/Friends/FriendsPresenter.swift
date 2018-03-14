@@ -19,6 +19,7 @@ protocol FriendsPresentationLogic {
     func presentLoadingSearchResults()
     func presentAddFriend(response: Friends.AddFriend.Response)
     func presentAddFriendError(response: Friends.AddFriend.Response)
+    func presentSelectedUser(response: Friends.SelectUser.Response)
 }
 
 class FriendsPresenter: FriendsPresentationLogic {
@@ -62,6 +63,13 @@ class FriendsPresenter: FriendsPresentationLogic {
     func presentAddFriendError(response: Friends.AddFriend.Response) {
         let viewModel = Friends.AddFriend.ViewModel(userId: response.userId)
         viewController?.displayAddFriendError(viewModel: viewModel)
+    }
+    
+    // MARK: Select user
+    
+    func presentSelectedUser(response: Friends.SelectUser.Response) {
+        let viewModel = Friends.SelectUser.ViewModel()
+        viewController?.displaySelectedUser(viewModel: viewModel)
     }
     
     // MARK: Helpers

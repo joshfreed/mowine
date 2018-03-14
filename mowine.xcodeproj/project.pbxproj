@@ -28,6 +28,12 @@
 		5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */; };
 		5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */; };
 		5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */; };
+		532FB08420584C2C0056D1B2 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB07E20584C2C0056D1B2 /* UserProfilePresenter.swift */; };
+		532FB08520584C2C0056D1B2 /* UserProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB07F20584C2C0056D1B2 /* UserProfileWorker.swift */; };
+		532FB08620584C2C0056D1B2 /* UserProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08020584C2C0056D1B2 /* UserProfileRouter.swift */; };
+		532FB08720584C2C0056D1B2 /* UserProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08120584C2C0056D1B2 /* UserProfileModels.swift */; };
+		532FB08820584C2C0056D1B2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */; };
+		532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */; };
 		53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */; };
 		53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */; };
 		53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */; };
@@ -201,6 +207,12 @@
 		5321FB9E1F0BF594001D2040 /* SelectVarietyPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyPresenter.swift; sourceTree = "<group>"; };
 		5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyRouter.swift; sourceTree = "<group>"; };
 		5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
+		532FB07E20584C2C0056D1B2 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePresenter.swift; sourceTree = "<group>"; };
+		532FB07F20584C2C0056D1B2 /* UserProfileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileWorker.swift; sourceTree = "<group>"; };
+		532FB08020584C2C0056D1B2 /* UserProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRouter.swift; sourceTree = "<group>"; };
+		532FB08120584C2C0056D1B2 /* UserProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModels.swift; sourceTree = "<group>"; };
+		532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
 		53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryInteractor.swift; sourceTree = "<group>"; };
 		53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryModels.swift; sourceTree = "<group>"; };
 		53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryPresenter.swift; sourceTree = "<group>"; };
@@ -398,6 +410,35 @@
 				5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */,
 			);
 			path = SelectVariety;
+			sourceTree = "<group>";
+		};
+		532FB07B20584BC70056D1B2 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				532FB07C20584C020056D1B2 /* TopWines */,
+				532FB07D20584C0A0056D1B2 /* Cellar */,
+				532FB07E20584C2C0056D1B2 /* UserProfilePresenter.swift */,
+				532FB07F20584C2C0056D1B2 /* UserProfileWorker.swift */,
+				532FB08020584C2C0056D1B2 /* UserProfileRouter.swift */,
+				532FB08120584C2C0056D1B2 /* UserProfileModels.swift */,
+				532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */,
+				532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		532FB07C20584C020056D1B2 /* TopWines */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TopWines;
+			sourceTree = "<group>";
+		};
+		532FB07D20584C0A0056D1B2 /* Cellar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cellar;
 			sourceTree = "<group>";
 		};
 		53423DD71F740B4000655A7F /* AddWineSummary */ = {
@@ -787,6 +828,7 @@
 				537614C01E591867005AABF0 /* EditWine */,
 				53A8D5EF20461181000AD7A3 /* MyAccount */,
 				53ED1F7D204F2D2F00C129BC /* Friends */,
+				532FB07B20584BC70056D1B2 /* UserProfile */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1167,8 +1209,10 @@
 				53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */,
 				53ED1F8E204F359C00C129BC /* UserTableViewCell.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
+				532FB08720584C2C0056D1B2 /* UserProfileModels.swift in Sources */,
 				53ED1F84204F2D5C00C129BC /* FriendsPresenter.swift in Sources */,
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
+				532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
 				53ED1F85204F2D5C00C129BC /* FriendsWorker.swift in Sources */,
@@ -1204,9 +1248,11 @@
 				53F100FA2045E08F00B29FAF /* SignInPresenter.swift in Sources */,
 				53FD50B21E4947CD00F474A6 /* WineTableViewCell.swift in Sources */,
 				537740A41E5BC73600A1D282 /* Models.swift in Sources */,
+				532FB08420584C2C0056D1B2 /* UserProfilePresenter.swift in Sources */,
 				534895F1203CBAA400B7547A /* Wine.swift in Sources */,
 				53423DE11F740B6B00655A7F /* AddWineSummaryRouter.swift in Sources */,
 				53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */,
+				532FB08520584C2C0056D1B2 /* UserProfileWorker.swift in Sources */,
 				53489600203CF10500B7547A /* AddWineSummaryWorker.swift in Sources */,
 				53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */,
 				5321FBA21F0BF594001D2040 /* SelectVarietyInteractor.swift in Sources */,
@@ -1233,6 +1279,7 @@
 				538F29441F72EB1F006EEDB1 /* RatingRow.swift in Sources */,
 				53F100E72044BFAF00B29FAF /* Session.swift in Sources */,
 				535793631E21A1EB00FDD56A /* MyWinesRouter.swift in Sources */,
+				532FB08820584C2C0056D1B2 /* UserProfileViewController.swift in Sources */,
 				53489609203DDFF000B7547A /* MainMenuViewController.swift in Sources */,
 				53489602203DD11F00B7547A /* WineRepository.swift in Sources */,
 				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
@@ -1258,6 +1305,7 @@
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				53A8D5FA204611A1000AD7A3 /* MyAccountViewController.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
+				532FB08620584C2C0056D1B2 /* UserProfileRouter.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
 				534895FD203CBFB900B7547A /* Container.swift in Sources */,
 				537614C91E591887005AABF0 /* EditWineInteractor.swift in Sources */,

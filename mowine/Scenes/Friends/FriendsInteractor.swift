@@ -17,25 +17,74 @@ protocol FriendsBusinessLogic {
     func searchUsers(request: Friends.SearchUsers.Request)
     func cancelSearch()
     func addFriend(request: Friends.AddFriend.Request)
+    func selectUser(request: Friends.SelectUser.Request)
 }
 
 protocol FriendsDataStore {
-    
+    var selectedUserId: UserId? { get }
 }
 
 class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     var presenter: FriendsPresentationLogic?
     var worker: FriendsWorker?
+    var selectedUserId: UserId?
 
+    enum DisplayMode {
+        case friends
+        case search
+    }
+
+    private(set) var displayMode: DisplayMode = .friends
     private var friends: [User] {
         return worker?.friends ?? []
     }
     private(set) var searchTimer: Timer?
     private(set) var debounceTime = 0.25
+    private var lastSearchResults: [User] = []
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(friendWasAdded), name: .friendAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(friendWasRemoved), name: .friendRemoved, object: nil)
+    }
+    
+    @objc func friendWasAdded(notification: Notification) {
+        guard let friendId = notification.userInfo?["friendId"] as? UserId else {
+            return
+        }
+        
+        worker?.friendWasAdded(userId: friendId) { result in
+            switch result {
+            case .success: self.updateFriendStatus(userId: friendId, isFriend: true)
+            case .failure(let error): print("\(error)")
+            }
+        }
+    }
+    
+    @objc func friendWasRemoved(notification: Notification) {
+        guard let friendId = notification.userInfo?["friendId"] as? UserId else {
+            return
+        }
+        
+        worker?.friendWasRemoved(userId: friendId)
+        updateFriendStatus(userId: friendId, isFriend: false)
+    }
+
+    private func updateFriendStatus(userId: UserId, isFriend: Bool) {
+        switch displayMode {
+        case .friends: presentFriends(friends)
+        case .search:
+            if let index = self.lastSearchResults.index(where: { $0.id == userId }) {
+                self.lastSearchResults[index].isFriend = isFriend
+            }
+            self.presentSearchResults(users: self.lastSearchResults)
+        }
+    }
     
     // MARK: Fetch Friends
 
-    func fetchFriends(request: Friends.FetchFriends.Request) {        
+    func fetchFriends(request: Friends.FetchFriends.Request) {
+        displayMode = .friends
+
         worker?.fetchMyFriends() { result in
             switch result {
             case .success(let friends): self.presentFriends(friends)
@@ -54,6 +103,8 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     private var searches: [UUID] = []
     
     func searchUsers(request: Friends.SearchUsers.Request) {
+        displayMode = .search
+
         print("Searching for: \(request.searchString)")
 
         cancelSearchTimer()
@@ -86,6 +137,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
                     return
                 }
                 print("Presenting search results for \(searchJobId), \(request.searchString)")
+                self.lastSearchResults = users
                 self.presentSearchResults(users: users)
             case .failure(let error): print("\(error)")
             }
@@ -106,6 +158,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     // MARK: Cancel search
     
     func cancelSearch() {
+        displayMode = .friends
         cancelSearchTimer()
         presentFriends(friends)
     }
@@ -128,5 +181,18 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
                 self.presenter?.presentAddFriendError(response: response)
             }
         }
+    }
+    
+    // MARK: Select user
+    
+    func selectUser(request: Friends.SelectUser.Request) {
+        guard let userId = UserId(string: request.userId) else {
+            return
+        }
+        
+        selectedUserId = userId
+        
+        let response = Friends.SelectUser.Response()
+        presenter?.presentSelectedUser(response: response)
     }
 }

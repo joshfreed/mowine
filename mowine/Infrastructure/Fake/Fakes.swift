@@ -157,8 +157,18 @@ class FakeUserRepository: UserRepository {
         completion(.success)
     }
     
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        if let index = friendsDB[owningUserId]?.index(of: friendId) {
+            friendsDB[owningUserId]?.remove(at: index)
+        }        
+        completion(.success)
+    }
+    
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
-        let user = usersDB.first(where: { $0.id == id })
+        var user = usersDB.first(where: { $0.id == id })
+        if user != nil, let currentUserId = Container.shared.session.currentUserId {
+            user?.isFriend = friendsDB[currentUserId]?.contains(id) ?? false
+        }
         completion(.success(user))
     }
 }

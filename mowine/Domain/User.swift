@@ -14,6 +14,7 @@ struct User: Equatable {
     var lastName: String?
     var emailAddress: String
     var profilePicture: UIImage?
+    var isFriend: Bool = false
     
     var fullName: String {
         let firstName = self.firstName ?? ""
