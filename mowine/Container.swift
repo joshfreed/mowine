@@ -15,10 +15,13 @@ class Container {
 
     lazy var session: Session = FakeSession()
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer)
-    lazy var wineRepository: WineRepository = {
+    
+    lazy var localWineDataStore: LocalWineDataStore = {
         let wineTranslator = CoreDataWineTranslator(context: persistentContainer.viewContext)
         return CoreDataWineRepository(container: persistentContainer, wineEntityMapper: wineTranslator)
     }()
+    lazy var remoteWineDataStore: RemoteWineDataStore = FakeRemoteWineDataStore()
+    lazy var wineRepository: WineRepository = TheWineRepository(local: localWineDataStore, remote: remoteWineDataStore)
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
     lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
     lazy var userRepository: UserRepository = FakeUserRepository()

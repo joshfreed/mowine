@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol UserProfileRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToTopWines(segue: UIStoryboardSegue)
 }
 
 protocol UserProfileDataPassing {
@@ -26,20 +26,11 @@ class UserProfileRouter: NSObject, UserProfileRoutingLogic, UserProfileDataPassi
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToTopWines(segue: UIStoryboardSegue) {
+        let destinationVC = segue.destination as! TopWinesViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToTopWines(source: dataStore!, destination: &destinationDS)
+    }
 
     // MARK: Navigation
 
@@ -50,8 +41,8 @@ class UserProfileRouter: NSObject, UserProfileRoutingLogic, UserProfileDataPassi
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: UserProfileDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToTopWines(source: UserProfileDataStore, destination: inout TopWinesDataStore)
+    {
+        destination.userId = source.userId
+    }
 }

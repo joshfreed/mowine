@@ -13,4 +13,5 @@ protocol WineRepository {
     func getMyWines(completion: @escaping (Result<[Wine]>) -> ())
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ())
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ())
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
 }

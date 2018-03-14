@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import JFLib
 
-class CoreDataWineRepository: WineRepository {
+class CoreDataWineRepository: LocalWineDataStore {
     let container: NSPersistentContainer
     let wineEntityMapper: CoreDataWineTranslator
     
@@ -75,5 +75,9 @@ class CoreDataWineRepository: WineRepository {
         
         container.viewContext.delete(managedWine)
         completion(.success)
+    }
+    
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+        
     }
 }

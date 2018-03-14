@@ -30,28 +30,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1v-bt-JHh" userLabel="Top Spacer">
-                                <rect key="frame" x="182.5" y="140.5" width="10" height="73"/>
+                                <rect key="frame" x="182.5" y="140.5" width="10" height="72.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="CBA-bX-H9P"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuT-xg-2mi" userLabel="Middle Spacer">
-                                <rect key="frame" x="182.5" y="368" width="10" height="72"/>
+                                <rect key="frame" x="182.5" y="367.5" width="10" height="72"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="PNh-6c-5sy"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWa-0t-gSr" userLabel="Bottom Spacer">
-                                <rect key="frame" x="182.5" y="594.5" width="10" height="72.5"/>
+                                <rect key="frame" x="182.5" y="594" width="10" height="73"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="PAK-am-Pcx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-WB-3cH" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="214" width="154" height="154.5"/>
+                                <rect key="frame" x="22.5" y="213.5" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="add wine"/>
@@ -59,7 +59,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="niZ-ht-yQv" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="198.5" y="214" width="154" height="154.5"/>
+                                <rect key="frame" x="198.5" y="213.5" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="my wines"/>
@@ -67,7 +67,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-RW-AMm" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="440.5" width="154" height="154.5"/>
+                                <rect key="frame" x="22.5" y="440" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="my account"/>
@@ -75,7 +75,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5V-7H-iwC" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="198.5" y="440.5" width="154" height="154.5"/>
+                                <rect key="frame" x="198.5" y="440" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="friends"/>
@@ -83,21 +83,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3F8-8T-zdL">
-                                <rect key="frame" x="0.0" y="286.5" width="22.5" height="10"/>
+                                <rect key="frame" x="0.0" y="286" width="22.5" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="nQh-L0-Ama"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jW3-z1-izp">
-                                <rect key="frame" x="176.5" y="286.5" width="22" height="10"/>
+                                <rect key="frame" x="176.5" y="286" width="22" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="xP1-jk-WX7"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQL-Aq-Wu0">
-                                <rect key="frame" x="352.5" y="286.5" width="22.5" height="10"/>
+                                <rect key="frame" x="352.5" y="286" width="22.5" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="efH-md-Utg"/>
@@ -1066,7 +1066,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vMD-DM-IVU">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="16" y="64" width="343" height="141.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPU-2B-f71">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="64"/>
@@ -1100,34 +1100,48 @@
                                         </segments>
                                         <color key="tintColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                     </segmentedControl>
-                                    <containerView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="nwZ-Uh-Quo">
-                                        <rect key="frame" x="0.0" y="149.5" width="343" height="453.5"/>
-                                        <connections>
-                                            <segue destination="rqY-LH-bqH" kind="embed" id="VcQ-aY-gsx"/>
-                                        </connections>
-                                    </containerView>
                                 </subviews>
                             </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="nwZ-Uh-Quo">
+                                <rect key="frame" x="0.0" y="213.5" width="375" height="453.5"/>
+                                <connections>
+                                    <segue destination="rqY-LH-bqH" kind="embed" identifier="TopWines" id="VcQ-aY-gsx"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tM-Qm-f1S">
+                                <rect key="frame" x="0.0" y="214" width="375" height="453"/>
+                                <connections>
+                                    <segue destination="lDX-bs-0sz" kind="embed" id="Kyp-iS-BQ4"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="l6I-8p-qcV" firstAttribute="top" secondItem="9tM-Qm-f1S" secondAttribute="bottom" id="357-Bm-QQa"/>
+                            <constraint firstItem="nwZ-Uh-Quo" firstAttribute="leading" secondItem="ueh-vL-DnX" secondAttribute="leading" id="7Mq-jH-bbc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vMD-DM-IVU" secondAttribute="trailing" id="8pR-oP-bOu"/>
-                            <constraint firstItem="l6I-8p-qcV" firstAttribute="top" secondItem="vMD-DM-IVU" secondAttribute="bottom" id="L6q-8r-niI"/>
+                            <constraint firstItem="9tM-Qm-f1S" firstAttribute="top" secondItem="vMD-DM-IVU" secondAttribute="bottom" constant="8" id="If3-Hx-6Rq"/>
+                            <constraint firstItem="l6I-8p-qcV" firstAttribute="top" secondItem="nwZ-Uh-Quo" secondAttribute="bottom" id="Scy-Fs-qu4"/>
+                            <constraint firstAttribute="trailing" secondItem="nwZ-Uh-Quo" secondAttribute="trailing" id="TKr-Ul-IAj"/>
+                            <constraint firstItem="nwZ-Uh-Quo" firstAttribute="top" secondItem="vMD-DM-IVU" secondAttribute="bottom" constant="8" id="U4z-Jy-dP5"/>
                             <constraint firstItem="vMD-DM-IVU" firstAttribute="leading" secondItem="ueh-vL-DnX" secondAttribute="leadingMargin" id="VoT-at-Lbg"/>
+                            <constraint firstItem="9tM-Qm-f1S" firstAttribute="leading" secondItem="ueh-vL-DnX" secondAttribute="leading" id="WLo-Mm-5Hp"/>
+                            <constraint firstAttribute="trailing" secondItem="9tM-Qm-f1S" secondAttribute="trailing" id="clS-Fz-4Xl"/>
                             <constraint firstItem="vMD-DM-IVU" firstAttribute="top" secondItem="NKF-cf-hbI" secondAttribute="bottom" id="vJQ-bZ-6u9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oVY-jN-FLq"/>
                     <connections>
-                        <outlet property="containerView" destination="nwZ-Uh-Quo" id="4SB-AQ-PYA"/>
+                        <outlet property="cellarView" destination="9tM-Qm-f1S" id="cVA-hI-yhP"/>
                         <outlet property="fullNameLabel" destination="WCi-tJ-mgF" id="uGH-CA-4Nm"/>
                         <outlet property="profilePictureImageView" destination="iqu-4j-42r" id="aDC-aa-bua"/>
                         <outlet property="segmentedControl" destination="ffh-1e-q3A" id="vPL-Y5-ndG"/>
+                        <outlet property="topWinesView" destination="nwZ-Uh-Quo" id="wYq-h2-whT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5v-K0-qf2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2543" y="2298"/>
+            <point key="canvasLocation" x="2541.5999999999999" y="2297.9010494752624"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="X5i-oU-3CZ">
@@ -1367,19 +1381,69 @@
             </objects>
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
-        <!--View Controller-->
+        <!--Top Wines View Controller-->
         <scene sceneID="rLp-aF-ahb">
             <objects>
-                <viewController id="rqY-LH-bqH" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TopWinesViewController" id="rqY-LH-bqH" customClass="TopWinesViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="npl-2q-fu9"/>
+                        <viewControllerLayoutGuide type="bottom" id="6eS-cY-GVt"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CNf-8a-GKr">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="453"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="453.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1i-vg-vF5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="453"/>
+                                <connections>
+                                    <segue destination="7NJ-7w-5oe" kind="embed" identifier="WineList" id="zG4-fF-NmX"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="w1i-vg-vF5" firstAttribute="leading" secondItem="CNf-8a-GKr" secondAttribute="leading" id="FQd-mW-RdK"/>
+                            <constraint firstItem="6eS-cY-GVt" firstAttribute="top" secondItem="w1i-vg-vF5" secondAttribute="bottom" id="hLw-Pu-4f6"/>
+                            <constraint firstAttribute="trailing" secondItem="w1i-vg-vF5" secondAttribute="trailing" id="j4S-4b-5Un"/>
+                            <constraint firstItem="w1i-vg-vF5" firstAttribute="top" secondItem="npl-2q-fu9" secondAttribute="bottom" id="vzC-D2-Dkd"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yj-jN-GqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3407" y="2297"/>
+            <point key="canvasLocation" x="3446" y="2031"/>
+        </scene>
+        <!--Wine List View Controller-->
+        <scene sceneID="cAp-S0-uPM">
+            <objects>
+                <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="453"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="7NJ-7w-5oe" id="9S2-Rd-daJ"/>
+                            <outlet property="delegate" destination="7NJ-7w-5oe" id="IU0-Pd-dmC"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q9p-Va-lrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4753" y="1720"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="e3x-Wp-Hcd">
+            <objects>
+                <viewController id="lDX-bs-0sz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cki-Ja-uam">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="453"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gIa-aO-aBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3446" y="2615"/>
         </scene>
     </scenes>
     <resources>

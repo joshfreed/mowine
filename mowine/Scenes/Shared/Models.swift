@@ -25,6 +25,13 @@ struct WineViewModel {
     }
 }
 
+struct WineListViewModel {
+    var name: String
+    var rating: Double
+    var type: String
+    var thumbnail: UIImage?
+}
+
 struct WineTypeViewModel: Equatable, CustomStringConvertible {
     var name: String
     var varieties: [String]

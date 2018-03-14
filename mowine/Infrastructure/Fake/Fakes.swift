@@ -9,10 +9,13 @@
 import Foundation
 import JFLib
 
+var josh = User(id: UserId(), emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
+var maureen = User(id: UserId(), emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
+
 let usersDB: [User] = [
-    User(id: UserId(), emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed"),
+    josh,
     User(id: UserId(), emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
-    User(id: UserId(), emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley"),
+    maureen,
     User(id: UserId(), emailAddress: "mbananas@gmail.com", firstName: "Maurice", lastName: "Bananas"),
     User(id: UserId(), emailAddress: "test1@test.com", firstName: "Test", lastName: "User1"),
     User(id: UserId(), emailAddress: "test2@test.com", firstName: "Test", lastName: "User2"),
@@ -37,12 +40,27 @@ let usersDB: [User] = [
 ]
 
 var friendsDB: [UserId: [UserId]] = [
-    usersDB[0].id: [
+    josh.id: [
         usersDB[1].id,
-        usersDB[2].id
+        maureen.id
     ],
-    usersDB[2].id: [
-        usersDB[0].id
+    maureen.id: [
+        josh.id
+    ]
+]
+
+var merlot = WineVariety(name: "Merlot")
+var red = WineType(name: "Red", varieties: [merlot])
+var winesDB: [UserId: [Wine]] = [
+    josh.id: [
+        
+    ],
+    maureen.id: [
+        Wine(type: red, variety: merlot, name: "Wine 1", rating: 1),
+        Wine(type: red, variety: merlot, name: "Wine 2", rating: 5),
+        Wine(type: red, variety: merlot, name: "Wine 3", rating: 3),
+        Wine(type: red, variety: merlot, name: "Wine 4", rating: 4),
+        Wine(type: red, variety: merlot, name: "Wine 5", rating: 5),
     ]
 ]
 
@@ -186,5 +204,14 @@ class FakeUserRepository: UserRepository {
             user?.isFriend = friendsDB[currentUserId]?.contains(id) ?? false
         }
         completion(.success(user))
+    }
+}
+
+class FakeRemoteWineDataStore: RemoteWineDataStore {
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+        var wines = winesDB[userId] ?? []
+        wines = wines.sorted(by: { $0.rating > $1.rating })
+        wines = Array(wines.prefix(3))
+        completion(.success(wines))
     }
 }

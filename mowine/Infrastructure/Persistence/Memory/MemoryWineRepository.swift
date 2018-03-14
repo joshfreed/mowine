@@ -32,4 +32,8 @@ class MemoryWineRepository: WineRepository {
             wines.remove(at: index)
         }
     }
+    
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+        
+    }
 }

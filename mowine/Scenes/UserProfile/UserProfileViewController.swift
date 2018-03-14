@@ -25,7 +25,8 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var containerView: UIView!    
+    @IBOutlet weak var topWinesView: UIView!
+    @IBOutlet weak var cellarView: UIView!
     
     // MARK: Object lifecycle
 
@@ -70,6 +71,10 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topWinesView.isHidden = false
+        cellarView.isHidden = true
+        
         fetchUserProfile()
     }
 
