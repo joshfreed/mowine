@@ -70,6 +70,10 @@ class FriendsViewControllerTests: XCTestCase {
             addFriendCalled = true
             addFriendRequest = request
         }
+
+        func selectUser(request: Friends.SelectUser.Request) {
+
+        }
     }
     
     class MockUserCell: UserTableViewCell {

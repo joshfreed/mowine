@@ -10,11 +10,24 @@ import Foundation
 @testable import mowine
 
 class UserBuilder {
-    var userId: UserId?
-    var emailAddress: String?
+    private var userId: UserId?
+    private var emailAddress: String?
+    private var _isFriend = false
     
     static func aUser() -> UserBuilder {
         return UserBuilder()
+    }
+
+    static func aUser(id: UserId) -> UserBuilder {
+        return UserBuilder(id: id)
+    }
+
+    init() {
+
+    }
+
+    init(id: UserId) {
+        userId = id
     }
     
     func build() -> User {
@@ -26,11 +39,17 @@ class UserBuilder {
         }
         
         var user = User(id: userId!, emailAddress: emailAddress!)
+        user.isFriend = _isFriend
         return user
     }
     
     func withEmail(_ email: String) -> UserBuilder {
         emailAddress = email
+        return self
+    }
+
+    func isFriend() -> UserBuilder {
+        self._isFriend = true
         return self
     }
 }

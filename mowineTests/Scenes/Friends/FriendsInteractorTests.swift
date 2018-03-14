@@ -45,8 +45,10 @@ class FriendsInteractorTests: XCTestCase {
 
     class FriendsPresentationLogicSpy: FriendsPresentationLogic {
         var presentFriendsCalled = false
+        var presentFriendsResponse: Friends.FetchFriends.Response?
         func presentFriends(response: Friends.FetchFriends.Response) {
             presentFriendsCalled = true
+            presentFriendsResponse = response
         }
         
         var presentEmptySearchCalled = false
@@ -77,18 +79,17 @@ class FriendsInteractorTests: XCTestCase {
         func presentAddFriendError(response: Friends.AddFriend.Response) {
             presentAddFriendErrorCalled = true
         }
+
+        func presentSelectedUser(response: Friends.SelectUser.Response) {
+
+        }
     }
     
     class MockFriendsWorker: FriendsWorker {
         init() {
             super.init(userRepository: MockUserRepository(), session: MockSession())
         }
-        
-        var _friends: [User] = []
-        override var friends: [User] {
-            return _friends
-        }
-        
+
         var fetchMyFriendsResult: Result<[User]>?
         override func fetchMyFriends(completion: @escaping (Result<[User]>) -> ()) {
             if let result = fetchMyFriendsResult {
@@ -122,10 +123,10 @@ class FriendsInteractorTests: XCTestCase {
             searchUsersResults[callCount] = result
         }
         
-        var addFriendResult: EmptyResult?
+        var addFriendResult: Result<User>?
         var addFriendCalled = false
         var addFriendUserId: UserId?
-        override func addFriend(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        override func addFriend(userId: UserId, completion: @escaping (Result<User>) -> ()) {
             addFriendCalled = true
             addFriendUserId = userId
             if let result = addFriendResult {
@@ -143,21 +144,29 @@ class FriendsInteractorTests: XCTestCase {
 
     func testFetchFriends() {
         // Given
+        let friend1 = UserBuilder.aUser().build()
+        let friend2 = UserBuilder.aUser().build()
+        let friends = [friend1, friend2]
+        worker.fetchMyFriendsResult = .success(friends)
         let request = Friends.FetchFriends.Request()
-        worker.fetchMyFriendsResult = .success([])
 
         // When
         sut.fetchFriends(request: request)
 
         // Then
         XCTAssertTrue(spy.presentFriendsCalled, "fetchFriends(request:) should ask the presenter to format the result")
+        expect(self.spy.presentFriendsResponse?.friends).to(equal(friends))
+        expect(self.sut.friends).to(equal(friends))
     }
+
+    // MARK: Add friend
     
     func testAddFriend() {
         // Given
-        let userId = UserId()
+        let user = UserBuilder.aUser().build()
+        let userId = user.id
         let request = Friends.AddFriend.Request(userId: String(describing: userId))
-        worker.addFriendResult = .success
+        worker.addFriendResult = .success(user)
         
         // When
         sut.addFriend(request: request)
@@ -165,6 +174,7 @@ class FriendsInteractorTests: XCTestCase {
         // Then
         worker.verifyAddFriendCalled(userId: userId)
         expect(self.spy.presentAddFriendCalled).to(beTrue())
+        expect(self.sut.friends).to(contain(user))
     }
     
     func testAddFriendFailsIfGivenInvalidUserId() {
@@ -181,7 +191,8 @@ class FriendsInteractorTests: XCTestCase {
     
     func testAddFriendShouldPresentAnError() {
         // Given
-        let userId = UserId()
+        let user = UserBuilder.aUser().build()
+        let userId = user.id
         let request = Friends.AddFriend.Request(userId: String(describing: userId))
         worker.addFriendResult = .failure(TestingError.someError)
         
@@ -192,21 +203,11 @@ class FriendsInteractorTests: XCTestCase {
         worker.verifyAddFriendCalled(userId: userId)
         expect(self.spy.presentAddFriendCalled).to(beFalse())
         expect(self.spy.presentAddFriendErrorCalled).to(beTrue())
+        expect(self.sut.friends).toNot(contain(user))
     }
     
     // MARK: Search users
-    
-//    func testSearchUsers_shouldDisplayTheLoadingView() {
-//        // Given
-//        let request = Friends.SearchUsers.Request(searchString: "momo")
-//
-//        // When
-//        sut.searchUsers(request: request)
-//
-//        // Then
-//        expect(self.spy.presentLoadingSearchResultsCalled).to(beTrue())
-//    }
-    
+
     func testSearchUsers_shouldDisplayTheSearchResults() {
         // Given
         let user1 = UserBuilder.aUser().build()
@@ -223,7 +224,7 @@ class FriendsInteractorTests: XCTestCase {
         expect(self.spy.presentSearchResultsResponse?.matches).toEventually(equal([user1, user2]))
     }
     
-    func testSearchUsers_shouldReturnTheFriendsListIfTheSearchStringIsEmpty() {
+    func testSearchUsers_shouldReturnAnEmptySearchWhenTheSearchStringIsBlank() {
         // Given
         let request = Friends.SearchUsers.Request(searchString: "")
         
@@ -272,6 +273,158 @@ class FriendsInteractorTests: XCTestCase {
         // Then
         expect(self.spy.presentSearchResultsCallCount).toEventually(equal(1), timeout: 3, pollInterval: 3)
         expect(self.spy.presentSearchResultsResponse?.matches).to(equal([user3, user4]))
+    }
+
+    // MARK: Cancel search
+
+    func testCancelSearch_displaysFriendsList() {
+        // Given
+        sut.displayMode = .search
+        sut.friends = [
+            UserBuilder.aUser().build(),
+            UserBuilder.aUser().build(),
+        ]
+
+        // When
+        sut.cancelSearch()
+
+        // Then
+        expect(self.sut.displayMode).to(equal(FriendsInteractor.DisplayMode.friends))
+        expect(self.spy.presentFriendsCalled).to(beTrue())
+        expect(self.spy.presentFriendsResponse?.friends).to(equal(sut.friends))
+    }
+
+    func testCancelSearch_cancelsPendingSearchTimer() {
+        // Given
+        sut.searchTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
+            fail("Timer should not have been fired")
+        }
+
+        // When
+        sut.cancelSearch()
+
+        // Then
+        expect(self.sut.searchTimer).to(beNil())
+    }
+    
+    func testCancelSearch_clearsSearchesInProgress() {
+        // Given
+        sut.searches = [UUID()]
+
+        // When
+        sut.cancelSearch()
+
+        // Then
+        expect(self.sut.searches).to(beEmpty())
+    }
+
+    // MARK: Friend was added
+
+    func testFriendWasAdded() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+
+        // When
+        NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": friend])
+
+        // Then
+        expect(self.sut.friends).to(contain(friend))
+    }
+
+    func testFriendWasAdded_updatesUserStructInLastSearchResults() {
+        // Given
+        let userId = UserId()
+        let friend1 = UserBuilder.aUser(id: userId).build()
+        let friend2 = UserBuilder.aUser(id: userId).isFriend().build()
+        sut.lastSearchResults.append(friend1)
+
+        // When
+        NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": friend2])
+
+        // Then
+        expect(self.sut.lastSearchResults[0].isFriend).to(beTrue())
+    }
+
+    func testFriendWasAdded_presentsFriendsIfNotSearching() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+        sut.displayMode = .friends
+
+        // When
+        NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": friend])
+
+        // Then
+        expect(self.spy.presentFriendsCalled).to(beTrue())
+        expect(self.spy.presentSearchResultsCalled).to(beFalse())
+    }
+
+    func testFriendWasAdded_doesPresentsUpdatedSearchResultsIfSearching() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+        sut.displayMode = .search
+
+        // When
+        NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": friend])
+
+        // Then
+        expect(self.spy.presentFriendsCalled).to(beFalse())
+        expect(self.spy.presentSearchResultsCalled).to(beTrue())
+    }
+
+    // MARK: friend was removed
+
+    func testFriendWasRemoved() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+        sut.friends.append(friend)
+
+        // When
+        NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": friend.id])
+
+        // Then
+        expect(self.sut.friends).toNot(contain(friend))
+    }
+
+    func testFriendWasRemoved_updateLastSearchResults() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+        sut.friends.append(friend)
+        sut.lastSearchResults = [UserBuilder.aUser().build(), friend]
+
+        // When
+        NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": friend.id])
+
+        // Then
+        expect(self.sut.lastSearchResults[1].isFriend).to(beFalse())
+    }
+
+    func testFriendWasRemoved_refreshFriendList() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+        sut.friends.append(friend)
+        sut.displayMode = .friends
+
+        // When
+        NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": friend.id])
+
+        // Then
+        expect(self.spy.presentFriendsCalled).to(beTrue())
+        expect(self.spy.presentSearchResultsCalled).to(beFalse())
+    }
+
+    func testFriendWasRemoved_refreshSearchResults() {
+        // Given
+        let friend = UserBuilder.aUser().isFriend().build()
+        sut.friends.append(friend)
+        sut.lastSearchResults = [UserBuilder.aUser().build(), friend]
+        sut.displayMode = .search
+
+        // When
+        NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": friend.id])
+
+        // Then
+        expect(self.spy.presentFriendsCalled).to(beFalse())
+        expect(self.spy.presentSearchResultsCalled).to(beTrue())
     }
 }
 

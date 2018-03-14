@@ -69,6 +69,10 @@ class FriendsPresenterTests: XCTestCase {
         func displayAddFriendError(viewModel: Friends.AddFriend.ViewModel) {
             
         }
+
+        func displaySelectedUser(viewModel: Friends.SelectUser.ViewModel) {
+
+        }
     }
 
     // MARK: Tests
@@ -87,7 +91,7 @@ class FriendsPresenterTests: XCTestCase {
     func testPresentSearchResults() {
         // Given
         let user = UserBuilder.aUser().build()
-        let response = Friends.SearchUsers.Response(matches: [user], myFriends: [])
+        let response = Friends.SearchUsers.Response(matches: [user])
         
         // When
         sut.presentSearchResults(response: response)
@@ -103,12 +107,9 @@ class FriendsPresenterTests: XCTestCase {
     func testPresentSearchResults_setsTrueWhenMatchIsFriendsWithCurrentUser() {
         // Given
         let user1 = UserBuilder.aUser().build()
-        let user2 = UserBuilder.aUser().build()
+        let user2 = UserBuilder.aUser().isFriend().build()
         let user3 = UserBuilder.aUser().build()
-        let response = Friends.SearchUsers.Response(
-            matches: [user1, user2, user3],
-            myFriends: [user2]
-        )
+        let response = Friends.SearchUsers.Response(matches: [user1, user2, user3])
         
         // When
         sut.presentSearchResults(response: response)

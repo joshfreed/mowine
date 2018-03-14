@@ -30,7 +30,7 @@ class UserProfileWorker {
         userRepository.getUserById(userId, completion: completion)            
     }
     
-    func friend(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func friend(userId: UserId, completion: @escaping (Result<User>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(UserProfileWorkerError.notLoggedIn))
             return

@@ -54,8 +54,8 @@ class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore {
     func addFriend(request: UserProfile.AddFriend.Request) {
         worker?.friend(userId: userId) { result in
             switch result {
-            case .success:
-                NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friendId": self.userId])
+            case .success(let newFriend):
+                NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": newFriend])
                 let response = UserProfile.AddFriend.Response()
                 self.presenter?.presentFriended(response: response)
             case .failure(let error):

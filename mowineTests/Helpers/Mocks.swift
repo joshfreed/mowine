@@ -63,13 +63,20 @@ class MockUserRepository: UserRepository {
     var addFriendCalled = false
     var addFriend_owningUserId: UserId?
     var addFriend_friendId: UserId?
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    var addFriendResult: Result<User>?
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
         addFriendCalled = true
         addFriend_owningUserId = owningUserId
         addFriend_friendId = friendId
-        completion(.success)
+        if let result = addFriendResult {
+            completion(result)
+        }
     }
-    
+
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+
+    }
+
     var getUserByIdResult: Result<User?>?
     var getUserByIdCalled = false
     var getUserById_id: UserId?

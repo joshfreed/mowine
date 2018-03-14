@@ -28,10 +28,7 @@ class FriendsPresenter: FriendsPresentationLogic {
     // MARK: Fetch friends
 
     func presentFriends(response: Friends.FetchFriends.Response) {
-        let friendIds = response.friends.map { $0.id }
-        let friends = response.friends.map {
-            makeDisplayedUser(from: $0, friends: friendIds)
-        }
+        let friends = response.friends.map { makeDisplayedUser(from: $0) }
         let viewModel = Friends.FetchFriends.ViewModel(friends: friends)
         viewController?.displayFriends(viewModel: viewModel)
     }
@@ -39,8 +36,7 @@ class FriendsPresenter: FriendsPresentationLogic {
     // MARK: Search users
 
     func presentSearchResults(response: Friends.SearchUsers.Response) {
-        let friendIds = response.myFriends.map { $0.id }
-        let matches = response.matches.map { makeDisplayedUser(from: $0, friends: friendIds) }
+        let matches = response.matches.map { makeDisplayedUser(from: $0) }
         let viewModel = Friends.SearchUsers.ViewModel(matches: matches)
         viewController?.displaySearchResults(viewModel: viewModel)
     }
@@ -74,12 +70,12 @@ class FriendsPresenter: FriendsPresentationLogic {
     
     // MARK: Helpers
     
-    private func makeDisplayedUser(from user: User, friends: [UserId]) -> Friends.DisplayedUser {
+    private func makeDisplayedUser(from user: User) -> Friends.DisplayedUser {
         return Friends.DisplayedUser(
             userId: String(describing: user.id),
             fullName: user.fullName,
             profilePicture: user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture"),
-            isFriend: friends.contains(user.id)
+            isFriend: user.isFriend
         )
     }
 }

@@ -34,29 +34,32 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
         case search
     }
 
-    private(set) var displayMode: DisplayMode = .friends
-    private var friends: [User] {
-        return worker?.friends ?? []
-    }
-    private(set) var searchTimer: Timer?
-    private(set) var debounceTime = 0.25
-    private var lastSearchResults: [User] = []
-    
+    var displayMode: DisplayMode = .friends
+    var friends: [User] = []
+    var lastSearchResults: [User] = []
+    var searchTimer: Timer?
+    var debounceTime = 0.25
+    var searches: [UUID] = []
+
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(friendWasAdded), name: .friendAdded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(friendWasRemoved), name: .friendRemoved, object: nil)
     }
     
     @objc func friendWasAdded(notification: Notification) {
-        guard let friendId = notification.userInfo?["friendId"] as? UserId else {
+        guard let friend = notification.userInfo?["friend"] as? User else {
             return
         }
-        
-        worker?.friendWasAdded(userId: friendId) { result in
-            switch result {
-            case .success: self.updateFriendStatus(userId: friendId, isFriend: true)
-            case .failure(let error): print("\(error)")
-            }
+
+        friends.append(friend)
+
+        if let index = lastSearchResults.index(where: { $0.id == friend.id }) {
+            lastSearchResults[index].isFriend = true
+        }
+
+        switch displayMode {
+        case .friends: presentFriends()
+        case .search: self.presentSearchResults(users: self.lastSearchResults)
         }
     }
     
@@ -64,22 +67,21 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
         guard let friendId = notification.userInfo?["friendId"] as? UserId else {
             return
         }
-        
-        worker?.friendWasRemoved(userId: friendId)
-        updateFriendStatus(userId: friendId, isFriend: false)
-    }
 
-    private func updateFriendStatus(userId: UserId, isFriend: Bool) {
+        if let index = friends.index(where: { $0.id == friendId }) {
+            friends.remove(at: index)
+        }
+
+        if let index = lastSearchResults.index(where: { $0.id == friendId }) {
+            lastSearchResults[index].isFriend = false
+        }
+
         switch displayMode {
-        case .friends: presentFriends(friends)
-        case .search:
-            if let index = self.lastSearchResults.index(where: { $0.id == userId }) {
-                self.lastSearchResults[index].isFriend = isFriend
-            }
-            self.presentSearchResults(users: self.lastSearchResults)
+        case .friends: presentFriends()
+        case .search: self.presentSearchResults(users: self.lastSearchResults)
         }
     }
-    
+
     // MARK: Fetch Friends
 
     func fetchFriends(request: Friends.FetchFriends.Request) {
@@ -87,21 +89,21 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
 
         worker?.fetchMyFriends() { result in
             switch result {
-            case .success(let friends): self.presentFriends(friends)
+            case .success(let friends):
+                self.friends = friends
+                self.presentFriends()
             case .failure(let error): print("\(error)")
             }
         }
     }
     
-    private func presentFriends(_ friends: [User]) {
+    private func presentFriends() {
         let response = Friends.FetchFriends.Response(friends: friends)
         presenter?.presentFriends(response: response)
     }
     
     // MARK: Search Users
 
-    private var searches: [UUID] = []
-    
     func searchUsers(request: Friends.SearchUsers.Request) {
         displayMode = .search
 
@@ -145,7 +147,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     }
     
     private func presentSearchResults(users: [User]) {
-        let response = Friends.SearchUsers.Response(matches: users, myFriends: friends)
+        let response = Friends.SearchUsers.Response(matches: users)
         presenter?.presentSearchResults(response: response)
     }
     
@@ -160,7 +162,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     func cancelSearch() {
         displayMode = .friends
         cancelSearchTimer()
-        presentFriends(friends)
+        presentFriends()
     }
     
     // MARK: Add friend
@@ -172,7 +174,8 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
         
         worker?.addFriend(userId: userId) { result in
             switch result {
-            case .success:
+            case .success(let newFriend):
+                self.friends.append(newFriend)
                 let response = Friends.AddFriend.Response(userId: request.userId)
                 self.presenter?.presentAddFriend(response: response)
             case .failure(let error):

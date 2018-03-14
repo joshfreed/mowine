@@ -42,7 +42,6 @@ enum Friends {
         
         struct Response {
             var matches: [User]
-            var myFriends: [User]
         }
         
         struct ViewModel {

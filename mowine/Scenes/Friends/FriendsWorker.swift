@@ -21,8 +21,6 @@ class FriendsWorker {
     let userRepository: UserRepository
     let session: Session
     
-    private(set) var friends: [User] = []
-    
     init(userRepository: UserRepository, session: Session) {
         self.userRepository = userRepository
         self.session = session
@@ -34,12 +32,7 @@ class FriendsWorker {
             return
         }
         
-        userRepository.getFriendsOf(userId: currentUserId) { result in
-            if case let .success(friends) = result {
-                self.friends = friends
-            }
-            completion(result)
-        }
+        userRepository.getFriendsOf(userId: currentUserId, completion: completion)
     }
     
     func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
@@ -49,7 +42,7 @@ class FriendsWorker {
         }
         
         guard !searchString.isEmpty else {
-            completion(.success(friends))
+            completion(.success([]))
             return
         }
         
@@ -63,40 +56,16 @@ class FriendsWorker {
         }
     }
     
-    func addFriend(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func addFriend(userId: UserId, completion: @escaping (Result<User>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(FriendsWorkerError.notLoggedIn))
             return
         }
-        
-        userRepository.addFriend(owningUserId: currentUserId, friendId: userId) { result1 in
-            self.fetchFriendUser(userId: userId) { _ in
-                completion(result1)
-            }
-        }
+
+        userRepository.addFriend(owningUserId: currentUserId, friendId: userId, completion: completion)
     }
-    
-    func friendWasAdded(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
-        fetchFriendUser(userId: userId) { result in
-            switch result {
-            case .success: completion(.success)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
-    
-    func friendWasRemoved(userId: UserId) {
-        if let index = friends.index(where: { $0.id == userId }) {
-            friends.remove(at: index)
-        }
-    }
-    
-    private func fetchFriendUser(userId: UserId, completion: @escaping (Result<User?>) -> ()) {
-        self.userRepository.getUserById(userId) { result in
-            if case let .success(f) = result, let newFriend = f {
-                self.friends.append(newFriend)
-            }
-            completion(result)
-        }
+
+    func getUser(byId userId: UserId, completion: @escaping (Result<User?>) -> ()) {
+        userRepository.getUserById(userId, completion: completion)
     }
 }

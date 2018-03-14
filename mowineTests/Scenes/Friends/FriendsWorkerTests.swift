@@ -64,10 +64,6 @@ class FriendsWorkerTests: XCTestCase {
         expect(foundFriends).to(haveCount(2))
         expect(foundFriends).to(contain(friend1))
         expect(foundFriends).to(contain(friend2))
-        expect(self.sut.friends).to(equal(foundFriends))
-//        expect(self.sut.friends).to(haveCount(2))
-//        expect(self.sut.friends).to(contain(friend1))
-//        expect(self.sut.friends).to(contain(friend2))
     }
     
     // searchUsers
@@ -122,14 +118,10 @@ class FriendsWorkerTests: XCTestCase {
         expect(foundUsers).to(contain(user3))
     }
     
-    func testSearchUsers_returnsFriendsIfSearchStringIsBlank() {
+    func testSearchUsers_returnsEmptyArraySearchStringIsBlank() {
         // Given
         let me = UserBuilder.aUser().build()
         session.login(user: me)
-        let friend1 = UserBuilder.aUser().build()
-        let friend2 = UserBuilder.aUser().build()
-        userRepository.getFriendsOfResult = .success([friend1, friend2])
-        sut.fetchMyFriends { _ in }
         let user1 = UserBuilder.aUser().build()
         let user2 = UserBuilder.aUser().build()
         let user3 = UserBuilder.aUser().build()
@@ -144,9 +136,7 @@ class FriendsWorkerTests: XCTestCase {
         }
         
         // Then
-        expect(foundUsers).to(haveCount(2))
-        expect(foundUsers).to(contain(friend1))
-        expect(foundUsers).to(contain(friend2))
+        expect(foundUsers).to(beEmpty())
     }
     
     // MARK: addFriend
@@ -164,21 +154,6 @@ class FriendsWorkerTests: XCTestCase {
         expect(self.userRepository.addFriendCalled).to(beTrue())
         expect(self.userRepository.addFriend_owningUserId).to(equal(me.id))
         expect(self.userRepository.addFriend_friendId).to(equal(friendId))
-    }
-    
-    func testAddFriend_addsFriendToTheLocalArray() {
-        // Given
-        let me = UserBuilder.aUser().build()
-        let friend = UserBuilder.aUser().build()
-        session.login(user: me)
-        userRepository.getUserByIdResult = .success(friend)
-        
-        // When
-        sut.addFriend(userId: friend.id) { result in
-        }
-        
-        // Then
-        expect(self.sut.friends).to(contain(friend))
     }
     
     func testAddFriend_failsIfNoCurrentUser() {
