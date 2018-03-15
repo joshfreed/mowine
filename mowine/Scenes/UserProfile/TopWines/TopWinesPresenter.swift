@@ -34,6 +34,12 @@ class TopWinesPresenter: TopWinesPresentationLogic {
         if let thumbnail = model.thumbnail {
             image = UIImage(data: thumbnail)
         }
-        return WineListViewModel(name: model.name, rating: model.rating, type: model.varietyName, thumbnail: image)
+        return WineListViewModel(
+            id: model.id.uuidString,
+            name: model.name,
+            rating: model.rating,
+            type: model.varietyName,
+            thumbnail: image
+        )
     }
 }

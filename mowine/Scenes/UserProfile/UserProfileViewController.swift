@@ -75,7 +75,19 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         topWinesView.isHidden = false
         cellarView.isHidden = true
         
+        segmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        
         fetchUserProfile()
+    }
+    
+    @objc func segmentChanged() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            topWinesView.isHidden = false
+            cellarView.isHidden = true
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            topWinesView.isHidden = true
+            cellarView.isHidden = false
+        }
     }
 
     // MARK: Fetch user profile

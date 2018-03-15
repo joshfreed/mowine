@@ -30,28 +30,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1v-bt-JHh" userLabel="Top Spacer">
-                                <rect key="frame" x="182.5" y="140.5" width="10" height="72.5"/>
+                                <rect key="frame" x="182.5" y="140.5" width="10" height="73"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="CBA-bX-H9P"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuT-xg-2mi" userLabel="Middle Spacer">
-                                <rect key="frame" x="182.5" y="367.5" width="10" height="72"/>
+                                <rect key="frame" x="182.5" y="368" width="10" height="72"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="PNh-6c-5sy"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWa-0t-gSr" userLabel="Bottom Spacer">
-                                <rect key="frame" x="182.5" y="594" width="10" height="73"/>
+                                <rect key="frame" x="182.5" y="594.5" width="10" height="72.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="PAK-am-Pcx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-WB-3cH" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="213.5" width="154" height="154.5"/>
+                                <rect key="frame" x="22.5" y="214" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="add wine"/>
@@ -59,7 +59,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="niZ-ht-yQv" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="198.5" y="213.5" width="154" height="154.5"/>
+                                <rect key="frame" x="198.5" y="214" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="my wines"/>
@@ -67,7 +67,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-RW-AMm" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="440" width="154" height="154.5"/>
+                                <rect key="frame" x="22.5" y="440.5" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="my account"/>
@@ -75,7 +75,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5V-7H-iwC" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="198.5" y="440" width="154" height="154.5"/>
+                                <rect key="frame" x="198.5" y="440.5" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="friends"/>
@@ -83,21 +83,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3F8-8T-zdL">
-                                <rect key="frame" x="0.0" y="286" width="22.5" height="10"/>
+                                <rect key="frame" x="0.0" y="286.5" width="22.5" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="nQh-L0-Ama"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jW3-z1-izp">
-                                <rect key="frame" x="176.5" y="286" width="22" height="10"/>
+                                <rect key="frame" x="176.5" y="286.5" width="22" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="xP1-jk-WX7"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQL-Aq-Wu0">
-                                <rect key="frame" x="352.5" y="286" width="22.5" height="10"/>
+                                <rect key="frame" x="352.5" y="286.5" width="22.5" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="efH-md-Utg"/>
@@ -151,11 +151,11 @@
                         <outlet property="myAccountMenuItem" destination="vOr-RW-AMm" id="xlW-VL-ooE"/>
                         <outlet property="myWinesMenuItem" destination="niZ-ht-yQv" id="D8f-OP-2pH"/>
                         <outlet property="titleLabel" destination="MO4-Ga-AQT" id="bai-x9-FWJ"/>
-                        <segue destination="qOI-mG-2k4" kind="show" identifier="MyWines" id="MGM-zE-0Nd"/>
                         <segue destination="0F1-Cv-DyL" kind="show" identifier="AddWine" id="lj3-Tx-rKI"/>
                         <segue destination="z2X-n5-Odb" kind="show" identifier="SignInScreen" id="Hn9-9I-QEg"/>
                         <segue destination="iPY-a6-bIw" kind="show" identifier="MyAccount" id="mym-HL-gO2"/>
                         <segue destination="Mly-Yv-kTl" kind="show" identifier="Friends" id="8OO-ag-nWW"/>
+                        <segue destination="vzF-3n-jSP" kind="show" identifier="MyWines" id="4YG-cQ-l5L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -836,36 +836,38 @@
             </objects>
             <point key="canvasLocation" x="6002" y="-310"/>
         </scene>
-        <!--My Wines-->
-        <scene sceneID="z8d-Kc-csk">
+        <!--My Wines View Controller-->
+        <scene sceneID="Yho-9N-F6B">
             <objects>
-                <tableViewController id="qOI-mG-2k4" customClass="MyWinesViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LXY-lH-tj4">
+                <viewController storyboardIdentifier="MyWinesViewController" id="vzF-3n-jSP" customClass="MyWinesViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HcY-5D-fwo"/>
+                        <viewControllerLayoutGuide type="bottom" id="t1b-g9-Ua9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tte-87-Xa7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="i3W-S1-Cbr">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i3W-S1-Cbr" id="uUa-b3-YPD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="qOI-mG-2k4" id="zxB-c2-26A"/>
-                            <outlet property="delegate" destination="qOI-mG-2k4" id="ldU-3q-z59"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="My Wines" id="yLx-Nm-MNc"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="29X-u0-kfx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <connections>
+                                    <segue destination="7NJ-7w-5oe" kind="embed" identifier="WineList" id="vZ4-j4-jqs"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t1b-g9-Ua9" firstAttribute="top" secondItem="29X-u0-kfx" secondAttribute="bottom" id="Evh-Rj-qg9"/>
+                            <constraint firstAttribute="trailing" secondItem="29X-u0-kfx" secondAttribute="trailing" id="HPe-Lr-OaD"/>
+                            <constraint firstItem="29X-u0-kfx" firstAttribute="leading" secondItem="tte-87-Xa7" secondAttribute="leading" id="diq-dX-qYp"/>
+                            <constraint firstItem="29X-u0-kfx" firstAttribute="top" secondItem="HcY-5D-fwo" secondAttribute="bottom" id="xmG-1C-lLj"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <segue destination="ZQf-Ib-L0c" kind="show" identifier="EditWine" id="vOb-0C-98C"/>
+                        <segue destination="ZQf-Ib-L0c" kind="show" identifier="EditWine" id="olj-Kp-8M0"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B6H-pi-VlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ae1-ZX-EQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2081" y="570"/>
         </scene>
@@ -1418,7 +1420,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="453"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -1429,12 +1431,16 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9p-Va-lrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4753" y="1720"/>
+            <point key="canvasLocation" x="4889" y="1496"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="e3x-Wp-Hcd">
             <objects>
                 <viewController id="lDX-bs-0sz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NJO-1M-uO5"/>
+                        <viewControllerLayoutGuide type="bottom" id="vTt-aR-OBL"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cki-Ja-uam">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="453"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1454,6 +1460,7 @@
         <image name="add-wine-header" width="248" height="93"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vZ4-j4-jqs"/>
         <segue reference="7pM-bq-uHV"/>
         <segue reference="dpv-GH-y8o"/>
     </inferredMetricsTieBreakers>

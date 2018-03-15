@@ -25,11 +25,16 @@ struct WineViewModel {
     }
 }
 
-struct WineListViewModel {
+struct WineListViewModel: Equatable {
+    var id: String
     var name: String
     var rating: Double
     var type: String
     var thumbnail: UIImage?
+    
+    public static func ==(lhs: WineListViewModel, rhs: WineListViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 struct WineTypeViewModel: Equatable, CustomStringConvertible {

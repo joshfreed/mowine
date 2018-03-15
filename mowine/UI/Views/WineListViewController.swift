@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol WineListViewControllerDelegate: class {
+    func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath)
+}
+
 class WineListViewController: UITableViewController {
+    weak var delegate: WineListViewControllerDelegate?
+    
     var wines: [WineListViewModel] = [] {
         didSet {
             tableView.reloadData()
@@ -22,6 +28,13 @@ class WineListViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+    }
+    
+    func update(wine: WineListViewModel) {
+        if let index = wines.index(of: wine) {
+            wines[index] = wine
+            tableView.reloadData()
+        }        
     }
     
     // MARK: - UITableViewDataSource
@@ -39,6 +52,6 @@ class WineListViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        delegate?.didSelectWine(wines[indexPath.row], at: indexPath)
     }
 }
