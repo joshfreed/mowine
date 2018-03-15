@@ -22,11 +22,12 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mii-k4-VHf">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="113.5"/>
+                    <color key="tintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARV-rm-8kZ">
                     <rect key="frame" x="8" y="121.5" width="134" height="33.5"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
-                    <color key="textColor" red="0.70196078431372544" green="0.61568627450980395" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

@@ -67,13 +67,6 @@ class AddWineSummaryViewController: UIViewController, AddWineSummaryDisplayLogic
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationItem.hidesBackButton = true
-        navigationController?.isNavigationBarHidden = true
-        
-//        ratingView.didFinishTouchingCosmos = { [weak self] rating in
-//            self?.updateRating(rating: rating)
-//        }
-        
         createWine()
     }
 

@@ -22,6 +22,10 @@ class MockWineRepository: WineRepository {
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
         completion(.success)
     }
+    
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+        
+    }
 }
 
 class MockWineTypeRepository: WineTypeRepository {

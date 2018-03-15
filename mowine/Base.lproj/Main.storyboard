@@ -51,7 +51,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-WB-3cH" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="214" width="154" height="154.5"/>
+                                <rect key="frame" x="22.5" y="213.5" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="add wine"/>
@@ -59,7 +59,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="niZ-ht-yQv" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="198.5" y="214" width="154" height="154.5"/>
+                                <rect key="frame" x="198.5" y="213.5" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="my wines"/>
@@ -67,7 +67,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOr-RW-AMm" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="440.5" width="154" height="154.5"/>
+                                <rect key="frame" x="22.5" y="440" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="my account"/>
@@ -75,7 +75,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5V-7H-iwC" customClass="MenuItem" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="198.5" y="440.5" width="154" height="154.5"/>
+                                <rect key="frame" x="198.5" y="440" width="154" height="154.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="friends"/>
@@ -83,21 +83,21 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3F8-8T-zdL">
-                                <rect key="frame" x="0.0" y="286.5" width="22.5" height="10"/>
+                                <rect key="frame" x="0.0" y="286" width="22.5" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="nQh-L0-Ama"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jW3-z1-izp">
-                                <rect key="frame" x="176.5" y="286.5" width="22" height="10"/>
+                                <rect key="frame" x="176.5" y="286" width="22" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="xP1-jk-WX7"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQL-Aq-Wu0">
-                                <rect key="frame" x="352.5" y="286.5" width="22.5" height="10"/>
+                                <rect key="frame" x="352.5" y="286" width="22.5" height="10"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.85882352939999995" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="efH-md-Utg"/>
@@ -836,7 +836,7 @@
             </objects>
             <point key="canvasLocation" x="6002" y="-310"/>
         </scene>
-        <!--My Wines View Controller-->
+        <!--My Wines-->
         <scene sceneID="Yho-9N-F6B">
             <objects>
                 <viewController storyboardIdentifier="MyWinesViewController" id="vzF-3n-jSP" customClass="MyWinesViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
@@ -863,6 +863,7 @@
                             <constraint firstItem="29X-u0-kfx" firstAttribute="top" secondItem="HcY-5D-fwo" secondAttribute="bottom" id="xmG-1C-lLj"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="My Wines" id="eRv-6D-TPd"/>
                     <connections>
                         <segue destination="ZQf-Ib-L0c" kind="show" identifier="EditWine" id="olj-Kp-8M0"/>
                     </connections>

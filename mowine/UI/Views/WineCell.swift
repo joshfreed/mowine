@@ -29,18 +29,15 @@ class WineCell: UITableViewCell {
     func configure(wine: WineListViewModel) {
         if let thumbnail = wine.thumbnail {
             thumbnailImageView.image = thumbnail
-            thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.size.width / 2
-            thumbnailImageView.clipsToBounds = true
-            thumbnailImageView.contentMode = .scaleAspectFill
         } else {
-            thumbnailImageView.image = #imageLiteral(resourceName: "bottle-of-wine")
-            thumbnailImageView.clipsToBounds = false
-            thumbnailImageView.contentMode = .scaleAspectFit
-            thumbnailImageView.tintColor = UIColor.lightGray
+            thumbnailImageView.image = #imageLiteral(resourceName: "Default Wine Image")
         }
+        thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.size.width / 2
+        thumbnailImageView.clipsToBounds = true
+        thumbnailImageView.contentMode = .scaleAspectFill
         
         nameLabel.text = wine.name
         wineTypeLabel.text = wine.type
         ratingView.rating = wine.rating
-    }
+    }    
 }

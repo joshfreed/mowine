@@ -47,6 +47,7 @@ class MenuItem: NibDesignable {
     }
     
     private func setupView() {
+        imageView.fixTintIssue()
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tappedMenuItem)))
     }
     
