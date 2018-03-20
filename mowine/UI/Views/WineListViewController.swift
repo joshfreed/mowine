@@ -14,7 +14,7 @@ protocol WineListViewControllerDelegate: class {
 
 class WineListViewController: UITableViewController {
     weak var delegate: WineListViewControllerDelegate?
-    
+
     var wines: [WineListViewModel] = [] {
         didSet {
             tableView.reloadData()

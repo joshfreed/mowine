@@ -15,9 +15,15 @@ import JFLib
 
 class WineCellarWorker {
     let wineTypeRepository: WineTypeRepository
+    let userRepository: UserRepository
     
-    init(wineTypeRepository: WineTypeRepository) {
+    init(wineTypeRepository: WineTypeRepository, userRepository: UserRepository) {
         self.wineTypeRepository = wineTypeRepository
+        self.userRepository = userRepository
+    }
+    
+    func getUser(by userId: UserId, completion: @escaping (Result<User?>) -> ()) {
+        userRepository.getUserById(userId, completion: completion)
     }
     
     func getWineTypes(completion: @escaping (Result<[WineType]>) -> ()) {

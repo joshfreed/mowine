@@ -30,16 +30,6 @@ class TopWinesPresenter: TopWinesPresentationLogic {
     // MARK: Helpers
     
     private func makeWineViewModel(from model: Wine) -> WineListViewModel {
-        var image: UIImage? = nil
-        if let thumbnail = model.thumbnail {
-            image = UIImage(data: thumbnail)
-        }
-        return WineListViewModel(
-            id: model.id.uuidString,
-            name: model.name,
-            rating: model.rating,
-            type: model.varietyName,
-            thumbnail: image
-        )
+        return WineListViewModel.from(wine: model)
     }
 }

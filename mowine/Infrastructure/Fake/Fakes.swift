@@ -50,10 +50,14 @@ var friendsDB: [UserId: [UserId]] = [
 ]
 
 var merlot = WineVariety(name: "Merlot")
+var prosecco = WineVariety(name: "Prosecco")
 var red = WineType(name: "Red", varieties: [merlot])
+var bubbly = WineType(name: "Bubbly", varieties: [prosecco])
 var winesDB: [UserId: [Wine]] = [
     josh.id: [
-        
+        Wine(type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5),
+        Wine(type: red, variety: merlot, name: "Wine 1", rating: 1),
+        Wine(type: red, variety: merlot, name: "Wine 2", rating: 5)
     ],
     maureen.id: [
         Wine(type: red, variety: merlot, name: "Wine 1", rating: 1),
@@ -61,6 +65,7 @@ var winesDB: [UserId: [Wine]] = [
         Wine(type: red, variety: merlot, name: "Wine 3", rating: 3),
         Wine(type: red, variety: merlot, name: "Wine 4", rating: 4),
         Wine(type: red, variety: merlot, name: "Wine 5", rating: 5),
+        Wine(type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5)
     ]
 ]
 
@@ -212,6 +217,12 @@ class FakeRemoteWineDataStore: RemoteWineDataStore {
         var wines = winesDB[userId] ?? []
         wines = wines.sorted(by: { $0.rating > $1.rating })
         wines = Array(wines.prefix(3))
+        completion(.success(wines))
+    }
+    
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+        var wines = winesDB[userId] ?? []
+        wines = wines.filter { $0.type == wineType }
         completion(.success(wines))
     }
 }

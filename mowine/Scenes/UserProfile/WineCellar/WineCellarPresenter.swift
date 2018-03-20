@@ -14,6 +14,7 @@ import UIKit
 
 protocol WineCellarPresentationLogic {
     func presentWineTypes(response: WineCellar.GetWineTypes.Response)
+    func presentSelectedType(response: WineCellar.SelectType.Response)
 }
 
 class WineCellarPresenter: WineCellarPresentationLogic {
@@ -25,5 +26,12 @@ class WineCellarPresenter: WineCellarPresentationLogic {
         let types = response.types.map { $0.name }
         let viewModel = WineCellar.GetWineTypes.ViewModel(types: types)
         viewController?.displayWineTypes(viewModel: viewModel)
+    }
+    
+    // MARK: Select type
+    
+    func presentSelectedType(response: WineCellar.SelectType.Response) {
+        let viewModel = WineCellar.SelectType.ViewModel()
+        viewController?.displaySelectedType(viewModel: viewModel)
     }
 }

@@ -409,7 +409,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="345"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="344"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -420,7 +420,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9p-Va-lrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6006" y="734"/>
+            <point key="canvasLocation" x="6918" y="958"/>
         </scene>
         <!--Wine Cellar View Controller-->
         <scene sceneID="e3x-Wp-Hcd">
@@ -476,11 +476,45 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="UnB-nP-5Ib" id="J7L-Sb-OJi"/>
+                        <segue destination="he4-Sp-W3w" kind="show" identifier="WineCellarList" id="2AF-44-hba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIa-aO-aBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4689" y="1925"/>
+        </scene>
+        <!--Cellar-->
+        <scene sceneID="rYs-4t-fO2">
+            <objects>
+                <viewController id="he4-Sp-W3w" customClass="WineCellarListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Wh-ug-ybX"/>
+                        <viewControllerLayoutGuide type="bottom" id="sWf-HN-7Pl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KDZ-aF-khW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="344.5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-wN-IwQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="344"/>
+                                <connections>
+                                    <segue destination="7NJ-7w-5oe" kind="embed" identifier="WineList" id="vw4-Zm-TUT"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sWf-HN-7Pl" firstAttribute="top" secondItem="yfb-wN-IwQ" secondAttribute="bottom" id="69l-I6-vy8"/>
+                            <constraint firstAttribute="trailing" secondItem="yfb-wN-IwQ" secondAttribute="trailing" id="OvY-ak-KRc"/>
+                            <constraint firstItem="yfb-wN-IwQ" firstAttribute="top" secondItem="1Wh-ug-ybX" secondAttribute="bottom" id="bjN-Hj-9Or"/>
+                            <constraint firstItem="yfb-wN-IwQ" firstAttribute="leading" secondItem="KDZ-aF-khW" secondAttribute="leading" id="wIb-BC-1Ns"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Cellar" id="BPQ-ha-PQh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LYw-I9-hSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5886" y="1925"/>
         </scene>
         <!--My Wines-->
         <scene sceneID="nAh-OR-12x">
@@ -561,6 +595,6 @@
         <image name="My Wines Tab" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zG4-fF-NmX"/>
+        <segue reference="vw4-Zm-TUT"/>
     </inferredMetricsTieBreakers>
 </document>

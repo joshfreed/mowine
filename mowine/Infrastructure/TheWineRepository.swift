@@ -17,6 +17,7 @@ protocol LocalWineDataStore {
 
 protocol RemoteWineDataStore {
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ())
 }
 
 class TheWineRepository: WineRepository {
@@ -42,5 +43,9 @@ class TheWineRepository: WineRepository {
     
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         remote.getTopWines(userId: userId, completion: completion)
+    }
+    
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+        remote.getWines(userId: userId, wineType: wineType, completion: completion)
     }
 }

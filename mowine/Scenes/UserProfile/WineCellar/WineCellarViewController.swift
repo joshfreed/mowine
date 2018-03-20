@@ -14,6 +14,7 @@ import UIKit
 
 protocol WineCellarDisplayLogic: class {
     func displayWineTypes(viewModel: WineCellar.GetWineTypes.ViewModel)
+    func displaySelectedType(viewModel: WineCellar.SelectType.ViewModel)
 }
 
 class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
@@ -44,7 +45,10 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = WineCellarWorker(wineTypeRepository: Container.shared.wineTypeRepository)
+        interactor.worker = WineCellarWorker(
+            wineTypeRepository: Container.shared.wineTypeRepository,
+            userRepository: Container.shared.userRepository
+        )
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -120,6 +124,11 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
     }
     
     func selectType(_ type: String) {
-        
+        let request = WineCellar.SelectType.Request(type: type)
+        interactor?.selectType(request: request)
+    }
+    
+    func displaySelectedType(viewModel: WineCellar.SelectType.ViewModel) {
+        performSegue(withIdentifier: "WineCellarList", sender: nil)
     }
 }

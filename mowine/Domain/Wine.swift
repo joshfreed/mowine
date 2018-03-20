@@ -52,3 +52,18 @@ class Wine: Equatable {
     }
 }
 
+extension WineListViewModel {
+    static func from(wine: Wine) -> WineListViewModel {
+        var image: UIImage? = nil
+        if let thumbnail = wine.thumbnail {
+            image = UIImage(data: thumbnail)
+        }
+        return WineListViewModel(
+            id: wine.id.uuidString,
+            name: wine.name,
+            rating: wine.rating,
+            type: wine.varietyName,
+            thumbnail: image
+        )
+    }
+}

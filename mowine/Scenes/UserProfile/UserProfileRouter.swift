@@ -14,6 +14,7 @@ import UIKit
 
 @objc protocol UserProfileRoutingLogic {
     func routeToTopWines(segue: UIStoryboardSegue)
+    func routeToWineCellar(segue: UIStoryboardSegue)
 }
 
 protocol UserProfileDataPassing {
@@ -27,9 +28,17 @@ class UserProfileRouter: NSObject, UserProfileRoutingLogic, UserProfileDataPassi
     // MARK: Routing
 
     func routeToTopWines(segue: UIStoryboardSegue) {
+        print("routeToTopWines")
         let destinationVC = segue.destination as! TopWinesViewController
         var destinationDS = destinationVC.router!.dataStore!
         passDataToTopWines(source: dataStore!, destination: &destinationDS)
+    }
+    
+    func routeToWineCellar(segue: UIStoryboardSegue) {
+        print("routeToWineCellar")
+        let destinationVC = segue.destination as! WineCellarViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToWineCellar(source: dataStore!, destination: &destinationDS)
     }
 
     // MARK: Navigation
@@ -43,6 +52,10 @@ class UserProfileRouter: NSObject, UserProfileRoutingLogic, UserProfileDataPassi
 
     func passDataToTopWines(source: UserProfileDataStore, destination: inout TopWinesDataStore)
     {
+        destination.userId = source.userId
+    }
+    
+    func passDataToWineCellar(source: UserProfileDataStore, destination: inout WineCellarDataStore) {
         destination.userId = source.userId
     }
 }
