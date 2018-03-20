@@ -116,6 +116,6 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     }
     
     func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel) {
-        router?.routeToMainMenu()
+        router?.routeToSignedOut()
     }
 }

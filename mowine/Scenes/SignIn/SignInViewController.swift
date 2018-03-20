@@ -20,7 +20,6 @@ protocol SignInDisplayLogic: class {
 class SignInViewController: UIViewController, SignInDisplayLogic {
     var interactor: SignInBusinessLogic?
     var router: (NSObjectProtocol & SignInRoutingLogic & SignInDataPassing)?
-    var onSignedIn: (() -> ())?
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -151,12 +150,7 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         if viewModel.error != nil {
             showErrorLabel("An error occurred while trying to log you in. Please try again in a few minutes.")
         } else if viewModel.isLoggedIn {
-            onSignedIn?()
-            dismiss(animated: true, completion: nil)
-//            switch viewModel.routeTo {
-//            case .myAccount: router?.routeToMyAccount()
-//            case .friends: router?.routeToFriends()
-//            }
+            router?.routeToSignedIn()
         } else {
             showErrorLabel("Login failed. Please check your email and password and try again.")
         }        

@@ -16,30 +16,24 @@ protocol SignInBusinessLogic {
     func signIn(request: SignIn.SignIn.Request)
 }
 
-enum SignInDestination {
-    case myAccount
-    case friends
-}
-
 protocol SignInDataStore {
-    var routeTo: SignInDestination! { get set }
+    
 }
 
 class SignInInteractor: SignInBusinessLogic, SignInDataStore {
     var presenter: SignInPresentationLogic?
     var worker: SignInWorker?
-    var routeTo: SignInDestination! = .myAccount
-
+    
     // MARK: Sign In
 
     func signIn(request: SignIn.SignIn.Request) {        
         worker?.signIn(emailAddress: request.email, password: request.password) { result in
             switch result {
             case .success(let isLoggedIn):
-                let response = SignIn.SignIn.Response(isLoggedIn: isLoggedIn, error: nil, routeTo: self.routeTo)
+                let response = SignIn.SignIn.Response(isLoggedIn: isLoggedIn, error: nil)
                 self.presenter?.presentSignInResult(response: response)
             case .failure(let error):
-                let response = SignIn.SignIn.Response(isLoggedIn: false, error: error, routeTo: self.routeTo)
+                let response = SignIn.SignIn.Response(isLoggedIn: false, error: error)
                 self.presenter?.presentSignInResult(response: response)
             }
         }

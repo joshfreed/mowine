@@ -39,7 +39,7 @@ class SignInViewControllerTests: XCTestCase {
 
     func setupSignInViewController() {
         let bundle = Bundle.main
-        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
+        let storyboard = UIStoryboard(name: "SignIn", bundle: bundle)
         sut = storyboard.instantiateViewController(withIdentifier:"SignInViewController") as! SignInViewController
     }
 
@@ -65,14 +65,9 @@ class SignInViewControllerTests: XCTestCase {
     class MockSignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
         var dataStore: SignInDataStore?
         
-        var routedToMyAccount = false
-        func routeToMyAccount() {
-            routedToMyAccount = true
-        }
-        
-        var routedToFriends = false
-        func routeToFriends() {
-            routedToFriends = true
+        var routedToSignedIn = false
+        func routeToSignedIn() {
+            routedToSignedIn = true
         }
     }
 
@@ -80,7 +75,7 @@ class SignInViewControllerTests: XCTestCase {
 
     func testDisplaySignInResult_loginSuccess() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil, routeTo: .myAccount)
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
@@ -91,30 +86,12 @@ class SignInViewControllerTests: XCTestCase {
         // Then
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beTrue())
-        expect(self.router.routedToMyAccount).to(beTrue())
-        expect(self.router.routedToFriends).to(beFalse())
-    }
-    
-    func testDisplaySignInResult_loginSuccess_routesToFriends() {
-        // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil, routeTo: .friends)
-        loadView()
-        sut.logInButton.displayLoading()
-        sut.hideErrorLabel()
-        
-        // When
-        sut.displaySignInResult(viewModel: viewModel)
-        
-        // Then
-        expect(self.sut.logInButton.isLoading).to(beFalse())
-        expect(self.sut.errorLabel.isHidden).to(beTrue())
-        expect(self.router.routedToMyAccount).to(beFalse())
-        expect(self.router.routedToFriends).to(beTrue())
+        expect(self.router.routedToSignedIn).to(beTrue())
     }
     
     func testDisplaySignInResult_loginFailed() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: nil, routeTo: .myAccount)
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: nil)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
@@ -126,12 +103,12 @@ class SignInViewControllerTests: XCTestCase {
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beFalse())
         expect(self.sut.errorLabel.text).to(equal("Login failed. Please check your email and password and try again."))
-        expect(self.router.routedToMyAccount).to(beFalse())
+        expect(self.router.routedToSignedIn).to(beFalse())
     }
     
     func testDisplaySignInResult_withError() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: MyFakeError.somethingWentWrong, routeTo: .myAccount)
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: MyFakeError.somethingWentWrong)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
@@ -143,6 +120,6 @@ class SignInViewControllerTests: XCTestCase {
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beFalse())
         expect(self.sut.errorLabel.text).to(equal("An error occurred while trying to log you in. Please try again in a few minutes."))
-        expect(self.router.routedToMyAccount).to(beFalse())
+        expect(self.router.routedToSignedIn).to(beFalse())
     }
 }

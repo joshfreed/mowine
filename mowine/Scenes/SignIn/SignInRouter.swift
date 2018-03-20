@@ -13,8 +13,7 @@
 import UIKit
 
 @objc protocol SignInRoutingLogic {
-    func routeToMyAccount()
-    func routeToFriends()
+    func routeToSignedIn()
 }
 
 protocol SignInDataPassing {
@@ -27,49 +26,19 @@ class SignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
 
     // MARK: Routing
 
-    func routeToMyAccount() {
+    func routeToSignedIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let destinationVC = storyboard.instantiateViewController(withIdentifier: "MyAccountViewController")
-        navigateToMyAccount(source: viewController!, destination: destinationVC)
+        let destinationVC = storyboard.instantiateInitialViewController() as! TabBarViewController
+        navigateToSignedIn(source: viewController!, destination: destinationVC)
     }
     
-    func routeToFriends() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let destinationVC = storyboard.instantiateViewController(withIdentifier: "FriendsViewController")
-        navigateToFriends(source: viewController!, destination: destinationVC)
-    }
-    
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-
     // MARK: Navigation
 
-    func navigateToMyAccount(source: SignInViewController, destination: UIViewController)
-    {
-        let nc = viewController?.navigationController
-        nc?.popToRootViewController(animated: false)
-        nc?.pushViewController(destination, animated: true)
+    func navigateToSignedIn(source: SignInViewController, destination: TabBarViewController) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = destination
     }
     
-    func navigateToFriends(source: SignInViewController, destination: UIViewController)
-    {
-        let nc = viewController?.navigationController
-        nc?.popToRootViewController(animated: false)
-        nc?.pushViewController(destination, animated: true)
-    }
-
     // MARK: Passing data
 
     //func passDataToSomewhere(source: SignInDataStore, destination: inout SomewhereDataStore)

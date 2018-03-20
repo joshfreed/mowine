@@ -40,14 +40,7 @@ class ButtonPrimary: UIButton {
         tintColor = .white
         layer.cornerRadius = 5
         let fontSize = titleLabel?.font.pointSize ?? defaultFontSize
-        titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)
-        
-        var hue: CGFloat = 0
-        var sat: CGFloat = 0
-        var brightness: CGFloat = 0
-        var alpha: CGFloat = 0
-        UIColor.mwButtonSecondary.getHue(&hue, saturation: &sat, brightness: &brightness, alpha: &alpha)
-        print("Hue: \(hue), \(sat), \(brightness), \(alpha)")
+        titleLabel?.font = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)        
     }
     
     func useDefaultFontSize() {

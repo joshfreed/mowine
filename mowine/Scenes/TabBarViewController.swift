@@ -36,29 +36,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
                 return false
             }
         }
-        
-        if let nc = viewController as? UINavigationController, nc.topViewController is FriendsViewController, !session.isLoggedIn {
-            openSignInModal(indexToSelectOnSuccess: 2)
-            return false
-        }
-        
-        if !session.isLoggedIn && viewController is MyAccountViewController {
-            openSignInModal(indexToSelectOnSuccess: 3)
-            return false
-        }
-        
+
         return true
-    }
-    
-    // MARK: Helpers
-    
-    private func openSignInModal(indexToSelectOnSuccess newIndex: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nc = storyboard.instantiateViewController(withIdentifier: "SignIn") as! UINavigationController
-        let vc = nc.topViewController as! SignInViewController
-        vc.onSignedIn = { [weak self] in
-            self?.selectedIndex = newIndex
-        }
-        present(nc, animated: true, completion: nil)
     }
 }

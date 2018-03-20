@@ -13,8 +13,7 @@
 import UIKit
 
 @objc protocol MyAccountRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    func routeToMainMenu()
+    func routeToSignedOut()
 }
 
 protocol MyAccountDataPassing {
@@ -26,25 +25,14 @@ class MyAccountRouter: NSObject, MyAccountRoutingLogic, MyAccountDataPassing {
     var dataStore: MyAccountDataStore?
 
     // MARK: Routing
-    func routeToMainMenu() {
-        viewController?.tabBarController?.selectedIndex = 0
+    
+    func routeToSignedOut() {
+        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+        let destinationVC = storyboard.instantiateInitialViewController()!
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = destinationVC
     }
     
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-
     // MARK: Navigation
 
     //func navigateToSomewhere(source: MyAccountViewController, destination: SomewhereViewController)

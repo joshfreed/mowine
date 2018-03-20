@@ -22,11 +22,7 @@ class SignInPresenter: SignInPresentationLogic {
     // MARK: Sign In
 
     func presentSignInResult(response: SignIn.SignIn.Response) {
-        let viewModel = SignIn.SignIn.ViewModel(
-            isLoggedIn: response.isLoggedIn,
-            error: response.error,
-            routeTo: response.routeTo
-        )
+        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: response.isLoggedIn, error: response.error)
         viewController?.displaySignInResult(viewModel: viewModel)
     }
 }

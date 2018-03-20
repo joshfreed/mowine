@@ -25,9 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             preLoadData()
             defaults.set(true, forKey: "isPreloaded")
         }
+
+        UserDefaults.standard.set(true, forKey: "hasLoggedInBefore")
         
         Container.shared.session.resume()
         
+        if !Container.shared.session.isLoggedIn {
+            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+            let initialViewController = storyboard.instantiateInitialViewController()!
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = initialViewController
+            window?.makeKeyAndVisible()
+        }
+
         return true
     }
 
