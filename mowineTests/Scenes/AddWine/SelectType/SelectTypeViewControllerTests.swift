@@ -39,7 +39,7 @@ class SelectTypeViewControllerTests: XCTestCase {
 
     func setupSelectTypeViewController() {
         let bundle = Bundle.main
-        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
+        let storyboard = UIStoryboard(name: "AddWine", bundle: bundle)
         sut = storyboard.instantiateViewController(withIdentifier:"SelectTypeViewController") as! SelectTypeViewController
     }
 

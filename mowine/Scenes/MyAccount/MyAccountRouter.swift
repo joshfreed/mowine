@@ -27,7 +27,7 @@ class MyAccountRouter: NSObject, MyAccountRoutingLogic, MyAccountDataPassing {
 
     // MARK: Routing
     func routeToMainMenu() {
-        viewController?.navigationController?.popToRootViewController(animated: true)
+        viewController?.tabBarController?.selectedIndex = 0
     }
     
     //func routeToSomewhere(segue: UIStoryboardSegue?)

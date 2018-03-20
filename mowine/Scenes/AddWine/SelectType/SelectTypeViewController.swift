@@ -20,6 +20,10 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
     var interactor: SelectTypeBusinessLogic?
     var router: (NSObjectProtocol & SelectTypeRoutingLogic & SelectTypeDataPassing)?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -67,8 +71,13 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.hideNavigationBar()
         headerImage.fixTintIssue()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
     }
 
     // MARK: Select wine type
@@ -88,5 +97,11 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
         } else {
             performSegue(withIdentifier: "SnapPhoto", sender: nil)
         }
+    }
+    
+    // MARK: Cancel
+    
+    @IBAction func tappedCancelButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
 }

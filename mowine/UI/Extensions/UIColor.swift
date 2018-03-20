@@ -16,4 +16,15 @@ extension UIColor {
     class var mwButtonSecondary: UIColor {
         return #colorLiteral(red: 0.7019607843, green: 0.6156862745, blue: 0.8588235294, alpha: 1)
     }
+    
+    class var mwDefaultGradient1: UIColor {
+//        return #colorLiteral(red: 0.2928104575, green: 0.2274509804, blue: 0.7176470588, alpha: 1)
+        return #colorLiteral(red: 0.4822859745, green: 0.2693989071, blue: 0.85, alpha: 1)
+//        return #colorLiteral(red: 0.5106557377, green: 0.2852459017, blue: 0.9, alpha: 1)
+    }
+    
+    class var mwDefaultGradient2: UIColor {
+        return #colorLiteral(red: 0.4039215686, green: 0.2274509804, blue: 0.7176470588, alpha: 1)
+//        return #colorLiteral(red: 0.5215686274, green: 0.2274509804, blue: 0.7176470588, alpha: 1)
+    }
 }

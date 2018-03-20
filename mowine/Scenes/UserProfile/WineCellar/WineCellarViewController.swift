@@ -82,21 +82,25 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
         
         var lastView: UIView?
         types.forEach {
-            let button = ButtonPrimary()
+            let button = ButtonPrimaryGradient()
             button.awakeFromNib()
-            button.useFont(ofSize: 28, weight: .light)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 37, weight: UIFont.Weight.light)
             button.setTitle($0, for: .normal)
             button.addTarget(self, action: #selector(tappedTypeButton), for: .touchUpInside)
             contentView.addSubview(button)
-            button.autoSetDimension(.height, toSize: 72)
+            button.autoSetDimension(.height, toSize: 80)
             button.autoPinEdge(.leading, to: .leading, of: contentView)
             button.autoPinEdge(.trailing, to: .trailing, of: contentView)
             
             if let lastView = lastView {
-                button.autoPinEdge(.top, to: .bottom, of: lastView, withOffset: 16)
+                button.autoPinEdge(.top, to: .bottom, of: lastView, withOffset: 4)
             } else {
                 button.autoPinEdge(toSuperviewEdge: .top)
             }
+            
+            button.layoutIfNeeded()
+            button.applyGradient()
+            
             lastView = button
         }
         

@@ -78,21 +78,25 @@ class SelectVarietyViewController: UIViewController, SelectVarietyDisplayLogic {
         
         var lastView: UIView?
         varieties.forEach {
-            let button = ButtonPrimary()
+            let button = ButtonPrimaryGradient()
             button.awakeFromNib()
-            button.useFont(ofSize: 28, weight: .light)
             button.setTitle($0, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: UIFont.Weight.light)
             button.addTarget(self, action: #selector(didTapVarietyButton), for: .touchUpInside)
             buttonContainer.addSubview(button)
-            button.autoSetDimension(.height, toSize: 74)
+            button.autoSetDimension(.height, toSize: 80)
             button.autoPinEdge(.leading, to: .leading, of: buttonContainer)
             button.autoPinEdge(.trailing, to: .trailing, of: buttonContainer)
             
             if let lastView = lastView {
-                button.autoPinEdge(.top, to: .bottom, of: lastView, withOffset: 16)
+                button.autoPinEdge(.top, to: .bottom, of: lastView, withOffset: 4)
             } else {
                 button.autoPinEdge(toSuperviewEdge: .top)
             }
+            
+            button.layoutIfNeeded()
+            button.applyGradient()
+            
             lastView = button
         }
         

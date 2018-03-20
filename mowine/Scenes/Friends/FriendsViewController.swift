@@ -87,8 +87,26 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for friends"
+        searchController.searchBar.tintColor = .mwButtonSecondary
+        let scb = searchController.searchBar
+        if let textfield = scb.value(forKey: "searchField") as? UITextField {
+            textfield.textColor = .white
+            if let backgroundview = textfield.subviews.first {
+                
+                // Background color
+                backgroundview.backgroundColor = UIColor.white
+                
+                // Rounded corner
+                backgroundview.layer.cornerRadius = 10;
+                backgroundview.clipsToBounds = true;
+            }
+        }
+
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
+//        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: "Search for friends", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
         
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
@@ -105,7 +123,8 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(animated)                
+        navigationItem.largeTitleDisplayMode = .automatic
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = false
         }
@@ -268,5 +287,60 @@ extension FriendsViewController: UserTableViewCellDelegate {
     func addFriend(cell: UserTableViewCell, userId: String) {
         friendCells[userId] = cell
         addFriend(userId: userId)
+    }
+}
+
+
+
+public extension UIImage {
+    
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+    
+    public func withRoundCorners(_ cornerRadius: CGFloat) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let rect = CGRect(origin: CGPoint.zero, size: size)
+        let context = UIGraphicsGetCurrentContext()
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
+        
+        context?.beginPath()
+        context?.addPath(path.cgPath)
+        context?.closePath()
+        context?.clip()
+        
+        draw(at: CGPoint.zero)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        return image;
+    }
+    
+}
+
+extension UISearchBar {
+    func changeBarColor(_ color: UIColor) {
+        for view in subviews {
+            for subview in view.subviews {
+                if let textField = subview as? UITextField {
+                    textField.backgroundColor = color
+                }
+            }
+        }
+    }
+    
+    public func setTextColor(_ color: UIColor) {
+        let svs = subviews.flatMap { $0.subviews }
+        guard let tf = (svs.filter { $0 is UITextField }).first as? UITextField else { return }
+        tf.textColor = color
     }
 }

@@ -28,7 +28,7 @@ protocol SignInDataStore {
 class SignInInteractor: SignInBusinessLogic, SignInDataStore {
     var presenter: SignInPresentationLogic?
     var worker: SignInWorker?
-    var routeTo: SignInDestination!
+    var routeTo: SignInDestination! = .myAccount
 
     // MARK: Sign In
 

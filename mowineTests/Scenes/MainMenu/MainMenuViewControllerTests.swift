@@ -82,29 +82,29 @@ class MainMenuViewControllerTests: XCTestCase {
 
     // MARK: Tests
 
-    func test_myAccountButton_routesToMyAccount() {
-        // Given
-        session.loggedIn()
-        
-        // When
-        loadView()
-        sut.showMyAccount()
-        
-        // Then
-        expect(self.router.routedToSignIn).to(beFalse())
-        expect(self.router.routedToMyAccount).to(beTrue())
-    }
-    
-    func test_myAccountButton_routesToSignInWhenNotSignedIn() {
-        // Given
-        session.notLoggedIn()
-
-        // When
-        loadView()
-        sut.showMyAccount()
-
-        // Then
-        expect(self.router.routedToMyAccount).to(beFalse())
-        expect(self.router.routedToSignIn).to(beTrue())
-    }
+//    func test_myAccountButton_routesToMyAccount() {
+//        // Given
+//        session.loggedIn()
+//        
+//        // When
+//        loadView()
+//        sut.showMyAccount()
+//        
+//        // Then
+//        expect(self.router.routedToSignIn).to(beFalse())
+//        expect(self.router.routedToMyAccount).to(beTrue())
+//    }
+//    
+//    func test_myAccountButton_routesToSignInWhenNotSignedIn() {
+//        // Given
+//        session.notLoggedIn()
+//
+//        // When
+//        loadView()
+//        sut.showMyAccount()
+//
+//        // Then
+//        expect(self.router.routedToMyAccount).to(beFalse())
+//        expect(self.router.routedToSignIn).to(beTrue())
+//    }
 }

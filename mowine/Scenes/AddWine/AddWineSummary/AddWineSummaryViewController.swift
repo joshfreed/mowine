@@ -91,6 +91,8 @@ class AddWineSummaryViewController: UIViewController, AddWineSummaryDisplayLogic
         displayPhotoPreview(photo: viewModel.photo)
         nameLabel.text = viewModel.name
         ratingView.rating = viewModel.rating
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func displayPhotoPreview(photo: UIImage?) {

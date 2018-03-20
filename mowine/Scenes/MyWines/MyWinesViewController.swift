@@ -22,6 +22,10 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     var router: (NSObjectProtocol & MyWinesRoutingLogic & MyWinesDataPassing)?
     weak var wineListViewController: WineListViewController?
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -75,11 +79,9 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Needed for now because EditWine shows the navigation bar
-//        navigationController?.hideNavigationBar()
+        UIApplication.shared.statusBarStyle = .lightContent
     }
-    
+
     // MARK: Fetch my wines
     
     func fetchMyWines() {
