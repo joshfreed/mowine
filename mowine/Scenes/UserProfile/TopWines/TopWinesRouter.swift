@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol TopWinesRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToWineDetails()
 }
 
 protocol TopWinesDataPassing {
@@ -26,32 +26,23 @@ class TopWinesRouter: NSObject, TopWinesRoutingLogic, TopWinesDataPassing {
 
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToWineDetails() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "WineDetailsViewController") as! WineDetailsViewController
+        var destinationDS = destinationVC.interactor as! WineDetailsDataStore
+        passDataToWineDetails(source: dataStore!, destination: &destinationDS)
+        navigateToWineDetails(source: viewController!, destination: destinationVC)
+    }
 
     // MARK: Navigation
 
-    //func navigateToSomewhere(source: TopWinesViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToWineDetails(source: TopWinesViewController, destination: WineDetailsViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: TopWinesDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToWineDetails(source: TopWinesDataStore, destination: inout WineDetailsDataStore) {
+        destination.wine = source.selectedWine
+    }
 }

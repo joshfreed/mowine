@@ -21,10 +21,6 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     var interactor: MyWinesBusinessLogic?
     var router: (NSObjectProtocol & MyWinesRoutingLogic & MyWinesDataPassing)?
     weak var wineListViewController: WineListViewController?
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     // MARK: Object lifecycle
 
@@ -76,11 +72,6 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
         super.viewDidLoad()
         fetchMyWines()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
 
     // MARK: Fetch my wines
     
@@ -98,4 +89,12 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     func displayUpdatedWine(viewModel: WineListViewModel) {
         wineListViewController?.update(wine: viewModel)
     }
+}
+
+extension MyWinesViewController: WineListViewControllerDelegate {
+    func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath) {
+        
+    }
+    
+    
 }

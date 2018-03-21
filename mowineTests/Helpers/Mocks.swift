@@ -26,6 +26,10 @@ class MockWineRepository: WineRepository {
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         
     }
+    
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+        
+    }
 }
 
 class MockWineTypeRepository: WineTypeRepository {

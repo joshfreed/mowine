@@ -83,17 +83,13 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.largeTitleDisplayMode = .never
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        let bgimg = UINavigationBar.appearance().backgroundImage(for: UIBarMetrics.default)
-//        navigationController?.navigationBar.setBackgroundImage(bgimg, for: .default)
-//        navigationController?.navigationBar.shadowImage = nil
-//        navigationController?.navigationBar.barTintColor = .mwButtonPrimary
-//    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.shadowImage = nil
+    }
     
     @objc func segmentChanged() {
         if segmentedControl.selectedSegmentIndex == 0 {

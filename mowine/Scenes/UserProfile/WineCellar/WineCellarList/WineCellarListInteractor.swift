@@ -14,11 +14,13 @@ import UIKit
 
 protocol WineCellarListBusinessLogic {
     func fetchWines(request: WineCellarList.FetchWines.Request)
+    func selectWine(request: WineCellarList.SelectWine.Request)
 }
 
 protocol WineCellarListDataStore {
     var user: User! { get set }
     var wineType: WineType! { get set }
+    var selectedWine: Wine? { get }
 }
 
 class WineCellarListInteractor: WineCellarListBusinessLogic, WineCellarListDataStore {
@@ -26,6 +28,8 @@ class WineCellarListInteractor: WineCellarListBusinessLogic, WineCellarListDataS
     var worker: WineCellarListWorker?
     var user: User!
     var wineType: WineType!
+    private var wines: [Wine] = []
+    var selectedWine: Wine?
 
     // MARK: Fetch wines
 
@@ -41,7 +45,17 @@ class WineCellarListInteractor: WineCellarListBusinessLogic, WineCellarListDataS
     }
     
     private func presentWines(_ wines: [Wine]) {
+        self.wines = wines
         let response = WineCellarList.FetchWines.Response(wines: wines)
         presenter?.presentWines(response: response)
+    }
+    
+    // MARK: Select wine
+    
+    func selectWine(request: WineCellarList.SelectWine.Request) {
+        guard let wineId = UUID(uuidString: request.wineId) else {
+            return
+        }
+        selectedWine = wines.first(where: { $0.id == wineId })
     }
 }

@@ -14,6 +14,7 @@ import UIKit
 
 protocol TopWinesDisplayLogic: class {
     func displayTopWines(viewModel: TopWines.FetchTopWines.ViewModel)
+    func displaySelectedWine(viewModel: TopWines.SelectWine.ViewModel)
 }
 
 class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
@@ -62,6 +63,7 @@ class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
         if segue.identifier == "WineList" {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
+            wineListViewController.delegate = self
         }
     }
 
@@ -83,5 +85,22 @@ class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
 
     func displayTopWines(viewModel: TopWines.FetchTopWines.ViewModel) {
         wineListViewController.wines = viewModel.wines
+    }
+    
+    // MARK: Select wine
+    
+    func selectWine(wineId: String) {
+        let request = TopWines.SelectWine.Request(wineId: wineId)
+        interactor?.selectWine(request: request)
+    }
+    
+    func displaySelectedWine(viewModel: TopWines.SelectWine.ViewModel) {
+        router?.routeToWineDetails()
+    }
+}
+
+extension TopWinesViewController: WineListViewControllerDelegate {
+    func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath) {
+        selectWine(wineId: wine.id)
     }
 }

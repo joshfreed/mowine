@@ -14,6 +14,7 @@ import UIKit
 
 protocol TopWinesPresentationLogic {
     func presentTopWines(response: TopWines.FetchTopWines.Response)
+    func presentSelectedWine(response: TopWines.SelectWine.Response)
 }
 
 class TopWinesPresenter: TopWinesPresentationLogic {
@@ -25,6 +26,11 @@ class TopWinesPresenter: TopWinesPresentationLogic {
         let wines = response.wines.map { makeWineViewModel(from: $0) }
         let viewModel = TopWines.FetchTopWines.ViewModel(wines: wines)
         viewController?.displayTopWines(viewModel: viewModel)
+    }
+    
+    func presentSelectedWine(response: TopWines.SelectWine.Response) {
+        let viewModel = TopWines.SelectWine.ViewModel()
+        viewController?.displaySelectedWine(viewModel: viewModel)
     }
     
     // MARK: Helpers

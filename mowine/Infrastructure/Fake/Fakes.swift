@@ -213,6 +213,10 @@ class FakeUserRepository: UserRepository {
 }
 
 class FakeRemoteWineDataStore: RemoteWineDataStore {
+    init() {
+        winesDB[maureen.id]?[1].location = "This is a long string that is a long string that should wrap around and go to the next liiiiiiine?"
+    }
+    
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         var wines = winesDB[userId] ?? []
         wines = wines.sorted(by: { $0.rating > $1.rating })

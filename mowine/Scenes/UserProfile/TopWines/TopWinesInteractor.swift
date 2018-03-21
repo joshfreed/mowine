@@ -14,10 +14,12 @@ import UIKit
 
 protocol TopWinesBusinessLogic {
     func fetchTopWines(request: TopWines.FetchTopWines.Request)
+    func selectWine(request: TopWines.SelectWine.Request)
 }
 
 protocol TopWinesDataStore {
     var userId: UserId! { get set }
+    var selectedWine: Wine? { get }
 }
 
 class TopWinesInteractor: TopWinesBusinessLogic, TopWinesDataStore {
@@ -25,6 +27,7 @@ class TopWinesInteractor: TopWinesBusinessLogic, TopWinesDataStore {
     var worker: TopWinesWorker?
     var userId: UserId!
     var topWines: [Wine] = []
+    var selectedWine: Wine?
 
     // MARK: Fetch top wines
 
@@ -38,5 +41,18 @@ class TopWinesInteractor: TopWinesBusinessLogic, TopWinesDataStore {
             case .failure(let error): print("\(error)")
             }
         }
+    }
+    
+    // MARK: Select wine
+    
+    func selectWine(request: TopWines.SelectWine.Request) {
+        guard let wineId = UUID(uuidString: request.wineId) else {
+            return
+        }
+        
+        selectedWine = topWines.first(where: { $0.id == wineId })
+        
+        let response = TopWines.SelectWine.Response()
+        presenter?.presentSelectedWine(response: response)
     }
 }

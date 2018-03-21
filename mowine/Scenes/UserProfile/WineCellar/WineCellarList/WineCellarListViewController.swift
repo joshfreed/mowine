@@ -84,4 +84,19 @@ class WineCellarListViewController: UIViewController, WineCellarListDisplayLogic
     func displayWines(viewModel: WineCellarList.FetchWines.ViewModel) {
         wineListViewController.wines = viewModel.wines
     }
+    
+    // MARK: Select wine
+    
+    func selectWine(wineId: String) {
+        let request = WineCellarList.SelectWine.Request(wineId: wineId)
+        interactor?.selectWine(request: request)
+        
+        router?.routeToWineDetails()
+    }
+}
+
+extension WineCellarListViewController: WineListViewControllerDelegate {
+    func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath) {
+        selectWine(wineId: wine.id)
+    }
 }

@@ -40,4 +40,16 @@ enum WineCellarList {
             var wines: [WineListViewModel]
         }
     }
+    
+    enum SelectWine {
+        struct Request {
+            var wineId: String
+        }
+        
+        struct Response {
+        }
+        
+        struct ViewModel {            
+        }
+    }
 }
