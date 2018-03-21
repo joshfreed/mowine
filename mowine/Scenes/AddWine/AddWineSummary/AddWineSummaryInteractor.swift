@@ -60,6 +60,7 @@ class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataS
             switch result {
             case .success(let wine):
                 self.wine = wine
+                NotificationCenter.default.post(name: .wineAdded, object: nil, userInfo: ["wine": wine])
                 let response = AddWineSummary.CreateWine.Response(wine: wine)
                 self.presenter?.presentWine(response: response)
             case .failure(let error):

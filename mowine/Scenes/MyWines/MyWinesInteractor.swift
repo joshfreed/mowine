@@ -30,6 +30,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(wineAdded), name: .wineAdded, object: nil)
     }
     
     @objc func wineUpdated(notification: Notification) {
@@ -40,19 +41,34 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         presenter?.presentUpdatedWine(wine: updatedWine)
     }
     
-    // MARK: - Business logic
+    @objc func wineAdded(notification: Notification) {
+        guard let newWine = notification.userInfo?["wine"] as? Wine else {
+            return
+        }
+        
+        wines.insert(newWine, at: 0)
+        presentWines()
+    }
+    
+    // MARK: Business logic
     
     func fetchMyWines(request: MyWines.FetchMyWines.Request) {
         worker?.fetchMyWines() { result in
             switch result {
             case .success(let wines):
                 self.wines = wines
-                let response = MyWines.FetchMyWines.Response(wines: wines)
-                self.presenter?.presentMyWines(response: response)
+                self.presentWines()
             case .failure(let error): print("\(error)")
             }
         }
     }
+    
+    private func presentWines() {
+        let response = MyWines.FetchMyWines.Response(wines: wines)
+        presenter?.presentMyWines(response: response)
+    }
+    
+    // MARK: Select wine
     
     func selectWine(atIndex index: Int) {
         selectedWine = wines[index]
