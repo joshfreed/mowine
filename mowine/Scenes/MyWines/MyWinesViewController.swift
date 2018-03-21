@@ -63,6 +63,7 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
         if segue.identifier == "WineList" {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
+            wineListViewController?.delegate = self
         }
     }
 
@@ -89,12 +90,17 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     func displayUpdatedWine(viewModel: WineListViewModel) {
         wineListViewController?.update(wine: viewModel)
     }
+    
+    // MARK: Select wine
+    
+    func selectWine(atIndex index: Int) {
+        interactor?.selectWine(atIndex: index)
+        performSegue(withIdentifier: "EditWine", sender: nil)
+    }
 }
 
 extension MyWinesViewController: WineListViewControllerDelegate {
     func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath) {
-        
+        selectWine(atIndex: indexPath.row)
     }
-    
-    
 }

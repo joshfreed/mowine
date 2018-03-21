@@ -49,11 +49,6 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         form = wineForm.makeWineForm()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.showNavigationBar()
-    }
-    
     // MARK: - Event handling
 
     func fetchWineOnLoad() {
