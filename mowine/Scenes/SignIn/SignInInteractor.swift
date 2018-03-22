@@ -29,13 +29,20 @@ class SignInInteractor: SignInBusinessLogic, SignInDataStore {
     func signIn(request: SignIn.SignIn.Request) {        
         worker?.signIn(emailAddress: request.email, password: request.password) { result in
             switch result {
-            case .success(let isLoggedIn):
-                let response = SignIn.SignIn.Response(isLoggedIn: isLoggedIn, error: nil)
-                self.presenter?.presentSignInResult(response: response)
+            case .success(let isLoggedIn): self.onSignInResult(isLoggedIn: isLoggedIn)
             case .failure(let error):
                 let response = SignIn.SignIn.Response(isLoggedIn: false, error: error)
                 self.presenter?.presentSignInResult(response: response)
             }
         }
+    }
+    
+    private func onSignInResult(isLoggedIn: Bool) {
+        if isLoggedIn {
+            UserDefaults.standard.set(true, forKey: "hasLoggedInBefore")
+        }
+        
+        let response = SignIn.SignIn.Response(isLoggedIn: isLoggedIn, error: nil)
+        presenter?.presentSignInResult(response: response)
     }
 }

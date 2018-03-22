@@ -22,10 +22,10 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     var router: (NSObjectProtocol & SignUpRoutingLogic & SignUpDataPassing)?
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var firstNameTextField: FloatingLabelTextField!
-    @IBOutlet weak var lastNameTextField: FloatingLabelTextField!
-    @IBOutlet weak var emailAddressTextField: FloatingLabelTextField!
-    @IBOutlet weak var passwordTextField: FloatingLabelTextField!
+    @IBOutlet weak var firstNameTextField: JPFFancyTextField!
+    @IBOutlet weak var lastNameTextField: JPFFancyTextField!
+    @IBOutlet weak var emailAddressTextField: JPFFancyTextField!
+    @IBOutlet weak var passwordTextField: JPFFancyTextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: ButtonPrimary!
     
@@ -70,7 +70,7 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     }
     
     @IBAction func tappedSignInButton(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "SignIn", sender: nil)
     }
 
     // MARK: View lifecycle
@@ -84,9 +84,17 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         hideErrorLabel()
         
         firstNameTextField.delegate = self
+        firstNameTextField.textField.autocapitalizationType = .words
+        firstNameTextField.textField.returnKeyType = .next
         lastNameTextField.delegate = self
+        lastNameTextField.textField.autocapitalizationType = .words
+        lastNameTextField.textField.returnKeyType = .next
         emailAddressTextField.delegate = self
+        emailAddressTextField.textField.textContentType = UITextContentType.emailAddress
+        emailAddressTextField.textField.returnKeyType = .next
         passwordTextField.delegate = self
+        passwordTextField.textField.isSecureTextEntry = true
+        passwordTextField.textField.returnKeyType = .go
         
         firstNameTextField.becomeFirstResponder()
     }
@@ -125,13 +133,17 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     
     func signUp() {
         hideErrorLabel()
+        firstNameTextField.resignFirstResponder()
+        lastNameTextField.resignFirstResponder()
+        emailAddressTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
         
         if firstNameTextField.text == nil || firstNameTextField.text!.isEmpty {
-            firstNameTextField.displayInvalid()
+            firstNameTextField.displayInvalid(message: "First name is required.")
         }
         
         if emailAddressTextField.text == nil || emailAddressTextField.text!.isEmpty {
-            emailAddressTextField.displayInvalid()
+            emailAddressTextField.displayInvalid(message: "Email address is required.")
         }
         
         if passwordTextField.text == nil || passwordTextField.text!.isEmpty {
@@ -145,8 +157,13 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         else {
             return
         }
-        
+
         let lastName = lastNameTextField.text
+        
+        guard password.count >= 8 else {
+            passwordTextField.displayInvalid(message: "Password must be at least 8 characters long")
+            return
+        }
         
         firstNameTextField.displayValid()
         lastNameTextField.displayValid()
@@ -163,8 +180,8 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     }
 }
 
-extension SignUpViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+extension SignUpViewController: JPFFancyTextFieldDelegate {
+    func textFieldShouldReturn(_ textField: JPFFancyTextField) -> Bool {
         if textField == firstNameTextField {
             lastNameTextField.becomeFirstResponder()
         } else if textField == lastNameTextField {
@@ -177,3 +194,4 @@ extension SignUpViewController: UITextFieldDelegate {
         return true
     }
 }
+

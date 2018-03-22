@@ -73,7 +73,11 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         hideErrorLabel()
         
         emailAddressTextField.delegate = self
+        emailAddressTextField.textField.textContentType = UITextContentType.emailAddress
+        emailAddressTextField.textField.returnKeyType = .next
         passwordTextField.delegate = self
+        passwordTextField.textField.isSecureTextEntry = true
+        passwordTextField.textField.returnKeyType = .go
         
         emailAddressTextField.becomeFirstResponder()
     }
@@ -94,8 +98,8 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
     
     // MARK: Sign In
 
-    @IBOutlet weak var emailAddressTextField: FloatingLabelTextField!
-    @IBOutlet weak var passwordTextField: FloatingLabelTextField!
+    @IBOutlet weak var emailAddressTextField: JPFFancyTextField!
+    @IBOutlet weak var passwordTextField: JPFFancyTextField!
     @IBOutlet weak var logInButton: ButtonPrimary!
     @IBOutlet weak var errorLabel: UILabel!
     
@@ -153,8 +157,8 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
     }
 }
 
-extension SignInViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+extension SignInViewController: JPFFancyTextFieldDelegate {
+    func textFieldShouldReturn(_ textField: JPFFancyTextField) -> Bool {
         if textField == emailAddressTextField {
             passwordTextField.becomeFirstResponder()
         } else if textField == passwordTextField {

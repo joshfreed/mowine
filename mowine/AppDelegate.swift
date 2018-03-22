@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(true, forKey: "isPreloaded")
         }
 
-        UserDefaults.standard.set(true, forKey: "hasLoggedInBefore")
+        UserDefaults.standard.set(false, forKey: "hasLoggedInBefore")
         
         Container.shared.session.resume()
         
