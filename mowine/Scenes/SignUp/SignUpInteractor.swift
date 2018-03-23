@@ -32,7 +32,31 @@ class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
         // Make sure the email address is unique and is not associated with another account
         // Make sure firstName is not empty
         
-        let response = SignUp.SignUp.Response(user: nil, error: nil)
-        presenter?.presentSignUp(response: response)
+        var user = User(id: UserId(), emailAddress: request.emailAddress)
+        user.firstName = request.firstName
+        user.lastName = request.lastName
+        
+        worker?.signUp(user: user, password: request.password) { result in
+            switch result {
+            case .success:
+                let response = SignUp.SignUp.Response(user: user, error: nil, message: nil)
+                self.presenter?.presentSignUp(response: response)
+            case .failure(let error):
+                print("\(error)")
+                switch error {
+                case EmailAuthenticationErrors.invalidPassword(let message):
+                    let response = SignUp.SignUp.Response(user: nil, error: error, message: message)
+                    self.presenter?.presentSignUp(response: response)
+                case EmailAuthenticationErrors.emailAddressAlreadyInUse:
+                    let message = "That email address is already associated with an account. Try signing in or resetting your password."
+                    let response = SignUp.SignUp.Response(user: nil, error: error, message: message)
+                    self.presenter?.presentSignUp(response: response)
+                default:
+                    let response = SignUp.SignUp.Response(user: nil, error: error, message: nil)
+                    self.presenter?.presentSignUp(response: response)
+                }
+                
+            }
+        }
     }
 }

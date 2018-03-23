@@ -10,6 +10,10 @@ import UIKit
 import CoreData
 import JFLib
 import PureLayout
+import AWSMobileClient
+import AWSAuthCore
+import AWSCognitoIdentityProvider
+import AWSUserPoolsSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,10 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(true, forKey: "isPreloaded")
         }
 
-        UserDefaults.standard.set(false, forKey: "hasLoggedInBefore")
+        AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
         
-        Container.shared.session.resume()
-        
+        Container.shared.session.resume() { _ in
+            
+        }
+
         if !Container.shared.session.isLoggedIn {
             let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
             let initialViewController = storyboard.instantiateInitialViewController()!
@@ -39,6 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return AWSMobileClient.sharedInstance().interceptApplication(
+            application, open: url,
+            sourceApplication: sourceApplication,
+            annotation: annotation
+        )
     }
 
     private func deleteDatabase() {

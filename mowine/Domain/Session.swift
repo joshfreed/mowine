@@ -12,7 +12,7 @@ import JFLib
 protocol Session {
     var isLoggedIn: Bool { get }
     var currentUserId: UserId? { get }
-    func resume()
+    func resume(completion: @escaping (EmptyResult) -> ())
     func getCurrentUser(completion: @escaping (Result<User>) -> ())
     func end()
 }

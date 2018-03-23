@@ -1,21 +1,46 @@
 PODS:
+  - AWSAuthCore (2.6.13):
+    - AWSCore (= 2.6.13)
+  - AWSAuthUI (2.6.13):
+    - AWSAuthCore (= 2.6.13)
+    - AWSCore (= 2.6.13)
+  - AWSCognitoIdentityProvider (2.6.13):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.6.13)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.6.13)
+  - AWSMobileClient (2.6.13):
+    - AWSAuthCore (= 2.6.13)
+  - AWSUserPoolsSignIn (2.6.13):
+    - AWSAuthCore (= 2.6.13)
+    - AWSCognitoIdentityProvider (= 2.6.13)
   - Cosmos (12.0.1)
   - Eureka (4.0.1)
   - Nimble (7.0.3)
   - PureLayout (3.0.2)
 
 DEPENDENCIES:
+  - AWSAuthUI (~> 2.6.5)
+  - AWSMobileClient (~> 2.6.5)
+  - AWSUserPoolsSignIn (~> 2.6.5)
   - Cosmos
   - Eureka
   - Nimble
   - PureLayout
 
 SPEC CHECKSUMS:
+  AWSAuthCore: 821990b7fc2febe5ed5eb42199ea55ee22ac911d
+  AWSAuthUI: 8c11af8f87939479cd0d94bd840e030eb599db3a
+  AWSCognitoIdentityProvider: c532434167c99ec42126447a83c6a2f2ea18f678
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 5da797bc476188fdaf00dec134fa18d84708eca9
+  AWSMobileClient: bf1c341c91f82eda8f757cd96dc0cbb3d1f0b768
+  AWSUserPoolsSignIn: 6d5a7dedeac2e3f2a84d7c838a5df85aa386f1c7
   Cosmos: 4a9f57998a08788a1062c7b8eefbc62d2b590f39
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
 
-PODFILE CHECKSUM: 9bfcdd1e9622e48bc1c0d953b470cc80a79b6ca8
+PODFILE CHECKSUM: a037c02aeb8aca6c40ed4a90b52053b09cb8596a
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

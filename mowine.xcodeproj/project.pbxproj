@@ -60,6 +60,9 @@
 		53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */; };
 		53423DE11F740B6B00655A7F /* AddWineSummaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */; };
 		53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */; };
+		534728C520642F3500DC7966 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 534728C420642F3400DC7966 /* awsconfiguration.json */; };
+		534728C82064305800DC7966 /* AWSSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534728C72064305800DC7966 /* AWSSession.swift */; };
+		534728CA20657FED00DC7966 /* AWSEmailAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */; };
 		534895F1203CBAA400B7547A /* Wine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F0203CBAA400B7547A /* Wine.swift */; };
 		534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F3203CBB4200B7547A /* WineTypeRepository.swift */; };
 		534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */; };
@@ -279,6 +282,9 @@
 		53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryPresenter.swift; sourceTree = "<group>"; };
 		53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryRouter.swift; sourceTree = "<group>"; };
 		53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryViewController.swift; sourceTree = "<group>"; };
+		534728C420642F3400DC7966 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		534728C72064305800DC7966 /* AWSSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSession.swift; sourceTree = "<group>"; };
+		534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSEmailAuthentication.swift; sourceTree = "<group>"; };
 		534895F0203CBAA400B7547A /* Wine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wine.swift; sourceTree = "<group>"; };
 		534895F3203CBB4200B7547A /* WineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeRepository.swift; sourceTree = "<group>"; };
 		534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeWorker.swift; sourceTree = "<group>"; };
@@ -577,6 +583,15 @@
 			path = AddWineSummary;
 			sourceTree = "<group>";
 		};
+		534728C62064304900DC7966 /* AWS */ = {
+			isa = PBXGroup;
+			children = (
+				534728C72064305800DC7966 /* AWSSession.swift */,
+				534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */,
+			);
+			path = AWS;
+			sourceTree = "<group>";
+		};
 		534895F2203CBAF300B7547A /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +635,7 @@
 		5348960F203DE4A300B7547A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				534728C62064304900DC7966 /* AWS */,
 				536E85A2204F506E004D5426 /* Fake */,
 				5348960C203DE44C00B7547A /* Persistence */,
 				537740A91E5BD58A00A1D282 /* WineImageWorker.swift */,
@@ -935,6 +951,7 @@
 				53958A9D20617BCD00BA4B6C /* SignIn.storyboard */,
 				53F5ABFD1E2176080067AB62 /* Assets.xcassets */,
 				53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */,
+				534728C420642F3400DC7966 /* awsconfiguration.json */,
 				53F5AC021E2176080067AB62 /* Info.plist */,
 				53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */,
 			);
@@ -1161,6 +1178,7 @@
 				53112846205F04580094DC35 /* AddWine.storyboard in Resources */,
 				5327BC1720617FC2006787E9 /* SignIn.storyboard in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
+				534728C520642F3500DC7966 /* awsconfiguration.json in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				53ED1F8F204F359C00C129BC /* UserTableViewCell.xib in Resources */,
 				5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */,
@@ -1221,12 +1239,26 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
@@ -1347,6 +1379,7 @@
 			files = (
 				5350B592203F56FE00C6B2D2 /* CoreDataWineTranslator.swift in Sources */,
 				53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */,
+				534728CA20657FED00DC7966 /* AWSEmailAuthentication.swift in Sources */,
 				53B6CB90205ADD9300AE8EFB /* WineCellarInteractor.swift in Sources */,
 				53ED1F8E204F359C00C129BC /* UserTableViewCell.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
@@ -1439,6 +1472,7 @@
 				537614CC1E591887005AABF0 /* EditWineRouter.swift in Sources */,
 				53D1E2FD2059B68800A22476 /* TopWinesPresenter.swift in Sources */,
 				535F66922062FEE20006B26A /* SignUpRouter.swift in Sources */,
+				534728C82064305800DC7966 /* AWSSession.swift in Sources */,
 				538F29441F72EB1F006EEDB1 /* RatingRow.swift in Sources */,
 				53F100E72044BFAF00B29FAF /* Session.swift in Sources */,
 				535D6D1C205AA8B6004D51AB /* MyWinesPresenter.swift in Sources */,

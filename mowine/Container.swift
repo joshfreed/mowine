@@ -13,9 +13,12 @@ class Container {
     static let shared = Container()
     private init() {}
 
-    lazy var session: Session = FakeSession()
-    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer)
+//    lazy var session: Session = FakeSession()
+//    lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
+    lazy var session: Session = AWSSession()
+    lazy var emailAuthService: EmailAuthenticationService = AWSEmailAuthenticationService()
     
+    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer)
     lazy var localWineDataStore: LocalWineDataStore = {
         let wineTranslator = CoreDataWineTranslator(context: persistentContainer.viewContext)
         return CoreDataWineRepository(container: persistentContainer, wineEntityMapper: wineTranslator)
@@ -23,7 +26,6 @@ class Container {
     lazy var remoteWineDataStore: RemoteWineDataStore = FakeRemoteWineDataStore()
     lazy var wineRepository: WineRepository = TheWineRepository(local: localWineDataStore, remote: remoteWineDataStore)
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
-    lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
     lazy var userRepository: UserRepository = FakeUserRepository()
     
     // MARK: Core Data Stack

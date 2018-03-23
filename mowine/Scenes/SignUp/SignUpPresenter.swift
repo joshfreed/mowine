@@ -22,7 +22,7 @@ class SignUpPresenter: SignUpPresentationLogic {
     // MARK: Sign Up
 
     func presentSignUp(response: SignUp.SignUp.Response) {
-        let viewModel = SignUp.SignUp.ViewModel()
+        let viewModel = SignUp.SignUp.ViewModel(error: response.error, message: response.message)
         viewController?.displaySignUpResult(viewModel: viewModel)
     }
 }

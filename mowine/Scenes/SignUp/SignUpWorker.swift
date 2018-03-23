@@ -14,6 +14,13 @@ import UIKit
 import JFLib
 
 class SignUpWorker {
-    func signUp(user: User, completion: @escaping (Result<User>) -> ()) {
+    let emailAuthService: EmailAuthenticationService
+    
+    init(emailAuthService: EmailAuthenticationService) {
+        self.emailAuthService = emailAuthService
+    }
+    
+    func signUp(user: User, password: String, completion: @escaping (EmptyResult) -> ()) {
+        emailAuthService.signUp(user: user, password: password, completion: completion)
     }
 }

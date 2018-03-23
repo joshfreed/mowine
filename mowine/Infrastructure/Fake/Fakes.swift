@@ -12,7 +12,7 @@ import JFLib
 var josh = User(id: UserId(), emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
 var maureen = User(id: UserId(), emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
 
-let usersDB: [User] = [
+var usersDB: [User] = [
     josh,
     User(id: UserId(), emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
     maureen,
@@ -104,7 +104,7 @@ class FakeSession: Session {
         loggedIn()
     }
     
-    func resume() {
+    func resume(completion: @escaping (EmptyResult) -> ()) {
         _isLoggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
         if let emailAddress = UserDefaults.standard.value(forKey: "emailAddress") as? String {
             _currentUser = usersDB.first(where: { $0.emailAddress == emailAddress })
@@ -112,6 +112,7 @@ class FakeSession: Session {
             UserDefaults.standard.set(false, forKey: "loggedIn")
             _isLoggedIn = false
         }
+        completion(.success)
     }
     
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
@@ -136,6 +137,11 @@ class FakeEmailAuth: EmailAuthenticationService {
         } else {
             completion(.success(false))
         }
+    }
+    
+    func signUp(user: User, password: String, completion: @escaping (EmptyResult) -> ()) {
+        usersDB.append(user)
+        completion(.success)
     }
 }
 

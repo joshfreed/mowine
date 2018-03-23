@@ -8,6 +8,11 @@ target 'mowine' do
   pod 'Eureka'
   pod 'Cosmos'
   pod 'PureLayout'
+  
+  # Auth dependencies
+  pod 'AWSUserPoolsSignIn', '~> 2.6.5'
+  pod 'AWSAuthUI', '~> 2.6.5'
+  pod 'AWSMobileClient', '~> 2.6.5'
 
   target 'mowineTests' do
     inherit! :search_paths

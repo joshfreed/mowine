@@ -25,11 +25,13 @@ enum SignUp {
 
         struct Response {
             let user: User?
-            var error: Error?
+            let error: Error?
+            let message: String?
         }
 
         struct ViewModel {
             var error: Error?
+            var message: String?
         }
     }
 }

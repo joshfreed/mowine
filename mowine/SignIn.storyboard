@@ -23,7 +23,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mHW-gK-y19"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YQT-09-AxJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -138,9 +138,9 @@
                                             <constraint firstItem="Vbb-I1-DF0" firstAttribute="leading" secondItem="YMr-RI-C1Z" secondAttribute="leading" constant="16" id="BcV-eQ-gLu"/>
                                             <constraint firstItem="fXf-sD-XtU" firstAttribute="leading" secondItem="YMr-RI-C1Z" secondAttribute="leading" constant="16" id="Dmp-Y4-d31"/>
                                             <constraint firstItem="i8I-37-XPI" firstAttribute="leading" secondItem="YMr-RI-C1Z" secondAttribute="leading" constant="16" id="Fgt-6F-AQh"/>
-                                            <constraint firstItem="8jO-ZE-4Yo" firstAttribute="top" secondItem="1AK-lU-UwB" secondAttribute="bottom" constant="32" id="GFh-Af-bh6"/>
+                                            <constraint firstItem="8jO-ZE-4Yo" firstAttribute="top" secondItem="1AK-lU-UwB" secondAttribute="bottom" constant="16" id="GFh-Af-bh6"/>
                                             <constraint firstItem="1AK-lU-UwB" firstAttribute="leading" secondItem="YMr-RI-C1Z" secondAttribute="leading" constant="16" id="HAU-c4-HXy"/>
-                                            <constraint firstItem="8jO-ZE-4Yo" firstAttribute="leading" secondItem="YMr-RI-C1Z" secondAttribute="leading" constant="32" id="KAZ-dn-CvK"/>
+                                            <constraint firstItem="8jO-ZE-4Yo" firstAttribute="leading" secondItem="YMr-RI-C1Z" secondAttribute="leading" constant="16" id="KAZ-dn-CvK"/>
                                             <constraint firstItem="i8I-37-XPI" firstAttribute="top" secondItem="Vbb-I1-DF0" secondAttribute="bottom" constant="8" id="Nv3-wp-bM7"/>
                                             <constraint firstAttribute="trailing" secondItem="1AK-lU-UwB" secondAttribute="trailing" constant="16" id="Nwv-nD-vlv"/>
                                             <constraint firstItem="zeF-Ds-9eB" firstAttribute="top" secondItem="UAn-uL-6gM" secondAttribute="bottom" constant="16" id="P0d-2s-yng"/>
@@ -285,7 +285,7 @@
                                             <constraint firstItem="i6W-ct-u5w" firstAttribute="top" secondItem="xwv-L8-wSt" secondAttribute="top" constant="8" id="7zz-qi-hvJ"/>
                                             <constraint firstItem="M2S-kx-NCv" firstAttribute="leading" secondItem="xwv-L8-wSt" secondAttribute="leading" constant="32" id="BZQ-eB-7HF"/>
                                             <constraint firstAttribute="trailing" secondItem="M2S-kx-NCv" secondAttribute="trailing" constant="32" id="EG1-Sp-9nP"/>
-                                            <constraint firstItem="M2S-kx-NCv" firstAttribute="top" secondItem="soj-4E-gXZ" secondAttribute="bottom" constant="32" id="EMp-LU-pZY"/>
+                                            <constraint firstItem="M2S-kx-NCv" firstAttribute="top" secondItem="soj-4E-gXZ" secondAttribute="bottom" constant="16" id="EMp-LU-pZY"/>
                                             <constraint firstAttribute="trailing" secondItem="soj-4E-gXZ" secondAttribute="trailing" constant="32" id="Ekb-Vk-7du"/>
                                             <constraint firstItem="iyH-Zs-kE2" firstAttribute="leading" secondItem="xwv-L8-wSt" secondAttribute="leading" constant="32" id="Lc0-Pk-U6m"/>
                                             <constraint firstItem="i6W-ct-u5w" firstAttribute="leading" secondItem="xwv-L8-wSt" secondAttribute="leading" constant="32" id="OTJ-D7-Nc2"/>
@@ -477,6 +477,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="RrH-Sc-Gn4"/>
-        <segue reference="49Y-qL-p7h"/>
+        <segue reference="944-3X-Tt0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -52,7 +52,7 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = SignUpWorker()
+        interactor.worker = SignUpWorker(emailAuthService: Container.shared.emailAuthService)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -172,11 +172,22 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         
         signUpButton.displayLoading()
         
-        
+        let request = SignUp.SignUp.Request(firstName: firstName, lastName: lastName, emailAddress: emailAddress, password: password)
+        interactor?.signUp(request: request)
     }
     
     func displaySignUpResult(viewModel: SignUp.SignUp.ViewModel) {
+        signUpButton.displayNotLoading()
         
+        if viewModel.error == nil {
+            router?.routeToSignedIn()
+        } else {
+            if let message = viewModel.message {
+                showErrorLabel(message)
+            } else {
+                showErrorLabel("Whoops! An error occurred while trying to sign you up.")
+            }
+        }
     }
 }
 
