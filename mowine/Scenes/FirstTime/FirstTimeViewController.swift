@@ -11,9 +11,12 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import AWSAuthCore
 
 protocol FirstTimeDisplayLogic: class {
-    func displaySomething(viewModel: FirstTime.Something.ViewModel)
+    func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel)
 }
 
 class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
@@ -42,6 +45,7 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
+        interactor.worker = FirstTimeWorker(facebookService: Container.shared.facebookService)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -62,7 +66,6 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,19 +78,19 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
         navigationController?.isNavigationBarHidden = false
     }
 
-    // MARK: Do something
+    // MARK: Continue with Facebook
 
-    //@IBOutlet weak var nameTextField: UITextField!
-
-    func doSomething() {
-        let request = FirstTime.Something.Request()
-        interactor?.doSomething(request: request)
-    }
-
-    func displaySomething(viewModel: FirstTime.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    @IBAction func tappedContinueWithFacebook(_ sender: MWButton) {
+        let request = FirstTime.FacebookLogin.Request()
+        interactor?.loginWithFacebook(request: request)
     }
     
+    func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel) {
+        if viewModel.error == nil {
+            router?.routeToSignedIn()
+        }
+    }
+
     // MARK: Continue with email
     
     @IBAction func tappedContinueWithEmail(_ sender: ButtonOutline) {

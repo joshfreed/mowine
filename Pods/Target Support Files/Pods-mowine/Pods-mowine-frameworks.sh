@@ -139,10 +139,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -151,10 +155,14 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

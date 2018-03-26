@@ -11,23 +11,31 @@ import JFLib
 import AWSAuthCore
 import AWSUserPoolsSignIn
 
-class AWSEmailAuthenticationService: EmailAuthenticationService {
+class AWSEmailAuthenticationService: NSObject, EmailAuthenticationService {
     lazy var pool = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool()
+
+    var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
+    private var username: String?
+    private var password: String?
     
     func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
-        let user = pool.getUser(emailAddress)
+        self.username = emailAddress
+        self.password = password
         
-        print("\(user)")
-        user.getSession(emailAddress, password: password, validationData: nil).continueWith { task -> Any? in
-            
+        AWSCognitoUserPoolsSignInProvider.sharedInstance().setInteractiveAuthDelegate(self)
+
+        let providerKey = AWSCognitoUserPoolsSignInProvider.sharedInstance().identityProviderName
+
+        AWSSignInManager.sharedInstance().login(signInProviderKey: providerKey) { (result: Any?, error: Error?) in
+
             DispatchQueue.main.async {
-                
-                if let e = task.error {
+
+                if let e = error {
                     let error = e as NSError
                     print("\(error)")
-                    
+
                     let type = error.userInfo["__type"] as? String
-                    
+
                     if type == "UserNotFoundException" || type == "NotAuthorizedException" {
                         completion(.success(false))
                     } else {
@@ -36,10 +44,9 @@ class AWSEmailAuthenticationService: EmailAuthenticationService {
                 } else {
                     completion(.success(true))
                 }
-                
+
             }
-            
-            return nil
+
         }
     }
     
@@ -145,5 +152,33 @@ class AWSEmailAuthenticationService: EmailAuthenticationService {
             
             return nil
         }
+    }
+}
+
+extension AWSEmailAuthenticationService: AWSCognitoIdentityInteractiveAuthenticationDelegate {
+    func startPasswordAuthentication() -> AWSCognitoIdentityPasswordAuthentication {
+        return self
+    }
+}
+
+extension AWSEmailAuthenticationService: AWSCognitoUserPoolsSignInHandler {
+    func handleUserPoolSignInFlowStart() {
+        guard let username = username, let password = password else {
+            return
+        }
+        
+        passwordAuthenticationCompletion?.set(result: AWSCognitoIdentityPasswordAuthenticationDetails(username: username, password: password))
+    }
+}
+
+extension AWSEmailAuthenticationService: AWSCognitoIdentityPasswordAuthentication {
+    func didCompleteStepWithError(_ error: Error?) {
+        if let error = error {
+            print("ERROR! \(error)")
+        }
+    }
+    
+    func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput, passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
+        passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
     }
 }

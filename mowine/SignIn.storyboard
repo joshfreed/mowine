@@ -23,7 +23,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mHW-gK-y19"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YQT-09-AxJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
@@ -380,6 +380,9 @@
                                         <state key="normal" title="Continue with Facebook">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tappedContinueWithFacebook:" destination="w6f-KD-eon" eventType="touchUpInside" id="CJN-kZ-RqN"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z0q-2z-Vfa" customClass="MWButton" customModule="mowine">
                                         <rect key="frame" x="0.0" y="80" width="311" height="72"/>
@@ -476,7 +479,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RrH-Sc-Gn4"/>
-        <segue reference="944-3X-Tt0"/>
+        <segue reference="ITt-WX-WGQ"/>
+        <segue reference="49Y-qL-p7h"/>
     </inferredMetricsTieBreakers>
 </document>

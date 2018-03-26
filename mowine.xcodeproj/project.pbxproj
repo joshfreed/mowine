@@ -55,6 +55,8 @@
 		532FB08720584C2C0056D1B2 /* UserProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08120584C2C0056D1B2 /* UserProfileModels.swift */; };
 		532FB08820584C2C0056D1B2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */; };
 		532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */; };
+		533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533980932068295C004C080B /* FacebookAuthenticationService.swift */; };
+		5339809620682A76004C080B /* AWSFacebookAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339809520682A76004C080B /* AWSFacebookAuthentication.swift */; };
 		53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */; };
 		53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */; };
 		53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */; };
@@ -277,6 +279,8 @@
 		532FB08120584C2C0056D1B2 /* UserProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModels.swift; sourceTree = "<group>"; };
 		532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
+		533980932068295C004C080B /* FacebookAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthenticationService.swift; sourceTree = "<group>"; };
+		5339809520682A76004C080B /* AWSFacebookAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSFacebookAuthentication.swift; sourceTree = "<group>"; };
 		53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryInteractor.swift; sourceTree = "<group>"; };
 		53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryModels.swift; sourceTree = "<group>"; };
 		53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryPresenter.swift; sourceTree = "<group>"; };
@@ -588,6 +592,7 @@
 			children = (
 				534728C72064305800DC7966 /* AWSSession.swift */,
 				534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */,
+				5339809520682A76004C080B /* AWSFacebookAuthentication.swift */,
 			);
 			path = AWS;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
 				53ED1F7B20489DBD00C129BC /* User.swift */,
 				53ED1F8A204F323F00C129BC /* UserRepository.swift */,
+				533980932068295C004C080B /* FacebookAuthenticationService.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1244,10 +1250,14 @@
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1257,10 +1267,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSFacebookSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1451,6 +1465,7 @@
 				535D6D21205AA8B6004D51AB /* MyWinesInteractor.swift in Sources */,
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				53D1E2FE2059B68800A22476 /* TopWinesWorker.swift in Sources */,
+				5339809620682A76004C080B /* AWSFacebookAuthentication.swift in Sources */,
 				534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				5327BC2820619D34006787E9 /* WineCellarListInteractor.swift in Sources */,
@@ -1462,6 +1477,7 @@
 				53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */,
 				5327BC2520619D34006787E9 /* WineCellarListRouter.swift in Sources */,
 				5327BC322062B362006787E9 /* WineDetailsRouter.swift in Sources */,
+				533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */,
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,
 				5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */,

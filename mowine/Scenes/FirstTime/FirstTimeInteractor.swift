@@ -13,25 +13,30 @@
 import UIKit
 
 protocol FirstTimeBusinessLogic {
-    func doSomething(request: FirstTime.Something.Request)
+    func loginWithFacebook(request: FirstTime.FacebookLogin.Request)
 }
 
 protocol FirstTimeDataStore {
-    //var name: String { get set }
+    
 }
 
 class FirstTimeInteractor: FirstTimeBusinessLogic, FirstTimeDataStore {
     var presenter: FirstTimePresentationLogic?
     var worker: FirstTimeWorker?
-    //var name: String = ""
 
-    // MARK: Do something
+    // MARK: Login with facebook
 
-    func doSomething(request: FirstTime.Something.Request) {
-        worker = FirstTimeWorker()
-        worker?.doSomeWork()
-
-        let response = FirstTime.Something.Response()
-        presenter?.presentSomething(response: response)
+    func loginWithFacebook(request: FirstTime.FacebookLogin.Request) {
+        worker?.loginWithFacebook() { result in
+            switch result {
+            case .success:
+                let response = FirstTime.FacebookLogin.Response(error: nil)
+                self.presenter?.presentFacebookLogin(response: response)
+            case .failure(let error):
+                print("\(error)")
+                let response = FirstTime.FacebookLogin.Response(error: error)
+                self.presenter?.presentFacebookLogin(response: response)
+            }
+        }
     }
 }

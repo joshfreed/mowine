@@ -17,6 +17,7 @@ class Container {
 //    lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
     lazy var session: Session = AWSSession()
     lazy var emailAuthService: EmailAuthenticationService = AWSEmailAuthenticationService()
+    lazy var facebookService: FacebookAuthenticationService = AWSFacebookAuthentication()
     
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer)
     lazy var localWineDataStore: LocalWineDataStore = {

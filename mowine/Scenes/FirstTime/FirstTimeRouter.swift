@@ -15,6 +15,7 @@ import UIKit
 @objc protocol FirstTimeRoutingLogic {
     func routeToSignIn(segue: UIStoryboardSegue)
     func routeToSignUp(segue: UIStoryboardSegue)
+    func routeToSignedIn()
 }
 
 protocol FirstTimeDataPassing {
@@ -34,27 +35,19 @@ class FirstTimeRouter: NSObject, FirstTimeRoutingLogic, FirstTimeDataPassing {
     func routeToSignUp(segue: UIStoryboardSegue) {
         
     }
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    
+    func routeToSignedIn() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateInitialViewController() as! TabBarViewController
+        navigateToSignedIn(source: viewController!, destination: destinationVC)
+    }
 
     // MARK: Navigation
 
-    //func navigateToSomewhere(source: FirstTimeViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToSignedIn(source: FirstTimeViewController, destination: TabBarViewController) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = destination
+    }
 
     // MARK: Passing data
 

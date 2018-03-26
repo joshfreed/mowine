@@ -13,16 +13,16 @@
 import UIKit
 
 protocol FirstTimePresentationLogic {
-    func presentSomething(response: FirstTime.Something.Response)
+    func presentFacebookLogin(response: FirstTime.FacebookLogin.Response)
 }
 
 class FirstTimePresenter: FirstTimePresentationLogic {
     weak var viewController: FirstTimeDisplayLogic?
 
-    // MARK: Do something
+    // MARK: Login with facebook
 
-    func presentSomething(response: FirstTime.Something.Response) {
-        let viewModel = FirstTime.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentFacebookLogin(response: FirstTime.FacebookLogin.Response) {
+        let viewModel = FirstTime.FacebookLogin.ViewModel(error: response.error)
+        viewController?.displayFacebookLogin(viewModel: viewModel)
     }
 }

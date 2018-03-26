@@ -15,14 +15,16 @@ import UIKit
 enum FirstTime {
     // MARK: Use cases
 
-    enum Something {
+    enum FacebookLogin {
         struct Request {
         }
 
         struct Response {
+            var error: Error?
         }
 
         struct ViewModel {
+            var error: Error?
         }
     }
 }

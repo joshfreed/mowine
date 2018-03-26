@@ -11,8 +11,20 @@
 //
 
 import UIKit
+import JFLib
 
 class FirstTimeWorker {
-    func doSomeWork() {
+    let facebookService: FacebookAuthenticationService
+
+    init(facebookService: FacebookAuthenticationService) {
+        self.facebookService = facebookService
+    }
+
+    func loginWithFacebook(completion: @escaping (EmptyResult) -> ()) {
+        facebookService.signIn(completion: completion)
+    }
+
+    func loginWithGoogle() {
+
     }
 }

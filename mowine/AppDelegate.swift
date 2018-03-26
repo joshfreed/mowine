@@ -12,8 +12,8 @@ import JFLib
 import PureLayout
 import AWSMobileClient
 import AWSAuthCore
-import AWSCognitoIdentityProvider
 import AWSUserPoolsSignIn
+import AWSFacebookSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,19 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = UIColor.mwButtonSecondary
 
-        let defaults = UserDefaults.standard
-        let isPreloaded = defaults.bool(forKey: "isPreloaded")
-        if !isPreloaded {
-            preLoadData()
-            defaults.set(true, forKey: "isPreloaded")
-        }
+//        let defaults = UserDefaults.standard
+//        let isPreloaded = defaults.bool(forKey: "isPreloaded")
+//        if !isPreloaded {
+//            preLoadData()
+//            defaults.set(true, forKey: "isPreloaded")
+//        }
 
-        AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
+        AWSFacebookSignInProvider.sharedInstance().setPermissions(["public_profile"])
+        AWSSignInManager.sharedInstance().register(signInProvider: AWSFacebookSignInProvider.sharedInstance())
+        AWSSignInManager.sharedInstance().register(signInProvider: AWSCognitoUserPoolsSignInProvider.sharedInstance())
         
-        Container.shared.session.resume() { _ in
-            
-        }
+        AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
 
+        Container.shared.session.resume() { _ in }
+
+        let credProv = AWSMobileClient.sharedInstance().getCredentialsProvider()
+        let identityId = credProv.identityId
+        print("Identity ID: \(String(describing: identityId))")
+        
         if !Container.shared.session.isLoggedIn {
             let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
             let initialViewController = storyboard.instantiateInitialViewController()!
