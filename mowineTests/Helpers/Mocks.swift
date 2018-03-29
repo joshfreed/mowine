@@ -45,11 +45,7 @@ class MockWineTypeRepository: WineTypeRepository {
     }
 }
 
-class MockUserRepository: UserRepository {
-    func getUserByEmail(_ emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
-        
-    }
-    
+class MockUserRepository: UserRepository {   
     func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
         
     }
@@ -112,19 +108,24 @@ class MockSession: Session {
         return _currentUser != nil
     }
     
+    var _currentUserId: UserId?
     var currentUserId: UserId? {
-        return _currentUser?.id
+        return _currentUserId ?? _currentUser?.id
     }
     
     func resume(completion: @escaping (EmptyResult) -> ()) {
         
     }
     
+    func login(userId: UserId) {
+        _currentUserId = userId
+    }
+    
     func login(user: User) {
         _currentUser = user
     }
     
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+    func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {
         if let currentUser = _currentUser {
             completion(.success(currentUser))
         } else {

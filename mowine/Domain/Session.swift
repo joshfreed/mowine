@@ -9,10 +9,14 @@
 import Foundation
 import JFLib
 
+enum SessionError: Error {
+    case notLoggedIn
+}
+
 protocol Session {
     var isLoggedIn: Bool { get }
     var currentUserId: UserId? { get }
     func resume(completion: @escaping (EmptyResult) -> ())
-    func getCurrentUser(completion: @escaping (Result<User>) -> ())
+    func getCurrentUser(completion: @escaping (Result<User?>) -> ())
     func end()
 }

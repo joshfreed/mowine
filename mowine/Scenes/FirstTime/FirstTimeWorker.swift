@@ -22,11 +22,18 @@ class FirstTimeWorker {
     let fbAuth: FacebookAuthenticationService
     let fbGraphApi: GraphApi
     let userRepository: UserRepository
+    let session: Session
 
-    init(fbAuth: FacebookAuthenticationService, fbGraphApi: GraphApi, userRepository: UserRepository) {
+    init(
+        fbAuth: FacebookAuthenticationService,
+        fbGraphApi: GraphApi,
+        userRepository: UserRepository,
+        session: Session
+    ) {
         self.fbAuth = fbAuth
         self.fbGraphApi = fbGraphApi
         self.userRepository = userRepository
+        self.session = session
     }
 
     func loginWithFacebook(completion: @escaping (EmptyResult) -> ()) {
@@ -65,7 +72,12 @@ class FirstTimeWorker {
     }
     
     func createUser(email: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
-        var user = User(id: UserId(), emailAddress: email)
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        
+        var user = User(id: currentUserId, emailAddress: email)
         user.firstName = firstName
         user.lastName = lastName
         

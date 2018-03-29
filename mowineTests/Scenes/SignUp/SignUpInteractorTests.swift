@@ -22,6 +22,7 @@ class SignUpInteractorTests: XCTestCase {
     let presenter = SignUpPresentationLogicSpy()
     let emailAuthService = TestEmailAuthService()
     let userRepository = TestUserRepository()
+    let session = MockSession()
 
     // MARK: Test lifecycle
 
@@ -40,7 +41,7 @@ class SignUpInteractorTests: XCTestCase {
     func setupSignUpInteractor() {
         sut = SignUpInteractor()
         sut.presenter = presenter
-        sut.worker = SignUpWorker(emailAuthService: emailAuthService, userRepository: userRepository)
+        sut.worker = SignUpWorker(emailAuthService: emailAuthService, userRepository: userRepository, session: session)
     }
 
     // MARK: Test doubles
@@ -96,6 +97,7 @@ class SignUpInteractorTests: XCTestCase {
         // Given
         emailAuthService.identityDoesNotExist(for: "jbone@test.com")
         emailAuthService.signUpWillSucceed()
+        session.login(userId: UserId())
         userRepository.saveUserWillSucceed()
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
 
@@ -111,6 +113,7 @@ class SignUpInteractorTests: XCTestCase {
     func test_signUp_emailAddressAlreadyExists() {
         // Given
         emailAuthService.identity(for: "jbone@test.com", password: "whatever")
+        session.login(userId: UserId())
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
         
         // When
@@ -131,6 +134,7 @@ class SignUpInteractorTests: XCTestCase {
     func test_signUp_userIdentityExistsButUserIsNotInRepository() {
         // Given
         emailAuthService.identity(for: "jbone@test.com", password: "password123")
+        session.login(userId: UserId())
         userRepository.doesNotContainUser(emailAddress: "jbone@test.com")
         userRepository.saveUserWillSucceed()
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
@@ -161,6 +165,7 @@ class SignUpInteractorTests: XCTestCase {
     func test_signUp_anErrorOccursWhileAddingTheUserToTheRepository() {
         // Given
         emailAuthService.identityDoesNotExist(for: "jbone@test.com")
+        session.login(userId: UserId()) // added this to make it pass - does it make sense for the use case tho?
         emailAuthService.signUpWillSucceed()
         userRepository.saveUserWillFail(error: TestError.unknownError)
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
@@ -209,6 +214,7 @@ class SignUpInteractorTests: XCTestCase {
     func test_signUp_userIdentityExists_and_userIsInRepository() {
         // Given
         emailAuthService.identity(for: "jbone@test.com", password: "password123")
+        session.login(userId: UserId())
         userRepository.containsUser(emailAddress: "jbone@test.com")
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
         

@@ -19,6 +19,7 @@ class SignUpWorkerTests: XCTestCase {
     var sut: SignUpWorker!
     let emailAuthService = MockEmailAuthService()
     let userRepository = MockUserRepository()
+    let session = MockSession()
 
     // MARK: Test lifecycle
 
@@ -36,7 +37,8 @@ class SignUpWorkerTests: XCTestCase {
     func setupSignUpWorker() {
         sut = SignUpWorker(
             emailAuthService: emailAuthService,
-            userRepository: userRepository
+            userRepository: userRepository,
+            session: session
         )
     }
 

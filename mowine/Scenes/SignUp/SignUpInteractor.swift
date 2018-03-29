@@ -30,37 +30,20 @@ class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
         // Make sure password meets the requirements
         // Make sure the email address is unique and is not associated with another account
         // Make sure firstName is not empty
-        
-        var user = User(id: UserId(), emailAddress: request.emailAddress)
-        user.firstName = request.firstName
-        user.lastName = request.lastName
-        
+
         worker?.signUp(emailAddress: request.emailAddress, password: request.password) { result in
             switch result {
-            case .success: self.handleSignUpSuccess(user: user)
+            case .success: self.createUser(request: request)
             case .failure(let error): self.handleSignUpFailure(error: error)
             }
         }
     }
 
-    func handleSignUpSuccess(user: User) {
-        worker?.getUser(emailAddress: user.emailAddress) { result in
+    func createUser(request: SignUp.SignUp.Request) {
+        worker?.createUser(emailAddress: request.emailAddress, firstName: request.firstName, lastName: request.lastName) { result in
             switch result {
-            case .success(let existingUser): self.handleGetUserSuccess(newUser: user, existingUser: existingUser)
+            case .success(let user): self.presentSignUp(user: user)
             case .failure(let error): self.presentSignUp(user: nil, error: error)
-            }
-        }
-    }
-    
-    func handleGetUserSuccess(newUser: User, existingUser: User?) {
-        if let existingUser = existingUser {
-            presentSignUp(user: existingUser)
-        } else {
-            worker?.saveNewUser(user: newUser) { result in
-                switch result {
-                case .success: self.presentSignUp(user: newUser)
-                case .failure(let error): self.presentSignUp(user: nil, error: error)
-                }
             }
         }
     }

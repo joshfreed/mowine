@@ -9,34 +9,34 @@
 import Foundation
 import JFLib
 
-var josh = User(id: UserId(), emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
-var maureen = User(id: UserId(), emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
+var josh = User.make(emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
+var maureen = User.make(emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
 
 var usersDB: [User] = [
     josh,
-    User(id: UserId(), emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
+    User.make(emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
     maureen,
-    User(id: UserId(), emailAddress: "mbananas@gmail.com", firstName: "Maurice", lastName: "Bananas"),
-    User(id: UserId(), emailAddress: "test1@test.com", firstName: "Test", lastName: "User1"),
-    User(id: UserId(), emailAddress: "test2@test.com", firstName: "Test", lastName: "User2"),
-    User(id: UserId(), emailAddress: "test3@test.com", firstName: "Test", lastName: "User3"),
-    User(id: UserId(), emailAddress: "test4@test.com", firstName: "Test", lastName: "User4"),
-    User(id: UserId(), emailAddress: "test5@test.com", firstName: "Test", lastName: "User5"),
-    User(id: UserId(), emailAddress: "test6@test.com", firstName: "Test", lastName: "User6"),
-    User(id: UserId(), emailAddress: "test7@test.com", firstName: "Test", lastName: "User7"),
-    User(id: UserId(), emailAddress: "test8@test.com", firstName: "Test", lastName: "User8"),
-    User(id: UserId(), emailAddress: "test9@test.com", firstName: "Test", lastName: "User9"),
-    User(id: UserId(), emailAddress: "test10@test.com", firstName: "Test", lastName: "User10"),
-    User(id: UserId(), emailAddress: "test11@test.com", firstName: "Test", lastName: "User12"),
-    User(id: UserId(), emailAddress: "test12@test.com", firstName: "Test", lastName: "User13"),
-    User(id: UserId(), emailAddress: "test13@test.com", firstName: "Test", lastName: "User14"),
-    User(id: UserId(), emailAddress: "test14@test.com", firstName: "Test", lastName: "User15"),
-    User(id: UserId(), emailAddress: "test15@test.com", firstName: "Test", lastName: "User16"),
-    User(id: UserId(), emailAddress: "test16@test.com", firstName: "Test", lastName: "User17"),
-    User(id: UserId(), emailAddress: "test17@test.com", firstName: "Test", lastName: "User18"),
-    User(id: UserId(), emailAddress: "test18@test.com", firstName: "Test", lastName: "User19"),
-    User(id: UserId(), emailAddress: "test19@test.com", firstName: "Test", lastName: "User19"),
-    User(id: UserId(), emailAddress: "test20@test.com", firstName: "Test", lastName: "User20"),
+    User.make(emailAddress: "mbananas@gmail.com", firstName: "Maurice", lastName: "Bananas"),
+    User.make(emailAddress: "test1@test.com", firstName: "Test", lastName: "User1"),
+    User.make(emailAddress: "test2@test.com", firstName: "Test", lastName: "User2"),
+    User.make(emailAddress: "test3@test.com", firstName: "Test", lastName: "User3"),
+    User.make(emailAddress: "test4@test.com", firstName: "Test", lastName: "User4"),
+    User.make(emailAddress: "test5@test.com", firstName: "Test", lastName: "User5"),
+    User.make(emailAddress: "test6@test.com", firstName: "Test", lastName: "User6"),
+    User.make(emailAddress: "test7@test.com", firstName: "Test", lastName: "User7"),
+    User.make(emailAddress: "test8@test.com", firstName: "Test", lastName: "User8"),
+    User.make(emailAddress: "test9@test.com", firstName: "Test", lastName: "User9"),
+    User.make(emailAddress: "test10@test.com", firstName: "Test", lastName: "User10"),
+    User.make(emailAddress: "test11@test.com", firstName: "Test", lastName: "User12"),
+    User.make(emailAddress: "test12@test.com", firstName: "Test", lastName: "User13"),
+    User.make(emailAddress: "test13@test.com", firstName: "Test", lastName: "User14"),
+    User.make(emailAddress: "test14@test.com", firstName: "Test", lastName: "User15"),
+    User.make(emailAddress: "test15@test.com", firstName: "Test", lastName: "User16"),
+    User.make(emailAddress: "test16@test.com", firstName: "Test", lastName: "User17"),
+    User.make(emailAddress: "test17@test.com", firstName: "Test", lastName: "User18"),
+    User.make(emailAddress: "test18@test.com", firstName: "Test", lastName: "User19"),
+    User.make(emailAddress: "test19@test.com", firstName: "Test", lastName: "User19"),
+    User.make(emailAddress: "test20@test.com", firstName: "Test", lastName: "User20"),
 ]
 
 var friendsDB: [UserId: [UserId]] = [
@@ -73,6 +73,15 @@ func randomDelay(action: @escaping () -> ()) {
 //    let wait = Double(arc4random_uniform(4) + 1)
 //    delay(seconds: wait, action: action)
     action()
+}
+
+extension User {
+    static func make(emailAddress: String, firstName: String, lastName: String) -> User {
+        var user = User(emailAddress: emailAddress)
+        user.firstName = firstName
+        user.lastName = lastName
+        return user
+    }
 }
 
 class FakeSession: Session {
@@ -115,7 +124,7 @@ class FakeSession: Session {
         completion(.success)
     }
     
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+    func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {
         if let currentUser = _currentUser {
             completion(.success(currentUser))
         }
@@ -140,7 +149,7 @@ class FakeEmailAuth: EmailAuthenticationService {
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
-        let user = User(id: UserId(), emailAddress: emailAddress)
+        let user = User(emailAddress: emailAddress)
         usersDB.append(user)
         completion(.success)
     }
@@ -225,15 +234,7 @@ class FakeUserRepository: UserRepository {
             user?.isFriend = friendsDB[currentUserId]?.contains(id) ?? false
         }
         completion(.success(user))
-    }
-    
-    func getUserByEmail(_ emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
-        var user = usersDB.first(where: { $0.emailAddress == emailAddress })
-        if let u = user, let currentUserId = Container.shared.session.currentUserId {
-            user?.isFriend = friendsDB[currentUserId]?.contains(u.id) ?? false
-        }
-        completion(.success(user))
-    }
+    }    
 }
 
 class FakeRemoteWineDataStore: RemoteWineDataStore {

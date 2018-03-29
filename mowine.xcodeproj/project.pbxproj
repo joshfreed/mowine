@@ -113,6 +113,7 @@
 		537614D11E591FA5005AABF0 /* WineForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537614D01E591FA5005AABF0 /* WineForm.swift */; };
 		537740A41E5BC73600A1D282 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A31E5BC73600A1D282 /* Models.swift */; };
 		537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A91E5BD58A00A1D282 /* WineImageWorker.swift */; };
+		53898641206AEB0700EBC67B /* AWSUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53898640206AEB0700EBC67B /* AWSUser.swift */; };
 		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
 		538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B41EE476A100CF1330 /* TestDoubles.swift */; };
 		538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */; };
@@ -194,6 +195,7 @@
 		53F2486F206D47EF0046B031 /* FirstTimeWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F2486B206D47EF0046B031 /* FirstTimeWorkerTests.swift */; };
 		53F24872206D4A760046B031 /* MoreDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24871206D4A760046B031 /* MoreDoubles.swift */; };
 		53F24874206D4ADA0046B031 /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24873206D4ADA0046B031 /* Facebook.swift */; };
+		53F24876206D6A0A0046B031 /* AWSUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24875206D6A0A0046B031 /* AWSUserRepository.swift */; };
 		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
@@ -345,6 +347,7 @@
 		537614D01E591FA5005AABF0 /* WineForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineForm.swift; sourceTree = "<group>"; };
 		537740A31E5BC73600A1D282 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		537740A91E5BD58A00A1D282 /* WineImageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
+		53898640206AEB0700EBC67B /* AWSUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSUser.swift; sourceTree = "<group>"; };
 		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorkerTests.swift; sourceTree = "<group>"; };
 		538995B41EE476A100CF1330 /* TestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
 		538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 		53F2486B206D47EF0046B031 /* FirstTimeWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeWorkerTests.swift; sourceTree = "<group>"; };
 		53F24871206D4A760046B031 /* MoreDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDoubles.swift; sourceTree = "<group>"; };
 		53F24873206D4ADA0046B031 /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
+		53F24875206D6A0A0046B031 /* AWSUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSUserRepository.swift; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -606,6 +610,7 @@
 		534728C62064304900DC7966 /* AWS */ = {
 			isa = PBXGroup;
 			children = (
+				53F24877206D6AA70046B031 /* DynamoDB */,
 				534728C72064305800DC7966 /* AWSSession.swift */,
 				534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */,
 				5339809520682A76004C080B /* AWSFacebookAuthentication.swift */,
@@ -968,6 +973,15 @@
 			path = FirstTime;
 			sourceTree = "<group>";
 		};
+		53F24877206D6AA70046B031 /* DynamoDB */ = {
+			isa = PBXGroup;
+			children = (
+				53898640206AEB0700EBC67B /* AWSUser.swift */,
+				53F24875206D6A0A0046B031 /* AWSUserRepository.swift */,
+			);
+			path = DynamoDB;
+			sourceTree = "<group>";
+		};
 		53F5ABE71E2176080067AB62 = {
 			isa = PBXGroup;
 			children = (
@@ -1298,7 +1312,9 @@
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSLambda/AWSLambda.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1315,7 +1331,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSFacebookSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSLambda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
@@ -1445,6 +1463,7 @@
 				53B6CB90205ADD9300AE8EFB /* WineCellarInteractor.swift in Sources */,
 				53ED1F8E204F359C00C129BC /* UserTableViewCell.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
+				53F24876206D6A0A0046B031 /* AWSUserRepository.swift in Sources */,
 				535D6D1F205AA8B6004D51AB /* MyWinesModels.swift in Sources */,
 				5327BC2720619D34006787E9 /* WineCellarListViewController.swift in Sources */,
 				532FB08720584C2C0056D1B2 /* UserProfileModels.swift in Sources */,
@@ -1525,6 +1544,7 @@
 				53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */,
 				5327BC2520619D34006787E9 /* WineCellarListRouter.swift in Sources */,
 				5327BC322062B362006787E9 /* WineDetailsRouter.swift in Sources */,
+				53898641206AEB0700EBC67B /* AWSUser.swift in Sources */,
 				533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */,
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,

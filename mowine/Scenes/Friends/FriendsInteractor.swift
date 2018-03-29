@@ -168,9 +168,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     // MARK: Add friend
     
     func addFriend(request: Friends.AddFriend.Request) {
-        guard let userId = UserId(string: request.userId) else {
-            return
-        }
+        let userId = UserId(string: request.userId)
         
         worker?.addFriend(userId: userId) { result in
             switch result {
@@ -189,9 +187,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     // MARK: Select user
     
     func selectUser(request: Friends.SelectUser.Request) {
-        guard let userId = UserId(string: request.userId) else {
-            return
-        }
+        let userId = UserId(string: request.userId)
         
         selectedUserId = userId
         

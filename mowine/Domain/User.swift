@@ -10,9 +10,9 @@ import UIKit
 
 struct User: Equatable {
     let id: UserId
+    var emailAddress: String
     var firstName: String?
     var lastName: String?
-    var emailAddress: String
     var profilePicture: UIImage?
     var isFriend: Bool = false
     
@@ -28,51 +28,45 @@ struct User: Equatable {
         return _fullName
     }
     
+    init(emailAddress: String) {
+        self.id = UserId()
+        self.emailAddress = emailAddress
+    }
+    
     init(id: UserId, emailAddress: String) {
         self.id = id
         self.emailAddress = emailAddress
     }
-    
-    init(id: UserId, emailAddress: String, firstName: String, lastName: String) {
-        self.id = id
-        self.emailAddress = emailAddress
-        self.firstName = firstName
-        self.lastName = lastName
-    }
-    
+
     static func ==(lhs: User, rhs: User) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.emailAddress == rhs.emailAddress
     }
 }
 
 struct UserId: Hashable, CustomStringConvertible {
-    private let uuid: UUID
+    let identityId: String
     
     var description: String {
-        return uuid.uuidString
+        return identityId
+    }
+    
+    var asString: String {
+        return description
     }
     
     init() {
-        uuid = UUID()
+        identityId = UUID().uuidString
     }
     
-    init(uuid: UUID) {
-        self.uuid = uuid
-    }
-    
-    init?(string: String) {
-        guard let uuid = UUID(uuidString: string) else {
-            return nil
-        }
-        
-        self.init(uuid: uuid)
+    init(string: String) {
+        identityId = string
     }
     
     var hashValue: Int {
-        return uuid.hashValue
+        return identityId.hashValue
     }
     
     static func ==(lhs: UserId, rhs: UserId) -> Bool {
-        return lhs.uuid == rhs.uuid
+        return lhs.identityId == rhs.identityId
     }
 }

@@ -12,6 +12,7 @@ import AWSMobileClient
 import AWSAuthCore
 
 class AWSSession: Session {
+    let userRepository: UserRepository
     private var _currentUser: User?
     
     var identityId: String? {
@@ -23,8 +24,14 @@ class AWSSession: Session {
     }
     
     var currentUserId: UserId? {
-        printIds()
-        return _currentUser?.id
+        guard let identityId = AWSIdentityManager.default().identityId else {
+            return nil
+        }
+        return UserId(string: identityId)
+    }
+    
+    init(userRepository: UserRepository) {
+        self.userRepository = userRepository
     }
     
     func resume(completion: @escaping (EmptyResult) -> ()) {
@@ -40,32 +47,18 @@ class AWSSession: Session {
         completion(.success)
     }
     
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
-        printIds()
+    func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {
+        guard let currentUserId = currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        
+        userRepository.getUserById(currentUserId, completion: completion)
     }
     
     func end() {        
         AWSSignInManager.sharedInstance().logout { (result, error) in
             print("Logged out. \(AWSSignInManager.sharedInstance().isLoggedIn)")
-        }
-    }
-    
-    private func printIds() {
-        let id = AWSIdentityManager.default().identityId
-        let credProv = AWSMobileClient.sharedInstance().getCredentialsProvider()
-        let identityId = credProv.identityId
-        print("Credentials Provider Identity ID: \(String(describing: identityId))")
-        print("Identity Manager ID: \(String(describing: id))")
-        
-        credProv.getIdentityId().continueWith { task -> Any? in
-            if let e = task.error {
-                let error = e as NSError
-                print("\(error)")
-            } else {
-                let cognitoId = task.result!
-                print("ASYNC Cognito id: \(cognitoId)")
-            }
-            return task
         }
     }
 }

@@ -13,7 +13,9 @@ target 'mowine' do
   pod 'AWSMobileClient', '~> 2.6.5'
   pod 'AWSAuthUI', '~> 2.6.5'
   pod 'AWSUserPoolsSignIn', '~> 2.6.5'
-  pod 'AWSFacebookSignIn', '~> 2.6.5'  
+  pod 'AWSFacebookSignIn', '~> 2.6.5'
+  pod 'AWSLambda', '~> 2.6.5'
+  pod 'AWSDynamoDB', '~> 2.6.5'
 
   target 'mowineTests' do
     inherit! :search_paths

@@ -32,6 +32,3 @@ class AWSFacebookAuthentication: FacebookAuthenticationService {
         }
     }
 }
-
-
-

@@ -20,6 +20,7 @@ class FirstTimeWorkerTests: XCTestCase {
     let facebookAuth = MockFacebookAuthService()
     let fbGraphApi = GraphApi()
     let userRepository = TestUserRepository()
+    let session = MockSession()
 
     // MARK: Test lifecycle
 
@@ -38,7 +39,8 @@ class FirstTimeWorkerTests: XCTestCase {
         sut = FirstTimeWorker(
             fbAuth: facebookAuth,
             fbGraphApi: fbGraphApi,
-            userRepository: userRepository
+            userRepository: userRepository,
+            session: session
         )
     }
 

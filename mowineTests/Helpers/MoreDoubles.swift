@@ -99,7 +99,7 @@ class TestUserRepository: UserRepository {
         }
     }
     func saveUserWillSucceed() {
-        let userToReturn = User(id: UserId(), emailAddress: "smelly@mybutt.com")
+        let userToReturn = User(emailAddress: "smelly@mybutt.com")
         saveUserResult = .success(userToReturn)
     }
     func saveUserWillFail(error: Error) {
@@ -134,10 +134,6 @@ class TestUserRepository: UserRepository {
     }
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
-        
-    }
-    
-    func getUserByEmail(_ emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
         completion(.success(_user))
-    }
+    }    
 }

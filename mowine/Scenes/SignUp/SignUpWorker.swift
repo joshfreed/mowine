@@ -16,10 +16,16 @@ import JFLib
 class SignUpWorker {
     let emailAuthService: EmailAuthenticationService
     let userRepository: UserRepository
+    let session: Session
     
-    init(emailAuthService: EmailAuthenticationService, userRepository: UserRepository) {
+    init(
+        emailAuthService: EmailAuthenticationService,
+        userRepository: UserRepository,
+        session: Session
+    ) {
         self.emailAuthService = emailAuthService
         self.userRepository = userRepository
+        self.session = session
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
@@ -45,6 +51,37 @@ class SignUpWorker {
         }
     }
 
+    func createUser(emailAddress: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        
+        var user = User(id: currentUserId, emailAddress: emailAddress)
+        user.firstName = firstName
+        user.lastName = lastName
+        
+        userRepository.getUserById(currentUserId) { result in
+            switch result {
+            case .success(let existingUser): self.handleGetUserSuccess(newUser: user, existingUser: existingUser, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func handleGetUserSuccess(newUser: User, existingUser: User?, completion: @escaping (Result<User>) -> ()) {
+        if let existingUser = existingUser {
+            completion(.success(existingUser))
+        } else {
+            saveNewUser(user: newUser) { result in
+                switch result {
+                case .success: completion(.success(newUser))
+                case .failure(let error): completion(.failure(error))
+                }
+            }
+        }
+    }
+    
     func saveNewUser(user: User, completion: @escaping (EmptyResult) -> ()) {
         userRepository.saveUser(user: user) { result in
             switch result {
@@ -52,9 +89,5 @@ class SignUpWorker {
             case .failure(let error): completion(.failure(error))
             }
         }
-    }
-    
-    func getUser(emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
-        userRepository.getUserByEmail(emailAddress, completion: completion)
-    }
+    }    
 }

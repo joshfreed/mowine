@@ -8,14 +8,13 @@
 
 import Foundation
 import CoreData
+import AWSDynamoDB
 
 class Container {
     static let shared = Container()
     private init() {}
 
-//    lazy var session: Session = FakeSession()
-//    lazy var emailAuthService: EmailAuthenticationService = FakeEmailAuth()
-    lazy var session: Session = AWSSession()
+    lazy var session: Session = AWSContainer.shared.session
     lazy var emailAuthService: EmailAuthenticationService = AWSContainer.shared.emailAuthService
     lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.facebookService
     lazy var fbGraphApi: GraphApi = GraphApi()
@@ -28,7 +27,7 @@ class Container {
     lazy var remoteWineDataStore: RemoteWineDataStore = FakeRemoteWineDataStore()
     lazy var wineRepository: WineRepository = TheWineRepository(local: localWineDataStore, remote: remoteWineDataStore)
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
-    lazy var userRepository: UserRepository = FakeUserRepository()
+    lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
     
     // MARK: Core Data Stack
     
@@ -67,6 +66,8 @@ class AWSContainer {
     static let shared = AWSContainer()
     private init() {}
     
+    lazy var session = AWSSession(userRepository: Container.shared.userRepository)
     lazy var emailAuthService = AWSEmailAuthenticationService()
     lazy var facebookService = AWSFacebookAuthentication()
+    lazy var userRepository = AWSUserRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
 }

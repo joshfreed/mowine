@@ -13,6 +13,10 @@
 import UIKit
 import JFLib
 
+enum MyAccountWorkerError: Error {
+    case userNotFound
+}
+
 class MyAccountWorker {
     let session: Session
     
@@ -21,7 +25,18 @@ class MyAccountWorker {
     }
     
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
-        session.getCurrentUser(completion: completion)
+        session.getCurrentUser { result in
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    completion(.success(user))
+                } else {
+                    completion(.failure(MyAccountWorkerError.userNotFound))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func signOut() {

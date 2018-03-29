@@ -23,6 +23,7 @@ class FirstTimeInteractorTests: XCTestCase {
     let facebookAuth = MockFacebookAuthService()
     let facebookGraphApi = MockFacebookGraphApi()
     let userRepository = TestUserRepository()
+    let session = MockSession()
 
     // MARK: Test lifecycle
 
@@ -31,7 +32,8 @@ class FirstTimeInteractorTests: XCTestCase {
         worker = FirstTimeWorker(
             fbAuth: facebookAuth,
             fbGraphApi: facebookGraphApi,
-            userRepository: userRepository
+            userRepository: userRepository,
+            session: session
         )
         setupFirstTimeInteractor()
     }
@@ -71,6 +73,7 @@ class FirstTimeInteractorTests: XCTestCase {
         // Given
         facebookAuth.signInWillSucceed()
         facebookGraphApi.setMe(emailAddress: "jbomb@gmail.com", firstName: "Jimbo", lastName: "Jones")
+        session.login(userId: UserId())
         userRepository.doesNotContainUser(emailAddress: "jbomb@gmail.com")
         userRepository.saveUserWillSucceed()
         let request = FirstTime.FacebookLogin.Request()

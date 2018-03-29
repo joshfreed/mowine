@@ -16,5 +16,4 @@ protocol UserRepository {
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ())
     func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ())
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ())
-    func getUserByEmail(_ emailAddress: String, completion: @escaping (Result<User?>) -> ())
 }

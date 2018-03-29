@@ -54,7 +54,8 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         interactor.presenter = presenter
         interactor.worker = SignUpWorker(
             emailAuthService: Container.shared.emailAuthService,
-            userRepository: Container.shared.userRepository
+            userRepository: Container.shared.userRepository,
+            session: Container.shared.session
         )
         presenter.viewController = viewController
         router.viewController = viewController
