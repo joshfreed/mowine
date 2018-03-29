@@ -46,6 +46,14 @@ class MockWineTypeRepository: WineTypeRepository {
 }
 
 class MockUserRepository: UserRepository {
+    func getUserByEmail(_ emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
+        
+    }
+    
+    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+        
+    }
+    
     var getFriendsOfResult: Result<[User]>?
     var getFriendsOf_userId: UserId?
     var getFriendsOfWasCalled = false
@@ -108,7 +116,7 @@ class MockSession: Session {
         return _currentUser?.id
     }
     
-    func resume() {
+    func resume(completion: @escaping (EmptyResult) -> ()) {
         
     }
     
@@ -126,5 +134,33 @@ class MockSession: Session {
     
     func end() {
         _currentUser = nil
+    }
+}
+
+class MockEmailAuthService: EmailAuthenticationService {
+    var signInCalled = false
+    var signIn_emailAddress: String?
+    var signIn_password: String?
+    var signInResult: EmptyResult?
+    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+        signInCalled = true
+        signIn_emailAddress = emailAddress
+        signIn_password = password
+        if let result = signInResult {
+            completion(result)
+        }
+    }
+    
+    var signUpCalled = false
+    var signUp_emailAddress: String?
+    var signUp_password: String?
+    var signUpResult: EmptyResult?
+    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+        signUpCalled = true
+        signUp_emailAddress = emailAddress
+        signUp_password = password
+        if let result = signUpResult {
+            completion(result)
+        }
     }
 }

@@ -15,12 +15,46 @@ import JFLib
 
 class SignUpWorker {
     let emailAuthService: EmailAuthenticationService
+    let userRepository: UserRepository
     
-    init(emailAuthService: EmailAuthenticationService) {
+    init(emailAuthService: EmailAuthenticationService, userRepository: UserRepository) {
         self.emailAuthService = emailAuthService
+        self.userRepository = userRepository
     }
     
-    func signUp(user: User, password: String, completion: @escaping (EmptyResult) -> ()) {
-        emailAuthService.signUp(user: user, password: password, completion: completion)
+    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+        emailAuthService.signIn(emailAddress: emailAddress, password: password) { result in
+            switch result {
+            case .success:
+                // The user with this email address already exists AND this is the correct password!!
+                // The user already has an account but is trying to sign up again
+                completion(.success)
+            case .failure(let error):
+                switch error {
+                case EmailAuthenticationErrors.userNotFound:
+                    // This email address is not in use by another user account
+                    // Let's sign them up!
+                    self.emailAuthService.signUp(emailAddress: emailAddress, password: password, completion: completion)
+                case EmailAuthenticationErrors.notAuthorized:
+                    // This email address is already in use by another account and this password is not correct
+                    // Assume that another user has signed up with this email address
+                    completion(.failure(EmailAuthenticationErrors.emailAddressAlreadyInUse))
+                default: completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    func saveNewUser(user: User, completion: @escaping (EmptyResult) -> ()) {
+        userRepository.saveUser(user: user) { result in
+            switch result {
+            case .success: completion(.success)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func getUser(emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
+        userRepository.getUserByEmail(emailAddress, completion: completion)
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 import JFLib
 import AWSAuthCore
 import AWSFacebookSignIn
+import AWSUserPoolsSignIn
 import FBSDKLoginKit
 
 class AWSFacebookAuthentication: FacebookAuthenticationService {
@@ -19,21 +20,18 @@ class AWSFacebookAuthentication: FacebookAuthenticationService {
         AWSFacebookSignInProvider.sharedInstance().setLoginBehavior(FBSDKLoginBehavior.native.rawValue)
         
         AWSSignInManager.sharedInstance().login(signInProviderKey: providerKey) { (result: Any?, error: Error?) in
-
+            let awsResult = AWSResult(result: result, error: error)
+            
             DispatchQueue.main.async {
-                if let e = error {
-                    print("Facebook Sign In Failed")
-                    let error = e as NSError
-                    print("\(error)")
-                    completion(.failure(error))
+                if awsResult.isError {
+                    completion(.failure(awsResult.error!))
                 } else {
-                    print("Facebook Sign In Success")
-                    let identityId = (Container.shared.session as! AWSSession).identityId
-                    print("Identity id \(String(describing: identityId))")
                     completion(.success)
                 }
             }
-            
         }
     }
 }
+
+
+

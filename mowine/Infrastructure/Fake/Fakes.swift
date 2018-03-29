@@ -130,22 +130,32 @@ class FakeSession: Session {
 }
 
 class FakeEmailAuth: EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
+    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
         if let user = usersDB.first(where: { $0.emailAddress == emailAddress }) {
             (Container.shared.session as? FakeSession)?.setUser(user: user)
-            completion(.success(true))
+            completion(.success)
         } else {
-            completion(.success(false))
+            completion(.failure(EmailAuthenticationErrors.userNotFound))
         }
     }
     
-    func signUp(user: User, password: String, completion: @escaping (EmptyResult) -> ()) {
+    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+        let user = User(id: UserId(), emailAddress: emailAddress)
         usersDB.append(user)
         completion(.success)
     }
 }
 
 class FakeUserRepository: UserRepository {
+    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+        if let index = usersDB.index(where: { $0.emailAddress == user.emailAddress }) {
+            usersDB[index] = user
+        } else {
+            usersDB.append(user)
+        }
+        completion(.success(user))
+    }
+
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
         let friendIds = friendsDB[userId] ?? []
         var friends: [User] = []
@@ -213,6 +223,14 @@ class FakeUserRepository: UserRepository {
         var user = usersDB.first(where: { $0.id == id })
         if user != nil, let currentUserId = Container.shared.session.currentUserId {
             user?.isFriend = friendsDB[currentUserId]?.contains(id) ?? false
+        }
+        completion(.success(user))
+    }
+    
+    func getUserByEmail(_ emailAddress: String, completion: @escaping (Result<User?>) -> ()) {
+        var user = usersDB.first(where: { $0.emailAddress == emailAddress })
+        if let u = user, let currentUserId = Container.shared.session.currentUserId {
+            user?.isFriend = friendsDB[currentUserId]?.contains(u.id) ?? false
         }
         completion(.success(user))
     }

@@ -13,144 +13,98 @@ import AWSUserPoolsSignIn
 
 class AWSEmailAuthenticationService: NSObject, EmailAuthenticationService {
     lazy var pool = AWSCognitoUserPoolsSignInProvider.sharedInstance().getUserPool()
-
-    var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
+    lazy var signInManager = AWSSignInManager.sharedInstance()
+    lazy var userPoolsSignInProvider = AWSCognitoUserPoolsSignInProvider.sharedInstance()
+    lazy var providerKey = userPoolsSignInProvider.identityProviderName
+    
+    private var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     private var username: String?
     private var password: String?
+    private var loginCompletion: ((EmptyResult) -> ())?
     
-    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
+    override init() {
+        super.init()
+        userPoolsSignInProvider.setInteractiveAuthDelegate(self)
+    }
+    
+    // MARK: - Sign In
+    
+    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
         self.username = emailAddress
         self.password = password
-        
-        AWSCognitoUserPoolsSignInProvider.sharedInstance().setInteractiveAuthDelegate(self)
+        self.loginCompletion = completion
 
-        let providerKey = AWSCognitoUserPoolsSignInProvider.sharedInstance().identityProviderName
-
-        AWSSignInManager.sharedInstance().login(signInProviderKey: providerKey) { (result: Any?, error: Error?) in
-
+        login(with: providerKey, completion: completion)
+    }
+    
+    func login(with providerKey: String, completion: @escaping (EmptyResult) -> ()) {
+        signInManager.login(signInProviderKey: providerKey) { (result: Any?, error: Error?) in
+            print("signInManager.login returned")
             DispatchQueue.main.async {
-
-                if let e = error {
-                    let error = e as NSError
-                    print("\(error)")
-
-                    let type = error.userInfo["__type"] as? String
-
-                    if type == "UserNotFoundException" || type == "NotAuthorizedException" {
-                        completion(.success(false))
-                    } else {
-                        completion(.failure(error))
-                    }
-                } else {
-                    completion(.success(true))
-                }
-
-            }
-
-        }
-    }
-    
-    func signUp(user: User, password: String, completion: @escaping (EmptyResult) -> ()) {
-        isEmailAddressAvailable(emailAddress: user.emailAddress) { result in
-            switch result {
-            case .success(let isAvailable):
-                if isAvailable {
-                    self.doSignUp(user: user, password: password, completion: completion)
-                } else {
-                    completion(.failure(EmailAuthenticationErrors.emailAddressAlreadyInUse))
-                }
-            case .failure(let error): completion(.failure(error))
+                let awsResult = AWSResult(result: result, error: error)
+                self.handleLoginResult(result: awsResult, completion: completion)
             }
         }
     }
     
-    private func doSignUp(user: User, password: String, completion: @escaping (EmptyResult) -> ()) {
-        var attributes = [AWSCognitoIdentityUserAttributeType]()
-        
-        let userIdAttr = AWSCognitoIdentityUserAttributeType()
-        userIdAttr?.name = "custom:userId"
-        userIdAttr?.value = user.id.description
-        attributes.append(userIdAttr!)
-        
-        let firstNameAttr = AWSCognitoIdentityUserAttributeType()
-        firstNameAttr?.name = "given_name"
-        firstNameAttr?.value = user.firstName
-        attributes.append(firstNameAttr!)
-        
-        let lastNameAttr = AWSCognitoIdentityUserAttributeType()
-        lastNameAttr?.name = "family_name"
-        lastNameAttr?.value = user.lastName
-        attributes.append(lastNameAttr!)
+    private func handleLoginResult(result: AWSResult, completion: @escaping (EmptyResult) -> ()) {
+        if result.isError {
+            if result.errorType == "UserNotFoundException" {
+                completion(.failure(EmailAuthenticationErrors.userNotFound))
+            } else if result.errorType == "NotAuthorizedException" {
+                completion(.failure(EmailAuthenticationErrors.notAuthorized))
+            } else {
+                completion(.failure(result.error!))
+            }
+        } else {
+            completion(.success)
+        }
+    }
+    
+    // MARK: - Sign Up
+    
+    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+        var attributes: [AWSCognitoIdentityUserAttributeType] = []
         
         let emailAttr = AWSCognitoIdentityUserAttributeType()
         emailAttr?.name = "email"
-        emailAttr?.value = user.emailAddress
+        emailAttr?.value = emailAddress
         attributes.append(emailAttr!)
         
         // I'd like for the email address to be the username. But currently AWS Mobile Hub doesn't configure the user pool to make that
         // happen the way I'd like. It's set up to use email address as an alias, but that requires the actual username to NOT be the
         // email address. I'd love to change that, but I can't currently edit user pool configs created by AWS Mobile hub.
         // I could create a custom user pool, but it won't be in the hub, and I'd have to integrate its keys manually (blah I say)
-        let username = user.id.description
-        
+        let username = UUID().uuidString
+
         pool.signUp(username, password: password, userAttributes: attributes, validationData: nil).continueWith { task -> Any? in
-            
+            let awsResult = AWSResult(result: task.result, error: task.error)
+
             DispatchQueue.main.async {
-                
-                if let e = task.error {
-                    let error = e as NSError
-                    print("\(error)")
-                    
-                    let type = error.userInfo["__type"] as? String
-                    let message = error.userInfo["message"] as? String
-                    
-                    if type == "InvalidPasswordException" {
-                        completion(.failure(EmailAuthenticationErrors.invalidPassword(message: message)))
+                if awsResult.isError {
+                    if awsResult.errorType == "InvalidPasswordException" {
+                        completion(.failure(EmailAuthenticationErrors.invalidPassword(message: awsResult.errorMessage)))
                     } else {
-                        completion(.failure(error))
+                        completion(.failure(awsResult.error!))
                     }
                 } else {
-                    completion(.success)
+                    self.signIn(emailAddress: emailAddress, password: password, completion: completion)
                 }
-                
             }
-            
+
             return nil
         }
     }
-    
-    func isEmailAddressAvailable(emailAddress: String, completion: @escaping (Result<Bool>) -> ()) {
-        
-        // This is super hacky.
-        // It's the best way I can think of to figure out whether an email address is already in use as an alias on AWS
-        
-        let user = pool.getUser(emailAddress)
-        let password = "!@#$%^&*)08663471987avslkjhrRJvsjkaLJVDKCAEzIRIHVSINA#IN$@$$5ASVRGJNETfDGNHJ!@$@#$!@FGHMHMJU"
-        
-        user.getSession(emailAddress, password: password, validationData: nil).continueWith { task -> Any? in
-            
-            DispatchQueue.main.async {
-                
-                if let e = task.error {
-                    let error = e as NSError
-                    print("\(error)")
-                    
-                    let type = error.userInfo["__type"] as? String
-        
-                    if type == "UserNotFoundException" {
-                        completion(.success(true))
-                    } else if type == "NotAuthorizedException" {
-                        completion(.success(false))
-                    } else {
-                        completion(.failure(error))
-                    }
-                } else {
-                    completion(.success(false))
-                }
-                
+
+    private func handleSignUpResult(result: AWSResult, completion: @escaping (EmptyResult) -> ()) {
+        if result.isError {
+            if result.errorType == "InvalidPasswordException" {
+                completion(.failure(EmailAuthenticationErrors.invalidPassword(message: result.errorMessage)))
+            } else {
+                completion(.failure(result.error!))
             }
-            
-            return nil
+        } else {
+            completion(.success)
         }
     }
 }
@@ -173,8 +127,17 @@ extension AWSEmailAuthenticationService: AWSCognitoUserPoolsSignInHandler {
 
 extension AWSEmailAuthenticationService: AWSCognitoIdentityPasswordAuthentication {
     func didCompleteStepWithError(_ error: Error?) {
-        if let error = error {
-            print("ERROR! \(error)")
+        guard let error = error else {
+            return
+        }
+        print("didCompleteStepWithError \(error)")
+        guard let loginCompletion = loginCompletion else {
+            fatalError("No callback set for loginCompletion")
+        }
+        let awsResult = AWSResult(result: nil, error: error)
+        DispatchQueue.main.async {
+            self.handleLoginResult(result: awsResult, completion: loginCompletion)
+            self.loginCompletion = nil
         }
     }
     

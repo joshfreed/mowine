@@ -88,6 +88,8 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel) {
         if viewModel.error == nil {
             router?.routeToSignedIn()
+        } else {
+            showAlert(title: "Login Error", message: "An error occurred while trying to login with Facebook")
         }
     }
 

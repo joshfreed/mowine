@@ -21,6 +21,16 @@ class SignInWorker {
     }
     
     func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
-        emailAuth.signIn(emailAddress: emailAddress, password: password, completion: completion)
+        emailAuth.signIn(emailAddress: emailAddress, password: password) { result in
+            switch result {
+            case .success: completion(.success(true))
+            case .failure(let error):
+                switch error {
+                case EmailAuthenticationErrors.userNotFound: completion(.success(false))
+                case EmailAuthenticationErrors.notAuthorized: completion(.success(false))
+                default: completion(.failure(error))
+                }
+            }
+        }
     }
 }

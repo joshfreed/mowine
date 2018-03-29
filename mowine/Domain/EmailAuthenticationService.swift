@@ -10,11 +10,13 @@ import Foundation
 import JFLib
 
 protocol EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ())
-    func signUp(user: User, password: String, completion: @escaping (EmptyResult) -> ())
+    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ())
+    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ())
 }
 
 enum EmailAuthenticationErrors: Error {
     case invalidPassword(message: String?)
     case emailAddressAlreadyInUse
+    case userNotFound
+    case notAuthorized
 }

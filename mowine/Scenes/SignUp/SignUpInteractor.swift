@@ -17,13 +17,12 @@ protocol SignUpBusinessLogic {
 }
 
 protocol SignUpDataStore {
-    //var name: String { get set }
+    
 }
 
 class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
     var presenter: SignUpPresentationLogic?
     var worker: SignUpWorker?
-    //var name: String = ""
 
     // MARK: Sign Up
 
@@ -36,27 +35,53 @@ class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
         user.firstName = request.firstName
         user.lastName = request.lastName
         
-        worker?.signUp(user: user, password: request.password) { result in
+        worker?.signUp(emailAddress: request.emailAddress, password: request.password) { result in
             switch result {
-            case .success:
-                let response = SignUp.SignUp.Response(user: user, error: nil, message: nil)
-                self.presenter?.presentSignUp(response: response)
-            case .failure(let error):
-                print("\(error)")
-                switch error {
-                case EmailAuthenticationErrors.invalidPassword(let message):
-                    let response = SignUp.SignUp.Response(user: nil, error: error, message: message)
-                    self.presenter?.presentSignUp(response: response)
-                case EmailAuthenticationErrors.emailAddressAlreadyInUse:
-                    let message = "That email address is already associated with an account. Try signing in or resetting your password."
-                    let response = SignUp.SignUp.Response(user: nil, error: error, message: message)
-                    self.presenter?.presentSignUp(response: response)
-                default:
-                    let response = SignUp.SignUp.Response(user: nil, error: error, message: nil)
-                    self.presenter?.presentSignUp(response: response)
-                }
-                
+            case .success: self.handleSignUpSuccess(user: user)
+            case .failure(let error): self.handleSignUpFailure(error: error)
             }
         }
+    }
+
+    func handleSignUpSuccess(user: User) {
+        worker?.getUser(emailAddress: user.emailAddress) { result in
+            switch result {
+            case .success(let existingUser): self.handleGetUserSuccess(newUser: user, existingUser: existingUser)
+            case .failure(let error): self.presentSignUp(user: nil, error: error)
+            }
+        }
+    }
+    
+    func handleGetUserSuccess(newUser: User, existingUser: User?) {
+        if let existingUser = existingUser {
+            presentSignUp(user: existingUser)
+        } else {
+            worker?.saveNewUser(user: newUser) { result in
+                switch result {
+                case .success: self.presentSignUp(user: newUser)
+                case .failure(let error): self.presentSignUp(user: nil, error: error)
+                }
+            }
+        }
+    }
+    
+    func handleSignUpFailure(error: Error) {
+        switch error {
+        case EmailAuthenticationErrors.invalidPassword(let message):
+            presentSignUp(user: nil, error: error, message: message)
+        case EmailAuthenticationErrors.emailAddressAlreadyInUse:
+            let message = "That email address is already associated with an account. Try signing in or resetting your password."
+            presentSignUp(user: nil, error: error, message: message)
+        default:
+            presentSignUp(user: nil, error: error)
+        }
+    }
+    
+    func presentSignUp(user: User?, error: Error? = nil, message: String? = nil) {
+        if let e = error {
+            print("\(e)")
+        }
+        let response = SignUp.SignUp.Response(user: user, error: error, message: message)
+        self.presenter?.presentSignUp(response: response)
     }
 }
