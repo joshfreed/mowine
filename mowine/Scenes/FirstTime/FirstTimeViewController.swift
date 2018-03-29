@@ -45,7 +45,11 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = FirstTimeWorker(facebookService: Container.shared.facebookService)
+        interactor.worker = FirstTimeWorker(
+            fbAuth: Container.shared.facebookAuthService,
+            fbGraphApi: Container.shared.fbGraphApi,
+            userRepository: Container.shared.userRepository
+        )
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor

@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import JFLib
 
 protocol FirstTimeBusinessLogic {
     func loginWithFacebook(request: FirstTime.FacebookLogin.Request)
@@ -29,14 +30,29 @@ class FirstTimeInteractor: FirstTimeBusinessLogic, FirstTimeDataStore {
     func loginWithFacebook(request: FirstTime.FacebookLogin.Request) {
         worker?.loginWithFacebook() { result in
             switch result {
-            case .success:
-                let response = FirstTime.FacebookLogin.Response(error: nil)
-                self.presenter?.presentFacebookLogin(response: response)
-            case .failure(let error):
-                print("\(error)")
-                let response = FirstTime.FacebookLogin.Response(error: error)
-                self.presenter?.presentFacebookLogin(response: response)
+            case .success: self.createUserFromFacebookInfo()
+            case .failure(let error): self.presentFacebookLoginError(error)
             }
         }
+    }
+    
+    func createUserFromFacebookInfo() {
+        worker?.createUserFromFacebookInfo { result in
+            switch result {
+            case .success(let user): self.presentFacebookLogin()
+            case .failure(let error): self.presentFacebookLoginError(error)
+            }
+        }
+    }
+    
+    func presentFacebookLogin() {
+        let response = FirstTime.FacebookLogin.Response(error: nil)
+        self.presenter?.presentFacebookLogin(response: response)
+    }
+    
+    func presentFacebookLoginError(_ error: Error) {
+        print("\(error)")
+        let response = FirstTime.FacebookLogin.Response(error: error)
+        self.presenter?.presentFacebookLogin(response: response)
     }
 }

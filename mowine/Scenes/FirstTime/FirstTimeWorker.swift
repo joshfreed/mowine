@@ -13,15 +13,63 @@
 import UIKit
 import JFLib
 
-class FirstTimeWorker {
-    let facebookService: FacebookAuthenticationService
+enum CreateUserFromFacebookInfoError: Error {
+    case missingEmail
+    case missingFirstName
+}
 
-    init(facebookService: FacebookAuthenticationService) {
-        self.facebookService = facebookService
+class FirstTimeWorker {
+    let fbAuth: FacebookAuthenticationService
+    let fbGraphApi: GraphApi
+    let userRepository: UserRepository
+
+    init(fbAuth: FacebookAuthenticationService, fbGraphApi: GraphApi, userRepository: UserRepository) {
+        self.fbAuth = fbAuth
+        self.fbGraphApi = fbGraphApi
+        self.userRepository = userRepository
     }
 
     func loginWithFacebook(completion: @escaping (EmptyResult) -> ()) {
-        facebookService.signIn(completion: completion)
+        fbAuth.signIn(completion: completion)
+    }
+    
+    func createUserFromFacebookInfo(completion: @escaping (Result<User>) -> ()) {
+        getFacebookInfo { result in
+            switch result {
+            case .success(let fields): self.createUser(fields: fields, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func getFacebookInfo(completion: @escaping (Result<[String: Any]>) -> ()) {
+        fbGraphApi.me(params: ["fields": "email,first_name,last_name"]) { result in
+            switch result {
+            case .success(let fields): completion(.success(fields))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func createUser(fields: [String: Any], completion: @escaping (Result<User>) -> ()) {
+        guard let email = fields["email"] as? String else {
+            completion(.failure(CreateUserFromFacebookInfoError.missingEmail))
+            return
+        }
+        guard let firstName = fields["first_name"] as? String else {
+            completion(.failure(CreateUserFromFacebookInfoError.missingFirstName))
+            return
+        }
+        let lastName = fields["last_name"] as? String
+        createUser(email: email, firstName: firstName, lastName: lastName, completion: completion)
+    }
+    
+    func createUser(email: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
+        var user = User(id: UserId(), emailAddress: email)
+        user.firstName = firstName
+        user.lastName = lastName
+        
+        userRepository.saveUser(user: user, completion: completion)
     }
 
     func loginWithGoogle() {
