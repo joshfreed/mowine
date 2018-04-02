@@ -7,166 +7,120 @@
 		<key>AWSAuthCore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>4</integer>
+			<false/>
 		</dict>
 		<key>AWSAuthUI-AWSAuthUI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>5</integer>
+			<false/>
 		</dict>
 		<key>AWSAuthUI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>6</integer>
+			<false/>
 		</dict>
 		<key>AWSCognitoIdentityProvider.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>7</integer>
+			<false/>
 		</dict>
 		<key>AWSCognitoIdentityProviderASF.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>8</integer>
+			<false/>
 		</dict>
 		<key>AWSCore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>9</integer>
+			<false/>
 		</dict>
 		<key>AWSDynamoDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>10</integer>
+			<false/>
 		</dict>
 		<key>AWSFacebookSignIn-AWSFacebookSignIn.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>11</integer>
+			<false/>
 		</dict>
 		<key>AWSFacebookSignIn.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>12</integer>
+			<false/>
 		</dict>
 		<key>AWSLambda.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>13</integer>
+			<false/>
 		</dict>
 		<key>AWSMobileClient.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>14</integer>
+			<false/>
 		</dict>
 		<key>AWSUserPoolsSignIn-AWSUserPoolsSignIn.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>15</integer>
+			<false/>
 		</dict>
 		<key>AWSUserPoolsSignIn.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>16</integer>
+			<false/>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>17</integer>
+			<false/>
 		</dict>
 		<key>Cosmos.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>18</integer>
+			<false/>
 		</dict>
 		<key>Eureka.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>19</integer>
+			<false/>
 		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>20</integer>
+			<false/>
 		</dict>
 		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>21</integer>
+			<false/>
 		</dict>
 		<key>Nimble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>22</integer>
+			<false/>
 		</dict>
 		<key>Pods-mowine.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>23</integer>
+			<false/>
 		</dict>
 		<key>Pods-mowineTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>24</integer>
+			<false/>
 		</dict>
 		<key>Pods-mowineUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>25</integer>
+			<false/>
 		</dict>
 		<key>PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>26</integer>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict />
+	<dict/>
 </dict>
 </plist>

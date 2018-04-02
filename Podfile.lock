@@ -29,7 +29,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
   - Cosmos (12.0.1)
-  - Eureka (4.0.1)
+  - Eureka (4.1.1)
   - FBSDKCoreKit (4.31.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.31.1):
@@ -62,7 +62,7 @@ SPEC CHECKSUMS:
   AWSUserPoolsSignIn: 6d5a7dedeac2e3f2a84d7c838a5df85aa386f1c7
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Cosmos: 4a9f57998a08788a1062c7b8eefbc62d2b590f39
-  Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
+  Eureka: b88fb930e42c79f8c03c373d0fcdc28c1d6c50ed
   FBSDKCoreKit: e08ccfcefa7bc1347a07c276dac9bf6c7fe57024
   FBSDKLoginKit: 99797ac39252fef6f72600b886f6ee60b4b29cab
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
