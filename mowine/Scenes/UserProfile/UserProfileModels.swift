@@ -25,9 +25,20 @@ enum UserProfile {
 
         struct ViewModel {
             var fullName: String
-            var profilePicture: UIImage
             var userCellarTitle: String
-            var isFriend: Bool
+        }
+    }
+    
+    enum FetchFriendStatus {
+        struct Request {
+        }
+        
+        struct Response {
+            let isFriend: Bool
+        }
+        
+        struct ViewModel {
+            let isFriend: Bool
         }
     }
     

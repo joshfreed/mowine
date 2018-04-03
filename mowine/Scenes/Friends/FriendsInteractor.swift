@@ -53,10 +53,6 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
 
         friends.append(friend)
 
-        if let index = lastSearchResults.index(where: { $0.id == friend.id }) {
-            lastSearchResults[index].isFriend = true
-        }
-
         switch displayMode {
         case .friends: presentFriends()
         case .search: self.presentSearchResults(users: self.lastSearchResults)
@@ -70,10 +66,6 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
 
         if let index = friends.index(where: { $0.id == friendId }) {
             friends.remove(at: index)
-        }
-
-        if let index = lastSearchResults.index(where: { $0.id == friendId }) {
-            lastSearchResults[index].isFriend = false
         }
 
         switch displayMode {
@@ -147,7 +139,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     }
     
     private func presentSearchResults(users: [User]) {
-        let response = Friends.SearchUsers.Response(matches: users)
+        let response = Friends.SearchUsers.Response(matches: users, myFriends: friends)
         presenter?.presentSearchResults(response: response)
     }
     

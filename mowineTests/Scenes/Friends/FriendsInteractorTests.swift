@@ -323,7 +323,7 @@ class FriendsInteractorTests: XCTestCase {
 
     func testFriendWasAdded() {
         // Given
-        let friend = UserBuilder.aUser().isFriend().build()
+        let friend = UserBuilder.aUser().build()
 
         // When
         NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": friend])
@@ -331,24 +331,10 @@ class FriendsInteractorTests: XCTestCase {
         // Then
         expect(self.sut.friends).to(contain(friend))
     }
-
-    func testFriendWasAdded_updatesUserStructInLastSearchResults() {
-        // Given
-        let userId = UserId()
-        let friend1 = UserBuilder.aUser(id: userId).build()
-        let friend2 = UserBuilder.aUser(id: userId).isFriend().build()
-        sut.lastSearchResults.append(friend1)
-
-        // When
-        NotificationCenter.default.post(name: .friendAdded, object: nil, userInfo: ["friend": friend2])
-
-        // Then
-        expect(self.sut.lastSearchResults[0].isFriend).to(beTrue())
-    }
-
+    
     func testFriendWasAdded_presentsFriendsIfNotSearching() {
         // Given
-        let friend = UserBuilder.aUser().isFriend().build()
+        let friend = UserBuilder.aUser().build()
         sut.displayMode = .friends
 
         // When
@@ -361,7 +347,7 @@ class FriendsInteractorTests: XCTestCase {
 
     func testFriendWasAdded_doesPresentsUpdatedSearchResultsIfSearching() {
         // Given
-        let friend = UserBuilder.aUser().isFriend().build()
+        let friend = UserBuilder.aUser().build()
         sut.displayMode = .search
 
         // When
@@ -376,7 +362,7 @@ class FriendsInteractorTests: XCTestCase {
 
     func testFriendWasRemoved() {
         // Given
-        let friend = UserBuilder.aUser().isFriend().build()
+        let friend = UserBuilder.aUser().build()
         sut.friends.append(friend)
 
         // When
@@ -386,22 +372,9 @@ class FriendsInteractorTests: XCTestCase {
         expect(self.sut.friends).toNot(contain(friend))
     }
 
-    func testFriendWasRemoved_updateLastSearchResults() {
-        // Given
-        let friend = UserBuilder.aUser().isFriend().build()
-        sut.friends.append(friend)
-        sut.lastSearchResults = [UserBuilder.aUser().build(), friend]
-
-        // When
-        NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": friend.id])
-
-        // Then
-        expect(self.sut.lastSearchResults[1].isFriend).to(beFalse())
-    }
-
     func testFriendWasRemoved_refreshFriendList() {
         // Given
-        let friend = UserBuilder.aUser().isFriend().build()
+        let friend = UserBuilder.aUser().build()
         sut.friends.append(friend)
         sut.displayMode = .friends
 
@@ -415,7 +388,7 @@ class FriendsInteractorTests: XCTestCase {
 
     func testFriendWasRemoved_refreshSearchResults() {
         // Given
-        let friend = UserBuilder.aUser().isFriend().build()
+        let friend = UserBuilder.aUser().build()
         sut.friends.append(friend)
         sut.lastSearchResults = [UserBuilder.aUser().build(), friend]
         sut.displayMode = .search

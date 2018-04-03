@@ -174,12 +174,6 @@ class FakeUserRepository: UserRepository {
             }
         }
 
-        if Container.shared.session.currentUserId == userId {
-            for i in 0..<friends.count {
-                friends[i].isFriend = true
-            }
-        }
-
         randomDelay {
             completion(.success(friends))
         }
@@ -198,12 +192,6 @@ class FakeUserRepository: UserRepository {
             matches.append(contentsOf: m)
         }
 
-        if let currentUserId = Container.shared.session.currentUserId {
-            for i in 0..<matches.count {
-                matches[i].isFriend = friendsDB[currentUserId]?.contains(matches[i].id) ?? false
-            }
-        }
-
         randomDelay {
             completion(.success(matches))
         }
@@ -214,10 +202,7 @@ class FakeUserRepository: UserRepository {
             friendsDB[owningUserId] = []
         }
         friendsDB[owningUserId]!.append(friendId)
-        var newFriend = usersDB.first(where: { $0.id == friendId })!
-        if Container.shared.session.currentUserId == owningUserId {
-            newFriend.isFriend = true
-        }
+        let newFriend = usersDB.first(where: { $0.id == friendId })!
         completion(.success(newFriend))
     }
     
@@ -229,12 +214,13 @@ class FakeUserRepository: UserRepository {
     }
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
-        var user = usersDB.first(where: { $0.id == id })
-        if user != nil, let currentUserId = Container.shared.session.currentUserId {
-            user?.isFriend = friendsDB[currentUserId]?.contains(id) ?? false
-        }
+        let user = usersDB.first(where: { $0.id == id })
         completion(.success(user))
-    }    
+    }
+    
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+        
+    }
 }
 
 class FakeRemoteWineDataStore: RemoteWineDataStore {

@@ -14,6 +14,7 @@ import UIKit
 
 protocol UserProfileBusinessLogic {
     func fetchUserProfile(request: UserProfile.FetchUserProfile.Request)
+    func fetchFriendStatus(request: UserProfile.FetchFriendStatus.Request)
     func addFriend(request: UserProfile.AddFriend.Request)
     func unfriend(request: UserProfile.Unfriend.Request)
 }
@@ -32,7 +33,9 @@ class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore {
     func fetchUserProfile(request: UserProfile.FetchUserProfile.Request) {        
         worker?.fetchUser(userId: userId) { result in
             switch result {
-            case .success(let user): self.presentUserProfile(user: user)
+            case .success(let user):
+                self.fetchFriendStatus(request: UserProfile.FetchFriendStatus.Request())
+                self.presentUserProfile(user: user)
             case .failure(let error):
                 print("\(error)")
             }
@@ -47,6 +50,23 @@ class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore {
         
         let response = UserProfile.FetchUserProfile.Response(user: user)
         presenter?.presentUserProfile(response: response)
+    }
+    
+    // MARK: Fetch friend status
+    
+    func fetchFriendStatus(request: UserProfile.FetchFriendStatus.Request) {
+        worker?.fetchFriendStatus(userId: userId) { result in
+            switch result {
+            case .success(let isFriend): self.presentFriendStatus(isFriend: isFriend)
+            case .failure(let error):
+                print("\(error)")
+            }
+        }
+    }
+    
+    private func presentFriendStatus(isFriend: Bool) {
+        let response = UserProfile.FetchFriendStatus.Response(isFriend: isFriend)
+        presenter?.presentFriendStatus(response: response)
     }
     
     // MARK: Add friend

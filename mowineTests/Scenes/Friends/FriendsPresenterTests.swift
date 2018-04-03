@@ -91,7 +91,7 @@ class FriendsPresenterTests: XCTestCase {
     func testPresentSearchResults() {
         // Given
         let user = UserBuilder.aUser().build()
-        let response = Friends.SearchUsers.Response(matches: [user])
+        let response = Friends.SearchUsers.Response(matches: [user], myFriends: [])
         
         // When
         sut.presentSearchResults(response: response)
@@ -107,9 +107,9 @@ class FriendsPresenterTests: XCTestCase {
     func testPresentSearchResults_setsTrueWhenMatchIsFriendsWithCurrentUser() {
         // Given
         let user1 = UserBuilder.aUser().build()
-        let user2 = UserBuilder.aUser().isFriend().build()
+        let user2 = UserBuilder.aUser().build()
         let user3 = UserBuilder.aUser().build()
-        let response = Friends.SearchUsers.Response(matches: [user1, user2, user3])
+        let response = Friends.SearchUsers.Response(matches: [user1, user2, user3], myFriends: [user2])
         
         // When
         sut.presentSearchResults(response: response)

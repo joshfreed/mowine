@@ -14,6 +14,7 @@ import UIKit
 
 protocol UserProfilePresentationLogic {
     func presentUserProfile(response: UserProfile.FetchUserProfile.Response)
+    func presentFriendStatus(response: UserProfile.FetchFriendStatus.Response)
     func presentFriended(response: UserProfile.AddFriend.Response)
     func presentUnfriended(response: UserProfile.Unfriend.Response)
 }
@@ -26,12 +27,15 @@ class UserProfilePresenter: UserProfilePresentationLogic {
     func presentUserProfile(response: UserProfile.FetchUserProfile.Response) {
         let viewModel = UserProfile.FetchUserProfile.ViewModel(
             fullName: response.user.fullName,
-            profilePicture: response.user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture"),
-            userCellarTitle: makeUserCellarTitle(from: response.user),
-            isFriend: response.user.isFriend
+//            profilePicture: response.user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture"),
+            userCellarTitle: makeUserCellarTitle(from: response.user)
         )
         viewController?.displayUserProfile(viewModel: viewModel)
     }
+    
+//    func presentProfilePicture() {
+//        viewController?.presentProfilePicture()
+//    }
     
     func makeUserCellarTitle(from user: User) -> String {
         if let firstName = user.firstName {
@@ -39,6 +43,13 @@ class UserProfilePresenter: UserProfilePresentationLogic {
         } else {
             return "Wine Cellar"
         }
+    }
+    
+    // MARK: Fetch friend status
+    
+    func presentFriendStatus(response: UserProfile.FetchFriendStatus.Response) {
+        let viewModel = UserProfile.FetchFriendStatus.ViewModel(isFriend: response.isFriend)
+        viewController?.displayFriendStatus(viewModel: viewModel)
     }
     
     // MARK: Add friend

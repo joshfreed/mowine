@@ -27,7 +27,21 @@ class UserProfileWorker {
     }
     
     func fetchUser(userId: UserId, completion: @escaping (Result<User?>) -> ()) {
-        userRepository.getUserById(userId, completion: completion)            
+        userRepository.getUserById(userId) { result in
+            switch result {
+            case .success(let user): completion(.success(user))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchFriendStatus(userId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(UserProfileWorkerError.notLoggedIn))
+            return
+        }
+        
+        userRepository.isFriendOf(userId: currentUserId, otherUserId: userId, completion: completion)
     }
     
     func friend(userId: UserId, completion: @escaping (Result<User>) -> ()) {

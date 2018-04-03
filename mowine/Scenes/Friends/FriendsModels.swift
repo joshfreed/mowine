@@ -14,10 +14,16 @@ import UIKit
 
 enum Friends {
     struct DisplayedUser {
-        var userId: String
+        let userId: String
         var fullName: String
         var profilePicture: UIImage
-        var isFriend: Bool
+        var isFriend: Bool = false
+        
+        init(userId: String, fullName: String) {
+            self.userId = userId
+            self.fullName = fullName
+            profilePicture = #imageLiteral(resourceName: "No Profile Picture")
+        }
     }
     
     // MARK: Use cases
@@ -42,6 +48,7 @@ enum Friends {
         
         struct Response {
             var matches: [User]
+            var myFriends: [User]
         }
         
         struct ViewModel {

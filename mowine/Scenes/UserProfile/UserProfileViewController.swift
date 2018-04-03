@@ -14,6 +14,7 @@ import UIKit
 
 protocol UserProfileDisplayLogic: class {
     func displayUserProfile(viewModel: UserProfile.FetchUserProfile.ViewModel)
+    func displayFriendStatus(viewModel: UserProfile.FetchFriendStatus.ViewModel)
     func displayFriended(viewModel: UserProfile.AddFriend.ViewModel)
     func displayUnfriended(viewModel: UserProfile.Unfriend.ViewModel)
 }
@@ -77,6 +78,8 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         
         segmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
         
+        profilePictureImageView.image = #imageLiteral(resourceName: "No Profile Picture")
+        
         fetchUserProfile()
     }
     
@@ -110,8 +113,12 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
 
     func displayUserProfile(viewModel: UserProfile.FetchUserProfile.ViewModel) {
         fullNameLabel.text = viewModel.fullName
-        profilePictureImageView.image = viewModel.profilePicture
         segmentedControl.setTitle(viewModel.userCellarTitle, forSegmentAt: 1)
+    }
+    
+    // MARK: Fetch friend status
+    
+    func displayFriendStatus(viewModel: UserProfile.FetchFriendStatus.ViewModel) {
         if viewModel.isFriend {
             showFriendsButton()
         } else {

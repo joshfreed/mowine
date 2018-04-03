@@ -28,7 +28,8 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var router: (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing)?
 
     var canSearch = false
-    var displayedUsers: [Friends.DisplayedUser] = []    
+    var displayedUsers: [Friends.DisplayedUser] = []
+    var userCells: [String: UserTableViewCell] = [:]
     var activityIndicator: UIActivityIndicatorView?
     var activityIndicatorBottom: NSLayoutConstraint?
     

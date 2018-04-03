@@ -167,12 +167,12 @@ class FriendsViewControllerTests: XCTestCase {
     func testDisplayFriendAdded_shouldUpdateTheDisplayedUser() {
         // Given
         let userId = "12345"
-        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
-        let userModel = Friends.DisplayedUser(userId: "12345", fullName: "Whatever", profilePicture: UIImage(), isFriend: false)
+        let userModel = Friends.DisplayedUser(userId: userId, fullName: "Whatever")
         sut.displayedUsers.append(userModel)
+        loadView()
+        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
         
         // When
-        loadView()
         sut.displayFriendAdded(viewModel: viewModel)
         
         // Then
@@ -182,12 +182,12 @@ class FriendsViewControllerTests: XCTestCase {
     func testDisplayAddFriendError() {
         // Given
         let userId = "12345"
-        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
         let cell = MockUserCell()
         sut.friendCells[userId] = cell
+        loadView()
+        let viewModel = Friends.AddFriend.ViewModel(userId: userId)
         
         // When
-        loadView()
         sut.displayAddFriendError(viewModel: viewModel)
         
         // Then

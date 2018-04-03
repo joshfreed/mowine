@@ -135,5 +135,9 @@ class TestUserRepository: UserRepository {
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
         completion(.success(_user))
-    }    
+    }
+    
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+        
+    }
 }

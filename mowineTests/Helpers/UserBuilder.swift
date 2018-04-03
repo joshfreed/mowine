@@ -12,7 +12,6 @@ import Foundation
 class UserBuilder {
     private var userId: UserId?
     private var emailAddress: String?
-    private var _isFriend = false
     
     static func aUser() -> UserBuilder {
         return UserBuilder()
@@ -38,18 +37,12 @@ class UserBuilder {
             emailAddress = "barry@test.com"
         }
         
-        var user = User(id: userId!, emailAddress: emailAddress!)
-        user.isFriend = _isFriend
+        let user = User(id: userId!, emailAddress: emailAddress!)
         return user
     }
     
     func withEmail(_ email: String) -> UserBuilder {
         emailAddress = email
-        return self
-    }
-
-    func isFriend() -> UserBuilder {
-        self._isFriend = true
         return self
     }
 }

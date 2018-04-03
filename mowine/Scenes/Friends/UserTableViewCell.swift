@@ -49,11 +49,19 @@ class UserTableViewCell: UITableViewCell {
         delegate?.addFriend(cell: self, userId: userId)
     }
     
-    func displayFriendAdded() {
+    func displayIsFriend() {
         addFriendButton.isHidden = true
     }
     
-    func displayAddFriendFailed() {
+    func displayNotFriend() {
         addFriendButton.isHidden = false
+    }
+    
+    func displayFriendAdded() {
+        displayIsFriend()
+    }
+    
+    func displayAddFriendFailed() {
+        displayNotFriend()
     }
 }
