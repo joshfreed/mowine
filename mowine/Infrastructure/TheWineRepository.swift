@@ -29,7 +29,7 @@ class TheWineRepository: WineRepository {
         self.remote = remote
     }
     
-    func getMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         local.getMyWines(completion: completion)
     }
     

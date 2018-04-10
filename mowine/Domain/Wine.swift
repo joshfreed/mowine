@@ -18,8 +18,9 @@ class Wine: Equatable {
     var thumbnail: Data?
     var location: String?
     var notes: String?
-    var price: Double?
+    var price: String?
     var pairings: [String] = []
+    var createdAt: Date?
     
     var varietyName: String {
         return variety?.name ?? type.name
@@ -30,6 +31,7 @@ class Wine: Equatable {
         self.type = type
         self.name = name
         self.rating = rating
+        self.createdAt = Date()
     }
     
     init(type: WineType, variety: WineVariety, name: String, rating: Double) {
@@ -37,7 +39,8 @@ class Wine: Equatable {
         self.type = type
         self.variety = variety
         self.name = name
-        self.rating = rating        
+        self.rating = rating
+        self.createdAt = Date()
     }
     
     init(type: WineType, name: String, rating: Double) {
@@ -45,6 +48,7 @@ class Wine: Equatable {
         self.type = type
         self.name = name
         self.rating = rating
+        self.createdAt = Date()
     }
     
     public static func ==(lhs: Wine, rhs: Wine) -> Bool {

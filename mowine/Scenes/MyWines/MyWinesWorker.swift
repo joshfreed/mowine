@@ -15,12 +15,18 @@ import JFLib
 
 class MyWinesWorker {
     let wineRepository: WineRepository
+    let session: Session
     
-    init(wineRepository: WineRepository) {
+    init(wineRepository: WineRepository, session: Session) {
         self.wineRepository = wineRepository
+        self.session = session
     }
     
     func fetchMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
-        wineRepository.getMyWines(completion: completion)
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(MoWineError.notLoggedIn))
+            return
+        }
+        wineRepository.getWines(userId: currentUserId, completion: completion)
     }
 }

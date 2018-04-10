@@ -26,7 +26,7 @@ class CoreDataWineTranslator {
         entity.thumbnail = wine.thumbnail
         
         if let price = wine.price {
-            entity.price = NSDecimalNumber(value: price)
+            entity.price = NSDecimalNumber(string: price)
         } else {
             entity.price = nil
         }
@@ -88,7 +88,7 @@ class CoreDataWineTranslator {
         }
         
         wine.location = entity.location
-        wine.price = entity.price != nil ? Double(truncating: entity.price!) : nil
+        wine.price = entity.price != nil ? entity.price!.stringValue : nil
         wine.notes = entity.notes        
         wine.photo = entity.image
         wine.thumbnail = entity.thumbnail

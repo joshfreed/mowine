@@ -38,7 +38,7 @@ struct EditWine {
             let type: String
             var variety: String?
             var location: String?
-            var price: Double?
+            var price: String?
             var notes: String?
             var image: UIImage?
             var pairings: [String] = []

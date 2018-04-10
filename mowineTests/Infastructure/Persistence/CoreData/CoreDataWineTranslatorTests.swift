@@ -66,7 +66,7 @@ class CoreDataWineTranslatorTests: XCTestCase {
         expect(mapped?.type.name).to(equal("My Wine Type"))
         expect(mapped?.variety).to(equal(WineVariety(name: "Buttsex")))
         expect(mapped?.location).to(equal("Wine and Spirits"))
-        expect(mapped?.price).to(beCloseTo(46.77))
+        expect(mapped?.price).to(equal("46.77"))
         expect(mapped?.notes).to(equal("This is a note about the wine"))
         expect(mapped?.photo).to(equal(photo))
         expect(mapped?.thumbnail).to(equal(thumbnail))

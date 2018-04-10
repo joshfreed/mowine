@@ -72,7 +72,7 @@ class EditWineWorkerTests: XCTestCase {
         request.variety = "Other Variety"
         request.location = "Wegmans"
         request.notes = "Wine tasted good"
-        request.price = 400
+        request.price = "400"
         request.pairings = ["Tacos", "Sushi"]
         var updatedWine: Wine?
 
@@ -90,7 +90,7 @@ class EditWineWorkerTests: XCTestCase {
         expect(updatedWine?.rating).to(equal(request.rating))
         expect(updatedWine?.location).to(equal(request.location))
         expect(updatedWine?.notes).to(equal(request.notes))
-        expect(updatedWine?.price).to(equal(400))
+        expect(updatedWine?.price).to(equal("400"))
         expect(updatedWine?.pairings).to(haveCount(2))
         expect(updatedWine?.pairings).to(contain(["Tacos", "Sushi"]))
         XCTAssertNil(updatedWine?.photo)

@@ -12,7 +12,7 @@ import JFLib
 class MemoryWineRepository: WineRepository {
     private var wines: [Wine] = []
     
-    func getMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         completion(.success(wines))
     }
     

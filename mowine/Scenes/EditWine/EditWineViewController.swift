@@ -74,7 +74,7 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         
         let variety = valuesDictionary["variety"] as? String
         let location = valuesDictionary["location"] as? String
-        let price = valuesDictionary["price"] as? Double
+        let price = valuesDictionary["price"] as? String
         let notes = valuesDictionary["notes"] as? String
         
         var request = EditWine.SaveWine.Request(name: name, rating: rating, type: type.name)

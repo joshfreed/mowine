@@ -32,7 +32,7 @@ class CoreDataWineRepositoryTests: XCTestCase {
         wine = Wine(type: type, variety: variety, name: "Freed 2015", rating: 5)
         wine.location = "Wegman's"
         wine.notes = "These are some notes about this delicious wine"
-        wine.price = 47.99
+        wine.price = "47.99"
         wine.photo = Data(repeating: 88, count: 44)
         wine.thumbnail = Data(repeating: 22, count: 10)
         wine.pairings = ["Sushi", "Pizza"]
@@ -88,7 +88,7 @@ class CoreDataWineRepositoryTests: XCTestCase {
         updated.rating = 1
         updated.location = "My Pants"
         updated.notes = "This is a different note"
-        updated.price = 99.99
+        updated.price = "99.99"
         updated.photo = Data(repeating: 99, count: 10)
         updated.thumbnail = Data(repeating: 99, count: 2)
         updated.pairings = ["Sushi", "Bananas", "Mango"]

@@ -44,7 +44,10 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = MyWinesWorker(wineRepository: Container.shared.wineRepository)
+        interactor.worker = MyWinesWorker(
+            wineRepository: Container.shared.wineRepository,
+            session: Container.shared.session
+        )
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor

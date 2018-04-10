@@ -17,7 +17,7 @@ class WineBuilder {
     private var rating: Double = 3
     private var location: String?
     private var notes: String?
-    private var price: Double?
+    private var price: String?
     private var photo: Data?
     private var thumbnail: Data?
     private var pairings: [String] = []
@@ -72,6 +72,7 @@ class WineBuilder {
     }
     
     func withLocation(_ location: String) -> WineBuilder {
+        self.location = location
         return self
     }
     
@@ -79,7 +80,8 @@ class WineBuilder {
         return self
     }
     
-    func withPrice(_ price: Double) -> WineBuilder {
+    func withPrice(_ price: String?) -> WineBuilder {
+        self.price = price
         return self
     }
     
