@@ -96,7 +96,7 @@
 			<key>License</key>
 			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
-			<string>AWSLambda</string>
+			<string>AWSMobileClient</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -107,7 +107,7 @@
 			<key>License</key>
 			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
-			<string>AWSMobileClient</string>
+			<string>AWSS3</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

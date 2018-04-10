@@ -13,10 +13,10 @@
 // permissions and limitations under the License.
 //
 
-#import "AWSLambdaRequestRetryHandler.h"
-#import "AWSLambdaModel.h"
+#import "AWSS3RequestRetryHandler.h"
+#import "AWSService.h"
 
-@implementation AWSLambdaRequestRetryHandler
+@implementation AWSS3RequestRetryHandler
 
 - (AWSNetworkingRetryType)shouldRetry:(uint32_t)currentRetryCount
                       originalRequest:(AWSNetworkingRequest *)originalRequest
@@ -29,15 +29,28 @@
                                                      data:data
                                                     error:error];
     if(retryType == AWSNetworkingRetryTypeShouldNotRetry
-       && [error.domain isEqualToString:AWSLambdaErrorDomain]
        && currentRetryCount < self.maxRetryCount) {
-        if ([error.userInfo[@"NSLocalizedFailureReason"] isEqualToString:@"InvalidSignatureException"]) {
-                retryType = AWSNetworkingRetryTypeShouldCorrectClockSkewAndRetry;
+        if (response.statusCode == 200
+            && error
+            && error.code != NSURLErrorCancelled) {
+            retryType = AWSNetworkingRetryTypeShouldRetry;
         }
-        
+    }
+    
+    if (currentRetryCount < self.maxRetryCount
+        && [error.domain isEqualToString:AWSServiceErrorDomain]) {
+        switch (error.code) {
+            case AWSServiceErrorSignatureDoesNotMatch:
+                //may happened right after generating AWS temporary credentials due to the massively distributed nature of Amazon S3, just retry the request
+                retryType = AWSNetworkingRetryTypeShouldRetry;
+                break;
+                
+            default:
+                break;
+        }
     }
     
     return retryType;
 }
-
 @end
+

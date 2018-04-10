@@ -49,12 +49,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>AWSLambda.xcscheme</key>
+		<key>AWSMobileClient.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>AWSMobileClient.xcscheme</key>
+		<key>AWSS3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
