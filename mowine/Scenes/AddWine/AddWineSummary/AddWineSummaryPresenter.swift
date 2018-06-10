@@ -29,11 +29,11 @@ class AddWineSummaryPresenter: AddWineSummaryPresentationLogic {
         }
         
         var photo: UIImage?
-        if let image = wine.thumbnail {
-            photo = UIImage(data: image as Data)
+        if let thumbnail = response.thumbnail {
+            photo = UIImage(data: thumbnail)
         }
         
-        let viewModel = AddWineSummary.CreateWine.ViewModel(photo: photo, name: wine.name ?? "", rating: wine.rating)
+        let viewModel = AddWineSummary.CreateWine.ViewModel(photo: photo, name: wine.name, rating: wine.rating)
         viewController?.displayCreateWine(viewModel: viewModel)
     }
     

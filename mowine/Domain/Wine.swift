@@ -14,8 +14,6 @@ class Wine: Equatable {
     var variety: WineVariety?
     var name: String
     var rating: Double
-    var photo: Data?
-    var thumbnail: Data?
     var location: String?
     var notes: String?
     var price: String?
@@ -53,21 +51,5 @@ class Wine: Equatable {
     
     public static func ==(lhs: Wine, rhs: Wine) -> Bool {
         return lhs.id == rhs.id
-    }
-}
-
-extension WineListViewModel {
-    static func from(wine: Wine) -> WineListViewModel {
-        var image: UIImage? = nil
-        if let thumbnail = wine.thumbnail {
-            image = UIImage(data: thumbnail)
-        }
-        return WineListViewModel(
-            id: wine.id.uuidString,
-            name: wine.name,
-            rating: wine.rating,
-            type: wine.varietyName,
-            thumbnail: image
-        )
     }
 }

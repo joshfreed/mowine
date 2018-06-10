@@ -12,22 +12,47 @@ import JFLib
 class AddWineSummaryWorker {
     let wineRepository: WineRepository
     let imageWorker: WineImageWorker
+    let imageRepository: WineImageRepository
     
-    init(wineRepository: WineRepository, imageWorker: WineImageWorker) {
+    init(
+        wineRepository: WineRepository,
+        imageWorker: WineImageWorker,
+        imageRepository: WineImageRepository
+    ) {
         self.wineRepository = wineRepository
         self.imageWorker = imageWorker
+        self.imageRepository = imageRepository
     }
     
-    func createWine(type: WineType, variety: WineVariety?, photo: UIImage?, name: String, rating: Double, completion: @escaping (Result<Wine>) -> ()) {
+    func createWine(
+        type: WineType,
+        variety: WineVariety?,
+        name: String,
+        rating: Double,
+        completion: @escaping (Result<Wine>) -> ()
+    ) {
         let wine = Wine(type: type, name: name, rating: rating)
         wine.variety = variety
-        
-        if let image = photo {
-            wine.photo = imageWorker.convertToPNGData(image: image) as Data?
-            wine.thumbnail = imageWorker.createThumbnail(from: image) as Data?
+        wineRepository.save(wine, completion: completion)
+    }
+    
+    func createImages(wineId: UUID, photo: UIImage?) -> Data? {
+        guard let image = photo else {
+            return nil
         }
         
-        wineRepository.save(wine, completion: completion)
+        guard
+            let downsizedImage = imageWorker.resize(image: image, to: CGSize(width: 400, height: 400)),
+            let imageData = imageWorker.toPNG(image: downsizedImage),
+            let thumbnailImage = imageWorker.resize(image: image, to: CGSize(width: 150, height: 150)),
+            let thumbnailData = imageWorker.toPNG(image: thumbnailImage)
+        else {
+            return nil
+        }
+        
+        imageRepository.store(wineId: wineId, image: imageData, thumbnail: thumbnailData)
+        
+        return thumbnailData
     }
     
     func updateRating(of wine: Wine, to rating: Double) {

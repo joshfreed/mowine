@@ -17,19 +17,26 @@ class EditWineWorker {
     let wineRepository: WineRepository
     let wineTypeRepository: WineTypeRepository
     let imageWorker: WineImageWorker
+    let wineImageRepository: WineImageRepository
     
     init(
         wineRepository: WineRepository,
         wineTypeRepository: WineTypeRepository,
-        imageWorker: WineImageWorker
+        imageWorker: WineImageWorker,
+        wineImageRepository: WineImageRepository
     ) {
         self.wineRepository = wineRepository
         self.wineTypeRepository = wineTypeRepository
         self.imageWorker = imageWorker
+        self.wineImageRepository = wineImageRepository
     }
     
     func getWineTypes(completion: @escaping (Result<[WineType]>) -> ()) {
         wineTypeRepository.getAll(completion: completion)
+    }
+    
+    func getWinePhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+        wineImageRepository.fetchPhoto(wineId: wineId, completion: completion)
     }
     
     func updateWine(wine: Wine, from request: EditWine.SaveWine.Request, completion: @escaping (Result<Wine>) -> ()) {
@@ -58,12 +65,6 @@ class EditWineWorker {
         wine.notes = request.notes
         wine.price = request.price
         wine.pairings = request.pairings
-        
-        if let image = request.image {
-            wine.photo = imageWorker.convertToPNGData(image: image) as Data?
-            wine.thumbnail = imageWorker.createThumbnail(from: image) as Data?
-        }
-
         wine.type = newType
         
         if let varietyName = request.variety, let variety = wine.type.getVariety(named: varietyName) {
@@ -73,6 +74,25 @@ class EditWineWorker {
         }
         
         wineRepository.save(wine, completion: completion)
+    }
+    
+    func updateWinePhoto(wineId: UUID, photo: UIImage?) -> Data? {
+        guard let photo = photo else {
+            return nil
+        }
+        
+        guard
+            let downsizedImage = imageWorker.resize(image: photo, to: CGSize(width: 400, height: 400)),
+            let imageData = imageWorker.toPNG(image: downsizedImage),
+            let thumbnailImage = imageWorker.resize(image: photo, to: CGSize(width: 150, height: 150)),
+            let thumbnailData = imageWorker.toPNG(image: thumbnailImage)
+        else {
+            return nil
+        }
+        
+        wineImageRepository.store(wineId: wineId, image: imageData, thumbnail: thumbnailData)
+        
+        return thumbnailData
     }
 }
 

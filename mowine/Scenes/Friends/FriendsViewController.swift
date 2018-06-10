@@ -89,19 +89,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for friends"
         searchController.searchBar.tintColor = .mwButtonSecondary
-        let scb = searchController.searchBar
-        if let textfield = scb.value(forKey: "searchField") as? UITextField {
-            textfield.textColor = .white
-            if let backgroundview = textfield.subviews.first {
-                
-                // Background color
-                backgroundview.backgroundColor = UIColor.white
-                
-                // Rounded corner
-                backgroundview.layer.cornerRadius = 10;
-                backgroundview.clipsToBounds = true;
-            }
-        }
+        searchController.searchBar.setSearchFieldColor(.white)        
 
         navigationItem.searchController = searchController
         definesPresentationContext = true

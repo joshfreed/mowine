@@ -14,6 +14,7 @@ import Eureka
 
 protocol EditWineViewControllerInput {
     func displayWine(viewModel: EditWine.FetchWine.ViewModel)
+    func displayPhoto(viewModel: EditWine.FetchPhoto.ViewModel)
     func navigateToMyWines()
     func presentError(_ error: Error)
 }
@@ -21,6 +22,7 @@ protocol EditWineViewControllerInput {
 protocol EditWineViewControllerOutput {
     var wine: Wine! { get set }
     func fetchWine(request: EditWine.FetchWine.Request)
+    func fetchPhoto(request: EditWine.FetchPhoto.Request)
     func saveWine(request: EditWine.SaveWine.Request)
 }
 
@@ -53,6 +55,7 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
 
     func fetchWineOnLoad() {
         output.fetchWine(request: EditWine.FetchWine.Request())
+        output.fetchPhoto(request: EditWine.FetchPhoto.Request())
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
@@ -99,7 +102,6 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
     func displayWine(viewModel: EditWine.FetchWine.ViewModel) {
         wineForm.nameRow.value = viewModel.wineViewModel.name
         wineForm.ratingRow.value = viewModel.wineViewModel.rating
-        wineForm.photoRow.value = viewModel.wineViewModel.image
         wineForm.typeRow.options = viewModel.wineTypes
         wineForm.typeRow.value = viewModel.wineViewModel.type
         wineForm.varietyRow.value = viewModel.wineViewModel.variety
@@ -131,5 +133,12 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
     
     func presentError(_ error: Error) {
 //        showAlert(error: error)
+    }
+    
+    // MARK: Fetch photo
+    
+    func displayPhoto(viewModel: EditWine.FetchPhoto.ViewModel) {
+        wineForm.photoRow.value = viewModel.photo
+        wineForm.photoRow.updateCell()
     }
 }

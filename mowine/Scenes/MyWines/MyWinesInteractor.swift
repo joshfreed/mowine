@@ -39,6 +39,11 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         }
         
         presenter?.presentUpdatedWine(wine: updatedWine)
+        
+        if let thumbnail = notification.userInfo?["thumbnail"] as? Data {
+            let response = MyWines.FetchThumbnail.Response(wine: updatedWine, thumbnail: thumbnail)
+            presenter?.presentThumbnail(response: response)
+        }
     }
     
     @objc func wineAdded(notification: Notification) {
@@ -48,6 +53,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         
         wines.insert(newWine, at: 0)
         presentWines()
+        loadWineThumbnails(wines: wines)
     }
     
     // MARK: Business logic
@@ -58,6 +64,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             case .success(let wines):
                 self.wines = wines
                 self.presentWines()
+                self.loadWineThumbnails(wines: wines)
             case .failure(let error): print("\(error)")
             }
         }
@@ -72,5 +79,33 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     
     func selectWine(atIndex index: Int) {
         selectedWine = wines[index]
+    }
+    
+    // MARK: Fetch thumbnails
+    
+    func loadWineThumbnails(wines: [Wine]) {
+        for wine in wines {
+            let request = MyWines.FetchThumbnail.Request(wineId: wine.id)
+            fetchThumbnail(request: request)
+        }
+    }
+    
+    // MARK: Fetch thumbnail
+    
+    func fetchThumbnail(request: MyWines.FetchThumbnail.Request) {
+        guard let wine = wines.first(where: { $0.id == request.wineId }) else {
+            return
+        }
+        
+        worker?.fetchThumbnail(wine: wine) { result in
+            switch result {
+            case .success(let thumbnail):
+                let response = MyWines.FetchThumbnail.Response(wine: wine, thumbnail: thumbnail)
+                self.presenter?.presentThumbnail(response: response)
+            case .failure(let error):
+                print("Error fetching thumb: \(error)")
+                break
+            }
+        }
     }
 }

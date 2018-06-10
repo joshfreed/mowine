@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         AWSDDLog.sharedInstance.logLevel = .info
         AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
+
+        _ = AWSContainer.shared.emailAuthService.pool
         
         Container.shared.session.resume() { _ in }
 

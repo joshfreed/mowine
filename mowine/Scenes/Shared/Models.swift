@@ -37,6 +37,18 @@ struct WineListViewModel: Equatable {
     }
 }
 
+extension WineListViewModel {
+    static func from(wine: Wine) -> WineListViewModel {
+        return WineListViewModel(
+            id: wine.id.uuidString,
+            name: wine.name,
+            rating: wine.rating,
+            type: wine.varietyName,
+            thumbnail: nil
+        )
+    }
+}
+
 struct WineTypeViewModel: Equatable, CustomStringConvertible {
     var name: String
     var varieties: [String]

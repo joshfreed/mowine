@@ -15,6 +15,7 @@ import UIKit
 protocol MyWinesPresentationLogic {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
     func presentUpdatedWine(wine: Wine)
+    func presentThumbnail(response: MyWines.FetchThumbnail.Response)
 }
 
 class MyWinesPresenter: MyWinesPresentationLogic {
@@ -24,17 +25,12 @@ class MyWinesPresenter: MyWinesPresentationLogic {
         let name = wine.name
         let varietyName = wine.varietyName
         
-        var thumbnail: UIImage?
-        if let imageData = wine.thumbnail {
-            thumbnail = UIImage(data: imageData)
-        }
-        
         return WineListViewModel(
             id: wine.id.uuidString,
             name: name,
             rating: wine.rating,
             type: varietyName,
-            thumbnail: thumbnail
+            thumbnail: nil
         )
     }
     
@@ -49,5 +45,12 @@ class MyWinesPresenter: MyWinesPresentationLogic {
     
     func presentUpdatedWine(wine: Wine) {
         viewController?.displayUpdatedWine(viewModel: buildWineViewModel(fromModel: wine))
+    }
+    
+    // MARK: Fetch thumbnail
+    
+    func presentThumbnail(response: MyWines.FetchThumbnail.Response) {
+        let viewModel = MyWines.FetchThumbnail.ViewModel(wineId: response.wine.id.uuidString, thumbnail: response.thumbnail)
+        viewController?.displayThumbnail(viewModel: viewModel)
     }
 }

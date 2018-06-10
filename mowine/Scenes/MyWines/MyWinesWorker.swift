@@ -16,10 +16,12 @@ import JFLib
 class MyWinesWorker {
     let wineRepository: WineRepository
     let session: Session
+    let imageRepository: WineImageRepository
     
-    init(wineRepository: WineRepository, session: Session) {
+    init(wineRepository: WineRepository, session: Session, imageRepository: WineImageRepository) {
         self.wineRepository = wineRepository
         self.session = session
+        self.imageRepository = imageRepository
     }
     
     func fetchMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
@@ -28,5 +30,9 @@ class MyWinesWorker {
             return
         }
         wineRepository.getWines(userId: currentUserId, completion: completion)
+    }
+    
+    func fetchThumbnail(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
+        imageRepository.fetchThumbnail(wineId: wine.id, completion: completion)
     }
 }

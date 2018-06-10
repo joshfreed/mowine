@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import AWSDynamoDB
+import AWSS3
 
 class Container {
     static let shared = Container()
@@ -21,6 +22,7 @@ class Container {
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository = AWSContainer.shared.wineRepository
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
+    lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
     lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
     
     // MARK: Core Data Stack
@@ -65,4 +67,8 @@ class AWSContainer {
     lazy var facebookService = AWSFacebookAuthentication()
     lazy var userRepository = AWSUserRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var wineRepository = AWSWineRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
+    lazy var wineImageRepository = S3WineImageRepository(
+        transferUtility: AWSS3TransferUtility.default(),
+        session: Container.shared.session
+    )
 }

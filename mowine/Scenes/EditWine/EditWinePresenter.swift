@@ -13,12 +13,14 @@ import UIKit
 
 protocol EditWinePresenterInput {
     func presentWine(response: EditWine.FetchWine.Response)
+    func presentPhoto(response: EditWine.FetchPhoto.Response)
     func navigateToMyWines()
     func presentError(_ error: Error)
 }
 
 protocol EditWinePresenterOutput: class {
     func displayWine(viewModel: EditWine.FetchWine.ViewModel)
+    func displayPhoto(viewModel: EditWine.FetchPhoto.ViewModel)
     func navigateToMyWines()
     func presentError(_ error: Error)
 }
@@ -39,9 +41,9 @@ class EditWinePresenter: EditWinePresenterInput {
             wineViewModel.price = Double(price)
         }
         
-        if let data = response.wine.photo {
-            wineViewModel.image = UIImage(data: data as Data)
-        }
+//        if let data = response.wine.photo {
+//            wineViewModel.image = UIImage(data: data as Data)
+//        }
         
         if let selectedTypeViewModel = wineTypes.filter({ $0.name == response.wine.type.name }).first {
             wineViewModel.type = selectedTypeViewModel
@@ -78,5 +80,16 @@ class EditWinePresenter: EditWinePresenterInput {
     
     func presentError(_ error: Error) {
         output.presentError(error)
+    }
+    
+    func presentPhoto(response: EditWine.FetchPhoto.Response) {
+        var photo: UIImage?
+        
+        if let data = response.data {
+            photo = UIImage(data: data)
+        }
+        
+        let viewModel = EditWine.FetchPhoto.ViewModel(photo: photo)
+        output.displayPhoto(viewModel: viewModel)
     }
 }

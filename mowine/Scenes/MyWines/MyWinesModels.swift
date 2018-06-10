@@ -27,4 +27,20 @@ enum MyWines {
             var wines: [WineListViewModel]
         }
     }
+    
+    enum FetchThumbnail {
+        struct Request {
+            let wineId: UUID
+        }
+        
+        struct Response {
+            let wine: Wine
+            let thumbnail: Data?
+        }
+        
+        struct ViewModel {
+            let wineId: String
+            let thumbnail: Data?
+        }
+    }
 }

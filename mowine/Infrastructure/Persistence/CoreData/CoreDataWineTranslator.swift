@@ -22,8 +22,8 @@ class CoreDataWineTranslator {
         entity.rating = wine.rating
         entity.location = wine.location
         entity.notes = wine.notes
-        entity.image = wine.photo
-        entity.thumbnail = wine.thumbnail
+//        entity.image = wine.photo
+//        entity.thumbnail = wine.thumbnail
         
         if let price = wine.price {
             entity.price = NSDecimalNumber(string: price)
@@ -90,8 +90,8 @@ class CoreDataWineTranslator {
         wine.location = entity.location
         wine.price = entity.price != nil ? entity.price!.stringValue : nil
         wine.notes = entity.notes        
-        wine.photo = entity.image
-        wine.thumbnail = entity.thumbnail
+//        wine.photo = entity.image
+//        wine.thumbnail = entity.thumbnail
         
         if let pairingSet = entity.pairings, let pairings = Array(pairingSet) as? [ManagedFood] {            
             wine.pairings = pairings.flatMap { $0.name }

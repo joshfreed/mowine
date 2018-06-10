@@ -29,6 +29,11 @@ class SignUpWorker {
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+        
+        // Little hacky, but since my user pool is setup w/ username as the primary login and email as an attribute alias,
+        // cognito will allow me to create even if the email address is already associated with an account
+        // By signing in first I can see if this email address is already associated with an account
+        
         emailAuthService.signIn(emailAddress: emailAddress, password: password) { result in
             switch result {
             case .success:

@@ -30,6 +30,19 @@ struct EditWine {
 
     }
     
+    struct FetchPhoto {
+        struct Request {
+        }
+        
+        struct Response {
+            let data: Data?
+        }
+        
+        struct ViewModel {
+            let photo: UIImage?
+        }
+    }
+    
     struct SaveWine {
         
         struct Request {

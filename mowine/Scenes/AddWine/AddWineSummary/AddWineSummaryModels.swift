@@ -22,6 +22,7 @@ enum AddWineSummary {
 
         struct Response {
             var wine: Wine?
+            let thumbnail: Data?
         }
 
         struct ViewModel {

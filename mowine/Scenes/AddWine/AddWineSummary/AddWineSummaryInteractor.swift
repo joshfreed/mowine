@@ -48,7 +48,7 @@ class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataS
         
         wine = updatedWine
         
-        let response = AddWineSummary.CreateWine.Response(wine: wine)
+        let response = AddWineSummary.CreateWine.Response(wine: wine, thumbnail: nil)
         presenter?.presentWine(response: response)
     }
     
@@ -56,12 +56,13 @@ class AddWineSummaryInteractor: AddWineSummaryBusinessLogic, AddWineSummaryDataS
 
     func createWine(request: AddWineSummary.CreateWine.Request) {
         
-        worker?.createWine(type: wineType, variety: variety, photo: photo, name: name, rating: rating) { result in
+        worker?.createWine(type: wineType, variety: variety, name: name, rating: rating) { result in
             switch result {
             case .success(let wine):
                 self.wine = wine
+                let thumbnail = self.worker?.createImages(wineId: wine.id, photo: self.photo)
                 NotificationCenter.default.post(name: .wineAdded, object: nil, userInfo: ["wine": wine])
-                let response = AddWineSummary.CreateWine.Response(wine: wine)
+                let response = AddWineSummary.CreateWine.Response(wine: wine, thumbnail: thumbnail)
                 self.presenter?.presentWine(response: response)
             case .failure(let error):
                 fatalError("\(error)")

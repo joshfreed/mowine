@@ -14,11 +14,13 @@ import UIKit
 protocol EditWineInteractorInput {
     var wine: Wine! { get set }
     func fetchWine(request: EditWine.FetchWine.Request)
+    func fetchPhoto(request: EditWine.FetchPhoto.Request)
     func saveWine(request: EditWine.SaveWine.Request)
 }
 
 protocol EditWineInteractorOutput {
     func presentWine(response: EditWine.FetchWine.Response)
+    func presentPhoto(response: EditWine.FetchPhoto.Response)
     func navigateToMyWines()
     func presentError(_ error: Error)
 }
@@ -47,19 +49,34 @@ class EditWineInteractor: EditWineInteractorInput {
         
     }
     
+    // MARK: - Fetch Photo
+    
+    func fetchPhoto(request: EditWine.FetchPhoto.Request) {
+        worker.getWinePhoto(wineId: wine.id) { result in
+            switch result {
+            case .success(let data):
+                let response = EditWine.FetchPhoto.Response(data: data)
+                self.output.presentPhoto(response: response)
+            case .failure(let error):
+                print("\(error)")
+            }
+        }
+    }
+    
     // MARK: - Save wine
     
     func saveWine(request: EditWine.SaveWine.Request) {
+        let newThumbnail = worker.updateWinePhoto(wineId: wine.id, photo: request.image)
         worker.updateWine(wine: wine, from: request) { result in
             switch result {
-            case .success(let wine): self.saveWineSuccess(wine)
+            case .success(let wine): self.saveWineSuccess(wine, thumbnail: newThumbnail)
             case .failure(let error): self.output.presentError(error)
             }
         }
     }
     
-    private func saveWineSuccess(_ wine: Wine) {
-        NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wine": wine])
+    private func saveWineSuccess(_ wine: Wine, thumbnail: Data?) {
+        NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wine": wine, "thumbnail": thumbnail])
         output.navigateToMyWines()
     }
 }
