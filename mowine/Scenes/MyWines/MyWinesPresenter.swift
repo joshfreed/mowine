@@ -30,7 +30,7 @@ class MyWinesPresenter: MyWinesPresentationLogic {
             name: name,
             rating: wine.rating,
             type: varietyName,
-            thumbnail: nil
+            thumbnail: wine.thumbnail
         )
     }
     

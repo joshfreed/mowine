@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import JFLib
 
 protocol MyWinesBusinessLogic {
     func fetchMyWines(request: MyWines.FetchMyWines.Request)
@@ -53,7 +54,11 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         
         wines.insert(newWine, at: 0)
         presentWines()
-        loadWineThumbnails(wines: wines)
+        
+        delay(seconds: 1.5) {
+            let request = MyWines.FetchThumbnail.Request(wineId: newWine.id)
+            self.fetchThumbnail(request: request)
+        }
     }
     
     // MARK: Business logic
@@ -85,6 +90,9 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     
     func loadWineThumbnails(wines: [Wine]) {
         for wine in wines {
+            if wine.thumbnail != nil {
+                continue
+            }
             let request = MyWines.FetchThumbnail.Request(wineId: wine.id)
             fetchThumbnail(request: request)
         }
@@ -100,6 +108,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         worker?.fetchThumbnail(wine: wine) { result in
             switch result {
             case .success(let thumbnail):
+                wine.thumbnail = thumbnail
                 let response = MyWines.FetchThumbnail.Response(wine: wine, thumbnail: thumbnail)
                 self.presenter?.presentThumbnail(response: response)
             case .failure(let error):

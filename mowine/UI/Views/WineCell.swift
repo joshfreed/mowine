@@ -27,8 +27,8 @@ class WineCell: UITableViewCell {
     }
     
     func configure(wine: WineListViewModel) {
-        if let thumbnail = wine.thumbnail {
-            thumbnailImageView.image = thumbnail
+        if let thumbnail = wine.thumbnail, let image = UIImage(data: thumbnail) {
+            thumbnailImageView.image = image
         } else {
             thumbnailImageView.image = #imageLiteral(resourceName: "Default Wine Image")
         }

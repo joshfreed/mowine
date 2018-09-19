@@ -131,6 +131,7 @@
 		53958A9A20617B6C00BA4B6C /* FirstTimeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9420617B6C00BA4B6C /* FirstTimeModels.swift */; };
 		53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */; };
 		53958A9C20617B6C00BA4B6C /* FirstTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9620617B6C00BA4B6C /* FirstTimeInteractor.swift */; };
+		53A3D5802145C4F4008A476D /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3D57F2145C4F4008A476D /* SyncManager.swift */; };
 		53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
 		53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */; };
@@ -372,6 +373,7 @@
 		53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
 		53958A9620617B6C00BA4B6C /* FirstTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeInteractor.swift; sourceTree = "<group>"; };
 		53958A9D20617BCD00BA4B6C /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SignIn.storyboard; path = /Users/joshfreed/Source/mowine/mowine/SignIn.storyboard; sourceTree = "<absolute>"; };
+		53A3D57F2145C4F4008A476D /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
 		53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountPresenter.swift; sourceTree = "<group>"; };
@@ -699,6 +701,7 @@
 		5348960F203DE4A300B7547A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				53A3D57E2145C4CE008A476D /* Sync */,
 				53F24865206D3F5E0046B031 /* Facebook */,
 				534728C62064304900DC7966 /* AWS */,
 				536E85A2204F506E004D5426 /* Fake */,
@@ -867,6 +870,14 @@
 				53958A9620617B6C00BA4B6C /* FirstTimeInteractor.swift */,
 			);
 			path = FirstTime;
+			sourceTree = "<group>";
+		};
+		53A3D57E2145C4CE008A476D /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				53A3D57F2145C4F4008A476D /* SyncManager.swift */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		53A8D5E42046023D000AD7A3 /* SignIn */ = {
@@ -1535,6 +1546,7 @@
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				5327BC1B20618670006787E9 /* MWButton.swift in Sources */,
 				53489607203DD86800B7547A /* CoreDataWineRepository.swift in Sources */,
+				53A3D5802145C4F4008A476D /* SyncManager.swift in Sources */,
 				53F100FF2045E08F00B29FAF /* SignInInteractor.swift in Sources */,
 				534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */,
 				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,

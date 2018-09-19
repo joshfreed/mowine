@@ -30,7 +30,7 @@ struct WineListViewModel: Equatable {
     var name: String
     var rating: Double
     var type: String
-    var thumbnail: UIImage?
+    var thumbnail: Data?
     
     public static func ==(lhs: WineListViewModel, rhs: WineListViewModel) -> Bool {
         return lhs.id == rhs.id

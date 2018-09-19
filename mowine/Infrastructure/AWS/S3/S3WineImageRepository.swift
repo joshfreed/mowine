@@ -21,11 +21,13 @@ class S3WineImageRepository {
     }
     
     private func uploadImage(image: Data, bucket: String, imageName: String) {
+        print("Starting upload \(imageName)")
+        
         let expression = AWSS3TransferUtilityUploadExpression()
         expression.progressBlock = {(task, progress) in
             DispatchQueue.main.async {
                 // Do something e.g. Update a progress bar.
-                print("\(imageName): \(progress.fractionCompleted)")
+                print("Upload \(imageName): \(progress.fractionCompleted)")
             }
         }
         
@@ -34,7 +36,7 @@ class S3WineImageRepository {
             DispatchQueue.main.async {
                 // Do something e.g. Alert a user for transfer completion.
                 // On failed uploads, `error` contains the error object.
-                print("Completion handler! \(error)")
+                print("\(imageName): Upload completion handler! \(error)")
             }
         }
         
@@ -52,7 +54,7 @@ class S3WineImageRepository {
             
             if let _ = task.result {
                 // Do something with uploadTask.
-                print("task complete?!?")
+                print("Upload task complete?!?")
             }
             
             return nil
@@ -60,17 +62,19 @@ class S3WineImageRepository {
     }
     
     private func downloadImage(fileName: String, userBucket: String, completion: @escaping (Result<Data?>) -> ()) {
+        print("Starting download \(fileName)")
+        
         let expression = AWSS3TransferUtilityDownloadExpression()
         expression.progressBlock = { task, progress in
             DispatchQueue.main.async {
                 // Do something e.g. Update a progress bar.
-                print("\(fileName): \(progress.fractionCompleted)")
+                print("Download \(fileName): \(progress.fractionCompleted)")
             }
         }
         
         let completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock = { task, url, data, error  in
             DispatchQueue.main.async {
-                print("download completion handler \(error)")
+                print("\(fileName): download completion handler \(error)")
                 completion(.success(data))
             }
         }
@@ -87,7 +91,7 @@ class S3WineImageRepository {
             
             if let _ = task.result {
                 // Do something with uploadTask.
-                print("task complete?!?")
+                print("Download task complete?!?")
             }
             
             return nil

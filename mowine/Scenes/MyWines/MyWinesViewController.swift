@@ -93,15 +93,15 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     // MARK: Fetch thumbnail
     
     func displayThumbnail(viewModel: MyWines.FetchThumbnail.ViewModel) {
-        var wine = wineListViewController?.wines.first(where: { $0.id == viewModel.wineId })
+        var wineViewModel = wineListViewController?.wines.first(where: { $0.id == viewModel.wineId })
         
-        guard wine != nil else {
+        guard wineViewModel != nil else {
             return
         }
         
-        if let data = viewModel.thumbnail, let image = UIImage(data: data) {
-            wine!.thumbnail = image
-            wineListViewController?.update(wine: wine!)
+        if let data = viewModel.thumbnail {
+            wineViewModel!.thumbnail = data
+            wineListViewController?.update(wine: wineViewModel!)
         }
     }
     
