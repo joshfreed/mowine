@@ -29,7 +29,7 @@ class WineModelTests: XCTestCase {
         let id = UUID()
         let type = WineType(name: "Red", varieties: [])
         let variety = WineVariety(name: "Merlot")
-        let wine = Wine(id: id, type: type, name: "Some Great Wine", rating: 4)
+        let wine = Wine(id: id, userId: UserId(string: UUID().uuidString), type: type, name: "Some Great Wine", rating: 4)
         wine.variety = variety
         wine.location = "Wegman's"
         wine.notes = "These are notes about this wine"

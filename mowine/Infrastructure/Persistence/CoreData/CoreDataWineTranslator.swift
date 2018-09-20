@@ -76,12 +76,14 @@ class CoreDataWineTranslator {
             let id = entity.wineId,
             let name = entity.name,
             let managedType = entity.type,
-            let type = CoreDataWineTypeTranslator.makeModel(from: managedType)
+            let type = CoreDataWineTypeTranslator.makeModel(from: managedType),
+            let user = entity.user, let userIdStr = user.userId
         else {
             return nil
         }
         
-        let wine = Wine(id: id, type: type, name: name, rating: entity.rating)
+        let userId = UserId(string: userIdStr)
+        let wine = Wine(id: id, userId: userId, type: type, name: name, rating: entity.rating)
         
         if let managedVariety = entity.variety {
             wine.variety = CoreDataVarietyTranslator.map(from: managedVariety)
@@ -90,11 +92,10 @@ class CoreDataWineTranslator {
         wine.location = entity.location
         wine.price = entity.price != nil ? entity.price!.stringValue : nil
         wine.notes = entity.notes        
-//        wine.photo = entity.image
-//        wine.thumbnail = entity.thumbnail
+        wine.thumbnail = entity.thumbnail
         
         if let pairingSet = entity.pairings, let pairings = Array(pairingSet) as? [ManagedFood] {            
-            wine.pairings = pairings.flatMap { $0.name }
+            wine.pairings = pairings.compactMap { $0.name }
         }
         
         return wine

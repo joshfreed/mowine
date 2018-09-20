@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Food" representedClassName="ManagedFood" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Type" representedClassName="ManagedWineType" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="varieties" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Variety" inverseName="type" inverseEntity="Variety" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="ManagedUser" syncable="YES" codeGenerationType="class">
+        <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profilePicture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="userId" attributeType="String" syncable="YES"/>
+        <relationship name="wines" toMany="YES" deletionRule="Nullify" destinationEntity="Wine" inverseName="user" inverseEntity="Wine" syncable="YES"/>
     </entity>
     <entity name="Variety" representedClassName="ManagedWineVariety" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -23,12 +31,14 @@
         <attribute name="wineId" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="pairings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" syncable="YES"/>
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" syncable="YES"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="wines" inverseEntity="User" syncable="YES"/>
         <relationship name="variety" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Variety" syncable="YES"/>
     </entity>
     <elements>
         <element name="Food" positionX="-171" positionY="-258" width="128" height="60"/>
         <element name="Type" positionX="61" positionY="-36" width="128" height="75"/>
+        <element name="User" positionX="-117" positionY="-108" width="128" height="135"/>
         <element name="Variety" positionX="-2" positionY="132" width="128" height="75"/>
-        <element name="Wine" positionX="-297" positionY="-99" width="128" height="223"/>
+        <element name="Wine" positionX="-297" positionY="-99" width="128" height="240"/>
     </elements>
 </model>

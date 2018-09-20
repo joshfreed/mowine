@@ -9,15 +9,30 @@
 import Foundation
 @testable import mowine
 import UIKit
+import JFLib
 
 class MockWineImageWorker: WineImageWorker {
-    override func convertToPNGData(image: UIImage) -> NSData? {
-        return nil
+    
+}
+
+class MockWineImageRepository: WineImageRepository {
+    func store(wineId: UUID, image: Data, thumbnail: Data) {
+        
     }
     
-    override func createThumbnail(from image: UIImage) -> NSData? {
-        return nil
+    func fetchThumbnail(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+        
     }
+    
+    func fetchPhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+        
+    }
+    
+    func deleteImages(wineId: UUID) {
+        
+    }
+    
+    
 }
 
 class MockEditWineWorker: EditWineWorker {
@@ -25,7 +40,8 @@ class MockEditWineWorker: EditWineWorker {
         super.init(
             wineRepository: MockWineRepository(),
             wineTypeRepository: MockWineTypeRepository(),
-            imageWorker: MockWineImageWorker()
+            imageWorker: MockWineImageWorker(),
+            wineImageRepository: MockWineImageRepository()
         )
     }
 }

@@ -85,6 +85,7 @@
 		5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489619203DE5C000B7547A /* MemoryWineRepository.swift */; };
 		5348961D203E0FA600B7547A /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348961C203E0FA600B7547A /* Mocks.swift */; };
 		53489623203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */; };
+		534CC91D2152F79F004F4A6C /* CoreDataUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CC91C2152F79F004F4A6C /* CoreDataUserRepository.swift */; };
 		5350B58B203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */; };
 		5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */; };
 		5350B592203F56FE00C6B2D2 /* CoreDataWineTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */; };
@@ -326,6 +327,7 @@
 		53489619203DE5C000B7547A /* MemoryWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWineRepository.swift; sourceTree = "<group>"; };
 		5348961C203E0FA600B7547A /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineTypeRepositoryTests.swift; sourceTree = "<group>"; };
+		534CC91C2152F79F004F4A6C /* CoreDataUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserRepository.swift; sourceTree = "<group>"; };
 		5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineRepositoryTests.swift; sourceTree = "<group>"; };
 		5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
 		5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineTranslator.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				53489606203DD86800B7547A /* CoreDataWineRepository.swift */,
 				5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */,
 				53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */,
+				534CC91C2152F79F004F4A6C /* CoreDataUserRepository.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1180,7 +1183,6 @@
 				53F5ABED1E2176080067AB62 /* Frameworks */,
 				53F5ABEE1E2176080067AB62 /* Resources */,
 				3CC2C3C1E16E051F202F77AA /* [CP] Embed Pods Frameworks */,
-				39E769D53F8697FF026C4F9D /* [CP] Copy Pods Resources */,
 				53C50BC11F795FC50049AC92 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1201,7 +1203,6 @@
 				53F5AC041E2176090067AB62 /* Frameworks */,
 				53F5AC051E2176090067AB62 /* Resources */,
 				63FBD3F369523F7F61789279 /* [CP] Embed Pods Frameworks */,
-				3672C8841AF85201A50B9DAA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1221,8 +1222,6 @@
 				53F5AC0E1E2176090067AB62 /* Sources */,
 				53F5AC0F1E2176090067AB62 /* Frameworks */,
 				53F5AC101E2176090067AB62 /* Resources */,
-				62ADF68B18886309CDD6C979 /* [CP] Embed Pods Frameworks */,
-				DF17E31B53DE0FBDDDA4B7CD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1323,36 +1322,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3672C8841AF85201A50B9DAA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		39E769D53F8697FF026C4F9D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3CC2C3C1E16E051F202F77AA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1419,21 +1388,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		62ADF68B18886309CDD6C979 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		63FBD3F369523F7F61789279 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1486,21 +1440,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF17E31B53DE0FBDDDA4B7CD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1599,6 +1538,7 @@
 				53ED1F88204F2D5C00C129BC /* FriendsViewController.swift in Sources */,
 				5321FBA31F0BF594001D2040 /* SelectVarietyModels.swift in Sources */,
 				5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */,
+				534CC91D2152F79F004F4A6C /* CoreDataUserRepository.swift in Sources */,
 				53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */,
 				5327BC2520619D34006787E9 /* WineCellarListRouter.swift in Sources */,
 				5327BC322062B362006787E9 /* WineDetailsRouter.swift in Sources */,

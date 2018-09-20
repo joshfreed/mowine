@@ -48,7 +48,8 @@ class AddWineSummaryViewController: UIViewController, AddWineSummaryDisplayLogic
         interactor.worker = AddWineSummaryWorker(            
             wineRepository: Container.shared.wineRepository,
             imageWorker: Container.shared.wineImageWorker,
-            imageRepository: Container.shared.wineImageRepository
+            imageRepository: Container.shared.wineImageRepository,
+            session: Container.shared.session
         )
         presenter.viewController = viewController
         router.viewController = viewController

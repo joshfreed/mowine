@@ -10,6 +10,7 @@ import UIKit
 
 class Wine: Equatable {
     let id: UUID
+    let userId: UserId
     var type: WineType
     var variety: WineVariety?
     var name: String
@@ -25,16 +26,18 @@ class Wine: Equatable {
         return variety?.name ?? type.name
     }
     
-    init(id: UUID, type: WineType, name: String, rating: Double) {
+    init(id: UUID, userId: UserId, type: WineType, name: String, rating: Double) {
         self.id = id
+        self.userId = userId
         self.type = type
         self.name = name
         self.rating = rating
         self.createdAt = Date()
     }
     
-    init(type: WineType, variety: WineVariety, name: String, rating: Double) {
+    init(userId: UserId, type: WineType, variety: WineVariety, name: String, rating: Double) {
         self.id = UUID()
+        self.userId = userId
         self.type = type
         self.variety = variety
         self.name = name
@@ -42,8 +45,9 @@ class Wine: Equatable {
         self.createdAt = Date()
     }
     
-    init(type: WineType, name: String, rating: Double) {
+    init(userId: UserId, type: WineType, name: String, rating: Double) {
         self.id = UUID()
+        self.userId = userId
         self.type = type
         self.name = name
         self.rating = rating

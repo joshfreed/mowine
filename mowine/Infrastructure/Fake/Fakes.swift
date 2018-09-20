@@ -55,17 +55,17 @@ var red = WineType(name: "Red", varieties: [merlot])
 var bubbly = WineType(name: "Bubbly", varieties: [prosecco])
 var winesDB: [UserId: [Wine]] = [
     josh.id: [
-        Wine(type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5),
-        Wine(type: red, variety: merlot, name: "Wine 1", rating: 1),
-        Wine(type: red, variety: merlot, name: "Wine 2", rating: 5)
+        Wine(userId: josh.id, type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5),
+        Wine(userId: josh.id, type: red, variety: merlot, name: "Wine 1", rating: 1),
+        Wine(userId: josh.id, type: red, variety: merlot, name: "Wine 2", rating: 5)
     ],
     maureen.id: [
-        Wine(type: red, variety: merlot, name: "Wine 1", rating: 1),
-        Wine(type: red, variety: merlot, name: "Wine 2", rating: 5),
-        Wine(type: red, variety: merlot, name: "Wine 3", rating: 3),
-        Wine(type: red, variety: merlot, name: "Wine 4", rating: 4),
-        Wine(type: red, variety: merlot, name: "Wine 5", rating: 5),
-        Wine(type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5)
+        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 1", rating: 1),
+        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 2", rating: 5),
+        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 3", rating: 3),
+        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 4", rating: 4),
+        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 5", rating: 5),
+        Wine(userId: maureen.id, type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5)
     ]
 ]
 
@@ -223,6 +223,7 @@ class FakeUserRepository: UserRepository {
     }
 }
 
+/*
 class FakeRemoteWineDataStore: RemoteWineDataStore {
     init() {
         winesDB[maureen.id]?[1].location = "This is a long string that is a long string that should wrap around and go to the next liiiiiiine?"
@@ -241,3 +242,4 @@ class FakeRemoteWineDataStore: RemoteWineDataStore {
         completion(.success(wines))
     }
 }
+*/

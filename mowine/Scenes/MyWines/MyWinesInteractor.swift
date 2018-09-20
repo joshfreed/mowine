@@ -69,7 +69,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             case .success(let wines):
                 self.wines = wines
                 self.presentWines()
-                self.loadWineThumbnails(wines: wines)
+//                self.loadWineThumbnails(wines: wines)
             case .failure(let error): print("\(error)")
             }
         }

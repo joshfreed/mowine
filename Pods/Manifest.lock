@@ -34,7 +34,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.31.1):
     - FBSDKCoreKit
-  - Nimble (7.0.3)
+  - Nimble (7.3.0)
   - PureLayout (3.0.2)
 
 DEPENDENCIES:
@@ -49,25 +49,45 @@ DEPENDENCIES:
   - Nimble
   - PureLayout
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AWSAuthCore
+    - AWSAuthUI
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSDynamoDB
+    - AWSFacebookSignIn
+    - AWSMobileClient
+    - AWSS3
+    - AWSUserPoolsSignIn
+    - Bolts
+    - Cosmos
+    - Eureka
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - Nimble
+    - PureLayout
+
 SPEC CHECKSUMS:
-  AWSAuthCore: 821990b7fc2febe5ed5eb42199ea55ee22ac911d
-  AWSAuthUI: 8c11af8f87939479cd0d94bd840e030eb599db3a
-  AWSCognitoIdentityProvider: c532434167c99ec42126447a83c6a2f2ea18f678
-  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
-  AWSCore: 5da797bc476188fdaf00dec134fa18d84708eca9
-  AWSDynamoDB: 36abff7ce93fcadad2c4dc6f729d8716c933adf2
-  AWSFacebookSignIn: 13e136b70e1cba49867ab78dc847f4e113d6950b
-  AWSMobileClient: bf1c341c91f82eda8f757cd96dc0cbb3d1f0b768
-  AWSS3: 7c178c82c2e648559b7075a663335055327dd4f5
-  AWSUserPoolsSignIn: 6d5a7dedeac2e3f2a84d7c838a5df85aa386f1c7
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  Cosmos: 4a9f57998a08788a1062c7b8eefbc62d2b590f39
-  Eureka: b88fb930e42c79f8c03c373d0fcdc28c1d6c50ed
-  FBSDKCoreKit: e08ccfcefa7bc1347a07c276dac9bf6c7fe57024
-  FBSDKLoginKit: 99797ac39252fef6f72600b886f6ee60b4b29cab
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
-  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  AWSAuthCore: 970e411f7fbb004e17cf827cd390eeaa96c35346
+  AWSAuthUI: d2d9d5de0ab4e86e63e63395fd23287452471661
+  AWSCognitoIdentityProvider: 205143a983c2e0ec98bd39aea81c4b6ac57a4b40
+  AWSCognitoIdentityProviderASF: 5d31eef1c1962b4ad58e87ceee376b83b697bf9b
+  AWSCore: 13dfa245ea3bf06f24bf385433ab144378774114
+  AWSDynamoDB: 04d4f1f75cbd98723e6cf8a4fa817ab050a851a3
+  AWSFacebookSignIn: 16f3ced29902c3486088ec988227109fddc9f596
+  AWSMobileClient: a2e342a1c587dba6cfe577af3f8d23e01ce6fc0e
+  AWSS3: 6f776385def9630ab00244e74ce968f150a37426
+  AWSUserPoolsSignIn: 1e8fda35318cc13833c26b461c21dfae540e6f93
+  Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
+  Cosmos: 1976d8535e9f8fbb6b24716635d73935f520b95c
+  Eureka: be640fcc48417c50bea4bf0bd6c9311ac33cd35e
+  FBSDKCoreKit: 3e000ec48de40eff715e13aeab0bde0069f9f74a
+  FBSDKLoginKit: 3c9384f7ed17adedc33694d7161463525db2ab08
+  Nimble: 97dd13c7b4aad2703ccb2c333abf1bcab46690d8
+  PureLayout: 5166b2d7444bed3556296dd6842aceb6f3c328cc
 
 PODFILE CHECKSUM: b3690d5901d46c61fc58ad1ad751e7685404f5e1
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

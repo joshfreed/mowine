@@ -32,19 +32,21 @@ class WineBuilder {
             name = "Wine\(num)"
         }
         
+        var userId = UserId(string: UUID().uuidString)
+        
         var wine: Wine
         
         if let id = id {
-            wine = Wine(id: id, type: type, name: name!, rating: rating)
+            wine = Wine(id: id, userId: userId, type: type, name: name!, rating: rating)
         } else {
-            wine = Wine(type: type, name: name!, rating: rating)
+            wine = Wine(userId: userId, type: type, name: name!, rating: rating)
         }
         
         wine.variety = variety
         wine.location = location
         wine.notes = notes
         wine.price = price
-        wine.photo = photo
+//        wine.photo = photo
         wine.thumbnail = thumbnail
         wine.pairings = pairings
         

@@ -17,6 +17,10 @@ class AWSWineRepository: WineRepository {
     init(dynamoDbObjectMapper: AWSDynamoDBObjectMapper) {
         self.dynamoDbObjectMapper = dynamoDbObjectMapper
     }
+    
+    func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+        
+    }
 
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         let awsWine = wine.toAWSWine()
@@ -140,10 +144,14 @@ extension Wine {
         guard let rating = awsWine._rating else {
             return nil
         }
+        guard let userIdStr = awsWine._userId else {
+            return nil
+        }
         
+        let userId = UserId(string: userIdStr)
         let wineType = WineType(name: typeName, varieties: [])
         
-        let wine = Wine(id: wineId, type: wineType, name: name, rating: rating.doubleValue)
+        let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: rating.doubleValue)
         
         if let varietyName = awsWine._variety {
             wine.variety = WineVariety(name: varietyName)

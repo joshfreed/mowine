@@ -13,15 +13,18 @@ class AddWineSummaryWorker {
     let wineRepository: WineRepository
     let imageWorker: WineImageWorker
     let imageRepository: WineImageRepository
+    let session: Session
     
     init(
         wineRepository: WineRepository,
         imageWorker: WineImageWorker,
-        imageRepository: WineImageRepository
+        imageRepository: WineImageRepository,
+        session: Session
     ) {
         self.wineRepository = wineRepository
         self.imageWorker = imageWorker
         self.imageRepository = imageRepository
+        self.session = session
     }
     
     func createWine(
@@ -29,11 +32,33 @@ class AddWineSummaryWorker {
         variety: WineVariety?,
         name: String,
         rating: Double,
+        photo: UIImage?,
         completion: @escaping (Result<Wine>) -> ()
     ) {
-        let wine = Wine(type: type, name: name, rating: rating)
+        guard let userId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        
+        let wine = Wine(userId: userId, type: type, name: name, rating: rating)
         wine.variety = variety
-        wineRepository.save(wine, completion: completion)
+        wine.thumbnail = self.createThumbnail(photo: photo)        
+        wineRepository.add(wine, completion: completion)
+    }
+    
+    private func createThumbnail(photo: UIImage?) -> Data? {
+        guard let image = photo else {
+            return nil
+        }
+        
+        guard
+            let thumbnailImage = imageWorker.resize(image: image, to: CGSize(width: 150, height: 150)),
+            let thumbnailData = imageWorker.toPNG(image: thumbnailImage)
+        else {
+                return nil
+        }
+        
+        return thumbnailData
     }
     
     func createImages(wineId: UUID, photo: UIImage?) -> Data? {

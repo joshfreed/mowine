@@ -9,43 +9,43 @@
 import Foundation
 import JFLib
 
-protocol LocalWineDataStore {
-    func getMyWines(completion: @escaping (Result<[Wine]>) -> ())
-    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ())
-    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) 
-}
+//protocol LocalWineDataStore {
+//    func getMyWines(completion: @escaping (Result<[Wine]>) -> ())
+//    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ())
+//    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ())
+//}
 
-protocol RemoteWineDataStore {
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ())
-}
+//protocol RemoteWineDataStore {
+//    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
+//    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ())
+//}
 
-class TheWineRepository: WineRepository {
-    let local: LocalWineDataStore
-    let remote: RemoteWineDataStore
-    
-    init(local: LocalWineDataStore, remote: RemoteWineDataStore) {
-        self.local = local
-        self.remote = remote
-    }
-    
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        local.getMyWines(completion: completion)
-    }
-    
-    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
-        local.save(wine, completion: completion)
-    }
-    
-    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        local.delete(wine, completion: completion)
-    }
-    
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        remote.getTopWines(userId: userId, completion: completion)
-    }
-    
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
-        remote.getWines(userId: userId, wineType: wineType, completion: completion)
-    }
-}
+//class TheWineRepository: WineRepository {
+//    let local: LocalWineDataStore
+//    let remote: RemoteWineDataStore
+//
+//    init(local: LocalWineDataStore, remote: RemoteWineDataStore) {
+//        self.local = local
+//        self.remote = remote
+//    }
+//
+//    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+//        local.getMyWines(completion: completion)
+//    }
+//
+//    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+//        local.save(wine, completion: completion)
+//    }
+//
+//    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
+//        local.delete(wine, completion: completion)
+//    }
+//
+//    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+//        remote.getTopWines(userId: userId, completion: completion)
+//    }
+//
+//    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+//        remote.getWines(userId: userId, wineType: wineType, completion: completion)
+//    }
+//}

@@ -29,7 +29,7 @@ class AddWineSummaryPresenter: AddWineSummaryPresentationLogic {
         }
         
         var photo: UIImage?
-        if let thumbnail = response.thumbnail {
+        if let thumbnail = response.wine?.thumbnail {
             photo = UIImage(data: thumbnail)
         }
         
