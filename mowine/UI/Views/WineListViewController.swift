@@ -25,8 +25,8 @@ class WineListViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: "WineCell", bundle: nil), forCellReuseIdentifier: "WineCell")
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = 104
+        tableView.estimatedRowHeight = 104
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     

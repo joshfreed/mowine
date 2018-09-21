@@ -23,6 +23,10 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     var router: (NSObjectProtocol & MyWinesRoutingLogic & MyWinesDataPassing)?
     weak var wineListViewController: WineListViewController?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -75,7 +79,7 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
     // MARK: View lifecycle
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         fetchMyWines()
     }
 

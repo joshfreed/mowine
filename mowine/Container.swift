@@ -28,8 +28,11 @@ class Container {
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
     lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
 //    lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
-    lazy var userRepository: UserRepository = CoreDataUserRepository(container: persistentContainer)
-    
+    lazy var userRepository: UserRepository = CoreDataUserRepository(container: persistentContainer, coreData: CoreDataService(context: persistentContainer.viewContext))
+    lazy var syncManager = SyncManager(
+        dynamoDb: DynamoDbService(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default()),
+        coreData: CoreDataService(context: Container.shared.persistentContainer.viewContext)
+    )
     
     // MARK: Core Data Stack
     

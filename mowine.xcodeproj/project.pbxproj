@@ -18,6 +18,8 @@
 		5306D5EE207BF1FC00E5EE20 /* AWSWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */; };
 		5306D5F0207BF8A300E5EE20 /* AWSWine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D5EF207BF8A300E5EE20 /* AWSWine.swift */; };
 		5306D5F6207C0A6300E5EE20 /* WineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D5F5207C0A6300E5EE20 /* WineModelTests.swift */; };
+		530BCA502154305E002F785C /* DynamoDbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA4F2154305E002F785C /* DynamoDbService.swift */; };
+		530BCA522154322E002F785C /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA512154322E002F785C /* CoreDataService.swift */; };
 		530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */; };
 		53112845205F02CB0094DC35 /* AddWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53112844205F02CB0094DC35 /* AddWineViewController.swift */; };
 		53112846205F04580094DC35 /* AddWine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53112843205F01CD0094DC35 /* AddWine.storyboard */; };
@@ -260,6 +262,8 @@
 		5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSWineRepository.swift; sourceTree = "<group>"; };
 		5306D5EF207BF8A300E5EE20 /* AWSWine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSWine.swift; sourceTree = "<group>"; };
 		5306D5F5207C0A6300E5EE20 /* WineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineModelTests.swift; sourceTree = "<group>"; };
+		530BCA4F2154305E002F785C /* DynamoDbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbService.swift; sourceTree = "<group>"; };
+		530BCA512154322E002F785C /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVarietyViewController.swift; sourceTree = "<group>"; };
 		53112843205F01CD0094DC35 /* AddWine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = AddWine.storyboard; path = /Users/joshfreed/Source/mowine/mowine/AddWine.storyboard; sourceTree = "<absolute>"; };
 		53112844205F02CB0094DC35 /* AddWineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewController.swift; sourceTree = "<group>"; };
@@ -668,6 +672,7 @@
 				5350B591203F56FE00C6B2D2 /* CoreDataWineTranslator.swift */,
 				53F100DE2040806F00B29FAF /* CoreDataVarietyTranslator.swift */,
 				534CC91C2152F79F004F4A6C /* CoreDataUserRepository.swift */,
+				530BCA512154322E002F785C /* CoreDataService.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1034,6 +1039,7 @@
 				53898640206AEB0700EBC67B /* AWSUser.swift */,
 				53F24875206D6A0A0046B031 /* AWSUserRepository.swift */,
 				5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */,
+				530BCA4F2154305E002F785C /* DynamoDbService.swift */,
 			);
 			path = DynamoDB;
 			sourceTree = "<group>";
@@ -1465,6 +1471,7 @@
 				535F66912062FEE20006B26A /* SignUpWorker.swift in Sources */,
 				532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */,
 				5327BC312062B362006787E9 /* WineDetailsWorker.swift in Sources */,
+				530BCA522154322E002F785C /* CoreDataService.swift in Sources */,
 				5306D5F0207BF8A300E5EE20 /* AWSWine.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
@@ -1543,6 +1550,7 @@
 				5327BC2520619D34006787E9 /* WineCellarListRouter.swift in Sources */,
 				5327BC322062B362006787E9 /* WineDetailsRouter.swift in Sources */,
 				53898641206AEB0700EBC67B /* AWSUser.swift in Sources */,
+				530BCA502154305E002F785C /* DynamoDbService.swift in Sources */,
 				533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */,
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,

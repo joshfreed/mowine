@@ -9,6 +9,10 @@
 import UIKit
 
 extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func hideNavigationBar() {
         navigationBar.isTranslucent = false
         navigationBar.shadowImage = UIImage()
@@ -17,5 +21,11 @@ extension UINavigationController {
     func showNavigationBar() {
         navigationBar.isTranslucent = true
         navigationBar.shadowImage = nil
+    }
+}
+
+class DefaultContentNavigationController: UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
 }

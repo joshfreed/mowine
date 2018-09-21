@@ -22,6 +22,10 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     var interactor: MyAccountBusinessLogic?
     var router: (NSObjectProtocol & MyAccountRoutingLogic & MyAccountDataPassing)?
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -70,12 +74,10 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
     }
 
     // MARK: Do something

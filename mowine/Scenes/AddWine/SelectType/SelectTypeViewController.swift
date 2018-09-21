@@ -71,13 +71,9 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
         navigationController?.hideNavigationBar()
         headerImage.fixTintIssue()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .default
     }
 
     // MARK: Select wine type

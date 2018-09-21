@@ -10,7 +10,7 @@ import Foundation
 import JFLib
 
 class MemoryWineTypeRepository: WineTypeRepository {
-    private lazy var types: [WineType] = {
+    private(set) lazy var types: [WineType] = {
         let red = WineType(name: "Red", varieties: [
             WineVariety(name: "Cabernet Sauvignon"),
             WineVariety(name: "Chianti"),
