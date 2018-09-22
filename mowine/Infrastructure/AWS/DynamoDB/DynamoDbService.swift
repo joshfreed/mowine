@@ -8,6 +8,7 @@
 
 import Foundation
 import AWSDynamoDB
+import AWSMobileClient
 import JFLib
 
 class DynamoDbService {
@@ -54,6 +55,36 @@ class DynamoDbService {
                     completion(.success([]))
                 }
             })
+        }
+    }
+    
+    func saveWine(_ wine: Wine, completion: ((EmptyResult) -> ())?) {
+        let awsWine = wine.toAWSWine()
+        awsWine._userId = AWSIdentityManager.default().identityId
+        
+        dynamoDbObjectMapper.save(awsWine) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    completion?(.failure(error))
+                } else {
+                    completion?(.success)
+                }
+            }
+        }
+    }
+    
+    func deleteWine(_ wine: Wine, completion: ((EmptyResult) -> ())?) {
+        let awsWine = wine.toAWSWine()
+        awsWine._userId = AWSIdentityManager.default().identityId
+        
+        dynamoDbObjectMapper.remove(awsWine) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    completion?(.failure(error))
+                } else {
+                    completion?(.success)
+                }
+            }
         }
     }
 }

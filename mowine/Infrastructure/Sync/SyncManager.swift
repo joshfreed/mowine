@@ -33,7 +33,7 @@ class SyncManager {
         // 1) sync remote with local
         // download "my wines"
         // any wines in the list NOT in core data should be added
-        // if remote updateDate is after local updateDate, update the local wine w/ the remote data
+        // if remote updateDate is after local updateDate AND the local is not modified, then update the local wine w/ the remote data
         // if a local wine exists that is NOT in the remote list, delete the local wine
         
         // 2) send local to remote
@@ -110,8 +110,9 @@ class SyncManager {
     func syncWines(completion: @escaping (EmptyResult) -> ()) {
         dynamoDb.scanWines { result in
             switch result {
-            case .success(let wines):
-                self.doSync(wines)
+            case .success(let remoteWines):
+                self.syncWinesRemoteToLocal(remoteWines)
+                self.syncWinesLocalToRemote()
                 completion(.success)
             case .failure(let error):
                 completion(.failure(error))
@@ -119,43 +120,63 @@ class SyncManager {
         }
     }
     
-    private func doSync(_ remoteWines: [Wine]) {
+    private func syncWinesRemoteToLocal(_ remoteWines: [Wine]) {
         for remoteWine in remoteWines {
-            if var localWine = coreData.findManagedWine(by: remoteWine.id) {
-                // already exists; deal with merging?!?!
+            if let localWine = coreData.findManagedWine(by: remoteWine.id) {
+                // This wine is already in the local db.
+                // If the local wine is not modified and the remote wine HAS been modified;
+                // then update the local wine
+                if localWine.syncStatus == SyncStatus.synced.rawValue && remoteWine.updatedAt > localWine.updatedAt! {
+                    print("Updating local wine from remote")
+                    map(wine: remoteWine, to: localWine)
+                    localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
+                }
             } else {
+                // Insert wine created from remote
+                print("Inserting new wine from remote")
                 let localWine = ManagedWine(context: coreData.context)
                 map(wine: remoteWine, to: localWine)
+                localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
+            }
+        }
+        
+        let localWines = coreData.getAllManagedWines()
+        
+        for localWine in localWines {
+            if localWine.syncStatus == SyncStatus.created.rawValue {
+                continue
+            }
+            
+            if !remoteWines.contains(where: { $0.id == localWine.wineId! }) {
+                print("Deleting wine from core data")
+                localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
+                coreData.context.delete(localWine)
             }
         }
         
         coreData.save()
     }
     
+    private func syncWinesLocalToRemote() {
+        let localWines = coreData.getAllManagedWines()
+        
+        // todo sync with dispatch groups?! update core data the end
+        
+        for localWine in localWines {
+            let syncStatus = SyncStatus(rawValue: Int(localWine.syncStatus))!
+            switch syncStatus {
+            case .synced: break
+            case .created: dynamoDb.saveWine(Wine.fromManagedWine(localWine)!, completion: nil)
+            case .deleted: dynamoDb.deleteWine(Wine.fromManagedWine(localWine)!, completion: nil)
+            case .modified: dynamoDb.saveWine(Wine.fromManagedWine(localWine)!, completion: nil)
+            }
+            localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
+        }
+        
+        coreData.save()
+    }
+    
     private func map(wine: Wine, to managedWine: ManagedWine) {
-        wine.map(to: managedWine)
-        
-        managedWine.user = coreData.findManagedUser(by: wine.userId)
-        if (managedWine.user == nil) {
-            fatalError("User \(wine.userId) not in db")
-        }
-        
-        managedWine.type = coreData.getManagedType(for: wine.type)
-        if (managedWine.type == nil) {
-            fatalError("Wine type \(wine.type.name) not in db")
-        }
-        
-        if let variety = wine.variety {
-            managedWine.variety = coreData.getManagedVariety(for: variety)
-        } else {
-            managedWine.variety = nil
-        }
-        
-        let pairings: [ManagedFood] = wine.pairings.map {
-            let mf = ManagedFood(context: coreData.context)
-            mf.name = $0
-            return mf
-        }
-        managedWine.pairings = NSSet(array: pairings)
+        wine.map(to: managedWine, coreData: coreData)
     }
 }

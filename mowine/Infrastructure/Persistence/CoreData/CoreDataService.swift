@@ -37,6 +37,17 @@ class CoreDataService {
         }
     }
     
+    func getAllManagedWines() -> [ManagedWine] {
+        let request: NSFetchRequest<ManagedWine> = ManagedWine.fetchRequest()
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
     func findManagedUser(by id: UserId) -> ManagedUser? {
         let request: NSFetchRequest<ManagedUser> = ManagedUser.fetchRequest()
         request.predicate = NSPredicate(format: "userId == %@", id.asString)

@@ -21,10 +21,7 @@ class Container {
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     //lazy var wineRepository = AWSContainer.shared.wineRepository
-    lazy var wineRepository = CoreDataWineRepository(
-        container: persistentContainer,
-        wineEntityMapper: CoreDataWineTranslator(context: persistentContainer.viewContext)
-    )
+    lazy var wineRepository = CoreDataWineRepository(container: persistentContainer)
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
     lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
 //    lazy var userRepository: UserRepository = AWSContainer.shared.userRepository

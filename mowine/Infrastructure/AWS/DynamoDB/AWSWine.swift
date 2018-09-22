@@ -21,6 +21,7 @@ class AWSWine: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _userId: String?
     var _wineId: String?
     var _createdAt: String?
+    var _updatedAt: String?
     var _location: String?
     var _name: String?
     var _notes: String?
@@ -29,6 +30,7 @@ class AWSWine: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _rating: NSNumber?
     var _type: String?
     var _variety: String?
+    var _thumbnail: Data?
     
     class func dynamoDBTableName() -> String {
         
@@ -50,6 +52,7 @@ class AWSWine: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_userId" : "userId",
             "_wineId" : "wineId",
             "_createdAt" : "createdAt",
+            "_updatedAt" : "updatedAt",
             "_location" : "location",
             "_name" : "name",
             "_notes" : "notes",
@@ -58,6 +61,7 @@ class AWSWine: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_rating" : "rating",
             "_type" : "type",
             "_variety" : "variety",
+            "_thumbnail" : "thumbnail"
         ]
     }
 }

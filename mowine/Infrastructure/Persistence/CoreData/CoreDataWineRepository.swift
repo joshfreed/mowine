@@ -12,19 +12,17 @@ import JFLib
 
 class CoreDataWineRepository: WineRepository {
     let container: NSPersistentContainer
-    let wineEntityMapper: CoreDataWineTranslator
     let coreDataService: CoreDataService
     
-    init(container: NSPersistentContainer, wineEntityMapper: CoreDataWineTranslator) {
+    init(container: NSPersistentContainer) {
         self.container = container
-        self.wineEntityMapper = wineEntityMapper
         self.coreDataService = CoreDataService(context: container.viewContext)
     }
     
     func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         let managedWine = ManagedWine(context: container.viewContext)
         
-        map(wine: wine, to: managedWine)
+        wine.map(to: managedWine, coreData: coreDataService)
         
         do {
             try container.viewContext.save()
@@ -40,7 +38,7 @@ class CoreDataWineRepository: WineRepository {
             return
         }
         
-        map(wine: wine, to: managedWine)
+        wine.map(to: managedWine, coreData: coreDataService)
         
         do {
             try container.viewContext.save()
@@ -67,7 +65,7 @@ class CoreDataWineRepository: WineRepository {
         
         do {
             let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { wineEntityMapper.map(from: $0) }
+            let wineModels = managedWines.compactMap { Wine.fromManagedWine($0) }
             completion(.success(wineModels))
         } catch {
             let nserror = error as NSError
@@ -81,7 +79,7 @@ class CoreDataWineRepository: WineRepository {
         
         do {
             let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { wineEntityMapper.map(from: $0) }
+            let wineModels = managedWines.compactMap { Wine.fromManagedWine($0) }
             completion(.success(wineModels))
         } catch {
             let nserror = error as NSError
@@ -91,65 +89,5 @@ class CoreDataWineRepository: WineRepository {
 
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         
-    }
-    
-    
-    
-    func getMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
-        let request: NSFetchRequest<ManagedWine> = ManagedWine.fetchRequest()
-        
-        do {
-            let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { wineEntityMapper.map(from: $0) }
-            completion(.success(wineModels))
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    
-    private func map(wine: Wine, to managedWine: ManagedWine) {
-        wine.map(to: managedWine)
-        
-        managedWine.user = coreDataService.findManagedUser(by: wine.userId)
-        if (managedWine.user == nil) {
-            fatalError("User \(wine.userId) not in db")
-        }
-        
-        managedWine.type = coreDataService.getManagedType(for: wine.type)
-        if (managedWine.type == nil) {
-            fatalError("Wine type \(wine.type.name) not in db")
-        }
-        
-        if let variety = wine.variety {
-            managedWine.variety = coreDataService.getManagedVariety(for: variety)
-        } else {
-            managedWine.variety = nil
-        }
-        
-        let pairings: [ManagedFood] = wine.pairings.map {
-            let mf = ManagedFood(context: container.viewContext)
-            mf.name = $0
-            return mf
-        }
-        managedWine.pairings = NSSet(array: pairings)
-    }
-}
-
-extension Wine {
-    func map(to managedWine: ManagedWine) {
-        managedWine.wineId = id
-        managedWine.name = name
-        managedWine.rating = rating
-        managedWine.location = location
-        managedWine.notes = notes
-        managedWine.thumbnail = thumbnail
-        managedWine.createdAt = createdAt
-        
-        if let price = price {
-            managedWine.price = NSDecimalNumber(string: price)
-        } else {
-            managedWine.price = nil
-        }
     }
 }

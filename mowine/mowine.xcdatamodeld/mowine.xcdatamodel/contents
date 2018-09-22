@@ -20,14 +20,15 @@
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" inverseName="varieties" inverseEntity="Type" syncable="YES"/>
     </entity>
     <entity name="Wine" representedClassName="ManagedWine" syncable="YES" codeGenerationType="class">
-        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Decimal" syncable="YES"/>
-        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="syncStatus" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="wineId" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="pairings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" syncable="YES"/>
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" syncable="YES"/>
@@ -35,10 +36,10 @@
         <relationship name="variety" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Variety" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Food" positionX="-171" positionY="-258" width="128" height="60"/>
-        <element name="Type" positionX="61" positionY="-36" width="128" height="75"/>
-        <element name="User" positionX="-117" positionY="-108" width="128" height="135"/>
-        <element name="Variety" positionX="-2" positionY="132" width="128" height="75"/>
-        <element name="Wine" positionX="-297" positionY="-99" width="128" height="240"/>
+        <element name="Food" positionX="-258.828125" positionY="-276.9765625" width="128" height="60"/>
+        <element name="Type" positionX="-102.42578125" positionY="50.5390625" width="128" height="75"/>
+        <element name="User" positionX="-113.71875" positionY="-179.875" width="128" height="135"/>
+        <element name="Variety" positionX="-105.45703125" positionY="215.00390625" width="128" height="75"/>
+        <element name="Wine" positionX="-383.36328125" positionY="-101.33984375" width="128" height="255"/>
     </elements>
 </model>

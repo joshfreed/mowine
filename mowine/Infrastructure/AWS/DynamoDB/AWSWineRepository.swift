@@ -25,7 +25,7 @@ class AWSWineRepository: WineRepository {
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         let awsWine = wine.toAWSWine()
         awsWine._userId = AWSIdentityManager.default().identityId
-        
+
         dynamoDbObjectMapper.save(awsWine) { error in
             DispatchQueue.main.async {
                 if let error = error {
@@ -105,67 +105,5 @@ class AWSWineRepository: WineRepository {
                 }
             }
         }
-    }
-}
-
-extension Wine {
-    func toAWSWine() -> AWSWine {
-        let awsWine: AWSWine = AWSWine()
-        awsWine._wineId = id.uuidString
-        awsWine._name = name
-        awsWine._rating = NSNumber(value: rating)
-        awsWine._type = type.name
-        awsWine._variety = variety?.name
-        awsWine._location = location
-        awsWine._notes = notes
-        awsWine._price = price
-        
-        if pairings.count > 0 {
-            awsWine._pairings = Set(pairings)
-        }
-        
-        if let createdAt = createdAt {
-            awsWine._createdAt = ISO8601DateFormatter().string(from: createdAt)
-        }
-        
-        return awsWine
-    }
-    
-    static func fromAWSWine(_ awsWine: AWSWine) -> Wine? {
-        guard let wineIdStr = awsWine._wineId, let wineId = UUID(uuidString: wineIdStr) else {
-            return nil
-        }
-        guard let name = awsWine._name else {
-            return nil
-        }
-        guard let typeName = awsWine._type else {
-            return nil
-        }
-        guard let rating = awsWine._rating else {
-            return nil
-        }
-        guard let userIdStr = awsWine._userId else {
-            return nil
-        }
-        
-        let userId = UserId(string: userIdStr)
-        let wineType = WineType(name: typeName, varieties: [])
-        
-        let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: rating.doubleValue)
-        
-        if let varietyName = awsWine._variety {
-            wine.variety = WineVariety(name: varietyName)
-        }
-
-        wine.location = awsWine._location
-        wine.notes = awsWine._notes
-        wine.price = awsWine._price
-        wine.pairings = Array(awsWine._pairings ?? [])
-        
-        if let createdAt = awsWine._createdAt {
-            wine.createdAt = ISO8601DateFormatter().date(from: createdAt)
-        }
-        
-        return wine
     }
 }
