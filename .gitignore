@@ -1,2 +1,4 @@
 xcuserdata/
 .idea/
+Secrets.plist
+awsconfiguration.json

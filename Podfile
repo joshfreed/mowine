@@ -8,6 +8,7 @@ target 'mowine' do
   pod 'Eureka'
   pod 'Cosmos'
   pod 'PureLayout'
+  pod 'SwiftyBeaver'
   
   # Auth dependencies
   pod 'AWSMobileClient', '~> 2.6.5'

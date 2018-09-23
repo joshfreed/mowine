@@ -21,6 +21,7 @@
 		530BCA502154305E002F785C /* DynamoDbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA4F2154305E002F785C /* DynamoDbService.swift */; };
 		530BCA522154322E002F785C /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA512154322E002F785C /* CoreDataService.swift */; };
 		530BCA542155823C002F785C /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA532155823C002F785C /* Syncable.swift */; };
+		530BCA572157EB6B002F785C /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530BCA562157EB6B002F785C /* Secrets.plist */; };
 		530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */; };
 		53112845205F02CB0094DC35 /* AddWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53112844205F02CB0094DC35 /* AddWineViewController.swift */; };
 		53112846205F04580094DC35 /* AddWine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53112843205F01CD0094DC35 /* AddWine.storyboard */; };
@@ -265,6 +266,7 @@
 		530BCA4F2154305E002F785C /* DynamoDbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbService.swift; sourceTree = "<group>"; };
 		530BCA512154322E002F785C /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		530BCA532155823C002F785C /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
+		530BCA562157EB6B002F785C /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		530F458E1F7BF80300DB3B13 /* SelectVarietyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVarietyViewController.swift; sourceTree = "<group>"; };
 		53112843205F01CD0094DC35 /* AddWine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = AddWine.storyboard; path = /Users/joshfreed/Source/mowine/mowine/AddWine.storyboard; sourceTree = "<absolute>"; };
 		53112844205F02CB0094DC35 /* AddWineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewController.swift; sourceTree = "<group>"; };
@@ -1084,6 +1086,7 @@
 				53F5AC021E2176080067AB62 /* Info.plist */,
 				53E2C159207D5C79006FFBC1 /* awsconfiguration.json */,
 				53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */,
+				530BCA562157EB6B002F785C /* Secrets.plist */,
 			);
 			path = mowine;
 			sourceTree = "<group>";
@@ -1297,6 +1300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53D1E2F62059B3AB00A22476 /* WineCell.xib in Resources */,
+				530BCA572157EB6B002F785C /* Secrets.plist in Resources */,
 				53D8EDD41E4186A300696FAE /* Podfile in Resources */,
 				538F29431F72EB1F006EEDB1 /* RatingCell.xib in Resources */,
 				5327BC392062BB41006787E9 /* WineDetailsHeader.xib in Resources */,
@@ -1351,6 +1355,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1370,6 +1375,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

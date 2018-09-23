@@ -9,6 +9,7 @@
 import Foundation
 import AWSDynamoDB
 import JFLib
+import SwiftyBeaver
 
 class SyncManager {
     let dynamoDb: DynamoDbService
@@ -41,6 +42,8 @@ class SyncManager {
         // look for any items with "deleted" status
         // send updates to remote. Local wines w/ updatedAt > remote date, send. Or sync status = modified?
         
+        SwiftyBeaver.info("Starting sync")
+        
         syncTypes()
         
         syncUsers() { result in
@@ -59,6 +62,8 @@ class SyncManager {
     }
     
     func syncTypes() {
+        SwiftyBeaver.info("Starting wine types")
+        
         let wineTypeRepository = MemoryWineTypeRepository()
         for remoteType in wineTypeRepository.types {
             if coreData.getManagedType(for: remoteType) == nil {
@@ -80,6 +85,8 @@ class SyncManager {
     }
     
     func syncUsers(completion: @escaping (EmptyResult) -> ()) {
+        SwiftyBeaver.info("Starting users")
+        
         dynamoDb.scanUsers { result in
             switch result {
             case .success(let users):
@@ -108,6 +115,8 @@ class SyncManager {
     }
     
     func syncWines(completion: @escaping (EmptyResult) -> ()) {
+        SwiftyBeaver.info("Starting wines")
+        
         dynamoDb.scanWines { result in
             switch result {
             case .success(let remoteWines):
@@ -127,13 +136,13 @@ class SyncManager {
                 // If the local wine is not modified and the remote wine HAS been modified;
                 // then update the local wine
                 if localWine.syncStatus == SyncStatus.synced.rawValue && remoteWine.updatedAt > localWine.updatedAt! {
-                    print("Updating local wine from remote")
+                    SwiftyBeaver.debug("Updating local wine from remote", context: ["wineId": remoteWine.id.uuidString])
                     map(wine: remoteWine, to: localWine)
                     localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
                 }
             } else {
                 // Insert wine created from remote
-                print("Inserting new wine from remote")
+                SwiftyBeaver.debug("Inserting new wine from remote")
                 let localWine = ManagedWine(context: coreData.context)
                 map(wine: remoteWine, to: localWine)
                 localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
@@ -148,7 +157,7 @@ class SyncManager {
             }
             
             if !remoteWines.contains(where: { $0.id == localWine.wineId! }) {
-                print("Deleting wine from core data")
+                SwiftyBeaver.debug("Deleting wine from core data not found in remote")
                 localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
                 coreData.context.delete(localWine)
             }
@@ -166,9 +175,15 @@ class SyncManager {
             let syncStatus = SyncStatus(rawValue: Int(localWine.syncStatus))!
             switch syncStatus {
             case .synced: break
-            case .created: dynamoDb.saveWine(Wine.fromManagedWine(localWine)!, completion: nil)
-            case .deleted: dynamoDb.deleteWine(Wine.fromManagedWine(localWine)!, completion: nil)
-            case .modified: dynamoDb.saveWine(Wine.fromManagedWine(localWine)!, completion: nil)
+            case .created:
+                SwiftyBeaver.debug("Sending new wine to AWS")
+                dynamoDb.saveWine(Wine.fromManagedWine(localWine)!, completion: nil)
+            case .deleted:
+                SwiftyBeaver.debug("Removing locally deleted wine from AWS")
+                dynamoDb.deleteWine(Wine.fromManagedWine(localWine)!, completion: nil)
+            case .modified:
+                SwiftyBeaver.debug("Sending modified wine to AWS")
+                dynamoDb.saveWine(Wine.fromManagedWine(localWine)!, completion: nil)
             }
             localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
         }

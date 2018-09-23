@@ -78,3 +78,25 @@ class AWSContainer {
         session: Container.shared.session
     )
 }
+
+// MARK: Secrets
+
+class Secrets {
+    
+    struct SwiftyBeaver {
+        static var appId: String { return Secrets.valueFor(key: "SwiftyBeaver.appId") }
+        static var appSecret: String { return Secrets.valueFor(key: "SwiftyBeaver.appSecret") }
+        static var encryptionKey: String { return Secrets.valueFor(key: "SwiftyBeaver.encryptionKey") }
+    }
+
+    static func valueFor(key: String) -> String {
+        let filePath = Bundle.main.path(forResource: "Secrets", ofType: "plist")
+        let plist = NSDictionary(contentsOfFile: filePath!)
+        
+        guard let value = plist?.object(forKey: key) as? String else {
+            fatalError("Couldn't find secret for key '\(key)'")
+        }
+        
+        return value
+    }
+}

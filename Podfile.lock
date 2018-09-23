@@ -36,6 +36,7 @@ PODS:
     - FBSDKCoreKit
   - Nimble (7.3.0)
   - PureLayout (3.0.2)
+  - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
   - AWSAuthUI (~> 2.6.5)
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - Eureka
   - Nimble
   - PureLayout
+  - SwiftyBeaver
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -68,6 +70,7 @@ SPEC REPOS:
     - FBSDKLoginKit
     - Nimble
     - PureLayout
+    - SwiftyBeaver
 
 SPEC CHECKSUMS:
   AWSAuthCore: 970e411f7fbb004e17cf827cd390eeaa96c35346
@@ -87,7 +90,8 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 3c9384f7ed17adedc33694d7161463525db2ab08
   Nimble: 97dd13c7b4aad2703ccb2c333abf1bcab46690d8
   PureLayout: 5166b2d7444bed3556296dd6842aceb6f3c328cc
+  SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: b3690d5901d46c61fc58ad1ad751e7685404f5e1
+PODFILE CHECKSUM: f9a79c5e60ebf2354ab508fb696e460976dfbea9
 
 COCOAPODS: 1.5.3

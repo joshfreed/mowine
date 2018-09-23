@@ -14,6 +14,7 @@ import AWSMobileClient
 import AWSAuthCore
 import AWSUserPoolsSignIn
 import AWSFacebookSignIn
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,8 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = UIColor.mwButtonSecondary
 
+        setupSwiftyBeaverLogging()
+        
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
-        AWSDDLog.sharedInstance.logLevel = .verbose
+        AWSDDLog.sharedInstance.logLevel = .info
         AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
 
         _ = AWSContainer.shared.emailAuthService.pool
@@ -40,6 +43,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    private func setupSwiftyBeaverLogging() {
+        let console = ConsoleDestination()
+        console.minLevel = .warning
+        SwiftyBeaver.addDestination(console)
+        
+        let platform = SBPlatformDestination(appID: Secrets.SwiftyBeaver.appId,
+                                             appSecret: Secrets.SwiftyBeaver.appSecret,
+                                             encryptionKey: Secrets.SwiftyBeaver.encryptionKey)
+        
+        SwiftyBeaver.addDestination(platform)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
