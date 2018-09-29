@@ -18,3 +18,7 @@ protocol UserRepository {
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ())
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ())
 }
+
+enum UserRepositoryError: Error {
+    case userNotFound
+}

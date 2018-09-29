@@ -91,39 +91,61 @@ class CoreDataUserRepository: UserRepository {
     }
     
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
-        completion(.success([]))
+        guard let user = coreData.findManagedUser(by: userId) else {
+            completion(.success([]))
+            return
+        }
+        
+        if let friendsSet = user.friends, let friendsArray = Array(friendsSet) as? [ManagedUser] {
+            let friends = friendsArray.compactMap { User.fromCoreData($0) }
+            completion(.success(friends))
+        } else {
+            completion(.success([]))
+        }
     }
 
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
+        guard let user = coreData.findManagedUser(by: owningUserId) else {
+            completion(.failure(UserRepositoryError.userNotFound))
+            return
+        }
+        guard let friend = coreData.findManagedUser(by: friendId) else {
+            completion(.failure(UserRepositoryError.userNotFound))
+            return
+        }
         
+        user.addToFriends(friend)
+        coreData.save()
+        completion(.success(User.fromCoreData(friend)!))
     }
     
     func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+        guard let user = coreData.findManagedUser(by: owningUserId) else {
+            completion(.failure(UserRepositoryError.userNotFound))
+            return
+        }
+        guard let friend = coreData.findManagedUser(by: friendId) else {
+            completion(.failure(UserRepositoryError.userNotFound))
+            return
+        }
         
+        user.removeFromFriends(friend)
+        coreData.save()
+        completion(.success)
     }
     
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
-        completion(.success(false))
-    }
-}
-
-extension User {
-    func toManagedUser(_ managedUser: ManagedUser) {
-        managedUser.userId = id.asString
-        managedUser.emailAddress = emailAddress
-        managedUser.firstName = firstName
-        managedUser.lastName = lastName
-    }
-    
-    static func fromCoreData(_ managedUser: ManagedUser) -> User? {
-        guard let userIdStr = managedUser.userId else {
-            return nil
+        guard let user = coreData.findManagedUser(by: userId) else {
+            completion(.success(false))
+            return
+        }
+        guard let otherUser = coreData.findManagedUser(by: otherUserId) else {
+            completion(.success(false))
+            return
         }
         
-        let userId = UserId(string: userIdStr)
-        var user = User(id: userId, emailAddress: managedUser.emailAddress ?? "")
-        user.firstName = managedUser.firstName
-        user.lastName = managedUser.lastName
-        return user
+        let isFriendOf = user.friends?.contains(otherUser) ?? false
+        
+        completion(.success(isFriendOf))
     }
 }

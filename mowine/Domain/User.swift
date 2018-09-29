@@ -14,6 +14,7 @@ struct User: Equatable {
     var firstName: String?
     var lastName: String?
     var profilePicture: UIImage?
+    private(set) var friends: [User] = []
     
     var fullName: String {
         let firstName = self.firstName ?? ""
@@ -39,6 +40,20 @@ struct User: Equatable {
 
     static func ==(lhs: User, rhs: User) -> Bool {
         return lhs.id == rhs.id && lhs.emailAddress == rhs.emailAddress
+    }
+    
+    mutating func addFriend(user: User) {
+        if friends.contains(user) {
+            return
+        }
+        
+        friends.append(user)
+    }
+    
+    mutating func removeFriend(user: User) {
+        if let index = friends.index(of: user) {
+            friends.remove(at: index)
+        }
     }
 }
 
@@ -67,5 +82,26 @@ struct UserId: Hashable, CustomStringConvertible {
     
     static func ==(lhs: UserId, rhs: UserId) -> Bool {
         return lhs.identityId == rhs.identityId
+    }
+}
+
+extension User {
+    func toManagedUser(_ managedUser: ManagedUser) {
+        managedUser.userId = id.asString
+        managedUser.emailAddress = emailAddress
+        managedUser.firstName = firstName
+        managedUser.lastName = lastName
+    }
+    
+    static func fromCoreData(_ managedUser: ManagedUser) -> User? {
+        guard let userIdStr = managedUser.userId else {
+            return nil
+        }
+        
+        let userId = UserId(string: userIdStr)
+        var user = User(id: userId, emailAddress: managedUser.emailAddress ?? "")
+        user.firstName = managedUser.firstName
+        user.lastName = managedUser.lastName
+        return user
     }
 }
