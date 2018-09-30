@@ -22,6 +22,7 @@ class AWSUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _email: String?
     var _firstName: String?
     var _lastName: String?
+    var _updatedAt: String?
     
     class func dynamoDBTableName() -> String {
 
@@ -39,6 +40,7 @@ class AWSUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_email" : "email",
                "_firstName" : "firstName",
                "_lastName" : "lastName",
+               "_updatedAt" : "updatedAt",
         ]
     }
 }

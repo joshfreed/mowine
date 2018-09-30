@@ -30,6 +30,8 @@ class Container {
         dynamoDb: DynamoDbService(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default()),
         coreData: CoreDataService(context: Container.shared.persistentContainer.viewContext)
     )
+    lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
+    lazy var coreDataWorker = CoreDataWorker(container: Container.shared.persistentContainer)
     
     // MARK: Core Data Stack
     

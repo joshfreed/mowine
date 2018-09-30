@@ -213,6 +213,11 @@
 		53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
 		53F5AC171E2176090067AB62 /* mowineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* mowineUITests.swift */; };
+		53FBE79A216125BB00C461FA /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE799216125BB00C461FA /* CoreDataWorker.swift */; };
+		53FBE79C2161261400C461FA /* DynamoDbWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79B2161261400C461FA /* DynamoDbWorker.swift */; };
+		53FBE79E2161267500C461FA /* CoreDataLocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */; };
+		53FBE7A02161269900C461FA /* DynamoDbRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */; };
+		53FBE7A221612B5F00C461FA /* SyncManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE7A121612B5F00C461FA /* SyncManager2.swift */; };
 		53FFD6482051BE6700AC60EE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFD6472051BE6700AC60EE /* Errors.swift */; };
 		D688361F4F3960234B3AB1F2 /* Pods_mowineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AA4083D86ECE106D39E0C96 /* Pods_mowineUITests.framework */; };
 /* End PBXBuildFile section */
@@ -463,6 +468,11 @@
 		53F5AC121E2176090067AB62 /* mowineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5AC161E2176090067AB62 /* mowineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mowineUITests.swift; sourceTree = "<group>"; };
 		53F5AC181E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53FBE799216125BB00C461FA /* CoreDataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
+		53FBE79B2161261400C461FA /* DynamoDbWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbWorker.swift; sourceTree = "<group>"; };
+		53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataLocalDataStore.swift; sourceTree = "<group>"; };
+		53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbRemoteDataStore.swift; sourceTree = "<group>"; };
+		53FBE7A121612B5F00C461FA /* SyncManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager2.swift; sourceTree = "<group>"; };
 		53FFD6472051BE6700AC60EE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		577E96813DDB79F8BF82D16A /* Pods-mowineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A3B9961338407689BF547C8 /* Pods-mowine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.release.xcconfig"; sourceTree = "<group>"; };
@@ -710,6 +720,7 @@
 		5348960F203DE4A300B7547A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				53FBE798216125A900C461FA /* CoreData */,
 				53A3D57E2145C4CE008A476D /* Sync */,
 				53F24865206D3F5E0046B031 /* Facebook */,
 				534728C62064304900DC7966 /* AWS */,
@@ -886,6 +897,9 @@
 			isa = PBXGroup;
 			children = (
 				53A3D57F2145C4F4008A476D /* SyncManager.swift */,
+				53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */,
+				53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */,
+				53FBE7A121612B5F00C461FA /* SyncManager2.swift */,
 			);
 			path = Sync;
 			sourceTree = "<group>";
@@ -1042,6 +1056,7 @@
 				53F24875206D6A0A0046B031 /* AWSUserRepository.swift */,
 				5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */,
 				530BCA4F2154305E002F785C /* DynamoDbService.swift */,
+				53FBE79B2161261400C461FA /* DynamoDbWorker.swift */,
 			);
 			path = DynamoDB;
 			sourceTree = "<group>";
@@ -1154,6 +1169,14 @@
 				53112844205F02CB0094DC35 /* AddWineViewController.swift */,
 			);
 			path = AddWine;
+			sourceTree = "<group>";
+		};
+		53FBE798216125A900C461FA /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				53FBE799216125BB00C461FA /* CoreDataWorker.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		5711E5250293345D67A101EC /* Pods */ = {
@@ -1480,6 +1503,7 @@
 				5306D5F0207BF8A300E5EE20 /* AWSWine.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
+				53FBE7A02161269900C461FA /* DynamoDbRemoteDataStore.swift in Sources */,
 				53ED1F85204F2D5C00C129BC /* FriendsWorker.swift in Sources */,
 				53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */,
 				53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */,
@@ -1542,6 +1566,7 @@
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				53D1E2FE2059B68800A22476 /* TopWinesWorker.swift in Sources */,
 				5339809620682A76004C080B /* AWSFacebookAuthentication.swift in Sources */,
+				53FBE79E2161267500C461FA /* CoreDataLocalDataStore.swift in Sources */,
 				534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				5327BC2820619D34006787E9 /* WineCellarListInteractor.swift in Sources */,
@@ -1560,6 +1585,8 @@
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,
 				530BCA542155823C002F785C /* Syncable.swift in Sources */,
+				53FBE7A221612B5F00C461FA /* SyncManager2.swift in Sources */,
+				53FBE79C2161261400C461FA /* DynamoDbWorker.swift in Sources */,
 				5300651C206C21BB008B9104 /* AWSResult.swift in Sources */,
 				5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */,
 				5327BC192061855B006787E9 /* ButtonOutline.swift in Sources */,
@@ -1607,6 +1634,7 @@
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
 				53D1E3042059BD0B00A22476 /* TheWineRepository.swift in Sources */,
 				5327BC2420619D34006787E9 /* WineCellarListWorker.swift in Sources */,
+				53FBE79A216125BB00C461FA /* CoreDataWorker.swift in Sources */,
 				534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
 				53A8D5FA204611A1000AD7A3 /* MyAccountViewController.swift in Sources */,

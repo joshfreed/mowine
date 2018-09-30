@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import AWSDynamoDB
 import JFLib
 import SwiftyBeaver
 
@@ -46,13 +45,24 @@ class SyncManager {
         
         syncTypes()
         
-        syncUsers() { result in
+//        syncUsers() { result in
+//            switch result {
+//            case .success: print("Synced users")
+//            case .failure(let error): print("Error syncing users: \(error)")
+//            }
+//        }
+
+        let remoteUserStore = DynamoDbRemoteDataStore<User>(dynamoDbWorker: Container.shared.dynamoDbWorker)
+        let localUserStore = CoreDataLocalDataStore<User>(coreDataWorker: Container.shared.coreDataWorker)
+        let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
+        
+        userSyncer.syncObjects { result in
             switch result {
-            case .success: print("Synced users")
-            case .failure(let error): print("Error syncing users: \(error)")
+            case .success: SwiftyBeaver.info("Users synced successfully.")
+            case .failure(let error): SwiftyBeaver.error("Error syncing users. Error: \(error)")
             }
         }
-        
+
         syncWines() { result in
             switch result {
             case .success: print("Synced wines")
@@ -137,14 +147,14 @@ class SyncManager {
                 // then update the local wine
                 if localWine.syncStatus == SyncStatus.synced.rawValue && remoteWine.updatedAt > localWine.updatedAt! {
                     SwiftyBeaver.debug("Updating local wine from remote", context: ["wineId": remoteWine.id.uuidString])
-                    map(wine: remoteWine, to: localWine)
+                    remoteWine.map(to: localWine, coreData: coreData)
                     localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
                 }
             } else {
                 // Insert wine created from remote
                 SwiftyBeaver.debug("Inserting new wine from remote")
                 let localWine = ManagedWine(context: coreData.context)
-                map(wine: remoteWine, to: localWine)
+                remoteWine.map(to: localWine, coreData: coreData)
                 localWine.syncStatus = Int16(SyncStatus.synced.rawValue)
             }
         }
@@ -189,9 +199,5 @@ class SyncManager {
         }
         
         coreData.save()
-    }
-    
-    private func map(wine: Wine, to managedWine: ManagedWine) {
-        wine.map(to: managedWine, coreData: coreData)
     }
 }
