@@ -11,6 +11,7 @@ import JFLib
 import AWSDynamoDB
 import AWSMobileClient
 
+/*
 class AWSWineRepository: WineRepository {
     let dynamoDbObjectMapper: AWSDynamoDBObjectMapper
     
@@ -107,3 +108,4 @@ class AWSWineRepository: WineRepository {
         }
     }
 }
+*/

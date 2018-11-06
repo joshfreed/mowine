@@ -12,51 +12,72 @@ import JFLib
 
 class CoreDataWineRepository: WineRepository {
     let container: NSPersistentContainer
-    let coreDataService: CoreDataService
+    let coreDataWorker: CoreDataWorkerProtocol
     
-    init(container: NSPersistentContainer) {
+    init(container: NSPersistentContainer, coreDataWorker: CoreDataWorkerProtocol) {
         self.container = container
-        self.coreDataService = CoreDataService(context: container.viewContext)
+        self.coreDataWorker = coreDataWorker
+//        self.coreDataService = CoreDataService(context: container.viewContext)
     }
     
     func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
-        let managedWine = ManagedWine(context: container.viewContext)
-        
-        wine.map(to: managedWine, coreData: coreDataService)
-        
         do {
-            try container.viewContext.save()
+            try coreDataWorker.insert(wine, in: container.viewContext)
             completion(.success(wine))
         } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(error))
         }
+//        _ = wine.toManagedObject(in: container.viewContext)
+//
+//        do {
+//            try container.viewContext.save()
+//            completion(.success(wine))
+//        } catch {
+//            let nserror = error as NSError
+//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//        }
     }
     
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
-        guard let managedWine = coreDataService.findManagedWine(by: wine.id) else {
-            return
-        }
-        
-        wine.map(to: managedWine, coreData: coreDataService)
-        
         do {
-            try container.viewContext.save()
+            try coreDataWorker.update(wine, in: container.viewContext)
             completion(.success(wine))
         } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(error))
         }
+        
+//        guard let managedWine = coreDataService.findManagedWine(by: wine.id) else {
+//            return
+//        }
+//
+//        wine.mapToManagedObject(managedWine)
+////        wine.map(to: managedWine, coreData: coreDataService)
+//
+//        do {
+//            try container.viewContext.save()
+//            completion(.success(wine))
+//        } catch {
+//            let nserror = error as NSError
+//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+//        }
     }
     
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        guard let managedWine = coreDataService.findManagedWine(by: wine.id) else {
+        do {
+            try coreDataWorker.delete(wine, from: container.viewContext)
             completion(.success)
-            return
+        } catch {
+            completion(.failure(error))
         }
         
-        container.viewContext.delete(managedWine)
-        completion(.success)
+        
+//        guard let managedWine = coreDataService.findManagedWine(by: wine.id) else {
+//            completion(.success)
+//            return
+//        }
+//
+//        container.viewContext.delete(managedWine)
+//        completion(.success)
     }
 
     func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
@@ -65,7 +86,7 @@ class CoreDataWineRepository: WineRepository {
         
         do {
             let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { Wine.fromManagedWine($0) }
+            let wineModels = managedWines.compactMap { Wine.toEntity(managedObject: $0) }
             completion(.success(wineModels))
         } catch {
             let nserror = error as NSError
@@ -79,7 +100,7 @@ class CoreDataWineRepository: WineRepository {
         
         do {
             let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { Wine.fromManagedWine($0) }
+            let wineModels = managedWines.compactMap { Wine.toEntity(managedObject: $0) }
             completion(.success(wineModels))
         } catch {
             let nserror = error as NSError

@@ -9,13 +9,12 @@
 import UIKit
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
-    var session: Session!
+//    var session: Session!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-        session = Container.shared.session
-        Container.shared.syncManager.sync()
+//        session = Container.shared.session
     }
 
     // MARK: - UITabBarControllerDelegate

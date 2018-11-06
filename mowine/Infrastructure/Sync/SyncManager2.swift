@@ -19,8 +19,12 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
         self.localDataStore = localDataStore
     }
     
+    private var entityName: String {
+        return String(describing: TRemoteDataStore.Entity.self)
+    }
+    
     func syncObjects(completion: @escaping (EmptyResult) -> ()) {
-        SwiftyBeaver.info("Starting sync")
+        SwiftyBeaver.info("Starting sync for \(entityName)")
         
         remoteDataStore.fetchAll() { result in
             switch result {
@@ -52,9 +56,13 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
     
     private func syncRemoteToLocal(_ remoteObjects: [TRemoteDataStore.Entity]) throws {
         for remoteObject in remoteObjects {
-            if var localObject = try localDataStore.getFor(remoteObject), localObject.syncState == .synced, remoteObject.updatedAt > localObject.updatedAt {
-                try localDataStore.update(remoteObject)
+            if var localObject = try localDataStore.getFor(remoteObject) {
+                if localObject.syncState == .synced, remoteObject.updatedAt > localObject.updatedAt {
+                    SwiftyBeaver.verbose("[\(entityName)] Updating local object with remote changes", context: [String(describing: TRemoteDataStore.Entity.self)])
+                    try localDataStore.update(remoteObject)
+                }                
             } else {
+                SwiftyBeaver.verbose("[\(entityName)] Inserting new object from remote")
                 try localDataStore.insert(remoteObject)
             }
         }
@@ -67,7 +75,7 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
             }
             
             if !remoteObjects.contains(where: { $0.identifier == localObject.identifier }) {
-                SwiftyBeaver.debug("Deleting wine from core data not found in remote")
+                SwiftyBeaver.debug("[\(entityName)] Deleting local object not found in remote")
                 try localDataStore.delete(localObject)
             }
         }
@@ -76,7 +84,7 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
     }
     
     func syncLocalToRemote(completion: @escaping (EmptyResult) -> ()) {
-        
+        completion(.success)
     }
 }
 

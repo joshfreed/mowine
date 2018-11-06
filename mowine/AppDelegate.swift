@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupSwiftyBeaverLogging() {
         let console = ConsoleDestination()
-        console.minLevel = .warning
+        console.minLevel = .verbose
         SwiftyBeaver.addDestination(console)
         
         let platform = SBPlatformDestination(appID: Secrets.SwiftyBeaver.appId,
@@ -78,64 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(false, forKey: "isPreloaded")
     }
     
-    private func preLoadData() {
-        let context = persistentContainer.viewContext
-        
-        deleteAllEntity("Variety")
-        deleteAllEntity("Type")
-        
-        let redWine = ManagedWineType(context: context)
-        redWine.name = "Red"
-        redWine.addToVarieties(makeVariety(name: "Cabernet Sauvignon"))
-        redWine.addToVarieties(makeVariety(name: "Chianti"))
-        redWine.addToVarieties(makeVariety(name: "Malbec"))
-        redWine.addToVarieties(makeVariety(name: "Merlot"))
-        redWine.addToVarieties(makeVariety(name: "Pinot Nior"))
-        redWine.addToVarieties(makeVariety(name: "Red Blend"))
-        
-        let whiteWine = ManagedWineType(context: context)
-        whiteWine.name = "White"
-        whiteWine.addToVarieties(makeVariety(name: "Chardonnay"))
-        whiteWine.addToVarieties(makeVariety(name: "Gewürztraminer"))
-        whiteWine.addToVarieties(makeVariety(name: "Pinot Blanc"))
-        whiteWine.addToVarieties(makeVariety(name: "Pinot Grigio"))
-        whiteWine.addToVarieties(makeVariety(name: "Riesling"))
-        whiteWine.addToVarieties(makeVariety(name: "Sauvignon Blanc"))
-        whiteWine.addToVarieties(makeVariety(name: "Moscato"))
-        whiteWine.addToVarieties(makeVariety(name: "White Blend"))
-        
-        let bubbly = ManagedWineType(context: context)
-        bubbly.name = "Bubbly"
-        bubbly.addToVarieties(makeVariety(name: "Champagne"))
-        bubbly.addToVarieties(makeVariety(name: "Prosecco"))
-
-        let rose = ManagedWineType(context: context)
-        rose.name = "Rosé"
-        
-        let other = ManagedWineType(context: context)
-        other.name = "Other"
-        
-        saveContext()
-    }
-    
-    private func makeVariety(name: String) -> ManagedWineVariety {
-        let variety = ManagedWineVariety(context: persistentContainer.viewContext)
-        variety.name = name
-        return variety
-    }
-
-    private func deleteAllEntity(_ entityName: String) {
-        let context = persistentContainer.viewContext
-        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let request = NSBatchDeleteRequest(fetchRequest: fetch)
-        do {
-            try context.execute(request)
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -152,6 +94,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")
+        Container.shared.syncManager.sync()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

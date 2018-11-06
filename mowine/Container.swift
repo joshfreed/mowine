@@ -19,19 +19,21 @@ class Container {
     lazy var emailAuthService: EmailAuthenticationService = AWSContainer.shared.emailAuthService
     lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.facebookService
     lazy var fbGraphApi: GraphApi = GraphApi()    
-    lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
-    //lazy var wineRepository = AWSContainer.shared.wineRepository
-    lazy var wineRepository = CoreDataWineRepository(container: persistentContainer)
+    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
+    lazy var wineRepository = CoreDataWineRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
     lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
-//    lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
-    lazy var userRepository: UserRepository = CoreDataUserRepository(container: persistentContainer, coreData: CoreDataService(context: persistentContainer.viewContext))
+    lazy var userRepository: UserRepository = CoreDataUserRepository(
+        container: persistentContainer,
+        coreData: CoreDataService(context: persistentContainer.viewContext),
+        coreDataWorker: coreDataWorker
+    )
     lazy var syncManager = SyncManager(
         dynamoDb: DynamoDbService(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default()),
         coreData: CoreDataService(context: Container.shared.persistentContainer.viewContext)
     )
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
-    lazy var coreDataWorker = CoreDataWorker(container: Container.shared.persistentContainer)
+    lazy var coreDataWorker = CoreDataWorker()
     
     // MARK: Core Data Stack
     
@@ -74,7 +76,7 @@ class AWSContainer {
     lazy var emailAuthService = AWSEmailAuthenticationService()
     lazy var facebookService = AWSFacebookAuthentication()
     lazy var userRepository = AWSUserRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
-    lazy var wineRepository = AWSWineRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
+//    lazy var wineRepository = AWSWineRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var wineImageRepository = S3WineImageRepository(
         transferUtility: AWSS3TransferUtility.default(),
         session: Container.shared.session

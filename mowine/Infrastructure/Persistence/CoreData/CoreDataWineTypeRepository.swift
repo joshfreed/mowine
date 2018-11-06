@@ -12,42 +12,29 @@ import CoreData
 
 class CoreDataWineTypeRepository: WineTypeRepository {
     let container: NSPersistentContainer
+    let coreDataWorker: CoreDataWorkerProtocol
     
-    init(container: NSPersistentContainer) {
+    init(container: NSPersistentContainer, coreDataWorker: CoreDataWorkerProtocol) {
         self.container = container
+        self.coreDataWorker = coreDataWorker
     }
     
     func getAll(completion: @escaping (Result<[WineType]>) -> ()) {
-        let context = container.viewContext
-        let request: NSFetchRequest<ManagedWineType> = ManagedWineType.fetchRequest()
-        
         do {
-            let types: [ManagedWineType] = try context.fetch(request)
-            let models: [WineType] = types.flatMap { CoreDataWineTypeTranslator.makeModel(from: $0) }
-            completion(.success(models))
+            let wineTypes: [WineType] = try coreDataWorker.get(with: nil, sortDescriptors: nil, from: container.viewContext)
+            completion(.success(wineTypes))
         } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(error))
         }
     }
     
     func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ()) {
-        let context = container.viewContext
-        let request: NSFetchRequest<ManagedWineType> = ManagedWineType.fetchRequest()
-        request.predicate = NSPredicate(format: "name == %@", name)
-        
+        let predicate = NSPredicate(format: "name == %@", name)
         do {
-            let types: [ManagedWineType] = try context.fetch(request)
-            let managedType = types.first
-            if let managedType = managedType {
-                let model = CoreDataWineTypeTranslator.makeModel(from: managedType)
-                completion(.success(model))
-            } else {
-                completion(.success(nil))
-            }
+            let wineType: WineType? = try coreDataWorker.getOne(with: predicate, from: container.viewContext)
+            completion(.success(wineType))
         } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(error))
         }
     }
 }

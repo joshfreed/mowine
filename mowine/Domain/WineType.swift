@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct WineType: Equatable {
     var name: String
@@ -18,5 +19,51 @@ struct WineType: Equatable {
     
     func getVariety(named name: String) -> WineVariety? {
         return varieties.first(where: { $0.name == name })
+    }
+}
+
+extension WineType: Syncable {
+    var identifier: String {
+        return name
+    }
+    
+    var syncState: SyncStatus {
+        return .synced
+    }
+    
+    var updatedAt: Date {
+        get {
+            return Date()
+        }
+        set {
+            
+        }
+    }
+}
+
+// MARK: CoreDataConvertible
+
+extension WineType: CoreDataConvertible {
+    static func toEntity(managedObject: ManagedWineType) -> WineType? {
+        guard let name = managedObject.name else {
+            return nil
+        }
+        
+        var varieties: [WineVariety] = []
+        
+        if let varietiesSet = managedObject.varieties, let mngVarietiesArray = Array(varietiesSet) as? [ManagedWineVariety] {
+            varieties = mngVarietiesArray.compactMap { WineVariety.toEntity(managedObject: $0) }
+        }
+        
+        return WineType(name: name, varieties:varieties)
+    }
+
+    func mapToManagedObject(_ managedObject: ManagedWineType, mappingContext: CoreDataMappingContext) throws {
+        managedObject.name = name
+        managedObject.varieties = try mappingContext.syncSet(varieties)
+    }
+
+    func getIdPredicate() -> NSPredicate {
+        return NSPredicate(format: "name == %@", name)
     }
 }

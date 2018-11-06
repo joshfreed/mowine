@@ -13,32 +13,54 @@ import JFLib
 protocol CoreDataConvertible {
     associatedtype ManagedType: NSManagedObject
     static func toEntity(managedObject: ManagedType) -> Self?
-    func toManagedObject(in context: NSManagedObjectContext) -> ManagedType?
-    func mapToManagedObject(_ managedObject: ManagedType)
+    func mapToManagedObject(_ managedObject: ManagedType, mappingContext: CoreDataMappingContext) throws
     func getIdPredicate() -> NSPredicate
 }
 
 protocol CoreDataWorkerProtocol {
     func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, from context: NSManagedObjectContext) throws -> [Entity]
-    func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, completion: @escaping (Result<[Entity]>) -> ())
-    func getOne<Entity: CoreDataConvertible>(_ entity: Entity, from context: NSManagedObjectContext) throws -> Entity.ManagedType?
+    func getOne<Entity>(with predicate: NSPredicate?, from context: NSManagedObjectContext) throws -> Entity? where Entity : CoreDataConvertible
     func insert<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible
     func update<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible
     func delete<Entity>(_ entity: Entity, from context: NSManagedObjectContext) throws where Entity : CoreDataConvertible
+    func getManagedObject<Entity>(for entity: Entity, from context: NSManagedObjectContext) throws -> Entity.ManagedType? where Entity : CoreDataConvertible
+}
+
+protocol CoreDataContainerWorkerProtocol {
+    func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, completion: @escaping (Result<[Entity]>) -> ())
 }
 
 enum CoreDataError: Error {
     case entityNotFound
 }
 
-class CoreDataWorker: CoreDataWorkerProtocol {
+class CoreDataContainerWorker: CoreDataContainerWorkerProtocol {
     let container: NSPersistentContainer
+    let coreDataWorker: CoreDataWorker
     
     init(container: NSPersistentContainer) {
         self.container = container
+        self.coreDataWorker = CoreDataWorker()
     }
     
-    func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, from context: NSManagedObjectContext) throws -> [Entity] {
+    func get<Entity>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, completion: @escaping (Result<[Entity]>) -> ()) where Entity : CoreDataConvertible {
+        container.performBackgroundTask { context in
+            do {
+                let results: [Entity] = try self.coreDataWorker.get(with: predicate, sortDescriptors: sortDescriptors, from: context)
+                completion(.success(results))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+}
+
+class CoreDataWorker: CoreDataWorkerProtocol {
+    func get<Entity: CoreDataConvertible> (
+        with predicate: NSPredicate?,
+        sortDescriptors: [NSSortDescriptor]?,
+        from context: NSManagedObjectContext
+    ) throws -> [Entity] {
         let fetchRequest = Entity.ManagedType.fetchRequest()
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortDescriptors
@@ -49,41 +71,41 @@ class CoreDataWorker: CoreDataWorkerProtocol {
         let items: [Entity] = results?.compactMap { Entity.toEntity(managedObject: $0) } ?? []
         return items
     }
-    
-    func get<Entity>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, completion: @escaping (Result<[Entity]>) -> ()) where Entity : CoreDataConvertible {
-        container.performBackgroundTask { context in
-            do {
-                let results: [Entity] = try self.get(with: predicate, sortDescriptors: sortDescriptors, from: context)
-                completion(.success(results))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func getOne<Entity>(_ entity: Entity, from context: NSManagedObjectContext) throws -> Entity.ManagedType? where Entity : CoreDataConvertible {
+
+    func getOne<Entity>(with predicate: NSPredicate?, from context: NSManagedObjectContext) throws -> Entity? where Entity : CoreDataConvertible {
         let fetchRequest = Entity.ManagedType.fetchRequest()
-        fetchRequest.predicate = entity.getIdPredicate()
+        fetchRequest.predicate = predicate
         let results = try context.fetch(fetchRequest) as? [Entity.ManagedType]
-        return results?.first
+        guard let managedObject = results?.first else {
+            return nil
+        }
+        return Entity.toEntity(managedObject: managedObject)
     }
     
     func insert<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
-        _ = entity.toManagedObject(in: context)
+        let managedObject = Entity.ManagedType(context: context)
+        try entity.mapToManagedObject(managedObject, mappingContext: CoreDataMappingContext(worker: self, context: context))
     }
     
     func update<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
-        guard let managedEntity = try getOne(entity, from: context) else {
+        guard let managedEntity = try getManagedObject(for: entity, from: context) else {
             throw CoreDataError.entityNotFound
         }
-        entity.mapToManagedObject(managedEntity)
+        try entity.mapToManagedObject(managedEntity, mappingContext: CoreDataMappingContext(worker: self, context: context))
     }
     
     func delete<Entity>(_ entity: Entity, from context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
-        guard let managedEntity = try getOne(entity, from: context) else {
+        guard let managedEntity = try getManagedObject(for: entity, from: context) else {
             return
         }
         
         context.delete(managedEntity)
     }
+    
+    func getManagedObject<Entity>(for entity: Entity, from context: NSManagedObjectContext) throws -> Entity.ManagedType? where Entity : CoreDataConvertible {
+        let fetchRequest = Entity.ManagedType.fetchRequest()
+        fetchRequest.predicate = entity.getIdPredicate()
+        let results = try context.fetch(fetchRequest) as? [Entity.ManagedType]
+        return results?.first
+    }    
 }

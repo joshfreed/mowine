@@ -19,5 +19,5 @@ class DynamoDbRemoteDataStore<Entity>: RemoteDataStore where Entity: DynamoConve
     
     func fetchAll(completion: @escaping (Result<[Entity]>) -> ()) {
         dynamoDbWorker.scan(completion: completion)
-    }
+    }    
 }

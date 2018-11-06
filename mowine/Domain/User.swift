@@ -9,13 +9,15 @@
 import UIKit
 import CoreData
 
+typealias UserId = StringIdentity
+
 struct User: Equatable {
     let id: UserId
     var emailAddress: String
     var firstName: String?
     var lastName: String?
     var profilePicture: UIImage?
-    private(set) var friends: [User] = []
+    private(set) var friends: [Friend] = []
     private(set) var syncState: SyncStatus = .synced
     var updatedAt: Date
     
@@ -48,45 +50,25 @@ struct User: Equatable {
     }
     
     mutating func addFriend(user: User) {
-        if friends.contains(user) {
+        let friend = Friend(user: self, friend: user)
+        
+        if friends.contains(friend) {
             return
         }
         
-        friends.append(user)
+        friends.append(friend)
     }
     
     mutating func removeFriend(user: User) {
-        if let index = friends.index(of: user) {
+        let friend = Friend(user: self, friend: user)
+        if let index = friends.index(of: friend) {
             friends.remove(at: index)
         }
     }
-}
-
-struct UserId: Hashable, CustomStringConvertible {
-    let identityId: String
     
-    var description: String {
-        return identityId
-    }
-    
-    var asString: String {
-        return description
-    }
-    
-    init() {
-        identityId = UUID().uuidString
-    }
-    
-    init(string: String) {
-        identityId = string
-    }
-    
-    var hashValue: Int {
-        return identityId.hashValue
-    }
-    
-    static func ==(lhs: UserId, rhs: UserId) -> Bool {
-        return lhs.identityId == rhs.identityId
+    func isFriendsWith(_ user: User) -> Bool {
+        let friend = Friend(user: self, friend: user)
+        return friends.contains(friend)
     }
 }
 
@@ -96,15 +78,7 @@ extension User: Syncable {
     }
 }
 
-extension User {
-    func toManagedUser(_ managedUser: ManagedUser) {
-        mapToManagedObject(managedUser)
-    }
-    
-    static func fromCoreData(_ managedUser: ManagedUser) -> User? {
-        return toEntity(managedObject: managedUser)
-    }
-}
+// MARK: CoreDataConvertible
 
 extension User: CoreDataConvertible {
     static func toEntity(managedObject: ManagedUser) -> User? {
@@ -116,20 +90,27 @@ extension User: CoreDataConvertible {
         var user = User(id: userId, emailAddress: managedObject.emailAddress ?? "")
         user.firstName = managedObject.firstName
         user.lastName = managedObject.lastName
+        user.syncState = SyncStatus(rawValue: Int(managedObject.syncState)) ?? .synced
+        
+        if let set = managedObject.friends, let array = Array(set) as? [ManagedFriend] {
+            user.friends = array.compactMap {
+                guard let managedFriend = $0.friend else { return nil }
+                guard let friend = User.toEntity(managedObject: managedFriend) else { return nil }
+                return Friend(user: user, friend: friend)
+            }
+        }
+        
         return user
     }
     
-    func toManagedObject(in context: NSManagedObjectContext) -> ManagedUser? {
-        let managedUser = ManagedUser(context: context)
-        mapToManagedObject(managedUser)
-        return managedUser
-    }
-    
-    func mapToManagedObject(_ managedObject: ManagedUser) {
+    func mapToManagedObject(_ managedObject: ManagedUser, mappingContext: CoreDataMappingContext) throws {
         managedObject.userId = id.asString
         managedObject.emailAddress = emailAddress
         managedObject.firstName = firstName
         managedObject.lastName = lastName
+        managedObject.syncState = Int16(syncState.rawValue)
+        managedObject.updatedAt = updatedAt
+        managedObject.friends = try mappingContext.syncSet(friends)
     }
     
     func getIdPredicate() -> NSPredicate {
@@ -149,18 +130,8 @@ extension User: DynamoConvertible {
         var user = User(id: userId, emailAddress: emailAddress)
         user.firstName = awsObject._firstName
         user.lastName = awsObject._lastName
-        
         user.updatedAt = ISO8601DateFormatter().date(from: awsObject._updatedAt ?? "") ?? Date()
-//        if let updatedAt = awsObject._updatedAt {
-//            if let date = ISO8601DateFormatter().date(from: updatedAt) {
-//                user.updatedAt = date
-//            } else {
-//                print("Could not parse date from updatedAt field: \(updatedAt)")
-//            }
-//        }
-        
         user.syncState = .synced
-        
         return user
     }
     

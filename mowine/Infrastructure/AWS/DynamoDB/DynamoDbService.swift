@@ -38,6 +38,7 @@ class DynamoDbService {
         }
     }
     
+    /*
     func scanWines(completion: @escaping (Result<[Wine]>) -> ()) {
         let expression = AWSDynamoDBScanExpression()
         dynamoDbObjectMapper.scan(AWSWine.self, expression: expression) { response, error in
@@ -57,7 +58,8 @@ class DynamoDbService {
             })
         }
     }
-    
+ */
+/*
     func saveWine(_ wine: Wine, completion: ((EmptyResult) -> ())?) {
         let awsWine = wine.toAWSWine()
         awsWine._userId = AWSIdentityManager.default().identityId
@@ -87,4 +89,5 @@ class DynamoDbService {
             }
         }
     }
+ */
 }
