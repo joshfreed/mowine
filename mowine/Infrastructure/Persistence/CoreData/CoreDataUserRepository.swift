@@ -61,7 +61,8 @@ class CoreDataUserRepository: UserRepository {
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
         do {
             if let user = try getById(userId) {
-                completion(.success(user.friends.map({ $0.friend })))
+                let friends = try user.friends.compactMap({ try getById($0.friendId) })
+                completion(.success(friends))
             } else {
                 completion(.success([]))
             }

@@ -23,6 +23,7 @@ class CoreDataWineRepository: WineRepository {
     func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         do {
             try coreDataWorker.insert(wine, in: container.viewContext)
+            try container.viewContext.save()
             completion(.success(wine))
         } catch {
             completion(.failure(error))
@@ -41,6 +42,7 @@ class CoreDataWineRepository: WineRepository {
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         do {
             try coreDataWorker.update(wine, in: container.viewContext)
+            try container.viewContext.save()
             completion(.success(wine))
         } catch {
             completion(.failure(error))
@@ -65,6 +67,7 @@ class CoreDataWineRepository: WineRepository {
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
         do {
             try coreDataWorker.delete(wine, from: container.viewContext)
+            try container.viewContext.save()
             completion(.success)
         } catch {
             completion(.failure(error))

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyBeaver
 
 final class Wine: Equatable {
     let id: UUID
@@ -65,10 +66,10 @@ final class Wine: Equatable {
     }
     
     private func modified() {
-        updatedAt = Date()
-        if syncState == .synced {
-            syncState = .modified
-        }
+//        updatedAt = Date()
+//        if syncState == .synced {
+//            syncState = .modified
+//        }
     }
     
     func synced() {
@@ -127,8 +128,8 @@ extension Wine: CoreDataConvertible {
         managedObject.location = location
         managedObject.notes = notes
         managedObject.thumbnail = thumbnail
-        managedObject.createdAt = createdAt
-        managedObject.updatedAt = updatedAt
+//        managedObject.createdAt = createdAt
+//        managedObject.updatedAt = updatedAt
         managedObject.syncStatus = Int16(syncState.rawValue)
         
         if let price = price {
@@ -156,7 +157,7 @@ extension Wine: CoreDataConvertible {
             return mf
         }
         managedObject.pairings = NSSet(array: managedPairings)
- */
+ */        
     }
     
     func getIdPredicate() -> NSPredicate {
@@ -238,5 +239,28 @@ extension Wine: DynamoConvertible {
         awsWine._updatedAt = ISO8601DateFormatter().string(from: updatedAt)
         
         return awsWine
+    }
+}
+
+extension ManagedWine {
+    override public func willSave() {
+        SwiftyBeaver.verbose("NSManagedObject::willSave()")
+        if hasPersistentChangedValues {
+            SwiftyBeaver.verbose("ManagedWine has changes")
+            
+            if let updatedAt = updatedAt {
+                if updatedAt.timeIntervalSince(Date()) > 10.0 {
+                    self.updatedAt = Date()
+                }
+            } else {
+                self.updatedAt = Date()
+            }
+            
+            if syncStatus != Int16(SyncStatus.modified.rawValue) {
+                syncStatus = Int16(SyncStatus.modified.rawValue)
+            }
+            
+            SwiftyBeaver.verbose(changedValues())
+        }
     }
 }

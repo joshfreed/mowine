@@ -11,36 +11,15 @@ import JFLib
 import SwiftyBeaver
 
 class SyncManager {
-    let dynamoDb: DynamoDbService
-    let coreData: CoreDataService
+//    let dynamoDb: DynamoDbService
+//    let coreData: CoreDataService
     
     init(dynamoDb: DynamoDbService, coreData: CoreDataService) {
-        self.dynamoDb = dynamoDb
-        self.coreData = coreData
+//        self.dynamoDb = dynamoDb
+//        self.coreData = coreData
     }
     
     func sync() {
-        // Need to:
-        // - Send newly created wines to the server
-        // - Update edited wines on the server
-        // - Remove locally deleted wines from the server
-        
-        // Merge in changes made by another device to this one
-        // - Add wines created on another device
-        // - Update wines edited on another device
-        // - Remove wines deleted from another device
-        
-        // 1) sync remote with local
-        // download "my wines"
-        // any wines in the list NOT in core data should be added
-        // if remote updateDate is after local updateDate AND the local is not modified, then update the local wine w/ the remote data
-        // if a local wine exists that is NOT in the remote list, delete the local wine
-        
-        // 2) send local to remote
-        // look for any items with "created" status
-        // look for any items with "deleted" status
-        // send updates to remote. Local wines w/ updatedAt > remote date, send. Or sync status = modified?
-        
         SwiftyBeaver.info("Starting sync")
         
         syncTypes()
@@ -104,8 +83,8 @@ class SyncManager {
     }
     
     func syncFriendships() {
-        let remoteUserStore = DynamoDbRemoteDataStore<Friend>(dynamoDbWorker: Container.shared.dynamoDbWorker)
-        let localUserStore = CoreDataLocalDataStore<Friend>(coreDataWorker: Container.shared.coreDataWorker)
+        let remoteUserStore = DynamoDbRemoteDataStore<Friendship>(dynamoDbWorker: Container.shared.dynamoDbWorker)
+        let localUserStore = CoreDataLocalDataStore<Friendship>(coreDataWorker: Container.shared.coreDataWorker)
         let syncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
         
         syncer.syncObjects { result in

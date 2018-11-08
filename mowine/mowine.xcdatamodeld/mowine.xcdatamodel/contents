@@ -44,10 +44,10 @@
     </entity>
     <elements>
         <element name="Food" positionX="-258.828125" positionY="-276.9765625" width="128" height="60"/>
+        <element name="Friend" positionX="-234" positionY="-126" width="128" height="75"/>
         <element name="Type" positionX="-102.42578125" positionY="50.5390625" width="128" height="75"/>
         <element name="User" positionX="-113.71875" positionY="-179.875" width="128" height="180"/>
         <element name="Variety" positionX="-105.45703125" positionY="215.00390625" width="128" height="75"/>
         <element name="Wine" positionX="-383.36328125" positionY="-101.33984375" width="128" height="255"/>
-        <element name="Friend" positionX="-234" positionY="-126" width="128" height="75"/>
     </elements>
 </model>

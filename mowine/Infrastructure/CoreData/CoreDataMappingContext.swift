@@ -18,6 +18,13 @@ class CoreDataMappingContext {
         self.context = context
     }
     
+    func syncOneManaged<ManagedType>(predicate: NSPredicate) throws -> ManagedType? where ManagedType: NSManagedObject {
+        let fetchRequest = ManagedType.fetchRequest()
+        fetchRequest.predicate = predicate
+        let results = try context.fetch(fetchRequest) as? [ManagedType]
+        return results?.first
+    }
+    
     func syncOne<Entity>(_ entity: Entity) throws -> Entity.ManagedType? where Entity: CoreDataConvertible {
         guard let managedObject = try findOrCreateManagedObject(entity) else {
             return nil

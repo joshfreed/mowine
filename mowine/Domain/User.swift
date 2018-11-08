@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftyBeaver
 
 typealias UserId = StringIdentity
 
@@ -17,9 +18,9 @@ struct User: Equatable {
     var firstName: String?
     var lastName: String?
     var profilePicture: UIImage?
-    private(set) var friends: [Friend] = []
-    private(set) var syncState: SyncStatus = .synced
-    var updatedAt: Date
+    private(set) var friends: [Friendship] = []
+    private(set) var syncState: SyncStatus = .created
+    var updatedAt: Date = Date()
     
     var fullName: String {
         let firstName = self.firstName ?? ""
@@ -36,13 +37,11 @@ struct User: Equatable {
     init(emailAddress: String) {
         self.id = UserId()
         self.emailAddress = emailAddress
-        updatedAt = Date()
     }
     
     init(id: UserId, emailAddress: String) {
         self.id = id
         self.emailAddress = emailAddress
-        updatedAt = Date()
     }
 
     static func ==(lhs: User, rhs: User) -> Bool {
@@ -50,7 +49,7 @@ struct User: Equatable {
     }
     
     mutating func addFriend(user: User) {
-        let friend = Friend(user: self, friend: user)
+        let friend = Friendship(userId: id, friendId: user.id)
         
         if friends.contains(friend) {
             return
@@ -60,14 +59,14 @@ struct User: Equatable {
     }
     
     mutating func removeFriend(user: User) {
-        let friend = Friend(user: self, friend: user)
+        let friend = Friendship(userId: id, friendId: user.id)
         if let index = friends.index(of: friend) {
             friends.remove(at: index)
         }
     }
     
     func isFriendsWith(_ user: User) -> Bool {
-        let friend = Friend(user: self, friend: user)
+        let friend = Friendship(userId: id, friendId: user.id)
         return friends.contains(friend)
     }
 }
@@ -90,19 +89,21 @@ extension User: CoreDataConvertible {
         var user = User(id: userId, emailAddress: managedObject.emailAddress ?? "")
         user.firstName = managedObject.firstName
         user.lastName = managedObject.lastName
+        user.updatedAt = managedObject.updatedAt!
         user.syncState = SyncStatus(rawValue: Int(managedObject.syncState)) ?? .synced
         
         if let set = managedObject.friends, let array = Array(set) as? [ManagedFriend] {
             user.friends = array.compactMap {
-                guard let managedFriend = $0.friend else { return nil }
-                guard let friend = User.toEntity(managedObject: managedFriend) else { return nil }
-                return Friend(user: user, friend: friend)
+                guard let managedFriend = $0.friend, let friendIdStr = managedFriend.userId else {
+                    return nil
+                }
+                return Friendship(userId: user.id, friendId: UserId(string: friendIdStr))
             }
         }
         
         return user
     }
-    
+
     func mapToManagedObject(_ managedObject: ManagedUser, mappingContext: CoreDataMappingContext) throws {
         managedObject.userId = id.asString
         managedObject.emailAddress = emailAddress
@@ -111,6 +112,11 @@ extension User: CoreDataConvertible {
         managedObject.syncState = Int16(syncState.rawValue)
         managedObject.updatedAt = updatedAt
         managedObject.friends = try mappingContext.syncSet(friends)
+        
+        if managedObject.hasPersistentChangedValues {
+            SwiftyBeaver.verbose("User::After::Object has persistent changes")
+            SwiftyBeaver.verbose(managedObject.changedValues())
+        }
     }
     
     func getIdPredicate() -> NSPredicate {
