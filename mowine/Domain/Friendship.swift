@@ -11,29 +11,16 @@ import Foundation
 struct Friendship: Equatable {
     let userId: UserId
     let friendId: UserId
-    private(set) var syncState: SyncStatus
-    var updatedAt: Date
     
     init(userId: UserId, friendId: UserId) {
         self.userId = userId
         self.friendId = friendId
-        updatedAt = Date()
-        syncState = .created
     }
     
     static func ==(lhs: Friendship, rhs: Friendship) -> Bool {
         return lhs.userId == rhs.userId && lhs.friendId == rhs.friendId
     }
 }
-
-// MARK: Syncable
-
-extension Friendship: Syncable {
-    var identifier: String {
-        return "\(userId)::\(friendId)"
-    }
-}
-
 
 // MARK: CoreDataConvertible
 

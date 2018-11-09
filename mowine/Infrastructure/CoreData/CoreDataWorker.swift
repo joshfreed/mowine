@@ -17,6 +17,10 @@ protocol CoreDataConvertible {
     func getIdPredicate() -> NSPredicate
 }
 
+protocol CoreDataObject {
+    static func getIdProperty() -> String
+}
+
 protocol CoreDataWorkerProtocol {
     func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, from context: NSManagedObjectContext) throws -> [Entity]
     func getOne<Entity>(with predicate: NSPredicate?, from context: NSManagedObjectContext) throws -> Entity? where Entity : CoreDataConvertible

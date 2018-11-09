@@ -10,25 +10,31 @@ import Foundation
 import JFLib
 import SwiftyBeaver
 
-class SyncManager {
-//    let dynamoDb: DynamoDbService
-//    let coreData: CoreDataService
-    
-    init(dynamoDb: DynamoDbService, coreData: CoreDataService) {
-//        self.dynamoDb = dynamoDb
-//        self.coreData = coreData
-    }
-    
+class SyncManager {    
     func sync() {
         SwiftyBeaver.info("Starting sync")
         
         syncTypes()
-        syncUsers()
-        syncFriendships()
+//        syncUsers()
+//        syncFriendships()
 //        syncWines()
     }
     
     func syncTypes() {
+        Container.shared.persistentContainer.performBackgroundTask { context in
+            let remoteWineTypeStore = MemoryWineTypeRepository()
+            let coreDataMappingContext = CoreDataMappingContext(worker: Container.shared.coreDataWorker, context: context)
+            
+            do {
+                _ = try coreDataMappingContext.syncSet(remoteWineTypeStore.types)
+                try context.save()
+                SwiftyBeaver.info("Wine types synced successfully.")
+            } catch {
+                SwiftyBeaver.error("Error syncing wine types. Error: \(error)")
+            }
+        }
+        
+        /*
         let remoteWineTypeStore = MemoryWineTypeRepository()
         let localWineTypeStore = CoreDataLocalDataStore<WineType>(coreDataWorker: Container.shared.coreDataWorker)
         let wineTypeSyncer = SyncManager2(remoteDataStore: remoteWineTypeStore, localDataStore: localWineTypeStore)
@@ -39,6 +45,7 @@ class SyncManager {
             case .failure(let error): SwiftyBeaver.error("Error syncing wine types. Error: \(error)")
             }
         }
+ */
 /*
         let wineTypeRepository = MemoryWineTypeRepository()
         for remoteType in wineTypeRepository.types {
@@ -62,6 +69,22 @@ class SyncManager {
     }
     
     func syncUsers() {
+        Container.shared.persistentContainer.performBackgroundTask { context in
+            let remoteUserStore = DynamoDbRemoteDataStore<AWSUser>(dynamoDbWorker: Container.shared.dynamoDbWorker)
+            let localUserStore = CoreDataLocalDataStore<ManagedUser>(coreDataWorker: Container.shared.coreDataWorker, context: context)
+            let userMapper = AwsCoreDataUserMapper(context: context)
+            let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore, mapper: userMapper)
+            
+            userSyncer.syncObjects { result in
+                switch result {
+                case .success: SwiftyBeaver.info("Users synced successfully.")
+                case .failure(let error): SwiftyBeaver.error("Error syncing users. Error: \(error)")
+                }
+            }
+        }
+        
+        
+        /*
         let remoteUserStore = DynamoDbRemoteDataStore<User>(dynamoDbWorker: Container.shared.dynamoDbWorker)
         let localUserStore = CoreDataLocalDataStore<User>(coreDataWorker: Container.shared.coreDataWorker)
         let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
@@ -72,6 +95,7 @@ class SyncManager {
             case .failure(let error): SwiftyBeaver.error("Error syncing users. Error: \(error)")
             }
         }
+ */
         
 //        syncUsers() { result in
 //            switch result {
@@ -83,6 +107,7 @@ class SyncManager {
     }
     
     func syncFriendships() {
+        /*
         let remoteUserStore = DynamoDbRemoteDataStore<Friendship>(dynamoDbWorker: Container.shared.dynamoDbWorker)
         let localUserStore = CoreDataLocalDataStore<Friendship>(coreDataWorker: Container.shared.coreDataWorker)
         let syncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
@@ -93,6 +118,7 @@ class SyncManager {
             case .failure(let error): SwiftyBeaver.error("Error syncing Friendships. Error: \(error)")
             }
         }
+ */
     }
     
 /*
@@ -127,6 +153,7 @@ class SyncManager {
     }
     */
     func syncWines() {
+        /*
         let remoteUserStore = DynamoDbRemoteDataStore<Wine>(dynamoDbWorker: Container.shared.dynamoDbWorker)
         let localUserStore = CoreDataLocalDataStore<Wine>(coreDataWorker: Container.shared.coreDataWorker)
         let syncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
@@ -137,6 +164,7 @@ class SyncManager {
             case .failure(let error): SwiftyBeaver.error("Error syncing wines. Error: \(error)")
             }
         }
+ */
 
 //        syncWines() { result in
 //            switch result {

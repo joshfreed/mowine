@@ -13,18 +13,15 @@ import SwiftyBeaver
 final class Wine: Equatable {
     let id: UUID
     let userId: UserId
-    var type: WineType {didSet{ modified() }}
-    var variety: WineVariety? {didSet{ modified() }}
-    var name: String {didSet{ modified() }}
-    var rating: Double {didSet{ modified() }}
-    var location: String? {didSet{ modified() }}
-    var notes: String? {didSet{ modified() }}
-    var price: String? {didSet{ modified() }}
-    var pairings: [String] = [] {didSet{ modified() }}
-    var thumbnail: Data? {didSet{ modified() }}
-    private(set) var createdAt: Date
-    private(set) var syncState: SyncStatus = .synced
-    var updatedAt: Date
+    var type: WineType
+    var variety: WineVariety?
+    var name: String
+    var rating: Double
+    var location: String?
+    var notes: String?
+    var price: String?
+    var pairings: [String] = []
+    var thumbnail: Data?
     
     var varietyName: String {
         return variety?.name ?? type.name
@@ -36,8 +33,6 @@ final class Wine: Equatable {
         self.type = type
         self.name = name
         self.rating = rating
-        self.createdAt = Date()
-        self.updatedAt = Date()
     }
     
     init(userId: UserId, type: WineType, variety: WineVariety, name: String, rating: Double) {
@@ -47,8 +42,6 @@ final class Wine: Equatable {
         self.variety = variety
         self.name = name
         self.rating = rating
-        self.createdAt = Date()
-        self.updatedAt = Date()
     }
     
     init(userId: UserId, type: WineType, name: String, rating: Double) {
@@ -57,33 +50,10 @@ final class Wine: Equatable {
         self.type = type
         self.name = name
         self.rating = rating
-        self.createdAt = Date()
-        self.updatedAt = Date()
     }
     
     public static func ==(lhs: Wine, rhs: Wine) -> Bool {
         return lhs.id == rhs.id
-    }
-    
-    private func modified() {
-//        updatedAt = Date()
-//        if syncState == .synced {
-//            syncState = .modified
-//        }
-    }
-    
-    func synced() {
-        syncState = .synced
-    }
-    
-    func delete() {
-        syncState = .deleted
-    }
-}
-
-extension Wine: Syncable {
-    var identifier: String {
-        return id.uuidString
     }
 }
 
@@ -110,9 +80,6 @@ extension Wine: CoreDataConvertible {
         wine.price = managedObject.price != nil ? managedObject.price!.stringValue : nil
         wine.notes = managedObject.notes
         wine.thumbnail = managedObject.thumbnail
-        wine.createdAt = managedObject.createdAt!
-        wine.updatedAt = managedObject.updatedAt!
-        wine.syncState = SyncStatus(rawValue: Int(managedObject.syncStatus))!
         
         if let pairingSet = managedObject.pairings, let pairings = Array(pairingSet) as? [ManagedFood] {
             wine.pairings = pairings.compactMap { $0.name }
@@ -128,9 +95,6 @@ extension Wine: CoreDataConvertible {
         managedObject.location = location
         managedObject.notes = notes
         managedObject.thumbnail = thumbnail
-//        managedObject.createdAt = createdAt
-//        managedObject.updatedAt = updatedAt
-        managedObject.syncStatus = Int16(syncState.rawValue)
         
         if let price = price {
             managedObject.price = NSDecimalNumber(string: price)
@@ -150,14 +114,12 @@ extension Wine: CoreDataConvertible {
             managedObject.variety = nil
         }
         
-        /*
         let managedPairings: [ManagedFood] = pairings.map {
-            let mf = ManagedFood(context: context)
+            let mf = ManagedFood(context: mappingContext.context)
             mf.name = $0
             return mf
         }
         managedObject.pairings = NSSet(array: managedPairings)
- */        
     }
     
     func getIdPredicate() -> NSPredicate {
@@ -165,6 +127,7 @@ extension Wine: CoreDataConvertible {
     }
 }
 
+/*
 extension Wine: DynamoConvertible {
     static func toEntity(awsObject: AWSWine) -> Wine? {
         guard let wineIdStr = awsObject._wineId, let wineId = UUID(uuidString: wineIdStr) else {
@@ -264,3 +227,4 @@ extension ManagedWine {
         }
     }
 }
+*/

@@ -22,25 +22,6 @@ struct WineType: Equatable {
     }
 }
 
-extension WineType: Syncable {
-    var identifier: String {
-        return name
-    }
-    
-    var syncState: SyncStatus {
-        return .synced
-    }
-    
-    var updatedAt: Date {
-        get {
-            return Date()
-        }
-        set {
-            
-        }
-    }
-}
-
 // MARK: CoreDataConvertible
 
 extension WineType: CoreDataConvertible {

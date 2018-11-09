@@ -19,8 +19,6 @@ struct User: Equatable {
     var lastName: String?
     var profilePicture: UIImage?
     private(set) var friends: [Friendship] = []
-    private(set) var syncState: SyncStatus = .created
-    var updatedAt: Date = Date()
     
     var fullName: String {
         let firstName = self.firstName ?? ""
@@ -71,12 +69,6 @@ struct User: Equatable {
     }
 }
 
-extension User: Syncable {
-    var identifier: String {
-        return id.asString
-    }
-}
-
 // MARK: CoreDataConvertible
 
 extension User: CoreDataConvertible {
@@ -89,8 +81,8 @@ extension User: CoreDataConvertible {
         var user = User(id: userId, emailAddress: managedObject.emailAddress ?? "")
         user.firstName = managedObject.firstName
         user.lastName = managedObject.lastName
-        user.updatedAt = managedObject.updatedAt!
-        user.syncState = SyncStatus(rawValue: Int(managedObject.syncState)) ?? .synced
+//        user.updatedAt = managedObject.updatedAt!
+//        user.syncState = SyncStatus(rawValue: Int(managedObject.syncState)) ?? .synced
         
         if let set = managedObject.friends, let array = Array(set) as? [ManagedFriend] {
             user.friends = array.compactMap {
@@ -109,8 +101,8 @@ extension User: CoreDataConvertible {
         managedObject.emailAddress = emailAddress
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-        managedObject.syncState = Int16(syncState.rawValue)
-        managedObject.updatedAt = updatedAt
+//        managedObject.syncState = Int16(syncState.rawValue)
+//        managedObject.updatedAt = updatedAt
         managedObject.friends = try mappingContext.syncSet(friends)
         
         if managedObject.hasPersistentChangedValues {
@@ -121,33 +113,5 @@ extension User: CoreDataConvertible {
     
     func getIdPredicate() -> NSPredicate {
         return NSPredicate(format: "userId == %@", id.asString)
-    }
-}
-
-extension User: DynamoConvertible {
-    static func toEntity(awsObject: AWSUser) -> User? {
-        guard let userIdStr = awsObject._userId else {
-            return nil
-        }
-        guard let emailAddress = awsObject._email else {
-            return nil
-        }
-        let userId = UserId(string: userIdStr)
-        var user = User(id: userId, emailAddress: emailAddress)
-        user.firstName = awsObject._firstName
-        user.lastName = awsObject._lastName
-        user.updatedAt = ISO8601DateFormatter().date(from: awsObject._updatedAt ?? "") ?? Date()
-        user.syncState = .synced
-        return user
-    }
-    
-    func toDynamoDb() -> AWSUser? {
-        let awsUser: AWSUser = AWSUser()
-        awsUser._userId = id.description
-        awsUser._email = emailAddress
-        awsUser._firstName = firstName
-        awsUser._lastName = lastName
-        awsUser._updatedAt = ISO8601DateFormatter().string(from: updatedAt)
-        return awsUser
     }
 }

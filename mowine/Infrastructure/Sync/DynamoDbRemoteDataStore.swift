@@ -10,14 +10,14 @@ import Foundation
 import JFLib
 import AWSDynamoDB
 
-class DynamoDbRemoteDataStore<Entity>: RemoteDataStore where Entity: DynamoConvertible {
+class DynamoDbRemoteDataStore<AWSType>: RemoteDataStore where AWSType: AWSDynamoDBObjectModel, AWSType: RemoteObject {
     let dynamoDbWorker: DynamoDbWorkerProtocol
     
     init(dynamoDbWorker: DynamoDbWorkerProtocol) {
         self.dynamoDbWorker = dynamoDbWorker
     }
     
-    func fetchAll(completion: @escaping (Result<[Entity]>) -> ()) {
-        dynamoDbWorker.scan(completion: completion)
-    }    
+    func fetchAll(completion: @escaping (Result<[AWSType]>) -> ()) {
+        dynamoDbWorker.scanRaw(completion: completion)
+    }
 }

@@ -16,7 +16,7 @@ import UIKit
 import AWSDynamoDB
 
 @objcMembers
-class AWSUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+final class AWSUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userId: String?
     var _email: String?

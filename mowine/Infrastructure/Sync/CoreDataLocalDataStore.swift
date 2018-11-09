@@ -10,48 +10,55 @@ import Foundation
 import JFLib
 import CoreData
 
-class CoreDataLocalDataStore<Entity>: LocalDataStore where Entity: CoreDataConvertible, Entity: Syncable {
+class CoreDataLocalDataStore<Entity>: LocalDataStore where Entity: CoreDataObject, Entity: LocalObject, Entity: NSManagedObject {
     let coreDataWorker: CoreDataWorkerProtocol
-    private var context: NSManagedObjectContext?
+    private var context: NSManagedObjectContext
     
-    init(coreDataWorker: CoreDataWorkerProtocol) {
+    init(coreDataWorker: CoreDataWorkerProtocol, context: NSManagedObjectContext) {
         self.coreDataWorker = coreDataWorker
+        self.context = context
     }
     
     func delete(_ entity: Entity) throws {
-        try coreDataWorker.delete(entity, from: context!)
+        context.delete(entity)
     }
 
     func getAll() throws -> [Entity] {
-        return try coreDataWorker.get(with: nil, sortDescriptors: nil, from: context!)
+        let fetchRequest = Entity.fetchRequest()
+        let results = try context.fetch(fetchRequest) as? [Entity]
+        return results ?? []
     }
     
-    func getFor(_ entity: Entity) throws -> Entity? {
-        let predicate = entity.getIdPredicate()
-        let entities: [Entity] = try coreDataWorker.get(with: predicate, sortDescriptors: nil, from: context!)
-        return entities.first
+    func getFor(_ id: String) throws -> Entity? {
+        let fetchRequest = Entity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "\(Entity.getIdProperty()) == %@", id)
+        let results = try context.fetch(fetchRequest) as? [Entity]
+        return results?.first
     }
     
     func insert(_ entity: Entity) throws {
-        try coreDataWorker.insert(entity, in: context!)
+        // no-op; just instantiating the managed object inserts it
+//        try coreDataWorker.insert(entity, in: context!)
     }
     
     func open(completion: @escaping () -> ()) {
-        Container.shared.persistentContainer.performBackgroundTask { context in
-            self.context = context
-            completion()
-        }
+        completion()
+//        Container.shared.persistentContainer.performBackgroundTask { context in
+//            self.context = context
+//            completion()
+//        }
     }
     
     func save() {
         do {
-            try context?.save()
+            try context.save()
         } catch {
             fatalError("Failed saving context: \(error)")
         }
     }
     
     func update(_ entity: Entity) throws {
-        try coreDataWorker.update(entity, in: context!)
+        // no-op; updated by mapper?
+//        try coreDataWorker.update(entity, in: context!)
     }
 }

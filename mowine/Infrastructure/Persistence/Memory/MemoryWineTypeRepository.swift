@@ -59,9 +59,3 @@ class MemoryWineTypeRepository: WineTypeRepository {
         completion(.success(nil))
     }
 }
-
-extension MemoryWineTypeRepository: RemoteDataStore {
-    func fetchAll(completion: @escaping (Result<[WineType]>) -> ()) {
-        completion(.success(types))
-    }
-}

@@ -18,6 +18,7 @@ protocol DynamoConvertible {
 
 protocol DynamoDbWorkerProtocol {
     func scan<Entity: DynamoConvertible>(completion: @escaping (Result<[Entity]>) -> Void)
+    func scanRaw<AWSType>(completion: @escaping (Result<[AWSType]>) -> Void) where AWSType: AWSDynamoDBObjectModel, AWSType: RemoteObject
 }
 
 class DynamoDbWorker: DynamoDbWorkerProtocol {
@@ -40,6 +41,23 @@ class DynamoDbWorker: DynamoDbWorkerProtocol {
                 let items = response?.items as? [Entity.AWSType]
                 let entities: [Entity] = items?.compactMap { Entity.toEntity(awsObject: $0) } ?? []
                 completion(.success(entities))
+            }
+        }
+    }
+    
+    func scanRaw<AWSType>(completion: @escaping (Result<[AWSType]>) -> Void) where AWSType: AWSDynamoDBObjectModel, AWSType: RemoteObject {
+        let scanExpression = AWSDynamoDBScanExpression()
+        
+        dynamoDbObjectMapper.scan(AWSType.self, expression: scanExpression) { response, error in
+            DispatchQueue.main.async {
+                if let error = error as NSError? {
+                    completion(.failure(error))
+                    return
+                }
+                
+                let items = response?.items as? [AWSType]
+                
+                completion(.success(items ?? []))
             }
         }
     }

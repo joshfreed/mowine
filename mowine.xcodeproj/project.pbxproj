@@ -124,6 +124,7 @@
 		537614D11E591FA5005AABF0 /* WineForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537614D01E591FA5005AABF0 /* WineForm.swift */; };
 		537740A41E5BC73600A1D282 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A31E5BC73600A1D282 /* Models.swift */; };
 		537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A91E5BD58A00A1D282 /* WineImageWorker.swift */; };
+		537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */; };
 		53812027206EF86C0053A94E /* AWSFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53812026206EF86C0053A94E /* AWSFriend.swift */; };
 		53898641206AEB0700EBC67B /* AWSUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53898640206AEB0700EBC67B /* AWSUser.swift */; };
 		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
@@ -377,6 +378,7 @@
 		537614D01E591FA5005AABF0 /* WineForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineForm.swift; sourceTree = "<group>"; };
 		537740A31E5BC73600A1D282 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		537740A91E5BD58A00A1D282 /* WineImageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
+		537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsCoreDataUserMapper.swift; sourceTree = "<group>"; };
 		53812026206EF86C0053A94E /* AWSFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSFriend.swift; sourceTree = "<group>"; };
 		53898640206AEB0700EBC67B /* AWSUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSUser.swift; sourceTree = "<group>"; };
 		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorkerTests.swift; sourceTree = "<group>"; };
@@ -1184,6 +1186,7 @@
 			children = (
 				53FBE799216125BB00C461FA /* CoreDataWorker.swift */,
 				53547C7A218DFB0D00EDD2A8 /* CoreDataMappingContext.swift */,
+				537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1496,6 +1499,7 @@
 				53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */,
 				534728CA20657FED00DC7966 /* AWSEmailAuthentication.swift in Sources */,
 				53B6CB90205ADD9300AE8EFB /* WineCellarInteractor.swift in Sources */,
+				537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */,
 				53ED1F8E204F359C00C129BC /* UserTableViewCell.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
 				53F24876206D6A0A0046B031 /* AWSUserRepository.swift in Sources */,

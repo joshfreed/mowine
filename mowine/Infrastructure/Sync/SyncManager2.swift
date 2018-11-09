@@ -10,17 +10,26 @@ import Foundation
 import JFLib
 import SwiftyBeaver
 
-class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: RemoteDataStore, TLocalDataStore : LocalDataStore, TRemoteDataStore.Entity == TLocalDataStore.Entity {
+class SyncManager2<TRemoteDataStore, TLocalDataStore, TDataMapper>
+where
+    TRemoteDataStore: RemoteDataStore,
+    TLocalDataStore: LocalDataStore,
+    TDataMapper: DataMapper,
+    TDataMapper.SourceType == TRemoteDataStore.Object,
+    TDataMapper.DestinationType == TLocalDataStore.L
+{
     let remoteDataStore: TRemoteDataStore
     let localDataStore: TLocalDataStore
+    let mapper: TDataMapper
     
-    init(remoteDataStore: TRemoteDataStore, localDataStore: TLocalDataStore) {
+    init(remoteDataStore: TRemoteDataStore, localDataStore: TLocalDataStore, mapper: TDataMapper) {
         self.remoteDataStore = remoteDataStore
         self.localDataStore = localDataStore
+        self.mapper = mapper
     }
     
     private var entityName: String {
-        return String(describing: TRemoteDataStore.Entity.self)
+        return String(describing: TRemoteDataStore.Object.self)
     }
     
     func syncObjects(completion: @escaping (EmptyResult) -> ()) {
@@ -34,7 +43,7 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
         }
     }
     
-    private func doSync(_ remoteObjects: [TRemoteDataStore.Entity], completion: @escaping (EmptyResult) -> ()) {
+    private func doSync(_ remoteObjects: [TRemoteDataStore.Object], completion: @escaping (EmptyResult) -> ()) {
         syncRemoteToLocal(remoteObjects) { result in
             switch result {
             case .success: self.syncLocalToRemote(completion: completion)
@@ -43,7 +52,7 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
         }
     }
     
-    func syncRemoteToLocal(_ remoteObjects: [TRemoteDataStore.Entity], completion: @escaping(EmptyResult) -> ()) {
+    func syncRemoteToLocal(_ remoteObjects: [TRemoteDataStore.Object], completion: @escaping(EmptyResult) -> ()) {
         localDataStore.open {
             do {
                 try self.syncRemoteToLocal(remoteObjects)
@@ -54,27 +63,29 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
         }
     }
     
-    private func syncRemoteToLocal(_ remoteObjects: [TRemoteDataStore.Entity]) throws {
+    private func syncRemoteToLocal(_ remoteObjects: [TRemoteDataStore.Object]) throws {
         for remoteObject in remoteObjects {
-            if var localObject = try localDataStore.getFor(remoteObject) {
-                if localObject.syncState == .synced, remoteObject.updatedAt > localObject.updatedAt {
-                    SwiftyBeaver.verbose("[\(entityName)] Updating local object with remote changes", context: [String(describing: TRemoteDataStore.Entity.self)])
-                    try localDataStore.update(remoteObject)
+            if let localObject = try localDataStore.getFor(remoteObject.getId()!) {
+                if let updatedAt = remoteObject.getUpdatedAt(), localObject.isModified(after: updatedAt) {
+                    SwiftyBeaver.verbose("[\(entityName)] Updating local object with remote changes")
+                    try mapper.map(from: remoteObject, to: localObject)
+                    try localDataStore.update(localObject)
                 }                
             } else {
                 SwiftyBeaver.verbose("[\(entityName)] Inserting new object from remote")
-                try localDataStore.insert(remoteObject)
+                let newLocalObject = try mapper.create(from: remoteObject)
+                try localDataStore.insert(newLocalObject)
             }
         }
         
-        let localObjects: [TLocalDataStore.Entity] = try localDataStore.getAll()
+        let localObjects: [TLocalDataStore.L] = try localDataStore.getAll()
         
         for localObject in localObjects {
-            if localObject.syncState == .created {
+            if localObject.isCreated() {
                 continue
             }
             
-            if !remoteObjects.contains(where: { $0.identifier == localObject.identifier }) {
+            if !remoteObjects.contains(where: { $0.getId() == localObject.getId() }) {
                 SwiftyBeaver.debug("[\(entityName)] Deleting local object not found in remote")
                 try localDataStore.delete(localObject)
             }
@@ -88,25 +99,36 @@ class SyncManager2<TRemoteDataStore, TLocalDataStore> where TRemoteDataStore: Re
     }
 }
 
-protocol Syncable {
-    var identifier: String { get }
-    var syncState: SyncStatus { get }
-    var updatedAt: Date { get set }
+protocol RemoteObject {
+    func getId() -> String?
+    func getUpdatedAt() -> Date?
+}
+
+protocol LocalObject {
+    func getId() -> String?
+    func isCreated() -> Bool
+    func isModified(after date: Date) -> Bool
 }
 
 protocol RemoteDataStore {
-    associatedtype Entity
-    func fetchAll(completion: @escaping (Result<[Entity]>) -> ())
+    associatedtype Object: RemoteObject
+    func fetchAll(completion: @escaping (Result<[Object]>) -> ())
 }
 
 protocol LocalDataStore {
-    associatedtype Entity: Syncable
-    
-    func delete(_ entity: Entity) throws
-    func getAll() throws -> [Entity]
-    func getFor(_ entity: Entity) throws -> Entity?    
-    func insert(_ entity: Entity) throws
+    associatedtype L: LocalObject
+    func delete(_ entity: L) throws
+    func getAll() throws -> [L]
+    func getFor(_ id: String) throws -> L?
+    func insert(_ entity: L) throws
     func open(completion: @escaping () -> ())
     func save()
-    func update(_ entity: Entity) throws
+    func update(_ entity: L) throws
+}
+
+protocol DataMapper {
+    associatedtype SourceType
+    associatedtype DestinationType
+    func create(from source: SourceType) throws -> DestinationType
+    func map(from source: SourceType, to destination: DestinationType) throws
 }

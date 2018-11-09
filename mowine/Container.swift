@@ -28,10 +28,7 @@ class Container {
         coreData: CoreDataService(context: persistentContainer.viewContext),
         coreDataWorker: coreDataWorker
     )
-    lazy var syncManager = SyncManager(
-        dynamoDb: DynamoDbService(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default()),
-        coreData: CoreDataService(context: Container.shared.persistentContainer.viewContext)
-    )
+    lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var coreDataWorker = CoreDataWorker()
     
