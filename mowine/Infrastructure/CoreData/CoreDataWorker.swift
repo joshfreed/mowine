@@ -100,7 +100,7 @@ class CoreDataWorker: CoreDataWorkerProtocol {
     
     func delete<Entity>(_ entity: Entity, from context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
         guard let managedEntity = try getManagedObject(for: entity, from: context) else {
-            return
+            throw CoreDataError.entityNotFound
         }
         
         context.delete(managedEntity)

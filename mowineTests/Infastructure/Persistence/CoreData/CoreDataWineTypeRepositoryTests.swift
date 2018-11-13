@@ -13,7 +13,7 @@ import CoreData
 
 class CoreDataWineTypeRepositoryTests: XCTestCase {
     var sut: CoreDataWineTypeRepository!
-    let coreData = CoreDataHelper()
+    var coreData: CoreDataHelper!
     var red: WineType!
     var white: WineType!
     var bubbly: WineType!
@@ -21,8 +21,9 @@ class CoreDataWineTypeRepositoryTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
+        coreData = CoreDataHelper.shared
         coreData.setUp()
-        sut = CoreDataWineTypeRepository(container: coreData.container)
+        sut = CoreDataWineTypeRepository(container: coreData.container, coreDataWorker: coreData.coreDataWorker)
         
         red = WineType(name: "Red", varieties: [
             WineVariety(name: "Merlot")
@@ -43,6 +44,7 @@ class CoreDataWineTypeRepositoryTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        coreData.tearDown()
     }
     
     // MARK: Get all

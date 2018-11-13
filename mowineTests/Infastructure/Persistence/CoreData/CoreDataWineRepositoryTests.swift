@@ -10,50 +10,58 @@ import XCTest
 @testable import mowine
 import CoreData
 import Nimble
+import JFLib
 
 class CoreDataWineRepositoryTests: XCTestCase {
     var sut: CoreDataWineRepository!
-    let coreData = CoreDataHelper()
+    var coreData: CoreDataHelper!
     var type: WineType!
     var variety: WineVariety!
     var variety2: WineVariety!
     var wine: Wine!
+    var user: User!
     
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        coreData.setUp()
-        let wineEntityMapper = CoreDataWineTranslator(context: coreData.container.viewContext)
-        sut = CoreDataWineRepository(container: coreData.container, wineEntityMapper: wineEntityMapper)
+        coreData = CoreDataHelper.shared
+        coreData.setUp()        
+        sut = CoreDataWineRepository(container: coreData.container, coreDataWorker: coreData.coreDataWorker)
         
+        user = User(id: UserId(), emailAddress: "guy@thing.com")
         variety = WineVariety(name: "Merlot")
         variety2 = WineVariety(name: "Chianti")
         type = WineType(name: "Red", varieties: [variety, variety2])
-        wine = Wine(userId: UserId(string: UUID().uuidString),type: type, variety: variety, name: "Freed 2015", rating: 5)
+        wine = Wine(userId: user.id, type: type, variety: variety, name: "Freed 2015", rating: 5)
         wine.location = "Wegman's"
         wine.notes = "These are some notes about this delicious wine"
         wine.price = "47.99"
 //        wine.photo = Data(repeating: 88, count: 44)
         wine.thumbnail = Data(repeating: 22, count: 10)
         wine.pairings = ["Sushi", "Pizza"]
+        
+        coreData.insert(user)
+        coreData.insert(type)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        coreData.tearDown()
         super.tearDown()
     }
     
     // MARK: Save
     
     func testSaveNewWine() {
+        print("testSaveNewWine")
         // Given
-        coreData.insert(variety)
-        coreData.insert(variety2)
-        coreData.insert(type)
         coreData.save()
         
         // When
-        sut.save(wine) { _ in }
+        var result: Result<Wine>?
+        sut.add(wine) { r in
+            result = r
+        }
+        expect(result).to(beSuccess())
         
         // Then
         let actual = loadById(wine.id)
@@ -77,9 +85,6 @@ class CoreDataWineRepositoryTests: XCTestCase {
     
     func testSaveUpdatesExistingWine() {
         // Given
-        coreData.insert(variety)
-        coreData.insert(variety2)
-        coreData.insert(type)
         coreData.insert(wine)
         coreData.save()
         let updated: Wine = wine
@@ -94,7 +99,11 @@ class CoreDataWineRepositoryTests: XCTestCase {
         updated.pairings = ["Sushi", "Bananas", "Mango"]
         
         // When
-        sut.save(updated) { _ in }
+        var result: Result<Wine>?
+        sut.save(updated) {  r in
+            result = r
+        }
+        expect(result).to(beSuccess())
         
         // Then
         expect(self.wineCount()).to(equal(1))
@@ -120,10 +129,9 @@ class CoreDataWineRepositoryTests: XCTestCase {
     
     func testGetMyWines() {
         // Given
-        let wine1 = WineBuilder.aWine().withType(type).build()
-        let wine2 = WineBuilder.aWine().withType(type).build()
-        let wine3 = WineBuilder.aWine().withType(type).build()
-        coreData.insert(type)
+        let wine1 = WineBuilder.aWine().withUser(user.id).withType(type).build()
+        let wine2 = WineBuilder.aWine().withUser(user.id).withType(type).build()
+        let wine3 = WineBuilder.aWine().withUser(user.id).withType(type).build()
         coreData.insert(wine1)
         coreData.insert(wine2)
         coreData.insert(wine3)
@@ -131,7 +139,7 @@ class CoreDataWineRepositoryTests: XCTestCase {
         var actual: [Wine] = []
         
         // When
-        sut.getMyWines { result in
+        sut.getWines(userId: user.id) { result in
             if case let .success(wines) = result {
                 actual = wines
             }
@@ -148,18 +156,25 @@ class CoreDataWineRepositoryTests: XCTestCase {
     
     func testDeleteWine() {
         // Given
-        let wine = WineBuilder.aWine().withVariety(variety).build()
-        coreData.insert(variety)
+        let wine = WineBuilder
+            .aWine()
+            .withUser(user.id)
+            .withType(type)
+            .withVariety(variety)
+            .build()
         coreData.insert(wine)
         coreData.save()
         var callbackWasCalled = false
         
         // When
-        sut.delete(wine) { result in
+        var result: EmptyResult?
+        sut.delete(wine) { r in
             callbackWasCalled = true
+            result = r
         }
         
         // Then
+        expect(result).to(beSuccess())
         expect(callbackWasCalled).to(equal(true))
         expect(self.wineCount()).to(equal(0))
         let actual = loadById(wine.id)

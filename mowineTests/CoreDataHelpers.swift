@@ -27,35 +27,60 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
     return managedObjectContext
 }
 
-func setUpInMemoryPersistentContainer() -> NSPersistentContainer {
-    let container = NSPersistentContainer(name: "mowine")
-    let description = NSPersistentStoreDescription()
-    description.type = NSInMemoryStoreType
-    container.persistentStoreDescriptions = [description]
-    
-    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-        
-    })
-    
-    return container
-}
-
 class CoreDataHelper {
-    var container: NSPersistentContainer!
+    let coreDataWorker = CoreDataWorker()
     
+    lazy var container: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "mowine")
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+        description.shouldAddStoreAsynchronously = false
+        container.persistentStoreDescriptions = [description]
+        
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        
+        return container
+    }()
+
     var context: NSManagedObjectContext {
         return container.viewContext
     }
     
+    static let shared = CoreDataHelper()
+    
+    private init() {}
+    
     func setUp() {
-        container = NSPersistentContainer(name: "mowine")
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-        container.persistentStoreDescriptions = [description]
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            
-        })
+        print("CoreDataHelper::setup")
+    }
+    
+    func tearDown() {
+        print("CoreDataHelper::tearDown")
+        deleteData(entityToFetch: "Type")
+        deleteData(entityToFetch: "Variety")
+        deleteData(entityToFetch: "Wine")
+        deleteData(entityToFetch: "User")
+        deleteData(entityToFetch: "Food")
+        deleteData(entityToFetch: "Friend")
+        try! context.save()
+    }
+    
+    func deleteData(entityToFetch: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityToFetch, in: context)
+        fetchRequest.includesPropertyValues = false
+        do {
+            let results = try context.fetch(fetchRequest) as! [NSManagedObject]
+            for result in results {
+                context.delete(result)
+            }
+        } catch {
+            fatalError("fetch error -\(error.localizedDescription)")
+        }
     }
     
     func save() {
@@ -67,17 +92,45 @@ class CoreDataHelper {
     }
     
     func insert(_ wineType: WineType) {
-        _ = CoreDataWineTypeTranslator.insert(model: wineType, in: container.viewContext)
+        try! coreDataWorker.insert(wineType, in: container.viewContext)
     }
     
     func insert(_ variety: WineVariety) {
-        let entity = ManagedWineVariety(context: container.viewContext)
-        entity.name = variety.name
+//        let entity = ManagedWineVariety(context: container.viewContext)
+//        entity.name = variety.name
     }
     
     func insert(_ wine: Wine) {
-        let entity = ManagedWine(context: container.viewContext)
-        let wineEntityMapper = CoreDataWineTranslator(context: container.viewContext)
-        wineEntityMapper.map(from: wine, to: entity)
+        try! coreDataWorker.insert(wine, in: container.viewContext)        
+    }
+    
+    func insert(_ user: User) {
+        try! coreDataWorker.insert(user, in: container.viewContext)
+    }
+}
+
+class MockCoreDataWorker: CoreDataWorkerProtocol {
+    func get<Entity>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, from context: NSManagedObjectContext) throws -> [Entity] where Entity : CoreDataConvertible {
+        return []
+    }
+    
+    func getOne<Entity>(with predicate: NSPredicate?, from context: NSManagedObjectContext) throws -> Entity? where Entity : CoreDataConvertible {
+        return nil
+    }
+    
+    func insert<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
+        
+    }
+    
+    func update<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
+        
+    }
+    
+    func delete<Entity>(_ entity: Entity, from context: NSManagedObjectContext) throws where Entity : CoreDataConvertible {
+        
+    }
+    
+    func getManagedObject<Entity>(for entity: Entity, from context: NSManagedObjectContext) throws -> Entity.ManagedType? where Entity : CoreDataConvertible {
+        return nil
     }
 }

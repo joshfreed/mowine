@@ -16,7 +16,6 @@ import AWSUserPoolsSignIn
 import AWSFacebookSignIn
 import SwiftyBeaver
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -34,10 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Container.shared.session.resume() { _ in }
 
-        if !Container.shared.session.isLoggedIn {
+        if Container.shared.session.isLoggedIn {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateInitialViewController()!
+            window = UIWindow()
+            window?.rootViewController = initialViewController
+            window?.makeKeyAndVisible()
+        } else {
             let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
             let initialViewController = storyboard.instantiateInitialViewController()!
-            window = UIWindow(frame: UIScreen.main.bounds)
+            window = UIWindow()
             window?.rootViewController = initialViewController
             window?.makeKeyAndVisible()
         }

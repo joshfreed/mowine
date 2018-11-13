@@ -21,6 +21,7 @@ class WineBuilder {
     private var photo: Data?
     private var thumbnail: Data?
     private var pairings: [String] = []
+    private var userId: UserId?
     
     static func aWine() -> WineBuilder {
         return WineBuilder()
@@ -32,14 +33,16 @@ class WineBuilder {
             name = "Wine\(num)"
         }
         
-        var userId = UserId(string: UUID().uuidString)
+        if userId == nil {
+            userId = UserId()
+        }
         
         var wine: Wine
         
         if let id = id {
-            wine = Wine(id: id, userId: userId, type: type, name: name!, rating: rating)
+            wine = Wine(id: id, userId: userId!, type: type, name: name!, rating: rating)
         } else {
-            wine = Wine(userId: userId, type: type, name: name!, rating: rating)
+            wine = Wine(userId: userId!, type: type, name: name!, rating: rating)
         }
         
         wine.variety = variety
@@ -51,6 +54,11 @@ class WineBuilder {
         wine.pairings = pairings
         
         return wine
+    }
+    
+    func withUser(_ userId: UserId) -> WineBuilder {
+        self.userId = userId
+        return self
     }
     
     func withType(_ type: WineType) -> WineBuilder {

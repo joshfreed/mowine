@@ -17,7 +17,6 @@ class CoreDataWineRepository: WineRepository {
     init(container: NSPersistentContainer, coreDataWorker: CoreDataWorkerProtocol) {
         self.container = container
         self.coreDataWorker = coreDataWorker
-//        self.coreDataService = CoreDataService(context: container.viewContext)
     }
     
     func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
@@ -28,15 +27,6 @@ class CoreDataWineRepository: WineRepository {
         } catch {
             completion(.failure(error))
         }
-//        _ = wine.toManagedObject(in: container.viewContext)
-//
-//        do {
-//            try container.viewContext.save()
-//            completion(.success(wine))
-//        } catch {
-//            let nserror = error as NSError
-//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//        }
     }
     
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {

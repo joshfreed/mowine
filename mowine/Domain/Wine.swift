@@ -102,8 +102,7 @@ extension Wine: CoreDataConvertible {
             managedObject.price = nil
         }
         
-        let user = User(id: userId, emailAddress: "") // todo - make this an actual association on Wine!!!!
-        managedObject.user = try mappingContext.syncOne(user)
+        managedObject.user = try mappingContext.syncOneManaged(predicate: NSPredicate(format: "userId == %@", userId.asString))
         managedObject.type = try mappingContext.syncOne(type)
         assert(managedObject.user != nil)
         assert(managedObject.type != nil)
@@ -120,10 +119,13 @@ extension Wine: CoreDataConvertible {
             return mf
         }
         managedObject.pairings = NSSet(array: managedPairings)
+        
+        managedObject.createdAt = Date()
+        managedObject.updatedAt = Date()
     }
     
     func getIdPredicate() -> NSPredicate {
-        return NSPredicate(format: "wineId == %@", id.uuidString)
+        return NSPredicate(format: "wineId == %@", id as CVarArg)
     }
 }
 
