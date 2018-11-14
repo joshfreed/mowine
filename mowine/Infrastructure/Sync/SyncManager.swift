@@ -15,57 +15,25 @@ class SyncManager {
         SwiftyBeaver.info("Starting sync")
         
         syncTypes()
-//        syncUsers()
+        syncUsers()
 //        syncFriendships()
 //        syncWines()
     }
     
     func syncTypes() {
         Container.shared.persistentContainer.performBackgroundTask { context in
-            let remoteWineTypeStore = MemoryWineTypeRepository()
+            let memoryWineTypeRepository = MemoryWineTypeRepository()
             let coreDataMappingContext = CoreDataMappingContext(worker: Container.shared.coreDataWorker, context: context)
             
             do {
-                _ = try coreDataMappingContext.syncSet(remoteWineTypeStore.types)
+                SwiftyBeaver.info("Starting sync for WineType")
+                _ = try coreDataMappingContext.syncSet(memoryWineTypeRepository.types)
                 try context.save()
                 SwiftyBeaver.info("Wine types synced successfully.")
             } catch {
                 SwiftyBeaver.error("Error syncing wine types. Error: \(error)")
             }
         }
-        
-        /*
-        let remoteWineTypeStore = MemoryWineTypeRepository()
-        let localWineTypeStore = CoreDataLocalDataStore<WineType>(coreDataWorker: Container.shared.coreDataWorker)
-        let wineTypeSyncer = SyncManager2(remoteDataStore: remoteWineTypeStore, localDataStore: localWineTypeStore)
-        
-        wineTypeSyncer.syncObjects { result in
-            switch result {
-            case .success: SwiftyBeaver.info("Wine types synced successfully.")
-            case .failure(let error): SwiftyBeaver.error("Error syncing wine types. Error: \(error)")
-            }
-        }
- */
-/*
-        let wineTypeRepository = MemoryWineTypeRepository()
-        for remoteType in wineTypeRepository.types {
-            if coreData.getManagedType(for: remoteType) == nil {
-                let managedType = ManagedWineType(context: coreData.context)
-                managedType.name = remoteType.name
-                
-                for remoteVariety in remoteType.varieties {
-                    var localVariety = coreData.getManagedVariety(for: remoteVariety)
-                    if localVariety == nil {
-                        localVariety = ManagedWineVariety(context: coreData.context)
-                        localVariety?.name = remoteVariety.name
-                    }
-                    managedType.addToVarieties(localVariety!)
-                }
-            }
-        }
-        
-        coreData.save()
- */
     }
     
     func syncUsers() {
@@ -82,28 +50,6 @@ class SyncManager {
                 }
             }
         }
-        
-        
-        /*
-        let remoteUserStore = DynamoDbRemoteDataStore<User>(dynamoDbWorker: Container.shared.dynamoDbWorker)
-        let localUserStore = CoreDataLocalDataStore<User>(coreDataWorker: Container.shared.coreDataWorker)
-        let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
-        
-        userSyncer.syncObjects { result in
-            switch result {
-            case .success: SwiftyBeaver.info("Users synced successfully.")
-            case .failure(let error): SwiftyBeaver.error("Error syncing users. Error: \(error)")
-            }
-        }
- */
-        
-//        syncUsers() { result in
-//            switch result {
-//            case .success: print("Synced users")
-//            case .failure(let error): print("Error syncing users: \(error)")
-//            }
-//        }
-
     }
     
     func syncFriendships() {

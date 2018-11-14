@@ -84,6 +84,7 @@ class CoreDataUserRepository: UserRepository {
             
             user.addFriend(user: friend)
             try coreDataWorker.update(user, in: container.viewContext)
+            try save()
             completion(.success(friend))
         } catch {
             completion(.failure(error))
@@ -103,6 +104,7 @@ class CoreDataUserRepository: UserRepository {
             
             user.removeFriend(user: friend)
             try coreDataWorker.update(user, in: container.viewContext)
+            try save()
             completion(.success)
         } catch {
             completion(.failure(error))

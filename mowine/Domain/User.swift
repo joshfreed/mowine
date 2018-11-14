@@ -81,8 +81,6 @@ extension User: CoreDataConvertible {
         var user = User(id: userId, emailAddress: managedObject.emailAddress ?? "")
         user.firstName = managedObject.firstName
         user.lastName = managedObject.lastName
-//        user.updatedAt = managedObject.updatedAt!
-//        user.syncState = SyncStatus(rawValue: Int(managedObject.syncState)) ?? .synced
         
         if let set = managedObject.friends, let array = Array(set) as? [ManagedFriend] {
             user.friends = array.compactMap {
@@ -101,8 +99,6 @@ extension User: CoreDataConvertible {
         managedObject.emailAddress = emailAddress
         managedObject.firstName = firstName
         managedObject.lastName = lastName
-//        managedObject.syncState = Int16(syncState.rawValue)
-//        managedObject.updatedAt = updatedAt
         managedObject.friends = try mappingContext.syncSet(friends)
         
         if managedObject.hasPersistentChangedValues {

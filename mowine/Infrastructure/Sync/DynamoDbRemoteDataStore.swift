@@ -10,7 +10,8 @@ import Foundation
 import JFLib
 import AWSDynamoDB
 
-class DynamoDbRemoteDataStore<AWSType>: RemoteDataStore where AWSType: AWSDynamoDBObjectModel, AWSType: RemoteObject {
+class DynamoDbRemoteDataStore<AWSType>: RemoteDataStore
+where AWSType: AWSDynamoDBObjectModel & AWSDynamoDBModeling, AWSType: RemoteObject {
     let dynamoDbWorker: DynamoDbWorkerProtocol
     
     init(dynamoDbWorker: DynamoDbWorkerProtocol) {
@@ -19,5 +20,17 @@ class DynamoDbRemoteDataStore<AWSType>: RemoteDataStore where AWSType: AWSDynamo
     
     func fetchAll(completion: @escaping (Result<[AWSType]>) -> ()) {
         dynamoDbWorker.scanRaw(completion: completion)
+    }
+    
+    func insert(_ object: AWSType, completion: @escaping (EmptyResult) -> ()) {
+        dynamoDbWorker.save(object, completion: completion)
+    }
+    
+    func update(_ object: AWSType, completion: @escaping (EmptyResult) -> ()) {
+        dynamoDbWorker.save(object, completion: completion)
+    }
+    
+    func delete(_ object: AWSType, completion: @escaping (EmptyResult) -> ()) {
+        dynamoDbWorker.remove(object, completion: completion)
     }
 }
