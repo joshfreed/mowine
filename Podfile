@@ -10,13 +10,12 @@ target 'mowine' do
   pod 'PureLayout'
   pod 'SwiftyBeaver'
   
-  # Auth dependencies
-  pod 'AWSMobileClient', '~> 2.6.5'
-  pod 'AWSAuthUI', '~> 2.6.5'
-  pod 'AWSUserPoolsSignIn', '~> 2.6.5'
-  pod 'AWSFacebookSignIn', '~> 2.6.5'
-  pod 'AWSDynamoDB', '~> 2.6.5'
-  pod 'AWSS3', '~> 2.6.5'
+  # AWS
+  pod 'AWSMobileClient', '~> 2.7.0'
+  pod 'AWSUserPoolsSignIn', '~> 2.7.0'
+  pod 'AWSFacebookSignIn', '~> 2.7.0'
+  pod 'AWSDynamoDB', '~> 2.7.0'
+  pod 'AWSS3', '~> 2.7.0'
 
   target 'mowineTests' do
     inherit! :search_paths

@@ -1,27 +1,28 @@
 PODS:
-  - AWSAuthCore (2.6.13):
-    - AWSCore (= 2.6.13)
-  - AWSAuthUI (2.6.13):
-    - AWSAuthCore (= 2.6.13)
-    - AWSCore (= 2.6.13)
-  - AWSCognitoIdentityProvider (2.6.13):
+  - AWSAuthCore (2.7.1):
+    - AWSCore (= 2.7.1)
+  - AWSAuthUI (2.7.1):
+    - AWSAuthCore (= 2.7.1)
+    - AWSCore (= 2.7.1)
+  - AWSCognitoIdentityProvider (2.7.1):
     - AWSCognitoIdentityProviderASF (= 1.0.1)
-    - AWSCore (= 2.6.13)
+    - AWSCore (= 2.7.1)
   - AWSCognitoIdentityProviderASF (1.0.1)
-  - AWSCore (2.6.13)
-  - AWSDynamoDB (2.6.13):
-    - AWSCore (= 2.6.13)
-  - AWSFacebookSignIn (2.6.13):
-    - AWSAuthCore (= 2.6.13)
+  - AWSCore (2.7.1)
+  - AWSDynamoDB (2.7.1):
+    - AWSCore (= 2.7.1)
+  - AWSFacebookSignIn (2.7.1):
+    - AWSAuthCore (= 2.7.1)
     - FBSDKCoreKit (~> 4.0)
     - FBSDKLoginKit (~> 4.0)
-  - AWSMobileClient (2.6.13):
-    - AWSAuthCore (= 2.6.13)
-  - AWSS3 (2.6.13):
-    - AWSCore (= 2.6.13)
-  - AWSUserPoolsSignIn (2.6.13):
-    - AWSAuthCore (= 2.6.13)
-    - AWSCognitoIdentityProvider (= 2.6.13)
+  - AWSMobileClient (2.7.1):
+    - AWSAuthCore (= 2.7.1)
+    - AWSCognitoIdentityProvider (= 2.7.1)
+  - AWSS3 (2.7.1):
+    - AWSCore (= 2.7.1)
+  - AWSUserPoolsSignIn (2.7.1):
+    - AWSAuthCore (= 2.7.1)
+    - AWSCognitoIdentityProvider (= 2.7.1)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -30,21 +31,21 @@ PODS:
   - Bolts/Tasks (1.9.0)
   - Cosmos (12.0.1)
   - Eureka (4.1.1)
-  - FBSDKCoreKit (4.31.1):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.31.1):
+  - FBSDKCoreKit (4.38.1):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.38.1):
     - FBSDKCoreKit
   - Nimble (7.3.0)
   - PureLayout (3.0.2)
   - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
-  - AWSAuthUI (~> 2.6.5)
-  - AWSDynamoDB (~> 2.6.5)
-  - AWSFacebookSignIn (~> 2.6.5)
-  - AWSMobileClient (~> 2.6.5)
-  - AWSS3 (~> 2.6.5)
-  - AWSUserPoolsSignIn (~> 2.6.5)
+  - AWSAuthUI (~> 2.7.0)
+  - AWSDynamoDB (~> 2.7.0)
+  - AWSFacebookSignIn (~> 2.7.0)
+  - AWSMobileClient (~> 2.7.0)
+  - AWSS3 (~> 2.7.0)
+  - AWSUserPoolsSignIn (~> 2.7.0)
   - Cosmos
   - Eureka
   - Nimble
@@ -73,25 +74,25 @@ SPEC REPOS:
     - SwiftyBeaver
 
 SPEC CHECKSUMS:
-  AWSAuthCore: 970e411f7fbb004e17cf827cd390eeaa96c35346
-  AWSAuthUI: d2d9d5de0ab4e86e63e63395fd23287452471661
-  AWSCognitoIdentityProvider: 205143a983c2e0ec98bd39aea81c4b6ac57a4b40
+  AWSAuthCore: 06c9e6a5224ee083d15614cc4d1284bb70e153d3
+  AWSAuthUI: 572f59a6b88e093cd77fe2b98828fd9ed0f69f95
+  AWSCognitoIdentityProvider: 591720033e5be65869e62fca1990dae39a5777f2
   AWSCognitoIdentityProviderASF: 5d31eef1c1962b4ad58e87ceee376b83b697bf9b
-  AWSCore: 13dfa245ea3bf06f24bf385433ab144378774114
-  AWSDynamoDB: 04d4f1f75cbd98723e6cf8a4fa817ab050a851a3
-  AWSFacebookSignIn: 16f3ced29902c3486088ec988227109fddc9f596
-  AWSMobileClient: a2e342a1c587dba6cfe577af3f8d23e01ce6fc0e
-  AWSS3: 6f776385def9630ab00244e74ce968f150a37426
-  AWSUserPoolsSignIn: 1e8fda35318cc13833c26b461c21dfae540e6f93
+  AWSCore: c7a97eee3e744f91f7167de12d8cb839b0c02475
+  AWSDynamoDB: a0dd15b015d2f57dab1d8435967734a90d3b2b88
+  AWSFacebookSignIn: ab39552004f229b0dfc2b282dc4b0e0d500aed54
+  AWSMobileClient: 749e27371424608a031edecc4cc0843a390b87c2
+  AWSS3: c0443acb4ed4c69be30e5750f5de8f7b668d34c0
+  AWSUserPoolsSignIn: 0a03e7a8390901f36a0cdc818054bd45466768ae
   Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
   Cosmos: 1976d8535e9f8fbb6b24716635d73935f520b95c
   Eureka: be640fcc48417c50bea4bf0bd6c9311ac33cd35e
-  FBSDKCoreKit: 3e000ec48de40eff715e13aeab0bde0069f9f74a
-  FBSDKLoginKit: 3c9384f7ed17adedc33694d7161463525db2ab08
+  FBSDKCoreKit: daf87d58d125ffc5cd891ad0645cdb88279d28e7
+  FBSDKLoginKit: 96bfaf921fe2519f827149c35888f0ccc36f7f01
   Nimble: 97dd13c7b4aad2703ccb2c333abf1bcab46690d8
   PureLayout: 5166b2d7444bed3556296dd6842aceb6f3c328cc
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: f9a79c5e60ebf2354ab508fb696e460976dfbea9
+PODFILE CHECKSUM: 11629a23d2764d8e4a276e1716934cfa3b92c3a2
 
 COCOAPODS: 1.5.3
