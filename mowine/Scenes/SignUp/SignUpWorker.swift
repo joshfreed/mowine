@@ -29,31 +29,7 @@ class SignUpWorker {
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
-        
-        // Little hacky, but since my user pool is setup w/ username as the primary login and email as an attribute alias,
-        // cognito will allow me to create even if the email address is already associated with an account
-        // By signing in first I can see if this email address is already associated with an account
-        
-        emailAuthService.signIn(emailAddress: emailAddress, password: password) { result in
-            switch result {
-            case .success:
-                // The user with this email address already exists AND this is the correct password!!
-                // The user already has an account but is trying to sign up again
-                completion(.success)
-            case .failure(let error):
-                switch error {
-                case EmailAuthenticationErrors.userNotFound:
-                    // This email address is not in use by another user account
-                    // Let's sign them up!
-                    self.emailAuthService.signUp(emailAddress: emailAddress, password: password, completion: completion)
-                case EmailAuthenticationErrors.notAuthorized:
-                    // This email address is already in use by another account and this password is not correct
-                    // Assume that another user has signed up with this email address
-                    completion(.failure(EmailAuthenticationErrors.emailAddressAlreadyInUse))
-                default: completion(.failure(error))
-                }
-            }
-        }
+        emailAuthService.signUp(emailAddress: emailAddress, password: password, completion: completion)               
     }
 
     func createUser(emailAddress: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {

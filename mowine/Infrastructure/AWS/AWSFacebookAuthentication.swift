@@ -13,10 +13,15 @@ import AWSFacebookSignIn
 import AWSUserPoolsSignIn
 import FBSDKLoginKit
 
+//
+// DEPRECATED
+// Not used any more, using AWSMobileAuth instead
+//
+
 class AWSFacebookAuthentication: FacebookAuthenticationService {
     lazy var providerKey = AWSFacebookSignInProvider.sharedInstance().identityProviderName
     
-    func signIn(completion: @escaping (EmptyResult) -> ()) {
+    func linkFacebookAccount(token: String, completion: @escaping (EmptyResult) -> ()) {
         AWSFacebookSignInProvider.sharedInstance().setLoginBehavior(FBSDKLoginBehavior.native.rawValue)
         
         AWSSignInManager.sharedInstance().login(signInProviderKey: providerKey) { (result: Any?, error: Error?) in

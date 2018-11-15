@@ -61,9 +61,6 @@ class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
     }
     
     func presentSignUp(user: User?, error: Error? = nil, message: String? = nil) {
-        if let e = error {
-            print("\(e)")
-        }
         let response = SignUp.SignUp.Response(user: user, error: error, message: message)
         self.presenter?.presentSignUp(response: response)
     }

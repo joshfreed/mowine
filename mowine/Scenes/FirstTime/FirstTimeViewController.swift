@@ -11,9 +11,8 @@
 //
 
 import UIKit
-import FBSDKCoreKit
 import FBSDKLoginKit
-import AWSAuthCore
+import SwiftyBeaver
 
 protocol FirstTimeDisplayLogic: class {
     func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel)
@@ -86,8 +85,18 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     // MARK: Continue with Facebook
 
     @IBAction func tappedContinueWithFacebook(_ sender: MWButton) {
-        let request = FirstTime.FacebookLogin.Request()
-        interactor?.loginWithFacebook(request: request)
+        let login = FBSDKLoginManager()
+        login.logIn(withReadPermissions: ["public_profile", "email"], from: self) { result, error in
+            if let error = error {
+                SwiftyBeaver.error("FB Error: \(error)")
+                return
+            }
+            
+            if let result = result, !result.isCancelled {
+//                self.loadingView?.show("Signing in...")
+                self.interactor?.linkToFacebookLogin(fbToken: result.token.tokenString)
+            }
+        }
     }
     
     func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel) {

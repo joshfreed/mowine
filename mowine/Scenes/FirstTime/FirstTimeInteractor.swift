@@ -14,7 +14,7 @@ import UIKit
 import JFLib
 
 protocol FirstTimeBusinessLogic {
-    func loginWithFacebook(request: FirstTime.FacebookLogin.Request)
+    func linkToFacebookLogin(fbToken: String)
 }
 
 protocol FirstTimeDataStore {
@@ -27,8 +27,8 @@ class FirstTimeInteractor: FirstTimeBusinessLogic, FirstTimeDataStore {
 
     // MARK: Login with facebook
 
-    func loginWithFacebook(request: FirstTime.FacebookLogin.Request) {
-        worker?.loginWithFacebook() { result in
+    func linkToFacebookLogin(fbToken: String) {
+        worker?.loginWithFacebook(token: fbToken) { result in
             switch result {
             case .success: self.createUserFromFacebookInfo()
             case .failure(let error): self.presentFacebookLoginError(error)

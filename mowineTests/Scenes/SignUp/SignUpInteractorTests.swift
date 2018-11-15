@@ -95,7 +95,6 @@ class SignUpInteractorTests: XCTestCase {
     // Happy path. The user's identity is created and a user object is added to the repository
     func test_signUp() {
         // Given
-        emailAuthService.identityDoesNotExist(for: "jbone@test.com")
         emailAuthService.signUpWillSucceed()
         session.login(userId: UserId())
         userRepository.saveUserWillSucceed()
@@ -110,47 +109,8 @@ class SignUpInteractorTests: XCTestCase {
         presenter.verifyPresentedSignUpSuccess(emailAddress: "jbone@test.com")
     }
     
-    func test_signUp_emailAddressAlreadyExists() {
-        // Given
-        emailAuthService.identity(for: "jbone@test.com", password: "whatever")
-        session.login(userId: UserId())
-        let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
-        
-        // When
-        sut.signUp(request: request)
-        
-        // Then
-        
-        emailAuthService.verifyIdentityWasNotCreated()
-        userRepository.verifyUserNotAddedToRepository()
-        presenter.verifyPresentedSignUpFailure(
-            error: EmailAuthenticationErrors.emailAddressAlreadyInUse,
-            message: "That email address is already associated with an account. Try signing in or resetting your password."
-        )
-    }
-    
-    // This scenario can happen if the user completes the sign up part of the flow, but there's an error adding the user to repository
-    // Without this case, the emailAuth service would try to sign up the user again, and likely be told "there's already a user with this email address"
-    func test_signUp_userIdentityExistsButUserIsNotInRepository() {
-        // Given
-        emailAuthService.identity(for: "jbone@test.com", password: "password123")
-        session.login(userId: UserId())
-        userRepository.doesNotContainUser(emailAddress: "jbone@test.com")
-        userRepository.saveUserWillSucceed()
-        let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
-        
-        // When
-        sut.signUp(request: request)
-        
-        // Then
-        emailAuthService.verifyIdentityWasNotCreated()
-        userRepository.verifyUserAddedToRepository(emailAddress: "jbone@test.com", firstName: "Jeff", lastName: "Beans")
-        presenter.verifyPresentedSignUpSuccess(emailAddress: "jbone@test.com")
-    }
-
     func test_signUp_anErrorOccursWhileCreatingTheIdentity() {
         // Given
-        emailAuthService.identityDoesNotExist(for: "jbone@test.com")
         emailAuthService.signUpWillFail(error: TestError.unknownError)
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
         
@@ -164,7 +124,6 @@ class SignUpInteractorTests: XCTestCase {
     
     func test_signUp_anErrorOccursWhileAddingTheUserToTheRepository() {
         // Given
-        emailAuthService.identityDoesNotExist(for: "jbone@test.com")
         session.login(userId: UserId()) // added this to make it pass - does it make sense for the use case tho?
         emailAuthService.signUpWillSucceed()
         userRepository.saveUserWillFail(error: TestError.unknownError)
@@ -191,39 +150,5 @@ class SignUpInteractorTests: XCTestCase {
         // Then
         userRepository.verifyUserNotAddedToRepository()
         presenter.verifyPresentedSignUpFailure(error: error, message: "Your password is invalid")
-    }
-    
-    func test_signUp_theSignInActionHasAnError() {
-        // Given
-        emailAuthService.signInWillFail(error: TestError.unknownError)
-        let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
-        
-        // When
-        sut.signUp(request: request)        
-        
-        // Then
-        emailAuthService.verifyIdentityWasNotCreated()
-        userRepository.verifyUserNotAddedToRepository()
-        presenter.verifyPresentedSignUpFailure(error: TestError.unknownError)
-    }
-    
-    // The user signs up w/ an exist identity and the correct password.
-    // The user object exists in the repository.
-    // Don't create a new identity; Don't insert a new user object. Just do nothing, and sign in.
-    // I really don't know how this scenario could happen...
-    func test_signUp_userIdentityExists_and_userIsInRepository() {
-        // Given
-        emailAuthService.identity(for: "jbone@test.com", password: "password123")
-        session.login(userId: UserId())
-        userRepository.containsUser(emailAddress: "jbone@test.com")
-        let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
-        
-        // When
-        sut.signUp(request: request)
-        
-        // Then
-        emailAuthService.verifyIdentityWasNotCreated()
-        userRepository.verifyUserNotAddedToRepository()
-        presenter.verifyPresentedSignUpSuccess(emailAddress: "jbone@test.com")
     }
 }

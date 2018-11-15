@@ -16,8 +16,8 @@ class Container {
     private init() {}
 
     lazy var session: Session = AWSContainer.shared.session
-    lazy var emailAuthService: EmailAuthenticationService = AWSContainer.shared.emailAuthService
-    lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.facebookService
+    lazy var emailAuthService: EmailAuthenticationService = AWSContainer.shared.mobileAuth
+    lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.mobileAuth
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
     lazy var wineRepository = CoreDataWineRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
@@ -70,10 +70,7 @@ class AWSContainer {
     private init() {}
     
     lazy var session = AWSSession(userRepository: Container.shared.userRepository)
-    lazy var emailAuthService = AWSEmailAuthenticationService()
-    lazy var facebookService = AWSFacebookAuthentication()
-    lazy var userRepository = AWSUserRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
-//    lazy var wineRepository = AWSWineRepository(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
+    lazy var mobileAuth = AWSMobileAuth()
     lazy var wineImageRepository = S3WineImageRepository(
         transferUtility: AWSS3TransferUtility.default(),
         session: Container.shared.session

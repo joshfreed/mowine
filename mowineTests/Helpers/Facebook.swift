@@ -17,7 +17,7 @@ class MockFacebookAuthService: FacebookAuthenticationService {
         signInResult = .success
     }
     var signInCalled = false
-    func signIn(completion: @escaping (EmptyResult) -> ()) {
+    func linkFacebookAccount(token: String, completion: @escaping (EmptyResult) -> ()) {
         signInCalled = true
         if let result = signInResult {
             completion(result)

@@ -71,15 +71,15 @@ class FirstTimeInteractorTests: XCTestCase {
     
     func testLoginWithFacebook() {
         // Given
+        let token = "abcdefghijklmnop"
         facebookAuth.signInWillSucceed()
         facebookGraphApi.setMe(emailAddress: "jbomb@gmail.com", firstName: "Jimbo", lastName: "Jones")
         session.login(userId: UserId())
         userRepository.doesNotContainUser(emailAddress: "jbomb@gmail.com")
         userRepository.saveUserWillSucceed()
-        let request = FirstTime.FacebookLogin.Request()
-
+        
         // When
-        sut.loginWithFacebook(request: request)
+        sut.linkToFacebookLogin(fbToken: token)
 
         // Then
         userRepository.verifyUserAddedToRepository(emailAddress: "jbomb@gmail.com", firstName: "Jimbo", lastName: "Jones")

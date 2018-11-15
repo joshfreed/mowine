@@ -2,3 +2,5 @@ xcuserdata/
 .idea/
 Secrets.plist
 awsconfiguration.json
+amplify/
+.amplifyrc

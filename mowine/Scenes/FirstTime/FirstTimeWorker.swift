@@ -36,8 +36,8 @@ class FirstTimeWorker {
         self.session = session
     }
 
-    func loginWithFacebook(completion: @escaping (EmptyResult) -> ()) {
-        fbAuth.signIn(completion: completion)
+    func loginWithFacebook(token: String, completion: @escaping (EmptyResult) -> ()) {
+        fbAuth.linkFacebookAccount(token: token, completion: completion)
     }
     
     func createUserFromFacebookInfo(completion: @escaping (Result<User>) -> ()) {

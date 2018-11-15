@@ -28,7 +28,7 @@ class SignUpRouter: NSObject, SignUpRoutingLogic, SignUpDataPassing {
 
     func routeToSignedIn() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let destinationVC = storyboard.instantiateInitialViewController() as! TabBarViewController
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
         navigateToSignedIn(source: viewController!, destination: destinationVC)
     }
 

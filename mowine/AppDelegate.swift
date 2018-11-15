@@ -27,25 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         AWSDDLog.sharedInstance.logLevel = .info
-        AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
-
-        _ = AWSContainer.shared.emailAuthService.pool
         
-        Container.shared.session.resume() { _ in }
-
-        if Container.shared.session.isLoggedIn {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController = storyboard.instantiateInitialViewController()!
-            window = UIWindow()
-            window?.rootViewController = initialViewController
-            window?.makeKeyAndVisible()
-        } else {
-            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-            let initialViewController = storyboard.instantiateInitialViewController()!
-            window = UIWindow()
-            window?.rootViewController = initialViewController
-            window?.makeKeyAndVisible()
+        AWSMobileClient.sharedInstance().addUserStateListener(self) { userState, info in
+            switch (userState) {
+            case .guest:
+                SwiftyBeaver.debug("user is in guest mode.")
+            case .signedOut:
+                SwiftyBeaver.debug("user signed out")
+            case .signedIn:
+                SwiftyBeaver.debug("user is signed in.")
+            case .signedOutUserPoolsTokenInvalid:
+                SwiftyBeaver.debug("need to login again.")
+            case .signedOutFederatedTokensInvalid:
+                SwiftyBeaver.debug("user logged in via federation, but currently needs new tokens")
+            default:
+                SwiftyBeaver.debug("unsupported")
+            }
         }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()!
+        window = UIWindow()
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
         
         return true
     }
@@ -62,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwiftyBeaver.addDestination(platform)
     }
     
+/*
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return AWSMobileClient.sharedInstance().interceptApplication(
             application, open: url,
@@ -69,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             annotation: annotation
         )
     }
+ */
 
     private func deleteDatabase() {
         var url = NSPersistentContainer.defaultDirectoryURL()
@@ -78,9 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try FileManager.default.removeItem(at: url)
         } catch {
             fatalError("\(error)")
-        }
-        
-        UserDefaults.standard.set(false, forKey: "isPreloaded")
+        }        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -99,10 +103,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")
+        SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")      
         
         if Container.shared.session.isLoggedIn {
-            Container.shared.syncManager.sync()
+//            Container.shared.syncManager.sync()
         }
     }
 

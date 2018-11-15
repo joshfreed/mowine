@@ -14,6 +14,8 @@ class SyncManager {
     func sync() {
         SwiftyBeaver.info("Starting sync")
         
+        fatalError("do not sync")
+        
         syncTypes()
         syncUsers()
 //        syncFriendships()
