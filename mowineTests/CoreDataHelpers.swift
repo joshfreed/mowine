@@ -107,6 +107,17 @@ class CoreDataHelper {
     func insert(_ user: User) {
         try! coreDataWorker.insert(user, in: container.viewContext)
     }
+    
+    func getOne<T>(predicate: NSPredicate) -> T? where T: NSManagedObject {
+        let fetchRequest = T.fetchRequest()
+        fetchRequest.predicate = predicate
+        let results = try! context.fetch(fetchRequest) as? [T]
+        return results?.first
+    }
+    
+    func getManagedUser(by userId: UserId) -> ManagedUser? {
+        return getOne(predicate: NSPredicate(format: "userId == %@", userId.asString))
+    }
 }
 
 class MockCoreDataWorker: CoreDataWorkerProtocol {

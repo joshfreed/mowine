@@ -139,52 +139,63 @@ where
     func syncLocalToRemote(completion: @escaping (EmptyResult) -> ()) {
         do {
             let localObjects: [TLocalDataStore.L] = try localDataStore.getAll()
-
+            let group = DispatchGroup()
+            
             for localObject in localObjects {
                 switch localObject.getSyncStatus() {
                 case .none: SwiftyBeaver.warning("[\(entityName)] Found local object w/o a valid sync state. Id: \(localObject.getId() ?? "nil")")
                 case .some(.synced): break
-                case .some(.created): try self.sendLocalObjecToRemote(localObject)
-                case .some(.modified): try self.updateRemoteFromLocal(localObject)
-                case .some(.deleted): try self.deleteObjectFromRemote(localObject)
+                case .some(.created): try self.sendLocalObjecToRemote(localObject, dispatchGroup: group)
+                case .some(.modified): try self.updateRemoteFromLocal(localObject, dispatchGroup: group)
+                case .some(.deleted): try self.deleteObjectFromRemote(localObject, dispatchGroup: group)
                 }
             }
-            completion(.success)
+            
+            group.notify(queue: DispatchQueue.global(qos: .background)) {
+                self.localDataStore.save()
+                completion(.success)
+            }
         } catch {
             completion(.failure(error))
         }
     }
     
-    func sendLocalObjecToRemote(_ localObject: TLocalDataStore.L) throws {
+    func sendLocalObjecToRemote(_ localObject: TLocalDataStore.L, dispatchGroup: DispatchGroup) throws {
         SwiftyBeaver.info("[\(entityName)] Sending new local object to remote")
+        dispatchGroup.enter()
         let remoteObject = try mapper.construct(from: localObject)
         remoteDataStore.insert(remoteObject) { result in
             switch result {
             case .success: localObject.markSynced()
             case .failure(let error): SwiftyBeaver.error("[\(self.entityName)] \(error)")
             }
+            dispatchGroup.leave()
         }
     }
     
-    func updateRemoteFromLocal(_ localObject: TLocalDataStore.L) throws {
+    func updateRemoteFromLocal(_ localObject: TLocalDataStore.L, dispatchGroup: DispatchGroup) throws {
         SwiftyBeaver.info("[\(entityName)] Sending updated local object to remote")
+        dispatchGroup.enter()
         let remoteObject = try mapper.construct(from: localObject)
         remoteDataStore.update(remoteObject) { result in
             switch result {
             case .success: localObject.markSynced()
             case .failure(let error): SwiftyBeaver.error("[\(self.entityName)] \(error)")
             }
+            dispatchGroup.leave()
         }
     }
     
-    func deleteObjectFromRemote(_ localObject: TLocalDataStore.L) throws {
+    func deleteObjectFromRemote(_ localObject: TLocalDataStore.L, dispatchGroup: DispatchGroup) throws {
         SwiftyBeaver.info("[\(entityName)] Removing deleteing local object from remote")
+        dispatchGroup.enter()
         let remoteObject = try mapper.construct(from: localObject)
         remoteDataStore.delete(remoteObject) { result in
             switch result {
             case .success: localObject.markSynced()
             case .failure(let error): SwiftyBeaver.error("[\(self.entityName)] \(error)")
             }
+            dispatchGroup.leave()
         }
     }
 }

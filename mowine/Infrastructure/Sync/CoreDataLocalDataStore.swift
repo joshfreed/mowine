@@ -50,11 +50,11 @@ class CoreDataLocalDataStore<Entity>: LocalDataStore where Entity: CoreDataObjec
     }
     
     func save() {
-        do {
-            try context.save()
-        } catch {
-            fatalError("Failed saving context: \(error)")
-        }
+//        do {
+//            try context.save()
+//        } catch {
+//            fatalError("Failed saving context: \(error)")
+//        }
     }
     
     func update(_ entity: Entity) throws {

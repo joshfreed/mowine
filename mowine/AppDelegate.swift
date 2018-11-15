@@ -51,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
         
+        Container.shared.syncManager.initialize()
+        
         return true
     }
     
@@ -106,14 +108,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")      
         
         if Container.shared.session.isLoggedIn {
-//            Container.shared.syncManager.sync()
+            Container.shared.syncManager.sync()
         }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+//        self.saveContext()
     }
 
     // MARK: - Core Data stack

@@ -9,53 +9,100 @@
 import Foundation
 import JFLib
 import SwiftyBeaver
+import CoreData
 
-class SyncManager {    
+class SyncManager {
+    private(set) var coreDataSyncableWatcher: CoreDataSyncableWatcher?
+    private var isSyncing: Bool = false
+    
+    func initialize() {
+        coreDataSyncableWatcher = CoreDataSyncableWatcher(container: Container.shared.persistentContainer)
+    }
+
     func sync() {
-        SwiftyBeaver.info("Starting sync")
-        
-        fatalError("do not sync")
-        
-        syncTypes()
-        syncUsers()
-//        syncFriendships()
-//        syncWines()
-    }
-    
-    func syncTypes() {
-        Container.shared.persistentContainer.performBackgroundTask { context in
-            let memoryWineTypeRepository = MemoryWineTypeRepository()
-            let coreDataMappingContext = CoreDataMappingContext(worker: Container.shared.coreDataWorker, context: context)
-            
-            do {
-                SwiftyBeaver.info("Starting sync for WineType")
-                _ = try coreDataMappingContext.syncSet(memoryWineTypeRepository.types)
-                try context.save()
-                SwiftyBeaver.info("Wine types synced successfully.")
-            } catch {
-                SwiftyBeaver.error("Error syncing wine types. Error: \(error)")
-            }
+        if isSyncing {
+            return
         }
-    }
-    
-    func syncUsers() {
+
+        SwiftyBeaver.info("Starting sync")
+
+        isSyncing = true
+        
+        var operations: [SyncOperation] = []
+        operations.append(WineTypeSyncOperation())
+        operations.append(UserSyncOperation())
+        
         Container.shared.persistentContainer.performBackgroundTask { context in
-            let remoteUserStore = DynamoDbRemoteDataStore<AWSUser>(dynamoDbWorker: Container.shared.dynamoDbWorker)
-            let localUserStore = CoreDataLocalDataStore<ManagedUser>(coreDataWorker: Container.shared.coreDataWorker, context: context)
-            let userMapper = AwsCoreDataUserMapper(context: context)
-            let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore, mapper: userMapper)
+            let group = DispatchGroup()
             
-            userSyncer.syncObjects { result in
-                switch result {
-                case .success: SwiftyBeaver.info("Users synced successfully.")
-                case .failure(let error): SwiftyBeaver.error("Error syncing users. Error: \(error)")
+            for operation in operations {
+                SwiftyBeaver.info("\(String(describing: type(of: operation))) started...")
+                
+                group.enter()
+                
+                operation.sync(context: context) { result in
+                    switch result {
+                    case .success: SwiftyBeaver.info("\(String(describing: type(of: operation))) completed successfully.")
+                    case .failure(let error): SwiftyBeaver.error("\(String(describing: type(of: operation))) failed with error: \(error)")
+                    }
+                    group.leave()
                 }
             }
+            
+            group.notify(queue: .global(qos: .background)) {
+                do {
+                    try context.save()
+                } catch {
+                    SwiftyBeaver.error("\(error)")
+                    SwiftyBeaver.error("\(error.localizedDescription)")
+                }
+                
+                self.isSyncing = false
+                
+                SwiftyBeaver.info("Sync complete")
+            }
         }
     }
     
-    func syncFriendships() {
+    /*
+    func syncTypes(dispatchGroup: DispatchGroup, context: NSManagedObjectContext) {
+        dispatchGroup.enter()
+        
+        let memoryWineTypeRepository = MemoryWineTypeRepository()
+        let coreDataMappingContext = CoreDataMappingContext(worker: Container.shared.coreDataWorker, context: context)
+        
+        do {
+            SwiftyBeaver.info("Starting sync for WineType")
+            _ = try coreDataMappingContext.syncSet(memoryWineTypeRepository.types)
+            SwiftyBeaver.info("Wine types synced successfully.")
+        } catch {
+            SwiftyBeaver.error("Error syncing wine types. Error: \(error)")
+        }
+        
+        dispatchGroup.leave()
+    }
+    
+    func syncUsers(dispatchGroup: DispatchGroup, context: NSManagedObjectContext) {
+        dispatchGroup.enter()
+        
+        let remoteUserStore = DynamoDbRemoteDataStore<AWSUser>(dynamoDbWorker: Container.shared.dynamoDbWorker)
+        let localUserStore = CoreDataLocalDataStore<ManagedUser>(coreDataWorker: Container.shared.coreDataWorker, context: context)
+        let userMapper = AwsCoreDataUserMapper(context: context)
+        let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore, mapper: userMapper)
+        
+        userSyncer.syncObjects { result in
+            switch result {
+            case .success: SwiftyBeaver.info("Users synced successfully.")
+            case .failure(let error): SwiftyBeaver.error("Error syncing users. Error: \(error)")
+            }
+            
+            dispatchGroup.leave()
+        }
+    }
+ */
         /*
+    func syncFriendships() {
+   
         let remoteUserStore = DynamoDbRemoteDataStore<Friendship>(dynamoDbWorker: Container.shared.dynamoDbWorker)
         let localUserStore = CoreDataLocalDataStore<Friendship>(coreDataWorker: Container.shared.coreDataWorker)
         let syncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore)
@@ -66,9 +113,9 @@ class SyncManager {
             case .failure(let error): SwiftyBeaver.error("Error syncing Friendships. Error: \(error)")
             }
         }
- */
+ 
     }
-    
+ */
 /*
     func syncUsers2(completion: @escaping (EmptyResult) -> ()) {
         SwiftyBeaver.info("Starting users")
@@ -202,3 +249,30 @@ class SyncManager {
 */
 }
 
+protocol SyncOperation {
+    func sync(context: NSManagedObjectContext, completion: @escaping (EmptyResult) -> ())
+}
+
+class WineTypeSyncOperation: SyncOperation {
+    func sync(context: NSManagedObjectContext, completion: @escaping (EmptyResult) -> ()) {
+        let memoryWineTypeRepository = MemoryWineTypeRepository()
+        let coreDataMappingContext = CoreDataMappingContext(worker: Container.shared.coreDataWorker, context: context)
+        
+        do {
+            _ = try coreDataMappingContext.syncSet(memoryWineTypeRepository.types)
+            completion(.success)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+}
+
+class UserSyncOperation: SyncOperation {
+    func sync(context: NSManagedObjectContext, completion: @escaping (EmptyResult) -> ()) {
+        let remoteUserStore = DynamoDbRemoteDataStore<AWSUser>(dynamoDbWorker: Container.shared.dynamoDbWorker)
+        let localUserStore = CoreDataLocalDataStore<ManagedUser>(coreDataWorker: Container.shared.coreDataWorker, context: context)
+        let userMapper = AwsCoreDataUserMapper(context: context)
+        let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore, mapper: userMapper)
+        userSyncer.syncObjects(completion: completion)
+    }
+}

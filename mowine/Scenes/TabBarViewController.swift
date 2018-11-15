@@ -9,12 +9,9 @@
 import UIKit
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
-//    var session: Session!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self
-//        session = Container.shared.session
+        delegate = self        
     }
 
     // MARK: - UITabBarControllerDelegate

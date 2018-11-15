@@ -59,25 +59,11 @@ extension AWSUser: RemoteObject {
     }
 }
 
-extension ManagedUser: LocalObject {
+extension ManagedUser: CoreDataSyncable {
     func getId() -> String? {
         return userId
     }
 
-    func getUpdatedAt() -> Date? {
-        return updatedAt
-    }
-    
-    func getSyncStatus() -> SyncStatus? {
-        return SyncStatus(rawValue: Int(syncState))
-    }
-    
-    func markSynced() {
-        syncState = Int16(SyncStatus.synced.rawValue)
-    }
-}
-
-extension ManagedUser: CoreDataObject {
     static func getIdProperty() -> String {
         return "userId"
     }

@@ -221,6 +221,8 @@
 		53F725AD219C650000F8176F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F725AC219C650000F8176F /* awsconfiguration.json */; };
 		53F725AF219C7DEE00F8176F /* AWSMobileAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725AE219C7DEE00F8176F /* AWSMobileAuth.swift */; };
 		53F725B3219CB79600F8176F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B2219CB79600F8176F /* StartViewController.swift */; };
+		53F725B5219DB99F00F8176F /* ManagedUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B4219DB99F00F8176F /* ManagedUserTests.swift */; };
+		53F725B7219DC1DA00F8176F /* CoreDataSyncableWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B6219DC1DA00F8176F /* CoreDataSyncableWatcher.swift */; };
 		53FBE79A216125BB00C461FA /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE799216125BB00C461FA /* CoreDataWorker.swift */; };
 		53FBE79C2161261400C461FA /* DynamoDbWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79B2161261400C461FA /* DynamoDbWorker.swift */; };
 		53FBE79E2161267500C461FA /* CoreDataLocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */; };
@@ -484,6 +486,8 @@
 		53F725AC219C650000F8176F /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		53F725AE219C7DEE00F8176F /* AWSMobileAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSMobileAuth.swift; sourceTree = "<group>"; };
 		53F725B2219CB79600F8176F /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		53F725B4219DB99F00F8176F /* ManagedUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedUserTests.swift; sourceTree = "<group>"; };
+		53F725B6219DC1DA00F8176F /* CoreDataSyncableWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSyncableWatcher.swift; sourceTree = "<group>"; };
 		53FBE799216125BB00C461FA /* CoreDataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
 		53FBE79B2161261400C461FA /* DynamoDbWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbWorker.swift; sourceTree = "<group>"; };
 		53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataLocalDataStore.swift; sourceTree = "<group>"; };
@@ -794,6 +798,7 @@
 			children = (
 				53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */,
 				5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */,
+				53F725B4219DB99F00F8176F /* ManagedUserTests.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -921,6 +926,7 @@
 				53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */,
 				53FBE7A121612B5F00C461FA /* SyncManager2.swift */,
 				537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */,
+				53F725B6219DC1DA00F8176F /* CoreDataSyncableWatcher.swift */,
 			);
 			path = Sync;
 			sourceTree = "<group>";
@@ -1648,6 +1654,7 @@
 				536E85A4204F507D004D5426 /* Fakes.swift in Sources */,
 				537740AA1E5BD58A00A1D282 /* WineImageWorker.swift in Sources */,
 				53112849205F06800094DC35 /* TabBarViewController.swift in Sources */,
+				53F725B7219DC1DA00F8176F /* CoreDataSyncableWatcher.swift in Sources */,
 				53ED1F87204F2D5C00C129BC /* FriendsModels.swift in Sources */,
 				53ED1F7C20489DBD00C129BC /* User.swift in Sources */,
 				53A8D5F9204611A1000AD7A3 /* MyAccountModels.swift in Sources */,
@@ -1719,6 +1726,7 @@
 				536E85B42050A729004D5426 /* UserBuilder.swift in Sources */,
 				53CA1E21206C2F2400043B3A /* SignUpWorkerTests.swift in Sources */,
 				53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */,
+				53F725B5219DB99F00F8176F /* ManagedUserTests.swift in Sources */,
 				53489623203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift in Sources */,
 				5348961D203E0FA600B7547A /* Mocks.swift in Sources */,
 				53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */,
