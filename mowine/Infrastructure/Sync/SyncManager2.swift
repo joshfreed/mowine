@@ -34,7 +34,7 @@ where
     
     func syncObjects(completion: @escaping (EmptyResult) -> ()) {
         SwiftyBeaver.info("Starting sync for \(entityName)")
-        
+
         remoteDataStore.fetchAll() { result in
             switch result {
             case .success(let remoteObjects): self.doSync(remoteObjects, completion: completion)

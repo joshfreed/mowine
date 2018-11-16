@@ -21,7 +21,7 @@ class CoreDataWineTypeRepository: WineTypeRepository {
     
     func getAll(completion: @escaping (Result<[WineType]>) -> ()) {
         do {
-            let wineTypes: [WineType] = try coreDataWorker.get(with: nil, sortDescriptors: nil, from: container.viewContext)
+            let wineTypes: [WineType] = try coreDataWorker.get(with: nil, sortDescriptors: nil, fetchLimit: nil, from: container.viewContext)
             completion(.success(wineTypes))
         } catch {
             completion(.failure(error))
@@ -39,6 +39,7 @@ class CoreDataWineTypeRepository: WineTypeRepository {
     }
 }
 
+/*
 class CoreDataWineTypeTranslator {
     static func makeModel(from entity: ManagedWineType) -> WineType? {
         guard let name = entity.name else {
@@ -59,3 +60,4 @@ class CoreDataWineTypeTranslator {
         return entity
     }
 }
+*/

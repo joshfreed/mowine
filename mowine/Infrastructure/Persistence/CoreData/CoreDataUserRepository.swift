@@ -51,7 +51,7 @@ class CoreDataUserRepository: UserRepository {
         let searchPredicate = NSCompoundPredicate(type: .or, subpredicates: predicates)
         
         do {
-            let users: [User] = try coreDataWorker.get(with: searchPredicate, sortDescriptors: nil, from: container.viewContext)
+            let users: [User] = try coreDataWorker.get(with: searchPredicate, sortDescriptors: nil, fetchLimit: nil, from: container.viewContext)
             completion(.success(users))
         } catch {
             completion(.failure(error))

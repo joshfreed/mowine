@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Food" representedClassName="ManagedFood" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -27,13 +27,12 @@
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Type" inverseName="varieties" inverseEntity="Type" syncable="YES"/>
     </entity>
     <entity name="Wine" representedClassName="ManagedWine" syncable="YES" codeGenerationType="class">
-        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="price" optional="YES" attributeType="Decimal" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="syncStatus" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="syncState" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="wineId" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
@@ -48,6 +47,6 @@
         <element name="Type" positionX="-102.42578125" positionY="50.5390625" width="128" height="75"/>
         <element name="User" positionX="-113.71875" positionY="-179.875" width="128" height="180"/>
         <element name="Variety" positionX="-105.45703125" positionY="215.00390625" width="128" height="75"/>
-        <element name="Wine" positionX="-383.36328125" positionY="-101.33984375" width="128" height="255"/>
+        <element name="Wine" positionX="-383.36328125" positionY="-101.33984375" width="128" height="240"/>
     </elements>
 </model>

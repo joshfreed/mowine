@@ -37,21 +37,6 @@ class CoreDataWineRepository: WineRepository {
         } catch {
             completion(.failure(error))
         }
-        
-//        guard let managedWine = coreDataService.findManagedWine(by: wine.id) else {
-//            return
-//        }
-//
-//        wine.mapToManagedObject(managedWine)
-////        wine.map(to: managedWine, coreData: coreDataService)
-//
-//        do {
-//            try container.viewContext.save()
-//            completion(.success(wine))
-//        } catch {
-//            let nserror = error as NSError
-//            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-//        }
     }
     
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
@@ -62,46 +47,36 @@ class CoreDataWineRepository: WineRepository {
         } catch {
             completion(.failure(error))
         }
-        
-        
-//        guard let managedWine = coreDataService.findManagedWine(by: wine.id) else {
-//            completion(.success)
-//            return
-//        }
-//
-//        container.viewContext.delete(managedWine)
-//        completion(.success)
     }
 
     func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        let request: NSFetchRequest<ManagedWine> = ManagedWine.fetchRequest()
-        request.predicate = NSPredicate(format: "user.userId == %@", userId.asString)
-        
         do {
-            let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { Wine.toEntity(managedObject: $0) }
-            completion(.success(wineModels))
+            let predicate = NSPredicate(format: "user.userId == %@", userId.asString)
+            let wines: [Wine] = try coreDataWorker.get(with: predicate, sortDescriptors: nil, fetchLimit: nil, from: container.viewContext)
+            completion(.success(wines))
         } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(error))
         }
     }
     
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
-        let request: NSFetchRequest<ManagedWine> = ManagedWine.fetchRequest()
-        request.predicate = NSPredicate(format: "user.userId == %@ && type.name == %@", userId.asString, wineType.name)
-        
         do {
-            let managedWines = try container.viewContext.fetch(request)
-            let wineModels = managedWines.compactMap { Wine.toEntity(managedObject: $0) }
-            completion(.success(wineModels))
+            let predicate = NSPredicate(format: "user.userId == %@ && type.name == %@", userId.asString, wineType.name)
+            let wines: [Wine] = try coreDataWorker.get(with: predicate, sortDescriptors: nil, fetchLimit: nil, from: container.viewContext)
+            completion(.success(wines))
         } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(error))
         }
     }
 
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        
+        do {
+            let predicate = NSPredicate(format: "user.userId == %@", userId.asString)
+            let sortDescriptors = [NSSortDescriptor(key: "rating", ascending: false)]
+            let wines: [Wine] = try coreDataWorker.get(with: predicate, sortDescriptors: sortDescriptors, fetchLimit: 5, from: container.viewContext)
+            completion(.success(wines))
+        } catch {
+            completion(.failure(error))
+        }
     }
 }

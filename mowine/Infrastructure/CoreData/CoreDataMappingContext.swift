@@ -25,6 +25,18 @@ class CoreDataMappingContext {
         return results?.first
     }
     
+    func syncSetManaged<ManagedType, V>(predicate format: String, key: String, values: [V]) throws -> [ManagedType] where ManagedType: NSManagedObject, V: CVarArg {
+        var result: [ManagedType] = []
+        for value in values {
+            var managedObject: ManagedType? = try syncOneManaged(predicate: NSPredicate(format: format, key, value))
+            if managedObject == nil {
+                managedObject = ManagedType(context: context)
+            }
+            result.append(managedObject!)
+        }
+        return result
+    }
+    
     func syncOne<Entity>(_ entity: Entity) throws -> Entity.ManagedType? where Entity: CoreDataConvertible {
         guard let managedObject = try findOrCreateManagedObject(entity) else {
             return nil

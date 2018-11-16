@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SwiftyBeaver.debug("user signed out")
             case .signedIn:
                 SwiftyBeaver.debug("user is signed in.")
+                Container.shared.syncManager.sync()
             case .signedOutUserPoolsTokenInvalid:
                 SwiftyBeaver.debug("need to login again.")
             case .signedOutFederatedTokensInvalid:

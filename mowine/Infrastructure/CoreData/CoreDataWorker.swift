@@ -22,7 +22,7 @@ protocol CoreDataObject {
 }
 
 protocol CoreDataWorkerProtocol {
-    func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, from context: NSManagedObjectContext) throws -> [Entity]
+    func get<Entity: CoreDataConvertible> (with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, fetchLimit: Int?, from context: NSManagedObjectContext) throws -> [Entity]
     func getOne<Entity>(with predicate: NSPredicate?, from context: NSManagedObjectContext) throws -> Entity? where Entity : CoreDataConvertible
     func insert<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible
     func update<Entity>(_ entity: Entity, in context: NSManagedObjectContext) throws where Entity : CoreDataConvertible
@@ -50,7 +50,7 @@ class CoreDataContainerWorker: CoreDataContainerWorkerProtocol {
     func get<Entity>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, completion: @escaping (Result<[Entity]>) -> ()) where Entity : CoreDataConvertible {
         container.performBackgroundTask { context in
             do {
-                let results: [Entity] = try self.coreDataWorker.get(with: predicate, sortDescriptors: sortDescriptors, from: context)
+                let results: [Entity] = try self.coreDataWorker.get(with: predicate, sortDescriptors: sortDescriptors, fetchLimit: nil, from: context)
                 completion(.success(results))
             } catch {
                 completion(.failure(error))
@@ -63,14 +63,15 @@ class CoreDataWorker: CoreDataWorkerProtocol {
     func get<Entity: CoreDataConvertible> (
         with predicate: NSPredicate?,
         sortDescriptors: [NSSortDescriptor]?,
+        fetchLimit: Int?,
         from context: NSManagedObjectContext
     ) throws -> [Entity] {
         let fetchRequest = Entity.ManagedType.fetchRequest()
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortDescriptors
-//        if let fetchLimit = fetchLimit {
-//            fetchRequest.fetchLimit = fetchLimit
-//        }
+        if let fetchLimit = fetchLimit {
+            fetchRequest.fetchLimit = fetchLimit
+        }
         let results = try context.fetch(fetchRequest) as? [Entity.ManagedType]
         let items: [Entity] = results?.compactMap { Entity.toEntity(managedObject: $0) } ?? []
         return items

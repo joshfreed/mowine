@@ -63,7 +63,7 @@ extension Wine: CoreDataConvertible {
             let id = managedObject.wineId,
             let name = managedObject.name,
             let managedType = managedObject.type,
-            let type = CoreDataWineTypeTranslator.makeModel(from: managedType),
+            let type = WineType.toEntity(managedObject: managedType),
             let user = managedObject.user, let userIdStr = user.userId
         else {
             return nil
@@ -77,7 +77,7 @@ extension Wine: CoreDataConvertible {
         }
         
         wine.location = managedObject.location
-        wine.price = managedObject.price != nil ? managedObject.price!.stringValue : nil
+        wine.price = managedObject.price
         wine.notes = managedObject.notes
         wine.thumbnail = managedObject.thumbnail
         
@@ -97,7 +97,7 @@ extension Wine: CoreDataConvertible {
         managedObject.thumbnail = thumbnail
         
         if let price = price {
-            managedObject.price = NSDecimalNumber(string: price)
+            managedObject.price = price
         } else {
             managedObject.price = nil
         }
@@ -120,7 +120,6 @@ extension Wine: CoreDataConvertible {
         }
         managedObject.pairings = NSSet(array: managedPairings)
         
-        managedObject.createdAt = Date()
         managedObject.updatedAt = Date()
     }
     

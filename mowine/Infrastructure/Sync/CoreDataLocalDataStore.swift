@@ -10,7 +10,7 @@ import Foundation
 import JFLib
 import CoreData
 
-class CoreDataLocalDataStore<Entity>: LocalDataStore where Entity: CoreDataObject, Entity: LocalObject, Entity: NSManagedObject {
+class CoreDataLocalDataStore<ManagedType>: LocalDataStore where ManagedType: CoreDataObject, ManagedType: LocalObject, ManagedType: NSManagedObject {
     let coreDataWorker: CoreDataWorkerProtocol
     private var context: NSManagedObjectContext
     
@@ -19,24 +19,24 @@ class CoreDataLocalDataStore<Entity>: LocalDataStore where Entity: CoreDataObjec
         self.context = context
     }
     
-    func delete(_ entity: Entity) throws {
+    func delete(_ entity: ManagedType) throws {
         context.delete(entity)
     }
 
-    func getAll() throws -> [Entity] {
-        let fetchRequest = Entity.fetchRequest()
-        let results = try context.fetch(fetchRequest) as? [Entity]
+    func getAll() throws -> [ManagedType] {
+        let fetchRequest = ManagedType.fetchRequest()
+        let results = try context.fetch(fetchRequest) as? [ManagedType]
         return results ?? []
     }
     
-    func getFor(_ id: String) throws -> Entity? {
-        let fetchRequest = Entity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "\(Entity.getIdProperty()) == %@", id)
-        let results = try context.fetch(fetchRequest) as? [Entity]
+    func getFor(_ id: String) throws -> ManagedType? {
+        let fetchRequest = ManagedType.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "\(ManagedType.getIdProperty()) == %@", id)
+        let results = try context.fetch(fetchRequest) as? [ManagedType]
         return results?.first
     }
     
-    func insert(_ entity: Entity) throws {
+    func insert(_ entity: ManagedType) throws {
         // no-op; just instantiating the managed object inserts it
 //        try coreDataWorker.insert(entity, in: context!)
     }
@@ -57,7 +57,7 @@ class CoreDataLocalDataStore<Entity>: LocalDataStore where Entity: CoreDataObjec
 //        }
     }
     
-    func update(_ entity: Entity) throws {
+    func update(_ entity: ManagedType) throws {
         // no-op; updated by mapper?
 //        try coreDataWorker.update(entity, in: context!)
     }
