@@ -12,6 +12,8 @@
 
 import UIKit
 import JFLib
+import AWSAppSync
+import SwiftyBeaver
 
 protocol MyWinesBusinessLogic {
     func fetchMyWines(request: MyWines.FetchMyWines.Request)
@@ -25,13 +27,38 @@ protocol MyWinesDataStore {
 class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     var presenter: MyWinesPresentationLogic?
     var worker: MyWinesWorker?
+    let appSyncClient: AWSAppSyncClient
+    private var discard: Cancellable?
     
     var selectedWine: Wine?
     private var wines: [Wine] = []
     
     init() {
+        self.appSyncClient = AWSContainer.shared.appSyncClient
+        
+        registerNotifications()
+        registerSubscriptions()
+    }
+    
+    func registerNotifications() {
+        // Or, maybe instead of these notifications, load the wines from the cache every time the view appears
+        
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(wineAdded), name: .wineAdded, object: nil)
+    }
+    
+    func registerSubscriptions() {
+        discard = try! self.appSyncClient.subscribe(subscription: OnCreateWineSubscription()) { result, transaction, error in
+            SwiftyBeaver.debug("onCreateWine")
+            if let result = result {
+                SwiftyBeaver.info("onCreateWine: \(result.data!.onCreateWine!.name)")
+                let newWine = result.data!.onCreateWine!.toWine()
+                self.insertWine(newWine)
+            } else if let error = error {
+                SwiftyBeaver.error("\(error)")
+                SwiftyBeaver.error(error.localizedDescription)
+            }
+        }
     }
     
     @objc func wineUpdated(notification: Notification) {
@@ -52,13 +79,21 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             return
         }
         
-        wines.insert(newWine, at: 0)
+        insertWine(newWine)
+    }
+    
+    func insertWine(_ wine: Wine) {
+        if wines.contains(wine) {
+            return
+        }
+        
+        wines.insert(wine, at: 0)
         presentWines()
         
-        delay(seconds: 1.5) {
-            let request = MyWines.FetchThumbnail.Request(wineId: newWine.id)
-            self.fetchThumbnail(request: request)
-        }
+//        delay(seconds: 1.5) {
+//            let request = MyWines.FetchThumbnail.Request(wineId: newWine.id)
+//            self.fetchThumbnail(request: request)
+//        }
     }
     
     // MARK: Business logic
@@ -101,6 +136,8 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     // MARK: Fetch thumbnail
     
     func fetchThumbnail(request: MyWines.FetchThumbnail.Request) {
+        return;
+        
         guard let wine = wines.first(where: { $0.id == request.wineId }) else {
             return
         }

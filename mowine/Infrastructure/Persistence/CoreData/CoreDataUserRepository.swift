@@ -19,13 +19,19 @@ class CoreDataUserRepository: UserRepository {
         self.coreDataWorker = coreDataWorker
     }
     
-    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+    func add(user: User, completion: @escaping (Result<User>) -> ()) {
         do {
-            if let _ = try getById(user.id) {
-                try coreDataWorker.update(user, in: container.viewContext)
-            } else {
-                try coreDataWorker.insert(user, in: container.viewContext)
-            }
+            try coreDataWorker.insert(user, in: container.viewContext)
+            try save()
+            completion(.success(user))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func save(user: User, completion: @escaping (Result<User>) -> ()) {
+        do {
+            try coreDataWorker.update(user, in: container.viewContext)
             try save()
             completion(.success(user))
         } catch {

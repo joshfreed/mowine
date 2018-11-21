@@ -156,11 +156,14 @@ class FakeEmailAuth: EmailAuthenticationService {
 }
 
 class FakeUserRepository: UserRepository {
-    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+        usersDB.append(user)
+        completion(.success(user))
+    }
+    
+    func save(user: User, completion: @escaping (Result<User>) -> ()) {
         if let index = usersDB.index(where: { $0.emailAddress == user.emailAddress }) {
             usersDB[index] = user
-        } else {
-            usersDB.append(user)
         }
         completion(.success(user))
     }

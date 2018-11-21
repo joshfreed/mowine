@@ -29,7 +29,15 @@ class MyWinesWorker {
             completion(.failure(MoWineError.notLoggedIn))
             return
         }
-        wineRepository.getWines(userId: currentUserId, completion: completion)
+        wineRepository.getWines(userId: currentUserId) { result in
+            switch result {
+            case .success(let wines):
+                let sorted = wines.sorted(by: { $0.createdAt > $1.createdAt })
+                completion(.success(sorted))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     func fetchThumbnail(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {

@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 import AWSDynamoDB
 import AWSS3
+import AWSAppSync
+import AWSMobileClient
 
 class Container {
     static let shared = Container()
@@ -20,14 +22,16 @@ class Container {
     lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.mobileAuth
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
-    lazy var wineRepository = CoreDataWineRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
+//    lazy var wineRepository = CoreDataWineRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
+    lazy var wineRepository: WineRepository = AWSContainer.shared.wineRepository
     lazy var wineImageWorker: WineImageWorker = WineImageWorker()
     lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
-    lazy var userRepository: UserRepository = CoreDataUserRepository(
-        container: persistentContainer,
-        coreData: CoreDataService(context: persistentContainer.viewContext),
-        coreDataWorker: coreDataWorker
-    )
+//    lazy var userRepository: UserRepository = CoreDataUserRepository(
+//        container: persistentContainer,
+//        coreData: CoreDataService(context: persistentContainer.viewContext),
+//        coreDataWorker: coreDataWorker
+//    )
+    lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
     lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var coreDataWorker = CoreDataWorker()
@@ -75,6 +79,41 @@ class AWSContainer {
         transferUtility: AWSS3TransferUtility.default(),
         session: Container.shared.session
     )
+    lazy var appSyncClient: AWSAppSyncClient = {
+        return initializeAppSync()
+    }()
+    lazy var userRepository: AppSyncUserRepository = AppSyncUserRepository(appSyncClient: appSyncClient)
+    lazy var wineRepository: AppSyncWineRepository = AppSyncWineRepository(appSyncClient: appSyncClient)
+}
+
+func initializeAppSync() -> AWSAppSyncClient {
+    // You can choose your database location, accessible by the SDK
+    let databaseURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("mowine_appsync")
+    
+    do {
+        // Initialize the AWS AppSync configuration
+        let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncClientInfo: AWSAppSyncClientInfo(),
+                                                              userPoolsAuthProvider: {
+                                                                class MyCognitoUserPoolsAuthProvider : AWSCognitoUserPoolsAuthProviderAsync {
+                                                                    func getLatestAuthToken(_ callback: @escaping (String?, Error?) -> Void) {
+                                                                        AWSMobileClient.sharedInstance().getTokens { (tokens, error) in
+                                                                            if error != nil {
+                                                                                callback(nil, error)
+                                                                            } else {
+                                                                                callback(tokens?.idToken?.tokenString, nil)
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                return MyCognitoUserPoolsAuthProvider()}(),
+                                                              databaseURL:databaseURL)
+        
+        // Initialize the AWS AppSync client
+        let appSyncClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
+        return appSyncClient
+    } catch {
+        fatalError("Error initializing appsync client. \(error)")
+    }
 }
 
 // MARK: Secrets

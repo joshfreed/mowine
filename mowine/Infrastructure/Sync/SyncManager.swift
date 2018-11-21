@@ -20,6 +20,8 @@ class SyncManager {
     }
 
     func sync() {
+        return;
+        
         if isSyncing {
             return
         }

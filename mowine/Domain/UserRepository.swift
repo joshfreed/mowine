@@ -10,7 +10,8 @@ import Foundation
 import JFLib
 
 protocol UserRepository {
-    func saveUser(user: User, completion: @escaping (Result<User>) -> ())
+    func add(user: User, completion: @escaping (Result<User>) -> ())
+    func save(user: User, completion: @escaping (Result<User>) -> ())
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ())
     func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ())
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ())

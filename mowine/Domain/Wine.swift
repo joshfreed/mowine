@@ -22,6 +22,7 @@ final class Wine: Equatable {
     var price: String?
     var pairings: [String] = []
     var thumbnail: Data?
+    var createdAt: Date = Date()
     
     var varietyName: String {
         return variety?.name ?? type.name

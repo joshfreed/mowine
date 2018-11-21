@@ -18,7 +18,11 @@ class AWSUserRepository: UserRepository {
         self.dynamoDbObjectMapper = dynamoDbObjectMapper
     }
     
-    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+        save(user: user, completion: completion)
+    }
+    
+    func save(user: User, completion: @escaping (Result<User>) -> ()) {
         let awsUser = user.toAWSUser()
         
         dynamoDbObjectMapper.save(awsUser) { (error: Error?) in

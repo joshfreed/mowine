@@ -4,3 +4,5 @@ Secrets.plist
 awsconfiguration.json
 amplify/
 .amplifyrc
+graphql/
+.graphqlconfig.yml

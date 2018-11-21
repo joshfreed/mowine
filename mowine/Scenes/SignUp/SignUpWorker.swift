@@ -64,7 +64,7 @@ class SignUpWorker {
     }
     
     func saveNewUser(user: User, completion: @escaping (EmptyResult) -> ()) {
-        userRepository.saveUser(user: user) { result in
+        userRepository.add(user: user) { result in
             switch result {
             case .success: completion(.success)
             case .failure(let error): completion(.failure(error))

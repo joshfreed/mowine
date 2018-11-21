@@ -81,7 +81,7 @@ class FirstTimeWorker {
         user.firstName = firstName
         user.lastName = lastName
         
-        userRepository.saveUser(user: user, completion: completion)
+        userRepository.add(user: user, completion: completion)
     }
 
     func loginWithGoogle() {
