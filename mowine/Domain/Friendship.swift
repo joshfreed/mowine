@@ -9,10 +9,18 @@
 import Foundation
 
 struct Friendship: Equatable {
+    let id: String
     let userId: UserId
     let friendId: UserId
     
+    init(id: String, userId: UserId, friendId: UserId) {
+        self.id = id
+        self.userId = userId
+        self.friendId = friendId
+    }
+    
     init(userId: UserId, friendId: UserId) {
+        id = UUID().uuidString
         self.userId = userId
         self.friendId = friendId
     }

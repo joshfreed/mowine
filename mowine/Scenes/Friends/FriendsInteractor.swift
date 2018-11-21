@@ -84,7 +84,9 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
             case .success(let friends):
                 self.friends = friends
                 self.presentFriends()
-            case .failure(let error): print("\(error)")
+            case .failure(let error):
+                // TODO print an error on screen
+                break
             }
         }
     }

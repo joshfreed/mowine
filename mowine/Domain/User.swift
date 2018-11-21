@@ -18,7 +18,7 @@ struct User: Equatable {
     var firstName: String?
     var lastName: String?
     var profilePicture: UIImage?
-    private(set) var friends: [Friendship] = []
+    var friends: [Friendship] = []
     
     var fullName: String {
         let firstName = self.firstName ?? ""
@@ -56,6 +56,16 @@ struct User: Equatable {
         friends.append(friend)
     }
     
+    mutating func addFriend(_ friendId: UserId) {
+        let friend = Friendship(userId: id, friendId: friendId)
+        
+        if friends.contains(friend) {
+            return
+        }
+        
+        friends.append(friend)
+    }
+    
     mutating func removeFriend(user: User) {
         let friend = Friendship(userId: id, friendId: user.id)
         if let index = friends.index(of: friend) {
@@ -66,6 +76,10 @@ struct User: Equatable {
     func isFriendsWith(_ user: User) -> Bool {
         let friend = Friendship(userId: id, friendId: user.id)
         return friends.contains(friend)
+    }
+    
+    func isFriendsWith(_ friendId: UserId) -> Bool {
+        return friends.contains(where: { $0.friendId == friendId })
     }
 }
 
