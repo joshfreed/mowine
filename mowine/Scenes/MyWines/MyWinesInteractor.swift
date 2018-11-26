@@ -50,14 +50,26 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     func registerSubscriptions() {
         discard = try! self.appSyncClient.subscribe(subscription: OnCreateWineSubscription()) { result, transaction, error in
             SwiftyBeaver.debug("onCreateWine")
-            if let result = result {
-                SwiftyBeaver.info("onCreateWine: \(result.data!.onCreateWine!.name)")
-                let newWine = result.data!.onCreateWine!.toWine()
-                self.insertWine(newWine)
-            } else if let error = error {
+            
+            if let error = error {
                 SwiftyBeaver.error("\(error)")
                 SwiftyBeaver.error(error.localizedDescription)
+                return
             }
+            
+            if let errors = result?.errors {
+                SwiftyBeaver.error("Result had \(errors.count) errors")
+                SwiftyBeaver.error("\(errors)")
+                return
+            }
+            
+            guard let result = result else {
+                return
+            }
+            
+            SwiftyBeaver.info("onCreateWine: \(result.data!.onCreateWine!.name)")
+            let newWine = result.data!.onCreateWine!.toWine()
+            self.insertWine(newWine)
         }
     }
     

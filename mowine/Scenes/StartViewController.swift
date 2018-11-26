@@ -17,7 +17,32 @@ class StartViewController: UIViewController {
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
+        AWSMobileClient.sharedInstance().addUserStateListener(self) { userState, info in
+            switch (userState) {
+            case .guest:
+                SwiftyBeaver.debug("user is in guest mode.")
+            case .signedOut:
+                SwiftyBeaver.debug("user signed out")
+            case .signedIn:
+                SwiftyBeaver.debug("user is signed in.")
+                Container.shared.syncManager.sync()
+            case .signedOutUserPoolsTokenInvalid:
+                SwiftyBeaver.debug("need to login again.")
+            case .signedOutFederatedTokensInvalid:
+                SwiftyBeaver.debug("user logged in via federation, but currently needs new tokens")
+            default:
+                SwiftyBeaver.debug("unsupported")
+            }
+        }
+        
         AWSMobileClient.sharedInstance().initialize { (userState, error) in
+            Container.shared.session.resume { result in
+                switch result {
+                case .success: break
+                case .failure(let error): SwiftyBeaver.error("\(error)")
+                }
+            }
+            
             if let userState = userState {
                 SwiftyBeaver.debug("UserState: \(userState.rawValue)")
                 SwiftyBeaver.debug("Current user id: \(Container.shared.session.currentUserId?.asString ?? "nil")")

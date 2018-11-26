@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 protocol FriendsBusinessLogic {
     func fetchFriends(request: Friends.FetchFriends.Request)
@@ -86,6 +87,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
                 self.presentFriends()
             case .failure(let error):
                 // TODO print an error on screen
+                SwiftyBeaver.error("\(error)")
                 break
             }
         }

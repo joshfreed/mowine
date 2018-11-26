@@ -104,7 +104,9 @@ extension AWSMobileAuth: FacebookAuthenticationService {
             } else {
                 // Calling getIdentity on success because I try to access the identity right away in order to create a User object
                 // But it doesn't seem to always populate in time. So this forces the rest of the app to wait for it
-                self.getIdentityId(completion: completion)
+                DispatchQueue.main.async {
+                    self.getIdentityId(completion: completion)
+                }
             }
         }
     }

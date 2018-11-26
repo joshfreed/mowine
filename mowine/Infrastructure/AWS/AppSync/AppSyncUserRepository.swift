@@ -34,6 +34,23 @@ class AppSyncUserRepository: UserRepository {
         return nil
     }
     
+    private func getUserFromCache(_ userId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
+        appSyncClient.fetch(query: GetUserQuery(id: userId.asString), cachePolicy: .returnCacheDataDontFetch) { (result, error) in
+            if let error = self.hasError(result: result, error: error) {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let getUser = result?.data?.getUser else {
+                completion(.failure(UserRepositoryError.userNotFound))
+                return
+            }
+            
+            let user = getUser.toUser()
+            completion(.success(user))
+        }
+    }
+    
     private func getUser(_ userId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
         appSyncClient.fetch(query: GetUserQuery(id: userId.asString), cachePolicy: .returnCacheDataAndFetch) { (result, error) in
             if let error = self.hasError(result: result, error: error) {
@@ -105,22 +122,14 @@ class AppSyncUserRepository: UserRepository {
     }
     
     func getFriendsOf(userId: UserId, completion: @escaping (JFLib.Result<[User]>) -> ()) {
-        appSyncClient.fetch(query: GetUserQuery(id: userId.asString), cachePolicy: .returnCacheDataAndFetch) { (result, error) in
-            if let error = self.hasError(result: result, error: error) {
+        getUser(userId) { result in
+            switch result {
+            case .success(let user):
+                let friendIds = user.friends.map { $0.friendId }
+                self.getUsers(by: friendIds, completion: completion)
+            case .failure(let error):
                 completion(.failure(error))
-                return
             }
-            
-            guard let friendItems = result?.data?.getUser?.friends?.items else {
-                completion(.success([]))
-                return
-            }
-            
-            let friendIds = friendItems
-                .compactMap({ $0?.friendId })
-                .map({ UserId(string: $0) })
-
-            self.getUsers(by: friendIds, completion: completion)
         }
     }
     
@@ -147,7 +156,7 @@ class AppSyncUserRepository: UserRepository {
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
         let input = CreateFriendshipInput(friendId: friendId.asString, friendshipUserId: owningUserId.asString)
         appSyncClient.perform(mutation: CreateFriendshipMutation(input: input)) { result, error in
-            self.getUser(friendId, completion: completion)
+            self.getUserFromCache(friendId, completion: completion)
         }
     }
     

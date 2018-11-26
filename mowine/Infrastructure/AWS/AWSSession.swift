@@ -30,7 +30,7 @@ class AWSSession: Session {
     }
     
     func resume(completion: @escaping (EmptyResult) -> ()) {
-        completion(.success)
+        AWSContainer.shared.mobileAuth.getIdentityId(completion: completion)
     }
     
     func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {

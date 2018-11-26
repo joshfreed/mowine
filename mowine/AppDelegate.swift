@@ -28,25 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         AWSDDLog.sharedInstance.logLevel = .info
-        
-        AWSMobileClient.sharedInstance().addUserStateListener(self) { userState, info in
-            switch (userState) {
-            case .guest:
-                SwiftyBeaver.debug("user is in guest mode.")
-            case .signedOut:
-                SwiftyBeaver.debug("user signed out")
-            case .signedIn:
-                SwiftyBeaver.debug("user is signed in.")
-                Container.shared.syncManager.sync()
-            case .signedOutUserPoolsTokenInvalid:
-                SwiftyBeaver.debug("need to login again.")
-            case .signedOutFederatedTokensInvalid:
-                SwiftyBeaver.debug("user logged in via federation, but currently needs new tokens")
-            default:
-                SwiftyBeaver.debug("unsupported")
-            }
-        }
-        
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialViewController = storyboard.instantiateInitialViewController()!
         window = UIWindow()
