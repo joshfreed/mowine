@@ -76,6 +76,11 @@ class AppSyncUserRepository: UserRepository {
     }
     
     private func getUsers(by ids: [UserId], completion: @escaping (JFLib.Result<[User]>) -> ()) {
+        guard ids.count > 0 else {
+            completion(.success([]))
+            return
+        }
+        
         var inputFilters: [ModelUserFilterInput] = []
         for userId in ids {
             inputFilters.append(ModelUserFilterInput(id: ModelIDFilterInput(eq: userId.asString)))

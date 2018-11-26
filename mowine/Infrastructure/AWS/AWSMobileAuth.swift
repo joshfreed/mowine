@@ -15,6 +15,8 @@ class AWSMobileAuth {
     lazy var client: AWSMobileClient = AWSMobileClient.sharedInstance()
     
     func getIdentityId(completion: @escaping (EmptyResult) -> ()) {
+        SwiftyBeaver.debug("getIdentityId")
+        
         client.getIdentityId().continueWith { task in
             DispatchQueue.main.async {
                 if let error = task.error {
@@ -53,7 +55,9 @@ extension AWSMobileAuth: EmailAuthenticationService {
                         }
                     } else {
                         // Calling getIdentity on success because I try to access the identity right away in order to create a User object
-                        // But it doesn't seem to always populate in time. So this forces the rest of the app to wait for it
+                        // or to load wines for the current user. If I don't call getIdentityId then it's run in parallel by the AWS sign in
+                        // code, so it becomes a race. If AWS getIdentityId does not finish in time then the app won't be able to operate
+                        // So I call it here and force the completion to wait for the id
                         self.getIdentityId(completion: completion)
                     }
                 }

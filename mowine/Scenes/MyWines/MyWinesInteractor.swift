@@ -117,7 +117,8 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
                 self.wines = wines
                 self.presentWines()
 //                self.loadWineThumbnails(wines: wines)
-            case .failure(let error): print("\(error)")
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
             }
         }
     }
