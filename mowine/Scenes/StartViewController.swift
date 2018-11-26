@@ -36,12 +36,12 @@ class StartViewController: UIViewController {
         }
         
         AWSMobileClient.sharedInstance().initialize { (userState, error) in
-            Container.shared.session.resume { result in
-                switch result {
-                case .success: break
-                case .failure(let error): SwiftyBeaver.error("\(error)")
-                }
-            }
+//            Container.shared.session.resume { result in
+//                switch result {
+//                case .success: break
+//                case .failure(let error): SwiftyBeaver.error("\(error)")
+//                }
+//            }
             
             if let userState = userState {
                 SwiftyBeaver.debug("UserState: \(userState.rawValue)")
