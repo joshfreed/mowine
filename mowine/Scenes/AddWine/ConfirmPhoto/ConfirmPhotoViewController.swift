@@ -97,7 +97,7 @@ class ConfirmPhotoViewController: UIViewController, ConfirmPhotoDisplayLogic {
         displayImagePickerController(.photoLibrary)
     }
     
-    func displayImagePickerController(_ sourceType: UIImagePickerControllerSourceType) {
+    func displayImagePickerController(_ sourceType: UIImagePickerController.SourceType) {
         let controller = UIImagePickerController()
         controller.sourceType = sourceType
         controller.delegate = self
@@ -111,10 +111,11 @@ class ConfirmPhotoViewController: UIViewController, ConfirmPhotoDisplayLogic {
 }
 
 extension ConfirmPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
             useDifferentImage(image)
         }
+        
         picker.dismiss(animated: true, completion: nil)
     }
     

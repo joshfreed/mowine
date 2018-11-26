@@ -76,7 +76,7 @@ class SnapPhotoViewController: UIViewController, SnapPhotoDisplayLogic {
         displayImagePickerController(.photoLibrary)
     }
     
-    func displayImagePickerController(_ sourceType: UIImagePickerControllerSourceType) {
+    func displayImagePickerController(_ sourceType: UIImagePickerController.SourceType) {
         let controller = UIImagePickerController()
         controller.sourceType = sourceType
         controller.delegate = self
@@ -96,9 +96,9 @@ class SnapPhotoViewController: UIViewController, SnapPhotoDisplayLogic {
 }
 
 extension SnapPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
-            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if let image = info[.originalImage] as? UIImage {            
                 self.useImage(image)
             }
         }

@@ -28,7 +28,7 @@ class ButtonPrimary: UIButton {
     }
 
     private func setup() {
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.isHidden = true
         addSubview(activityIndicator)

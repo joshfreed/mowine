@@ -65,8 +65,8 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         nameTextField.delegate = self
         
@@ -86,9 +86,9 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     // MARK: Keyboard
     
     @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let kbSize = keyboardSize.size
-            let contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+            let contentInsets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0);
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
         }

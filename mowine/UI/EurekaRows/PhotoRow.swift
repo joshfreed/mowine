@@ -23,9 +23,8 @@ open class ImagePickerController: UIImagePickerController, TypedRowControllerTyp
         delegate = self
     }
     
-    open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        (row as? PhotoRow)?.imageURL = info[UIImagePickerControllerReferenceURL] as? URL
-        row.value = info[UIImagePickerControllerOriginalImage] as? UIImage
+    open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        row.value = info[.originalImage] as? UIImage
         onDismissCallback?(self)
     }
     
@@ -89,7 +88,7 @@ final class PhotoRow: OptionsRow<PhotoCell>, PresenterRowType, RowType {
         // do nothing on select!
     }
     
-    func displayImagePickerController(_ sourceType: UIImagePickerControllerSourceType) {
+    func displayImagePickerController(_ sourceType: UIImagePickerController.SourceType) {
         if let presentationMode = presentationMode, !isDisabled {
             if let controller = presentationMode.makeController() {
                 controller.row = self

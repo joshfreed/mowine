@@ -24,7 +24,7 @@ class WineImageWorker {
     }
     
     func toPNG(image: UIImage) -> Data? {
-        return UIImagePNGRepresentation(image)
+        return image.pngData()
     }
     
 //    func convertToPNGData(image: UIImage) -> NSData? {

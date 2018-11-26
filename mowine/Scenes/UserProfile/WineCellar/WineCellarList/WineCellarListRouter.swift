@@ -28,7 +28,7 @@ class WineCellarListRouter: NSObject, WineCellarListRoutingLogic, WineCellarList
     // MARK: Routing
 
     func routeToWineList(segue: UIStoryboardSegue) {
-        viewController?.wineListViewController = segue.destination as! WineListViewController
+        viewController?.wineListViewController = segue.destination as? WineListViewController
         viewController?.wineListViewController.delegate = viewController
     }
     

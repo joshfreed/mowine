@@ -39,7 +39,7 @@ class FirstTimeInteractor: FirstTimeBusinessLogic, FirstTimeDataStore {
     func createUserFromFacebookInfo() {
         worker?.createUserFromFacebookInfo { result in
             switch result {
-            case .success(let user): self.presentFacebookLogin()
+            case .success: self.presentFacebookLogin()
             case .failure(let error): self.presentFacebookLoginError(error)
             }
         }

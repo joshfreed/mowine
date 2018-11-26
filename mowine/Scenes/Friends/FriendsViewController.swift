@@ -103,7 +103,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     }
     
     private func setUpActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator!.hidesWhenStopped = true
         view.addSubview(activityIndicator!)
         activityIndicator!.translatesAutoresizingMaskIntoConstraints = false
