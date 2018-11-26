@@ -50,11 +50,15 @@ class MockWineTypeRepository: WineTypeRepository {
 }
 
 class MockUserRepository: UserRepository {
+    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+        
+    }
+    
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
         
     }
     
-    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (Result<User>) -> ()) {
         
     }
     

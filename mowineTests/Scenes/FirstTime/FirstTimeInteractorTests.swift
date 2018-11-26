@@ -76,7 +76,7 @@ class FirstTimeInteractorTests: XCTestCase {
         facebookGraphApi.setMe(emailAddress: "jbomb@gmail.com", firstName: "Jimbo", lastName: "Jones")
         session.login(userId: UserId())
         userRepository.doesNotContainUser(emailAddress: "jbomb@gmail.com")
-        userRepository.saveUserWillSucceed()
+        userRepository.addUserWillSucceed()
         
         // When
         sut.linkToFacebookLogin(fbToken: token)

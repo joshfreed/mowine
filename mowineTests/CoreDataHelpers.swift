@@ -121,6 +121,10 @@ class CoreDataHelper {
 }
 
 class MockCoreDataWorker: CoreDataWorkerProtocol {
+    func get<Entity>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, fetchLimit: Int?, from context: NSManagedObjectContext) throws -> [Entity] where Entity : CoreDataConvertible {
+        return []
+    }
+    
     func get<Entity>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, from context: NSManagedObjectContext) throws -> [Entity] where Entity : CoreDataConvertible {
         return []
     }

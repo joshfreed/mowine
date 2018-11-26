@@ -97,7 +97,7 @@ class SignUpInteractorTests: XCTestCase {
         // Given
         emailAuthService.signUpWillSucceed()
         session.login(userId: UserId())
-        userRepository.saveUserWillSucceed()
+        userRepository.addUserWillSucceed()
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
 
         // When
@@ -126,7 +126,7 @@ class SignUpInteractorTests: XCTestCase {
         // Given
         session.login(userId: UserId()) // added this to make it pass - does it make sense for the use case tho?
         emailAuthService.signUpWillSucceed()
-        userRepository.saveUserWillFail(error: TestError.unknownError)
+        userRepository.addUserWillFail(error: TestError.unknownError)
         let request = SignUp.SignUp.Request(firstName: "Jeff", lastName: "Beans", emailAddress: "jbone@test.com", password: "password123")
         
         // When

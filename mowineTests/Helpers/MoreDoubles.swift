@@ -88,10 +88,39 @@ class TestUserRepository: UserRepository {
         _user = UserBuilder.aUser().withEmail(emailAddress).build()
     }
     
+    var addUserCalled = false
+    var addedUser: User?
+    var addUserResult: Result<User>?
+    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+        addUserCalled = true
+        addedUser = user
+        if let result = addUserResult {
+            completion(result)
+        }
+    }
+    func addUserWillSucceed() {
+        let userToReturn = User(emailAddress: "smelly@mybutt.com")
+        addUserResult = .success(userToReturn)
+    }
+    func addUserWillFail(error: Error) {
+        addUserResult = .failure(error)
+    }
+    func verifyUserAddedToRepository(emailAddress: String, firstName: String, lastName: String) {
+        expect(self.addUserCalled).to(beTrue())
+        expect(self.addedUser).toNot(beNil())
+        expect(self.addedUser?.emailAddress).to(equal(emailAddress))
+        expect(self.addedUser?.firstName).to(equal(firstName))
+        expect(self.addedUser?.lastName).to(equal(lastName))
+    }
+    func verifyUserNotAddedToRepository() {
+        expect(self.addUserCalled).to(beFalse())
+        expect(self.addedUser).to(beNil())
+    }
+    
     var saveUserCalled = false
     var savedUser: User?
     var saveUserResult: Result<User>?
-    func saveUser(user: User, completion: @escaping (Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (Result<User>) -> ()) {
         saveUserCalled = true
         savedUser = user
         if let result = saveUserResult {
@@ -105,14 +134,14 @@ class TestUserRepository: UserRepository {
     func saveUserWillFail(error: Error) {
         saveUserResult = .failure(error)
     }
-    func verifyUserAddedToRepository(emailAddress: String, firstName: String, lastName: String) {
+    func verifyUserSavedToRepository(emailAddress: String, firstName: String, lastName: String) {
         expect(self.saveUserCalled).to(beTrue())
         expect(self.savedUser).toNot(beNil())
         expect(self.savedUser?.emailAddress).to(equal(emailAddress))
         expect(self.savedUser?.firstName).to(equal(firstName))
         expect(self.savedUser?.lastName).to(equal(lastName))
     }
-    func verifyUserNotAddedToRepository() {
+    func verifyUserNotSavedToRepository() {
         expect(self.saveUserCalled).to(beFalse())
         expect(self.savedUser).to(beNil())
     }
