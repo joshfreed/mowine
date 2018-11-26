@@ -16,7 +16,7 @@ target 'mowine' do
   pod 'AWSFacebookSignIn', '~> 2.7.0'
   pod 'AWSDynamoDB', '~> 2.7.0'
   pod 'AWSS3', '~> 2.7.0'
-  pod 'AWSAppSync', '~> 2.6.24'
+  pod 'AWSAppSync', '~> 2.7.0'
 
   target 'mowineTests' do
     inherit! :search_paths
