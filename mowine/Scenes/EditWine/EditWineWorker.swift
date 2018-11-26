@@ -17,18 +17,15 @@ class EditWineWorker {
     let wineRepository: WineRepository
     let wineTypeRepository: WineTypeRepository
     let imageWorker: WineImageWorker
-    let wineImageRepository: WineImageRepository
     
     init(
         wineRepository: WineRepository,
         wineTypeRepository: WineTypeRepository,
-        imageWorker: WineImageWorker,
-        wineImageRepository: WineImageRepository
+        imageWorker: WineImageWorker
     ) {
         self.wineRepository = wineRepository
         self.wineTypeRepository = wineTypeRepository
         self.imageWorker = imageWorker
-        self.wineImageRepository = wineImageRepository
     }
     
     func getWineTypes(completion: @escaping (Result<[WineType]>) -> ()) {
@@ -36,7 +33,7 @@ class EditWineWorker {
     }
     
     func getWinePhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
-        wineImageRepository.fetchPhoto(wineId: wineId, completion: completion)
+        imageWorker.fetchPhoto(wineId: wineId, completion: completion)
     }
     
     func updateWine(wine: Wine, from request: EditWine.SaveWine.Request, completion: @escaping (Result<Wine>) -> ()) {
@@ -77,22 +74,7 @@ class EditWineWorker {
     }
     
     func updateWinePhoto(wineId: UUID, photo: UIImage?) -> Data? {
-        guard let photo = photo else {
-            return nil
-        }
-        
-        guard
-            let downsizedImage = imageWorker.resize(image: photo, to: CGSize(width: 400, height: 400)),
-            let imageData = imageWorker.toPNG(image: downsizedImage),
-            let thumbnailImage = imageWorker.resize(image: photo, to: CGSize(width: 150, height: 150)),
-            let thumbnailData = imageWorker.toPNG(image: thumbnailImage)
-        else {
-            return nil
-        }
-        
-        wineImageRepository.store(wineId: wineId, image: imageData, thumbnail: thumbnailData)
-        
-        return thumbnailData
+        return imageWorker.createImages(wineId: wineId, photo: photo)
     }
 }
 

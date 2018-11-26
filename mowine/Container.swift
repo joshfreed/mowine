@@ -22,15 +22,9 @@ class Container {
     lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.mobileAuth
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
-//    lazy var wineRepository = CoreDataWineRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
     lazy var wineRepository: WineRepository = AWSContainer.shared.wineRepository
-    lazy var wineImageWorker: WineImageWorker = WineImageWorker()
+    lazy var wineImageWorker: WineImageWorker = WineImageWorker(imageRepository: wineImageRepository)
     lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
-//    lazy var userRepository: UserRepository = CoreDataUserRepository(
-//        container: persistentContainer,
-//        coreData: CoreDataService(context: persistentContainer.viewContext),
-//        coreDataWorker: coreDataWorker
-//    )
     lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
     lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())

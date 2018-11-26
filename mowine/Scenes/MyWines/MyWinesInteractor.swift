@@ -116,7 +116,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             case .success(let wines):
                 self.wines = wines
                 self.presentWines()
-//                self.loadWineThumbnails(wines: wines)
+                self.loadWineThumbnails(wines: wines)
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
             }
@@ -149,8 +149,6 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     // MARK: Fetch thumbnail
     
     func fetchThumbnail(request: MyWines.FetchThumbnail.Request) {
-        return;
-        
         guard let wine = wines.first(where: { $0.id == request.wineId }) else {
             return
         }
