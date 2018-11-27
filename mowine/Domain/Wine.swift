@@ -21,7 +21,7 @@ final class Wine: Equatable {
     var notes: String?
     var price: String?
     var pairings: [String] = []
-    var thumbnail: Data?
+//    var thumbnail: Data?
     var createdAt: Date = Date()
     
     var varietyName: String {
@@ -80,7 +80,7 @@ extension Wine: CoreDataConvertible {
         wine.location = managedObject.location
         wine.price = managedObject.price
         wine.notes = managedObject.notes
-        wine.thumbnail = managedObject.thumbnail
+//        wine.thumbnail = managedObject.thumbnail
         
         if let pairingSet = managedObject.pairings, let pairings = Array(pairingSet) as? [ManagedFood] {
             wine.pairings = pairings.compactMap { $0.name }
@@ -95,7 +95,7 @@ extension Wine: CoreDataConvertible {
         managedObject.rating = rating
         managedObject.location = location
         managedObject.notes = notes
-        managedObject.thumbnail = thumbnail
+//        managedObject.thumbnail = thumbnail
         
         if let price = price {
             managedObject.price = price

@@ -114,7 +114,11 @@ class AppSyncWineRepository: WineRepository {
     }
     
     func getWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
+        SwiftyBeaver.debug("getWines for \(userId)")
+        
         appSyncClient.fetch(query: GetUserQuery(id: userId.asString), cachePolicy: .returnCacheDataAndFetch) { (result, error) in
+            SwiftyBeaver.debug("getWines GetUserQuery Complete")
+            
             if error != nil {
                 SwiftyBeaver.error(error?.localizedDescription ?? "")
                 completion(.failure(error!))

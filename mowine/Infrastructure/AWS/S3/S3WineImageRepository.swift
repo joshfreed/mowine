@@ -9,6 +9,7 @@
 import Foundation
 import AWSS3
 import JFLib
+import SwiftyBeaver
 
 class S3WineImageRepository {
     let transferUtility: AWSS3TransferUtility
@@ -21,13 +22,13 @@ class S3WineImageRepository {
     }
     
     private func uploadImage(image: Data, bucket: String, imageName: String) {
-        print("Starting upload \(imageName)")
+        SwiftyBeaver.info("Starting upload \(imageName)")
         
         let expression = AWSS3TransferUtilityUploadExpression()
         expression.progressBlock = {(task, progress) in
             DispatchQueue.main.async {
                 // Do something e.g. Update a progress bar.
-                print("Upload \(imageName): \(progress.fractionCompleted)")
+                SwiftyBeaver.verbose("Upload \(imageName): \(progress.fractionCompleted)")
             }
         }
         
@@ -36,7 +37,7 @@ class S3WineImageRepository {
             DispatchQueue.main.async {
                 // Do something e.g. Alert a user for transfer completion.
                 // On failed uploads, `error` contains the error object.
-                print("\(imageName): Upload completion handler! \(error)")
+                SwiftyBeaver.info("\(imageName): Upload completion handler! \(error)")
             }
         }
         
@@ -49,12 +50,12 @@ class S3WineImageRepository {
             completionHandler: completionHandler
         ).continueWith { task in
             if let error = task.error {
-                print("Error: \(error.localizedDescription)")
+                SwiftyBeaver.error("Error: \(error.localizedDescription)")
             }
             
             if let _ = task.result {
                 // Do something with uploadTask.
-                print("Upload task complete?!?")
+                SwiftyBeaver.debug("Upload task complete?!?")
             }
             
             return nil
@@ -62,19 +63,19 @@ class S3WineImageRepository {
     }
     
     private func downloadImage(fileName: String, userBucket: String, completion: @escaping (Result<Data?>) -> ()) {
-        print("Starting download \(fileName)")
+        SwiftyBeaver.info("Starting download \(fileName)")
         
         let expression = AWSS3TransferUtilityDownloadExpression()
         expression.progressBlock = { task, progress in
             DispatchQueue.main.async {
                 // Do something e.g. Update a progress bar.
-                print("Download \(fileName): \(progress.fractionCompleted)")
+                SwiftyBeaver.verbose("Download \(fileName): \(progress.fractionCompleted)")
             }
         }
         
         let completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock = { task, url, data, error  in
             DispatchQueue.main.async {
-                print("\(fileName): download completion handler \(error)")
+                SwiftyBeaver.info("\(fileName): download completion handler \(error)")
                 completion(.success(data))
             }
         }
@@ -86,12 +87,12 @@ class S3WineImageRepository {
             completionHandler: completionHandler
         ).continueWith { task in
             if let error = task.error {
-                print("Error: \(error.localizedDescription)")
+                SwiftyBeaver.error("Error: \(error.localizedDescription)")
             }
             
             if let _ = task.result {
                 // Do something with uploadTask.
-                print("Download task complete?!?")
+                SwiftyBeaver.debug("Download task complete?!?")
             }
             
             return nil

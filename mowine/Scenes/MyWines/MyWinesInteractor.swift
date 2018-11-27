@@ -100,6 +100,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         }
         
         wines.insert(wine, at: 0)
+        
         presentWines()
         
 //        delay(seconds: 1.5) {
@@ -111,12 +112,14 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     // MARK: Business logic
     
     func fetchMyWines(request: MyWines.FetchMyWines.Request) {
+        SwiftyBeaver.debug("fetchMyWines")
+        
         worker?.fetchMyWines() { result in
             switch result {
             case .success(let wines):
                 self.wines = wines
                 self.presentWines()
-                self.loadWineThumbnails(wines: wines)
+                self.loadWineThumbnails()
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
             }
@@ -136,11 +139,13 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     
     // MARK: Fetch thumbnails
     
-    func loadWineThumbnails(wines: [Wine]) {
+    func loadWineThumbnails() {
+        SwiftyBeaver.debug("loadWineThumbnails")
+        
         for wine in wines {
-            if wine.thumbnail != nil {
-                continue
-            }
+//            if wine.thumbnail != nil {
+//                continue
+//            }
             let request = MyWines.FetchThumbnail.Request(wineId: wine.id)
             fetchThumbnail(request: request)
         }
@@ -156,11 +161,11 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         worker?.fetchThumbnail(wine: wine) { result in
             switch result {
             case .success(let thumbnail):
-                wine.thumbnail = thumbnail
+//                wine.thumbnail = thumbnail
                 let response = MyWines.FetchThumbnail.Response(wine: wine, thumbnail: thumbnail)
                 self.presenter?.presentThumbnail(response: response)
             case .failure(let error):
-                print("Error fetching thumb: \(error)")
+                SwiftyBeaver.error("Error fetching thumb: \(error)")
                 break
             }
         }
