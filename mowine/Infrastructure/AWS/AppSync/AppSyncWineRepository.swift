@@ -45,6 +45,7 @@ class AppSyncWineRepository: WineRepository {
             }
         }, resultHandler: { result, error in
             SwiftyBeaver.debug("CreateWine result handler called")
+            
             if let error = error as? AWSAppSyncClientError {
                 SwiftyBeaver.error("Error occurred: \(error.localizedDescription )")
                 return

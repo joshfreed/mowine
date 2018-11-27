@@ -21,7 +21,8 @@ class Container {
     lazy var emailAuthService: EmailAuthenticationService = AWSContainer.shared.mobileAuth
     lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.mobileAuth
     lazy var fbGraphApi: GraphApi = GraphApi()    
-    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
+//    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
+    lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository: WineRepository = AWSContainer.shared.wineRepository
     lazy var wineImageWorker: WineImageWorker = WineImageWorker(imageRepository: wineImageRepository)
     lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository

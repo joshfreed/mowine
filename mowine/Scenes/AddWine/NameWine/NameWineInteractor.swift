@@ -11,44 +11,37 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 protocol NameWineBusinessLogic {
-    func updateName(request: NameWine.UpdateName.Request)
-    func updateRating(request: NameWine.UpdateRating.Request)
+    func createWine(request: NameWine.CreateWine.Request)
 }
 
 protocol NameWineDataStore {
     var wineType: WineType! { get set }
     var variety: WineVariety? { get set }
     var photo: UIImage? { get set }
-    var name: String { get }
-    var rating: Double { get }
 }
 
 class NameWineInteractor: NameWineBusinessLogic, NameWineDataStore {
     var presenter: NameWinePresentationLogic?
+    var worker: WineWorker!
     var wineType: WineType!
     var variety: WineVariety?
     var photo: UIImage?
-    var name: String = ""
-    var rating: Double = 0
 
+    // MARK: Create Wine
     
-    // MARK: Update name
-    
-    func updateName(request: NameWine.UpdateName.Request) {
-        name = request.name ?? ""
-        
-        let response = NameWine.UpdateName.Response()
-        presenter?.presentName(response: response)
-    }
-    
-    // MARK: Update rating
-    
-    func updateRating(request: NameWine.UpdateRating.Request) {
-        rating = request.rating
-        
-        let response = NameWine.UpdateRating.Response()
-        presenter?.presentRating(response: response)
+    func createWine(request: NameWine.CreateWine.Request) {
+        worker.createWine(type: wineType, variety: variety, name: request.name, rating: request.rating, photo: photo) { result in
+            switch result {
+            case .success:
+                let response = NameWine.CreateWine.Response()
+                self.presenter?.presentWine(response: response)
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+                self.presenter?.presentErrorCreatingWine(error)
+            }
+        }
     }
 }

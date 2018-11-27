@@ -13,24 +13,21 @@
 import UIKit
 
 protocol NameWinePresentationLogic {
-    func presentName(response: NameWine.UpdateName.Response)
-    func presentRating(response: NameWine.UpdateRating.Response)
+    func presentWine(response: NameWine.CreateWine.Response)
+    func presentErrorCreatingWine(_ error: Error)
 }
 
 class NameWinePresenter: NameWinePresentationLogic {
     weak var viewController: NameWineDisplayLogic?
 
-    // MARK: Update name
+    // MARK: Create wine
     
-    func presentName(response: NameWine.UpdateName.Response) {
-        let viewModel = NameWine.UpdateName.ViewModel()
-        viewController?.displayName(viewModel: viewModel)
+    func presentWine(response: NameWine.CreateWine.Response) {
+        viewController?.displayWineCreated(viewModel: NameWine.CreateWine.ViewModel())
     }
     
-    // MARK: Update rating
-    
-    func presentRating(response: NameWine.UpdateRating.Response) {
-        let viewModel = NameWine.UpdateRating.ViewModel()
-        viewController?.displayRating(viewModel: viewModel)
+    func presentErrorCreatingWine(_ error: Error) {
+        let message = "\(error)"
+        viewController?.displayErrorCreatingWine(message)
     }
 }

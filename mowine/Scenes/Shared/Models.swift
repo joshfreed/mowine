@@ -14,7 +14,7 @@ struct WineViewModel {
     var type: WineTypeViewModel?
     var variety: String?
     var location: String?
-    var price: Double?
+    var price: String?
     var notes: String?
     var image: UIImage?
     var pairings: [String] = []

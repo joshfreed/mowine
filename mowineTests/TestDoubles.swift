@@ -12,7 +12,9 @@ import UIKit
 import JFLib
 
 class MockWineImageWorker: WineImageWorker {
-    
+    init() {
+        super.init(imageRepository: MockWineImageRepository())
+    }
 }
 
 class MockWineImageRepository: WineImageRepository {
@@ -40,8 +42,7 @@ class MockEditWineWorker: EditWineWorker {
         super.init(
             wineRepository: MockWineRepository(),
             wineTypeRepository: MockWineTypeRepository(),
-            imageWorker: MockWineImageWorker(),
-            wineImageRepository: MockWineImageRepository()
+            imageWorker: MockWineImageWorker()
         )
     }
 }

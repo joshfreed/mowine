@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WU9-gR-Vw5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WU9-gR-Vw5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -232,17 +232,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap the Bottle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ge-ON-jl5">
-                                <rect key="frame" x="45" y="173" width="285" height="44.5"/>
+                                <rect key="frame" x="45" y="183" width="285" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca5-sd-LSG" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="47" y="237.5" width="281" height="74"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca5-sd-LSG" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="16" y="247.5" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="74" id="88H-Pf-cR6"/>
-                                    <constraint firstAttribute="width" constant="281" id="EBO-P4-dPJ"/>
+                                    <constraint firstAttribute="height" constant="80" id="88H-Pf-cR6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
                                 <color key="tintColor" white="1" alpha="0.87" colorSpace="calibratedWhite"/>
@@ -252,12 +251,11 @@
                                     <action selector="takePhoto:" destination="Ndr-H1-xxV" eventType="touchUpInside" id="Iyx-4I-tuC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-xk-Q56" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="47" y="331.5" width="281" height="74"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-xk-Q56" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="16" y="331.5" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="281" id="DoR-GN-6ow"/>
-                                    <constraint firstAttribute="height" constant="74" id="N35-IA-IEC"/>
+                                    <constraint firstAttribute="height" constant="80" id="N35-IA-IEC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
                                 <color key="tintColor" white="1" alpha="0.87" colorSpace="calibratedWhite"/>
@@ -280,16 +278,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ca5-sd-LSG" secondAttribute="trailing" constant="16" id="882-bN-qJy"/>
+                            <constraint firstItem="MuD-xk-Q56" firstAttribute="leading" secondItem="D3e-Ic-IN1" secondAttribute="leading" constant="16" id="8ju-9X-hGr"/>
                             <constraint firstItem="biG-MD-lma" firstAttribute="top" secondItem="Q5S-ww-WfF" secondAttribute="bottom" constant="16" id="Aln-3l-lYc"/>
                             <constraint firstItem="7Ge-ON-jl5" firstAttribute="centerX" secondItem="D3e-Ic-IN1" secondAttribute="centerX" id="JX9-K1-bEN"/>
-                            <constraint firstItem="MuD-xk-Q56" firstAttribute="top" secondItem="ca5-sd-LSG" secondAttribute="bottom" constant="20" id="Ozt-eE-c7m"/>
+                            <constraint firstItem="MuD-xk-Q56" firstAttribute="top" secondItem="ca5-sd-LSG" secondAttribute="bottom" constant="4" id="Ozt-eE-c7m"/>
                             <constraint firstItem="biG-MD-lma" firstAttribute="trailing" secondItem="D3e-Ic-IN1" secondAttribute="trailingMargin" id="Umj-tY-Si6"/>
                             <constraint firstItem="hRI-0b-qtZ" firstAttribute="centerX" secondItem="D3e-Ic-IN1" secondAttribute="centerX" id="Yc2-ey-S5D"/>
-                            <constraint firstItem="ca5-sd-LSG" firstAttribute="centerX" secondItem="D3e-Ic-IN1" secondAttribute="centerX" id="edQ-Co-BoC"/>
+                            <constraint firstItem="ca5-sd-LSG" firstAttribute="leading" secondItem="D3e-Ic-IN1" secondAttribute="leading" constant="16" id="eGc-jA-kbf"/>
                             <constraint firstItem="ca5-sd-LSG" firstAttribute="top" secondItem="7Ge-ON-jl5" secondAttribute="bottom" constant="20" id="mX5-xZ-Ohf"/>
-                            <constraint firstItem="7Ge-ON-jl5" firstAttribute="top" secondItem="biG-MD-lma" secondAttribute="bottom" id="nHW-0d-0Sv"/>
-                            <constraint firstItem="3Lq-PI-MXb" firstAttribute="top" secondItem="hRI-0b-qtZ" secondAttribute="bottom" constant="16" id="sBd-Wa-VXP"/>
-                            <constraint firstItem="MuD-xk-Q56" firstAttribute="centerX" secondItem="D3e-Ic-IN1" secondAttribute="centerX" id="wwM-Sw-nXw"/>
+                            <constraint firstItem="7Ge-ON-jl5" firstAttribute="top" secondItem="biG-MD-lma" secondAttribute="bottom" constant="10" id="nHW-0d-0Sv"/>
+                            <constraint firstItem="3Lq-PI-MXb" firstAttribute="top" secondItem="hRI-0b-qtZ" secondAttribute="bottom" constant="16" id="qmA-jh-EQl"/>
+                            <constraint firstAttribute="trailing" secondItem="MuD-xk-Q56" secondAttribute="trailing" constant="16" id="wMH-Ls-Zc5"/>
                             <constraint firstItem="biG-MD-lma" firstAttribute="leading" secondItem="D3e-Ic-IN1" secondAttribute="leadingMargin" id="zQG-hS-Azc"/>
                         </constraints>
                     </view>
@@ -354,12 +354,12 @@
                                     <constraint firstAttribute="width" secondItem="XDS-YG-dd1" secondAttribute="height" multiplier="1:1" id="FPx-BW-AEA"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-D3-y0b" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="32" y="373.5" width="311" height="64"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-D3-y0b" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="16" y="373.5" width="343" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="yjY-ac-anv"/>
+                                    <constraint firstAttribute="height" constant="80" id="yjY-ac-anv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="37"/>
                                 <state key="normal" title="Nailed It"/>
                                 <connections>
                                     <segue destination="VEu-kc-eUB" kind="show" identifier="NameWine" id="7pM-bq-uHV"/>
@@ -386,8 +386,8 @@
                             <constraint firstItem="RfP-dM-ZPw" firstAttribute="leading" secondItem="c02-xa-DMc" secondAttribute="leadingMargin" constant="16" id="Xep-An-WwY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RfP-dM-ZPw" secondAttribute="trailing" constant="16" id="cFh-T2-g3r"/>
                             <constraint firstItem="PSI-RK-spm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iEc-D3-y0b" secondAttribute="bottom" constant="8" id="fEQ-TG-zFV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="iEc-D3-y0b" secondAttribute="trailing" constant="16" id="gwA-e8-4Yy"/>
-                            <constraint firstItem="iEc-D3-y0b" firstAttribute="leading" secondItem="c02-xa-DMc" secondAttribute="leadingMargin" constant="16" id="nL0-Ir-En5"/>
+                            <constraint firstAttribute="trailing" secondItem="iEc-D3-y0b" secondAttribute="trailing" constant="16" id="gwA-e8-4Yy"/>
+                            <constraint firstItem="iEc-D3-y0b" firstAttribute="leading" secondItem="c02-xa-DMc" secondAttribute="leading" constant="16" id="nL0-Ir-En5"/>
                             <constraint firstItem="RfP-dM-ZPw" firstAttribute="top" secondItem="Dud-CK-Y4c" secondAttribute="bottom" id="pad-I0-Nwr"/>
                             <constraint firstItem="XDS-YG-dd1" firstAttribute="width" relation="lessThanOrEqual" secondItem="c02-xa-DMc" secondAttribute="width" multiplier="0.6" id="pgh-3V-GA8"/>
                             <constraint firstItem="XDS-YG-dd1" firstAttribute="top" secondItem="RfP-dM-ZPw" secondAttribute="bottom" priority="250" constant="20" id="pq4-VD-3Lv"/>
@@ -427,7 +427,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWe-9j-TJI" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="319"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="335"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the name, brand, or description of this wine" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sio-aG-lEh">
                                                 <rect key="frame" x="24" y="16" width="327" height="38.5"/>
@@ -450,8 +450,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfA-FT-ZCV" customClass="CosmosView" customModule="Cosmos">
-                                                <rect key="frame" x="65.5" y="154" width="245" height="45"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfA-FT-ZCV" customClass="CosmosView" customModule="Cosmos">
+                                                <rect key="frame" x="65" y="154" width="245" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="f8E-8y-Ktc"/>
@@ -468,10 +468,10 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rM-JR-l5W" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="223" width="327" height="64"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rM-JR-l5W" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="223" width="343" height="80"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="64" id="7RR-ld-22w"/>
+                                                    <constraint firstAttribute="height" constant="80" id="7RR-ld-22w"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                 <state key="normal" title="Add Wine"/>
@@ -486,8 +486,8 @@
                                             <constraint firstItem="0rM-JR-l5W" firstAttribute="top" secondItem="FfA-FT-ZCV" secondAttribute="bottom" constant="24" id="AvT-OZ-N3a"/>
                                             <constraint firstItem="BcE-1d-zAB" firstAttribute="top" secondItem="sio-aG-lEh" secondAttribute="bottom" constant="8" id="CbR-xX-PBG"/>
                                             <constraint firstItem="FfA-FT-ZCV" firstAttribute="centerX" secondItem="tWe-9j-TJI" secondAttribute="centerX" id="DFb-SR-4RQ"/>
-                                            <constraint firstItem="0rM-JR-l5W" firstAttribute="leading" secondItem="tWe-9j-TJI" secondAttribute="leadingMargin" constant="16" id="FV2-DK-5JS"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="0rM-JR-l5W" secondAttribute="trailing" constant="16" id="IFU-uX-shJ"/>
+                                            <constraint firstItem="0rM-JR-l5W" firstAttribute="leading" secondItem="tWe-9j-TJI" secondAttribute="leading" constant="16" id="FV2-DK-5JS"/>
+                                            <constraint firstAttribute="trailing" secondItem="0rM-JR-l5W" secondAttribute="trailing" constant="16" id="IFU-uX-shJ"/>
                                             <constraint firstItem="FfA-FT-ZCV" firstAttribute="top" secondItem="feg-QJ-zWI" secondAttribute="bottom" constant="8" id="Klc-y9-AFL"/>
                                             <constraint firstItem="feg-QJ-zWI" firstAttribute="centerX" secondItem="tWe-9j-TJI" secondAttribute="centerX" id="OUT-1U-dHO"/>
                                             <constraint firstItem="feg-QJ-zWI" firstAttribute="top" secondItem="BcE-1d-zAB" secondAttribute="bottom" constant="24" id="TPa-Dw-PsY"/>
@@ -522,7 +522,6 @@
                         <outlet property="nameTextField" destination="BcE-1d-zAB" id="DvD-TH-v31"/>
                         <outlet property="ratingView" destination="FfA-FT-ZCV" id="zpS-YF-nLW"/>
                         <outlet property="scrollView" destination="zp3-Q6-Rby" id="p04-Un-EaN"/>
-                        <segue destination="zob-5b-4jf" kind="show" identifier="AddWineSummary" id="tRu-N2-7Vv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFP-C5-TmI" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -33,7 +33,7 @@ class WineForm: NSObject {
         $0.title = "Location"
         $0.placeholder = "Where did I find this wine?"
     }
-    let priceRow = DecimalRow("price") {
+    let priceRow = TextRow("price") {
         $0.title = "Price"
         $0.placeholder = "How much was this wine?"
     }

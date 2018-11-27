@@ -15,23 +15,10 @@ import UIKit
 enum NameWine {
     // MARK: Use cases
 
-    enum UpdateName {
+    enum CreateWine {
         struct Request {
-            var name: String?
-        }
-        
-        struct Response {
-            
-        }
-        
-        struct ViewModel {
-            
-        }
-    }
-    
-    enum UpdateRating {
-        struct Request {
-            var rating: Double
+            let name: String
+            let rating: Double
         }
         
         struct Response {

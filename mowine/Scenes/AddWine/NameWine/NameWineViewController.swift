@@ -14,8 +14,8 @@ import UIKit
 import Cosmos
 
 protocol NameWineDisplayLogic: class {
-    func displayName(viewModel: NameWine.UpdateName.ViewModel)
-    func displayRating(viewModel: NameWine.UpdateRating.ViewModel)
+    func displayWineCreated(viewModel: NameWine.CreateWine.ViewModel)
+    func displayErrorCreatingWine(_ message: String)
 }
 
 class NameWineViewController: UIViewController, NameWineDisplayLogic {
@@ -44,6 +44,11 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
+        interactor.worker = WineWorker(
+            wineRepository: Container.shared.wineRepository,
+            imageWorker: Container.shared.wineImageWorker,
+            session: Container.shared.session
+        )
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -74,7 +79,7 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
         doneButton.alpha = 0
         
         ratingView.didFinishTouchingCosmos = { [weak self] rating in
-            self?.updateRating(rating: rating)
+            self?.showDoneButton()
         }        
     }
     
@@ -106,30 +111,23 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     @IBOutlet weak var doneButton: ButtonPrimary!
     @IBOutlet weak var ratingView: CosmosView!
     
-    // MARK: Update name
+    // MARK: Create wine
     
     @IBAction func tappedNext(_ sender: ButtonPrimary) {
-        let request = NameWine.UpdateName.Request(name: nameTextField.text)
-        interactor?.updateName(request: request)
+        let request = NameWine.CreateWine.Request(name: nameTextField.text ?? "", rating: ratingView.rating)
+        interactor?.createWine(request: request)
+    }
+
+    func displayWineCreated(viewModel: NameWine.CreateWine.ViewModel) {
+        router?.routeToMyWines()
     }
     
-    func displayName(viewModel: NameWine.UpdateName.ViewModel) {
-        performSegue(withIdentifier: "AddWineSummary", sender: nil)
-    }
-    
-    // MARK: Update rating
-    
-    func updateRating(rating: Double) {
-        let request = NameWine.UpdateRating.Request(rating: rating)
-        interactor?.updateRating(request: request)
-    }
-    
-    func displayRating(viewModel: NameWine.UpdateRating.ViewModel) {
-        showDoneButton()
+    func displayErrorCreatingWine(_ message: String) {
+        
     }
     
     // MARK: Helper funcs
-    
+
     func showDoneButton() {
         guard let name = nameTextField.text, !name.isEmpty, ratingView.rating > 0 else {        
             hideDoneButton()

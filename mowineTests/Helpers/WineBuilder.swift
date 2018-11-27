@@ -50,7 +50,7 @@ class WineBuilder {
         wine.notes = notes
         wine.price = price
 //        wine.photo = photo
-        wine.thumbnail = thumbnail
+//        wine.thumbnail = thumbnail
         wine.pairings = pairings
         
         return wine
