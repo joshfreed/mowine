@@ -14,6 +14,7 @@ import UIKit
 
 protocol MyWinesPresentationLogic {
     func presentMyWines(response: MyWines.FetchMyWines.Response)
+    func presentWineAdded(wine: Wine)
     func presentUpdatedWine(wine: Wine)
     func presentThumbnail(response: MyWines.FetchThumbnail.Response)
 }
@@ -42,6 +43,11 @@ class MyWinesPresenter: MyWinesPresentationLogic {
         
         let viewModel = MyWines.FetchMyWines.ViewModel(wines: wineViewModels)
         viewController?.displayMyWines(viewModel: viewModel)
+    }
+    
+    func presentWineAdded(wine: Wine) {
+        let viewModel = buildWineViewModel(fromModel: wine)
+        viewController?.displayNewWine(viewModel: viewModel)
     }
     
     func presentUpdatedWine(wine: Wine) {

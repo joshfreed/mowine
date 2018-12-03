@@ -24,8 +24,11 @@ class Container {
 //    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository: WineRepository = AWSContainer.shared.wineRepository
-    lazy var wineImageWorker: WineImageWorker = WineImageWorker(imageRepository: wineImageRepository)
-    lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
+    lazy var wineImageWorker: WineImageWorker = WineImageWorker(
+        imageRepository: AWSContainer.shared.wineImageRepository,
+        wineRepository: wineRepository
+    )
+//    lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
     lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
     lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())

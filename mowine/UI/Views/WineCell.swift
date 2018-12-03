@@ -27,7 +27,14 @@ class WineCell: UITableViewCell {
     }
     
     func configure(wine: WineListViewModel) {
-        if let thumbnail = wine.thumbnail, let image = UIImage(data: thumbnail) {
+        nameLabel.text = wine.name
+        wineTypeLabel.text = wine.type
+        ratingView.rating = wine.rating
+        configure(thumbnail: wine.thumbnail)
+    }
+    
+    func configure(thumbnail: Data?) {
+        if let thumbnail = thumbnail, let image = UIImage(data: thumbnail) {
             thumbnailImageView.image = image
         } else {
             thumbnailImageView.image = #imageLiteral(resourceName: "Default Wine Image")
@@ -35,9 +42,5 @@ class WineCell: UITableViewCell {
         thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.size.width / 2
         thumbnailImageView.clipsToBounds = true
         thumbnailImageView.contentMode = .scaleAspectFill
-        
-        nameLabel.text = wine.name
-        wineTypeLabel.text = wine.type
-        ratingView.rating = wine.rating
-    }    
+    }
 }

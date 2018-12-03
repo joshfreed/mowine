@@ -14,6 +14,7 @@ import UIKit
 
 protocol MyWinesDisplayLogic: class {
     func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel)
+    func displayNewWine(viewModel: WineListViewModel)
     func displayUpdatedWine(viewModel: WineListViewModel)
     func displayThumbnail(viewModel: MyWines.FetchThumbnail.ViewModel)
 }
@@ -52,7 +53,7 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
         interactor.worker = MyWinesWorker(
             wineRepository: Container.shared.wineRepository,
             session: Container.shared.session,
-            imageRepository: Container.shared.wineImageRepository
+            imageWorker: Container.shared.wineImageWorker
         )
         presenter.viewController = viewController
         router.viewController = viewController
@@ -73,6 +74,7 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
             wineListViewController?.delegate = self
+            wineListViewController?.thumbnailFetcher = Container.shared.wineImageWorker
         }
     }
 
@@ -107,6 +109,12 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
             wineViewModel!.thumbnail = data
             wineListViewController?.update(wine: wineViewModel!)
         }
+    }
+    
+    // MARK: Display new wine
+    
+    func displayNewWine(viewModel: WineListViewModel) {
+        wineListViewController?.insert(wine: viewModel, at: 0)
     }
     
     // MARK: Display updated wine

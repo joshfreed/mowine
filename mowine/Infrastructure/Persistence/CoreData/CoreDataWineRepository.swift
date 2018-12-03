@@ -48,6 +48,10 @@ class CoreDataWineRepository: WineRepository {
             completion(.failure(error))
         }
     }
+    
+    func getWine(by id: UUID, completion: @escaping (Result<Wine>) -> ()) {
+        fatalError("Not implemented")
+    }
 
     func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         do {

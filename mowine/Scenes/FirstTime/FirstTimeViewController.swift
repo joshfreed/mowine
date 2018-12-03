@@ -74,12 +74,12 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     // MARK: Continue with Facebook
@@ -110,10 +110,6 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     // MARK: Continue with email
     
     @IBAction func tappedContinueWithEmail(_ sender: ButtonOutline) {
-        if UserDefaults.standard.bool(forKey: "hasLoggedInBefore") {
-            performSegue(withIdentifier: "SignIn", sender: nil)
-        } else {
-            performSegue(withIdentifier: "SignUp", sender: nil)
-        }
+        performSegue(withIdentifier: "SignUp", sender: nil)
     }
 }

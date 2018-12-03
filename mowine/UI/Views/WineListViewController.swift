@@ -7,16 +7,24 @@
 //
 
 import UIKit
+import JFLib
+import SwiftyBeaver
 
 protocol WineListViewControllerDelegate: class {
     func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath)
 }
 
+protocol WineListThumbnailFetcher: class {
+    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?>) -> ())
+}
+
 class WineListViewController: UITableViewController {
     weak var delegate: WineListViewControllerDelegate?
+    weak var thumbnailFetcher: WineListThumbnailFetcher?
 
     var wines: [WineListViewModel] = [] {
         didSet {
+            SwiftyBeaver.verbose("didSet wines")
             tableView.reloadData()
         }
     }
@@ -30,7 +38,14 @@ class WineListViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
+    func insert(wine: WineListViewModel, at index: Int) {
+        SwiftyBeaver.verbose("Insert wine \(wine.id)")
+        wines.insert(wine, at: index)
+    }
+    
     func update(wine: WineListViewModel) {
+        SwiftyBeaver.verbose("Update wine \(wine.id)")
+        
         if let index = wines.index(of: wine) {
             wines[index] = wine
             tableView.reloadData()
@@ -45,7 +60,14 @@ class WineListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WineCell", for: indexPath) as! WineCell
-        cell.configure(wine: wines[indexPath.row])
+        let wine = wines[indexPath.row]
+        cell.configure(wine: wine)
+        thumbnailFetcher?.fetchThumbnail(for: wine.id) { result in
+            switch result {
+            case .success(let data): cell.configure(thumbnail: data)
+            case .failure(let error): SwiftyBeaver.warning("\(error)")
+            }
+        }
         return cell
     }
     

@@ -21,6 +21,14 @@ class MemoryWineRepository: WineRepository {
             wines.remove(at: index)
         }
     }
+    
+    func getWine(by id: UUID, completion: @escaping (Result<Wine>) -> ()) {
+        if let wine = wines.first(where: { $0.id == id }) {
+            completion(.success(wine))
+        } else {
+            completion(.failure(WineRepositoryError.notFound))
+        }
+    }
 
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         guard let index = wines.index(of: wine) else {

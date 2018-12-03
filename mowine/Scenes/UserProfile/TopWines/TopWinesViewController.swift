@@ -64,6 +64,7 @@ class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
             wineListViewController.delegate = self
+            wineListViewController.thumbnailFetcher = Container.shared.wineImageWorker
         }
     }
 

@@ -11,7 +11,7 @@ import JFLib
 
 protocol WineImageRepository {
     func store(wineId: UUID, image: Data, thumbnail: Data)
-    func fetchThumbnail(wineId: UUID, completion: @escaping (Result<Data?>) -> ())
+    func fetchThumbnail(wineId: UUID, userId: UserId, completion: @escaping (Result<Data?>) -> ())
     func fetchPhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ())
     func deleteImages(wineId: UUID)
 }

@@ -114,6 +114,34 @@ class AppSyncWineRepository: WineRepository {
         }
     }
     
+    func getWine(by id: UUID, completion: @escaping (JFLib.Result<Wine>) -> ()) {
+        appSyncClient.fetch(query: GetWineQuery(id: id.uuidString), cachePolicy: .returnCacheDataAndFetch) { result, error in
+            SwiftyBeaver.debug("GetWineQuery result handler \(id)")
+            
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                SwiftyBeaver.error(error.localizedDescription)
+                completion(.failure(error))
+                return
+            }
+            
+            if let errors = result?.errors, let firstError = errors.first {
+                SwiftyBeaver.error("Result had \(errors.count) errors")
+                SwiftyBeaver.error("\(errors)")
+                completion(.failure(firstError))
+                return
+            }
+            
+            guard let getWine = result?.data?.getWine else {
+                completion(.failure(WineRepositoryError.notFound))
+                return
+            }
+            
+            let wine = getWine.toWine()
+            completion(.success(wine))
+        }        
+    }
+    
     func getWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
         SwiftyBeaver.debug("getWines for \(userId)")
         
@@ -205,6 +233,26 @@ extension GetUserQuery.Data.GetUser.Wine.Item {
 }
 
 extension OnCreateWineSubscription.Data.OnCreateWine {
+    func toWine() -> Wine {
+        let wineId = UUID(uuidString: id)!
+        let userId = UserId(string: user?.id ?? "")
+        let wineType = WineType(name: type, varieties: [])
+        let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: Double(rating))
+        
+        if let varietyName = variety {
+            wine.variety = WineVariety(name: varietyName)
+        }
+        
+        wine.location = location
+        wine.notes = notes
+        wine.price = price
+        wine.pairings = pairings
+        
+        return wine
+    }
+}
+
+extension GetWineQuery.Data.GetWine {
     func toWine() -> Wine {
         let wineId = UUID(uuidString: id)!
         let userId = UserId(string: user?.id ?? "")

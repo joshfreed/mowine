@@ -14,7 +14,7 @@ import SwiftyBeaver
 class S3WineImageRepository {
     let transferUtility: AWSS3TransferUtility
     let session: Session
-    let baseBucket = "mowine-wine-images"
+    let baseBucket = "mowine3586f516ef894a65a88b1c6a187dcf27/protected"
     
     init(transferUtility: AWSS3TransferUtility, session: Session) {
         self.transferUtility = transferUtility
@@ -118,11 +118,7 @@ extension S3WineImageRepository: WineImageRepository {
     }
     
     
-    func fetchThumbnail(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
-        guard let userId = session.currentUserId else {
-            return
-        }
-        
+    func fetchThumbnail(wineId: UUID, userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
         let userBucket = "\(baseBucket)/\(userId)"
         let thumbnailName = "\(wineId)-thumb.png"
         downloadImage(fileName: thumbnailName, userBucket: userBucket, completion: completion)

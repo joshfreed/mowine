@@ -99,14 +99,8 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             return
         }
         
-        wines.insert(wine, at: 0)
-        
-        presentWines()
-        
-//        delay(seconds: 1.5) {
-//            let request = MyWines.FetchThumbnail.Request(wineId: newWine.id)
-//            self.fetchThumbnail(request: request)
-//        }
+        wines.insert(wine, at: 0)        
+        presenter?.presentWineAdded(wine: wine)
     }
     
     // MARK: Business logic
@@ -119,7 +113,6 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             case .success(let wines):
                 self.wines = wines
                 self.presentWines()
-                self.loadWineThumbnails()
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
             }
@@ -135,39 +128,5 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     
     func selectWine(atIndex index: Int) {
         selectedWine = wines[index]
-    }
-    
-    // MARK: Fetch thumbnails
-    
-    func loadWineThumbnails() {
-        SwiftyBeaver.debug("loadWineThumbnails")
-        
-        for wine in wines {
-//            if wine.thumbnail != nil {
-//                continue
-//            }
-            let request = MyWines.FetchThumbnail.Request(wineId: wine.id)
-            fetchThumbnail(request: request)
-        }
-    }
-    
-    // MARK: Fetch thumbnail
-    
-    func fetchThumbnail(request: MyWines.FetchThumbnail.Request) {
-        guard let wine = wines.first(where: { $0.id == request.wineId }) else {
-            return
-        }
-        
-        worker?.fetchThumbnail(wine: wine) { result in
-            switch result {
-            case .success(let thumbnail):
-//                wine.thumbnail = thumbnail
-                let response = MyWines.FetchThumbnail.Response(wine: wine, thumbnail: thumbnail)
-                self.presenter?.presentThumbnail(response: response)
-            case .failure(let error):
-                SwiftyBeaver.error("Error fetching thumb: \(error)")
-                break
-            }
-        }
     }
 }
