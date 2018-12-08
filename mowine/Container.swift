@@ -91,19 +91,7 @@ func initializeAppSync() -> AWSAppSyncClient {
     do {
         // Initialize the AWS AppSync configuration
         let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncClientInfo: AWSAppSyncClientInfo(),
-                                                              userPoolsAuthProvider: {
-                                                                class MyCognitoUserPoolsAuthProvider : AWSCognitoUserPoolsAuthProviderAsync {
-                                                                    func getLatestAuthToken(_ callback: @escaping (String?, Error?) -> Void) {
-                                                                        AWSMobileClient.sharedInstance().getTokens { (tokens, error) in
-                                                                            if error != nil {
-                                                                                callback(nil, error)
-                                                                            } else {
-                                                                                callback(tokens?.idToken?.tokenString, nil)
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                                return MyCognitoUserPoolsAuthProvider()}(),
+                                                              userPoolsAuthProvider: { return MyCognitoUserPoolsAuthProvider() }(),
                                                               databaseURL:databaseURL)
         
         // Initialize the AWS AppSync client
@@ -111,6 +99,18 @@ func initializeAppSync() -> AWSAppSyncClient {
         return appSyncClient
     } catch {
         fatalError("Error initializing appsync client. \(error)")
+    }
+}
+
+class MyCognitoUserPoolsAuthProvider : AWSCognitoUserPoolsAuthProviderAsync {
+    func getLatestAuthToken(_ callback: @escaping (String?, Error?) -> Void) {
+        AWSMobileClient.sharedInstance().getTokens { (tokens, error) in
+            if error != nil {
+                callback(nil, error)
+            } else {
+                callback(tokens?.idToken?.tokenString, nil)
+            }
+        }
     }
 }
 

@@ -13,11 +13,15 @@ import JFLib
 
 class MockWineImageWorker: WineImageWorker {
     init() {
-        super.init(imageRepository: MockWineImageRepository())
+        super.init(imageRepository: MockWineImageRepository(), wineRepository: MockWineRepository())
     }
 }
 
 class MockWineImageRepository: WineImageRepository {
+    func fetchThumbnail(wineId: UUID, userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
+        
+    }
+    
     func store(wineId: UUID, image: Data, thumbnail: Data) {
         
     }

@@ -11,6 +11,10 @@ import Foundation
 import JFLib
 
 class MockWineRepository: WineRepository {
+    func getWine(by id: UUID, completion: @escaping (Result<Wine>) -> ()) {
+        
+    }
+    
     func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         
     }
