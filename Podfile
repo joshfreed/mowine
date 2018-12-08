@@ -17,16 +17,16 @@ target 'mowine' do
   pod 'AWSDynamoDB', '~> 2.7.0'
   pod 'AWSS3', '~> 2.7.0'
   pod 'AWSAppSync', '~> 2.7.0'
+  pod 'Firebase/Core'
 
   target 'mowineTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'Nimble'
   end
+end
 
-  target 'mowineUITests' do
-    inherit! :search_paths
+target 'mowineUITests' do
     # Pods for testing
-  end
-
+    pod 'Firebase/Core'
 end
