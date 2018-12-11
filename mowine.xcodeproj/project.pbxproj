@@ -65,6 +65,8 @@
 		532FB08720584C2C0056D1B2 /* UserProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08120584C2C0056D1B2 /* UserProfileModels.swift */; };
 		532FB08820584C2C0056D1B2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */; };
 		532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */; };
+		533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */; };
+		533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533597B021BC43A900CEFD45 /* FirebaseSession.swift */; };
 		533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533980932068295C004C080B /* FacebookAuthenticationService.swift */; };
 		5339809620682A76004C080B /* AWSFacebookAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339809520682A76004C080B /* AWSFacebookAuthentication.swift */; };
 		53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */; };
@@ -127,6 +129,8 @@
 		537740A41E5BC73600A1D282 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A31E5BC73600A1D282 /* Models.swift */; };
 		537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */; };
 		537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18D321961CFB00011C63 /* NimbleMatchers.swift */; };
+		5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35421BC49F700221219 /* FirestoreUserRepository.swift */; };
+		5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35621BC759300221219 /* FirebaseSocialAuth.swift */; };
 		53812027206EF86C0053A94E /* AWSFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53812026206EF86C0053A94E /* AWSFriend.swift */; };
 		53898641206AEB0700EBC67B /* AWSUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53898640206AEB0700EBC67B /* AWSUser.swift */; };
 		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
@@ -330,6 +334,8 @@
 		532FB08120584C2C0056D1B2 /* UserProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModels.swift; sourceTree = "<group>"; };
 		532FB08220584C2C0056D1B2 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		532FB08320584C2C0056D1B2 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
+		533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseEmailAuth.swift; sourceTree = "<group>"; };
+		533597B021BC43A900CEFD45 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
 		533980932068295C004C080B /* FacebookAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthenticationService.swift; sourceTree = "<group>"; };
 		5339809520682A76004C080B /* AWSFacebookAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSFacebookAuthentication.swift; sourceTree = "<group>"; };
 		53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryInteractor.swift; sourceTree = "<group>"; };
@@ -392,6 +398,8 @@
 		537740A31E5BC73600A1D282 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsCoreDataUserMapper.swift; sourceTree = "<group>"; };
 		537A18D321961CFB00011C63 /* NimbleMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleMatchers.swift; sourceTree = "<group>"; };
+		5380F35421BC49F700221219 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
+		5380F35621BC759300221219 /* FirebaseSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSocialAuth.swift; sourceTree = "<group>"; };
 		53812026206EF86C0053A94E /* AWSFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSFriend.swift; sourceTree = "<group>"; };
 		53898640206AEB0700EBC67B /* AWSUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSUser.swift; sourceTree = "<group>"; };
 		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorkerTests.swift; sourceTree = "<group>"; };
@@ -682,6 +690,25 @@
 			path = WineCellar;
 			sourceTree = "<group>";
 		};
+		533597AC21BC3ED600CEFD45 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5380F35321BC49E000221219 /* Firestore */,
+				533597AF21BC439E00CEFD45 /* Auth */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		533597AF21BC439E00CEFD45 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */,
+				533597B021BC43A900CEFD45 /* FirebaseSession.swift */,
+				5380F35621BC759300221219 /* FirebaseSocialAuth.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		53423DD71F740B4000655A7F /* AddWineSummary */ = {
 			isa = PBXGroup;
 			children = (
@@ -754,6 +781,7 @@
 		5348960F203DE4A300B7547A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				533597AC21BC3ED600CEFD45 /* Firebase */,
 				53FBE798216125A900C461FA /* CoreData */,
 				53A3D57E2145C4CE008A476D /* Sync */,
 				53F24865206D3F5E0046B031 /* Facebook */,
@@ -904,6 +932,14 @@
 				537614C71E591887005AABF0 /* EditWineWorker.swift */,
 			);
 			path = EditWine;
+			sourceTree = "<group>";
+		};
+		5380F35321BC49E000221219 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				5380F35421BC49F700221219 /* FirestoreUserRepository.swift */,
+			);
+			path = Firestore;
 			sourceTree = "<group>";
 		};
 		538995AA1EE475BB00CF1330 /* Scenes */ = {
@@ -1627,10 +1663,12 @@
 				53D1E3012059B68800A22476 /* TopWinesViewController.swift in Sources */,
 				5327BC342062B362006787E9 /* WineDetailsViewController.swift in Sources */,
 				53B6CB8B205ADD9300AE8EFB /* WineCellarPresenter.swift in Sources */,
+				5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */,
 				53ED1F86204F2D5C00C129BC /* FriendsRouter.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
 				53F100FD2045E08F00B29FAF /* SignInModels.swift in Sources */,
 				53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */,
+				533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */,
 				53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				5327BC1B20618670006787E9 /* MWButton.swift in Sources */,
@@ -1671,6 +1709,7 @@
 				53423DE11F740B6B00655A7F /* AddWineSummaryRouter.swift in Sources */,
 				53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */,
 				532FB08520584C2C0056D1B2 /* UserProfileWorker.swift in Sources */,
+				5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */,
 				5327BC372062BB35006787E9 /* WineDetailsHeader.swift in Sources */,
 				53489600203CF10500B7547A /* AddWineSummaryWorker.swift in Sources */,
 				53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */,
@@ -1744,6 +1783,7 @@
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
 				53F100FC2045E08F00B29FAF /* SignInRouter.swift in Sources */,
+				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				53F100DF2040806F00B29FAF /* CoreDataVarietyTranslator.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,

@@ -17,19 +17,18 @@ class Container {
     static let shared = Container()
     private init() {}
 
-    lazy var session: Session = AWSContainer.shared.session
-    lazy var emailAuthService: EmailAuthenticationService = AWSContainer.shared.mobileAuth
-    lazy var facebookAuthService: FacebookAuthenticationService = AWSContainer.shared.mobileAuth
+    lazy var session: Session = FirebaseSession()
+    lazy var emailAuthService: EmailAuthenticationService = FirebaseEmailAuth()
+    lazy var facebookAuthService: FacebookAuthenticationService = FirebaseSocialAuth()
     lazy var fbGraphApi: GraphApi = GraphApi()    
-//    lazy var wineTypeRepository: WineTypeRepository = CoreDataWineTypeRepository(container: persistentContainer, coreDataWorker: coreDataWorker)
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository: WineRepository = AWSContainer.shared.wineRepository
+    lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
     lazy var wineImageWorker: WineImageWorker = WineImageWorker(
-        imageRepository: AWSContainer.shared.wineImageRepository,
+        imageRepository: wineImageRepository,
         wineRepository: wineRepository
     )
-//    lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
-    lazy var userRepository: UserRepository = AWSContainer.shared.userRepository
+    lazy var userRepository: UserRepository = FirestoreUserRepository()
     lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var coreDataWorker = CoreDataWorker()

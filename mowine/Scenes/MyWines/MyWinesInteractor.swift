@@ -12,7 +12,6 @@
 
 import UIKit
 import JFLib
-import AWSAppSync
 import SwiftyBeaver
 
 protocol MyWinesBusinessLogic {
@@ -27,15 +26,11 @@ protocol MyWinesDataStore {
 class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     var presenter: MyWinesPresentationLogic?
     var worker: MyWinesWorker?
-    let appSyncClient: AWSAppSyncClient
-    private var discard: Cancellable?
     
     var selectedWine: Wine?
     private var wines: [Wine] = []
     
     init() {
-        self.appSyncClient = AWSContainer.shared.appSyncClient
-        
         registerNotifications()
         registerSubscriptions()
     }
@@ -48,29 +43,29 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     }
     
     func registerSubscriptions() {
-        discard = try! self.appSyncClient.subscribe(subscription: OnCreateWineSubscription()) { result, transaction, error in
-            SwiftyBeaver.debug("onCreateWine")
-            
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                SwiftyBeaver.error(error.localizedDescription)
-                return
-            }
-            
-            if let errors = result?.errors {
-                SwiftyBeaver.error("Result had \(errors.count) errors")
-                SwiftyBeaver.error("\(errors)")
-                return
-            }
-            
-            guard let result = result else {
-                return
-            }
-            
-            SwiftyBeaver.info("onCreateWine: \(result.data!.onCreateWine!.name)")
-            let newWine = result.data!.onCreateWine!.toWine()
-            self.insertWine(newWine)
-        }
+//        discard = try! self.appSyncClient.subscribe(subscription: OnCreateWineSubscription()) { result, transaction, error in
+//            SwiftyBeaver.debug("onCreateWine")
+//
+//            if let error = error {
+//                SwiftyBeaver.error("\(error)")
+//                SwiftyBeaver.error(error.localizedDescription)
+//                return
+//            }
+//
+//            if let errors = result?.errors {
+//                SwiftyBeaver.error("Result had \(errors.count) errors")
+//                SwiftyBeaver.error("\(errors)")
+//                return
+//            }
+//
+//            guard let result = result else {
+//                return
+//            }
+//
+//            SwiftyBeaver.info("onCreateWine: \(result.data!.onCreateWine!.name)")
+//            let newWine = result.data!.onCreateWine!.toWine()
+//            self.insertWine(newWine)
+//        }
     }
     
     @objc func wineUpdated(notification: Notification) {

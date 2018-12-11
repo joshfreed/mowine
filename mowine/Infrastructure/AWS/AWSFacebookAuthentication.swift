@@ -9,7 +9,7 @@
 import Foundation
 import JFLib
 import AWSAuthCore
-import AWSFacebookSignIn
+//import AWSFacebookSignIn
 import AWSUserPoolsSignIn
 import FBSDKLoginKit
 
@@ -18,6 +18,7 @@ import FBSDKLoginKit
 // Not used any more, using AWSMobileAuth instead
 //
 
+/*
 class AWSFacebookAuthentication: FacebookAuthenticationService {
     lazy var providerKey = AWSFacebookSignInProvider.sharedInstance().identityProviderName
     
@@ -37,3 +38,4 @@ class AWSFacebookAuthentication: FacebookAuthenticationService {
         }
     }
 }
+*/
