@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B31648E4CDED387AFFF4196 /* Pods_mowineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95525E35B6A767922F7A7849 /* Pods_mowineTests.framework */; };
-		343D6EE6C17E140DBE698F1B /* libPods-mowineUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9BF49EEBB6CFD306CBE07AB /* libPods-mowineUITests.a */; };
+		2D37D0BA7A38AD66494E2C65 /* Pods_mowineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D009C1656E64A107F1550B /* Pods_mowineTests.framework */; };
 		5300651C206C21BB008B9104 /* AWSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300651B206C21BB008B9104 /* AWSResult.swift */; };
 		5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5301F72D0F6004A66A9 /* NameWineInteractor.swift */; };
 		5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5311F72D0F6004A66A9 /* NameWineModels.swift */; };
@@ -235,8 +234,8 @@
 		53FBE7A02161269900C461FA /* DynamoDbRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */; };
 		53FBE7A221612B5F00C461FA /* SyncManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE7A121612B5F00C461FA /* SyncManager2.swift */; };
 		53FFD6482051BE6700AC60EE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFD6472051BE6700AC60EE /* Errors.swift */; };
-		C31AB210C5B9253A029291C7 /* Pods_mowine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D2191A073430204A43EAD2 /* Pods_mowine.framework */; };
-		E2F5A5CF3BB672023FDCCD21 /* Pods_mowine_mowineUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FAA0109337D689E95EFE0E /* Pods_mowine_mowineUITests.framework */; };
+		75473028A2935552CC93E86A /* libPods-mowineUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */; };
+		D55A3B9E94FC7F3E1014D0F4 /* Pods_mowine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86FB78043F03257BD82D891 /* Pods_mowine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,10 +270,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B81E5EED7FB531E1352CB18 /* Pods-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
-		27D44C4408290ED28897B675 /* Pods-mowineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.release.xcconfig"; sourceTree = "<group>"; };
-		47FAA0109337D689E95EFE0E /* Pods_mowine_mowineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine_mowineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EC92B585F30D8DC2711291D /* Pods-mowine-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine-mowineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowine-mowineUITests/Pods-mowine-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		02D009C1656E64A107F1550B /* Pods_mowineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mowineUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		363B98F58C21B7324D5549F9 /* Pods-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5300651B206C21BB008B9104 /* AWSResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSResult.swift; sourceTree = "<group>"; };
 		5301D5301F72D0F6004A66A9 /* NameWineInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineInteractor.swift; sourceTree = "<group>"; };
 		5301D5311F72D0F6004A66A9 /* NameWineModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineModels.swift; sourceTree = "<group>"; };
@@ -506,14 +504,12 @@
 		53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbRemoteDataStore.swift; sourceTree = "<group>"; };
 		53FBE7A121612B5F00C461FA /* SyncManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager2.swift; sourceTree = "<group>"; };
 		53FFD6472051BE6700AC60EE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		558C323AD1536C69814BC914 /* Pods-mowine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.debug.xcconfig"; sourceTree = "<group>"; };
-		5BF925A7A8875DA1BE3385A2 /* Pods-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		629677DC1C4169B64512406B /* Pods-mowine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.release.xcconfig"; sourceTree = "<group>"; };
-		88828FE216EFA5A273B117B4 /* Pods-mowineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.debug.xcconfig"; sourceTree = "<group>"; };
-		95525E35B6A767922F7A7849 /* Pods_mowineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0D2191A073430204A43EAD2 /* Pods_mowine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8BEEB9484D50E0032AE3A80 /* Pods-mowine-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine-mowineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowine-mowineUITests/Pods-mowine-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F9BF49EEBB6CFD306CBE07AB /* libPods-mowineUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mowineUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		650191F6EFC37436B6FB1E64 /* Pods-mowineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.release.xcconfig"; sourceTree = "<group>"; };
+		736CDE5C539B071F454AA97F /* Pods-mowine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.debug.xcconfig"; sourceTree = "<group>"; };
+		8E42D2124F6F638ABFFF4A7E /* Pods-mowineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B86FB78043F03257BD82D891 /* Pods_mowine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B877722BAF23F11826C61E1D /* Pods-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F1D5D9BA1B17CB648EFB9449 /* Pods-mowine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,7 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */,
-				C31AB210C5B9253A029291C7 /* Pods_mowine.framework in Frameworks */,
+				D55A3B9E94FC7F3E1014D0F4 /* Pods_mowine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +526,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B31648E4CDED387AFFF4196 /* Pods_mowineTests.framework in Frameworks */,
+				2D37D0BA7A38AD66494E2C65 /* Pods_mowineTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,29 +534,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F5A5CF3BB672023FDCCD21 /* Pods_mowine_mowineUITests.framework in Frameworks */,
-				343D6EE6C17E140DBE698F1B /* libPods-mowineUITests.a in Frameworks */,
+				75473028A2935552CC93E86A /* libPods-mowineUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08F72C55990258CD876B9DEF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				558C323AD1536C69814BC914 /* Pods-mowine.debug.xcconfig */,
-				629677DC1C4169B64512406B /* Pods-mowine.release.xcconfig */,
-				4EC92B585F30D8DC2711291D /* Pods-mowine-mowineUITests.debug.xcconfig */,
-				D8BEEB9484D50E0032AE3A80 /* Pods-mowine-mowineUITests.release.xcconfig */,
-				88828FE216EFA5A273B117B4 /* Pods-mowineTests.debug.xcconfig */,
-				27D44C4408290ED28897B675 /* Pods-mowineTests.release.xcconfig */,
-				5BF925A7A8875DA1BE3385A2 /* Pods-mowineUITests.debug.xcconfig */,
-				0B81E5EED7FB531E1352CB18 /* Pods-mowineUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		5301D52F1F72D0D8004A66A9 /* NameWine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1159,7 +1139,7 @@
 				53F5AC151E2176090067AB62 /* mowineUITests */,
 				53F5ABF11E2176080067AB62 /* Products */,
 				8E45E83822A4C492508A446C /* Frameworks */,
-				08F72C55990258CD876B9DEF /* Pods */,
+				90A3B16437E1BB88FF300867 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1275,12 +1255,24 @@
 			isa = PBXGroup;
 			children = (
 				531550DE1F5848C70017DA70 /* JFLib.framework */,
-				D0D2191A073430204A43EAD2 /* Pods_mowine.framework */,
-				47FAA0109337D689E95EFE0E /* Pods_mowine_mowineUITests.framework */,
-				95525E35B6A767922F7A7849 /* Pods_mowineTests.framework */,
-				F9BF49EEBB6CFD306CBE07AB /* libPods-mowineUITests.a */,
+				B86FB78043F03257BD82D891 /* Pods_mowine.framework */,
+				02D009C1656E64A107F1550B /* Pods_mowineTests.framework */,
+				2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		90A3B16437E1BB88FF300867 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				736CDE5C539B071F454AA97F /* Pods-mowine.debug.xcconfig */,
+				F1D5D9BA1B17CB648EFB9449 /* Pods-mowine.release.xcconfig */,
+				8E42D2124F6F638ABFFF4A7E /* Pods-mowineTests.debug.xcconfig */,
+				650191F6EFC37436B6FB1E64 /* Pods-mowineTests.release.xcconfig */,
+				B877722BAF23F11826C61E1D /* Pods-mowineUITests.debug.xcconfig */,
+				363B98F58C21B7324D5549F9 /* Pods-mowineUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1290,12 +1282,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F5AC1B1E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowine" */;
 			buildPhases = (
-				A3784477A85C210EDD2D3F3B /* [CP] Check Pods Manifest.lock */,
+				172DC1A07E432BDDCC56722D /* [CP] Check Pods Manifest.lock */,
 				53F5ABEC1E2176080067AB62 /* Sources */,
 				53F5ABED1E2176080067AB62 /* Frameworks */,
 				53F5ABEE1E2176080067AB62 /* Resources */,
 				53C50BC11F795FC50049AC92 /* Embed Frameworks */,
-				3B33D48B4604CF08C7027AE6 /* [CP] Embed Pods Frameworks */,
+				5F6191A378EC056E5EB4AC1F /* [CP] Embed Pods Frameworks */,
+				0CED62522BF32C4544BE0F21 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1310,11 +1303,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F5AC1E1E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineTests" */;
 			buildPhases = (
-				F14160AC63F3A10390E33A79 /* [CP] Check Pods Manifest.lock */,
+				9984F1D212FE364A28E9EE2C /* [CP] Check Pods Manifest.lock */,
 				53F5AC031E2176090067AB62 /* Sources */,
 				53F5AC041E2176090067AB62 /* Frameworks */,
 				53F5AC051E2176090067AB62 /* Resources */,
-				689B7242E28B3C219A491BB0 /* [CP] Embed Pods Frameworks */,
+				E92991D3ECAB01C94E6D8750 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1330,7 +1323,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F5AC211E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineUITests" */;
 			buildPhases = (
-				2E6B6DE2C9E0D565FE10BAE4 /* [CP] Check Pods Manifest.lock */,
+				B1B5AB87424500AFCA3A32B4 /* [CP] Check Pods Manifest.lock */,
 				53F5AC0E1E2176090067AB62 /* Sources */,
 				53F5AC0F1E2176090067AB62 /* Frameworks */,
 				53F5AC101E2176090067AB62 /* Resources */,
@@ -1436,101 +1429,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E6B6DE2C9E0D565FE10BAE4 /* [CP] Check Pods Manifest.lock */ = {
+		0CED62522BF32C4544BE0F21 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mowineUITests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3B33D48B4604CF08C7027AE6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AWSAppSync/AWSAppSync.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSFacebookSignIn/AWSFacebookSignIn.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-framework/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb-framework/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAppSync.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSFacebookSignIn.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		689B7242E28B3C219A491BB0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A3784477A85C210EDD2D3F3B /* [CP] Check Pods Manifest.lock */ = {
+		172DC1A07E432BDDCC56722D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1548,7 +1465,75 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F14160AC63F3A10390E33A79 /* [CP] Check Pods Manifest.lock */ = {
+		5F6191A378EC056E5EB4AC1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAppSync/AWSAppSync.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-framework/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb-framework/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAppSync.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9984F1D212FE364A28E9EE2C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1564,6 +1549,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1B5AB87424500AFCA3A32B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mowineUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E92991D3ECAB01C94E6D8750 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1948,7 +1969,7 @@
 		};
 		53F5AC1C1E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 558C323AD1536C69814BC914 /* Pods-mowine.debug.xcconfig */;
+			baseConfigurationReference = 736CDE5C539B071F454AA97F /* Pods-mowine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
@@ -1969,7 +1990,7 @@
 		};
 		53F5AC1D1E2176090067AB62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 629677DC1C4169B64512406B /* Pods-mowine.release.xcconfig */;
+			baseConfigurationReference = F1D5D9BA1B17CB648EFB9449 /* Pods-mowine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
@@ -1990,7 +2011,7 @@
 		};
 		53F5AC1F1E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88828FE216EFA5A273B117B4 /* Pods-mowineTests.debug.xcconfig */;
+			baseConfigurationReference = 8E42D2124F6F638ABFFF4A7E /* Pods-mowineTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2006,7 +2027,7 @@
 		};
 		53F5AC201E2176090067AB62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27D44C4408290ED28897B675 /* Pods-mowineTests.release.xcconfig */;
+			baseConfigurationReference = 650191F6EFC37436B6FB1E64 /* Pods-mowineTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2022,7 +2043,7 @@
 		};
 		53F5AC221E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BF925A7A8875DA1BE3385A2 /* Pods-mowineUITests.debug.xcconfig */;
+			baseConfigurationReference = B877722BAF23F11826C61E1D /* Pods-mowineUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
@@ -2037,7 +2058,7 @@
 		};
 		53F5AC231E2176090067AB62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B81E5EED7FB531E1352CB18 /* Pods-mowineUITests.release.xcconfig */;
+			baseConfigurationReference = 363B98F58C21B7324D5549F9 /* Pods-mowineUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
