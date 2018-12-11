@@ -6,3 +6,4 @@ amplify/
 .amplifyrc
 graphql/
 .graphqlconfig.yml
+Pods/
