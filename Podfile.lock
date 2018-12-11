@@ -12,10 +12,6 @@ PODS:
   - AWSCore (2.7.4)
   - AWSDynamoDB (2.7.4):
     - AWSCore (= 2.7.4)
-  - AWSFacebookSignIn (2.7.4):
-    - AWSAuthCore (= 2.7.4)
-    - FBSDKCoreKit (~> 4.0)
-    - FBSDKLoginKit (~> 4.0)
   - AWSMobileClient (2.7.4):
     - AWSAuthCore (= 2.7.4)
     - AWSCognitoIdentityProvider (= 2.7.4)
@@ -30,17 +26,29 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - BoringSSL (10.0.6):
+    - BoringSSL/Implementation (= 10.0.6)
+    - BoringSSL/Interface (= 10.0.6)
+  - BoringSSL/Implementation (10.0.6):
+    - BoringSSL/Interface (= 10.0.6)
+  - BoringSSL/Interface (10.0.6)
   - Cosmos (17.0.0)
   - Eureka (4.3.0)
-  - FBSDKCoreKit (4.39.0):
+  - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.39.0):
+  - FBSDKLoginKit (4.38.1):
     - FBSDKCoreKit
+  - Firebase/Auth (5.14.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.1.0)
   - Firebase/Core (5.14.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.4.0)
   - Firebase/CoreOnly (5.14.0):
     - FirebaseCore (= 5.1.9)
+  - Firebase/Firestore (5.14.0):
+    - Firebase/CoreOnly
+    - FirebaseFirestore (= 0.16.0)
   - FirebaseAnalytics (5.4.0):
     - FirebaseCore (~> 5.1)
     - FirebaseInstanceID (~> 3.3)
@@ -50,8 +58,29 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - FirebaseAuth (5.1.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseAuthInterop (1.0.0)
   - FirebaseCore (5.1.9):
     - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseFirestore (0.16.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - FirebaseFirestore/abseil-cpp (= 0.16.0)
+    - "gRPC-C++ (= 0.0.5)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.8)
+    - Protobuf (~> 3.1)
+  - FirebaseFirestore/abseil-cpp (0.16.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - "gRPC-C++ (= 0.0.5)"
+    - leveldb-library (~> 1.20)
+    - nanopb (~> 0.3.8)
+    - Protobuf (~> 3.1)
   - FirebaseInstanceID (3.3.0):
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
@@ -80,12 +109,31 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
+  - "gRPC-C++ (0.0.5)":
+    - "gRPC-C++/Implementation (= 0.0.5)"
+    - "gRPC-C++/Interface (= 0.0.5)"
+  - "gRPC-C++/Implementation (0.0.5)":
+    - "gRPC-C++/Interface (= 0.0.5)"
+    - gRPC-Core (= 1.14.0)
+    - nanopb (~> 0.3)
+  - "gRPC-C++/Interface (0.0.5)"
+  - gRPC-Core (1.14.0):
+    - gRPC-Core/Implementation (= 1.14.0)
+    - gRPC-Core/Interface (= 1.14.0)
+  - gRPC-Core/Implementation (1.14.0):
+    - BoringSSL (~> 10.0)
+    - gRPC-Core/Interface (= 1.14.0)
+    - nanopb (~> 0.3)
+  - gRPC-Core/Interface (1.14.0)
+  - GTMSessionFetcher/Core (1.2.1)
+  - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Nimble (7.3.1)
+  - Protobuf (3.6.1)
   - PureLayout (3.1.4)
   - ReachabilitySwift (4.3.0)
   - SQLite.swift (0.11.4):
@@ -96,13 +144,16 @@ PODS:
 DEPENDENCIES:
   - AWSAppSync (~> 2.7.0)
   - AWSDynamoDB (~> 2.7.0)
-  - AWSFacebookSignIn (~> 2.7.0)
   - AWSMobileClient (~> 2.7.0)
   - AWSS3 (~> 2.7.0)
   - AWSUserPoolsSignIn (~> 2.7.0)
   - Cosmos
   - Eureka
+  - FBSDKCoreKit (~> 4.38.0)
+  - FBSDKLoginKit (~> 4.38.0)
+  - Firebase/Auth
   - Firebase/Core
+  - Firebase/Firestore
   - Nimble
   - PureLayout
   - SwiftyBeaver
@@ -115,23 +166,31 @@ SPEC REPOS:
     - AWSCognitoIdentityProviderASF
     - AWSCore
     - AWSDynamoDB
-    - AWSFacebookSignIn
     - AWSMobileClient
     - AWSS3
     - AWSUserPoolsSignIn
     - Bolts
+    - BoringSSL
     - Cosmos
     - Eureka
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseFirestore
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleUtilities
+    - "gRPC-C++"
+    - gRPC-Core
+    - GTMSessionFetcher
+    - leveldb-library
     - nanopb
     - Nimble
+    - Protobuf
     - PureLayout
     - ReachabilitySwift
     - SQLite.swift
@@ -144,28 +203,36 @@ SPEC CHECKSUMS:
   AWSCognitoIdentityProviderASF: 5d31eef1c1962b4ad58e87ceee376b83b697bf9b
   AWSCore: b25ac6fb70a4e527b2e0df956d9f27ded5f6e518
   AWSDynamoDB: c5de46781facd1fe21adc703201094a728f9c26d
-  AWSFacebookSignIn: 2f8bcf20968c12d309911319c8c8054255bfcfc1
   AWSMobileClient: bb1994cea9a87afa82d87bb131b08346935ad237
   AWSS3: bb5d02aeb94ba5e32d3b42eeffff7b8832ed607f
   AWSUserPoolsSignIn: 5af62070c60c7d3025edb3c2643c6b8d1e2d1821
   Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
+  BoringSSL: 016eaed201a404d11981ba2cfce8c3a773e86a1b
   Cosmos: bfc3f026cd36e4bfc8941ffe301687b212324298
   Eureka: 524b63ee66dbdca913658081a31ce68b5585e115
-  FBSDKCoreKit: a9f31ef821b904320216c8215e2b36ee9f831fc6
-  FBSDKLoginKit: dd2cbdd100de8386cf0e1f0953686a13a97e4709
+  FBSDKCoreKit: daf87d58d125ffc5cd891ad0645cdb88279d28e7
+  FBSDKLoginKit: 96bfaf921fe2519f827149c35888f0ccc36f7f01
   Firebase: 961a2b4069c354937500e45945d502de98144b6f
   FirebaseAnalytics: ac2d0962033bb9032400ebcae97c741086b3057a
+  FirebaseAuth: 1b7a30ce4e50e0be4c40bea25cb18450e7e4e278
+  FirebaseAuthInterop: 165c11428f6ae3f7ec2262e53fdd8b6fb2c4922a
   FirebaseCore: fbabde8140c2977a597df3a26e8cebc688a217b4
+  FirebaseFirestore: d08ced0a76008b464db68c82944314dde8b1aab7
   FirebaseInstanceID: 8d407bb087e6b74e19154e2e700fcb499b364a5f
   GoogleAppMeasurement: 3ca0c97c372fa2355eb2b813bdd824ccd9c88f9d
   GoogleUtilities: fd87f68d5791b938d8f25de9de1f404409099310
+  "gRPC-C++": 83bbb322462612a12a52a88d4b4b3780631cb746
+  gRPC-Core: e517327a7723b2efe3dcfc8533a92880aaa99e4b
+  GTMSessionFetcher: c1b726d3e27675e1dab34347e28325c873a468e6
+  leveldb-library: d2078c743a1ba226e4917345714d72423e0069cc
   nanopb: 9f8aa4fc4e9d32c345e927e12c7bd9c0ea088353
   Nimble: d351cee437b0eb2719d29964edad9501cc62c184
+  Protobuf: 6b0fc34ab8f2b7dbad2278a48be08a669427c59f
   PureLayout: cd5c97224004e45506d9e750161efdf70336c0af
   ReachabilitySwift: 8610aeb4af1844f38c44f05482de0ab537f852eb
   SQLite.swift: 0231abc3a3a05101fb90a7cd48d44aaeec6cbd4f
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: 95923ff3a2e26d59da414f08d3950f52c0742ebc
+PODFILE CHECKSUM: 7715807df44da5959390c4e17d82aeaa9ac1decf
 
 COCOAPODS: 1.5.3
