@@ -9,14 +9,26 @@
 import UIKit
 import AWSMobileClient
 import SwiftyBeaver
+import Firebase
+import FirebaseAuth
 
 class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        FirebaseApp.configure()
+
+        let handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+            SwiftyBeaver.info("addStateDidChangeListener was triggered")
+            if user != nil {
+                self?.showSignedInView()
+            } else {
+                self?.showSignedOutView()
+            }
+        }
         
+/*
         AWSMobileClient.sharedInstance().addUserStateListener(self) { userState, info in
             switch (userState) {
             case .guest:
@@ -48,14 +60,8 @@ class StartViewController: UIViewController {
                 SwiftyBeaver.debug("Current user id: \(Container.shared.session.currentUserId?.asString ?? "nil")")
                 
                 switch userState {
-                case .signedIn:
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-                    appDelegate.window?.rootViewController = destinationVC
-                case .signedOut:
-                    let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-                    let destinationVC = storyboard.instantiateInitialViewController()!
-                    appDelegate.window?.rootViewController = destinationVC
+                case .signedIn: self.showSignedInView()
+                case .signedOut: self.showSignedOutView()
                 default:
                     break
                 }
@@ -64,6 +70,21 @@ class StartViewController: UIViewController {
                 SwiftyBeaver.debug("error: \(error.localizedDescription)")
             }
         }
+*/
+    }
+    
+    private func showSignedInView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = destinationVC
+    }
+    
+    private func showSignedOutView() {
+        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+        let destinationVC = storyboard.instantiateInitialViewController()!
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = destinationVC
     }
     
 

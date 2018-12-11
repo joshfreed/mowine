@@ -13,9 +13,9 @@ import PureLayout
 import AWSMobileClient
 import AWSAuthCore
 import AWSUserPoolsSignIn
-import AWSFacebookSignIn
 import SwiftyBeaver
 import AWSAppSync
+import FBSDKCoreKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -51,16 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SwiftyBeaver.addDestination(platform)
     }
-    
-/*
+  
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return AWSMobileClient.sharedInstance().interceptApplication(
-            application, open: url,
-            sourceApplication: sourceApplication,
-            annotation: annotation
-        )
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
- */
 
     private func deleteDatabase() {
         var url = NSPersistentContainer.defaultDirectoryURL()
