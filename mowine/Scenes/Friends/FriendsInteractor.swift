@@ -42,7 +42,8 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     var debounceTime = 0.25
     var searches: [UUID] = []
 
-    init() {
+    init(worker: FriendsWorker) {
+        self.worker = worker
         NotificationCenter.default.addObserver(self, selector: #selector(friendWasAdded), name: .friendAdded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(friendWasRemoved), name: .friendRemoved, object: nil)
     }

@@ -13,6 +13,7 @@
 @testable import mowine
 import XCTest
 import Nimble
+import Dip
 
 class FriendsViewControllerTests: XCTestCase {
     // MARK: Subject under test
@@ -20,27 +21,44 @@ class FriendsViewControllerTests: XCTestCase {
     var sut: FriendsViewController!
     var window: UIWindow!
     let spy = FriendsBusinessLogicSpy()
+    let router = MockRouter()
 
     // MARK: Test lifecycle
 
     override func setUp() {
         super.setUp()
         window = UIWindow()
+        setupContainer()
         setupFriendsViewController()
     }
 
     override func tearDown() {
         window = nil
+        DependencyContainer.uiContainers = []
         super.tearDown()
     }
 
     // MARK: Test setup
 
+    func setupContainer() {
+        let container = DependencyContainer { container in
+            container.register(.shared) { FriendsViewController() }
+                .implements(FriendsDisplayLogic.self)
+                .resolvingProperties { container, controller in
+                    controller.interactor = try! container.resolve()
+                    controller.router = try! container.resolve()
+                }
+            container.register { self.spy as FriendsBusinessLogic }
+            container.register { self.router as (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing) }
+        }
+
+        DependencyContainer.uiContainers = [container]
+    }
+    
     func setupFriendsViewController() {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier:"FriendsViewController") as! FriendsViewController
-        sut.interactor = spy
+        sut = storyboard.instantiateViewController(withIdentifier:"FriendsViewController") as? FriendsViewController
     }
 
     func loadView() {
@@ -85,6 +103,14 @@ class FriendsViewControllerTests: XCTestCase {
         var displayAddFriendFailedCalled = false
         override func displayAddFriendFailed() {
             displayAddFriendFailedCalled = true
+        }
+    }
+    
+    class MockRouter: NSObject, FriendsRoutingLogic, FriendsDataPassing {
+        var dataStore: FriendsDataStore?
+        
+        func routeToUserProfile(segue: UIStoryboardSegue) {
+            
         }
     }
 

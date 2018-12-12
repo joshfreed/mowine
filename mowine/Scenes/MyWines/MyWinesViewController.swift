@@ -51,9 +51,9 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
         viewController.router = router
         interactor.presenter = presenter
         interactor.worker = MyWinesWorker(
-            wineRepository: Container.shared.wineRepository,
-            session: Container.shared.session,
-            imageWorker: Container.shared.wineImageWorker
+            wineRepository: JFContainer.shared.wineRepository,
+            session: JFContainer.shared.session,
+            imageWorker: JFContainer.shared.wineImageWorker
         )
         presenter.viewController = viewController
         router.viewController = viewController
@@ -74,7 +74,7 @@ class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
             wineListViewController?.delegate = self
-            wineListViewController?.thumbnailFetcher = Container.shared.wineImageWorker
+            wineListViewController?.thumbnailFetcher = JFContainer.shared.wineImageWorker
         }
     }
 

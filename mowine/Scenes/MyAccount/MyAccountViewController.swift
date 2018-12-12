@@ -48,7 +48,7 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = MyAccountWorker(session: Container.shared.session)
+        interactor.worker = MyAccountWorker(session: JFContainer.shared.session)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor

@@ -16,7 +16,7 @@ class SyncManager {
     private var isSyncing: Bool = false
     
     func initialize() {
-        coreDataSyncableWatcher = CoreDataSyncableWatcher(container: Container.shared.persistentContainer)
+        coreDataSyncableWatcher = CoreDataSyncableWatcher(container: JFContainer.shared.persistentContainer)
     }
 
     func sync() {
@@ -35,7 +35,7 @@ class SyncManager {
         operations.append(UserSyncOperation())
         operations.append(WineSyncOperation())
         
-        Container.shared.persistentContainer.performBackgroundTask { context in
+        JFContainer.shared.persistentContainer.performBackgroundTask { context in
             let group = DispatchGroup()
             
             for operation in operations {
@@ -259,7 +259,7 @@ protocol SyncOperation {
 class WineTypeSyncOperation: SyncOperation {
     func sync(context: NSManagedObjectContext, completion: @escaping (EmptyResult) -> ()) {
         let memoryWineTypeRepository = MemoryWineTypeRepository()
-        let coreDataMappingContext = CoreDataMappingContext(worker: Container.shared.coreDataWorker, context: context)
+        let coreDataMappingContext = CoreDataMappingContext(worker: JFContainer.shared.coreDataWorker, context: context)
         
         do {
             _ = try coreDataMappingContext.syncSet(memoryWineTypeRepository.types)
@@ -272,8 +272,8 @@ class WineTypeSyncOperation: SyncOperation {
 
 class UserSyncOperation: SyncOperation {
     func sync(context: NSManagedObjectContext, completion: @escaping (EmptyResult) -> ()) {
-        let remoteUserStore = DynamoDbRemoteDataStore<AWSUser>(dynamoDbWorker: Container.shared.dynamoDbWorker)
-        let localUserStore = CoreDataLocalDataStore<ManagedUser>(coreDataWorker: Container.shared.coreDataWorker, context: context)
+        let remoteUserStore = DynamoDbRemoteDataStore<AWSUser>(dynamoDbWorker: JFContainer.shared.dynamoDbWorker)
+        let localUserStore = CoreDataLocalDataStore<ManagedUser>(coreDataWorker: JFContainer.shared.coreDataWorker, context: context)
         let userMapper = AwsCoreDataUserMapper(context: context)
         let userSyncer = SyncManager2(remoteDataStore: remoteUserStore, localDataStore: localUserStore, mapper: userMapper)
         userSyncer.syncObjects(completion: completion)
@@ -282,8 +282,8 @@ class UserSyncOperation: SyncOperation {
 
 class WineSyncOperation: SyncOperation {
     func sync(context: NSManagedObjectContext, completion: @escaping (EmptyResult) -> ()) {
-        let remoteWineStore = DynamoDbRemoteDataStore<AWSWine>(dynamoDbWorker: Container.shared.dynamoDbWorker)
-        let localWineStore = CoreDataLocalDataStore<ManagedWine>(coreDataWorker: Container.shared.coreDataWorker, context: context)
+        let remoteWineStore = DynamoDbRemoteDataStore<AWSWine>(dynamoDbWorker: JFContainer.shared.dynamoDbWorker)
+        let localWineStore = CoreDataLocalDataStore<ManagedWine>(coreDataWorker: JFContainer.shared.coreDataWorker, context: context)
         let wineMapper = AwsCoreDataWineMapper(context: context)
         let wineSyncer = SyncManager2(remoteDataStore: remoteWineStore, localDataStore: localWineStore, mapper: wineMapper)
         wineSyncer.syncObjects(completion: completion)

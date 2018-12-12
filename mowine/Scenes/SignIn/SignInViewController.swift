@@ -45,7 +45,7 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = SignInWorker(emailAuth: Container.shared.emailAuthService)
+        interactor.worker = SignInWorker(emailAuth: JFContainer.shared.emailAuthService)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor

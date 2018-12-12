@@ -44,7 +44,7 @@ class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = TopWinesWorker(wineRepository: Container.shared.wineRepository)
+        interactor.worker = TopWinesWorker(wineRepository: JFContainer.shared.wineRepository)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -64,7 +64,7 @@ class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
             wineListViewController.delegate = self
-            wineListViewController.thumbnailFetcher = Container.shared.wineImageWorker
+            wineListViewController.thumbnailFetcher = JFContainer.shared.wineImageWorker
         }
     }
 

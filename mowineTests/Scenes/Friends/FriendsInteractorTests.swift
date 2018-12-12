@@ -36,8 +36,7 @@ class FriendsInteractorTests: XCTestCase {
     // MARK: Test setup
 
     func setupFriendsInteractor() {
-        sut = FriendsInteractor()
-        sut.worker = worker
+        sut = FriendsInteractor(worker: worker)
         sut.presenter = spy
     }
 

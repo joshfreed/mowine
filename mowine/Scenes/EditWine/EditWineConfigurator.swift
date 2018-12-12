@@ -45,9 +45,9 @@ class EditWineConfigurator {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let worker = EditWineWorker(
-            wineRepository: Container.shared.wineRepository,
-            wineTypeRepository: Container.shared.wineTypeRepository,
-            imageWorker: Container.shared.wineImageWorker
+            wineRepository: JFContainer.shared.wineRepository,
+            wineTypeRepository: JFContainer.shared.wineTypeRepository,
+            imageWorker: JFContainer.shared.wineImageWorker
         )
         let interactor = EditWineInteractor(worker: worker)
         interactor.output = presenter

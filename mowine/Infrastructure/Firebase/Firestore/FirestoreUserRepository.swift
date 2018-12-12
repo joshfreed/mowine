@@ -63,11 +63,11 @@ class FirestoreUserRepository: UserRepository {
     }
     
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
-        
+        completion(.success([]))
     }
     
     func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
-        
+        completion(.success([]))
     }
     
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
@@ -79,6 +79,6 @@ class FirestoreUserRepository: UserRepository {
     }
 
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
-        
+        completion(.success(false))
     }
 }

@@ -12,12 +12,24 @@ import AWSDynamoDB
 import AWSS3
 import AWSAppSync
 import AWSMobileClient
+import Dip
 
-class Container {
-    static let shared = Container()
-    private init() {}
+class JFContainer {
+    static let shared = JFContainer()
+    private init() {
+        DependencyContainer.uiContainers = [container]
+    }
 
-    lazy var session: Session = FirebaseSession()
+    let container = DependencyContainer { container in
+        // Common
+        container.register(.singleton) { FirebaseSession() as Session }
+        container.register(.singleton) { FirestoreUserRepository() as UserRepository }
+        
+        // Scenes
+        FriendsScene.configureDependencies(container)        
+    }
+    
+    lazy var session: Session = try! container.resolve()
     lazy var emailAuthService: EmailAuthenticationService = FirebaseEmailAuth()
     lazy var facebookAuthService: FacebookAuthenticationService = FirebaseSocialAuth()
     lazy var fbGraphApi: GraphApi = GraphApi()    
@@ -28,7 +40,7 @@ class Container {
         imageRepository: wineImageRepository,
         wineRepository: wineRepository
     )
-    lazy var userRepository: UserRepository = FirestoreUserRepository()
+    lazy var userRepository: UserRepository = try! container.resolve()
     lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var coreDataWorker = CoreDataWorker()
@@ -70,11 +82,11 @@ class AWSContainer {
     static let shared = AWSContainer()
     private init() {}
     
-    lazy var session = AWSSession(userRepository: Container.shared.userRepository)
+    lazy var session = AWSSession(userRepository: JFContainer.shared.userRepository)
     lazy var mobileAuth = AWSMobileAuth()
     lazy var wineImageRepository = S3WineImageRepository(
         transferUtility: AWSS3TransferUtility.default(),
-        session: Container.shared.session
+        session: JFContainer.shared.session
     )
     lazy var appSyncClient: AWSAppSyncClient = {
         return initializeAppSync()

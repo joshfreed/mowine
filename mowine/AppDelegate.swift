@@ -16,10 +16,11 @@ import AWSUserPoolsSignIn
 import SwiftyBeaver
 import AWSAppSync
 import FBSDKCoreKit
+import Dip
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = UIColor.mwButtonSecondary
@@ -85,8 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")      
         
-        if Container.shared.session.isLoggedIn {
-            Container.shared.syncManager.sync()
+        if JFContainer.shared.session.isLoggedIn {
+            JFContainer.shared.syncManager.sync()
         }
     }
 
@@ -98,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data stack
 
-    lazy var persistentContainer: NSPersistentContainer = Container.shared.persistentContainer
+    lazy var persistentContainer: NSPersistentContainer = JFContainer.shared.persistentContainer
 
     // MARK: - Core Data Saving support
 

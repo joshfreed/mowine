@@ -33,6 +33,7 @@ PODS:
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
   - Cosmos (17.0.0)
+  - Dip (7.0.0)
   - Eureka (4.3.0)
   - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
@@ -148,6 +149,7 @@ DEPENDENCIES:
   - AWSS3 (~> 2.7.0)
   - AWSUserPoolsSignIn (~> 2.7.0)
   - Cosmos
+  - Dip
   - Eureka
   - FBSDKCoreKit (~> 4.38.0)
   - FBSDKLoginKit (~> 4.38.0)
@@ -172,6 +174,7 @@ SPEC REPOS:
     - Bolts
     - BoringSSL
     - Cosmos
+    - Dip
     - Eureka
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -209,6 +212,7 @@ SPEC CHECKSUMS:
   Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
   BoringSSL: 016eaed201a404d11981ba2cfce8c3a773e86a1b
   Cosmos: bfc3f026cd36e4bfc8941ffe301687b212324298
+  Dip: c0428d6f8f80840e9ae1c8fccb08545389c623d1
   Eureka: 524b63ee66dbdca913658081a31ce68b5585e115
   FBSDKCoreKit: daf87d58d125ffc5cd891ad0645cdb88279d28e7
   FBSDKLoginKit: 96bfaf921fe2519f827149c35888f0ccc36f7f01
@@ -233,6 +237,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 0231abc3a3a05101fb90a7cd48d44aaeec6cbd4f
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: 7715807df44da5959390c4e17d82aeaa9ac1decf
+PODFILE CHECKSUM: 11eff443f0ffd3fff8c217c3354cb8b9c6ae6fcb
 
 COCOAPODS: 1.5.3
