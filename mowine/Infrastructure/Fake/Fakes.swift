@@ -141,7 +141,7 @@ class FakeSession: Session {
 class FakeEmailAuth: EmailAuthenticationService {
     func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
         if let user = usersDB.first(where: { $0.emailAddress == emailAddress }) {
-            (Container.shared.session as? FakeSession)?.setUser(user: user)
+            (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
             completion(.success)
         } else {
             completion(.failure(EmailAuthenticationErrors.userNotFound))

@@ -9,6 +9,9 @@ target 'mowine' do
   pod 'Cosmos'
   pod 'PureLayout'
   pod 'SwiftyBeaver'
+  pod 'Dip'
+  
+  # Facebook
   pod 'FBSDKCoreKit', '~> 4.38.0'
   pod 'FBSDKLoginKit', '~> 4.38.0'
   

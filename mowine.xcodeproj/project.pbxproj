@@ -80,7 +80,7 @@
 		534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F3203CBB4200B7547A /* WineTypeRepository.swift */; };
 		534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */; };
 		534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F9203CBF7100B7547A /* CoreDataWineTypeRepository.swift */; };
-		534895FD203CBFB900B7547A /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* Container.swift */; };
+		534895FD203CBFB900B7547A /* JFContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* JFContainer.swift */; };
 		53489600203CF10500B7547A /* AddWineSummaryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FF203CF10500B7547A /* AddWineSummaryWorker.swift */; };
 		53489602203DD11F00B7547A /* WineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489601203DD11F00B7547A /* WineRepository.swift */; };
 		53489607203DD86800B7547A /* CoreDataWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489606203DD86800B7547A /* CoreDataWineRepository.swift */; };
@@ -129,6 +129,7 @@
 		537740A41E5BC73600A1D282 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A31E5BC73600A1D282 /* Models.swift */; };
 		537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */; };
 		537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18D321961CFB00011C63 /* NimbleMatchers.swift */; };
+		537D8A4D21C067EF00A110FF /* FriendsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537D8A4C21C067EF00A110FF /* FriendsScene.swift */; };
 		5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35421BC49F700221219 /* FirestoreUserRepository.swift */; };
 		5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35621BC759300221219 /* FirebaseSocialAuth.swift */; };
 		53812027206EF86C0053A94E /* AWSFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53812026206EF86C0053A94E /* AWSFriend.swift */; };
@@ -349,7 +350,7 @@
 		534895F3203CBB4200B7547A /* WineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeRepository.swift; sourceTree = "<group>"; };
 		534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeWorker.swift; sourceTree = "<group>"; };
 		534895F9203CBF7100B7547A /* CoreDataWineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineTypeRepository.swift; sourceTree = "<group>"; };
-		534895FC203CBFB900B7547A /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		534895FC203CBFB900B7547A /* JFContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFContainer.swift; sourceTree = "<group>"; };
 		534895FF203CF10500B7547A /* AddWineSummaryWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryWorker.swift; sourceTree = "<group>"; };
 		53489601203DD11F00B7547A /* WineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineRepository.swift; sourceTree = "<group>"; };
 		53489606203DD86800B7547A /* CoreDataWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineRepository.swift; sourceTree = "<group>"; };
@@ -398,6 +399,7 @@
 		537740A31E5BC73600A1D282 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsCoreDataUserMapper.swift; sourceTree = "<group>"; };
 		537A18D321961CFB00011C63 /* NimbleMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleMatchers.swift; sourceTree = "<group>"; };
+		537D8A4C21C067EF00A110FF /* FriendsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsScene.swift; sourceTree = "<group>"; };
 		5380F35421BC49F700221219 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		5380F35621BC759300221219 /* FirebaseSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSocialAuth.swift; sourceTree = "<group>"; };
 		53812026206EF86C0053A94E /* AWSFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSFriend.swift; sourceTree = "<group>"; };
@@ -1107,6 +1109,7 @@
 				53ED1F83204F2D5C00C129BC /* FriendsInteractor.swift */,
 				53ED1F8C204F359C00C129BC /* UserTableViewCell.swift */,
 				53ED1F8D204F359C00C129BC /* UserTableViewCell.xib */,
+				537D8A4C21C067EF00A110FF /* FriendsScene.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -1199,7 +1202,7 @@
 				539C4D8A21ACA99500B0F8E0 /* Workers */,
 				53B61B7F219B34C200A0258E /* main.swift */,
 				53F5ABF31E2176080067AB62 /* AppDelegate.swift */,
-				534895FC203CBFB900B7547A /* Container.swift */,
+				534895FC203CBFB900B7547A /* JFContainer.swift */,
 				53F5ABF71E2176080067AB62 /* Main.storyboard */,
 				53112843205F01CD0094DC35 /* AddWine.storyboard */,
 				53958A9D20617BCD00BA4B6C /* SignIn.storyboard */,
@@ -1520,6 +1523,7 @@
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/Dip/Dip.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -1549,6 +1553,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -1678,6 +1683,7 @@
 				534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */,
 				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,
 				53112845205F02CB0094DC35 /* AddWineViewController.swift in Sources */,
+				537D8A4D21C067EF00A110FF /* FriendsScene.swift in Sources */,
 				5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */,
 				53A8D5FB204611A1000AD7A3 /* MyAccountInteractor.swift in Sources */,
 				5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */,
@@ -1802,7 +1808,7 @@
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				532FB08620584C2C0056D1B2 /* UserProfileRouter.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
-				534895FD203CBFB900B7547A /* Container.swift in Sources */,
+				534895FD203CBFB900B7547A /* JFContainer.swift in Sources */,
 				537614C91E591887005AABF0 /* EditWineInteractor.swift in Sources */,
 				53D1E3022059B68800A22476 /* TopWinesInteractor.swift in Sources */,
 				5350C83D21A098F8004BBA42 /* AppSyncUserRepository.swift in Sources */,

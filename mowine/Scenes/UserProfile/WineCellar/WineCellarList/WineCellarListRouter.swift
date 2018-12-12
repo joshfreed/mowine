@@ -30,7 +30,7 @@ class WineCellarListRouter: NSObject, WineCellarListRoutingLogic, WineCellarList
     func routeToWineList(segue: UIStoryboardSegue) {
         viewController?.wineListViewController = segue.destination as? WineListViewController
         viewController?.wineListViewController.delegate = viewController
-        viewController?.wineListViewController.thumbnailFetcher = Container.shared.wineImageWorker
+        viewController?.wineListViewController.thumbnailFetcher = JFContainer.shared.wineImageWorker
     }
     
     func routeToWineDetails() {

@@ -12,6 +12,7 @@
 
 import UIKit
 import JFLib
+import Dip
 
 protocol FriendsDisplayLogic: class {
     func displayFriends(viewModel: Friends.FetchFriends.ViewModel)
@@ -33,37 +34,6 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var activityIndicator: UIActivityIndicatorView?
     var activityIndicatorBottom: NSLayoutConstraint?
     
-    // MARK: Object lifecycle
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // MARK: Setup
-
-    private func setup() {
-        let viewController = self
-        let interactor = FriendsInteractor()
-        let presenter = FriendsPresenter()
-        let router = FriendsRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        interactor.worker = FriendsWorker(
-            userRepository: Container.shared.userRepository,
-            session: Container.shared.session
-        )
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-
     // MARK: Routing
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -234,6 +204,10 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     func displaySelectedUser(viewModel: Friends.SelectUser.ViewModel) {
         performSegue(withIdentifier: "UserProfile", sender: nil)
     }
+}
+
+extension FriendsViewController: StoryboardInstantiatable {
+    
 }
 
 // MARK: - UISearchResultsUpdating

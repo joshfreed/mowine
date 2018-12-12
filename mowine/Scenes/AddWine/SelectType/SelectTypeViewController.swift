@@ -46,7 +46,7 @@ class SelectTypeViewController: UIViewController, SelectTypeDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = SelectTypeWorker(wineTypeRepository: Container.shared.wineTypeRepository)
+        interactor.worker = SelectTypeWorker(wineTypeRepository: JFContainer.shared.wineTypeRepository)
         
         presenter.viewController = viewController
         router.viewController = viewController

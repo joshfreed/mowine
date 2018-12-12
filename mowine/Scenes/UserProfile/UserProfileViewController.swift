@@ -51,7 +51,7 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = UserProfileWorker(userRepository: Container.shared.userRepository, session: Container.shared.session)
+        interactor.worker = UserProfileWorker(userRepository: JFContainer.shared.userRepository, session: JFContainer.shared.session)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor

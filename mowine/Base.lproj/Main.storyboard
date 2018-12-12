@@ -286,6 +286,9 @@
                     <navigationItem key="navigationItem" title="Friends" id="ood-TV-3lY">
                         <barButtonItem key="backBarButtonItem" title="Back" id="PGP-dz-w77"/>
                     </navigationItem>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="nil" keyPath="dipTag"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="8L6-9K-tc3" kind="show" identifier="UserProfile" id="Lhr-3l-nxg"/>
                     </connections>

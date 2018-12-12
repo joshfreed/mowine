@@ -44,7 +44,7 @@ class WineCellarListViewController: UIViewController, WineCellarListDisplayLogic
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = WineCellarListWorker(wineRepository: Container.shared.wineRepository)
+        interactor.worker = WineCellarListWorker(wineRepository: JFContainer.shared.wineRepository)
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
