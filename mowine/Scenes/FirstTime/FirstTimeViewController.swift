@@ -13,6 +13,7 @@
 import UIKit
 import FBSDKLoginKit
 import SwiftyBeaver
+import JFLib
 
 protocol FirstTimeDisplayLogic: class {
     func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel)
@@ -22,6 +23,8 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     var interactor: FirstTimeBusinessLogic?
     var router: (NSObjectProtocol & FirstTimeRoutingLogic & FirstTimeDataPassing)?
 
+    var loadingView: LoadingView!
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -70,6 +73,7 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView = LoadingView(parentView: view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +97,7 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
             }
             
             if let result = result, !result.isCancelled {
-//                self.loadingView?.show("Signing in...")
+                self.loadingView.show("Signing in...")
                 self.interactor?.linkToFacebookLogin(fbToken: result.token.tokenString)
             }
         }

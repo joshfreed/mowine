@@ -83,6 +83,24 @@ struct User: Equatable {
     }
 }
 
+// MARK: Dictionary
+
+extension User {
+    static func toUser(from dictionary: [String: Any]) throws -> User {
+        guard let userIdStr = dictionary["userId"] as? String else {
+            throw MoWineError.dictionaryError(message: "'userId' missing or incorrect type")
+        }
+        guard let emailAddress = dictionary["email"] as? String else {
+            throw MoWineError.dictionaryError(message: "'email' missing or incorrect type")
+        }
+        let userId = UserId(string: userIdStr)
+        var user = User(id: userId, emailAddress: emailAddress)
+        user.firstName = dictionary["firstName"] as? String
+        user.lastName = dictionary["lastName"] as? String
+        return user
+    }
+}
+
 // MARK: CoreDataConvertible
 
 extension User: CoreDataConvertible {
