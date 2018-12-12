@@ -22,10 +22,6 @@ class FirebaseSession: Session {
         return UserId(string: uid)
     }
     
-    func resume(completion: @escaping (EmptyResult) -> ()) {
-        // no-op
-    }
-    
     func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {
         if let authUser = Auth.auth().currentUser {
             let userId = UserId(string: authUser.uid)

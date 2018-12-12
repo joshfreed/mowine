@@ -858,6 +858,7 @@
 		535C0B1D1E3579EB008A8117 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				537D8A4E21C1AE8F00A110FF /* User */,
 				539196951E6B612D001AE149 /* Notifications.swift */,
 				534895F0203CBAA400B7547A /* Wine.swift */,
 				53489611203DE54500B7547A /* WineType.swift */,
@@ -867,11 +868,8 @@
 				53F100E62044BFAF00B29FAF /* Session.swift */,
 				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
 				533980932068295C004C080B /* FacebookAuthenticationService.swift */,
-				53ED1F7B20489DBD00C129BC /* User.swift */,
-				53ED1F8A204F323F00C129BC /* UserRepository.swift */,
 				53257F00207D49CD00E1AB5F /* WineImageRepository.swift */,
 				530BCA532155823C002F785C /* Syncable.swift */,
-				53547C7C218E3F8700EDD2A8 /* Friendship.swift */,
 				53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */,
 			);
 			path = Domain;
@@ -934,6 +932,16 @@
 				537614C71E591887005AABF0 /* EditWineWorker.swift */,
 			);
 			path = EditWine;
+			sourceTree = "<group>";
+		};
+		537D8A4E21C1AE8F00A110FF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				53ED1F7B20489DBD00C129BC /* User.swift */,
+				53ED1F8A204F323F00C129BC /* UserRepository.swift */,
+				53547C7C218E3F8700EDD2A8 /* Friendship.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		5380F35321BC49E000221219 /* Firestore */ = {

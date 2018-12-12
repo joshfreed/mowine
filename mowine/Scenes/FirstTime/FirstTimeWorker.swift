@@ -41,6 +41,26 @@ class FirstTimeWorker {
     }
     
     func createUserFromFacebookInfo(completion: @escaping (Result<User>) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        
+        userRepository.getUserById(currentUserId) { result in
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    completion(.success(user))
+                } else {
+                    self.doCreateUserFromFacebookInfo(completion: completion)
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func doCreateUserFromFacebookInfo(completion: @escaping (Result<User>) -> ()) {
         getFacebookInfo { result in
             switch result {
             case .success(let fields): self.createUser(fields: fields, completion: completion)

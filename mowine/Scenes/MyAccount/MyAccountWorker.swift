@@ -19,13 +19,20 @@ enum MyAccountWorkerError: Error {
 
 class MyAccountWorker {
     let session: Session
+    let userRepository: UserRepository
     
-    init(session: Session) {
+    init(session: Session, userRepository: UserRepository) {
         self.session = session
+        self.userRepository = userRepository
     }
     
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
-        session.getCurrentUser { result in
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(MoWineError.notLoggedIn))
+            return
+        }
+        
+        userRepository.getUserById(currentUserId) { result in
             switch result {
             case .success(let user):
                 if let user = user {
