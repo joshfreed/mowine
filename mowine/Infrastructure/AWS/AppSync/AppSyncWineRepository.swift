@@ -19,7 +19,7 @@ class AppSyncWineRepository: WineRepository {
     }
     
     func add(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
-        var input = CreateWineInput(id: wine.id.uuidString, type: wine.type.name, name: wine.name, rating: Int(wine.rating), pairings: [])
+        var input = CreateWineInput(id: wine.id.asString, type: wine.type.name, name: wine.name, rating: Int(wine.rating), pairings: [])
         input.wineUserId = wine.userId.asString
         input.location = wine.location
         input.notes = wine.notes
@@ -58,7 +58,7 @@ class AppSyncWineRepository: WineRepository {
     }
     
     func save(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
-        var input = UpdateWineInput(id: wine.id.uuidString)
+        var input = UpdateWineInput(id: wine.id.asString)
         input.type = wine.type.name
         input.name = wine.name
         input.rating = Int(wine.rating)
@@ -98,7 +98,7 @@ class AppSyncWineRepository: WineRepository {
     }
     
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        let input = DeleteWineInput(id: wine.id.uuidString)
+        let input = DeleteWineInput(id: wine.id.asString)
         appSyncClient.perform(mutation: DeleteWineMutation(input: input)) { result, error in
             if let error = error as? AWSAppSyncClientError {
                 SwiftyBeaver.error("Error occurred: \(error.localizedDescription )")
@@ -115,7 +115,7 @@ class AppSyncWineRepository: WineRepository {
     }
     
     func getWine(by id: WineId, completion: @escaping (JFLib.Result<Wine>) -> ()) {
-        appSyncClient.fetch(query: GetWineQuery(id: id.uuidString), cachePolicy: .returnCacheDataAndFetch) { result, error in
+        appSyncClient.fetch(query: GetWineQuery(id: id.asString), cachePolicy: .returnCacheDataAndFetch) { result, error in
             SwiftyBeaver.debug("GetWineQuery result handler \(id)")
             
             if let error = error {
@@ -194,7 +194,7 @@ class AppSyncWineRepository: WineRepository {
 extension GetUserQuery.Data.GetUser.Wine.Item {
     static func fromWine(_ wine: Wine) -> GetUserQuery.Data.GetUser.Wine.Item {
         var item = GetUserQuery.Data.GetUser.Wine.Item(
-            id: wine.id.uuidString,
+            id: wine.id.asString,
             type: wine.type.name,
             name: wine.name,
             rating: Int(wine.rating),

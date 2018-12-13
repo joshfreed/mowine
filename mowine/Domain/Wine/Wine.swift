@@ -10,28 +10,7 @@ import UIKit
 import CoreData
 import SwiftyBeaver
 
-//typealias WineId = StringIdentity
-
-struct WineId: Equatable {
-    let uuid: UUID
-    
-    var uuidString: String {
-        return uuid.uuidString
-    }
-    
-    init() {
-        uuid = UUID()
-    }
-    
-    init(string: String) {
-        uuid = UUID(uuidString: string)!
-    }
-    
-    static func ==(lhs: WineId, rhs: WineId) -> Bool {
-        return lhs.uuid == rhs.uuid
-    }
-}
-
+typealias WineId = StringIdentity
 
 final class Wine: Equatable {
     let id: WineId

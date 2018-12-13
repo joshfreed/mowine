@@ -36,8 +36,8 @@ class WineImageWorker {
         
         imageRepository.store(wineId: wineId, image: imageData, thumbnail: thumbnailData)
         
-        thumbnailCache.setObject(thumbnailData as NSData, forKey: wineId.uuidString as NSString)
-        photoCache.setObject(imageData as NSData, forKey: wineId.uuidString as NSString)
+        thumbnailCache.setObject(thumbnailData as NSData, forKey: wineId.asString as NSString)
+        photoCache.setObject(imageData as NSData, forKey: wineId.asString as NSString)
         
         return thumbnailData
     }
@@ -57,28 +57,28 @@ class WineImageWorker {
     }
     
     func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
-        if let cachedImage = photoCache.object(forKey: wineId.uuidString as NSString) {
+        if let cachedImage = photoCache.object(forKey: wineId.asString as NSString) {
             completion(.success(cachedImage as Data))
             return
         }
         
         imageRepository.fetchPhoto(wineId: wineId) { result in
             if case let .success(data) = result, let nsdata = data as NSData? {
-                self.photoCache.setObject(nsdata, forKey: wineId.uuidString as NSString)
+                self.photoCache.setObject(nsdata, forKey: wineId.asString as NSString)
             }
             completion(result)
         }
     }
     
     func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?>) -> ()) {
-        if let cachedImage = thumbnailCache.object(forKey: wine.id.uuidString as NSString) {
+        if let cachedImage = thumbnailCache.object(forKey: wine.id.asString as NSString) {
             completion(.success(cachedImage as Data))
             return
         }
         
         imageRepository.fetchThumbnail(wineId: wine.id, userId: wine.userId) { result in
             if case let .success(data) = result, let nsdata = data as NSData? {
-                self.thumbnailCache.setObject(nsdata, forKey: wine.id.uuidString as NSString)
+                self.thumbnailCache.setObject(nsdata, forKey: wine.id.asString as NSString)
             }
             completion(result)
         }
