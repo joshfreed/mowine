@@ -40,7 +40,7 @@ struct WineListViewModel: Equatable {
 extension WineListViewModel {
     static func from(wine: Wine) -> WineListViewModel {
         return WineListViewModel(
-            id: wine.id.uuidString,
+            id: wine.id.asString,
             name: wine.name,
             rating: wine.rating,
             type: wine.varietyName,

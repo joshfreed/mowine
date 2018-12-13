@@ -27,7 +27,7 @@ class MyWinesPresenter: MyWinesPresentationLogic {
         let varietyName = wine.varietyName
         
         return WineListViewModel(
-            id: wine.id.uuidString,
+            id: wine.id.asString,
             name: name,
             rating: wine.rating,
             type: varietyName,
@@ -57,7 +57,7 @@ class MyWinesPresenter: MyWinesPresentationLogic {
     // MARK: Fetch thumbnail
     
     func presentThumbnail(response: MyWines.FetchThumbnail.Response) {
-        let viewModel = MyWines.FetchThumbnail.ViewModel(wineId: response.wine.id.uuidString, thumbnail: response.thumbnail)
+        let viewModel = MyWines.FetchThumbnail.ViewModel(wineId: response.wine.id.asString, thumbnail: response.thumbnail)
         viewController?.displayThumbnail(viewModel: viewModel)
     }
 }
