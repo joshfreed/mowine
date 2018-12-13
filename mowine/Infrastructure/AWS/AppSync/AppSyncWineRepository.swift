@@ -114,7 +114,7 @@ class AppSyncWineRepository: WineRepository {
         }
     }
     
-    func getWine(by id: UUID, completion: @escaping (JFLib.Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (JFLib.Result<Wine>) -> ()) {
         appSyncClient.fetch(query: GetWineQuery(id: id.uuidString), cachePolicy: .returnCacheDataAndFetch) { result, error in
             SwiftyBeaver.debug("GetWineQuery result handler \(id)")
             
@@ -208,7 +208,7 @@ extension GetUserQuery.Data.GetUser.Wine.Item {
     }
     
     func toWine(userId: UserId) -> Wine {
-        let wineId = UUID(uuidString: id)!
+        let wineId = WineId(string: id)
         let wineType = WineType(name: type, varieties: [])
         let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: Double(rating))
         
@@ -234,7 +234,7 @@ extension GetUserQuery.Data.GetUser.Wine.Item {
 
 extension OnCreateWineSubscription.Data.OnCreateWine {
     func toWine() -> Wine {
-        let wineId = UUID(uuidString: id)!
+        let wineId = WineId(string: id)
         let userId = UserId(string: user?.id ?? "")
         let wineType = WineType(name: type, varieties: [])
         let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: Double(rating))
@@ -254,7 +254,7 @@ extension OnCreateWineSubscription.Data.OnCreateWine {
 
 extension GetWineQuery.Data.GetWine {
     func toWine() -> Wine {
-        let wineId = UUID(uuidString: id)!
+        let wineId = WineId(string: id)
         let userId = UserId(string: user?.id ?? "")
         let wineType = WineType(name: type, varieties: [])
         let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: Double(rating))

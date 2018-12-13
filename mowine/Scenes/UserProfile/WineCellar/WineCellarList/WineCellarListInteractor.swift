@@ -53,9 +53,7 @@ class WineCellarListInteractor: WineCellarListBusinessLogic, WineCellarListDataS
     // MARK: Select wine
     
     func selectWine(request: WineCellarList.SelectWine.Request) {
-        guard let wineId = UUID(uuidString: request.wineId) else {
-            return
-        }
+        let wineId = WineId(string: request.wineId)
         selectedWine = wines.first(where: { $0.id == wineId })
     }
 }

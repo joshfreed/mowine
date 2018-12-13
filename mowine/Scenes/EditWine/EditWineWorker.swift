@@ -32,7 +32,7 @@ class EditWineWorker {
         wineTypeRepository.getAll(completion: completion)
     }
     
-    func getWinePhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+    func getWinePhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
         imageWorker.fetchPhoto(wineId: wineId, completion: completion)
     }
     
@@ -73,7 +73,7 @@ class EditWineWorker {
         wineRepository.save(wine, completion: completion)
     }
     
-    func updateWinePhoto(wineId: UUID, photo: UIImage?) -> Data? {
+    func updateWinePhoto(wineId: WineId, photo: UIImage?) -> Data? {
         return imageWorker.createImages(wineId: wineId, photo: photo)
     }
 }

@@ -103,7 +103,7 @@ class S3WineImageRepository {
 // MARK: - WineImageRepository
 
 extension S3WineImageRepository: WineImageRepository {
-    func store(wineId: UUID, image: Data, thumbnail: Data) {
+    func store(wineId: WineId, image: Data, thumbnail: Data) {
         guard let userId = session.currentUserId else {
             return
         }
@@ -118,13 +118,13 @@ extension S3WineImageRepository: WineImageRepository {
     }
     
     
-    func fetchThumbnail(wineId: UUID, userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(wineId: WineId, userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
         let userBucket = "\(baseBucket)/\(userId)"
         let thumbnailName = "\(wineId)-thumb.png"
         downloadImage(fileName: thumbnailName, userBucket: userBucket, completion: completion)
     }
     
-    func fetchPhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
         guard let userId = session.currentUserId else {
             return
         }
@@ -134,7 +134,7 @@ extension S3WineImageRepository: WineImageRepository {
         downloadImage(fileName: thumbnailName, userBucket: userBucket, completion: completion)
     }
     
-    func deleteImages(wineId: UUID) {
+    func deleteImages(wineId: WineId) {
         
     }
 }

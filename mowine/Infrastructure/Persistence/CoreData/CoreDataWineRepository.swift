@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import JFLib
 
+/*
 class CoreDataWineRepository: WineRepository {
     let container: NSPersistentContainer
     let coreDataWorker: CoreDataWorkerProtocol
@@ -49,7 +50,7 @@ class CoreDataWineRepository: WineRepository {
         }
     }
     
-    func getWine(by id: UUID, completion: @escaping (Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
         fatalError("Not implemented")
     }
 
@@ -84,3 +85,4 @@ class CoreDataWineRepository: WineRepository {
         }
     }
 }
+*/
