@@ -24,6 +24,9 @@ class JFContainer {
         // Common
         container.register(.singleton) { FirebaseSession() as Session }
         container.register(.singleton) { FirestoreUserRepository() as UserRepository }
+        container.register(.singleton) { FirestoreWineRepository() as WineRepository }
+        container.register(.singleton) { FirebaseWineImageRepository() as WineImageRepository }
+        container.register(.singleton) { WineImageWorker(imageRepository: $0, wineRepository: $1) }
         
         // Scenes
         FriendsScene.configureDependencies(container)        
@@ -34,12 +37,9 @@ class JFContainer {
     lazy var facebookAuthService: FacebookAuthenticationService = FirebaseSocialAuth()
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
-    lazy var wineRepository: WineRepository = AWSContainer.shared.wineRepository
-    lazy var wineImageRepository: WineImageRepository = AWSContainer.shared.wineImageRepository
-    lazy var wineImageWorker: WineImageWorker = WineImageWorker(
-        imageRepository: wineImageRepository,
-        wineRepository: wineRepository
-    )
+    lazy var wineRepository: WineRepository = try! container.resolve()
+    lazy var wineImageRepository: WineImageRepository = try! container.resolve()
+    lazy var wineImageWorker: WineImageWorker = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()
     lazy var syncManager = SyncManager()
     lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())

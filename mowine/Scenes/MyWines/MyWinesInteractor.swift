@@ -31,7 +31,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     private var wines: [Wine] = []
     
     init() {
-        registerNotifications()
+//        registerNotifications()
         registerSubscriptions()
     }
     
@@ -43,6 +43,8 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     }
     
     func registerSubscriptions() {
+        
+        
 //        discard = try! self.appSyncClient.subscribe(subscription: OnCreateWineSubscription()) { result, transaction, error in
 //            SwiftyBeaver.debug("onCreateWine")
 //
