@@ -10,8 +10,31 @@ import UIKit
 import CoreData
 import SwiftyBeaver
 
+//typealias WineId = StringIdentity
+
+struct WineId: Equatable {
+    let uuid: UUID
+    
+    var uuidString: String {
+        return uuid.uuidString
+    }
+    
+    init() {
+        uuid = UUID()
+    }
+    
+    init(string: String) {
+        uuid = UUID(uuidString: string)!
+    }
+    
+    static func ==(lhs: WineId, rhs: WineId) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+}
+
+
 final class Wine: Equatable {
-    let id: UUID
+    let id: WineId
     let userId: UserId
     var type: WineType
     var variety: WineVariety?
@@ -28,7 +51,7 @@ final class Wine: Equatable {
         return variety?.name ?? type.name
     }
     
-    init(id: UUID, userId: UserId, type: WineType, name: String, rating: Double) {
+    init(id: WineId, userId: UserId, type: WineType, name: String, rating: Double) {
         self.id = id
         self.userId = userId
         self.type = type
@@ -37,7 +60,7 @@ final class Wine: Equatable {
     }
     
     init(userId: UserId, type: WineType, variety: WineVariety, name: String, rating: Double) {
-        self.id = UUID()
+        self.id = WineId()
         self.userId = userId
         self.type = type
         self.variety = variety
@@ -46,7 +69,7 @@ final class Wine: Equatable {
     }
     
     init(userId: UserId, type: WineType, name: String, rating: Double) {
-        self.id = UUID()
+        self.id = WineId()
         self.userId = userId
         self.type = type
         self.name = name
@@ -58,6 +81,7 @@ final class Wine: Equatable {
     }
 }
 
+/*
 extension Wine: CoreDataConvertible {
     static func toEntity(managedObject: ManagedWine) -> Wine? {
         guard
@@ -128,7 +152,7 @@ extension Wine: CoreDataConvertible {
         return NSPredicate(format: "wineId == %@", id as CVarArg)
     }
 }
-
+*/
 /*
 extension Wine: DynamoConvertible {
     static func toEntity(awsObject: AWSWine) -> Wine? {

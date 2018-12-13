@@ -46,9 +46,7 @@ class TopWinesInteractor: TopWinesBusinessLogic, TopWinesDataStore {
     // MARK: Select wine
     
     func selectWine(request: TopWines.SelectWine.Request) {
-        guard let wineId = UUID(uuidString: request.wineId) else {
-            return
-        }
+        let wineId = WineId(string: request.wineId)
         
         selectedWine = topWines.first(where: { $0.id == wineId })
         

@@ -20,7 +20,7 @@ class WineImageWorker {
         self.wineRepository = wineRepository
     }
     
-    func createImages(wineId: UUID, photo: UIImage?) -> Data? {
+    func createImages(wineId: WineId, photo: UIImage?) -> Data? {
         guard let image = photo else {
             return nil
         }
@@ -56,7 +56,7 @@ class WineImageWorker {
         return newImage
     }
     
-    func fetchPhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
         if let cachedImage = photoCache.object(forKey: wineId.uuidString as NSString) {
             completion(.success(cachedImage as Data))
             return
@@ -93,7 +93,7 @@ extension WineImageWorker: WineListThumbnailFetcher {
             return
         }
         
-        wineRepository.getWine(by: UUID(uuidString: wineId)!) { result in
+        wineRepository.getWine(by: WineId(string: wineId)) { result in
             switch result {
             case .success(let wine): self.fetchThumbnail(for: wine, completion: completion)
             case .failure(let error): completion(.failure(error))

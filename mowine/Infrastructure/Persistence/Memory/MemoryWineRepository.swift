@@ -22,7 +22,7 @@ class MemoryWineRepository: WineRepository {
         }
     }
     
-    func getWine(by id: UUID, completion: @escaping (Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
         if let wine = wines.first(where: { $0.id == id }) {
             completion(.success(wine))
         } else {
