@@ -12,6 +12,8 @@
 
 import UIKit
 import JFLib
+import FirebaseFirestore
+import SwiftyBeaver
 
 class MyWinesWorker {
     let wineRepository: WineRepository
@@ -22,6 +24,33 @@ class MyWinesWorker {
         self.wineRepository = wineRepository
         self.session = session
         self.imageWorker = imageWorker
+    }
+    
+    func addListener(userId: UserId, listener: @escaping (WineEvent) -> ()) {
+        let db = Firestore.firestore()
+        
+        let query = db.collection("wines").whereField("userId", isEqualTo: userId.asString)
+        
+        query.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                listener(.failure(error))
+            } else if let snapshot = querySnapshot {
+                snapshot.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                        print("New wine: \(diff.document.data())")
+                    }
+                    if (diff.type == .modified) {
+                        print("Modified wine: \(diff.document.data())")
+                    }
+                    if (diff.type == .removed) {
+                        print("Removed wine: \(diff.document.data())")
+                    }
+                }
+            } else {
+                fatalError("unknown error with query")
+            }
+        }
     }
     
     func fetchMyWines(completion: @escaping (Result<[Wine]>) -> ()) {
@@ -43,4 +72,11 @@ class MyWinesWorker {
     func fetchThumbnail(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
         imageWorker.fetchThumbnail(for: wine, completion: completion)
     }
+}
+
+enum WineEvent {
+    case failure(Error)
+    case added
+    case modified
+    case removed
 }

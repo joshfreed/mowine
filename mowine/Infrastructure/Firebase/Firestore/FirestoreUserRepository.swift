@@ -18,7 +18,6 @@ class FirestoreUserRepository: UserRepository {
         let settings = db.settings
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
-//        db.disableNetwork(completion: nil)
     }
     
     func add(user: User, completion: @escaping (Result<User>) -> ()) {
@@ -48,10 +47,10 @@ class FirestoreUserRepository: UserRepository {
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
         let query = db.collection("users").whereField("userId", isEqualTo: id.asString)
         
-        query.getDocuments(source: .cache) { (querySnapshot, err) in
-            if let err = err {
-                SwiftyBeaver.error("\(err)")
-                completion(.failure(err))
+        query.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
             } else {
                 do {
                     let user = try self.makeUser(from: querySnapshot?.documents.first)
@@ -60,21 +59,7 @@ class FirestoreUserRepository: UserRepository {
                     completion(.failure(error))
                 }
             }
-        }
-        
-        query.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                SwiftyBeaver.error("\(err)")
-                completion(.failure(err))
-            } else {
-                do {
-                    let user = try self.makeUser(from: querySnapshot?.documents.first)
-                    completion(.success(user))
-                } catch {
-                    completion(.failure(error))
-                }
-            }
-        }
+        }        
     }
     
     private func makeUser(from doc: QueryDocumentSnapshot?) throws -> User? {
