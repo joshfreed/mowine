@@ -26,7 +26,7 @@ protocol FriendsDisplayLogic: class {
 
 class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     var interactor: FriendsBusinessLogic?
-    var router: (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing)?
+    var router: FriendsRoutingLogic?
 
     var canSearch = false
     var displayedUsers: [Friends.DisplayedUser] = []

@@ -18,23 +18,23 @@ class MockWineImageWorker: WineImageWorker {
 }
 
 class MockWineImageRepository: WineImageRepository {
-    func fetchThumbnail(wineId: UUID, userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(wineId: WineId, userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
         
     }
     
-    func store(wineId: UUID, image: Data, thumbnail: Data) {
+    func store(wineId: WineId, image: Data, thumbnail: Data) {
         
     }
     
-    func fetchThumbnail(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
         
     }
     
-    func fetchPhoto(wineId: UUID, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
         
     }
     
-    func deleteImages(wineId: UUID) {
+    func deleteImages(wineId: WineId) {
         
     }
     

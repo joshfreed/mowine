@@ -11,7 +11,7 @@ import XCTest
 import CoreData
 import Nimble
 import JFLib
-
+/*
 class CoreDataWineRepositoryTests: XCTestCase {
     var sut: CoreDataWineRepository!
     var coreData: CoreDataHelper!
@@ -207,3 +207,4 @@ class CoreDataWineRepositoryTests: XCTestCase {
         }
     }
 }
+*/

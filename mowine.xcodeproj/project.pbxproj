@@ -1123,6 +1123,7 @@
 		53ED1F7D204F2D2F00C129BC /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				537D8A4C21C067EF00A110FF /* FriendsScene.swift */,
 				53ED1F7E204F2D5C00C129BC /* FriendsPresenter.swift */,
 				53ED1F7F204F2D5C00C129BC /* FriendsWorker.swift */,
 				53ED1F80204F2D5C00C129BC /* FriendsRouter.swift */,
@@ -1131,7 +1132,6 @@
 				53ED1F83204F2D5C00C129BC /* FriendsInteractor.swift */,
 				53ED1F8C204F359C00C129BC /* UserTableViewCell.swift */,
 				53ED1F8D204F359C00C129BC /* UserTableViewCell.xib */,
-				537D8A4C21C067EF00A110FF /* FriendsScene.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
