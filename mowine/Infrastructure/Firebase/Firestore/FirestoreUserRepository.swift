@@ -148,12 +148,26 @@ class FirestoreUserRepository: UserRepository {
         db.collection("friends").document(docId).setData([
             "userId": owningUserId.asString,
             "friendId": friendId.asString
-        ])
+        ]) { err in
+            if let err = err {
+                SwiftyBeaver.error("Error writing document: \(err)")
+                completion(.failure(err))
+            } else {
+                self.getUserFromCache(userId: friendId, completion: completion)
+            }
+        }
     }
     
     func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
         let docId = "\(owningUserId)_\(friendId)"
-        db.collection("friends").document(docId).delete()
+        db.collection("friends").document(docId).delete() { err in
+            if let err = err {
+                SwiftyBeaver.error("Error writing document: \(err)")
+                completion(.failure(err))
+            } else {
+                completion(.success)
+            }
+        }
     }
 
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
@@ -169,6 +183,27 @@ class FirestoreUserRepository: UserRepository {
                 completion(.success(true))
             } else {
                 completion(.success(false))
+            }
+        }
+    }
+    
+    //
+    // Privates
+    //
+    
+    private func getUserFromCache(userId: UserId, completion: @escaping (Result<User>) -> ()) {
+        let query = db.collection("users").document(userId.asString)
+        query.getDocument(source: .cache) { (document, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            if let document = document, document.exists, let user = User.fromFirestore(document) {
+                completion(.success(user))
+            } else {
+                completion(.failure(UserRepositoryError.userNotFound))
             }
         }
     }
