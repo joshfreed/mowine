@@ -20,72 +20,156 @@ class FirestoreUserRepository: UserRepository {
         db.settings = settings
     }
     
-    func add(user: User, completion: @escaping (Result<User>) -> ()) {
-        let data: [String: Any?] = [
-            "userId": user.id.asString,
-            "email": user.emailAddress,
-            "firstName": user.firstName,
-            "lastName": user.lastName,
-        ]
+    func add(user: User, completion: @escaping (Result<User>) -> ()) {        
+        let data = user.toFirestore()
         
-        var ref: DocumentReference? = nil
-        ref = db.collection("users").addDocument(data: data) { err in
+        db.collection("users").document(user.id.asString).setData(data) { err in
             if let err = err {
                 SwiftyBeaver.error("Error adding document: \(err)")
                 completion(.failure(err))
             } else {
-                print("Document added with ID: \(ref!.documentID)")
                 completion(.success(user))
             }
         }
     }
     
     func save(user: User, completion: @escaping (Result<User>) -> ()) {
-        
+        fatalError("Not implemented")
     }
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
-        let query = db.collection("users").whereField("userId", isEqualTo: id.asString)
+        let query = db.collection("users").document(id.asString)
         
-        query.addSnapshotListener { (querySnapshot, error) in
+        query.addSnapshotListener { (documentSnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
                 completion(.failure(error))
+                return
+            }
+            
+            if let document = documentSnapshot, let user = User.fromFirestore(document) {
+                completion(.success(user))
             } else {
-                do {
-                    let user = try self.makeUser(from: querySnapshot?.documents.first)
-                    completion(.success(user))
-                } catch {
-                    completion(.failure(error))
-                }
+                completion(.success(nil))
             }
         }        
     }
     
-    private func makeUser(from doc: QueryDocumentSnapshot?) throws -> User? {
-        guard let doc = doc else { return nil }
-        let dataDict = doc.data()
-        let user = try User.toUser(from: dataDict)
-        return user
-    }
-    
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
-        completion(.success([]))
+        let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+            } else {
+                if let documents = querySnapshot?.documents {
+                    let friendIds: [UserId] = documents.compactMap {
+                        let data = $0.data()
+                        guard let friendIdStr = data["friendId"] as? String else { return nil }
+                        return UserId(string: friendIdStr)
+                    }
+                    self.getUsers(by: friendIds, completion: completion)
+                } else {
+                    completion(.success([]))
+                }
+            }
+        }
+    }
+
+    private func getUsers(by ids: [UserId], completion: @escaping (Result<[User]>) -> ()) {
+        guard ids.count > 0 else {
+            completion(.success([]))
+            return
+        }
+        
+        let group = DispatchGroup()
+        var friends: [User] = []
+        for userId in ids {
+            group.enter()
+            let query = db.collection("users").document(userId.asString)
+            query.getDocument { (document, error) in
+                if let error = error {
+                    SwiftyBeaver.error("\(error)")
+                    completion(.failure(error))
+                    return
+                }
+                
+                if let document = document, document.exists, let friend = User.fromFirestore(document) {
+                    friends.append(friend)
+                }
+                
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            completion(.success(friends))
+        }
+    }
+
+    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+        let query = db.collection("users")
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+            } else {
+                if let documents = querySnapshot?.documents {
+                    let users = documents.compactMap { User.fromFirestore($0) }
+                    let matches = self.filterUsers(searchString: searchString, allUsers: users)
+                    completion(.success(matches))
+                } else {
+                    completion(.success([]))
+                }
+            }
+        }
     }
     
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
-        completion(.success([]))
+    private func filterUsers(searchString: String, allUsers: [User]) -> [User] {
+        let words = searchString.lowercased().split(separator: " ")
+        var matches: [User] = []
+        
+        for word in words {
+            let m = allUsers.filter {
+                let firstName = ($0.firstName ?? "").lowercased()
+                let lastName = ($0.lastName ?? "").lowercased()
+                return firstName.starts(with: word) || lastName.starts(with: word)
+            }
+            matches.append(contentsOf: m)
+        }
+        
+        return matches
     }
     
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
-        
+        let docId = "\(owningUserId)_\(friendId)"
+        db.collection("friends").document(docId).setData([
+            "userId": owningUserId.asString,
+            "friendId": friendId.asString
+        ])
     }
     
     func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
-        
+        let docId = "\(owningUserId)_\(friendId)"
+        db.collection("friends").document(docId).delete()
     }
 
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
-        completion(.success(false))
+        let docId = "\(userId)_\(otherUserId)"
+        db.collection("friends").document(docId).getDocument { (document, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            if let document = document, document.exists {
+                completion(.success(true))
+            } else {
+                completion(.success(false))
+            }
+        }
     }
 }

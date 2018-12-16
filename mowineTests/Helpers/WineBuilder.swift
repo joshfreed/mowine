@@ -10,7 +10,7 @@ import Foundation
 @testable import mowine
 
 class WineBuilder {
-    private var id: UUID?
+    private var id: WineId?
     private var type = WineType(name: "Red", varieties: [])
     private var variety: WineVariety?
     private var name: String?

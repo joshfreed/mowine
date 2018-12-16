@@ -100,9 +100,9 @@ class CoreDataHelper {
 //        entity.name = variety.name
     }
     
-    func insert(_ wine: Wine) {
-        try! coreDataWorker.insert(wine, in: container.viewContext)        
-    }
+//    func insert(_ wine: Wine) {
+//        try! coreDataWorker.insert(wine, in: container.viewContext)        
+//    }
     
     func insert(_ user: User) {
         try! coreDataWorker.insert(user, in: container.viewContext)

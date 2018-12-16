@@ -15,6 +15,7 @@ class FriendsScene {
             .implements(FriendsDisplayLogic.self)
             .resolvingProperties { container, controller in
                 controller.interactor = try! container.resolve()
+                controller.router = try! container.resolve()
             }
         container.register { FriendsInteractor(worker: $0) }
             .implements(FriendsBusinessLogic.self, FriendsDataStore.self)
@@ -27,7 +28,7 @@ class FriendsScene {
                 obj.viewController = try! container.resolve()
             }
         container.register { FriendsRouter() }
-            .implements(NSObjectProtocol.self, FriendsRoutingLogic.self, FriendsDataPassing.self)
+            .implements(FriendsRoutingLogic.self, FriendsDataPassing.self)
             .resolvingProperties { container, obj in
                 obj.dataStore = try! container.resolve()
             }

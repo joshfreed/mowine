@@ -11,7 +11,6 @@ import JFLib
 import FirebaseFirestore
 import SwiftyBeaver
 
-
 class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()
     
@@ -35,16 +34,34 @@ class FirestoreWineRepository: WineRepository {
     }
     
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
-//        let data = wine.toFirestore()
-//        db.collection("wines").document(wine.id.asString).setData(data, merge: true)
+        let data = wine.toFirestore()
+        db.collection("wines").document(wine.id.asString).setData(data, merge: true)
+        completion(.success(wine))
     }
     
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        
+        fatalError("Not implemented")
     }
     
     func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
-        
+        let docRef = db.collection("wines").document(id.asString)
+        docRef.getDocument(source: .cache) { (document, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            if let document = document,
+                document.exists,
+                let data = document.data(),
+                let wine = Wine.fromFirestore(documentId: document.documentID, data: data)
+            {
+                completion(.success(wine))
+            } else {
+                completion(.failure(WineRepositoryError.notFound))
+            }
+        }
     }
     
     func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
@@ -55,7 +72,7 @@ class FirestoreWineRepository: WineRepository {
                 SwiftyBeaver.error("\(error)")
                 completion(.failure(error))
             } else if let documents = querySnapshot?.documents {
-                let wines: [Wine] = documents.compactMap { Wine.fromFirestore($0.data()) }
+                let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
                 completion(.success(wines))
             } else {
                 fatalError("unknown error with query")
@@ -64,16 +81,47 @@ class FirestoreWineRepository: WineRepository {
     }
     
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
-        completion(.success([]))
+        let query = db
+            .collection("wines")
+            .whereField("userId", isEqualTo: userId.asString)
+            .whereField("type", isEqualTo: wineType.name)
+        
+        query.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+            } else if let documents = querySnapshot?.documents {
+                let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
+                completion(.success(wines))
+            } else {
+                fatalError("unknown error with query")
+            }
+        }
     }
     
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        completion(.success([]))
+        let query = db
+            .collection("wines")
+            .whereField("userId", isEqualTo: userId.asString)
+            .order(by: "rating", descending: true)
+            .limit(to: 3)
+        
+        query.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+            } else if let documents = querySnapshot?.documents {
+                let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
+                completion(.success(wines))
+            } else {
+                fatalError("unknown error with query")
+            }
+        }
     }
 }
 
 extension Wine {
-    static func fromFirestore(_ data: [String: Any]) -> Wine? {
+    static func fromFirestore(documentId: String, data: [String: Any]) -> Wine? {
         guard
             let userIdStr = data["userId"] as? String,
             let typeName = data["type"] as? String,
@@ -82,7 +130,7 @@ extension Wine {
         else {
             return nil
         }
-        let wineId = WineId()
+        let wineId = WineId(string: documentId)
         let userId = UserId(string: userIdStr)
         let wineType = WineType(name: typeName, varieties: [])
         var wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: rating)
@@ -96,8 +144,8 @@ extension Wine {
             "name": name,
             "rating": rating
         ]
-        if let varietyName = variety {
-            data["variety"] = varietyName
+        if let variety = variety {
+            data["variety"] = variety.name
         }
         return data
     }

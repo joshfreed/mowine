@@ -49,7 +49,7 @@ class FriendsViewControllerTests: XCTestCase {
                     controller.router = try! container.resolve()
                 }
             container.register { self.spy as FriendsBusinessLogic }
-            container.register { self.router as (NSObjectProtocol & FriendsRoutingLogic & FriendsDataPassing) }
+            container.register { self.router as FriendsRoutingLogic }
         }
 
         DependencyContainer.uiContainers = [container]

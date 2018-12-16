@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SwiftyBeaver
+import FirebaseFirestore
 
 typealias UserId = StringIdentity
 
@@ -86,18 +87,31 @@ struct User: Equatable {
 // MARK: Dictionary
 
 extension User {
-    static func toUser(from dictionary: [String: Any]) throws -> User {
-        guard let userIdStr = dictionary["userId"] as? String else {
-            throw MoWineError.dictionaryError(message: "'userId' missing or incorrect type")
+    static func fromFirestore(_ document: DocumentSnapshot) -> User? {
+        guard
+            let dataDict = document.data(),
+            let emailAddress = dataDict["email"] as? String
+        else {
+            return nil
         }
-        guard let emailAddress = dictionary["email"] as? String else {
-            throw MoWineError.dictionaryError(message: "'email' missing or incorrect type")
-        }
-        let userId = UserId(string: userIdStr)
+        let userId = UserId(string: document.documentID)
         var user = User(id: userId, emailAddress: emailAddress)
-        user.firstName = dictionary["firstName"] as? String
-        user.lastName = dictionary["lastName"] as? String
+        user.firstName = dataDict["firstName"] as? String
+        user.lastName = dataDict["lastName"] as? String
         return user
+    }
+    
+    func toFirestore() -> [String: Any] {
+        var data: [String: Any] = [
+            "email": emailAddress
+        ]
+        if let firstName = firstName {
+            data["firstName"] = firstName
+        }
+        if let lastName = lastName {
+            data["lastName"] = lastName
+        }
+        return data
     }
 }
 

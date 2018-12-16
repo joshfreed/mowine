@@ -12,7 +12,7 @@
 
 import UIKit
 
-@objc protocol FriendsRoutingLogic {
+@objc protocol FriendsRoutingLogic: NSObjectProtocol {
     func routeToUserProfile(segue: UIStoryboardSegue)
 }
 
