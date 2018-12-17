@@ -134,6 +134,23 @@ extension Wine {
         let userId = UserId(string: userIdStr)
         let wineType = WineType(name: typeName, varieties: [])
         var wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: rating)
+        
+        if let varietyName = data["variety"] as? String {
+            wine.variety = WineVariety(name: varietyName)
+        }
+        
+        wine.location = data["location"] as? String
+        wine.notes = data["notes"] as? String
+        wine.price = data["price"] as? String
+        
+        if let createdAtStr = data["createdAt"] as? String, let createdAt = ISO8601DateFormatter().date(from: createdAtStr) {
+            wine.createdAt = createdAt
+        }
+        
+        if let pairingsArray = data["pairings"] as? [String] {
+            wine.pairings = pairingsArray
+        }
+        
         return wine
     }
     
@@ -142,10 +159,21 @@ extension Wine {
             "userId": userId.asString,
             "type": type.name,
             "name": name,
-            "rating": rating
+            "rating": rating,
+            "createdAt": ISO8601DateFormatter().string(from: createdAt),
+            "pairings": pairings
         ]
         if let variety = variety {
             data["variety"] = variety.name
+        }
+        if let location = location {
+            data["location"] = location
+        }
+        if let notes = notes {
+            data["notes"] = notes
+        }
+        if let price = price {
+            data["price"] = price
         }
         return data
     }
