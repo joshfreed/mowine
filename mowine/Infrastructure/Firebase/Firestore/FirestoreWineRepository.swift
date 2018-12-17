@@ -23,7 +23,7 @@ class FirestoreWineRepository: WineRepository {
     func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
         let data = wine.toFirestore()
         
-        db.collection("wines").addDocument(data: data) { err in
+        db.collection("wines").document(wine.id.asString).setData(data) { err in
             if let err = err {
                 SwiftyBeaver.error("Error adding wine document: \(err)")
                 completion(.failure(err))

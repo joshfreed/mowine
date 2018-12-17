@@ -31,7 +31,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
     private var wines: [Wine] = []
     
     init() {
-//        registerNotifications()
+        registerNotifications()
         registerSubscriptions()
     }
     
@@ -39,7 +39,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
         // Or, maybe instead of these notifications, load the wines from the cache every time the view appears
         
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(wineAdded), name: .wineAdded, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(wineAdded), name: .wineAdded, object: nil)
     }
     
     func registerSubscriptions() {
@@ -75,7 +75,7 @@ class MyWinesInteractor: MyWinesBusinessLogic, MyWinesDataStore {
             return
         }
         
-        presenter?.presentUpdatedWine(wine: updatedWine)
+//        presenter?.presentUpdatedWine(wine: updatedWine)
         
         if let thumbnail = notification.userInfo?["thumbnail"] as? Data {
             let response = MyWines.FetchThumbnail.Response(wine: updatedWine, thumbnail: thumbnail)

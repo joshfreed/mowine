@@ -654,6 +654,14 @@
 			path = WineDetails;
 			sourceTree = "<group>";
 		};
+		532AD8A821C7207400A93BDA /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				537D8A5A21C1C4D700A110FF /* FirebaseWineImageRepository.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		532FB07B20584BC70056D1B2 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -699,9 +707,9 @@
 		533597AC21BC3ED600CEFD45 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				532AD8A821C7207400A93BDA /* Storage */,
 				5380F35321BC49E000221219 /* Firestore */,
 				533597AF21BC439E00CEFD45 /* Auth */,
-				537D8A5A21C1C4D700A110FF /* FirebaseWineImageRepository.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";

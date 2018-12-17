@@ -25,7 +25,7 @@ class JFContainer {
         container.register(.singleton) { FirebaseSession() as Session }
         container.register(.singleton) { FirestoreUserRepository() as UserRepository }
         container.register(.singleton) { FirestoreWineRepository() as WineRepository }
-        container.register(.singleton) { FirebaseWineImageRepository() as WineImageRepository }
+        container.register(.singleton) { FirebaseWineImageRepository(session: $0) as WineImageRepository }
         container.register(.singleton) { WineImageWorker(imageRepository: $0, wineRepository: $1) }
         
         // Scenes
