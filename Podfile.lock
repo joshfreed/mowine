@@ -50,6 +50,9 @@ PODS:
   - Firebase/Firestore (5.14.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 0.16.0)
+  - Firebase/Storage (5.14.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.0.3)
   - FirebaseAnalytics (5.4.0):
     - FirebaseCore (~> 5.1)
     - FirebaseInstanceID (~> 3.3)
@@ -86,6 +89,10 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseStorage (3.0.3):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleAppMeasurement (5.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -156,6 +163,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - Nimble
   - PureLayout
   - SwiftyBeaver
@@ -185,6 +193,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleUtilities
     - "gRPC-C++"
@@ -223,6 +232,7 @@ SPEC CHECKSUMS:
   FirebaseCore: fbabde8140c2977a597df3a26e8cebc688a217b4
   FirebaseFirestore: d08ced0a76008b464db68c82944314dde8b1aab7
   FirebaseInstanceID: 8d407bb087e6b74e19154e2e700fcb499b364a5f
+  FirebaseStorage: 85f3c3b8b8133b9a7647b8b160509d31b5576cae
   GoogleAppMeasurement: 3ca0c97c372fa2355eb2b813bdd824ccd9c88f9d
   GoogleUtilities: fd87f68d5791b938d8f25de9de1f404409099310
   "gRPC-C++": 83bbb322462612a12a52a88d4b4b3780631cb746
@@ -237,6 +247,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 0231abc3a3a05101fb90a7cd48d44aaeec6cbd4f
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: 11eff443f0ffd3fff8c217c3354cb8b9c6ae6fcb
+PODFILE CHECKSUM: 4e3768f82340d23833d6a0455aa66af7281b7ab4
 
 COCOAPODS: 1.5.3
