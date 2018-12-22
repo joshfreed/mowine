@@ -33,8 +33,11 @@ PODS:
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
   - Cosmos (17.0.0)
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
   - Dip (7.0.0)
   - Eureka (4.3.0)
+  - Fabric (1.9.0)
   - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
   - FBSDKLoginKit (4.38.1):
@@ -50,9 +53,15 @@ PODS:
   - Firebase/Firestore (5.14.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 0.16.0)
+  - Firebase/Performance (5.14.0):
+    - Firebase/Core
+    - FirebasePerformance (= 2.2.1)
   - Firebase/Storage (5.14.0):
     - Firebase/CoreOnly
     - FirebaseStorage (= 3.0.3)
+  - FirebaseABTesting (2.0.0):
+    - FirebaseCore (~> 5.0)
+    - Protobuf (~> 3.5)
   - FirebaseAnalytics (5.4.0):
     - FirebaseCore (~> 5.1)
     - FirebaseInstanceID (~> 3.3)
@@ -89,6 +98,24 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebasePerformance (2.2.1):
+    - FirebaseAnalytics (~> 5.3)
+    - FirebaseInstanceID (~> 3.3)
+    - FirebaseRemoteConfig (~> 3.1)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleUtilities/ISASwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.5)
+  - FirebaseRemoteConfig (3.1.0):
+    - FirebaseABTesting (~> 2.0)
+    - FirebaseAnalytics (~> 5.3)
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleUtilities/Environment (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - Protobuf (~> 3.5)
   - FirebaseStorage (3.0.3):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.1)
@@ -99,11 +126,17 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - GoogleToolboxForMac/Defines (2.2.0)
+  - GoogleToolboxForMac/Logger (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
+    - GoogleToolboxForMac/Defines (= 2.2.0)
   - GoogleUtilities/AppDelegateSwizzler (5.3.6):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
   - GoogleUtilities/Environment (5.3.6)
+  - GoogleUtilities/ISASwizzler (5.3.6)
   - GoogleUtilities/Logger (5.3.6):
     - GoogleUtilities/Environment
   - GoogleUtilities/MethodSwizzler (5.3.6):
@@ -156,13 +189,16 @@ DEPENDENCIES:
   - AWSS3 (~> 2.7.0)
   - AWSUserPoolsSignIn (~> 2.7.0)
   - Cosmos
+  - Crashlytics (~> 3.12.0)
   - Dip
   - Eureka
+  - Fabric (~> 1.9.0)
   - FBSDKCoreKit (~> 4.38.0)
   - FBSDKLoginKit (~> 4.38.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Performance
   - Firebase/Storage
   - Nimble
   - PureLayout
@@ -182,19 +218,25 @@ SPEC REPOS:
     - Bolts
     - BoringSSL
     - Cosmos
+    - Crashlytics
     - Dip
     - Eureka
+    - Fabric
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseAuth
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebasePerformance
+    - FirebaseRemoteConfig
     - FirebaseStorage
     - GoogleAppMeasurement
+    - GoogleToolboxForMac
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -221,19 +263,25 @@ SPEC CHECKSUMS:
   Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
   BoringSSL: 016eaed201a404d11981ba2cfce8c3a773e86a1b
   Cosmos: bfc3f026cd36e4bfc8941ffe301687b212324298
+  Crashlytics: 0dbc1330db64921cf67e6a0d3402fc7d95675abd
   Dip: c0428d6f8f80840e9ae1c8fccb08545389c623d1
   Eureka: 524b63ee66dbdca913658081a31ce68b5585e115
+  Fabric: 64c408540b54db50bdd106de9d7a9845d35c95e9
   FBSDKCoreKit: daf87d58d125ffc5cd891ad0645cdb88279d28e7
   FBSDKLoginKit: 96bfaf921fe2519f827149c35888f0ccc36f7f01
   Firebase: 961a2b4069c354937500e45945d502de98144b6f
+  FirebaseABTesting: c0993e02bdcd6dccd0cf9c1eaf472204430ee85c
   FirebaseAnalytics: ac2d0962033bb9032400ebcae97c741086b3057a
   FirebaseAuth: 1b7a30ce4e50e0be4c40bea25cb18450e7e4e278
   FirebaseAuthInterop: 165c11428f6ae3f7ec2262e53fdd8b6fb2c4922a
   FirebaseCore: fbabde8140c2977a597df3a26e8cebc688a217b4
   FirebaseFirestore: d08ced0a76008b464db68c82944314dde8b1aab7
   FirebaseInstanceID: 8d407bb087e6b74e19154e2e700fcb499b364a5f
+  FirebasePerformance: 704b3e5648d4e3652dca01354be16fec96b37e46
+  FirebaseRemoteConfig: adca8a6169d52b3fe53eb2e3715c5d205d52402e
   FirebaseStorage: 85f3c3b8b8133b9a7647b8b160509d31b5576cae
   GoogleAppMeasurement: 3ca0c97c372fa2355eb2b813bdd824ccd9c88f9d
+  GoogleToolboxForMac: 91a761a7c5ba525da1e2003e897736252ab8f3fe
   GoogleUtilities: fd87f68d5791b938d8f25de9de1f404409099310
   "gRPC-C++": 83bbb322462612a12a52a88d4b4b3780631cb746
   gRPC-Core: e517327a7723b2efe3dcfc8533a92880aaa99e4b
@@ -247,6 +295,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 0231abc3a3a05101fb90a7cd48d44aaeec6cbd4f
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: 4e3768f82340d23833d6a0455aa66af7281b7ab4
+PODFILE CHECKSUM: b98d2bb7918a718ab83d89d4379ecc961629fe01
 
 COCOAPODS: 1.5.3

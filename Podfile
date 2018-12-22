@@ -27,6 +27,11 @@ target 'mowine' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'Firebase/Performance'
+  
+  # Crashlytics
+  pod 'Fabric', '~> 1.9.0'
+  pod 'Crashlytics', '~> 3.12.0'
 
   target 'mowineTests' do
     inherit! :search_paths
