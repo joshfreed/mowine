@@ -126,11 +126,22 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - GoogleSignIn (4.4.0):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
   - GoogleToolboxForMac/Defines (2.2.0)
   - GoogleToolboxForMac/Logger (2.2.0):
     - GoogleToolboxForMac/Defines (= 2.2.0)
   - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
     - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.0)
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GoogleUtilities/AppDelegateSwizzler (5.3.6):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -200,6 +211,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Performance
   - Firebase/Storage
+  - GoogleSignIn
   - Nimble
   - PureLayout
   - SwiftyBeaver
@@ -236,6 +248,7 @@ SPEC REPOS:
     - FirebaseRemoteConfig
     - FirebaseStorage
     - GoogleAppMeasurement
+    - GoogleSignIn
     - GoogleToolboxForMac
     - GoogleUtilities
     - "gRPC-C++"
@@ -281,6 +294,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: adca8a6169d52b3fe53eb2e3715c5d205d52402e
   FirebaseStorage: 85f3c3b8b8133b9a7647b8b160509d31b5576cae
   GoogleAppMeasurement: 3ca0c97c372fa2355eb2b813bdd824ccd9c88f9d
+  GoogleSignIn: ea3778511e551761685697560f3614b2b50f4e40
   GoogleToolboxForMac: 91a761a7c5ba525da1e2003e897736252ab8f3fe
   GoogleUtilities: fd87f68d5791b938d8f25de9de1f404409099310
   "gRPC-C++": 83bbb322462612a12a52a88d4b4b3780631cb746
@@ -295,6 +309,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 0231abc3a3a05101fb90a7cd48d44aaeec6cbd4f
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: b98d2bb7918a718ab83d89d4379ecc961629fe01
+PODFILE CHECKSUM: db4a36b966ac0f4be63f4d815729066c6cdb563e
 
 COCOAPODS: 1.5.3

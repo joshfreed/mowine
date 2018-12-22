@@ -28,13 +28,17 @@ class JFContainer {
         container.register(.singleton) { FirebaseWineImageRepository(session: $0) as WineImageRepository }
         container.register(.singleton) { WineImageWorker(imageRepository: $0, wineRepository: $1) }
         
+        // Auth
+        container.register(.singleton) { FirebaseSocialAuth() }
+            .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self)
+        
         // Scenes
         FriendsScene.configureDependencies(container)        
     }
     
     lazy var session: Session = try! container.resolve()
     lazy var emailAuthService: EmailAuthenticationService = FirebaseEmailAuth()
-    lazy var facebookAuthService: FacebookAuthenticationService = FirebaseSocialAuth()
+    lazy var facebookAuthService: FacebookAuthenticationService = try! container.resolve()
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository: WineRepository = try! container.resolve()

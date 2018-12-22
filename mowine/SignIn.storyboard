@@ -322,6 +322,9 @@
                                         <state key="normal" title="Connect with Google">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tappedContinueWithGoogle:" destination="w6f-KD-eon" eventType="touchUpInside" id="d7Z-H9-IcO"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCN-sH-htM" customClass="ButtonOutline" customModule="mowine">
                                         <rect key="frame" x="0.0" y="160" width="311" height="72"/>

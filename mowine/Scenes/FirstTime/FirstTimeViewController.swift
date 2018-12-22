@@ -14,12 +14,13 @@ import UIKit
 import FBSDKLoginKit
 import SwiftyBeaver
 import JFLib
+import GoogleSignIn
 
 protocol FirstTimeDisplayLogic: class {
-    func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel)
+    func displaySocialLogin(viewModel: FirstTime.SocialLogin.ViewModel)
 }
 
-class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
+class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignInUIDelegate {
     var interactor: FirstTimeBusinessLogic?
     var router: (NSObjectProtocol & FirstTimeRoutingLogic & FirstTimeDataPassing)?
 
@@ -51,7 +52,8 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
             fbAuth: JFContainer.shared.facebookAuthService,
             fbGraphApi: JFContainer.shared.fbGraphApi,
             userRepository: JFContainer.shared.userRepository,
-            session: JFContainer.shared.session
+            session: JFContainer.shared.session,
+            googleAuth: try! JFContainer.shared.container.resolve()
         )
         presenter.viewController = viewController
         router.viewController = viewController
@@ -74,6 +76,8 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView = LoadingView(parentView: view)
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,11 +107,24 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
         }
     }
     
-    func displayFacebookLogin(viewModel: FirstTime.FacebookLogin.ViewModel) {
+    // MARK: Continue with Google
+    
+    @IBAction func tappedContinueWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()        
+    }
+    
+    func linkToGoogleLogin(idToken: String, accessToken: String) {
+        loadingView?.show("Signing in...")
+        interactor?.linkToGoogleLogin(idToken: idToken, accessToken: accessToken)
+    }
+    
+    //  MARK: Social Login
+    
+    func displaySocialLogin(viewModel: FirstTime.SocialLogin.ViewModel) {
         if viewModel.error == nil {
             router?.routeToSignedIn()
         } else {
-            showAlert(title: "Login Error", message: "An error occurred while trying to login with Facebook")
+            showAlert(title: "Login Error", message: "An error occurred while trying to login.")
         }
     }
 
@@ -115,5 +132,25 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic {
     
     @IBAction func tappedContinueWithEmail(_ sender: ButtonOutline) {
         performSegue(withIdentifier: "SignUp", sender: nil)
+    }
+}
+
+extension FirstTimeViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error as NSError? {
+            SwiftyBeaver.error(error)
+            guard error.code != -5 else {
+                return
+            }
+            fatalError(error.localizedDescription)
+//            ErrorBanner.show(message: error.localizedDescription)
+        } else {
+            linkToGoogleLogin(idToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
     }
 }

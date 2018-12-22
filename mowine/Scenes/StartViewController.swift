@@ -11,6 +11,7 @@ import AWSMobileClient
 import SwiftyBeaver
 import Firebase
 import FirebaseAuth
+import GoogleSignIn
 
 class StartViewController: UIViewController {
 
@@ -19,6 +20,8 @@ class StartViewController: UIViewController {
 
         FirebaseApp.configure()
 
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
         let handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             SwiftyBeaver.info("addStateDidChangeListener was triggered")
             if user != nil {

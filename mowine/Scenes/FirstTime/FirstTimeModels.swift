@@ -15,7 +15,7 @@ import UIKit
 enum FirstTime {
     // MARK: Use cases
 
-    enum FacebookLogin {
+    enum SocialLogin {
         struct Request {
         }
 
