@@ -24,6 +24,7 @@ class FirstTimeInteractorTests: XCTestCase {
     let facebookGraphApi = MockFacebookGraphApi()
     let userRepository = TestUserRepository()
     let session = MockSession()
+    let googleAuth = MockGoogleAuthService()
 
     // MARK: Test lifecycle
 
@@ -33,7 +34,8 @@ class FirstTimeInteractorTests: XCTestCase {
             fbAuth: facebookAuth,
             fbGraphApi: facebookGraphApi,
             userRepository: userRepository,
-            session: session
+            session: session,
+            googleAuth: googleAuth
         )
         setupFirstTimeInteractor()
     }
@@ -53,13 +55,13 @@ class FirstTimeInteractorTests: XCTestCase {
     // MARK: Test doubles
 
     class FirstTimePresentationLogicSpy: FirstTimePresentationLogic {
-        var presentFacebookLoginCalled = false
+        var presentSocialLoginCalled = false
 
-        func presentFacebookLogin(response: FirstTime.FacebookLogin.Response) {
-            presentFacebookLoginCalled = true
+        func presentSocialLogin(response: FirstTime.SocialLogin.Response) {
+            presentSocialLoginCalled = true
         }
-        func verifyPresentedFacebookLoginSuccess() {
-            expect(self.presentFacebookLoginCalled).to(beTrue())
+        func verifyPresentedSocialLoginSuccess() {
+            expect(self.presentSocialLoginCalled).to(beTrue())
         }
     }
 
@@ -83,6 +85,6 @@ class FirstTimeInteractorTests: XCTestCase {
 
         // Then
         userRepository.verifyUserAddedToRepository(emailAddress: "jbomb@gmail.com", firstName: "Jimbo", lastName: "Jones")
-        presenter.verifyPresentedFacebookLoginSuccess()
+        presenter.verifyPresentedSocialLoginSuccess()
     }
 }

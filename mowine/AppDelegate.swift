@@ -17,6 +17,7 @@ import SwiftyBeaver
 import AWSAppSync
 import FBSDKCoreKit
 import Dip
+import GoogleSignIn
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -53,6 +54,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwiftyBeaver.addDestination(platform)
     }
   
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        var handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
+        if handled {
+            return handled
+        }
+        handled = GIDSignIn.sharedInstance().handle(url,
+                                                    sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                                    annotation: [:])
+        return handled
+    }
+    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }

@@ -126,6 +126,7 @@
 		537614CD1E591887005AABF0 /* EditWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537614C61E591887005AABF0 /* EditWineViewController.swift */; };
 		537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537614C71E591887005AABF0 /* EditWineWorker.swift */; };
 		537614D11E591FA5005AABF0 /* WineForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537614D01E591FA5005AABF0 /* WineForm.swift */; };
+		53766EE821CEEB4300174E97 /* GoogleAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */; };
 		537740A41E5BC73600A1D282 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A31E5BC73600A1D282 /* Models.swift */; };
 		537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */; };
 		537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18D321961CFB00011C63 /* NimbleMatchers.swift */; };
@@ -398,6 +399,7 @@
 		537614C61E591887005AABF0 /* EditWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineViewController.swift; sourceTree = "<group>"; };
 		537614C71E591887005AABF0 /* EditWineWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorker.swift; sourceTree = "<group>"; };
 		537614D01E591FA5005AABF0 /* WineForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineForm.swift; sourceTree = "<group>"; };
+		53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthenticationService.swift; sourceTree = "<group>"; };
 		537740A31E5BC73600A1D282 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsCoreDataUserMapper.swift; sourceTree = "<group>"; };
 		537A18D321961CFB00011C63 /* NimbleMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleMatchers.swift; sourceTree = "<group>"; };
@@ -879,6 +881,7 @@
 				533980932068295C004C080B /* FacebookAuthenticationService.swift */,
 				530BCA532155823C002F785C /* Syncable.swift */,
 				53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */,
+				53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1507,10 +1510,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1692,6 +1697,7 @@
 				53F24876206D6A0A0046B031 /* AWSUserRepository.swift in Sources */,
 				535D6D1F205AA8B6004D51AB /* MyWinesModels.swift in Sources */,
 				5327BC2720619D34006787E9 /* WineCellarListViewController.swift in Sources */,
+				53766EE821CEEB4300174E97 /* GoogleAuthenticationService.swift in Sources */,
 				532FB08720584C2C0056D1B2 /* UserProfileModels.swift in Sources */,
 				53ED1F84204F2D5C00C129BC /* FriendsPresenter.swift in Sources */,
 				537D8A5921C1C17D00A110FF /* FirestoreWineRepository.swift in Sources */,

@@ -12,9 +12,11 @@
 
 import UIKit
 import JFLib
+import SwiftyBeaver
 
 protocol FirstTimeBusinessLogic {
     func linkToFacebookLogin(fbToken: String)
+    func linkToGoogleLogin(idToken: String, accessToken: String)
 }
 
 protocol FirstTimeDataStore {
@@ -25,13 +27,26 @@ class FirstTimeInteractor: FirstTimeBusinessLogic, FirstTimeDataStore {
     var presenter: FirstTimePresentationLogic?
     var worker: FirstTimeWorker?
 
+    // MARK: Social login
+    
+    func presentSocialLogin() {
+        let response = FirstTime.SocialLogin.Response(error: nil)
+        self.presenter?.presentSocialLogin(response: response)
+    }
+    
+    func presentSocialLoginError(_ error: Error) {
+        print("\(error)")
+        let response = FirstTime.SocialLogin.Response(error: error)
+        self.presenter?.presentSocialLogin(response: response)
+    }
+    
     // MARK: Login with facebook
 
     func linkToFacebookLogin(fbToken: String) {
         worker?.loginWithFacebook(token: fbToken) { result in
             switch result {
             case .success: self.createUserFromFacebookInfo()
-            case .failure(let error): self.presentFacebookLoginError(error)
+            case .failure(let error): self.presentSocialLoginError(error)
             }
         }
     }
@@ -39,20 +54,29 @@ class FirstTimeInteractor: FirstTimeBusinessLogic, FirstTimeDataStore {
     func createUserFromFacebookInfo() {
         worker?.createUserFromFacebookInfo { result in
             switch result {
-            case .success: self.presentFacebookLogin()
-            case .failure(let error): self.presentFacebookLoginError(error)
+            case .success: self.presentSocialLogin()
+            case .failure(let error): self.presentSocialLoginError(error)
+            }
+        }
+    }
+
+    // MARK: Login with Google
+    
+    func linkToGoogleLogin(idToken: String, accessToken: String) {
+        worker?.loginWithGoogle(idToken: idToken, accessToken: accessToken) { result in
+            switch result {
+            case .success: self.createUserFromGoogleInfo()
+            case .failure(let error): self.presentSocialLoginError(error)
             }
         }
     }
     
-    func presentFacebookLogin() {
-        let response = FirstTime.FacebookLogin.Response(error: nil)
-        self.presenter?.presentFacebookLogin(response: response)
-    }
-    
-    func presentFacebookLoginError(_ error: Error) {
-        print("\(error)")
-        let response = FirstTime.FacebookLogin.Response(error: error)
-        self.presenter?.presentFacebookLogin(response: response)
-    }
+    func createUserFromGoogleInfo() {
+        worker?.createUserFromGoogleInfo { result in
+            switch result {
+            case .success: self.presentSocialLogin()
+            case .failure(let error): self.presentSocialLoginError(error)
+            }
+        }
+    }    
 }

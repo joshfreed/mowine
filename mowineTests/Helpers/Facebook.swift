@@ -25,6 +25,12 @@ class MockFacebookAuthService: FacebookAuthenticationService {
     }
 }
 
+class MockGoogleAuthService: GoogleAuthenticationService {
+    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ()) {
+        
+    }
+}
+
 class MockFacebookGraphApi: GraphApi {
     var emailAddress: String?
     var firstName: String?

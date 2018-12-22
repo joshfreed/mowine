@@ -28,3 +28,18 @@ extension FirebaseSocialAuth: FacebookAuthenticationService {
         }
     }
 }
+
+extension FirebaseSocialAuth: GoogleAuthenticationService {
+    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ()) {
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+        
+        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            completion(.success)
+        }
+    }
+}
