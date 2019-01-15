@@ -25,9 +25,10 @@ class JFContainer {
         container.register(.singleton) { FirebaseSession() as Session }
         container.register(.singleton) { FirestoreUserRepository() as UserRepository }
         container.register(.singleton) { FirestoreWineRepository() as WineRepository }
-        container.register(.singleton) { FirebaseWineImageRepository(session: $0) as WineImageRepository }
-        container.register(.singleton) { WineImageWorker(imageRepository: $0, wineRepository: $1) }
-        
+        container.register(.singleton) { WineImageWorker(imageService: $0, session: $1, wineRepository: $2) }
+        container.register(.singleton) { FirebaseStorageService() }
+        container.register(.singleton) { ImageService(storage: $0) }
+
         // Auth
         container.register(.singleton) { FirebaseSocialAuth() }
             .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self)
@@ -42,7 +43,6 @@ class JFContainer {
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository: WineRepository = try! container.resolve()
-    lazy var wineImageRepository: WineImageRepository = try! container.resolve()
     lazy var wineImageWorker: WineImageWorker = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()
     lazy var syncManager = SyncManager()
