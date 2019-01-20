@@ -39,4 +39,29 @@ class FirebaseSession: Session {
             SwiftyBeaver.error("Error signing out: \(signOutError)")
         }
     }
+
+    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+        guard let authUser = Auth.auth().currentUser else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+
+        let changeRequest = authUser.createProfileChangeRequest()
+        changeRequest.photoURL = url
+        changeRequest.commitChanges { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success)
+            }
+        }
+    }
+
+    func getPhotoUrl() -> URL? {
+        guard let authUser = Auth.auth().currentUser else {
+            return nil
+        }
+
+        return authUser.photoURL
+    }
 }

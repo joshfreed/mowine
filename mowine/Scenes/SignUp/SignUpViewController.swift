@@ -29,6 +29,7 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: ButtonPrimary!
     
+    weak var delegate: SignUpViewControllerDelegate?
     
     // MARK: Object lifecycle
 
@@ -181,11 +182,11 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     }
     
     func displaySignUpResult(viewModel: SignUp.SignUp.ViewModel) {
-        signUpButton.displayNotLoading()
-        
         if viewModel.error == nil {
-            router?.routeToSignedIn()
+            delegate?.signedUp(self)
+//            router?.routeToSignedIn()
         } else {
+            signUpButton.displayNotLoading()
             if let message = viewModel.message {
                 showErrorLabel(message)
             } else {

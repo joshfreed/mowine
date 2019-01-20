@@ -131,7 +131,8 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
     // MARK: Continue with email
     
     @IBAction func tappedContinueWithEmail(_ sender: ButtonOutline) {
-        performSegue(withIdentifier: "SignUp", sender: nil)
+        let signUp = SignUpByEmailViewController(delegate: self)
+        present(signUp, animated: true, completion: nil)
     }
 }
 
@@ -152,5 +153,11 @@ extension FirstTimeViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
         // ...
+    }
+}
+
+extension FirstTimeViewController: SignUpByEmailViewControllerDelegate {
+    func signUpComplete() {
+        router?.routeToSignedIn()
     }
 }

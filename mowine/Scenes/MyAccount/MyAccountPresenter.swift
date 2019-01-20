@@ -11,15 +11,22 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 protocol MyAccountPresentationLogic {
     func presentUser(response: MyAccount.GetUser.Response)
     func presentErrorGettingUser()
     func presentSignedOut(response: MyAccount.SignOut.Response)
+    func presentError(_ error: Error)
+    func presentProfilePicture(data: Data?)
 }
 
 class MyAccountPresenter: MyAccountPresentationLogic {
     weak var viewController: MyAccountDisplayLogic?
+
+    func presentError(_ error: Error) {
+        SwiftyBeaver.error("\(error)")
+    }
 
     // MARK: Get User
 
@@ -41,5 +48,15 @@ class MyAccountPresenter: MyAccountPresentationLogic {
     func presentSignedOut(response: MyAccount.SignOut.Response) {
         let viewModel = MyAccount.SignOut.ViewModel()
         viewController?.displaySignedOut(viewModel: viewModel)
+    }
+
+    // MARK: Get profile picture
+
+    func presentProfilePicture(data: Data?) {
+        var image: UIImage?
+        if let data = data {
+            image = UIImage(data: data)
+        }
+        viewController?.displayProfilePicture(image: image)
     }
 }

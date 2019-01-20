@@ -39,6 +39,13 @@ class MyAccountInteractor: MyAccountBusinessLogic, MyAccountDataStore {
                 break
             }
         }
+
+        worker?.getProfilePicture() { result in
+            switch result {
+            case .success(let data): self.presenter?.presentProfilePicture(data: data)
+            case .failure(let error): self.presenter?.presentError(error)
+            }
+        }
     }
     
     // MARK: Sign Out
