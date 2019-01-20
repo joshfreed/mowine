@@ -28,6 +28,7 @@ class JFContainer {
         container.register(.singleton) { WineImageWorker(imageService: $0, session: $1, wineRepository: $2) }
         container.register(.singleton) { FirebaseStorageService() }
         container.register(.singleton) { ImageService(storage: $0) }
+        container.register(.singleton) { ProfilePictureWorker(imageService: $0, session: $1) }
 
         // Auth
         container.register(.singleton) { FirebaseSocialAuth() }

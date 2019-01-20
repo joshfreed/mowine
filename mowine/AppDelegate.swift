@@ -30,11 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         AWSDDLog.sharedInstance.logLevel = .info
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateInitialViewController()!
+        
         window = UIWindow()
-        window?.rootViewController = initialViewController
+        window?.rootViewController = StartViewController()
         window?.makeKeyAndVisible()
         
 //        Container.shared.syncManager.initialize()

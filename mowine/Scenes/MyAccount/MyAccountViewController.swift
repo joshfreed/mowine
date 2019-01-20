@@ -16,6 +16,7 @@ protocol MyAccountDisplayLogic: class {
     func displayUser(viewModel: MyAccount.GetUser.ViewModel)
     func displayErrorGettingUser()
     func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel)
+    func displayProfilePicture(image: UIImage?)
 }
 
 class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
@@ -48,7 +49,11 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
-        interactor.worker = MyAccountWorker(session: JFContainer.shared.session, userRepository: JFContainer.shared.userRepository)
+        interactor.worker = MyAccountWorker(
+            session: JFContainer.shared.session,
+            userRepository: JFContainer.shared.userRepository,
+            imageService: try! JFContainer.shared.container.resolve()
+        )
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -69,17 +74,23 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        profilePictureImageView.image = #imageLiteral(resourceName: "No Profile Picture")
+        profilePictureImageView.clipsToBounds = true
+        profilePictureImageView.contentMode = .scaleAspectFill
+
         getUser()
     }
-    
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width / 2
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-
     // MARK: Do something
 
     @IBOutlet weak var profilePictureImageView: UIImageView!
@@ -94,7 +105,6 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     func displayUser(viewModel: MyAccount.GetUser.ViewModel) {
         fullNameLabel.text = viewModel.fullName
         emailAddressLabel.text = viewModel.emailAddress
-        profilePictureImageView.image = viewModel.profilePicture
     }
     
     func displayErrorGettingUser() {
@@ -119,5 +129,11 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     
     func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel) {
         router?.routeToSignedOut()
+    }
+
+    // MARK: Display profile picture
+
+    func displayProfilePicture(image: UIImage?) {
+        profilePictureImageView.image = image
     }
 }

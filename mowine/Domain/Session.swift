@@ -17,4 +17,6 @@ protocol Session {
     var isLoggedIn: Bool { get }
     var currentUserId: UserId? { get }
     func end()
+    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ())
+    func getPhotoUrl() -> URL?
 }

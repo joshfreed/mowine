@@ -12,6 +12,7 @@
 
 import UIKit
 import JFLib
+import SwiftyBeaver
 
 enum MyAccountWorkerError: Error {
     case userNotFound
@@ -20,10 +21,12 @@ enum MyAccountWorkerError: Error {
 class MyAccountWorker {
     let session: Session
     let userRepository: UserRepository
+    let imageService: ImageService
     
-    init(session: Session, userRepository: UserRepository) {
+    init(session: Session, userRepository: UserRepository, imageService: ImageService) {
         self.session = session
         self.userRepository = userRepository
+        self.imageService = imageService
     }
     
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
@@ -44,6 +47,23 @@ class MyAccountWorker {
                 completion(.failure(error))
             }
         }
+    }
+
+    func getProfilePicture(completion: @escaping (Result<Data?>) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(MoWineError.notLoggedIn))
+            return
+        }
+
+        guard let photoUrl = session.getPhotoUrl() else {
+            SwiftyBeaver.verbose("No profile picture for current user")
+            completion(.success(nil))
+            return
+        }
+
+        SwiftyBeaver.verbose("Fetching profile picture: \(photoUrl)")
+
+        imageService.fetchImage(name: photoUrl.path, completion: completion)
     }
     
     func signOut() {

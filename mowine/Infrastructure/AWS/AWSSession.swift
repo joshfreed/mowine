@@ -45,4 +45,12 @@ class AWSSession: Session {
     func end() {
         AWSMobileClient.sharedInstance().signOut()
     }
+
+    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+
+    }
+
+    func getPhotoUrl() -> URL? {
+        fatalError("getPhotoUrl() has not been implemented")
+    }
 }

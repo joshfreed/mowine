@@ -39,20 +39,28 @@ class FirestoreUserRepository: UserRepository {
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
         let query = db.collection("users").document(id.asString)
-        
-        query.addSnapshotListener { (documentSnapshot, error) in
+
+        query.getDocument { (document, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
                 completion(.failure(error))
                 return
             }
-            
-            if let document = documentSnapshot, let user = User.fromFirestore(document) {
-                completion(.success(user))
-            } else {
+
+            guard let document = document, document.exists else {
+                SwiftyBeaver.warning("Document does not exist")
                 completion(.success(nil))
+                return
             }
-        }        
+
+            guard let user = User.fromFirestore(document) else {
+                SwiftyBeaver.warning("Couldn't build user from document")
+                completion(.success(nil))
+                return
+            }
+
+            completion(.success(user))
+        }
     }
     
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {

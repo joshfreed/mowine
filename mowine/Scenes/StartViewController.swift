@@ -14,10 +14,16 @@ import FirebaseAuth
 import GoogleSignIn
 
 class StartViewController: UIViewController {
-
+    private var mainStoryboard: UIStoryboard!
+    private var current: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        current = mainStoryboard.instantiateViewController(withIdentifier: "SplashViewController")
+        show(viewController: current!)
+        
         FirebaseApp.configure()
 
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -77,28 +83,23 @@ class StartViewController: UIViewController {
     }
     
     private func showSignedInView() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = destinationVC
+        let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
+        show(viewController: destinationVC)
     }
     
     private func showSignedOutView() {
         let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
         let destinationVC = storyboard.instantiateInitialViewController()!
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = destinationVC
+        show(viewController: destinationVC)
     }
     
+    private func show(viewController: UIViewController) {
+        showChild(viewController)
 
-    /*
-    // MARK: - Navigation
+        current?.willMove(toParent: nil)
+        current?.view.removeFromSuperview()
+        current?.removeFromParent()
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        current = viewController
     }
-    */
-
 }

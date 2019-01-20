@@ -136,6 +136,14 @@ class FakeSession: Session {
         UserDefaults.standard.removeObject(forKey: "emailAddress")
         UserDefaults.standard.removeObject(forKey: "loggedIn")
     }
+
+    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+
+    }
+
+    func getPhotoUrl() -> URL? {
+        fatalError("getPhotoUrl() has not been implemented")
+    }
 }
 
 class FakeEmailAuth: EmailAuthenticationService {

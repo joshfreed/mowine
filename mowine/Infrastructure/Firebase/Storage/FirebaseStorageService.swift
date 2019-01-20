@@ -17,7 +17,12 @@ class FirebaseStorageService {
 
     func putData(_ data: Data, path: String) {
         let storageRef = storage.reference()
-        storageRef.child(path).putData(data)
+        let uploadTask = storageRef.child(path).putData(data)
+        uploadTask.observe(.failure) { snapshot in
+            if let err = snapshot.error {
+                SwiftyBeaver.error(err)
+            }
+        }
     }
 
     func getData(path: String, completion: @escaping (Result<Data?>) -> ()) {
