@@ -167,7 +167,7 @@
                                         <rect key="frame" x="146.66666666666666" y="0.0" width="50" height="35.333333333333336"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="cIA-fQ-Ous">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="cIA-fQ-Ous">
                                         <rect key="frame" x="71.666666666666686" y="51.333333333333343" width="200" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="cIA-fQ-Ous" secondAttribute="height" multiplier="1:1" id="JW7-TU-731"/>

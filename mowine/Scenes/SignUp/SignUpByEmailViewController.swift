@@ -117,8 +117,8 @@ extension SignUpByEmailViewController: ConfirmPhotoViewControllerDelegate {
 
         profilePictureWorker.setProfilePicture(userId: newUserId, image: photo)
 
-        dismiss(animated: true) {
-            self.delegate?.signUpComplete()
-        }
+        delegate?.signUpComplete()
+
+        dismiss(animated: true, completion: nil)
     }
 }

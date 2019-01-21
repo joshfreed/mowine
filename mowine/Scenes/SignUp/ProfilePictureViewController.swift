@@ -41,11 +41,10 @@ class ProfilePictureViewController: UIViewController {
 
 extension ProfilePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) {
-            if let image = info[.originalImage] as? UIImage {
-                self.useImage(image)
-            }
+        if let image = info[.originalImage] as? UIImage {
+            self.useImage(image)
         }
+        picker.dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
