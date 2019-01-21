@@ -24,6 +24,7 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
     var interactor: FirstTimeBusinessLogic?
     var router: (NSObjectProtocol & FirstTimeRoutingLogic & FirstTimeDataPassing)?
 
+    weak var delegate: StartViewControllerDelegate?
     var loadingView: LoadingView!
     
     // MARK: Object lifecycle
@@ -75,7 +76,7 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingView = LoadingView(parentView: view)
+        loadingView = LoadingView(parentView: navigationController!.view)
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
     }
@@ -87,7 +88,7 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+//        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     // MARK: Continue with Facebook
@@ -134,6 +135,12 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
         let signUp = SignUpByEmailViewController(delegate: self)
         present(signUp, animated: true, completion: nil)
     }
+
+    // Helpers
+
+    private func showSignedInView() {
+        delegate?.showSignedInView()
+    }
 }
 
 extension FirstTimeViewController: GIDSignInDelegate {
@@ -158,6 +165,6 @@ extension FirstTimeViewController: GIDSignInDelegate {
 
 extension FirstTimeViewController: SignUpByEmailViewControllerDelegate {
     func signUpComplete() {
-        router?.routeToSignedIn()
+        showSignedInView()
     }
 }

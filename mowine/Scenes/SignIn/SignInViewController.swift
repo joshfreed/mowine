@@ -82,6 +82,11 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         emailAddressTextField.becomeFirstResponder()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let kbSize = keyboardSize.size
