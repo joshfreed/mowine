@@ -15,12 +15,23 @@ class FirebaseStorageService {
         storage = Storage.storage()
     }
 
-    func putData(_ data: Data, path: String) {
-        let storageRef = storage.reference()
-        let uploadTask = storageRef.child(path).putData(data)
-        uploadTask.observe(.failure) { snapshot in
-            if let err = snapshot.error {
-                SwiftyBeaver.error(err)
+    func putData(_ data: Data, path: String, completion: @escaping (Result<URL>) -> ()) {
+        let uploadRef = storage.reference().child(path)
+
+        uploadRef.putData(data, metadata: nil) { (metadata, error) in
+            if let err = error {
+                completion(.failure(err))
+                return
+            }
+
+            uploadRef.downloadURL { url, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let url = url {
+                    completion(.success(url))
+                } else {
+                    fatalError("Firebase downloadURL did not contain an error or url")
+                }
             }
         }
     }

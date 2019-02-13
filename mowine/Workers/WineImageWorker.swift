@@ -11,11 +11,11 @@ import JFLib
 import SwiftyBeaver
 
 class WineImageWorker {
-    let imageService: ImageService
+    let imageService: ImageServiceProtocol
     let session: Session
     let wineRepository: WineRepository
 
-    init(imageService: ImageService, session: Session, wineRepository: WineRepository) {
+    init(imageService: ImageServiceProtocol, session: Session, wineRepository: WineRepository) {
         self.imageService = imageService
         self.session = session
         self.wineRepository = wineRepository
@@ -39,8 +39,8 @@ class WineImageWorker {
 
         let imageName = "\(userId)/\(wineId).png"
         let thumbnailName = "\(userId)/\(wineId)-thumb.png"
-        imageService.storeImage(name: imageName, data: imageData)
-        imageService.storeImage(name: thumbnailName, data: thumbnailData)
+        imageService.storeImage(name: imageName, data: imageData, completion: { _ in })
+        imageService.storeImage(name: thumbnailName, data: thumbnailData, completion: { _ in })
         return thumbnailData
     }
 
