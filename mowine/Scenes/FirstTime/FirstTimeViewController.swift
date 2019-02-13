@@ -122,10 +122,11 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
     //  MARK: Social Login
     
     func displaySocialLogin(viewModel: FirstTime.SocialLogin.ViewModel) {
-        if viewModel.error == nil {
-            router?.routeToSignedIn()
+        if let error = viewModel.error {
+            loadingView.hide()
+            showAlert(title: "Login Error", message: error.localizedDescription)
         } else {
-            showAlert(title: "Login Error", message: "An error occurred while trying to login.")
+            router?.routeToSignedIn()
         }
     }
 
