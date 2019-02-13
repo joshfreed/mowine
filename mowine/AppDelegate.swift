@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum MoWineError: Error {
+    case error(message: String)
     case unknownError
     case notLoggedIn
     case dictionaryError(message: String)

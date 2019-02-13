@@ -7,10 +7,10 @@ import UIKit
 import SwiftyBeaver
 
 class ProfilePictureWorker {
-    let imageService: ImageService
+    let imageService: ImageServiceProtocol
     let session: Session
 
-    init(imageService: ImageService, session: Session) {
+    init(imageService: ImageServiceProtocol, session: Session) {
         self.imageService = imageService
         self.session = session
     }
@@ -25,15 +25,24 @@ class ProfilePictureWorker {
             return
         }
 
-        imageService.storeImage(name: "\(userId)/profile.png", data: imageData)
-        imageService.storeImage(name: "\(userId)/profile-thumb.png", data: thumbnailData)
+        imageService.storeImage(name: "\(userId)/profile.png", data: imageData) { result in 
+            if case let .failure(error) = result {
+                SwiftyBeaver.error("\(error)")
+            }
+        }
 
-        let photoUrl = URL(string: "\(userId)/profile-thumb.png")!
-        session.setPhotoUrl(photoUrl) { result in
+        imageService.storeImage(name: "\(userId)/profile-thumb.png", data: thumbnailData) { result in 
             switch result {
-            case .success: break
-            case .failure(let error):
-                SwiftyBeaver.error("Error setting photo url: \(error)")
+            case .success(let url): self.setPhotoUrl(url)
+            case .failure(let error): SwiftyBeaver.error("\(error)")
+            }
+        }
+    }
+
+    private func setPhotoUrl(_ url: URL) {
+        session.setPhotoUrl(url) { result in
+            if case let .failure(error) = result {
+                SwiftyBeaver.error("\(error)")
             }
         }
     }

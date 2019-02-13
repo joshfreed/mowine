@@ -13,7 +13,7 @@ import JFLib
 
 class MockWineImageWorker: WineImageWorker {
     init() {
-        super.init(imageRepository: MockWineImageRepository(), wineRepository: MockWineRepository())
+        super.init(imageService: MockImageService(), session: MockSession(), wineRepository: MockWineRepository())
     }
 }
 

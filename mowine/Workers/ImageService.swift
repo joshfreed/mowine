@@ -5,8 +5,14 @@
 
 import Foundation
 import JFLib
+import SwiftyBeaver
 
-class ImageService {
+protocol ImageServiceProtocol {
+    func storeImage(name: String, data: Data, completion: @escaping (Result<URL>) -> ())
+    func fetchImage(name: String, completion: @escaping (Result<Data?>) -> ())
+}
+
+class ImageService: ImageServiceProtocol {
     let storage: FirebaseStorageService
     let photoCache = NSCache<NSString, NSData>()
 
@@ -14,9 +20,9 @@ class ImageService {
         self.storage = storage
     }
 
-    func storeImage(name: String, data: Data) {
-        storage.putData(data, path: name)
+    func storeImage(name: String, data: Data, completion: @escaping (Result<URL>) -> ()) {
         photoCache.setObject(data as NSData, forKey: name as NSString)
+        storage.putData(data, path: name, completion: completion)
     }
 
     func fetchImage(name: String, completion: @escaping (Result<Data?>) -> ()) {

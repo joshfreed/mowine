@@ -21,9 +21,9 @@ enum MyAccountWorkerError: Error {
 class MyAccountWorker {
     let session: Session
     let userRepository: UserRepository
-    let imageService: ImageService
+    let imageService: ImageServiceProtocol
     
-    init(session: Session, userRepository: UserRepository, imageService: ImageService) {
+    init(session: Session, userRepository: UserRepository, imageService: ImageServiceProtocol) {
         self.session = session
         self.userRepository = userRepository
         self.imageService = imageService
@@ -50,11 +50,6 @@ class MyAccountWorker {
     }
 
     func getProfilePicture(completion: @escaping (Result<Data?>) -> ()) {
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(MoWineError.notLoggedIn))
-            return
-        }
-
         guard let photoUrl = session.getPhotoUrl() else {
             SwiftyBeaver.verbose("No profile picture for current user")
             completion(.success(nil))
@@ -63,7 +58,12 @@ class MyAccountWorker {
 
         SwiftyBeaver.verbose("Fetching profile picture: \(photoUrl)")
 
-        imageService.fetchImage(name: photoUrl.path, completion: completion)
+        do {
+            let photoData = try Data(contentsOf: photoUrl)
+            completion(.success(photoData))
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     func signOut() {

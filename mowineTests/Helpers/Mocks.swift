@@ -152,6 +152,14 @@ class MockSession: Session {
     func end() {
         _currentUser = nil
     }
+    
+    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+        
+    }
+    
+    func getPhotoUrl() -> URL? {
+        return nil
+    }
 }
 
 class MockEmailAuthService: EmailAuthenticationService {
@@ -179,5 +187,15 @@ class MockEmailAuthService: EmailAuthenticationService {
         if let result = signUpResult {
             completion(result)
         }
+    }
+}
+
+class MockImageService: ImageServiceProtocol {
+    func fetchImage(name: String, completion: @escaping (Result<Data?>) -> ()) {
+        
+    }
+
+    func storeImage(name: String, data: Data, completion: @escaping (Result<URL>) -> ()) {
+
     }
 }
