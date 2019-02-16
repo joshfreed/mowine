@@ -184,7 +184,6 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     func displaySignUpResult(viewModel: SignUp.SignUp.ViewModel) {
         if viewModel.error == nil {
             delegate?.signedUp(self)
-//            router?.routeToSignedIn()
         } else {
             signUpButton.displayNotLoading()
             if let message = viewModel.message {

@@ -5,6 +5,7 @@
 
 import UIKit
 import SwiftyBeaver
+import JFLib
 
 class ProfilePictureWorker {
     let imageService: ImageServiceProtocol
@@ -15,7 +16,7 @@ class ProfilePictureWorker {
         self.session = session
     }
 
-    func setProfilePicture(userId: UserId, image: UIImage) {
+    func setProfilePicture(userId: UserId, image: UIImage, completion: @escaping (EmptyResult) -> ()) {
         guard
             let downsizedImage = image.resize(to: CGSize(width: 400, height: 400)),
             let imageData = downsizedImage.pngData(),
@@ -25,24 +26,28 @@ class ProfilePictureWorker {
             return
         }
 
-        imageService.storeImage(name: "\(userId)/profile.png", data: imageData) { result in 
-            if case let .failure(error) = result {
-                SwiftyBeaver.error("\(error)")
+        imageService.storeImage(name: "\(userId)/profile.png", data: imageData) { result in
+            switch result {
+            case .success(let url): self.setPhotoUrl(url, completion: completion)
+            case .failure(let error): completion(.failure(error))
             }
         }
 
+        /*
         imageService.storeImage(name: "\(userId)/profile-thumb.png", data: thumbnailData) { result in 
             switch result {
-            case .success(let url): self.setPhotoUrl(url)
+            case .success(let url): self.setPhotoUrl(url, completion: completion)
             case .failure(let error): SwiftyBeaver.error("\(error)")
             }
         }
+        */
     }
 
-    private func setPhotoUrl(_ url: URL) {
+    private func setPhotoUrl(_ url: URL, completion: @escaping  (EmptyResult) -> ()) {
         session.setPhotoUrl(url) { result in
-            if case let .failure(error) = result {
-                SwiftyBeaver.error("\(error)")
+            switch result {
+            case .success: completion(.success)
+            case .failure(let error): completion(.failure(error))
             }
         }
     }

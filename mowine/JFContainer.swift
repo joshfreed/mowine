@@ -14,6 +14,8 @@ import AWSAppSync
 import AWSMobileClient
 import Dip
 
+let useFakes = false
+
 class JFContainer {
     static let shared = JFContainer()
     private init() {
@@ -21,13 +23,22 @@ class JFContainer {
     }
 
     let container = DependencyContainer { container in
-        // Common
-        container.register(.singleton) { FirebaseSession() as Session }
-        container.register(.singleton) { FirestoreUserRepository() as UserRepository }
-        container.register(.singleton) { FirestoreWineRepository() as WineRepository }
+        if useFakes {
+            container.register(.singleton) { FakeSession() as Session }
+            container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
+            container.register(.singleton) { FakeUserRepository() as UserRepository }
+            container.register(.singleton) { MemoryWineRepository() as WineRepository }
+            container.register(.singleton) { FakeImageService() as ImageServiceProtocol }
+        } else {
+            container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
+            container.register(.singleton) { FirebaseSession() as Session }
+            container.register(.singleton) { FirestoreUserRepository() as UserRepository }
+            container.register(.singleton) { FirestoreWineRepository() as WineRepository }
+            container.register(.singleton) { FirebaseStorageService() }
+            container.register(.singleton) { ImageService(storage: $0) as ImageServiceProtocol }
+        }
+
         container.register(.singleton) { WineImageWorker(imageService: $0, session: $1, wineRepository: $2) }
-        container.register(.singleton) { FirebaseStorageService() }
-        container.register(.singleton) { ImageService(storage: $0) as ImageServiceProtocol }
         container.register(.singleton) { ProfilePictureWorker(imageService: $0, session: $1) }
 
         // Auth
@@ -39,7 +50,7 @@ class JFContainer {
     }
     
     lazy var session: Session = try! container.resolve()
-    lazy var emailAuthService: EmailAuthenticationService = FirebaseEmailAuth()
+    lazy var emailAuthService: EmailAuthenticationService = try! container.resolve()
     lazy var facebookAuthService: FacebookAuthenticationService = try! container.resolve()
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()

@@ -8,6 +8,7 @@
 
 import UIKit
 import JFLib
+import SwiftyBeaver
 
 protocol SignUpByEmailViewControllerDelegate: class {
     func signUpComplete()
@@ -67,7 +68,7 @@ class SignUpByEmailViewController: UIViewController {
     }
 
     @objc func skipProfilePicture() {
-        // todo move to next sign up step
+        signUpComplete()
     }
     
     func makeSignUpViewController() -> UIViewController {
@@ -87,6 +88,11 @@ class SignUpByEmailViewController: UIViewController {
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "ConfirmPhoto2ViewController") as! ConfirmPhoto2ViewController
         vc.delegate = self
         return vc
+    }
+
+    func signUpComplete() {
+        delegate?.signUpComplete()
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -115,10 +121,18 @@ extension SignUpByEmailViewController: ConfirmPhotoViewControllerDelegate {
             fatalError("NO USER AFTER SIGN UP SHIT")
         }
 
-        profilePictureWorker.setProfilePicture(userId: newUserId, image: photo)
-
-        delegate?.signUpComplete()
-
-        dismiss(animated: true, completion: nil)
+        let loadingView = LoadingView(parentView: rootViewController.view)
+        loadingView.show()
+        
+        profilePictureWorker.setProfilePicture(userId: newUserId, image: photo) { result in
+            loadingView.hide()
+            
+            switch result {
+            case .success:
+                self.signUpComplete()
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+            }
+        }
     }
 }

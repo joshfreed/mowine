@@ -56,6 +56,8 @@ class MyAccountPresenter: MyAccountPresentationLogic {
         var image: UIImage?
         if let data = data {
             image = UIImage(data: data)
+        } else {
+            image = UIImage(named: "No Profile Picture")
         }
         viewController?.displayProfilePicture(image: image)
     }
