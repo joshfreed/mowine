@@ -16,12 +16,8 @@ protocol SignUpBusinessLogic {
     func signUp(request: SignUp.SignUp.Request)
 }
 
-protocol SignUpDataStore {
-    
-}
-
-class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
-    var presenter: SignUpPresentationLogic?
+class SignUpInteractor: SignUpBusinessLogic {
+    weak var viewController: SignUpDisplayLogic?
     var worker: SignUpWorker?
 
     // MARK: Sign Up
@@ -61,7 +57,7 @@ class SignUpInteractor: SignUpBusinessLogic, SignUpDataStore {
     }
     
     func presentSignUp(user: User?, error: Error? = nil, message: String? = nil) {
-        let response = SignUp.SignUp.Response(user: user, error: error, message: message)
-        self.presenter?.presentSignUp(response: response)
+        let viewModel = SignUp.SignUp.ViewModel(error: error, message: message)
+        viewController?.displaySignUpResult(viewModel: viewModel)
     }
 }

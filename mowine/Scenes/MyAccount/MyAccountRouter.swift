@@ -27,10 +27,10 @@ class MyAccountRouter: NSObject, MyAccountRoutingLogic, MyAccountDataPassing {
     // MARK: Routing
     
     func routeToSignedOut() {
-        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-        let destinationVC = storyboard.instantiateInitialViewController()!
+        // TODO get rid of this somehow
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = destinationVC
+        let startViewController = appDelegate.window?.rootViewController as! StartViewController
+        startViewController.showSignedOutView()
     }
     
     // MARK: Navigation

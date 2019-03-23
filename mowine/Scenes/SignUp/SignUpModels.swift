@@ -23,12 +23,6 @@ enum SignUp {
             let password: String
         }
 
-        struct Response {
-            let user: User?
-            let error: Error?
-            let message: String?
-        }
-
         struct ViewModel {
             var error: Error?
             var message: String?
