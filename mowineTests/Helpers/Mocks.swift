@@ -119,6 +119,7 @@ class MockUserRepository: UserRepository {
 
 class MockSession: Session {
     private var _currentUser: User?
+    var photoUrl: URL?
     
     var isLoggedIn: Bool {
         return _currentUser != nil
@@ -154,11 +155,12 @@ class MockSession: Session {
     }
     
     func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
-        
+        photoUrl = url
+        completion(.success)
     }
     
     func getPhotoUrl() -> URL? {
-        return nil
+        return photoUrl
     }
 }
 

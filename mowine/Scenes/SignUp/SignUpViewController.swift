@@ -19,7 +19,6 @@ protocol SignUpDisplayLogic: class {
 
 class SignUpViewController: UIViewController, SignUpDisplayLogic {
     var interactor: SignUpBusinessLogic?
-    var router: (NSObjectProtocol & SignUpRoutingLogic & SignUpDataPassing)?
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstNameTextField: JPFFancyTextField!
@@ -48,32 +47,15 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     private func setup() {
         let viewController = self
         let interactor = SignUpInteractor()
-        let presenter = SignUpPresenter()
-        let router = SignUpRouter()
         viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
         interactor.worker = SignUpWorker(
             emailAuthService: JFContainer.shared.emailAuthService,
             userRepository: JFContainer.shared.userRepository,
             session: JFContainer.shared.session
         )
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
+        interactor.viewController = viewController
     }
 
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     @IBAction func tappedSignInButton(_ sender: UIButton) {
         performSegue(withIdentifier: "SignIn", sender: nil)
     }

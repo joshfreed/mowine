@@ -16,67 +16,32 @@ import SwiftyBeaver
 import JFLib
 import GoogleSignIn
 
-protocol FirstTimeDisplayLogic: class {
-    func displaySocialLogin(viewModel: FirstTime.SocialLogin.ViewModel)
+protocol FirstTimeViewControllerDelegate: class {
+    func showSignedInView()
 }
 
-class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignInUIDelegate {
-    var interactor: FirstTimeBusinessLogic?
-    var router: (NSObjectProtocol & FirstTimeRoutingLogic & FirstTimeDataPassing)?
-
-    weak var delegate: StartViewControllerDelegate?
+class FirstTimeViewController: UIViewController, GIDSignInUIDelegate {
+    weak var delegate: FirstTimeViewControllerDelegate?
+    var worker: FirstTimeWorker!
     var loadingView: LoadingView!
-    
-    // MARK: Object lifecycle
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // MARK: Setup
-
-    private func setup() {
-        let viewController = self
-        let interactor = FirstTimeInteractor()
-        let presenter = FirstTimePresenter()
-        let router = FirstTimeRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        interactor.worker = FirstTimeWorker(
-            fbAuth: JFContainer.shared.facebookAuthService,
-            fbGraphApi: JFContainer.shared.fbGraphApi,
-            userRepository: JFContainer.shared.userRepository,
-            session: JFContainer.shared.session,
-            googleAuth: try! JFContainer.shared.container.resolve()
-        )
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
-    // MARK: View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO - Move into service container?
+        let fbAuth = JFContainer.shared.facebookAuthService
+        let fbGraphApi = JFContainer.shared.fbGraphApi
+        let userRepository = JFContainer.shared.userRepository
+        let session = JFContainer.shared.session
+        let googleAuth: GoogleAuthenticationService = try! JFContainer.shared.container.resolve()
+        let facebookProvider = FacebookProvider(fbAuth: fbAuth, fbGraphApi: fbGraphApi)
+        let googleProvider = GoogleProvider(googleAuth: googleAuth)
+        let facebookSignInWorker = SocialSignInWorker<FacebookProvider>(userRepository: userRepository, session: session, provider: facebookProvider)
+        let googleSignInWorker = SocialSignInWorker<GoogleProvider>(userRepository: userRepository, session: session, provider: googleProvider)
+        worker = FirstTimeWorker(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker)
+
         loadingView = LoadingView(parentView: navigationController!.view)
+        
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
     }
@@ -86,26 +51,25 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-
     // MARK: Continue with Facebook
 
     @IBAction func tappedContinueWithFacebook(_ sender: MWButton) {
         let login = FBSDKLoginManager()
-        login.logIn(withReadPermissions: ["public_profile", "email"], from: self) { result, error in
+        login.logIn(withReadPermissions: ["public_profile", "email"], from: nil) { result, error in
             if let error = error {
                 SwiftyBeaver.error("FB Error: \(error)")
                 return
             }
             
             if let result = result, !result.isCancelled {
-                self.loadingView.show("Signing in...")
-                self.interactor?.linkToFacebookLogin(fbToken: result.token.tokenString)
+                self.linkToFacebookLogin(fbToken: result.token.tokenString)
             }
         }
+    }
+    
+    private func linkToFacebookLogin(fbToken: String) {
+        loadingView.show("Signing in...")
+        worker.loginWithFacebook(token: fbToken, completion: socialSignInComplete)
     }
     
     // MARK: Continue with Google
@@ -115,21 +79,10 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
     }
     
     func linkToGoogleLogin(idToken: String, accessToken: String) {
-        loadingView?.show("Signing in...")
-        interactor?.linkToGoogleLogin(idToken: idToken, accessToken: accessToken)
+        loadingView.show("Signing in...")
+        worker.loginWithGoogle(idToken: idToken, accessToken: accessToken, completion: socialSignInComplete)
     }
     
-    //  MARK: Social Login
-    
-    func displaySocialLogin(viewModel: FirstTime.SocialLogin.ViewModel) {
-        if let error = viewModel.error {
-            loadingView.hide()
-            showAlert(title: "Login Error", message: error.localizedDescription)
-        } else {
-            router?.routeToSignedIn()
-        }
-    }
-
     // MARK: Continue with email
     
     @IBAction func tappedContinueWithEmail(_ sender: ButtonOutline) {
@@ -139,6 +92,15 @@ class FirstTimeViewController: UIViewController, FirstTimeDisplayLogic, GIDSignI
 
     // Helpers
 
+    func socialSignInComplete(result: Result<User>) {
+        loadingView.hide()
+        
+        switch result {
+        case .success: showSignedInView()
+        case .failure(let error): showAlert(title: "Login Error", message: error.localizedDescription)
+        }
+    }
+    
     private func showSignedInView() {
         delegate?.showSignedInView()
     }

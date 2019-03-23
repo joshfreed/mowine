@@ -13,12 +13,7 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 
-protocol StartViewControllerDelegate: class {
-    func showSignedInView()
-    func showSignedOutView()
-}
-
-class StartViewController: UIViewController, StartViewControllerDelegate {
+class StartViewController: UIViewController, FirstTimeViewControllerDelegate {
     private var mainStoryboard: UIStoryboard!
     private var current: UIViewController?
     
@@ -33,13 +28,10 @@ class StartViewController: UIViewController, StartViewControllerDelegate {
 
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
-        let handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-            SwiftyBeaver.info("addStateDidChangeListener was triggered")
-            if user != nil {
-                self?.showSignedInView()
-            } else {
-                self?.showSignedOutView()
-            }
+        if Auth.auth().currentUser == nil {
+            showSignedOutView()
+        } else {
+            showSignedInView()
         }
     }
     

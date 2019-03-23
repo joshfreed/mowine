@@ -40,31 +40,29 @@ class SignUpInteractorTests: XCTestCase {
 
     func setupSignUpInteractor() {
         sut = SignUpInteractor()
-        sut.presenter = presenter
+        sut.viewController = presenter
         sut.worker = SignUpWorker(emailAuthService: emailAuthService, userRepository: userRepository, session: session)
     }
 
     // MARK: Test doubles
 
-    class SignUpPresentationLogicSpy: SignUpPresentationLogic {
+    class SignUpPresentationLogicSpy: SignUpDisplayLogic {
         var presentSignUpCalled = false
-        var presentSignUpResponse: SignUp.SignUp.Response?
-        func presentSignUp(response: SignUp.SignUp.Response) {
+        var presentSignUpResponse: SignUp.SignUp.ViewModel?
+        func displaySignUpResult(viewModel: SignUp.SignUp.ViewModel) {
             presentSignUpCalled = true
-            presentSignUpResponse = response
+            presentSignUpResponse = viewModel
         }
+
         func verifyPresentedSignUpSuccess(emailAddress: String) {
             expect(self.presentSignUpCalled).to(beTrue())
             expect(self.presentSignUpResponse).toNot(beNil())
-            expect(self.presentSignUpResponse?.user).toNot(beNil())
-            expect(self.presentSignUpResponse?.user?.emailAddress).to(equal(emailAddress))
             expect(self.presentSignUpResponse?.error).to(beNil())
             expect(self.presentSignUpResponse?.message).to(beNil())
         }
         func verifyPresentedSignUpFailure(error: Error) {
             expect(self.presentSignUpCalled).to(beTrue())
             expect(self.presentSignUpResponse).toNot(beNil())
-            expect(self.presentSignUpResponse?.user).to(beNil())
             expect(self.presentSignUpResponse?.error).toNot(beNil())
             expect(self.presentSignUpResponse?.message).to(beNil())
 
@@ -77,7 +75,6 @@ class SignUpInteractorTests: XCTestCase {
         func verifyPresentedSignUpFailure(error: Error, message: String) {
             expect(self.presentSignUpCalled).to(beTrue())
             expect(self.presentSignUpResponse).toNot(beNil())
-            expect(self.presentSignUpResponse?.user).to(beNil())
             expect(self.presentSignUpResponse?.error).toNot(beNil())
             expect(self.presentSignUpResponse?.message).toNot(beNil())
             expect(self.presentSignUpResponse?.message).to(equal(message))

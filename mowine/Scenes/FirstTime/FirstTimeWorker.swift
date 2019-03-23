@@ -13,141 +13,25 @@
 import UIKit
 import JFLib
 import GoogleSignIn
-
-enum CreateUserFromFacebookInfoError: Error {
-    case missingEmail
-    case missingFirstName
-}
-
-enum CreateUserFromGoogleInfoError: Error {
-    case failedToFetchProfile
-}
+import SwiftyBeaver
 
 class FirstTimeWorker {
-    let fbAuth: FacebookAuthenticationService
-    let fbGraphApi: GraphApi
-    let userRepository: UserRepository
-    let session: Session
-    let googleAuth: GoogleAuthenticationService
+    let facebookSignInWorker: SocialSignInWorker<FacebookProvider>
+    let googleSignInWorker: SocialSignInWorker<GoogleProvider>
     
     init(
-        fbAuth: FacebookAuthenticationService,
-        fbGraphApi: GraphApi,
-        userRepository: UserRepository,
-        session: Session,
-        googleAuth: GoogleAuthenticationService
+        facebookSignInWorker: SocialSignInWorker<FacebookProvider>,
+        googleSignInWorker: SocialSignInWorker<GoogleProvider>        
     ) {
-        self.fbAuth = fbAuth
-        self.fbGraphApi = fbGraphApi
-        self.userRepository = userRepository
-        self.session = session
-        self.googleAuth = googleAuth
-    }
-
-    // MARK: Facebook
-    
-    func loginWithFacebook(token: String, completion: @escaping (EmptyResult) -> ()) {
-        fbAuth.linkFacebookAccount(token: token, completion: completion)
+        self.facebookSignInWorker = facebookSignInWorker
+        self.googleSignInWorker = googleSignInWorker
     }
     
-    func createUserFromFacebookInfo(completion: @escaping (Result<User>) -> ()) {
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-        
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    completion(.success(user))
-                } else {
-                    self.doCreateUserFromFacebookInfo(completion: completion)
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+    func loginWithFacebook(token: String, completion: @escaping (Result<User>) -> ()) {
+        facebookSignInWorker.login(token: FacebookToken(token: token), completion: completion)
     }
     
-    func doCreateUserFromFacebookInfo(completion: @escaping (Result<User>) -> ()) {
-        getFacebookInfo { result in
-            switch result {
-            case .success(let fields): self.createUser(fields: fields, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
-    
-    func getFacebookInfo(completion: @escaping (Result<[String: Any]>) -> ()) {
-        fbGraphApi.me(params: ["fields": "email,first_name,last_name"]) { result in
-            switch result {
-            case .success(let fields): completion(.success(fields))
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
-    
-    // MARK: Google
-    
-    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ()) {
-        googleAuth.linkGoogleAccount(idToken: idToken, accessToken: accessToken, completion: completion)
-    }
-    
-    func createUserFromGoogleInfo(completion: @escaping (Result<User>) -> ()) {
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-        
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    completion(.success(user))
-                } else {
-                    self.doCreateUserFromGoogleInfo(completion: completion)
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func doCreateUserFromGoogleInfo(completion: @escaping (Result<User>) -> ()) {
-        guard let profile = GIDSignIn.sharedInstance()?.currentUser.profile else {
-            completion(.failure(CreateUserFromGoogleInfoError.failedToFetchProfile))
-            return
-        }
-        
-        createUser(email: profile.email, firstName: profile.givenName, lastName: profile.familyName, completion: completion)
-    }
-    
-    // MARK: Create user
-    
-    func createUser(fields: [String: Any], completion: @escaping (Result<User>) -> ()) {
-        guard let email = fields["email"] as? String else {
-            completion(.failure(CreateUserFromFacebookInfoError.missingEmail))
-            return
-        }
-        guard let firstName = fields["first_name"] as? String else {
-            completion(.failure(CreateUserFromFacebookInfoError.missingFirstName))
-            return
-        }
-        let lastName = fields["last_name"] as? String
-        createUser(email: email, firstName: firstName, lastName: lastName, completion: completion)
-    }
-
-    func createUser(email: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-        
-        var user = User(id: currentUserId, emailAddress: email)
-        user.firstName = firstName
-        user.lastName = lastName
-        
-        userRepository.add(user: user, completion: completion)
+    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User>) -> ()) {
+        googleSignInWorker.login(token: GoogleToken(idToken: idToken, accessToken: accessToken), completion: completion)
     }
 }
