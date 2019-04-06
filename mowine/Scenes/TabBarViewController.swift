@@ -9,6 +9,14 @@
 import UIKit
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if let vc = viewControllers?[selectedIndex] {
+            return vc.preferredStatusBarStyle
+        } else {
+            return .default
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self        

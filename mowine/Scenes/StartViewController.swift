@@ -16,6 +16,16 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate {
     private var mainStoryboard: UIStoryboard!
     private var current: UIViewController?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if current is UINavigationController {
+            return .lightContent
+        } else if let current = current as? TabBarViewController {
+            return current.preferredStatusBarStyle
+        } else {
+            return .default
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
