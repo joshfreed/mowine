@@ -97,6 +97,7 @@ class SignUpByEmailViewController: UIViewController {
         vc.delegate = self
         vc.navigationItem.leftBarButtonItem = nil
         vc.navigationItem.hidesBackButton = true
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: nil, action: #selector(skipProfilePicture))
         return vc
     }
 
