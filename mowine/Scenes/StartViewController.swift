@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AWSMobileClient
 import SwiftyBeaver
 import Firebase
 import FirebaseAuth

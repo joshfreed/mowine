@@ -1,25 +1,4 @@
 PODS:
-  - AWSAppSync (2.7.0):
-    - AWSCore (~> 2.7.0)
-    - ReachabilitySwift (~> 4.3.0)
-    - SQLite.swift (= 0.11.4)
-  - AWSAuthCore (2.7.4):
-    - AWSCore (= 2.7.4)
-  - AWSCognitoIdentityProvider (2.7.4):
-    - AWSCognitoIdentityProviderASF (= 1.0.1)
-    - AWSCore (= 2.7.4)
-  - AWSCognitoIdentityProviderASF (1.0.1)
-  - AWSCore (2.7.4)
-  - AWSDynamoDB (2.7.4):
-    - AWSCore (= 2.7.4)
-  - AWSMobileClient (2.7.4):
-    - AWSAuthCore (= 2.7.4)
-    - AWSCognitoIdentityProvider (= 2.7.4)
-  - AWSS3 (2.7.4):
-    - AWSCore (= 2.7.4)
-  - AWSUserPoolsSignIn (2.7.4):
-    - AWSAuthCore (= 2.7.4)
-    - AWSCognitoIdentityProvider (= 2.7.4)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -184,21 +163,12 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Nimble (7.3.1)
+  - Nimble (8.0.1)
   - Protobuf (3.6.1)
   - PureLayout (3.1.4)
-  - ReachabilitySwift (4.3.0)
-  - SQLite.swift (0.11.4):
-    - SQLite.swift/standard (= 0.11.4)
-  - SQLite.swift/standard (0.11.4)
   - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
-  - AWSAppSync (~> 2.7.0)
-  - AWSDynamoDB (~> 2.7.0)
-  - AWSMobileClient (~> 2.7.0)
-  - AWSS3 (~> 2.7.0)
-  - AWSUserPoolsSignIn (~> 2.7.0)
   - Cosmos
   - Crashlytics (~> 3.12.0)
   - Dip
@@ -218,15 +188,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AWSAppSync
-    - AWSAuthCore
-    - AWSCognitoIdentityProvider
-    - AWSCognitoIdentityProviderASF
-    - AWSCore
-    - AWSDynamoDB
-    - AWSMobileClient
-    - AWSS3
-    - AWSUserPoolsSignIn
     - Bolts
     - BoringSSL
     - Cosmos
@@ -259,20 +220,9 @@ SPEC REPOS:
     - Nimble
     - Protobuf
     - PureLayout
-    - ReachabilitySwift
-    - SQLite.swift
     - SwiftyBeaver
 
 SPEC CHECKSUMS:
-  AWSAppSync: 96e0197cf3aa0bf0ce60c93d404d3ee1b7fb1fcc
-  AWSAuthCore: 5d3db4330d4f634c9a58b49ea0bc6e2e42500ca2
-  AWSCognitoIdentityProvider: f3c6395d21ca0a9d11ed49b7d18ea1adf312015f
-  AWSCognitoIdentityProviderASF: 5d31eef1c1962b4ad58e87ceee376b83b697bf9b
-  AWSCore: b25ac6fb70a4e527b2e0df956d9f27ded5f6e518
-  AWSDynamoDB: c5de46781facd1fe21adc703201094a728f9c26d
-  AWSMobileClient: bb1994cea9a87afa82d87bb131b08346935ad237
-  AWSS3: bb5d02aeb94ba5e32d3b42eeffff7b8832ed607f
-  AWSUserPoolsSignIn: 5af62070c60c7d3025edb3c2643c6b8d1e2d1821
   Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
   BoringSSL: 016eaed201a404d11981ba2cfce8c3a773e86a1b
   Cosmos: bfc3f026cd36e4bfc8941ffe301687b212324298
@@ -302,13 +252,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: c1b726d3e27675e1dab34347e28325c873a468e6
   leveldb-library: d2078c743a1ba226e4917345714d72423e0069cc
   nanopb: 9f8aa4fc4e9d32c345e927e12c7bd9c0ea088353
-  Nimble: d351cee437b0eb2719d29964edad9501cc62c184
+  Nimble: a3aa44d3310cf0e4e62e7bc64a84107ce843cb20
   Protobuf: 6b0fc34ab8f2b7dbad2278a48be08a669427c59f
   PureLayout: cd5c97224004e45506d9e750161efdf70336c0af
-  ReachabilitySwift: 8610aeb4af1844f38c44f05482de0ab537f852eb
-  SQLite.swift: 0231abc3a3a05101fb90a7cd48d44aaeec6cbd4f
   SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
 
-PODFILE CHECKSUM: db4a36b966ac0f4be63f4d815729066c6cdb563e
+PODFILE CHECKSUM: a561fca97f8672653b18d26f8a30f99d556d8f60
 
 COCOAPODS: 1.5.3
