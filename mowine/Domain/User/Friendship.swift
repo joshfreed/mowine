@@ -50,20 +50,3 @@ extension Friendship: CoreDataConvertible {
         return NSPredicate(format: "user.userId == %@ && friend.userId == %@", userId.asString, friendId.asString)
     }
 }
-
-// MARK: - DynamoConvertible
-
-extension Friendship: DynamoConvertible {
-    static func toEntity(awsObject: AWSFriend) -> Friendship? {
-        guard let userIdStr = awsObject._userId else { return nil }
-        guard let friendIdStr = awsObject._friendId else { return nil }
-        return Friendship(userId: UserId(string: userIdStr), friendId: UserId(string: friendIdStr))
-    }
-    
-    func toDynamoDb() -> AWSFriend? {
-        let awsFriend: AWSFriend = AWSFriend()
-        awsFriend._userId = userId.asString
-        awsFriend._friendId = friendId.asString
-        return awsFriend
-    }
-}

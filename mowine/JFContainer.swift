@@ -8,10 +8,6 @@
 
 import Foundation
 import CoreData
-import AWSDynamoDB
-import AWSS3
-import AWSAppSync
-import AWSMobileClient
 import Dip
 
 let useFakes = false
@@ -57,8 +53,6 @@ class JFContainer {
     lazy var wineRepository: WineRepository = try! container.resolve()
     lazy var wineImageWorker: WineImageWorker = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()
-    lazy var syncManager = SyncManager()
-    lazy var dynamoDbWorker = DynamoDbWorker(dynamoDbObjectMapper: AWSDynamoDBObjectMapper.default())
     lazy var coreDataWorker = CoreDataWorker()
     
     // MARK: Core Data Stack
@@ -90,55 +84,6 @@ class JFContainer {
         })
         return container
     }()
-}
-
-// MARK: AWS Services
-
-class AWSContainer {
-    static let shared = AWSContainer()
-    private init() {}
-    
-    lazy var session = AWSSession(userRepository: JFContainer.shared.userRepository)
-    lazy var mobileAuth = AWSMobileAuth()
-    lazy var wineImageRepository = S3WineImageRepository(
-        transferUtility: AWSS3TransferUtility.default(),
-        session: JFContainer.shared.session
-    )
-    lazy var appSyncClient: AWSAppSyncClient = {
-        return initializeAppSync()
-    }()
-    lazy var userRepository: AppSyncUserRepository = AppSyncUserRepository(appSyncClient: appSyncClient)
-    lazy var wineRepository: AppSyncWineRepository = AppSyncWineRepository(appSyncClient: appSyncClient)
-}
-
-func initializeAppSync() -> AWSAppSyncClient {
-    // You can choose your database location, accessible by the SDK
-    let databaseURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("mowine_appsync")
-    
-    do {
-        // Initialize the AWS AppSync configuration
-        let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncClientInfo: AWSAppSyncClientInfo(),
-                                                              userPoolsAuthProvider: { return MyCognitoUserPoolsAuthProvider() }(),
-                                                              databaseURL:databaseURL)
-        
-        // Initialize the AWS AppSync client
-        let appSyncClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
-        return appSyncClient
-    } catch {
-        fatalError("Error initializing appsync client. \(error)")
-    }
-}
-
-class MyCognitoUserPoolsAuthProvider : AWSCognitoUserPoolsAuthProviderAsync {
-    func getLatestAuthToken(_ callback: @escaping (String?, Error?) -> Void) {
-        AWSMobileClient.sharedInstance().getTokens { (tokens, error) in
-            if error != nil {
-                callback(nil, error)
-            } else {
-                callback(tokens?.idToken?.tokenString, nil)
-            }
-        }
-    }
 }
 
 // MARK: Secrets

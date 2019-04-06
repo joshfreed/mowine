@@ -8,16 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2D37D0BA7A38AD66494E2C65 /* Pods_mowineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D009C1656E64A107F1550B /* Pods_mowineTests.framework */; };
-		5300651C206C21BB008B9104 /* AWSResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5300651B206C21BB008B9104 /* AWSResult.swift */; };
 		5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5301F72D0F6004A66A9 /* NameWineInteractor.swift */; };
 		5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5311F72D0F6004A66A9 /* NameWineModels.swift */; };
 		5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */; };
 		5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */; };
 		5301D53A1F72D0F6004A66A9 /* NameWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */; };
-		5306D5EE207BF1FC00E5EE20 /* AWSWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */; };
-		5306D5F0207BF8A300E5EE20 /* AWSWine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D5EF207BF8A300E5EE20 /* AWSWine.swift */; };
-		5306D5F6207C0A6300E5EE20 /* WineModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306D5F5207C0A6300E5EE20 /* WineModelTests.swift */; };
-		530BCA502154305E002F785C /* DynamoDbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA4F2154305E002F785C /* DynamoDbService.swift */; };
 		530BCA522154322E002F785C /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA512154322E002F785C /* CoreDataService.swift */; };
 		530BCA542155823C002F785C /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA532155823C002F785C /* Syncable.swift */; };
 		530BCA572157EB6B002F785C /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530BCA562157EB6B002F785C /* Secrets.plist */; };
@@ -31,7 +26,6 @@
 		53112849205F06800094DC35 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53112848205F06800094DC35 /* TabBarViewController.swift */; };
 		5311284C206010520094DC35 /* ButtonPrimaryGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */; };
 		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
-		531D7D14219DDFC8007E7B3A /* AwsCoreDataWineMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D7D13219DDFC8007E7B3A /* AwsCoreDataWineMapper.swift */; };
 		5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5320BF361E42B0BB00F2405E /* PhotoCell.xib */; };
 		5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5320BF381E436FF200F2405E /* PhotoRow.swift */; };
 		5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB8F1F0BEE27001D2040 /* SelectTypeInteractor.swift */; };
@@ -45,7 +39,6 @@
 		5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */; };
 		5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */; };
 		53257F01207D49CD00E1AB5F /* WineImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53257F00207D49CD00E1AB5F /* WineImageRepository.swift */; };
-		53257F04207D4D4200E1AB5F /* S3WineImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53257F03207D4D4200E1AB5F /* S3WineImageRepository.swift */; };
 		5327BC1720617FC2006787E9 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53958A9D20617BCD00BA4B6C /* SignIn.storyboard */; };
 		5327BC192061855B006787E9 /* ButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327BC182061855B006787E9 /* ButtonOutline.swift */; };
 		5327BC1B20618670006787E9 /* MWButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327BC1A20618670006787E9 /* MWButton.swift */; };
@@ -72,14 +65,11 @@
 		533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */; };
 		533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533597B021BC43A900CEFD45 /* FirebaseSession.swift */; };
 		533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533980932068295C004C080B /* FacebookAuthenticationService.swift */; };
-		5339809620682A76004C080B /* AWSFacebookAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339809520682A76004C080B /* AWSFacebookAuthentication.swift */; };
 		53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */; };
 		53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */; };
 		53423DE01F740B6B00655A7F /* AddWineSummaryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */; };
 		53423DE11F740B6B00655A7F /* AddWineSummaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */; };
 		53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */; };
-		534728C82064305800DC7966 /* AWSSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534728C72064305800DC7966 /* AWSSession.swift */; };
-		534728CA20657FED00DC7966 /* AWSEmailAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */; };
 		534895F1203CBAA400B7547A /* Wine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F0203CBAA400B7547A /* Wine.swift */; };
 		534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F3203CBB4200B7547A /* WineTypeRepository.swift */; };
 		534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */; };
@@ -98,8 +88,6 @@
 		534CC91D2152F79F004F4A6C /* CoreDataUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CC91C2152F79F004F4A6C /* CoreDataUserRepository.swift */; };
 		5350B58B203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */; };
 		5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */; };
-		5350C83A21A09867004BBA42 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350C83921A09867004BBA42 /* API.swift */; };
-		5350C83D21A098F8004BBA42 /* AppSyncUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350C83C21A098F8004BBA42 /* AppSyncUserRepository.swift */; };
 		53547C7B218DFB0D00EDD2A8 /* CoreDataMappingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7A218DFB0D00EDD2A8 /* CoreDataMappingContext.swift */; };
 		53547C7D218E3F8700EDD2A8 /* Friendship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7C218E3F8700EDD2A8 /* Friendship.swift */; };
 		53547C7F218E40FC00EDD2A8 /* StringIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */; };
@@ -131,7 +119,6 @@
 		537614D11E591FA5005AABF0 /* WineForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537614D01E591FA5005AABF0 /* WineForm.swift */; };
 		53766EE821CEEB4300174E97 /* GoogleAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */; };
 		537740A41E5BC73600A1D282 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537740A31E5BC73600A1D282 /* Models.swift */; };
-		537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */; };
 		537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A18D321961CFB00011C63 /* NimbleMatchers.swift */; };
 		537D8A4D21C067EF00A110FF /* FriendsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537D8A4C21C067EF00A110FF /* FriendsScene.swift */; };
 		537D8A5921C1C17D00A110FF /* FirestoreWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537D8A5821C1C17D00A110FF /* FirestoreWineRepository.swift */; };
@@ -140,8 +127,6 @@
 		537E24092246D5B300DFFA4B /* SocialSignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537E24082246D5B300DFFA4B /* SocialSignInWorker.swift */; };
 		5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35421BC49F700221219 /* FirestoreUserRepository.swift */; };
 		5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35621BC759300221219 /* FirebaseSocialAuth.swift */; };
-		53812027206EF86C0053A94E /* AWSFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53812026206EF86C0053A94E /* AWSFriend.swift */; };
-		53898641206AEB0700EBC67B /* AWSUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53898640206AEB0700EBC67B /* AWSUser.swift */; };
 		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
 		538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B41EE476A100CF1330 /* TestDoubles.swift */; };
 		538995B71EE4A42E00CF1330 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */; };
@@ -151,9 +136,7 @@
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		53958A9820617B6C00BA4B6C /* FirstTimeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */; };
 		53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */; };
-		539C4D8421A499D700B0F8E0 /* AppSyncWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8321A499D700B0F8E0 /* AppSyncWineRepository.swift */; };
 		539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */; };
-		53A3D5802145C4F4008A476D /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A3D57F2145C4F4008A476D /* SyncManager.swift */; };
 		53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
 		53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */; };
@@ -171,7 +154,6 @@
 		53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */; };
 		53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */; };
 		53B61B80219B34C200A0258E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B61B7F219B34C200A0258E /* main.swift */; };
-		53B61B85219B6F5C00A0258E /* SyncManager2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B61B84219B6F5C00A0258E /* SyncManager2Tests.swift */; };
 		53B6CB8B205ADD9300AE8EFB /* WineCellarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B6CB85205ADD9300AE8EFB /* WineCellarPresenter.swift */; };
 		53B6CB8C205ADD9300AE8EFB /* WineCellarWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B6CB86205ADD9300AE8EFB /* WineCellarWorker.swift */; };
 		53B6CB8D205ADD9300AE8EFB /* WineCellarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B6CB87205ADD9300AE8EFB /* WineCellarRouter.swift */; };
@@ -224,23 +206,14 @@
 		53F2486E206D47EF0046B031 /* FirstTimeInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F2486A206D47EF0046B031 /* FirstTimeInteractorTests.swift */; };
 		53F24872206D4A760046B031 /* MoreDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24871206D4A760046B031 /* MoreDoubles.swift */; };
 		53F24874206D4ADA0046B031 /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24873206D4ADA0046B031 /* Facebook.swift */; };
-		53F24876206D6A0A0046B031 /* AWSUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24875206D6A0A0046B031 /* AWSUserRepository.swift */; };
 		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABFA1E2176080067AB62 /* mowine.xcdatamodeld */; };
 		53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
 		53F5AC171E2176090067AB62 /* mowineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* mowineUITests.swift */; };
-		53F725AD219C650000F8176F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 53F725AC219C650000F8176F /* awsconfiguration.json */; };
-		53F725AF219C7DEE00F8176F /* AWSMobileAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725AE219C7DEE00F8176F /* AWSMobileAuth.swift */; };
 		53F725B3219CB79600F8176F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B2219CB79600F8176F /* StartViewController.swift */; };
-		53F725B5219DB99F00F8176F /* ManagedUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B4219DB99F00F8176F /* ManagedUserTests.swift */; };
-		53F725B7219DC1DA00F8176F /* CoreDataSyncableWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B6219DC1DA00F8176F /* CoreDataSyncableWatcher.swift */; };
 		53FBE79A216125BB00C461FA /* CoreDataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE799216125BB00C461FA /* CoreDataWorker.swift */; };
-		53FBE79C2161261400C461FA /* DynamoDbWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79B2161261400C461FA /* DynamoDbWorker.swift */; };
-		53FBE79E2161267500C461FA /* CoreDataLocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */; };
-		53FBE7A02161269900C461FA /* DynamoDbRemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */; };
-		53FBE7A221612B5F00C461FA /* SyncManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FBE7A121612B5F00C461FA /* SyncManager2.swift */; };
 		53FFD6482051BE6700AC60EE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFD6472051BE6700AC60EE /* Errors.swift */; };
 		75473028A2935552CC93E86A /* libPods-mowineUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */; };
 		D55A3B9E94FC7F3E1014D0F4 /* Pods_mowine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86FB78043F03257BD82D891 /* Pods_mowine.framework */; };
@@ -285,16 +258,11 @@
 		02D009C1656E64A107F1550B /* Pods_mowineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mowineUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		363B98F58C21B7324D5549F9 /* Pods-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
-		5300651B206C21BB008B9104 /* AWSResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSResult.swift; sourceTree = "<group>"; };
 		5301D5301F72D0F6004A66A9 /* NameWineInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineInteractor.swift; sourceTree = "<group>"; };
 		5301D5311F72D0F6004A66A9 /* NameWineModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineModels.swift; sourceTree = "<group>"; };
 		5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWinePresenter.swift; sourceTree = "<group>"; };
 		5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineRouter.swift; sourceTree = "<group>"; };
 		5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineViewController.swift; sourceTree = "<group>"; };
-		5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSWineRepository.swift; sourceTree = "<group>"; };
-		5306D5EF207BF8A300E5EE20 /* AWSWine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSWine.swift; sourceTree = "<group>"; };
-		5306D5F5207C0A6300E5EE20 /* WineModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineModelTests.swift; sourceTree = "<group>"; };
-		530BCA4F2154305E002F785C /* DynamoDbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbService.swift; sourceTree = "<group>"; };
 		530BCA512154322E002F785C /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		530BCA532155823C002F785C /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
 		530BCA562157EB6B002F785C /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
@@ -309,7 +277,6 @@
 		5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPrimaryGradient.swift; sourceTree = "<group>"; };
 		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		531550DE1F5848C70017DA70 /* JFLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JFLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		531D7D13219DDFC8007E7B3A /* AwsCoreDataWineMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsCoreDataWineMapper.swift; sourceTree = "<group>"; };
 		5320BF361E42B0BB00F2405E /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		5320BF381E436FF200F2405E /* PhotoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRow.swift; sourceTree = "<group>"; };
 		5321FB8F1F0BEE27001D2040 /* SelectTypeInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTypeInteractor.swift; sourceTree = "<group>"; };
@@ -323,7 +290,6 @@
 		5321FB9F1F0BF594001D2040 /* SelectVarietyRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyRouter.swift; sourceTree = "<group>"; };
 		5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
 		53257F00207D49CD00E1AB5F /* WineImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageRepository.swift; sourceTree = "<group>"; };
-		53257F03207D4D4200E1AB5F /* S3WineImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3WineImageRepository.swift; sourceTree = "<group>"; };
 		5327BC182061855B006787E9 /* ButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOutline.swift; sourceTree = "<group>"; };
 		5327BC1A20618670006787E9 /* MWButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWButton.swift; sourceTree = "<group>"; };
 		5327BC1D20619D34006787E9 /* WineCellarListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarListPresenter.swift; sourceTree = "<group>"; };
@@ -349,14 +315,11 @@
 		533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseEmailAuth.swift; sourceTree = "<group>"; };
 		533597B021BC43A900CEFD45 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
 		533980932068295C004C080B /* FacebookAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthenticationService.swift; sourceTree = "<group>"; };
-		5339809520682A76004C080B /* AWSFacebookAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSFacebookAuthentication.swift; sourceTree = "<group>"; };
 		53423DD81F740B6B00655A7F /* AddWineSummaryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryInteractor.swift; sourceTree = "<group>"; };
 		53423DD91F740B6B00655A7F /* AddWineSummaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryModels.swift; sourceTree = "<group>"; };
 		53423DDA1F740B6B00655A7F /* AddWineSummaryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryPresenter.swift; sourceTree = "<group>"; };
 		53423DDB1F740B6B00655A7F /* AddWineSummaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryRouter.swift; sourceTree = "<group>"; };
 		53423DDC1F740B6B00655A7F /* AddWineSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineSummaryViewController.swift; sourceTree = "<group>"; };
-		534728C72064305800DC7966 /* AWSSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSSession.swift; sourceTree = "<group>"; };
-		534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSEmailAuthentication.swift; sourceTree = "<group>"; };
 		534895F0203CBAA400B7547A /* Wine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wine.swift; sourceTree = "<group>"; };
 		534895F3203CBB4200B7547A /* WineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeRepository.swift; sourceTree = "<group>"; };
 		534895F7203CBD0B00B7547A /* SelectTypeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeWorker.swift; sourceTree = "<group>"; };
@@ -375,8 +338,6 @@
 		534CC91C2152F79F004F4A6C /* CoreDataUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserRepository.swift; sourceTree = "<group>"; };
 		5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWineRepositoryTests.swift; sourceTree = "<group>"; };
 		5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
-		5350C83921A09867004BBA42 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		5350C83C21A098F8004BBA42 /* AppSyncUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSyncUserRepository.swift; sourceTree = "<group>"; };
 		53547C7A218DFB0D00EDD2A8 /* CoreDataMappingContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMappingContext.swift; sourceTree = "<group>"; };
 		53547C7C218E3F8700EDD2A8 /* Friendship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendship.swift; sourceTree = "<group>"; };
 		53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIdentity.swift; sourceTree = "<group>"; };
@@ -408,7 +369,6 @@
 		537614D01E591FA5005AABF0 /* WineForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineForm.swift; sourceTree = "<group>"; };
 		53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthenticationService.swift; sourceTree = "<group>"; };
 		537740A31E5BC73600A1D282 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsCoreDataUserMapper.swift; sourceTree = "<group>"; };
 		537A18D321961CFB00011C63 /* NimbleMatchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleMatchers.swift; sourceTree = "<group>"; };
 		537D8A4C21C067EF00A110FF /* FriendsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsScene.swift; sourceTree = "<group>"; };
 		537D8A5821C1C17D00A110FF /* FirestoreWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreWineRepository.swift; sourceTree = "<group>"; };
@@ -417,8 +377,6 @@
 		537E24082246D5B300DFFA4B /* SocialSignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInWorker.swift; sourceTree = "<group>"; };
 		5380F35421BC49F700221219 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		5380F35621BC759300221219 /* FirebaseSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSocialAuth.swift; sourceTree = "<group>"; };
-		53812026206EF86C0053A94E /* AWSFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSFriend.swift; sourceTree = "<group>"; };
-		53898640206AEB0700EBC67B /* AWSUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSUser.swift; sourceTree = "<group>"; };
 		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorkerTests.swift; sourceTree = "<group>"; };
 		538995B41EE476A100CF1330 /* TestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
 		538995B61EE4A42E00CF1330 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -429,9 +387,7 @@
 		53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeWorker.swift; sourceTree = "<group>"; };
 		53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
 		53958A9D20617BCD00BA4B6C /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SignIn.storyboard; path = /Users/joshfreed/Source/mowine/mowine/SignIn.storyboard; sourceTree = "<absolute>"; };
-		539C4D8321A499D700B0F8E0 /* AppSyncWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSyncWineRepository.swift; sourceTree = "<group>"; };
 		539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
-		53A3D57F2145C4F4008A476D /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
 		53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountPresenter.swift; sourceTree = "<group>"; };
@@ -449,7 +405,6 @@
 		53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapPhotoRouter.swift; sourceTree = "<group>"; };
 		53B564D51F11952D00459BB8 /* SnapPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapPhotoViewController.swift; sourceTree = "<group>"; };
 		53B61B7F219B34C200A0258E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		53B61B84219B6F5C00A0258E /* SyncManager2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager2Tests.swift; sourceTree = "<group>"; };
 		53B6CB85205ADD9300AE8EFB /* WineCellarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarPresenter.swift; sourceTree = "<group>"; };
 		53B6CB86205ADD9300AE8EFB /* WineCellarWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarWorker.swift; sourceTree = "<group>"; };
 		53B6CB87205ADD9300AE8EFB /* WineCellarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarRouter.swift; sourceTree = "<group>"; };
@@ -500,7 +455,6 @@
 		53F2486A206D47EF0046B031 /* FirstTimeInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeInteractorTests.swift; sourceTree = "<group>"; };
 		53F24871206D4A760046B031 /* MoreDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDoubles.swift; sourceTree = "<group>"; };
 		53F24873206D4ADA0046B031 /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
-		53F24875206D6A0A0046B031 /* AWSUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSUserRepository.swift; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -513,16 +467,8 @@
 		53F5AC121E2176090067AB62 /* mowineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5AC161E2176090067AB62 /* mowineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mowineUITests.swift; sourceTree = "<group>"; };
 		53F5AC181E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53F725AC219C650000F8176F /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		53F725AE219C7DEE00F8176F /* AWSMobileAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSMobileAuth.swift; sourceTree = "<group>"; };
 		53F725B2219CB79600F8176F /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		53F725B4219DB99F00F8176F /* ManagedUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedUserTests.swift; sourceTree = "<group>"; };
-		53F725B6219DC1DA00F8176F /* CoreDataSyncableWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSyncableWatcher.swift; sourceTree = "<group>"; };
 		53FBE799216125BB00C461FA /* CoreDataWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataWorker.swift; sourceTree = "<group>"; };
-		53FBE79B2161261400C461FA /* DynamoDbWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbWorker.swift; sourceTree = "<group>"; };
-		53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataLocalDataStore.swift; sourceTree = "<group>"; };
-		53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDbRemoteDataStore.swift; sourceTree = "<group>"; };
-		53FBE7A121612B5F00C461FA /* SyncManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager2.swift; sourceTree = "<group>"; };
 		53FFD6472051BE6700AC60EE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		650191F6EFC37436B6FB1E64 /* Pods-mowineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineTests/Pods-mowineTests.release.xcconfig"; sourceTree = "<group>"; };
 		736CDE5C539B071F454AA97F /* Pods-mowine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowine/Pods-mowine.debug.xcconfig"; sourceTree = "<group>"; };
@@ -577,22 +523,6 @@
 			path = NameWine;
 			sourceTree = "<group>";
 		};
-		5306D5F3207C0A3800E5EE20 /* AWS */ = {
-			isa = PBXGroup;
-			children = (
-				5306D5F4207C0A3F00E5EE20 /* DynamoDB */,
-			);
-			path = AWS;
-			sourceTree = "<group>";
-		};
-		5306D5F4207C0A3F00E5EE20 /* DynamoDB */ = {
-			isa = PBXGroup;
-			children = (
-				5306D5F5207C0A6300E5EE20 /* WineModelTests.swift */,
-			);
-			path = DynamoDB;
-			sourceTree = "<group>";
-		};
 		5321FB661F0BE5D9001D2040 /* AddWine */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,14 +556,6 @@
 				5321FBA81F0BFA09001D2040 /* VarietyCollectionViewCell.swift */,
 			);
 			path = SelectVariety;
-			sourceTree = "<group>";
-		};
-		53257F02207D4D2800E1AB5F /* S3 */ = {
-			isa = PBXGroup;
-			children = (
-				53257F03207D4D4200E1AB5F /* S3WineImageRepository.swift */,
-			);
-			path = S3;
 			sourceTree = "<group>";
 		};
 		5327BC1C20619D1D006787E9 /* WineCellarList */ = {
@@ -747,21 +669,6 @@
 			path = AddWineSummary;
 			sourceTree = "<group>";
 		};
-		534728C62064304900DC7966 /* AWS */ = {
-			isa = PBXGroup;
-			children = (
-				5350C83B21A098E1004BBA42 /* AppSync */,
-				53257F02207D4D2800E1AB5F /* S3 */,
-				53F24877206D6AA70046B031 /* DynamoDB */,
-				534728C72064305800DC7966 /* AWSSession.swift */,
-				534728C920657FED00DC7966 /* AWSEmailAuthentication.swift */,
-				5339809520682A76004C080B /* AWSFacebookAuthentication.swift */,
-				5300651B206C21BB008B9104 /* AWSResult.swift */,
-				53F725AE219C7DEE00F8176F /* AWSMobileAuth.swift */,
-			);
-			path = AWS;
-			sourceTree = "<group>";
-		};
 		534895F2203CBAF300B7547A /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,9 +716,7 @@
 			children = (
 				533597AC21BC3ED600CEFD45 /* Firebase */,
 				53FBE798216125A900C461FA /* CoreData */,
-				53A3D57E2145C4CE008A476D /* Sync */,
 				53F24865206D3F5E0046B031 /* Facebook */,
-				534728C62064304900DC7966 /* AWS */,
 				536E85A2204F506E004D5426 /* Fake */,
 				5348960C203DE44C00B7547A /* Persistence */,
 				53D1E3032059BD0B00A22476 /* TheWineRepository.swift */,
@@ -844,8 +749,6 @@
 		5348961F203E26EE00B7547A /* Infastructure */ = {
 			isa = PBXGroup;
 			children = (
-				53B61B81219B6F3B00A0258E /* Sync */,
-				5306D5F3207C0A3800E5EE20 /* AWS */,
 				53489620203E26F600B7547A /* Persistence */,
 			);
 			path = Infastructure;
@@ -864,19 +767,8 @@
 			children = (
 				53489622203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift */,
 				5350B58A203F1DD400C6B2D2 /* CoreDataWineRepositoryTests.swift */,
-				53F725B4219DB99F00F8176F /* ManagedUserTests.swift */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		5350C83B21A098E1004BBA42 /* AppSync */ = {
-			isa = PBXGroup;
-			children = (
-				5350C83921A09867004BBA42 /* API.swift */,
-				5350C83C21A098F8004BBA42 /* AppSyncUserRepository.swift */,
-				539C4D8321A499D700B0F8E0 /* AppSyncWineRepository.swift */,
-			);
-			path = AppSync;
 			sourceTree = "<group>";
 		};
 		535C0B1D1E3579EB008A8117 /* Domain */ = {
@@ -1038,20 +930,6 @@
 			path = Workers;
 			sourceTree = "<group>";
 		};
-		53A3D57E2145C4CE008A476D /* Sync */ = {
-			isa = PBXGroup;
-			children = (
-				53A3D57F2145C4F4008A476D /* SyncManager.swift */,
-				53FBE79D2161267500C461FA /* CoreDataLocalDataStore.swift */,
-				53FBE79F2161269900C461FA /* DynamoDbRemoteDataStore.swift */,
-				53FBE7A121612B5F00C461FA /* SyncManager2.swift */,
-				53F725B6219DC1DA00F8176F /* CoreDataSyncableWatcher.swift */,
-				537A18CC2195CF6300011C63 /* AwsCoreDataUserMapper.swift */,
-				531D7D13219DDFC8007E7B3A /* AwsCoreDataWineMapper.swift */,
-			);
-			path = Sync;
-			sourceTree = "<group>";
-		};
 		53A8D5E42046023D000AD7A3 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -1093,14 +971,6 @@
 				53B564D41F11952D00459BB8 /* SnapPhotoRouter.swift */,
 			);
 			path = SnapPhoto;
-			sourceTree = "<group>";
-		};
-		53B61B81219B6F3B00A0258E /* Sync */ = {
-			isa = PBXGroup;
-			children = (
-				53B61B84219B6F5C00A0258E /* SyncManager2Tests.swift */,
-			);
-			path = Sync;
 			sourceTree = "<group>";
 		};
 		53C88BFA1F085D17009B7D29 /* Views */ = {
@@ -1204,25 +1074,10 @@
 			path = FirstTime;
 			sourceTree = "<group>";
 		};
-		53F24877206D6AA70046B031 /* DynamoDB */ = {
-			isa = PBXGroup;
-			children = (
-				5306D5EF207BF8A300E5EE20 /* AWSWine.swift */,
-				53812026206EF86C0053A94E /* AWSFriend.swift */,
-				53898640206AEB0700EBC67B /* AWSUser.swift */,
-				53F24875206D6A0A0046B031 /* AWSUserRepository.swift */,
-				5306D5ED207BF1FC00E5EE20 /* AWSWineRepository.swift */,
-				530BCA4F2154305E002F785C /* DynamoDbService.swift */,
-				53FBE79B2161261400C461FA /* DynamoDbWorker.swift */,
-			);
-			path = DynamoDB;
-			sourceTree = "<group>";
-		};
 		53F5ABE71E2176080067AB62 = {
 			isa = PBXGroup;
 			children = (
 				538B239C21BB22BD002F278A /* GoogleService-Info.plist */,
-				53F725AC219C650000F8176F /* awsconfiguration.json */,
 				53D8EDD31E4186A300696FAE /* Podfile */,
 				53F5ABF21E2176080067AB62 /* mowine */,
 				53F5AC0A1E2176090067AB62 /* mowineTests */,
@@ -1468,6 +1323,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1496,7 +1352,6 @@
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				53112846205F04580094DC35 /* AddWine.storyboard in Resources */,
 				5327BC1720617FC2006787E9 /* SignIn.storyboard in Resources */,
-				53F725AD219C650000F8176F /* awsconfiguration.json in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				53ED1F8F204F359C00C129BC /* UserTableViewCell.xib in Resources */,
@@ -1581,15 +1436,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AWSAppSync/AWSAppSync.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
@@ -1602,8 +1448,6 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-ac14cd06/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -1612,15 +1456,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAppSync.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
@@ -1633,8 +1468,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -1709,12 +1542,9 @@
 			files = (
 				539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */,
 				53423DE21F740B6B00655A7F /* AddWineSummaryViewController.swift in Sources */,
-				534728CA20657FED00DC7966 /* AWSEmailAuthentication.swift in Sources */,
 				53B6CB90205ADD9300AE8EFB /* WineCellarInteractor.swift in Sources */,
-				537A18CD2195CF6300011C63 /* AwsCoreDataUserMapper.swift in Sources */,
 				53ED1F8E204F359C00C129BC /* UserTableViewCell.swift in Sources */,
 				53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */,
-				53F24876206D6A0A0046B031 /* AWSUserRepository.swift in Sources */,
 				535D6D1F205AA8B6004D51AB /* MyWinesModels.swift in Sources */,
 				5327BC2720619D34006787E9 /* WineCellarListViewController.swift in Sources */,
 				53766EE821CEEB4300174E97 /* GoogleAuthenticationService.swift in Sources */,
@@ -1723,16 +1553,12 @@
 				537D8A5921C1C17D00A110FF /* FirestoreWineRepository.swift in Sources */,
 				53B564D71F11952D00459BB8 /* SnapPhotoInteractor.swift in Sources */,
 				535C6A8021EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift in Sources */,
-				531D7D14219DDFC8007E7B3A /* AwsCoreDataWineMapper.swift in Sources */,
-				5306D5EE207BF1FC00E5EE20 /* AWSWineRepository.swift in Sources */,
 				535F66912062FEE20006B26A /* SignUpWorker.swift in Sources */,
 				532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */,
 				5327BC312062B362006787E9 /* WineDetailsWorker.swift in Sources */,
 				530BCA522154322E002F785C /* CoreDataService.swift in Sources */,
-				5306D5F0207BF8A300E5EE20 /* AWSWine.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
-				53FBE7A02161269900C461FA /* DynamoDbRemoteDataStore.swift in Sources */,
 				53ED1F85204F2D5C00C129BC /* FriendsWorker.swift in Sources */,
 				53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */,
 				53B564DB1F11952D00459BB8 /* SnapPhotoViewController.swift in Sources */,
@@ -1752,7 +1578,6 @@
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				5327BC1B20618670006787E9 /* MWButton.swift in Sources */,
 				53489607203DD86800B7547A /* CoreDataWineRepository.swift in Sources */,
-				53A3D5802145C4F4008A476D /* SyncManager.swift in Sources */,
 				53F100FF2045E08F00B29FAF /* SignInInteractor.swift in Sources */,
 				534895FA203CBF7100B7547A /* CoreDataWineTypeRepository.swift in Sources */,
 				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,
@@ -1762,7 +1587,6 @@
 				53A8D5FB204611A1000AD7A3 /* MyAccountInteractor.swift in Sources */,
 				5321FB951F0BEE27001D2040 /* SelectTypeInteractor.swift in Sources */,
 				53ED1F89204F2D5C00C129BC /* FriendsInteractor.swift in Sources */,
-				53257F04207D4D4200E1AB5F /* S3WineImageRepository.swift in Sources */,
 				5327BC2620619D34006787E9 /* WineCellarListModels.swift in Sources */,
 				53ED1F8B204F323F00C129BC /* UserRepository.swift in Sources */,
 				535F66942062FEE20006B26A /* SignUpViewController.swift in Sources */,
@@ -1772,10 +1596,8 @@
 				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
 				53F5ABFC1E2176080067AB62 /* mowine.xcdatamodeld in Sources */,
-				539C4D8421A499D700B0F8E0 /* AppSyncWineRepository.swift in Sources */,
 				53B564D81F11952D00459BB8 /* SnapPhotoModels.swift in Sources */,
 				53F100FA2045E08F00B29FAF /* SignInPresenter.swift in Sources */,
-				53812027206EF86C0053A94E /* AWSFriend.swift in Sources */,
 				53755D7821ADEA5B005D9954 /* WineWorker.swift in Sources */,
 				5327BC332062B362006787E9 /* WineDetailsModels.swift in Sources */,
 				53B61B80219B34C200A0258E /* main.swift in Sources */,
@@ -1800,8 +1622,6 @@
 				535D6D21205AA8B6004D51AB /* MyWinesInteractor.swift in Sources */,
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				53D1E2FE2059B68800A22476 /* TopWinesWorker.swift in Sources */,
-				5339809620682A76004C080B /* AWSFacebookAuthentication.swift in Sources */,
-				53FBE79E2161267500C461FA /* CoreDataLocalDataStore.swift in Sources */,
 				534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				5327BC2820619D34006787E9 /* WineCellarListInteractor.swift in Sources */,
@@ -1820,15 +1640,10 @@
 				53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */,
 				5327BC2520619D34006787E9 /* WineCellarListRouter.swift in Sources */,
 				5327BC322062B362006787E9 /* WineDetailsRouter.swift in Sources */,
-				53898641206AEB0700EBC67B /* AWSUser.swift in Sources */,
-				530BCA502154305E002F785C /* DynamoDbService.swift in Sources */,
 				533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */,
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,
 				530BCA542155823C002F785C /* Syncable.swift in Sources */,
-				53FBE7A221612B5F00C461FA /* SyncManager2.swift in Sources */,
-				53FBE79C2161261400C461FA /* DynamoDbWorker.swift in Sources */,
-				5300651C206C21BB008B9104 /* AWSResult.swift in Sources */,
 				5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */,
 				5327BC192061855B006787E9 /* ButtonOutline.swift in Sources */,
 				537614C81E591887005AABF0 /* EditWineConfigurator.swift in Sources */,
@@ -1837,7 +1652,6 @@
 				53489616203DE5A100B7547A /* MemoryWineTypeRepository.swift in Sources */,
 				537614CC1E591887005AABF0 /* EditWineRouter.swift in Sources */,
 				53D1E2FD2059B68800A22476 /* TopWinesPresenter.swift in Sources */,
-				534728C82064305800DC7966 /* AWSSession.swift in Sources */,
 				538F29441F72EB1F006EEDB1 /* RatingRow.swift in Sources */,
 				53F100E72044BFAF00B29FAF /* Session.swift in Sources */,
 				535D6D1C205AA8B6004D51AB /* MyWinesPresenter.swift in Sources */,
@@ -1850,7 +1664,6 @@
 				536E85A4204F507D004D5426 /* Fakes.swift in Sources */,
 				537E24052246D58600DFFA4B /* FacebookSignInWorker.swift in Sources */,
 				53112849205F06800094DC35 /* TabBarViewController.swift in Sources */,
-				53F725B7219DC1DA00F8176F /* CoreDataSyncableWatcher.swift in Sources */,
 				537E24092246D5B300DFFA4B /* SocialSignInWorker.swift in Sources */,
 				53ED1F87204F2D5C00C129BC /* FriendsModels.swift in Sources */,
 				53ED1F7C20489DBD00C129BC /* User.swift in Sources */,
@@ -1871,7 +1684,6 @@
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				53F24867206D40370046B031 /* GraphApi.swift in Sources */,
-				53F725AF219C7DEE00F8176F /* AWSMobileAuth.swift in Sources */,
 				535D6D1E205AA8B6004D51AB /* MyWinesRouter.swift in Sources */,
 				5327BC2320619D34006787E9 /* WineCellarListPresenter.swift in Sources */,
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
@@ -1887,8 +1699,6 @@
 				534895FD203CBFB900B7547A /* JFContainer.swift in Sources */,
 				537614C91E591887005AABF0 /* EditWineInteractor.swift in Sources */,
 				53D1E3022059B68800A22476 /* TopWinesInteractor.swift in Sources */,
-				5350C83D21A098F8004BBA42 /* AppSyncUserRepository.swift in Sources */,
-				5350C83A21A09867004BBA42 /* API.swift in Sources */,
 				5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */,
 				5327BC352062B362006787E9 /* WineDetailsInteractor.swift in Sources */,
 				53D1E2FF2059B68800A22476 /* TopWinesRouter.swift in Sources */,
@@ -1911,7 +1721,6 @@
 				530FD7562246E1850042B761 /* SocialSignInWorkerTests.swift in Sources */,
 				536E85B22050A31F004D5426 /* FriendsPresenterTests.swift in Sources */,
 				536E85B12050A31F004D5426 /* FriendsWorkerTests.swift in Sources */,
-				5306D5F6207C0A6300E5EE20 /* WineModelTests.swift in Sources */,
 				53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */,
 				53F24874206D4ADA0046B031 /* Facebook.swift in Sources */,
 				537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */,
@@ -1928,13 +1737,11 @@
 				536E85B42050A729004D5426 /* UserBuilder.swift in Sources */,
 				53CA1E21206C2F2400043B3A /* SignUpWorkerTests.swift in Sources */,
 				53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */,
-				53F725B5219DB99F00F8176F /* ManagedUserTests.swift in Sources */,
 				53489623203E271500B7547A /* CoreDataWineTypeRepositoryTests.swift in Sources */,
 				5348961D203E0FA600B7547A /* Mocks.swift in Sources */,
 				53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */,
 				53F2486E206D47EF0046B031 /* FirstTimeInteractorTests.swift in Sources */,
 				5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */,
-				53B61B85219B6F5C00A0258E /* SyncManager2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,11 +10,7 @@ import UIKit
 import CoreData
 import JFLib
 import PureLayout
-import AWSMobileClient
-import AWSAuthCore
-import AWSUserPoolsSignIn
 import SwiftyBeaver
-import AWSAppSync
 import FBSDKCoreKit
 import Dip
 import GoogleSignIn
@@ -27,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.mwButtonSecondary
 
         setupSwiftyBeaverLogging()
-        
-        AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
-        AWSDDLog.sharedInstance.logLevel = .info
         
         window = UIWindow()
         window?.rootViewController = StartViewController()
@@ -94,11 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")      
-        
-        if JFContainer.shared.session.isLoggedIn {
-            JFContainer.shared.syncManager.sync()
-        }
+        SwiftyBeaver.info("AppDelegate::applicationDidBecomeActive")              
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

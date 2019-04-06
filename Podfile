@@ -15,13 +15,6 @@ target 'mowine' do
   pod 'FBSDKCoreKit', '~> 4.38.0'
   pod 'FBSDKLoginKit', '~> 4.38.0'
   
-  # AWS
-  pod 'AWSMobileClient', '~> 2.7.0'
-  pod 'AWSUserPoolsSignIn', '~> 2.7.0'
-  pod 'AWSDynamoDB', '~> 2.7.0'
-  pod 'AWSS3', '~> 2.7.0'
-  pod 'AWSAppSync', '~> 2.7.0'
-  
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
