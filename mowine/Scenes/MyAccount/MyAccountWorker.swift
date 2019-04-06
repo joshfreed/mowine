@@ -58,12 +58,21 @@ class MyAccountWorker {
 
         SwiftyBeaver.verbose("Fetching profile picture: \(photoUrl)")
 
-        do {
-            let photoData = try Data(contentsOf: photoUrl)
-            completion(.success(photoData))
-        } catch {
-            completion(.failure(error))
+        getData(from: photoUrl) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    completion(.failure(error))
+                } else if let data = data {
+                    completion(.success(data))
+                } else {
+                    completion(.failure(MoWineError.unknownError))
+                }
+            }
         }
+    }
+    
+    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     func signOut() {
