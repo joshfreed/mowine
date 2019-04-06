@@ -173,7 +173,7 @@ class FakeUserRepository: UserRepository {
     }
     
     func save(user: User, completion: @escaping (Result<User>) -> ()) {
-        if let index = usersDB.index(where: { $0.emailAddress == user.emailAddress }) {
+        if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
             usersDB[index] = user
         }
         completion(.success(user))
@@ -221,7 +221,7 @@ class FakeUserRepository: UserRepository {
     }
     
     func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
-        if let index = friendsDB[owningUserId]?.index(of: friendId) {
+        if let index = friendsDB[owningUserId]?.firstIndex(of: friendId) {
             friendsDB[owningUserId]?.remove(at: index)
         }        
         completion(.success)

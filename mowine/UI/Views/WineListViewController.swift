@@ -46,7 +46,7 @@ class WineListViewController: UITableViewController {
     func update(wine: WineListViewModel) {
         SwiftyBeaver.verbose("Update wine \(wine.id)")
         
-        if let index = wines.index(of: wine) {
+        if let index = wines.firstIndex(of: wine) {
             wines[index] = wine
             tableView.reloadData()
         }        

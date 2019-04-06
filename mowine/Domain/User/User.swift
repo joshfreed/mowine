@@ -68,7 +68,7 @@ struct User: Equatable {
     
     mutating func removeFriend(user: User) {
         let friend = Friendship(userId: id, friendId: user.id)
-        if let index = friends.index(of: friend) {
+        if let index = friends.firstIndex(of: friend) {
             friends.remove(at: index)
         }
     }

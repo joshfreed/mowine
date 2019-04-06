@@ -188,7 +188,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     }
     
     func displayFriendAdded(viewModel: Friends.AddFriend.ViewModel) {
-        if let index = displayedUsers.index(where: { $0.userId == viewModel.userId }) {
+        if let index = displayedUsers.firstIndex(where: { $0.userId == viewModel.userId }) {
             displayedUsers[index].isFriend = true
         }
         friendCells[viewModel.userId]?.displayFriendAdded()

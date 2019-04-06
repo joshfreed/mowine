@@ -66,7 +66,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
             return
         }
 
-        if let index = friends.index(where: { $0.id == friendId }) {
+        if let index = friends.firstIndex(where: { $0.id == friendId }) {
             friends.remove(at: index)
         }
 
