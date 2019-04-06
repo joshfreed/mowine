@@ -17,7 +17,7 @@ class MemoryWineRepository: WineRepository {
     }
     
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        if let index = wines.index(of: wine) {
+        if let index = wines.firstIndex(of: wine) {
             wines.remove(at: index)
         }
     }
@@ -31,7 +31,7 @@ class MemoryWineRepository: WineRepository {
     }
 
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
-        guard let index = wines.index(of: wine) else {
+        guard let index = wines.firstIndex(of: wine) else {
             return
         }
         
