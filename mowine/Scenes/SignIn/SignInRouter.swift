@@ -27,22 +27,8 @@ class SignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
     // MARK: Routing
 
     func routeToSignedIn() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let destinationVC = storyboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-        navigateToSignedIn(source: viewController!, destination: destinationVC)
-    }
-    
-    // MARK: Navigation
-
-    func navigateToSignedIn(source: SignInViewController, destination: TabBarViewController) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = destination
+        let startViewController = appDelegate.window?.rootViewController as! StartViewController
+        startViewController.showSignedInView()
     }
-    
-    // MARK: Passing data
-
-    //func passDataToSomewhere(source: SignInDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
 }
