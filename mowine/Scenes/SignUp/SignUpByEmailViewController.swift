@@ -33,6 +33,7 @@ class SignUpByEmailViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
     init(delegate: SignUpByEmailViewControllerDelegate) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
@@ -59,6 +60,8 @@ class SignUpByEmailViewController: UIViewController {
         rootViewController.navigationBar.isTranslucent = false
         rootViewController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         rootViewController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        rootViewController.navigationItem.backBarButtonItem?.isEnabled = false
+        rootViewController.interactivePopGestureRecognizer!.isEnabled = false
         
         addChild(rootViewController)
         view.addSubview(rootViewController.view)
@@ -83,6 +86,8 @@ class SignUpByEmailViewController: UIViewController {
     func makeProfilePictureViewController() -> UIViewController {
         let vc = signInStoryboard.instantiateViewController(withIdentifier: "ProfilePictureViewController") as! ProfilePictureViewController
         vc.delegate = self
+        vc.navigationItem.leftBarButtonItem = nil
+        vc.navigationItem.hidesBackButton = true
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: nil, action: #selector(skipProfilePicture))
         return vc
     }
@@ -90,6 +95,8 @@ class SignUpByEmailViewController: UIViewController {
     func makePhotoConfirmationViewController(photo: UIImage) -> ConfirmPhoto2ViewController {
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "ConfirmPhoto2ViewController") as! ConfirmPhoto2ViewController
         vc.delegate = self
+        vc.navigationItem.leftBarButtonItem = nil
+        vc.navigationItem.hidesBackButton = true
         return vc
     }
 
