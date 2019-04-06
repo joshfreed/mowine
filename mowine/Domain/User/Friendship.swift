@@ -29,24 +29,3 @@ struct Friendship: Equatable {
         return lhs.userId == rhs.userId && lhs.friendId == rhs.friendId
     }
 }
-
-// MARK: CoreDataConvertible
-
-extension Friendship: CoreDataConvertible {
-    static func toEntity(managedObject: ManagedFriend) -> Friendship? {
-        guard let managedUser = managedObject.user else { return nil }
-        guard let managedFriend = managedObject.friend else { return nil }
-        guard let userIdStr = managedUser.userId else { return nil }
-        guard let friendIdStr = managedFriend.userId else { return nil }
-        return Friendship(userId: UserId(string: userIdStr), friendId: UserId(string: friendIdStr))
-    }
-    
-    func mapToManagedObject(_ managedObject: ManagedFriend, mappingContext: CoreDataMappingContext) throws {
-        managedObject.user = try mappingContext.syncOneManaged(predicate: NSPredicate(format: "userId == %@", userId.asString))
-        managedObject.friend = try mappingContext.syncOneManaged(predicate: NSPredicate(format: "userId == %@", friendId.asString))
-    }
-    
-    func getIdPredicate() -> NSPredicate {
-        return NSPredicate(format: "user.userId == %@ && friend.userId == %@", userId.asString, friendId.asString)
-    }
-}
