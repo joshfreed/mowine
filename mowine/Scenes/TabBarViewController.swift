@@ -10,7 +10,10 @@ import UIKit
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let vc = viewControllers?[selectedIndex] {
+        if let vcs = viewControllers,
+            selectedIndex >= 0 && selectedIndex < vcs.count,
+            let vc = viewControllers?[selectedIndex]
+        {
             return vc.preferredStatusBarStyle
         } else {
             return .default
