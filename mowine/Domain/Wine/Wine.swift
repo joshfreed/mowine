@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import SwiftyBeaver
 
 typealias WineId = StringIdentity

@@ -42,8 +42,6 @@ class EditWineConfigurator {
         let presenter = EditWinePresenter()
         presenter.output = viewController
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
         let worker = EditWineWorker(
             wineRepository: JFContainer.shared.wineRepository,
             wineTypeRepository: JFContainer.shared.wineTypeRepository,

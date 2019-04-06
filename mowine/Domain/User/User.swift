@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import SwiftyBeaver
 import FirebaseFirestore
 
@@ -112,48 +111,5 @@ extension User {
             data["lastName"] = lastName
         }
         return data
-    }
-}
-
-// MARK: CoreDataConvertible
-
-extension User: CoreDataConvertible {
-    static func toEntity(managedObject: ManagedUser) -> User? {
-        guard let userIdStr = managedObject.userId else {
-            return nil
-        }
-        
-        let userId = UserId(string: userIdStr)
-        var user = User(id: userId, emailAddress: managedObject.emailAddress ?? "")
-        user.firstName = managedObject.firstName
-        user.lastName = managedObject.lastName
-        
-        if let set = managedObject.friends, let array = Array(set) as? [ManagedFriend] {
-            user.friends = array.compactMap {
-                guard let managedFriend = $0.friend, let friendIdStr = managedFriend.userId else {
-                    return nil
-                }
-                return Friendship(userId: user.id, friendId: UserId(string: friendIdStr))
-            }
-        }
-        
-        return user
-    }
-
-    func mapToManagedObject(_ managedObject: ManagedUser, mappingContext: CoreDataMappingContext) throws {
-        managedObject.userId = id.asString
-        managedObject.emailAddress = emailAddress
-        managedObject.firstName = firstName
-        managedObject.lastName = lastName
-        managedObject.friends = try mappingContext.syncSet(friends)
-        
-        if managedObject.hasPersistentChangedValues {
-            SwiftyBeaver.verbose("User::After::Object has persistent changes")
-            SwiftyBeaver.verbose(managedObject.changedValues())
-        }
-    }
-    
-    func getIdPredicate() -> NSPredicate {
-        return NSPredicate(format: "userId == %@", id.asString)
     }
 }
