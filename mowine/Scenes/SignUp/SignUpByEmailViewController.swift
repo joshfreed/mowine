@@ -30,6 +30,9 @@ class SignUpByEmailViewController: UIViewController {
     private var profilePictureWorker: ProfilePictureWorker!
     private var session: Session!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     init(delegate: SignUpByEmailViewControllerDelegate) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
