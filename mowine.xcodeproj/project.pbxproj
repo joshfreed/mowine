@@ -172,7 +172,6 @@
 		53D1E3002059B68800A22476 /* TopWinesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1E2FA2059B68800A22476 /* TopWinesModels.swift */; };
 		53D1E3012059B68800A22476 /* TopWinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1E2FB2059B68800A22476 /* TopWinesViewController.swift */; };
 		53D1E3022059B68800A22476 /* TopWinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1E2FC2059B68800A22476 /* TopWinesInteractor.swift */; };
-		53D1E3042059BD0B00A22476 /* TheWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1E3032059BD0B00A22476 /* TheWineRepository.swift */; };
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
 		53ED1F7C20489DBD00C129BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED1F7B20489DBD00C129BC /* User.swift */; };
 		53ED1F84204F2D5C00C129BC /* FriendsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED1F7E204F2D5C00C129BC /* FriendsPresenter.swift */; };
@@ -410,7 +409,6 @@
 		53D1E2FA2059B68800A22476 /* TopWinesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWinesModels.swift; sourceTree = "<group>"; };
 		53D1E2FB2059B68800A22476 /* TopWinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWinesViewController.swift; sourceTree = "<group>"; };
 		53D1E2FC2059B68800A22476 /* TopWinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWinesInteractor.swift; sourceTree = "<group>"; };
-		53D1E3032059BD0B00A22476 /* TheWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheWineRepository.swift; sourceTree = "<group>"; };
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		53ED1F7B20489DBD00C129BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		53ED1F7E204F2D5C00C129BC /* FriendsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPresenter.swift; sourceTree = "<group>"; };
@@ -683,7 +681,6 @@
 				53F24865206D3F5E0046B031 /* Facebook */,
 				536E85A2204F506E004D5426 /* Fake */,
 				5348960C203DE44C00B7547A /* Persistence */,
-				53D1E3032059BD0B00A22476 /* TheWineRepository.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -1607,7 +1604,6 @@
 				535D6D1E205AA8B6004D51AB /* MyWinesRouter.swift in Sources */,
 				5327BC2320619D34006787E9 /* WineCellarListPresenter.swift in Sources */,
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
-				53D1E3042059BD0B00A22476 /* TheWineRepository.swift in Sources */,
 				5327BC2420619D34006787E9 /* WineCellarListWorker.swift in Sources */,
 				534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */,
 				537614CE1E591887005AABF0 /* EditWineWorker.swift in Sources */,
