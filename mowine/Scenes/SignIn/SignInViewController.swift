@@ -13,59 +13,20 @@
 import UIKit
 import JFLib
 
-protocol SignInDisplayLogic: class {
-    func displaySignInResult(viewModel: SignIn.SignIn.ViewModel)
+protocol SignInViewControllerDelegate: class {
+    func signedIn(_ viewController: SignInViewController)
 }
 
-class SignInViewController: UIViewController, SignInDisplayLogic {
-    var interactor: SignInBusinessLogic?
-    var router: (NSObjectProtocol & SignInRoutingLogic & SignInDataPassing)?
+class SignInViewController: UIViewController {
+    weak var delegate: SignInViewControllerDelegate?
+    private(set) var worker: SignInWorker!
 
     @IBOutlet weak var scrollView: UIScrollView!
     
-    // MARK: Object lifecycle
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // MARK: Setup
-
-    private func setup() {
-        let viewController = self
-        let interactor = SignInInteractor()
-        let presenter = SignInPresenter()
-        let router = SignInRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        interactor.worker = SignInWorker(emailAuth: JFContainer.shared.emailAuthService)
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
-    // MARK: View lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        worker = SignInWorker(emailAuth: JFContainer.shared.emailAuthService)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -82,9 +43,9 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         emailAddressTextField.becomeFirstResponder()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        emailAddressTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
 
     @objc func keyboardWillShow(notification: Notification) {
@@ -135,8 +96,12 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         
         logInButton.displayLoading()
         
-        let request = SignIn.SignIn.Request(email: emailAddress, password: password)
-        interactor?.signIn(request: request)
+        worker?.signIn(emailAddress: emailAddress, password: password) { result in
+            switch result {
+            case .success(let isLoggedIn): self.displaySignInResult(isLoggedIn: isLoggedIn, error: nil)
+            case .failure(let error): self.displaySignInResult(isLoggedIn: false, error: error)
+            }
+        }
     }
     
     func hideErrorLabel() {
@@ -149,13 +114,13 @@ class SignInViewController: UIViewController, SignInDisplayLogic {
         errorLabel.isHidden = false
     }
 
-    func displaySignInResult(viewModel: SignIn.SignIn.ViewModel) {
+    func displaySignInResult(isLoggedIn: Bool, error: Error?) {
         logInButton.displayNotLoading()
         
-        if viewModel.error != nil {
+        if error != nil {
             showErrorLabel("An error occurred while trying to log you in. Please try again in a few minutes.")
-        } else if viewModel.isLoggedIn {
-            router?.routeToSignedIn()
+        } else if isLoggedIn {                        
+            delegate?.signedIn(self)
         } else {
             showErrorLabel("Login failed. Please check your email and password and try again.")
         }        

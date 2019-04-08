@@ -89,6 +89,13 @@ class FirstTimeViewController: UIViewController, GIDSignInUIDelegate {
         let signUp = SignUpByEmailViewController(delegate: self)
         present(signUp, animated: true, completion: nil)
     }
+    
+    // MARK: Sign in with email
+    
+    @IBAction func tappedSignInWithEmail(_ sender: UIButton) {
+        let signIn = SignInByEmailViewController(delegate: self)
+        present(signIn, animated: true, completion: nil)
+    }
 
     // Helpers
 
@@ -128,6 +135,12 @@ extension FirstTimeViewController: GIDSignInDelegate {
 
 extension FirstTimeViewController: SignUpByEmailViewControllerDelegate {
     func signUpComplete() {
+        showSignedInView()
+    }
+}
+
+extension FirstTimeViewController: SignInByEmailViewControllerDelegate {
+    func signInComplete() {
         showSignedInView()
     }
 }
