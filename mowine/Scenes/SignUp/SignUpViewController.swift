@@ -13,12 +13,9 @@
 import UIKit
 import JFLib
 
-protocol SignUpDisplayLogic: class {
-    func displaySignUpResult(viewModel: SignUp.SignUp.ViewModel)
-}
-
-class SignUpViewController: UIViewController, SignUpDisplayLogic {
-    var interactor: SignUpBusinessLogic?
+class SignUpViewController: UIViewController {
+    weak var delegate: SignUpViewControllerDelegate?
+    var worker: SignUpWorker!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstNameTextField: JPFFancyTextField!
@@ -27,43 +24,15 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
     @IBOutlet weak var passwordTextField: JPFFancyTextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var signUpButton: ButtonPrimary!
-    
-    weak var delegate: SignUpViewControllerDelegate?
-    
-    // MARK: Object lifecycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // MARK: Setup
-
-    private func setup() {
-        let viewController = self
-        let interactor = SignUpInteractor()
-        viewController.interactor = interactor
-        interactor.worker = SignUpWorker(
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        worker = SignUpWorker(
             emailAuthService: JFContainer.shared.emailAuthService,
             userRepository: JFContainer.shared.userRepository,
             session: JFContainer.shared.session
         )
-        interactor.viewController = viewController
-    }
-
-    @IBAction func tappedSignInButton(_ sender: UIButton) {
-        performSegue(withIdentifier: "SignIn", sender: nil)
-    }
-
-    // MARK: View lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)        
@@ -166,20 +135,34 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         
         signUpButton.displayLoading()
         
-        let request = SignUp.SignUp.Request(firstName: firstName, lastName: lastName, emailAddress: emailAddress, password: password)
-        interactor?.signUp(request: request)
+        worker.signUp(emailAddress: emailAddress, password: password, firstName: firstName, lastName: lastName) { result in
+            switch result {
+            case .success: self.displaySignUpSuccess()
+            case .failure(let error): self.displaySignUpError(error)
+            }
+        }
     }
     
-    func displaySignUpResult(viewModel: SignUp.SignUp.ViewModel) {
-        if viewModel.error == nil {
-            delegate?.signedUp(self)
+    func displaySignUpSuccess() {
+        delegate?.signedUp(self)
+    }
+    
+    func displaySignUpError(_ error: Error) {
+        signUpButton.displayNotLoading()
+        
+        if let message = getErrorMessage(error) {
+            showErrorLabel(message)
         } else {
-            signUpButton.displayNotLoading()
-            if let message = viewModel.message {
-                showErrorLabel(message)
-            } else {
-                showErrorLabel("Whoops! An error occurred while trying to sign you up.")
-            }
+            showErrorLabel("Whoops! An error occurred while trying to sign you up.")
+        }
+    }
+    
+    private func getErrorMessage(_ error: Error) -> String? {
+        switch error {
+        case EmailAuthenticationErrors.invalidPassword(let message): return message
+        case EmailAuthenticationErrors.emailAddressAlreadyInUse:
+            return "That email address is already associated with an account. Try signing in or resetting your password."
+        default: return nil
         }
     }
 }
