@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D37D0BA7A38AD66494E2C65 /* Pods_mowineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D009C1656E64A107F1550B /* Pods_mowineTests.framework */; };
+		53013454225BE69B00A4B718 /* SignInByEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53013453225BE69B00A4B718 /* SignInByEmailViewController.swift */; };
 		5301D5361F72D0F6004A66A9 /* NameWineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5301F72D0F6004A66A9 /* NameWineInteractor.swift */; };
 		5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5311F72D0F6004A66A9 /* NameWineModels.swift */; };
 		5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */; };
@@ -186,12 +187,8 @@
 		53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */; };
 		53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */; };
 		53F100E72044BFAF00B29FAF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100E62044BFAF00B29FAF /* Session.swift */; };
-		53F100FA2045E08F00B29FAF /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F42045E08F00B29FAF /* SignInPresenter.swift */; };
 		53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F52045E08F00B29FAF /* SignInWorker.swift */; };
-		53F100FC2045E08F00B29FAF /* SignInRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F62045E08F00B29FAF /* SignInRouter.swift */; };
-		53F100FD2045E08F00B29FAF /* SignInModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F72045E08F00B29FAF /* SignInModels.swift */; };
 		53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F82045E08F00B29FAF /* SignInViewController.swift */; };
-		53F100FF2045E08F00B29FAF /* SignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F92045E08F00B29FAF /* SignInInteractor.swift */; };
 		53F24867206D40370046B031 /* GraphApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24866206D40370046B031 /* GraphApi.swift */; };
 		53F2486E206D47EF0046B031 /* FirstTimeInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F2486A206D47EF0046B031 /* FirstTimeInteractorTests.swift */; };
 		53F24872206D4A760046B031 /* MoreDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24871206D4A760046B031 /* MoreDoubles.swift */; };
@@ -246,6 +243,7 @@
 		02D009C1656E64A107F1550B /* Pods_mowineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mowineUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		363B98F58C21B7324D5549F9 /* Pods-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
+		53013453225BE69B00A4B718 /* SignInByEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInByEmailViewController.swift; sourceTree = "<group>"; };
 		5301D5301F72D0F6004A66A9 /* NameWineInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineInteractor.swift; sourceTree = "<group>"; };
 		5301D5311F72D0F6004A66A9 /* NameWineModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineModels.swift; sourceTree = "<group>"; };
 		5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWinePresenter.swift; sourceTree = "<group>"; };
@@ -423,12 +421,8 @@
 		53F100D6203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewControllerTests.swift; sourceTree = "<group>"; };
 		53F100D9203F6C1E00B29FAF /* SelectTypePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypePresenterTests.swift; sourceTree = "<group>"; };
 		53F100E62044BFAF00B29FAF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		53F100F42045E08F00B29FAF /* SignInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInPresenter.swift; sourceTree = "<group>"; };
 		53F100F52045E08F00B29FAF /* SignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWorker.swift; sourceTree = "<group>"; };
-		53F100F62045E08F00B29FAF /* SignInRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRouter.swift; sourceTree = "<group>"; };
-		53F100F72045E08F00B29FAF /* SignInModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModels.swift; sourceTree = "<group>"; };
 		53F100F82045E08F00B29FAF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		53F100F92045E08F00B29FAF /* SignInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInteractor.swift; sourceTree = "<group>"; };
 		53F24866206D40370046B031 /* GraphApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApi.swift; sourceTree = "<group>"; };
 		53F2486A206D47EF0046B031 /* FirstTimeInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeInteractorTests.swift; sourceTree = "<group>"; };
 		53F24871206D4A760046B031 /* MoreDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDoubles.swift; sourceTree = "<group>"; };
@@ -983,12 +977,9 @@
 		53F100F32045E04700B29FAF /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				53F100F42045E08F00B29FAF /* SignInPresenter.swift */,
 				53F100F52045E08F00B29FAF /* SignInWorker.swift */,
-				53F100F62045E08F00B29FAF /* SignInRouter.swift */,
-				53F100F72045E08F00B29FAF /* SignInModels.swift */,
 				53F100F82045E08F00B29FAF /* SignInViewController.swift */,
-				53F100F92045E08F00B29FAF /* SignInInteractor.swift */,
+				53013453225BE69B00A4B718 /* SignInByEmailViewController.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -1494,13 +1485,11 @@
 				5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */,
 				53ED1F86204F2D5C00C129BC /* FriendsRouter.swift in Sources */,
 				53B564DA1F11952D00459BB8 /* SnapPhotoRouter.swift in Sources */,
-				53F100FD2045E08F00B29FAF /* SignInModels.swift in Sources */,
 				53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */,
 				533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */,
 				53423DDE1F740B6B00655A7F /* AddWineSummaryInteractor.swift in Sources */,
 				537614CB1E591887005AABF0 /* EditWinePresenter.swift in Sources */,
 				5327BC1B20618670006787E9 /* MWButton.swift in Sources */,
-				53F100FF2045E08F00B29FAF /* SignInInteractor.swift in Sources */,
 				53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */,
 				53112845205F02CB0094DC35 /* AddWineViewController.swift in Sources */,
 				537D8A4D21C067EF00A110FF /* FriendsScene.swift in Sources */,
@@ -1517,7 +1506,6 @@
 				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,
 				53B564D81F11952D00459BB8 /* SnapPhotoModels.swift in Sources */,
-				53F100FA2045E08F00B29FAF /* SignInPresenter.swift in Sources */,
 				53755D7821ADEA5B005D9954 /* WineWorker.swift in Sources */,
 				5327BC332062B362006787E9 /* WineDetailsModels.swift in Sources */,
 				53B61B80219B34C200A0258E /* main.swift in Sources */,
@@ -1535,6 +1523,7 @@
 				5327BC372062BB35006787E9 /* WineDetailsHeader.swift in Sources */,
 				53489600203CF10500B7547A /* AddWineSummaryWorker.swift in Sources */,
 				53423DDF1F740B6B00655A7F /* AddWineSummaryModels.swift in Sources */,
+				53013454225BE69B00A4B718 /* SignInByEmailViewController.swift in Sources */,
 				5321FBA21F0BF594001D2040 /* SelectVarietyInteractor.swift in Sources */,
 				53B564D91F11952D00459BB8 /* SnapPhotoPresenter.swift in Sources */,
 				5321FB991F0BEE27001D2040 /* SelectTypeViewController.swift in Sources */,
@@ -1596,7 +1585,6 @@
 				5311284C206010520094DC35 /* ButtonPrimaryGradient.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
-				53F100FC2045E08F00B29FAF /* SignInRouter.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,

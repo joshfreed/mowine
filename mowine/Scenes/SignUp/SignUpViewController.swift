@@ -86,6 +86,13 @@ class SignUpViewController: UIViewController, SignUpDisplayLogic {
         firstNameTextField.becomeFirstResponder()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        firstNameTextField.resignFirstResponder()
+        lastNameTextField.resignFirstResponder()
+        emailAddressTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let kbSize = keyboardSize.size

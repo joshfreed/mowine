@@ -39,7 +39,7 @@ class SignUpByEmailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    override required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init from coder")
     }
 
@@ -68,7 +68,7 @@ class SignUpByEmailViewController: UIViewController {
         rootViewController.view.jpfPinToSuperview()
         rootViewController.didMove(toParent: self)
     }
-    
+
     @objc func cancelSignUp() {
         dismiss(animated: true, completion: nil)
     }
