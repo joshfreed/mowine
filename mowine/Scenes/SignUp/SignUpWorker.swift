@@ -28,8 +28,15 @@ class SignUpWorker {
         self.session = session
     }
     
-    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
-        emailAuthService.signUp(emailAddress: emailAddress, password: password, completion: completion)               
+    func signUp(emailAddress: String, password: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
+        // TODO check password strength requirements?
+        
+        emailAuthService.signUp(emailAddress: emailAddress, password: password) { result in
+            switch result {
+            case .success: self.createUser(emailAddress: emailAddress, firstName: firstName, lastName: lastName, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
     }
 
     func createUser(emailAddress: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
