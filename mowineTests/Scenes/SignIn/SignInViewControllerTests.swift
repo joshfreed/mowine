@@ -13,13 +13,15 @@
 @testable import mowine
 import XCTest
 import Nimble
+import JFLib
 
 class SignInViewControllerTests: XCTestCase {
     // MARK: Subject under test
 
     var sut: SignInViewController!
     var window: UIWindow!
-    var router = MockSignInRouter()
+    let worker = MockSignInWorker()
+    let delegate = MockDelegate()
 
     // MARK: Test lifecycle
 
@@ -27,7 +29,8 @@ class SignInViewControllerTests: XCTestCase {
         super.setUp()
         window = UIWindow()
         setupSignInViewController()
-        sut.router = router
+        sut.worker = worker
+        sut.delegate = delegate
     }
 
     override func tearDown() {
@@ -50,10 +53,14 @@ class SignInViewControllerTests: XCTestCase {
 
     // MARK: Test doubles
 
-    class SignInBusinessLogicSpy: SignInBusinessLogic {
+    class MockSignInWorker: SignInWorker {
+        init() {
+            super.init(emailAuth: MockEmailAuthService())
+        }
+        
         var signInWasCalled = false
         
-        func signIn(request: SignIn.SignIn.Request) {
+        override func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
             signInWasCalled = true
         }
     }
@@ -62,64 +69,59 @@ class SignInViewControllerTests: XCTestCase {
         case somethingWentWrong
     }
     
-    class MockSignInRouter: NSObject, SignInRoutingLogic, SignInDataPassing {
-        var dataStore: SignInDataStore?
-        
-        var routedToSignedIn = false
-        func routeToSignedIn() {
-            routedToSignedIn = true
+    class MockDelegate: SignInViewControllerDelegate {
+        var signedInWasCalled = false
+        func signedIn(_ viewController: SignInViewController) {
+            signedInWasCalled = true
         }
     }
-
+    
     // MARK: Tests
 
     func testDisplaySignInResult_loginSuccess() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: true, error: nil)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
 
         // When
-        sut.displaySignInResult(viewModel: viewModel)
+        sut.displaySignInResult(isLoggedIn: true, error: nil)
 
         // Then
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beTrue())
-        expect(self.router.routedToSignedIn).to(beTrue())
+        expect(self.delegate.signedInWasCalled).to(beTrue())
     }
     
     func testDisplaySignInResult_loginFailed() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: nil)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
         
         // When
-        sut.displaySignInResult(viewModel: viewModel)
+        sut.displaySignInResult(isLoggedIn: false, error: nil)
         
         // Then
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beFalse())
         expect(self.sut.errorLabel.text).to(equal("Login failed. Please check your email and password and try again."))
-        expect(self.router.routedToSignedIn).to(beFalse())
+        expect(self.delegate.signedInWasCalled).to(beFalse())
     }
     
     func testDisplaySignInResult_withError() {
         // Given
-        let viewModel = SignIn.SignIn.ViewModel(isLoggedIn: false, error: MyFakeError.somethingWentWrong)
         loadView()
         sut.logInButton.displayLoading()
         sut.hideErrorLabel()
         
         // When
-        sut.displaySignInResult(viewModel: viewModel)
+        sut.displaySignInResult(isLoggedIn: false, error: MyFakeError.somethingWentWrong)
         
         // Then
         expect(self.sut.logInButton.isLoading).to(beFalse())
         expect(self.sut.errorLabel.isHidden).to(beFalse())
         expect(self.sut.errorLabel.text).to(equal("An error occurred while trying to log you in. Please try again in a few minutes."))
-        expect(self.router.routedToSignedIn).to(beFalse())
+        expect(self.delegate.signedInWasCalled).to(beFalse())
     }
 }

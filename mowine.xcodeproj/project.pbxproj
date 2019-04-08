@@ -155,8 +155,6 @@
 		53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
 		53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
-		53CA1E20206C2F2400043B3A /* SignUpInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CA1E1C206C2F2400043B3A /* SignUpInteractorTests.swift */; };
-		53CA1E21206C2F2400043B3A /* SignUpWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CA1E1D206C2F2400043B3A /* SignUpWorkerTests.swift */; };
 		53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */; };
 		53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */; };
 		53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */; };
@@ -387,8 +385,6 @@
 		53B6CB8A205ADD9300AE8EFB /* WineCellarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarInteractor.swift; sourceTree = "<group>"; };
 		53C3E66D1FF6E048003F6676 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		53CA1E1C206C2F2400043B3A /* SignUpInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInteractorTests.swift; sourceTree = "<group>"; };
-		53CA1E1D206C2F2400043B3A /* SignUpWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWorkerTests.swift; sourceTree = "<group>"; };
 		53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoInteractor.swift; sourceTree = "<group>"; };
 		53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoModels.swift; sourceTree = "<group>"; };
 		53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoPresenter.swift; sourceTree = "<group>"; };
@@ -814,7 +810,6 @@
 			isa = PBXGroup;
 			children = (
 				53F24868206D47C30046B031 /* FirstTime */,
-				53CA1E1A206C2F1000043B3A /* SignUp */,
 				536E85AA2050A30D004D5426 /* Friends */,
 				53A8D5E42046023D000AD7A3 /* SignIn */,
 				5321FB661F0BE5D9001D2040 /* AddWine */,
@@ -909,15 +904,6 @@
 				53D1E2F42059B3AB00A22476 /* WineCell.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		53CA1E1A206C2F1000043B3A /* SignUp */ = {
-			isa = PBXGroup;
-			children = (
-				53CA1E1C206C2F2400043B3A /* SignUpInteractorTests.swift */,
-				53CA1E1D206C2F2400043B3A /* SignUpWorkerTests.swift */,
-			);
-			path = SignUp;
 			sourceTree = "<group>";
 		};
 		53CDB50C1F3E263D00EF9CF6 /* ConfirmPhoto */ = {
@@ -1620,7 +1606,6 @@
 				53F24874206D4ADA0046B031 /* Facebook.swift in Sources */,
 				537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */,
 				53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */,
-				53CA1E20206C2F2400043B3A /* SignUpInteractorTests.swift in Sources */,
 				53F24872206D4A760046B031 /* MoreDoubles.swift in Sources */,
 				53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */,
 				536E85B02050A31F004D5426 /* FriendsInteractorTests.swift in Sources */,
@@ -1628,7 +1613,6 @@
 				53FFD6482051BE6700AC60EE /* Errors.swift in Sources */,
 				53B564CD1F11879500459BB8 /* SelectVarietyViewControllerTests.swift in Sources */,
 				536E85B42050A729004D5426 /* UserBuilder.swift in Sources */,
-				53CA1E21206C2F2400043B3A /* SignUpWorkerTests.swift in Sources */,
 				53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */,
 				5348961D203E0FA600B7547A /* Mocks.swift in Sources */,
 				53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */,

@@ -19,7 +19,7 @@ protocol SignInViewControllerDelegate: class {
 
 class SignInViewController: UIViewController {
     weak var delegate: SignInViewControllerDelegate?
-    private(set) var worker: SignInWorker!
+    var worker: SignInWorker!
 
     @IBOutlet weak var scrollView: UIScrollView!
     
