@@ -99,17 +99,16 @@ class SocialSignInWorker<T: SocialSignInProvider> {
         }
         
         let newUrlString = provider.getProfilePictureUrl(photoUrl.absoluteString)
+        let highResUrl = URL(string: newUrlString)
+
+        var _user = user
+        _user.profilePictureUrl = highResUrl
         
-        guard let highResUrl = URL(string: newUrlString) else {
-            completion(.success(user))
-            return
-        }
-        
-        session.setPhotoUrl(highResUrl) { result in
+        userRepository.save(user: _user) { result in
             switch result {
-            case .success: completion(.success(user))
+            case .success(let user): completion(.success(user))
             case .failure(let error): completion(.failure(error))
             }
-        }
+        }        
     }
 }
