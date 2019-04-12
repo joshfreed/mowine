@@ -257,26 +257,3 @@ class FakeRemoteWineDataStore: RemoteWineDataStore {
     }
 }
 */
-
-class FakeImageService: ImageServiceProtocol {
-    let images = NSCache<NSString, NSData>()
-
-    func storeImage(name: String, data: Data, completion: @escaping (Result<URL>) -> ()) {
-        let seconds = Double.random(in: 1.25..<5)
-        delay(seconds: seconds) {
-            self.images.setObject(data as NSData, forKey: name as NSString)
-            completion(.success(URL(string: "https://via.placeholder.com/400")!))
-        }
-    }
-
-    func fetchImage(name: String, completion: @escaping (Result<Data?>) -> ()) {
-        let seconds = Double.random(in: 0.25..<3.5)
-        delay(seconds: seconds) {
-            if let cachedImage = self.images.object(forKey: name as NSString) {
-                completion(.success(cachedImage as Data))
-            } else {
-                completion(.success(nil))
-            }
-        }
-    }
-}
