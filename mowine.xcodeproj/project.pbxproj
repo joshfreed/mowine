@@ -200,7 +200,6 @@
 		53FFD6482051BE6700AC60EE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFD6472051BE6700AC60EE /* Errors.swift */; };
 		75473028A2935552CC93E86A /* libPods-mowineUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4DB9139FFB63EF64B77A7F /* libPods-mowineUITests.a */; };
 		D55A3B9E94FC7F3E1014D0F4 /* Pods_mowine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86FB78043F03257BD82D891 /* Pods_mowine.framework */; };
-		E9AFC1A5C64B2AC62CBE67EF /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC6343B59712E8BC07C7D /* ImageService.swift */; };
 		E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */; };
 		E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */; };
 		E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */; };
@@ -443,7 +442,6 @@
 		B86FB78043F03257BD82D891 /* Pods_mowine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B877722BAF23F11826C61E1D /* Pods-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
-		E9AFC6343B59712E8BC07C7D /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		E9AFC6C7F3E6ABECDD25B916 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePictureWorker.swift; sourceTree = "<group>"; };
 		E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionService.swift; sourceTree = "<group>"; };
@@ -853,7 +851,6 @@
 				539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */,
 				53755D7721ADEA5B005D9954 /* WineWorker.swift */,
 				E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */,
-				E9AFC6343B59712E8BC07C7D /* ImageService.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -1631,7 +1628,6 @@
 				E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */,
 				E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */,
 				E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */,
-				E9AFC1A5C64B2AC62CBE67EF /* ImageService.swift in Sources */,
 				E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -191,13 +191,3 @@ class MockEmailAuthService: EmailAuthenticationService {
         }
     }
 }
-
-class MockImageService: ImageServiceProtocol {
-    func fetchImage(name: String, completion: @escaping (Result<Data?>) -> ()) {
-        
-    }
-
-    func storeImage(name: String, data: Data, completion: @escaping (Result<URL>) -> ()) {
-
-    }
-}
