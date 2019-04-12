@@ -7,13 +7,22 @@ import UIKit
 import SwiftyBeaver
 import JFLib
 
-class ProfilePictureWorker {
-    let imageService: ImageServiceProtocol
-    let session: Session
+protocol ProfilePictureWorkerProtocol {
+    func setProfilePicture(userId: UserId, image: UIImage, completion: @escaping (EmptyResult) -> ())
+    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ())
+}
 
-    init(imageService: ImageServiceProtocol, session: Session) {
-        self.imageService = imageService
+class ProfilePictureWorker<DataServiceType: DataServiceProtocol>: ProfilePictureWorkerProtocol
+where
+    DataServiceType.GetDataUrl == URL,
+    DataServiceType.PutDataUrl == String
+{
+    let session: Session
+    let profilePictureService: DataServiceType
+
+    init(session: Session, profilePictureService: DataServiceType) {
         self.session = session
+        self.profilePictureService = profilePictureService
     }
 
     func setProfilePicture(userId: UserId, image: UIImage, completion: @escaping (EmptyResult) -> ()) {
@@ -26,29 +35,19 @@ class ProfilePictureWorker {
             return
         }
 
-        imageService.storeImage(name: "\(userId)/profile.png", data: imageData) { result in
+        profilePictureService.putData(imageData, url: "\(userId)/profile.png") { result in
             switch result {
             case .success(let url): self.setPhotoUrl(url, completion: completion)
             case .failure(let error): completion(.failure(error))
             }
         }
-
-        /*
-        imageService.storeImage(name: "\(userId)/profile-thumb.png", data: thumbnailData) { result in 
-            switch result {
-            case .success(let url): self.setPhotoUrl(url, completion: completion)
-            case .failure(let error): SwiftyBeaver.error("\(error)")
-            }
-        }
-        */
     }
 
     private func setPhotoUrl(_ url: URL, completion: @escaping  (EmptyResult) -> ()) {
-        session.setPhotoUrl(url) { result in
-            switch result {
-            case .success: completion(.success)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
+        session.setPhotoUrl(url, completion: completion)
+    }
+    
+    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ()) {
+        profilePictureService.getData(url: url, completion: completion)
     }
 }

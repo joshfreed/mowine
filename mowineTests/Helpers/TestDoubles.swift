@@ -11,9 +11,21 @@ import Foundation
 import UIKit
 import JFLib
 
-class MockWineImageWorker: WineImageWorker {
-    init() {
-        super.init(imageService: MockImageService(), session: MockSession(), wineRepository: MockWineRepository())
+class MockWineImageWorker: WineImageWorkerProtocol {
+    func createImages(wineId: WineId, photo: UIImage?) -> Data? {
+        return nil
+    }
+    
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
+        
+    }
+    
+    func fetchThumbnail(for wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
+        
+    }
+    
+    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?>) -> ()) {
+        
     }
 }
 
@@ -50,4 +62,3 @@ class MockEditWineWorker: EditWineWorker {
         )
     }
 }
-

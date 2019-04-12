@@ -52,7 +52,7 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
         interactor.worker = MyAccountWorker(
             session: JFContainer.shared.session,
             userRepository: JFContainer.shared.userRepository,
-            imageService: try! JFContainer.shared.container.resolve()
+            profilePictureWorker: try! JFContainer.shared.container.resolve()
         )
         presenter.viewController = viewController
         router.viewController = viewController

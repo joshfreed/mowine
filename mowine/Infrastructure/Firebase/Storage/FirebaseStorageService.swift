@@ -50,3 +50,17 @@ class FirebaseStorageService {
         }
     }
 }
+
+extension FirebaseStorageService: DataReadService {
+    func getData(url: String, completion: @escaping (Result<Data?>) -> ()) {
+        SwiftyBeaver.debug("Getting data from firebase \(url)")
+        getData(path: url, completion: completion)
+    }
+}
+
+extension FirebaseStorageService: DataWriteService {
+    func putData(_ data: Data, url: String, completion: @escaping (Result<URL>) -> ()) {
+        SwiftyBeaver.debug("Putting data to firebase \(url)")
+        putData(data, path: url, completion: completion)
+    }
+}

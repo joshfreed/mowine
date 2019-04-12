@@ -15,12 +15,12 @@ import JFLib
 class EditWineWorker {
     let wineRepository: WineRepository
     let wineTypeRepository: WineTypeRepository
-    let imageWorker: WineImageWorker
+    let imageWorker: WineImageWorkerProtocol
     
     init(
         wineRepository: WineRepository,
         wineTypeRepository: WineTypeRepository,
-        imageWorker: WineImageWorker
+        imageWorker: WineImageWorkerProtocol
     ) {
         self.wineRepository = wineRepository
         self.wineTypeRepository = wineTypeRepository
