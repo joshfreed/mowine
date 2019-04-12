@@ -8,8 +8,8 @@ import SwiftyBeaver
 import JFLib
 
 protocol ProfilePictureWorkerProtocol {
-    func setProfilePicture(userId: UserId, image: UIImage, completion: @escaping (EmptyResult) -> ())
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ())
+    func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ())
+    func getProfilePicture(user: User, completion: @escaping (Result<Data?>) -> ())
 }
 
 class ProfilePictureWorker<DataServiceType: DataServiceProtocol>: ProfilePictureWorkerProtocol
@@ -19,35 +19,55 @@ where
 {
     let session: Session
     let profilePictureService: DataServiceType
+    let userRepository: UserRepository
 
-    init(session: Session, profilePictureService: DataServiceType) {
+    init(session: Session, profilePictureService: DataServiceType, userRepository: UserRepository) {
         self.session = session
         self.profilePictureService = profilePictureService
+        self.userRepository = userRepository
     }
 
-    func setProfilePicture(userId: UserId, image: UIImage, completion: @escaping (EmptyResult) -> ()) {
+    func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ()) {
         guard
             let downsizedImage = image.resize(to: CGSize(width: 400, height: 400)),
-            let imageData = downsizedImage.pngData(),
-            let thumbnailImage = image.resize(to: CGSize(width: 150, height: 150)),
-            let thumbnailData = thumbnailImage.pngData()
+            let imageData = downsizedImage.pngData()
         else {
             return
         }
-
-        profilePictureService.putData(imageData, url: "\(userId)/profile.png") { result in
+        
+        session.getCurrentUser { result in
             switch result {
-            case .success(let url): self.setPhotoUrl(url, completion: completion)
+            case .success(let user): self.uploadImage(imageData, user: user, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    private func uploadImage(_ imageData: Data, user: User, completion: @escaping (EmptyResult) -> ()) {
+        profilePictureService.putData(imageData, url: "\(user.id)/profile.png") { result in
+            switch result {
+            case .success(let url): self.setUserProfilePictureUrl(user: user, url: url, completion: completion)
             case .failure(let error): completion(.failure(error))
             }
         }
     }
 
-    private func setPhotoUrl(_ url: URL, completion: @escaping  (EmptyResult) -> ()) {
-        session.setPhotoUrl(url, completion: completion)
+    private func setUserProfilePictureUrl(user: User, url: URL, completion: @escaping (EmptyResult) -> ()) {
+        var _user = user
+        _user.profilePictureUrl = url
+        userRepository.save(user: _user) { result in
+            switch result {
+            case .success: completion(.success)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
     }
     
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ()) {
+    func getProfilePicture(user: User, completion: @escaping (Result<Data?>) -> ()) {
+        guard let url = user.profilePictureUrl else {
+            completion(.success(nil))
+            return
+        }
         profilePictureService.getData(url: url, completion: completion)
     }
 }

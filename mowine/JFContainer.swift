@@ -25,7 +25,7 @@ class JFContainer {
             container.register(.singleton) { MemoryWineRepository() as WineRepository }
         } else {
             container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
-            container.register(.singleton) { FirebaseSession() as Session }
+            container.register(.singleton) { FirebaseSession(userRepository: $0) as Session }
             container.register(.singleton) { FirestoreUserRepository() as UserRepository }
             container.register(.singleton) { FirestoreWineRepository() as WineRepository }
             container.register(.singleton) { FirebaseStorageService() }
@@ -42,7 +42,7 @@ class JFContainer {
         container.register(.singleton) { DataService<UrlSessionService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
         container.register(.singleton) { DataService<FirebaseStorageService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
         container.register(.singleton) {
-            ProfilePictureWorker<DataService<UrlSessionService, FirebaseStorageService>>(session: $0, profilePictureService: $1)
+            ProfilePictureWorker<DataService<UrlSessionService, FirebaseStorageService>>(session: $0, profilePictureService: $1, userRepository: $2)
         }
             .implements(ProfilePictureWorkerProtocol.self)
 

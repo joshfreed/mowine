@@ -118,6 +118,10 @@ class MockUserRepository: UserRepository {
 }
 
 class MockSession: Session {
+    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+        
+    }
+    
     private var _currentUser: User?
     var photoUrl: URL?
     
