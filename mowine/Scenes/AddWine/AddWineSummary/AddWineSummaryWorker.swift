@@ -11,10 +11,10 @@ import JFLib
 
 class AddWineSummaryWorker {
     let wineRepository: WineRepository
-    let imageWorker: WineImageWorker
+    let imageWorker: WineImageWorkerProtocol
     let session: Session
     
-    init(wineRepository: WineRepository, imageWorker: WineImageWorker, session: Session) {
+    init(wineRepository: WineRepository, imageWorker: WineImageWorkerProtocol, session: Session) {
         self.wineRepository = wineRepository
         self.imageWorker = imageWorker
         self.session = session

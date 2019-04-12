@@ -33,8 +33,20 @@ class JFContainer {
             container.register(.singleton) { ImageService(storage: $0) as ImageServiceProtocol }
         }
 
-        container.register(.singleton) { WineImageWorker(imageService: $0, session: $1, wineRepository: $2) }
-        container.register(.singleton) { ProfilePictureWorker(imageService: $0, session: $1) }
+        // Images
+        container.register(.singleton) { UrlSessionService() }
+        
+        container.register(.singleton) {
+            WineImageWorker<DataService<FirebaseStorageService, FirebaseStorageService>>(session: $0, wineRepository: $1, imageService: $2)
+        }
+            .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
+
+        container.register(.singleton) { DataService<UrlSessionService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
+        container.register(.singleton) { DataService<FirebaseStorageService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
+        container.register(.singleton) {
+            ProfilePictureWorker<DataService<UrlSessionService, FirebaseStorageService>>(session: $0, profilePictureService: $1)
+        }
+            .implements(ProfilePictureWorkerProtocol.self)
 
         // Auth
         container.register(.singleton) { FirebaseSocialAuth() }
@@ -50,7 +62,7 @@ class JFContainer {
     lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
     lazy var wineRepository: WineRepository = try! container.resolve()
-    lazy var wineImageWorker: WineImageWorker = try! container.resolve()
+    lazy var wineImageWorker: WineImageWorkerProtocol = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()
 }
 

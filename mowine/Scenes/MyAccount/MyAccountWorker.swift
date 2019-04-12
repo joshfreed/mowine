@@ -21,12 +21,12 @@ enum MyAccountWorkerError: Error {
 class MyAccountWorker {
     let session: Session
     let userRepository: UserRepository
-    let imageService: ImageServiceProtocol
+    let profilePictureWorker: ProfilePictureWorkerProtocol
     
-    init(session: Session, userRepository: UserRepository, imageService: ImageServiceProtocol) {
+    init(session: Session, userRepository: UserRepository, profilePictureWorker: ProfilePictureWorkerProtocol) {
         self.session = session
         self.userRepository = userRepository
-        self.imageService = imageService
+        self.profilePictureWorker = profilePictureWorker
     }
     
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
@@ -56,25 +56,9 @@ class MyAccountWorker {
             return
         }
 
-        SwiftyBeaver.verbose("Fetching profile picture: \(photoUrl)")
+        profilePictureWorker.getProfilePicture(url: photoUrl, completion: completion)        
+    }
 
-        getData(from: photoUrl) { (data, response, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(.failure(error))
-                } else if let data = data {
-                    completion(.success(data))
-                } else {
-                    completion(.failure(MoWineError.unknownError))
-                }
-            }
-        }
-    }
-    
-    private func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
     func signOut() {
         session.end()
     }

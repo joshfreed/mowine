@@ -27,7 +27,7 @@ class SignUpByEmailViewController: UIViewController {
     private var mainStoryboard: UIStoryboard!
     private var signInStoryboard: UIStoryboard!
     private var rootViewController: UINavigationController!
-    private var profilePictureWorker: ProfilePictureWorker!
+    private var profilePictureWorker: ProfilePictureWorkerProtocol!
     private var session: Session!
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -136,14 +136,16 @@ extension SignUpByEmailViewController: ConfirmPhotoViewControllerDelegate {
         loadingView.show()
         
         profilePictureWorker.setProfilePicture(userId: newUserId, image: photo) { result in
-            loadingView.hide()
-            
-            switch result {
-            case .success:
-                self.signUpComplete()
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-            }
+
+                loadingView.hide()
+
+                switch result {
+                case .success:
+                    self.signUpComplete()
+                case .failure(let error):
+                    SwiftyBeaver.error("\(error)")
+                }
+
         }
     }
 }

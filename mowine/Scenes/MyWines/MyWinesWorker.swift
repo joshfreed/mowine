@@ -18,12 +18,10 @@ import SwiftyBeaver
 class MyWinesWorker {
     let wineRepository: WineRepository
     let session: Session
-    let imageWorker: WineImageWorker
-    
-    init(wineRepository: WineRepository, session: Session, imageWorker: WineImageWorker) {
+
+    init(wineRepository: WineRepository, session: Session) {
         self.wineRepository = wineRepository
         self.session = session
-        self.imageWorker = imageWorker
     }
     
     func addListener(userId: UserId, listener: @escaping (WineEvent) -> ()) {
@@ -67,10 +65,6 @@ class MyWinesWorker {
                 completion(.failure(error))
             }
         }
-    }
-    
-    func fetchThumbnail(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
-        imageWorker.fetchThumbnail(for: wine, completion: completion)
     }
 }
 

@@ -41,9 +41,11 @@ class MyAccountInteractor: MyAccountBusinessLogic, MyAccountDataStore {
         }
 
         worker?.getProfilePicture() { result in
-            switch result {
-            case .success(let data): self.presenter?.presentProfilePicture(data: data)
-            case .failure(let error): self.presenter?.presentError(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data): self.presenter?.presentProfilePicture(data: data)
+                case .failure(let error): self.presenter?.presentError(error)
+                }
             }
         }
     }
