@@ -34,7 +34,7 @@ class MyAccountPresenter: MyAccountPresentationLogic {
         let viewModel = MyAccount.GetUser.ViewModel(
             fullName: response.user.fullName,
             emailAddress: response.user.emailAddress,
-            profilePicture: response.user.profilePicture ?? #imageLiteral(resourceName: "No Profile Picture")
+            profilePicture: #imageLiteral(resourceName: "No Profile Picture")
         )
         viewController?.displayUser(viewModel: viewModel)
     }

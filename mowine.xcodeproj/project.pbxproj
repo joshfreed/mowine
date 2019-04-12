@@ -203,6 +203,7 @@
 		E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */; };
 		E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */; };
 		E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */; };
+		E9AFC8EF909924DDD53094F9 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC15D86F3FD8314B3EAD6 /* UserTests.swift */; };
 		E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC6C7F3E6ABECDD25B916 /* UIImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -442,6 +443,7 @@
 		B86FB78043F03257BD82D891 /* Pods_mowine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B877722BAF23F11826C61E1D /* Pods-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mowineUITests/Pods-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		E9AFC15D86F3FD8314B3EAD6 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		E9AFC6C7F3E6ABECDD25B916 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePictureWorker.swift; sourceTree = "<group>"; };
 		E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionService.swift; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				5348961B203E0F9B00B7547A /* Helpers */,
 				538995AA1EE475BB00CF1330 /* Scenes */,
 				53F5AC0D1E2176090067AB62 /* Info.plist */,
+				E9AFC3D0FAA26CC92B3C262B /* Domain */,
 			);
 			path = mowineTests;
 			sourceTree = "<group>";
@@ -1153,6 +1156,14 @@
 				E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */,
 			);
 			path = URLSession;
+			sourceTree = "<group>";
+		};
+		E9AFC3D0FAA26CC92B3C262B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E9AFC15D86F3FD8314B3EAD6 /* UserTests.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1658,6 +1669,7 @@
 				53F100DA203F6C1E00B29FAF /* SelectTypeViewControllerTests.swift in Sources */,
 				53F2486E206D47EF0046B031 /* FirstTimeInteractorTests.swift in Sources */,
 				5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */,
+				E9AFC8EF909924DDD53094F9 /* UserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

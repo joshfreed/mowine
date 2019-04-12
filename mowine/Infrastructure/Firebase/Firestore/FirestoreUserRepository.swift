@@ -34,7 +34,9 @@ class FirestoreUserRepository: UserRepository {
     }
     
     func save(user: User, completion: @escaping (Result<User>) -> ()) {
-        fatalError("Not implemented")
+        let data = user.toFirestore()
+        db.collection("users").document(user.id.asString).setData(data, merge: true)
+        completion(.success(user))
     }
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {

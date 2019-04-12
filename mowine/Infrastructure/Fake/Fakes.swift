@@ -125,7 +125,7 @@ class FakeSession: Session {
         completion(.success)
     }
     
-    func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {
+    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
         if let currentUser = _currentUser {
             completion(.success(currentUser))
         }

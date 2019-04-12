@@ -101,6 +101,28 @@ class SignUpByEmailViewController: UIViewController {
         return vc
     }
 
+    func confirmProfilePicture(photo: UIImage) {
+        guard let newUserId = session.currentUserId else {
+            fatalError("NO USER AFTER SIGN UP")
+        }
+
+        let loadingView = LoadingView(parentView: rootViewController.view)
+        loadingView.show()
+
+        profilePictureWorker.setProfilePicture(image: photo) { result in
+
+            loadingView.hide()
+
+            switch result {
+            case .success:
+                self.signUpComplete()
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+            }
+
+        }
+    }
+
     func signUpComplete() {
         delegate?.signUpComplete()
         dismiss(animated: true, completion: nil)
@@ -128,24 +150,6 @@ extension SignUpByEmailViewController: ProfilePictureViewControllerDelegate {
 
 extension SignUpByEmailViewController: ConfirmPhotoViewControllerDelegate {
     func confirm(_ controller: ConfirmPhoto2ViewController, photo: UIImage) {
-        guard let newUserId = session.currentUserId else {
-            fatalError("NO USER AFTER SIGN UP SHIT")
-        }
-
-        let loadingView = LoadingView(parentView: rootViewController.view)
-        loadingView.show()
-        
-        profilePictureWorker.setProfilePicture(userId: newUserId, image: photo) { result in
-
-                loadingView.hide()
-
-                switch result {
-                case .success:
-                    self.signUpComplete()
-                case .failure(let error):
-                    SwiftyBeaver.error("\(error)")
-                }
-
-        }
+        confirmProfilePicture(photo: photo)
     }
 }

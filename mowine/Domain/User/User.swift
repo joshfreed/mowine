@@ -17,7 +17,7 @@ struct User: Equatable {
     var emailAddress: String
     var firstName: String?
     var lastName: String?
-    var profilePicture: UIImage?
+    var profilePictureUrl: URL?
     var friends: [Friendship] = []
     
     var fullName: String {
@@ -97,6 +97,9 @@ extension User {
         var user = User(id: userId, emailAddress: emailAddress)
         user.firstName = dataDict["firstName"] as? String
         user.lastName = dataDict["lastName"] as? String
+        if let photoUrlString = dataDict["photoURL"] as? String {
+            user.profilePictureUrl = URL(string: photoUrlString)
+        }
         return user
     }
     
@@ -109,6 +112,9 @@ extension User {
         }
         if let lastName = lastName {
             data["lastName"] = lastName
+        }
+        if let photoURL = profilePictureUrl {
+            data["photoURL"] = photoURL.absoluteString
         }
         return data
     }
