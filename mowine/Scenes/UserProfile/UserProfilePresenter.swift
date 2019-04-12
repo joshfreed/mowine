@@ -14,6 +14,7 @@ import UIKit
 
 protocol UserProfilePresentationLogic {
     func presentUserProfile(response: UserProfile.FetchUserProfile.Response)
+    func presentProfilePicture(data: Data?)
     func presentFriendStatus(response: UserProfile.FetchFriendStatus.Response)
     func presentFriended(response: UserProfile.AddFriend.Response)
     func presentUnfriended(response: UserProfile.Unfriend.Response)
@@ -43,6 +44,16 @@ class UserProfilePresenter: UserProfilePresentationLogic {
         } else {
             return "Wine Cellar"
         }
+    }
+    
+    func presentProfilePicture(data: Data?) {
+        var image: UIImage!
+        if let data = data {
+            image = UIImage(data: data)
+        } else {
+            image = #imageLiteral(resourceName: "No Profile Picture")
+        }
+        viewController?.displayProfilePicture(image: image)
     }
     
     // MARK: Fetch friend status

@@ -40,6 +40,16 @@ class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore {
                 print("\(error)")
             }
         }
+        
+        worker?.fetchProfilePicture(userId: userId) { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.presenter?.presentProfilePicture(data: data)
+                }                
+            case .failure(let error): print("\(error)")
+            }
+        }
     }
     
     private func presentUserProfile(user: User?) {
