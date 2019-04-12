@@ -14,6 +14,7 @@ import UIKit
 
 protocol UserProfileDisplayLogic: class {
     func displayUserProfile(viewModel: UserProfile.FetchUserProfile.ViewModel)
+    func displayProfilePicture(image: UIImage)
     func displayFriendStatus(viewModel: UserProfile.FetchFriendStatus.ViewModel)
     func displayFriended(viewModel: UserProfile.AddFriend.ViewModel)
     func displayUnfriended(viewModel: UserProfile.Unfriend.ViewModel)
@@ -83,6 +84,8 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
         segmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
         
         profilePictureImageView.image = #imageLiteral(resourceName: "No Profile Picture")
+        profilePictureImageView.clipsToBounds = true
+        profilePictureImageView.contentMode = .scaleAspectFill
         
         fetchUserProfile()
     }
@@ -96,6 +99,11 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.shadowImage = nil
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        profilePictureImageView.layer.cornerRadius = profilePictureImageView.frame.size.width / 2
     }
     
     @objc func segmentChanged() {
@@ -118,6 +126,10 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     func displayUserProfile(viewModel: UserProfile.FetchUserProfile.ViewModel) {
         fullNameLabel.text = viewModel.fullName
         segmentedControl.setTitle(viewModel.userCellarTitle, forSegmentAt: 1)
+    }
+    
+    func displayProfilePicture(image: UIImage) {
+        profilePictureImageView.image = image
     }
     
     // MARK: Fetch friend status

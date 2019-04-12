@@ -20,16 +20,33 @@ enum UserProfileWorkerError: Error {
 class UserProfileWorker {
     let userRepository: UserRepository
     let session: Session
+    let profilePictureWorker: ProfilePictureWorkerProtocol
     
-    init(userRepository: UserRepository, session: Session) {
+    init(userRepository: UserRepository, session: Session, profilePictureWorker: ProfilePictureWorkerProtocol) {
         self.userRepository = userRepository
         self.session = session
+        self.profilePictureWorker = profilePictureWorker
     }
     
     func fetchUser(userId: UserId, completion: @escaping (Result<User?>) -> ()) {
         userRepository.getUserById(userId) { result in
             switch result {
             case .success(let user): completion(.success(user))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchProfilePicture(userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
+        userRepository.getUserById(userId) { result in
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
+                } else {
+                    // not really a success but whatever
+                    completion(.success(nil))
+                }
             case .failure(let error): completion(.failure(error))
             }
         }
