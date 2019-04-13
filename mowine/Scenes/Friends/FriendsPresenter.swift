@@ -75,6 +75,8 @@ class FriendsPresenter: FriendsPresentationLogic {
     // MARK: Helpers
     
     private func makeDisplayedUser(from user: User) -> Friends.DisplayedUser {
-        return Friends.DisplayedUser(userId: String(describing: user.id), fullName: user.fullName)
+        var df = Friends.DisplayedUser(userId: String(describing: user.id), fullName: user.fullName)
+        df.profilePictureUrl = user.profilePictureUrl
+        return df
     }
 }

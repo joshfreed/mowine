@@ -10,6 +10,7 @@ import JFLib
 protocol ProfilePictureWorkerProtocol {
     func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ())
     func getProfilePicture(user: User, completion: @escaping (Result<Data?>) -> ())
+    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ())
 }
 
 class ProfilePictureWorker<DataServiceType: DataServiceProtocol>: ProfilePictureWorkerProtocol
@@ -68,6 +69,10 @@ where
             completion(.success(nil))
             return
         }
+        profilePictureService.getData(url: url, completion: completion)
+    }
+    
+    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ()) {
         profilePictureService.getData(url: url, completion: completion)
     }
 }

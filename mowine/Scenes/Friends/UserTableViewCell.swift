@@ -10,6 +10,7 @@ import UIKit
 
 protocol UserTableViewCellDelegate: class {
     func addFriend(cell: UserTableViewCell, userId: String)
+    func getProfilePicture(_ user: Friends.DisplayedUser, completion: @escaping (UIImage) -> ())
 }
 
 class UserTableViewCell: UITableViewCell {
@@ -24,12 +25,14 @@ class UserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        
+        profilePictureImageView.clipsToBounds = true
+        profilePictureImageView.contentMode = .scaleAspectFill
+        profilePictureImageView.layer.cornerRadius = self.profilePictureImageView.frame.size.width / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configure(user: Friends.DisplayedUser) {
@@ -37,6 +40,10 @@ class UserTableViewCell: UITableViewCell {
         profilePictureImageView.image = user.profilePicture
         fullNameLabel.text = user.fullName
         addFriendButton.isHidden = user.isFriend
+        
+        delegate?.getProfilePicture(user) {
+            self.profilePictureImageView.image = $0
+        }
     }
     
     @IBAction func tappedAddFriend(_ sender: UIButton) {
