@@ -24,6 +24,7 @@ class WineDetailsInteractor: WineDetailsBusinessLogic, WineDetailsDataStore {
     var presenter: WineDetailsPresentationLogic?
     var worker: WineDetailsWorker?
     var wine: Wine!
+    var wineImageWorker: WineImageWorkerProtocol?
 
     // MARK: Fetch wine
 
@@ -33,5 +34,12 @@ class WineDetailsInteractor: WineDetailsBusinessLogic, WineDetailsDataStore {
 
         let response = WineDetails.FetchWine.Response(wine: wine)
         presenter?.presentWine(response: response)
+        
+        wineImageWorker?.fetchPhoto(wine: wine) { result in
+            switch result {
+            case .success(let data): self.presenter?.presentWineImage(data: data)
+            case .failure: break
+            }
+        }
     }
 }

@@ -14,6 +14,7 @@ import UIKit
 
 protocol WineDetailsPresentationLogic {
     func presentWine(response: WineDetails.FetchWine.Response)
+    func presentWineImage(data: Data?)
 }
 
 class WineDetailsPresenter: WineDetailsPresentationLogic {
@@ -36,5 +37,15 @@ class WineDetailsPresenter: WineDetailsPresentationLogic {
         )
         let viewModel = WineDetails.FetchWine.ViewModel(wine: wineViewModel)
         viewController?.displayWine(viewModel: viewModel)
+    }
+    
+    func presentWineImage(data: Data?) {
+        var photo: UIImage?
+        
+        if let data = data {
+            photo = UIImage(data: data)
+        }
+        
+        viewController?.displayWineImage(photo)
     }
 }

@@ -16,12 +16,15 @@ import JFLib
 
 protocol WineDetailsDisplayLogic: class {
     func displayWine(viewModel: WineDetails.FetchWine.ViewModel)
+    func displayWineImage(_ image: UIImage?)
 }
 
 class WineDetailsViewController: UITableViewController, WineDetailsDisplayLogic {
     var interactor: WineDetailsBusinessLogic?
     var router: (NSObjectProtocol & WineDetailsRoutingLogic & WineDetailsDataPassing)?
 
+    let headerView = WineDetailsHeader()
+    
     @IBOutlet weak var varietyCell: UITableViewCell!
     @IBOutlet weak var typeCell: UITableViewCell!
     @IBOutlet weak var priceCell: UITableViewCell!
@@ -50,6 +53,7 @@ class WineDetailsViewController: UITableViewController, WineDetailsDisplayLogic 
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
+        interactor.wineImageWorker = try! JFContainer.shared.container.resolve()
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
@@ -97,7 +101,6 @@ class WineDetailsViewController: UITableViewController, WineDetailsDisplayLogic 
     }
 
     func displayWine(viewModel: WineDetails.FetchWine.ViewModel) {
-        let headerView = WineDetailsHeader()
         headerView.configure(wine: viewModel.wine)
         tableView.setAndLayoutTableHeaderView(header: headerView)
         
@@ -105,5 +108,9 @@ class WineDetailsViewController: UITableViewController, WineDetailsDisplayLogic 
         varietyCell.detailTextLabel?.text = viewModel.wine.variety
         priceCell.detailTextLabel?.text = viewModel.wine.price
         whereToBuyLabel.text = viewModel.wine.whereToBuy
+    }
+    
+    func displayWineImage(_ image: UIImage?) {
+        headerView.setWineImage(image)
     }
 }
