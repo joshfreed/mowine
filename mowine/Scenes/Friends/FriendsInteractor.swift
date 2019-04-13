@@ -19,6 +19,7 @@ protocol FriendsBusinessLogic {
     func cancelSearch()
     func addFriend(request: Friends.AddFriend.Request)
     func selectUser(request: Friends.SelectUser.Request)
+    func getProfilePicture(url: URL?, completion: @escaping (UIImage) -> ())
 }
 
 protocol FriendsDataStore {
@@ -28,6 +29,7 @@ protocol FriendsDataStore {
 class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     var presenter: FriendsPresentationLogic?
     var worker: FriendsWorker?
+    var profilePictureWorker: ProfilePictureWorkerProtocol!
     var selectedUserId: UserId?
 
     enum DisplayMode {
@@ -42,8 +44,9 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     var debounceTime = 0.25
     var searches: [UUID] = []
 
-    init(worker: FriendsWorker) {
+    init(worker: FriendsWorker, profilePictureWorker: ProfilePictureWorkerProtocol) {
         self.worker = worker
+        self.profilePictureWorker = profilePictureWorker
         NotificationCenter.default.addObserver(self, selector: #selector(friendWasAdded), name: .friendAdded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(friendWasRemoved), name: .friendRemoved, object: nil)
     }
@@ -190,5 +193,18 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
         
         let response = Friends.SelectUser.Response()
         presenter?.presentSelectedUser(response: response)
+    }
+    
+    // MARK: Get profile picture
+    
+    func getProfilePicture(url: URL?, completion: @escaping (UIImage) -> ()) {
+        guard let url = url else { return }
+        profilePictureWorker.getProfilePicture(url: url) { result in
+            if case let .success(d) = result, let data = d, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+        }
     }
 }

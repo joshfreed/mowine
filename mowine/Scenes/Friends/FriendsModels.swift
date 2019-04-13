@@ -16,6 +16,7 @@ enum Friends {
     struct DisplayedUser {
         let userId: String
         var fullName: String
+        var profilePictureUrl: URL?
         var profilePicture: UIImage
         var isFriend: Bool = false
         

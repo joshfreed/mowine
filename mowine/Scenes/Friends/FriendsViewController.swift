@@ -251,6 +251,10 @@ extension FriendsViewController: UserTableViewCellDelegate {
         friendCells[userId] = cell
         addFriend(userId: userId)
     }
+    
+    func getProfilePicture(_ user: Friends.DisplayedUser, completion: @escaping (UIImage) -> ()) {
+        interactor?.getProfilePicture(url: user.profilePictureUrl, completion: completion)
+    }
 }
 
 

@@ -17,7 +17,7 @@ class FriendsScene {
                 controller.interactor = try! container.resolve()
                 controller.router = try! container.resolve()
             }
-        container.register { FriendsInteractor(worker: $0) }
+        container.register { FriendsInteractor(worker: $0, profilePictureWorker: $1) }
             .implements(FriendsBusinessLogic.self, FriendsDataStore.self)
             .resolvingProperties { container, obj in
                 obj.presenter = try! container.resolve()
