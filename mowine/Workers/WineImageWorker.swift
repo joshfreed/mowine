@@ -13,6 +13,7 @@ import SwiftyBeaver
 protocol WineImageWorkerProtocol {
     func createImages(wineId: WineId, photo: UIImage?) -> Data?
     func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ())
+    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?>) -> ())
 }
 
 class WineImageWorker<DataServiceType: DataServiceProtocol>: WineImageWorkerProtocol
@@ -57,6 +58,12 @@ where
         guard let userId = session.currentUserId else { return }
         let name = "\(userId)/\(wineId).png"
         SwiftyBeaver.info("Requested full res wine image. WineId: \(wineId)")
+        imageService.getData(url: name, completion: completion)
+    }
+    
+    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
+        let name = "\(wine.userId)/\(wine.id).png"
+        SwiftyBeaver.info("Requested full res wine image. WineId: \(wine.id)")
         imageService.getData(url: name, completion: completion)
     }
 }

@@ -18,7 +18,7 @@ class WineDetailsHeader: NibDesignable {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        fromNib()   // 5.
+        fromNib()
     }
     
     init() {
@@ -27,9 +27,15 @@ class WineDetailsHeader: NibDesignable {
     }
     
     func configure(wine: WineDetails.WineViewModel) {
-        nameLabel.text = wine.name
-        
+        nameLabel.text = wine.name        
         ratingView.rating = wine.rating
         ratingView.settings.totalStars = Int(wine.rating)
+    }
+    
+    func setWineImage(_ image: UIImage?) {
+        pictureImageView.image = image
+        pictureImageView.clipsToBounds = true
+        pictureImageView.contentMode = .scaleAspectFill
+        pictureImageView.layer.cornerRadius = pictureImageView.frame.size.width / 2
     }
 }
