@@ -92,7 +92,7 @@ class SignUpByEmailViewController: UIViewController {
         return vc
     }
 
-    func makePhotoConfirmationViewController(photo: UIImage) -> ConfirmPhoto2ViewController {
+    func makePhotoConfirmationViewController() -> ConfirmPhoto2ViewController {
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "ConfirmPhoto2ViewController") as! ConfirmPhoto2ViewController
         vc.delegate = self
         vc.navigationItem.leftBarButtonItem = nil
@@ -142,7 +142,7 @@ extension SignUpByEmailViewController: SignUpViewControllerDelegate {
 
 extension SignUpByEmailViewController: ProfilePictureViewControllerDelegate {
     func profilePicture(_ controller: ProfilePictureViewController, picked: UIImage) {
-        let vc = makePhotoConfirmationViewController(photo: picked)
+        let vc = makePhotoConfirmationViewController()
         rootViewController.pushViewController(vc, animated: true)
         vc.photo = picked
     }
