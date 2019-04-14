@@ -65,6 +65,40 @@ class FirestoreUserRepository: UserRepository {
         }
     }
     
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> ListenerRegistration {
+        let listener = db.collection("users").document(id.asString).addSnapshotListener { documentSnapshot, error in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                SwiftyBeaver.warning("Document does not exist")
+                completion(.success(nil))
+                return
+            }
+            
+            guard let data = document.data() else {
+                SwiftyBeaver.warning("Document was empty")
+                completion(.success(nil))
+                return
+            }
+            
+            print("Current data: \(data)")
+            
+            guard let user = User.fromFirestore(document) else {
+                SwiftyBeaver.warning("Couldn't build user from document")
+                completion(.success(nil))
+                return
+            }
+            
+            completion(.success(user))
+        }
+        
+        return listener
+    }
+    
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
         let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
         

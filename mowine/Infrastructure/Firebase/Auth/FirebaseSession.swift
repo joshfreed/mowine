@@ -10,11 +10,11 @@ import Foundation
 import JFLib
 import FirebaseAuth
 import SwiftyBeaver
+import FirebaseFirestore
 
 class FirebaseSession: Session {
     let userRepository: UserRepository
-    private var currentUser: User?
-
+   
     var isLoggedIn: Bool {
         return Auth.auth().currentUser != nil
     }
@@ -25,9 +25,37 @@ class FirebaseSession: Session {
         }
         return UserId(string: uid)
     }
+    
+    private var currentUser: User?
+    private var listener: ListenerRegistration?
 
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                self.listenForUserUpdates()
+            }
+        }
+    }
+    
+    private func listenForUserUpdates() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let currentUserId = UserId(string: uid)
+        
+        SwiftyBeaver.info("Listening for changes to User \(currentUserId)")
+        
+        listener?.remove()
+        listener = nil
+        
+        listener = (userRepository as! FirestoreUserRepository).getUserByIdAndListenForUpdates(id: currentUserId) { result in
+            if case let .success(user) = result {
+                self.currentUser = user
+            }
+        }
     }
 
     func end() {
@@ -68,29 +96,9 @@ class FirebaseSession: Session {
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
         if let currentUser = currentUser {
             completion(.success(currentUser))
-            return
-        }
-
-        fetchUserModel(completion: completion)
-    }
-
-    private func fetchUserModel(completion: @escaping (Result<User>) -> ()) {
-        guard let currentUserId = currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    self.currentUser = user
-                    completion(.success(user))
-                } else {
-                    fatalError("No user found matching the id of the current user \(currentUserId)")
-                }
-            case .failure(let error): completion(.failure(error))
-            }
+            
+        } else {
+            completion(.failure(UserRepositoryError.userNotFound))
         }
     }
 }
