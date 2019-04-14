@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable
 class ButtonPrimaryGradient: UIButton {
+    let gradient: CAGradientLayer = CAGradientLayer()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
@@ -23,6 +25,13 @@ class ButtonPrimaryGradient: UIButton {
         applyGradient()
         tintColor = .white
         layer.cornerRadius = 5
+        layer.masksToBounds = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        gradient.frame = self.bounds
     }
     
     func applyGradient() {
@@ -34,12 +43,8 @@ class ButtonPrimaryGradient: UIButton {
     }
     
     func applyGradient(_ colours: [UIColor], locations: [NSNumber]?) -> Void {
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = self.bounds
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
-        gradient.cornerRadius = 5
-        gradient.masksToBounds = true
-        layer.insertSublayer(gradient, at: 0)
+        layer.addSublayer(gradient)
     }
 }
