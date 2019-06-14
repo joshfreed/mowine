@@ -412,7 +412,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="673"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="437.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -437,6 +437,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="515.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no wines in the cellar." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slW-s3-tk9">
+                                <rect key="frame" x="36" y="44" width="342" height="437.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKB-2R-FSe">
                                 <rect key="frame" x="0.0" y="44" width="414" height="437.5"/>
                                 <subviews>
@@ -470,15 +476,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="slW-s3-tk9" firstAttribute="leading" secondItem="cki-Ja-uam" secondAttribute="leadingMargin" constant="16" id="MEH-kB-y0r"/>
                             <constraint firstItem="YBT-dM-G1l" firstAttribute="width" secondItem="cki-Ja-uam" secondAttribute="width" id="N2A-Po-xYh"/>
                             <constraint firstItem="vTt-aR-OBL" firstAttribute="top" secondItem="ZKB-2R-FSe" secondAttribute="bottom" id="e9I-z1-onD"/>
+                            <constraint firstItem="slW-s3-tk9" firstAttribute="top" secondItem="NJO-1M-uO5" secondAttribute="bottom" id="liZ-XG-5rU"/>
                             <constraint firstAttribute="trailing" secondItem="ZKB-2R-FSe" secondAttribute="trailing" id="nBo-mw-nq7"/>
                             <constraint firstItem="ZKB-2R-FSe" firstAttribute="top" secondItem="NJO-1M-uO5" secondAttribute="bottom" id="nvc-i3-OOp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="slW-s3-tk9" secondAttribute="trailing" constant="16" id="vCz-50-LaG"/>
                             <constraint firstItem="ZKB-2R-FSe" firstAttribute="leading" secondItem="cki-Ja-uam" secondAttribute="leading" id="vTN-lB-5Jj"/>
+                            <constraint firstItem="vTt-aR-OBL" firstAttribute="top" secondItem="slW-s3-tk9" secondAttribute="bottom" id="zde-WV-oY2"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="UnB-nP-5Ib" id="J7L-Sb-OJi"/>
+                        <outlet property="emptyCellarLabel" destination="slW-s3-tk9" id="7di-SU-ybB"/>
                         <segue destination="he4-Sp-W3w" kind="show" identifier="WineCellarList" id="2AF-44-hba"/>
                     </connections>
                 </viewController>
@@ -888,6 +899,6 @@
         <image name="No Profile Picture" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vZ4-j4-jqs"/>
+        <segue reference="vw4-Zm-TUT"/>
     </inferredMetricsTieBreakers>
 </document>

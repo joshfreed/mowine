@@ -16,17 +16,35 @@ import JFLib
 class WineCellarWorker {
     let wineTypeRepository: WineTypeRepository
     let userRepository: UserRepository
+    let wineRepository: WineRepository
     
-    init(wineTypeRepository: WineTypeRepository, userRepository: UserRepository) {
+    init(wineTypeRepository: WineTypeRepository, userRepository: UserRepository, wineRepository: WineRepository) {
         self.wineTypeRepository = wineTypeRepository
         self.userRepository = userRepository
+        self.wineRepository = wineRepository
     }
     
     func getUser(by userId: UserId, completion: @escaping (Result<User?>) -> ()) {
         userRepository.getUserById(userId, completion: completion)
     }
     
-    func getWineTypes(completion: @escaping (Result<[WineType]>) -> ()) {
-        wineTypeRepository.getAll(completion: completion)
+    func getWineTypes(for userId: UserId, completion: @escaping (Result<[WineType]>) -> ()) {
+        wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: userId) { result in
+            switch result {
+            case .success(let wineTypeNames): self.convertToWineTypes(wineTypeNames, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    private func convertToWineTypes(_ wineTypeNames: [String], completion: @escaping (Result<[WineType]>) -> ()) {
+        wineTypeRepository.getAll { result in
+            switch result {
+            case .success(let allWineTypes):
+                let userWineTypes = allWineTypes.filter { wineTypeNames.contains($0.name) }
+                completion(.success(userWineTypes))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
     var router: (NSObjectProtocol & WineCellarRoutingLogic & WineCellarDataPassing)?
     
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var emptyCellarLabel: UILabel!
     
     // MARK: Object lifecycle
 
@@ -47,7 +48,8 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
         interactor.presenter = presenter
         interactor.worker = WineCellarWorker(
             wineTypeRepository: JFContainer.shared.wineTypeRepository,
-            userRepository: JFContainer.shared.userRepository
+            userRepository: JFContainer.shared.userRepository,
+            wineRepository: JFContainer.shared.wineRepository
         )
         presenter.viewController = viewController
         router.viewController = viewController
@@ -83,6 +85,8 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
 
     func displayWineTypes(viewModel: WineCellar.GetWineTypes.ViewModel) {
         let types = viewModel.types
+        
+        emptyCellarLabel.isHidden = !types.isEmpty
         
         var lastView: UIView?
         types.forEach {

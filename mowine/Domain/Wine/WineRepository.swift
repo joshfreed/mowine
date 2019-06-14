@@ -17,6 +17,7 @@ protocol WineRepository {
     func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ())
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String]>) -> ())
 }
 
 enum WineRepositoryError: Error {
