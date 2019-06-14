@@ -32,9 +32,15 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate {
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         current = mainStoryboard.instantiateViewController(withIdentifier: "SplashViewController")
         show(viewController: current!)
+
+        #if DEBUG
+        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(false)
+        #else
+        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(true)
+        #endif
         
         FirebaseApp.configure()
-
+        
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
         if Auth.auth().currentUser == nil {
