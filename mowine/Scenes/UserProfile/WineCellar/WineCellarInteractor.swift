@@ -45,7 +45,7 @@ class WineCellarInteractor: WineCellarBusinessLogic, WineCellarDataStore {
     }
     
     private func getWineTypes2(request: WineCellar.GetWineTypes.Request) {
-        worker?.getWineTypes() { result in
+        worker?.getWineTypes(for: userId) { result in
             switch result {
             case .success(let types):
                 self.types = types

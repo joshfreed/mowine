@@ -118,6 +118,27 @@ class FirestoreWineRepository: WineRepository {
             }
         }
     }
+    
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String]>) -> ()) {
+        let query = db.collection("wines").whereField("userId", isEqualTo: userId.asString)
+        
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+            } else {
+                if let documents = querySnapshot?.documents {
+                    let wineTypeNames: [String] = documents.compactMap {
+                        let data = $0.data()
+                        return data["type"] as? String
+                    }
+                    completion(.success(wineTypeNames))
+                } else {
+                    completion(.success([]))
+                }
+            }
+        }
+    }
 }
 
 extension Wine {

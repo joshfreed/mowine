@@ -52,4 +52,8 @@ class MemoryWineRepository: WineRepository {
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
         
     }
+    
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String]>) -> ()) {
+        
+    }
 }
