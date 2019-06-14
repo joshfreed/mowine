@@ -24,10 +24,16 @@ class WineListViewController: UITableViewController {
 
     var wines: [WineListViewModel] = [] {
         didSet {
-            SwiftyBeaver.verbose("didSet wines")
+            if wines.isEmpty {
+                showEmptyMessage(emptyMessage)
+            } else {
+                hideEmptyMessage()
+            }
             tableView.reloadData()
         }
     }
+
+    var emptyMessage: String = "This is an empty list."
     
     override func viewDidLoad() {
         super.viewDidLoad()

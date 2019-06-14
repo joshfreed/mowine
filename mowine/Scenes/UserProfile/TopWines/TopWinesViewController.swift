@@ -65,6 +65,7 @@ class TopWinesViewController: UIViewController, TopWinesDisplayLogic {
             wineListViewController = vc
             wineListViewController.delegate = self
             wineListViewController.thumbnailFetcher = try! JFContainer.shared.container.resolve()
+            wineListViewController.emptyMessage = "This user hasn't rated any wines yet."
         }
     }
 
