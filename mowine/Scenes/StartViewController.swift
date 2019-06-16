@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 
-class StartViewController: UIViewController, FirstTimeViewControllerDelegate {
+class StartViewController: UIViewController, FirstTimeViewControllerDelegate, TabbedViewCoordinator {
     private var mainStoryboard: UIStoryboard!
     private var current: UIViewController?
     
@@ -51,8 +51,9 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate {
     }
     
     func showSignedInView() {
-        let destinationVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-        show(viewController: destinationVC)
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
+        vc.coordinator = self
+        show(viewController: vc)
     }
     
     func showSignedOutView() {
