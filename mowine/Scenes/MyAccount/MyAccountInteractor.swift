@@ -14,14 +14,10 @@ import UIKit
 
 protocol MyAccountBusinessLogic {
     func getUser(request: MyAccount.GetUser.Request)
-    func signOut(request: MyAccount.SignOut.Request)
+    func signOut()
 }
 
-protocol MyAccountDataStore {
-    //var name: String { get set }
-}
-
-class MyAccountInteractor: MyAccountBusinessLogic, MyAccountDataStore {
+class MyAccountInteractor: MyAccountBusinessLogic {
     var presenter: MyAccountPresentationLogic?
     var worker: MyAccountWorker?
 
@@ -52,10 +48,7 @@ class MyAccountInteractor: MyAccountBusinessLogic, MyAccountDataStore {
     
     // MARK: Sign Out
     
-    func signOut(request: MyAccount.SignOut.Request) {
+    func signOut() {
         worker?.signOut()
-        
-        let response = MyAccount.SignOut.Response()
-        presenter?.presentSignedOut(response: response)
     }
 }

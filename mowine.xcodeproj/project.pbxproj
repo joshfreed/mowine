@@ -132,7 +132,6 @@
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
 		53A8D5F6204611A1000AD7A3 /* MyAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */; };
 		53A8D5F7204611A1000AD7A3 /* MyAccountWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F1204611A1000AD7A3 /* MyAccountWorker.swift */; };
-		53A8D5F8204611A1000AD7A3 /* MyAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F2204611A1000AD7A3 /* MyAccountRouter.swift */; };
 		53A8D5F9204611A1000AD7A3 /* MyAccountModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F3204611A1000AD7A3 /* MyAccountModels.swift */; };
 		53A8D5FA204611A1000AD7A3 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F4204611A1000AD7A3 /* MyAccountViewController.swift */; };
 		53A8D5FB204611A1000AD7A3 /* MyAccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5F5204611A1000AD7A3 /* MyAccountInteractor.swift */; };
@@ -367,7 +366,6 @@
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
 		53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountPresenter.swift; sourceTree = "<group>"; };
 		53A8D5F1204611A1000AD7A3 /* MyAccountWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountWorker.swift; sourceTree = "<group>"; };
-		53A8D5F2204611A1000AD7A3 /* MyAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountRouter.swift; sourceTree = "<group>"; };
 		53A8D5F3204611A1000AD7A3 /* MyAccountModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountModels.swift; sourceTree = "<group>"; };
 		53A8D5F4204611A1000AD7A3 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		53A8D5F5204611A1000AD7A3 /* MyAccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountInteractor.swift; sourceTree = "<group>"; };
@@ -847,6 +845,13 @@
 			path = FirstTime;
 			sourceTree = "<group>";
 		};
+		539717C022B6794A00EFA97F /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
 		539C4D8A21ACA99500B0F8E0 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,9 +873,9 @@
 		53A8D5EF20461181000AD7A3 /* MyAccount */ = {
 			isa = PBXGroup;
 			children = (
+				539717C022B6794A00EFA97F /* EditProfile */,
 				53A8D5F0204611A1000AD7A3 /* MyAccountPresenter.swift */,
 				53A8D5F1204611A1000AD7A3 /* MyAccountWorker.swift */,
-				53A8D5F2204611A1000AD7A3 /* MyAccountRouter.swift */,
 				53A8D5F3204611A1000AD7A3 /* MyAccountModels.swift */,
 				53A8D5F4204611A1000AD7A3 /* MyAccountViewController.swift */,
 				53A8D5F5204611A1000AD7A3 /* MyAccountInteractor.swift */,
@@ -1530,7 +1535,6 @@
 				53ED1F8B204F323F00C129BC /* UserRepository.swift in Sources */,
 				535F66942062FEE20006B26A /* SignUpViewController.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
-				53A8D5F8204611A1000AD7A3 /* MyAccountRouter.swift in Sources */,
 				53A8D5F7204611A1000AD7A3 /* MyAccountWorker.swift in Sources */,
 				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
 				5321FBA41F0BF594001D2040 /* SelectVarietyPresenter.swift in Sources */,

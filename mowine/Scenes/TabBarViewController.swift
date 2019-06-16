@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol TabbedViewCoordinator: class {
+    func showSignedOutView()
+}
+
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
+    weak var coordinator: TabbedViewCoordinator?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let vcs = viewControllers,
             selectedIndex >= 0 && selectedIndex < vcs.count,
@@ -22,7 +28,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self        
+        delegate = self
+        
+        if let vc = viewControllers?[3] as? MyAccountViewController {
+            vc.delegate = self
+        }
     }
 
     // MARK: - UITabBarControllerDelegate
@@ -37,5 +47,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         }
 
         return true
+    }
+}
+
+extension TabBarViewController: MyAccountViewControllerDelegate {
+    func didSignOut() {
+        coordinator?.showSignedOutView()
     }
 }

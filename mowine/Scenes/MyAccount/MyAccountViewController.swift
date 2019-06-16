@@ -15,13 +15,16 @@ import UIKit
 protocol MyAccountDisplayLogic: class {
     func displayUser(viewModel: MyAccount.GetUser.ViewModel)
     func displayErrorGettingUser()
-    func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel)
     func displayProfilePicture(image: UIImage?)
+}
+
+protocol MyAccountViewControllerDelegate: class {
+    func didSignOut()
 }
 
 class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     var interactor: MyAccountBusinessLogic?
-    var router: (NSObjectProtocol & MyAccountRoutingLogic & MyAccountDataPassing)?
+    weak var delegate: MyAccountViewControllerDelegate?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -45,9 +48,7 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
         let viewController = self
         let interactor = MyAccountInteractor()
         let presenter = MyAccountPresenter()
-        let router = MyAccountRouter()
         viewController.interactor = interactor
-        viewController.router = router
         interactor.presenter = presenter
         interactor.worker = MyAccountWorker(
             session: JFContainer.shared.session,
@@ -55,26 +56,13 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
             profilePictureWorker: try! JFContainer.shared.container.resolve()
         )
         presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
     }
 
     // MARK: View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         profilePictureImageView.image = #imageLiteral(resourceName: "No Profile Picture")
         profilePictureImageView.clipsToBounds = true
         profilePictureImageView.contentMode = .scaleAspectFill
@@ -123,14 +111,10 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     }
     
     func signOut() {
-        let request = MyAccount.SignOut.Request()
-        interactor?.signOut(request: request)
+        interactor?.signOut()
+        delegate?.didSignOut()
     }
     
-    func displaySignedOut(viewModel: MyAccount.SignOut.ViewModel) {
-        router?.routeToSignedOut()
-    }
-
     // MARK: Display profile picture
 
     func displayProfilePicture(image: UIImage?) {

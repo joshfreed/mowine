@@ -96,7 +96,6 @@ class FirebaseSession: Session {
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
         if let currentUser = currentUser {
             completion(.success(currentUser))
-            
         } else {
             completion(.failure(UserRepositoryError.userNotFound))
         }
