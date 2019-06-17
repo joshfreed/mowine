@@ -114,6 +114,9 @@
                                         <state key="normal" title="Edit Profile">
                                             <color key="titleColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="6y7-Rk-XqW" kind="presentation" id="rGF-8x-hZf"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4w-1g-KWf">
                                         <rect key="frame" x="122" y="316" width="170" height="38"/>
@@ -181,6 +184,111 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMs-cN-fB5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2078" y="615"/>
+        </scene>
+        <!--Edit Profile-->
+        <scene sceneID="AyI-XU-X1P">
+            <objects>
+                <viewController id="0Tl-Wj-WwI" customClass="EditProfileViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wua-7D-tta"/>
+                        <viewControllerLayoutGuide type="bottom" id="urK-fb-DHm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NsI-8N-XWC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkk-og-AUz">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3l4-1c-MA2" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="592"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-yM-8Dz" customClass="ProfilePictureView" customModule="mowine" customModuleProvider="target">
+                                                <rect key="frame" x="143" y="32" width="128" height="128"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="128" id="KKp-H1-Ru5"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dfu-hS-C95">
+                                                <rect key="frame" x="16" y="192" width="382" height="384"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q1p-0J-d3N" customClass="JPFFancyTextField" customModule="JFLib">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="First Name"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcZ-vZ-6Eu" customClass="JPFFancyTextField" customModule="JFLib">
+                                                        <rect key="frame" x="0.0" y="128" width="382" height="128"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Last Name"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-R8-mj3" customClass="JPFFancyTextField" customModule="JFLib">
+                                                        <rect key="frame" x="0.0" y="256" width="382" height="128"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email Address"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Dfu-hS-C95" firstAttribute="leading" secondItem="3l4-1c-MA2" secondAttribute="leading" constant="16" id="5hR-1v-GMG"/>
+                                            <constraint firstAttribute="bottom" secondItem="Dfu-hS-C95" secondAttribute="bottom" constant="16" id="Gk1-bm-x32"/>
+                                            <constraint firstItem="Dfu-hS-C95" firstAttribute="top" secondItem="dxo-yM-8Dz" secondAttribute="bottom" constant="32" id="V1f-Y0-9FF"/>
+                                            <constraint firstItem="dxo-yM-8Dz" firstAttribute="top" secondItem="3l4-1c-MA2" secondAttribute="top" constant="32" id="WVL-Qu-2yE"/>
+                                            <constraint firstItem="dxo-yM-8Dz" firstAttribute="centerX" secondItem="3l4-1c-MA2" secondAttribute="centerX" id="Y5k-gd-pFq"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dfu-hS-C95" secondAttribute="trailing" constant="16" id="Zkj-q8-HNJ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="3l4-1c-MA2" secondAttribute="trailing" id="17Y-wt-9NP"/>
+                                    <constraint firstItem="3l4-1c-MA2" firstAttribute="top" secondItem="lkk-og-AUz" secondAttribute="top" id="Brl-jJ-mNi"/>
+                                    <constraint firstAttribute="bottom" secondItem="3l4-1c-MA2" secondAttribute="bottom" id="YGK-j2-ghG"/>
+                                    <constraint firstItem="3l4-1c-MA2" firstAttribute="leading" secondItem="lkk-og-AUz" secondAttribute="leading" id="wph-kW-Hx2"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="urK-fb-DHm" firstAttribute="top" secondItem="lkk-og-AUz" secondAttribute="bottom" id="E1i-QC-rQ7"/>
+                            <constraint firstAttribute="trailing" secondItem="lkk-og-AUz" secondAttribute="trailing" id="TJF-a8-8QK"/>
+                            <constraint firstItem="3l4-1c-MA2" firstAttribute="width" secondItem="NsI-8N-XWC" secondAttribute="width" id="eNJ-Wy-RVo"/>
+                            <constraint firstItem="lkk-og-AUz" firstAttribute="top" secondItem="Wua-7D-tta" secondAttribute="bottom" id="nCj-Zo-rkq"/>
+                            <constraint firstItem="lkk-og-AUz" firstAttribute="leading" secondItem="NsI-8N-XWC" secondAttribute="leading" id="sIO-IE-dmY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="76i-Kl-3b7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Fq-sT-3cb">
+                            <connections>
+                                <segue destination="ZrU-gy-VzW" kind="unwind" unwindAction="unwindToMyAccount:" id="18D-Gq-TLA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="3mm-om-lij">
+                            <connections>
+                                <action selector="tappedSave:" destination="0Tl-Wj-WwI" id="vOz-8l-KGv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="emailAddressTextField" destination="uBi-R8-mj3" id="5fs-O2-8Ub"/>
+                        <outlet property="firstNameTextField" destination="Q1p-0J-d3N" id="s00-5G-1Tb"/>
+                        <outlet property="lastNameTextField" destination="IcZ-vZ-6Eu" id="85D-gV-ad9"/>
+                        <outlet property="profilePictureView" destination="dxo-yM-8Dz" id="9K5-FL-uOR"/>
+                        <outlet property="saveButton" destination="3mm-om-lij" id="3Is-TA-eUc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0J2-ya-QnQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZrU-gy-VzW" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3953.6231884057975" y="661.60714285714278"/>
         </scene>
         <!--Friends-->
         <scene sceneID="tsU-q8-lcS">
@@ -423,7 +531,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9p-Va-lrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6918" y="958"/>
+            <point key="canvasLocation" x="7827.5362318840589" y="957.58928571428567"/>
         </scene>
         <!--Wine Cellar View Controller-->
         <scene sceneID="e3x-Wp-Hcd">
@@ -889,6 +997,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bc-I6-g62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="506" y="2323"/>
+        </scene>
+        <!--Default Content Navigation Controller-->
+        <scene sceneID="GPr-rA-qbP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6y7-Rk-XqW" customClass="DefaultContentNavigationController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ekb-hh-cEy">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Tl-Wj-WwI" kind="relationship" relationship="rootViewController" id="wJT-uB-U5P"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fom-ve-Zjv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3094" y="662"/>
         </scene>
     </scenes>
     <resources>

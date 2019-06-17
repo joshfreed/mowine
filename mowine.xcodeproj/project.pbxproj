@@ -127,6 +127,10 @@
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		53958A9820617B6C00BA4B6C /* FirstTimeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */; };
 		53958A9B20617B6C00BA4B6C /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */; };
+		539717C222B6BA1D00EFA97F /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717C122B6BA1D00EFA97F /* EditProfileViewController.swift */; };
+		539717C422B6BFC200EFA97F /* ProfilePictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 539717C322B6BFC200EFA97F /* ProfilePictureView.xib */; };
+		539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717C522B6BFD300EFA97F /* ProfilePictureView.swift */; };
+		539717CC22B6C6A300EFA97F /* EditProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717CB22B6C6A300EFA97F /* EditProfileService.swift */; };
 		539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */; };
 		53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
@@ -361,6 +365,10 @@
 		53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeWorker.swift; sourceTree = "<group>"; };
 		53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
 		53958A9D20617BCD00BA4B6C /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SignIn.storyboard; path = /Users/joshfreed/Source/mowine/mowine/SignIn.storyboard; sourceTree = "<absolute>"; };
+		539717C122B6BA1D00EFA97F /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		539717C322B6BFC200EFA97F /* ProfilePictureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePictureView.xib; sourceTree = "<group>"; };
+		539717C522B6BFD300EFA97F /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
+		539717CB22B6C6A300EFA97F /* EditProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileService.swift; sourceTree = "<group>"; };
 		539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
 		53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
@@ -848,6 +856,8 @@
 		539717C022B6794A00EFA97F /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
+				539717C122B6BA1D00EFA97F /* EditProfileViewController.swift */,
+				539717CB22B6C6A300EFA97F /* EditProfileService.swift */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -915,6 +925,8 @@
 				53D1E2F12059B32500A22476 /* WineListViewController.swift */,
 				53D1E2F32059B3AB00A22476 /* WineCell.swift */,
 				53D1E2F42059B3AB00A22476 /* WineCell.xib */,
+				539717C322B6BFC200EFA97F /* ProfilePictureView.xib */,
+				539717C522B6BFD300EFA97F /* ProfilePictureView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1305,6 +1317,7 @@
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				53ED1F8F204F359C00C129BC /* UserTableViewCell.xib in Resources */,
 				5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */,
+				539717C422B6BFC200EFA97F /* ProfilePictureView.xib in Resources */,
 				538B239D21BB22BD002F278A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1504,6 +1517,7 @@
 				535C6A8021EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift in Sources */,
 				535F66912062FEE20006B26A /* SignUpWorker.swift in Sources */,
 				532FB08920584C2C0056D1B2 /* UserProfileInteractor.swift in Sources */,
+				539717CC22B6C6A300EFA97F /* EditProfileService.swift in Sources */,
 				5327BC312062B362006787E9 /* WineDetailsWorker.swift in Sources */,
 				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
@@ -1593,6 +1607,7 @@
 				538F29441F72EB1F006EEDB1 /* RatingRow.swift in Sources */,
 				53F100E72044BFAF00B29FAF /* Session.swift in Sources */,
 				535D6D1C205AA8B6004D51AB /* MyWinesPresenter.swift in Sources */,
+				539717C222B6BA1D00EFA97F /* EditProfileViewController.swift in Sources */,
 				53EAFA0F225E8EA0002BCAB0 /* DataService.swift in Sources */,
 				532FB08820584C2C0056D1B2 /* UserProfileViewController.swift in Sources */,
 				53958A9820617B6C00BA4B6C /* FirstTimeWorker.swift in Sources */,
@@ -1619,6 +1634,7 @@
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
+				539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				53F24867206D40370046B031 /* GraphApi.swift in Sources */,
 				535D6D1E205AA8B6004D51AB /* MyWinesRouter.swift in Sources */,
