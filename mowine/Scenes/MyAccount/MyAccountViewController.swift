@@ -79,6 +79,11 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
         super.viewWillAppear(animated)
     }
     
+    @IBAction func unwindToMyAccount(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
     // MARK: Do something
 
     @IBOutlet weak var profilePictureImageView: UIImageView!

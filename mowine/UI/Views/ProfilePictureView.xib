@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfilePictureView" customModule="mowine" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="286"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="HHW-i9-W1E">
+                    <rect key="frame" x="0.0" y="44" width="200" height="208"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="HHW-i9-W1E" secondAttribute="height" multiplier="1:1" id="kac-rT-jMl"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HHW-i9-W1E" secondAttribute="bottom" id="HFE-PG-3Jo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HHW-i9-W1E" secondAttribute="trailing" id="TWt-ga-Me8"/>
+                <constraint firstItem="HHW-i9-W1E" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="dtV-GZ-zXa"/>
+                <constraint firstItem="HHW-i9-W1E" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wQd-2W-sDR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="73.913043478260875" y="-45.535714285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="No Profile Picture" width="400" height="400"/>
+    </resources>
+</document>

@@ -51,7 +51,8 @@ class JFContainer {
             .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self)
         
         // Scenes
-        FriendsScene.configureDependencies(container)        
+        FriendsScene.configureDependencies(container)
+        container.register(.singleton) { EditProfileService(session: $0, userRepository: $1) }
     }
     
     lazy var session: Session = try! container.resolve()
