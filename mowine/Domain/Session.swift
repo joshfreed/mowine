@@ -22,5 +22,5 @@ protocol Session {
     func getPhotoUrl() -> URL?
     func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ())
     func getCurrentUser() -> Promise<User>
-    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ())
+    func updateEmailAddress(_ emailAddress: String) -> Promise<Void>
 }

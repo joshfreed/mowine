@@ -77,6 +77,7 @@ class TestEmailAuthService: EmailAuthenticationService {
 
 enum TestError: Error {
     case unknownError
+    case someError
 }
 
 class TestUserRepository: UserRepository {

@@ -226,3 +226,39 @@ class MockProfilePictureWorker: ProfilePictureWorkerProtocol {
         
     }
 }
+
+class MockUserProfileService: UserProfileService {
+    init() {
+        super.init(session: MockSession(), userRepository: MockUserRepository(), profilePictureWorker: MockProfilePictureWorker())
+    }
+
+    var updateProfilePictureWasCalled = false
+    var updateProfilePicture_image: UIImage?
+    var updateProfilePicture_rejection: Error?
+    override func updateProfilePicture(_ image: UIImage?) -> Promise<Void> {
+        updateProfilePictureWasCalled = true
+        updateProfilePicture_image = image
+
+        if let error = updateProfilePicture_rejection {
+            return Promise { $0.reject(error) }
+        } else {
+            return Promise()
+        }
+    }
+
+    var updateEmailAddressWasCalled = false
+    var updateEmailAddress_emailAddress: String?
+    override func updateEmailAddress(emailAddress: String) -> Promise<Void> {
+        updateEmailAddressWasCalled = true
+        updateEmailAddress_emailAddress = emailAddress
+        return Promise { $0.fulfill_() }
+    }
+
+    var updateUserProfileWasCalled = false
+    var updateUserProfile_request: UpdateUserProfileRequest?
+    override func updateUserProfile(_ request: UpdateUserProfileRequest) -> Promise<Void> {
+        updateUserProfileWasCalled = true
+        updateUserProfile_request = request
+        return Promise { $0.fulfill_() }
+    }
+}
