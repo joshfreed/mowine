@@ -9,21 +9,26 @@
 import Foundation
 @testable import mowine
 import JFLib
+import PromiseKit
 
 class MockWineRepository: WineRepository {
-    func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (JFLib.Result<[String]>) -> ()) {
         
     }
     
-    func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (JFLib.Result<Wine>) -> ()) {
         
     }
     
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+    func add(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
         
     }
     
-    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+    func getWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
+        
+    }
+    
+    func save(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
         completion(.success(wine))
     }
     
@@ -31,11 +36,11 @@ class MockWineRepository: WineRepository {
         completion(.success)
     }
     
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getTopWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
         
     }
     
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
         
     }
 }
@@ -43,33 +48,37 @@ class MockWineRepository: WineRepository {
 class MockWineTypeRepository: WineTypeRepository {
     var types: [WineType] = []
     
-    func getAll(completion: @escaping (Result<[WineType]>) -> ()) {
+    func getAll(completion: @escaping (JFLib.Result<[WineType]>) -> ()) {
         completion(.success(types))
     }
     
-    func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ()) {
+    func getWineType(named name: String, completion: @escaping (JFLib.Result<WineType?>) -> ()) {
         let type = types.first(where: { $0.name == name })
         completion(.success(type))        
     }
 }
 
 class MockUserRepository: UserRepository {
-    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
+    }
+    
+    func add(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
         
     }
     
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (JFLib.Result<Bool>) -> ()) {
         
     }
     
-    func save(user: User, completion: @escaping (Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
         
     }
     
-    var getFriendsOfResult: Result<[User]>?
+    var getFriendsOfResult: JFLib.Result<[User]>?
     var getFriendsOf_userId: UserId?
     var getFriendsOfWasCalled = false
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
+    func getFriendsOf(userId: UserId, completion: @escaping (JFLib.Result<[User]>) -> ()) {
         getFriendsOfWasCalled = true
         getFriendsOf_userId = userId
         if let result = getFriendsOfResult {
@@ -77,10 +86,10 @@ class MockUserRepository: UserRepository {
         }
     }
     
-    var searchUsersResult: Result<[User]>?
+    var searchUsersResult: JFLib.Result<[User]>?
     var searchUsers_searchString: String?
     var searchUsersWasCalled = false
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (JFLib.Result<[User]>) -> ()) {
         searchUsersWasCalled = true
         searchUsers_searchString = searchString
         if let result = searchUsersResult {
@@ -91,8 +100,8 @@ class MockUserRepository: UserRepository {
     var addFriendCalled = false
     var addFriend_owningUserId: UserId?
     var addFriend_friendId: UserId?
-    var addFriendResult: Result<User>?
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
+    var addFriendResult: JFLib.Result<User>?
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
         addFriendCalled = true
         addFriend_owningUserId = owningUserId
         addFriend_friendId = friendId
@@ -105,10 +114,10 @@ class MockUserRepository: UserRepository {
 
     }
 
-    var getUserByIdResult: Result<User?>?
+    var getUserByIdResult: JFLib.Result<User?>?
     var getUserByIdCalled = false
     var getUserById_id: UserId?
-    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func getUserById(_ id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) {
         getUserByIdCalled = true
         getUserById_id = id
         if let result = getUserByIdResult {
@@ -118,10 +127,6 @@ class MockUserRepository: UserRepository {
 }
 
 class MockSession: Session {
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
-        
-    }
-    
     private var _currentUser: User?
     var photoUrl: URL?
     
@@ -146,11 +151,19 @@ class MockSession: Session {
         _currentUser = user
     }
     
-    func getCurrentUser(completion: @escaping (Result<User?>) -> ()) {
+    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
         if let currentUser = _currentUser {
             completion(.success(currentUser))
         } else {
             // ??DF?DF?
+        }
+    }
+    
+    func getCurrentUser() -> Promise<User> {
+        if let currentUser = _currentUser {
+            return Promise { $0.fulfill(currentUser) }
+        } else {
+            return Promise { $0.reject(SessionError.notLoggedIn) }
         }
     }
     
@@ -165,6 +178,10 @@ class MockSession: Session {
     
     func getPhotoUrl() -> URL? {
         return photoUrl
+    }
+    
+    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ()) {
+        
     }
 }
 
@@ -193,5 +210,19 @@ class MockEmailAuthService: EmailAuthenticationService {
         if let result = signUpResult {
             completion(result)
         }
+    }
+}
+
+class MockProfilePictureWorker: ProfilePictureWorkerProtocol {
+    func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ()) {
+        
+    }
+    
+    func getProfilePicture(user: User, completion: @escaping (JFLib.Result<Data?>) -> ()) {
+        
+    }
+    
+    func getProfilePicture(url: URL, completion: @escaping (JFLib.Result<Data?>) -> ()) {
+        
     }
 }
