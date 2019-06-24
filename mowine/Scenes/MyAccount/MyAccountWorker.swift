@@ -23,6 +23,8 @@ class MyAccountWorker {
     let userRepository: UserRepository
     let profilePictureWorker: ProfilePictureWorkerProtocol
 
+    private var listener: MoWineListenerRegistration?
+    
     init(session: Session, userRepository: UserRepository, profilePictureWorker: ProfilePictureWorkerProtocol) {
         self.session = session
         self.userRepository = userRepository
@@ -30,7 +32,26 @@ class MyAccountWorker {
     }
     
     func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
-        session.getCurrentUser(completion: completion)
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+
+        listener = userRepository.getUserByIdAndListenForUpdates(id: currentUserId) { result in
+            SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
+            
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    completion(.success(user))
+                } else {
+                    completion(.failure(UserRepositoryError.userNotFound))
+                }
+            case .failure(let error):
+                // Remember, this closure can be called repeatedly!
+                SwiftyBeaver.error("\(error)")
+            }
+        }
     }
 
     func getProfilePicture(completion: @escaping (Result<Data?>) -> ()) {
@@ -43,6 +64,8 @@ class MyAccountWorker {
     }
 
     func signOut() {
+        listener?.remove()
+        listener = nil
         session.end()
     }
 }
