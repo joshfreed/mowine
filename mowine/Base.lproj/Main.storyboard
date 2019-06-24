@@ -210,6 +210,9 @@
                                                     <constraint firstAttribute="width" constant="128" id="KKp-H1-Ru5"/>
                                                 </constraints>
                                             </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile Picture Overlay" translatesAutoresizingMaskIntoConstraints="NO" id="ePZ-Ye-4Wz">
+                                                <rect key="frame" x="143" y="32" width="128" height="128"/>
+                                            </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dfu-hS-C95">
                                                 <rect key="frame" x="16" y="192" width="382" height="384"/>
                                                 <subviews>
@@ -240,11 +243,15 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Dfu-hS-C95" firstAttribute="leading" secondItem="3l4-1c-MA2" secondAttribute="leading" constant="16" id="5hR-1v-GMG"/>
+                                            <constraint firstItem="ePZ-Ye-4Wz" firstAttribute="centerY" secondItem="dxo-yM-8Dz" secondAttribute="centerY" id="6Xl-tN-yGS"/>
                                             <constraint firstAttribute="bottom" secondItem="Dfu-hS-C95" secondAttribute="bottom" constant="16" id="Gk1-bm-x32"/>
+                                            <constraint firstItem="ePZ-Ye-4Wz" firstAttribute="width" secondItem="dxo-yM-8Dz" secondAttribute="width" id="HGh-ko-vBE"/>
                                             <constraint firstItem="Dfu-hS-C95" firstAttribute="top" secondItem="dxo-yM-8Dz" secondAttribute="bottom" constant="32" id="V1f-Y0-9FF"/>
                                             <constraint firstItem="dxo-yM-8Dz" firstAttribute="top" secondItem="3l4-1c-MA2" secondAttribute="top" constant="32" id="WVL-Qu-2yE"/>
                                             <constraint firstItem="dxo-yM-8Dz" firstAttribute="centerX" secondItem="3l4-1c-MA2" secondAttribute="centerX" id="Y5k-gd-pFq"/>
                                             <constraint firstAttribute="trailing" secondItem="Dfu-hS-C95" secondAttribute="trailing" constant="16" id="Zkj-q8-HNJ"/>
+                                            <constraint firstItem="ePZ-Ye-4Wz" firstAttribute="height" secondItem="dxo-yM-8Dz" secondAttribute="height" id="eqt-qS-sJe"/>
+                                            <constraint firstItem="ePZ-Ye-4Wz" firstAttribute="centerX" secondItem="dxo-yM-8Dz" secondAttribute="centerX" id="fI9-mg-UQi"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -268,7 +275,7 @@
                     <navigationItem key="navigationItem" title="Edit Profile" id="76i-Kl-3b7">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Fq-sT-3cb">
                             <connections>
-                                <segue destination="ZrU-gy-VzW" kind="unwind" unwindAction="unwindToMyAccount:" id="18D-Gq-TLA"/>
+                                <segue destination="ZrU-gy-VzW" kind="unwind" identifier="exit" unwindAction="unwindToMyAccount:" id="KH8-TE-hjp"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="3mm-om-lij">
@@ -281,6 +288,7 @@
                         <outlet property="emailAddressTextField" destination="uBi-R8-mj3" id="5fs-O2-8Ub"/>
                         <outlet property="firstNameTextField" destination="Q1p-0J-d3N" id="s00-5G-1Tb"/>
                         <outlet property="lastNameTextField" destination="IcZ-vZ-6Eu" id="85D-gV-ad9"/>
+                        <outlet property="profilePictureOverlay" destination="ePZ-Ye-4Wz" id="Fdl-CV-BV1"/>
                         <outlet property="profilePictureView" destination="dxo-yM-8Dz" id="9K5-FL-uOR"/>
                         <outlet property="saveButton" destination="3mm-om-lij" id="3Is-TA-eUc"/>
                     </connections>
@@ -896,27 +904,27 @@
                                 <rect key="frame" x="16" y="60" width="382" height="656"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6SA-am-Wq9">
-                                        <rect key="frame" x="186" y="0.0" width="10" height="115.5"/>
+                                        <rect key="frame" x="186" y="0.0" width="10" height="207.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="um4-Dj-5kS"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="How's that look?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-iN-1Yw">
-                                        <rect key="frame" x="91.5" y="147.5" width="199.5" height="33.5"/>
+                                        <rect key="frame" x="91.5" y="239.5" width="199.5" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="9XF-mr-MeV">
-                                        <rect key="frame" x="91" y="213" width="200" height="200"/>
+                                        <rect key="frame" x="183" y="305" width="16" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="9XF-mr-MeV" secondAttribute="height" multiplier="1:1" id="UeW-pA-SIb"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="gGb-d0-wpD"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1J0-PM-mkm" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="445" width="382" height="64"/>
+                                        <rect key="frame" x="0.0" y="353" width="382" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Irt-sF-syg"/>
                                         </constraints>
@@ -927,7 +935,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAi-ci-aUd">
-                                        <rect key="frame" x="186" y="541" width="10" height="115"/>
+                                        <rect key="frame" x="186" y="449" width="10" height="207"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="8Dr-ts-okL"/>
@@ -1023,6 +1031,7 @@
         <image name="My Account Tab" width="23" height="23"/>
         <image name="My Wines Tab" width="23" height="23"/>
         <image name="No Profile Picture" width="400" height="400"/>
+        <image name="Profile Picture Overlay" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vw4-Zm-TUT"/>

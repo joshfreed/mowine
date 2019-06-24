@@ -27,7 +27,7 @@ class FirebaseSession: Session {
     }
     
     private var currentUser: User?
-    private var listener: ListenerRegistration?
+    private var listener: MoWineListenerRegistration?
 
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
@@ -35,6 +35,7 @@ class FirebaseSession: Session {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 self.listenForUserUpdates()
+                SwiftyBeaver.info("FireBase Session Info: \(user?.email), \(user?.displayName)")
             }
         }
     }
@@ -98,6 +99,20 @@ class FirebaseSession: Session {
             completion(.success(currentUser))
         } else {
             completion(.failure(UserRepositoryError.userNotFound))
+        }
+    }
+    
+    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ()) {
+        guard let fbUser = Auth.auth().currentUser else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        fbUser.updateEmail(to: emailAddress) { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success)
+            }
         }
     }
 }

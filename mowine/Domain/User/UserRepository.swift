@@ -18,6 +18,7 @@ protocol UserRepository {
     func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ())
     func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ())
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ())
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration
 }
 
 enum UserRepositoryError: Error {

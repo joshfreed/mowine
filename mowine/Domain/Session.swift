@@ -20,4 +20,5 @@ protocol Session {
     func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ())
     func getPhotoUrl() -> URL?
     func getCurrentUser(completion: @escaping (Result<User>) -> ())
+    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ())
 }

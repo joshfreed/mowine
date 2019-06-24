@@ -65,7 +65,7 @@ class FirestoreUserRepository: UserRepository {
         }
     }
     
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> ListenerRegistration {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration {
         let listener = db.collection("users").document(id.asString).addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
@@ -96,7 +96,7 @@ class FirestoreUserRepository: UserRepository {
             completion(.success(user))
         }
         
-        return listener
+        return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
     func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
@@ -250,5 +250,17 @@ class FirestoreUserRepository: UserRepository {
                 completion(.failure(UserRepositoryError.userNotFound))
             }
         }
+    }
+}
+
+class MyFirebaseListenerRegistration: MoWineListenerRegistration {
+    let wrapped: ListenerRegistration
+    
+    init(wrapped: ListenerRegistration) {
+        self.wrapped = wrapped
+    }
+    
+    func remove() {
+        wrapped.remove()
     }
 }

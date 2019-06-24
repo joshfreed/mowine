@@ -70,9 +70,9 @@ var winesDB: [UserId: [Wine]] = [
 ]
 
 func randomDelay(action: @escaping () -> ()) {
-//    let wait = Double(arc4random_uniform(4) + 1)
-//    delay(seconds: wait, action: action)
-    action()
+    let wait = Double(arc4random_uniform(4) + 1)
+    delay(seconds: wait, action: action)
+//    action()
 }
 
 extension User {
@@ -146,6 +146,9 @@ class FakeSession: Session {
     func getPhotoUrl() -> URL? {
         return _photoUrl
     }
+    
+    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ()) {
+    }
 }
 
 class FakeEmailAuth: EmailAuthenticationService {
@@ -167,6 +170,10 @@ class FakeEmailAuth: EmailAuthenticationService {
 }
 
 class FakeUserRepository: UserRepository {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
+    }
+    
     func add(user: User, completion: @escaping (Result<User>) -> ()) {
         usersDB.append(user)
         completion(.success(user))
