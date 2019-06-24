@@ -21,6 +21,7 @@ class FriendsInteractorTests: XCTestCase {
     var sut: FriendsInteractor!
     let worker = MockFriendsWorker()
     let spy = FriendsPresentationLogicSpy()
+    let profilePictureWorker = MockProfilePictureWorker()
 
     // MARK: Test lifecycle
 
@@ -36,7 +37,7 @@ class FriendsInteractorTests: XCTestCase {
     // MARK: Test setup
 
     func setupFriendsInteractor() {
-        sut = FriendsInteractor(worker: worker)
+        sut = FriendsInteractor(worker: worker, profilePictureWorker: profilePictureWorker)
         sut.presenter = spy
     }
 

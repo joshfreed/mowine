@@ -12,6 +12,10 @@ import UIKit
 import JFLib
 
 class MockWineImageWorker: WineImageWorkerProtocol {
+    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
+        
+    }
+    
     func createImages(wineId: WineId, photo: UIImage?) -> Data? {
         return nil
     }

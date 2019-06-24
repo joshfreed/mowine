@@ -69,6 +69,10 @@ class FriendsViewControllerTests: XCTestCase {
     // MARK: Test doubles
 
     class FriendsBusinessLogicSpy: FriendsBusinessLogic {
+        func getProfilePicture(url: URL?, completion: @escaping (UIImage) -> ()) {
+            
+        }
+        
         var fetchFriendsCalled = false
         func fetchFriends(request: Friends.FetchFriends.Request) {
             fetchFriendsCalled = true

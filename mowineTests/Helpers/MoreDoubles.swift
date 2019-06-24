@@ -80,6 +80,10 @@ enum TestError: Error {
 }
 
 class TestUserRepository: UserRepository {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
+    }
+    
     func doesNotContainUser(emailAddress: String) {
         
     }
