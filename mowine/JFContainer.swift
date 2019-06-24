@@ -50,12 +50,12 @@ class JFContainer {
         container.register(.singleton) { FirebaseSocialAuth() }
             .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self)
         
-        // Application Services
-        container.register(.singleton) { UserProfileService(session: $0, userRepository: $1) }
+        // Domain Services
+        container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }
         
         // Scenes
         FriendsScene.configureDependencies(container)
-        container.register(.singleton) { EditProfileService(session: $0, userRepository: $1, profilePictureWorker: $2, userProfileService: $3) }
+        container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2) }
     }
     
     lazy var session: Session = try! container.resolve()

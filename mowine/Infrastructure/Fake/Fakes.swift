@@ -8,6 +8,7 @@
 
 import Foundation
 import JFLib
+import PromiseKit
 
 var josh = User.make(emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
 var maureen = User.make(emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
@@ -125,9 +126,19 @@ class FakeSession: Session {
         completion(.success)
     }
     
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
         if let currentUser = _currentUser {
             completion(.success(currentUser))
+        }
+    }
+    
+    func getCurrentUser() -> Promise<User> {
+        return Promise<User> { seal in
+            if let currentUser = _currentUser {
+                seal.fulfill(currentUser)
+            } else {
+                seal.reject(UserRepositoryError.userNotFound)
+            }
         }
     }
     
@@ -170,23 +181,23 @@ class FakeEmailAuth: EmailAuthenticationService {
 }
 
 class FakeUserRepository: UserRepository {
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
     
-    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+    func add(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
         usersDB.append(user)
         completion(.success(user))
     }
     
-    func save(user: User, completion: @escaping (Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
         if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
             usersDB[index] = user
         }
         completion(.success(user))
     }
 
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
+    func getFriendsOf(userId: UserId, completion: @escaping (JFLib.Result<[User]>) -> ()) {
         let friendIds = friendsDB[userId] ?? []
         var friends: [User] = []
         for friendId in friendIds {
@@ -200,7 +211,7 @@ class FakeUserRepository: UserRepository {
         }
     }
     
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (JFLib.Result<[User]>) -> ()) {
         let words = searchString.split(separator: " ")
         var matches: [User] = []
         
@@ -218,7 +229,7 @@ class FakeUserRepository: UserRepository {
         }
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
         if friendsDB[owningUserId] == nil {
             friendsDB[owningUserId] = []
         }
@@ -234,12 +245,12 @@ class FakeUserRepository: UserRepository {
         completion(.success)
     }
     
-    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func getUserById(_ id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) {
         let user = usersDB.first(where: { $0.id == id })
         completion(.success(user))
     }
     
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (JFLib.Result<Bool>) -> ()) {
         
     }
 }

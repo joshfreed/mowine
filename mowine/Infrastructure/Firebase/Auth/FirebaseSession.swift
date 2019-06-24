@@ -11,6 +11,7 @@ import JFLib
 import FirebaseAuth
 import SwiftyBeaver
 import FirebaseFirestore
+import PromiseKit
 
 class FirebaseSession: Session {
     let userRepository: UserRepository
@@ -94,11 +95,21 @@ class FirebaseSession: Session {
         return authUser.photoURL
     }
 
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
         if let currentUser = currentUser {
             completion(.success(currentUser))
         } else {
             completion(.failure(UserRepositoryError.userNotFound))
+        }
+    }
+    
+    func getCurrentUser() -> Promise<User> {
+        return Promise<User> { seal in
+            if let currentUser = currentUser {
+                seal.fulfill(currentUser)
+            } else {
+                seal.reject(UserRepositoryError.userNotFound)
+            }
         }
     }
     
