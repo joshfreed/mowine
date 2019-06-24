@@ -36,7 +36,11 @@ class UserProfileService {
     }
     
     func updateEmailAddress(emailAddress: String) -> Promise<Void> {
-        return session.getCurrentUser().then { user in
+        return firstly {
+            session.updateEmailAddress(emailAddress)
+        }.then {
+            self.session.getCurrentUser()
+        }.then { user in
             self.updateEmailAddress(user: user, emailAddress: emailAddress)
         }
     }

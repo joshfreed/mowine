@@ -15,7 +15,7 @@ class EditProfileService {
     let profilePictureWorker: ProfilePictureWorkerProtocol
     let userProfileService: UserProfileService
 
-    private var newProfilePicture: UIImage?
+    private(set) var newProfilePicture: UIImage?
     
     init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService) {
         self.session = session

@@ -113,16 +113,19 @@ class FirebaseSession: Session {
         }
     }
     
-    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ()) {
-        guard let fbUser = Auth.auth().currentUser else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-        fbUser.updateEmail(to: emailAddress) { (error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success)
+    func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
+        return Promise<Void> { seal in
+            guard let authUser = Auth.auth().currentUser else {
+                seal.reject(SessionError.notLoggedIn)
+                return
+            }
+            
+            authUser.updateEmail(to: emailAddress) { (error) in
+                if let error = error {
+                    seal.reject(error)
+                } else {
+                    seal.fulfill_()
+                }
             }
         }
     }
