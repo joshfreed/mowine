@@ -8,8 +8,9 @@ target 'mowine' do
   pod 'Eureka'
   pod 'Cosmos'
   pod 'PureLayout'
-  pod 'SwiftyBeaver'
+  pod 'SwiftyBeaver', '~> 1.7'
   pod 'Dip'
+  pod 'PromiseKit', '~> 6.8'
   
   # Facebook
   pod 'FBSDKCoreKit', '~> 4.38.0'
