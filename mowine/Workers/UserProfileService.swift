@@ -7,40 +7,70 @@
 //
 
 import Foundation
-import JFLib
+import PromiseKit
 
 class UserProfileService {
     let session: Session
     let userRepository: UserRepository
+    let profilePictureWorker: ProfilePictureWorkerProtocol
     
-    init(session: Session, userRepository: UserRepository) {
+    init(session: Session, userRepository: UserRepository, profilePictureWorker: ProfilePictureWorkerProtocol) {
         self.session = session
         self.userRepository = userRepository
+        self.profilePictureWorker = profilePictureWorker
     }
     
-    func updateEmailAddress(emailAddress: String, completion: @escaping (EmptyResult) -> ()) {
-        
-    }
-    
-    func updateUserProfile(_ request: UpdateUserProfileRequest, completion: @escaping (EmptyResult) -> ()) {
-        session.getCurrentUser { result in
-            switch result {
-            case .success(let user): self.updateUserProfileObject(user: user, request: request, completion: completion)
-            case .failure(let error): completion(.failure(error))
+    func updateProfilePicture(_ image: UIImage?) -> Promise<Void> {
+        if let newProfilePicture = image {
+            return Promise<Void> { seal in
+                self.profilePictureWorker.setProfilePicture(image: newProfilePicture) { result in
+                    switch result {
+                    case .success: seal.fulfill_()
+                    case .failure(let error): seal.reject(error)
+                    }
+                }
             }
+        } else {
+            return Promise()
         }
     }
     
-    private func updateUserProfileObject(user: User, request: UpdateUserProfileRequest, completion: @escaping (EmptyResult) -> ()) {
+    func updateEmailAddress(emailAddress: String) -> Promise<Void> {
+        return session.getCurrentUser().then { user in
+            self.updateEmailAddress(user: user, emailAddress: emailAddress)
+        }
+    }
+    
+    private func updateEmailAddress(user: User, emailAddress: String) -> Promise<Void> {
+        if user.emailAddress == emailAddress {
+            return Promise()
+        } else {
+            var _user = user
+            _user.emailAddress = emailAddress
+            return save(user: _user)
+        }
+    }
+    
+    func updateUserProfile(_ request: UpdateUserProfileRequest) -> Promise<Void> {
+        return session.getCurrentUser().then { user in
+            self.updateUserProfile(user: user, request: request)
+        }
+    }
+    
+    private func updateUserProfile(user: User, request: UpdateUserProfileRequest) -> Promise<Void> {
         var _user = user
-        
         _user.firstName = request.firstName
         _user.lastName = request.lastName
-        
-        userRepository.save(user: _user) { result in
-            switch result {
-            case .success: completion(.success)
-            case .failure(let error): completion(.failure(error))
+        return save(user: _user)
+    }
+    
+    private func save(user: User) -> Promise<Void> {
+        return Promise<Void> { seal in
+            userRepository.save(user: user) { result in
+                switch result {
+                case .success: seal.fulfill_()
+                case .failure(let error): seal.reject(error)
+                }
             }
         }
     }

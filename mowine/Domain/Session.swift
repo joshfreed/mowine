@@ -8,6 +8,7 @@
 
 import Foundation
 import JFLib
+import PromiseKit
 
 enum SessionError: Error {
     case notLoggedIn
@@ -19,6 +20,7 @@ protocol Session {
     func end()
     func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ())
     func getPhotoUrl() -> URL?
-    func getCurrentUser(completion: @escaping (Result<User>) -> ())
+    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ())
+    func getCurrentUser() -> Promise<User>
     func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ())
 }

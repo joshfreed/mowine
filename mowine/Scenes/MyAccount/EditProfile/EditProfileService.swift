@@ -8,23 +8,22 @@
 
 import Foundation
 import JFLib
+import PromiseKit
 
 class EditProfileService {
     let session: Session
-    let userRepository: UserRepository
     let profilePictureWorker: ProfilePictureWorkerProtocol
     let userProfileService: UserProfileService
 
     private var newProfilePicture: UIImage?
     
-    init(session: Session, userRepository: UserRepository, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService) {
+    init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService) {
         self.session = session
-        self.userRepository = userRepository
         self.profilePictureWorker = profilePictureWorker
         self.userProfileService = userProfileService
     }
     
-    func fetchProfile(completion: @escaping (Result<ProfileViewModel>) -> ()) {
+    func fetchProfile(completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
         session.getCurrentUser { result in
             switch result {
             case .success(let user): self.fetchProfileForUser(user, completion: completion)
@@ -33,12 +32,12 @@ class EditProfileService {
         }
     }
     
-    func fetchProfileForUser(_ user: User, completion: @escaping (Result<ProfileViewModel>) -> ()) {
+    func fetchProfileForUser(_ user: User, completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
         let viewModel = ProfileViewModel(firstName: user.firstName, lastName: user.lastName, emailAddress: user.emailAddress)
         completion(.success(viewModel))
     }
     
-    func getProfilePicture(completion: @escaping (Result<Data?>) -> ()) {
+    func getProfilePicture(completion: @escaping (JFLib.Result<Data?>) -> ()) {
         session.getCurrentUser { result in
             switch result {
             case .success(let user): self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
@@ -52,60 +51,22 @@ class EditProfileService {
     }
     
     func saveProfile(email: String, firstName: String, lastName: String?, completion: @escaping (EmptyResult) -> ()) {
-        if let newProfilePicture = newProfilePicture {
-            profilePictureWorker.setProfilePicture(image: newProfilePicture) { result in
-                switch result {
-                case .success:
-                    self.newProfilePicture = nil
-                    self.updateUserProfile(email: email, firstName: firstName, lastName: lastName, completion: completion)
-                case .failure(let error): completion(.failure(error))
-                }
-            }
-        } else {
-            updateUserProfile(email: email, firstName: firstName, lastName: lastName, completion: completion)
+        firstly {
+            userProfileService.updateProfilePicture(newProfilePicture)
+        }.get {
+            self.newProfilePicture = nil
+        }.then {
+            self.userProfileService.updateEmailAddress(emailAddress: email)
+        }.then {
+            self.userProfileService.updateUserProfile(
+                UpdateUserProfileRequest(firstName: firstName, lastName: lastName)
+            )
+        }.done {
+            completion(.success)
+        }.catch { error in
+            completion(.failure(error))
         }
-    }
-    
-    private func updateUserProfile(email: String, firstName: String, lastName: String?, completion: @escaping (EmptyResult) -> ()) {
-        session.getCurrentUser { result in
-            switch result {
-            case .success(let user): self.updateUserProfileObj(user, email: email, firstName: firstName, lastName: lastName, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
-    
-    private func updateUserProfileObj(_ user: User, email: String, firstName: String, lastName: String?, completion: @escaping (EmptyResult) -> ()) {
-        if user.emailAddress != email {
-            userProfileService.updateEmailAddress(emailAddress: email) { result in
-                switch result {
-                case .success: self.updateUserProfile(firstName: firstName, lastName: lastName, completion: completion)
-                case .failure(let error): completion(.failure(error))
-                }
-            }
-        } else {
-            updateUserProfile(firstName: firstName, lastName: lastName, completion: completion)
-        }
-    }
-    
-    private func updateUserProfile(firstName: String, lastName: String?, completion: @escaping (EmptyResult) -> ()) {
-        let updateProfileRequest = UpdateUserProfileRequest(firstName: firstName, lastName: lastName)
-        userProfileService.updateUserProfile(updateProfileRequest, completion: completion)
-    }
-    
-    private func updateUserObj(_ user: User, email: String, firstName: String, lastName: String?, completion: @escaping (EmptyResult) -> ()) {
-        var _user = user
-        _user.emailAddress = email
-        _user.firstName = firstName
-        _user.lastName = lastName
-        
-        userRepository.save(user: _user) { result in
-            switch result {
-            case .success: completion(.success)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
+    }    
 }
 
 struct ProfileViewModel {
