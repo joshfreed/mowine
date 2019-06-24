@@ -164,9 +164,18 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Nimble (8.0.1)
+  - PromiseKit (6.8.4):
+    - PromiseKit/CorePromise (= 6.8.4)
+    - PromiseKit/Foundation (= 6.8.4)
+    - PromiseKit/UIKit (= 6.8.4)
+  - PromiseKit/CorePromise (6.8.4)
+  - PromiseKit/Foundation (6.8.4):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.8.4):
+    - PromiseKit/CorePromise
   - Protobuf (3.6.1)
   - PureLayout (3.1.4)
-  - SwiftyBeaver (1.6.1)
+  - SwiftyBeaver (1.7.0)
 
 DEPENDENCIES:
   - Cosmos
@@ -183,8 +192,9 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleSignIn
   - Nimble
+  - PromiseKit (~> 6.8)
   - PureLayout
-  - SwiftyBeaver
+  - SwiftyBeaver (~> 1.7)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -218,6 +228,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Nimble
+    - PromiseKit
     - Protobuf
     - PureLayout
     - SwiftyBeaver
@@ -253,10 +264,11 @@ SPEC CHECKSUMS:
   leveldb-library: d2078c743a1ba226e4917345714d72423e0069cc
   nanopb: 9f8aa4fc4e9d32c345e927e12c7bd9c0ea088353
   Nimble: a3aa44d3310cf0e4e62e7bc64a84107ce843cb20
+  PromiseKit: 7d3d1e73adf135d7c379b61723cb19c1db72f947
   Protobuf: 6b0fc34ab8f2b7dbad2278a48be08a669427c59f
   PureLayout: cd5c97224004e45506d9e750161efdf70336c0af
-  SwiftyBeaver: b3472ad30abf6fde5ee88733c23d05e5843fa3e1
+  SwiftyBeaver: faff13c9b69e467c2d21425a0f8e5efaed8e6a35
 
-PODFILE CHECKSUM: a561fca97f8672653b18d26f8a30f99d556d8f60
+PODFILE CHECKSUM: 69f0ff19104a3f83c1441453909eef1f8452fe01
 
 COCOAPODS: 1.5.3
