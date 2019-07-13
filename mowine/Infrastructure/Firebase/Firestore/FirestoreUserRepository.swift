@@ -85,7 +85,7 @@ class FirestoreUserRepository: UserRepository {
                 return
             }
             
-            print("Current data: \(data)")
+            SwiftyBeaver.debug("Received user document snapshot w/ data: \(data)")
             
             guard let user = User.fromFirestore(document) else {
                 SwiftyBeaver.warning("Couldn't build user from document")

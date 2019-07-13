@@ -126,22 +126,6 @@ class FakeSession: Session {
         completion(.success)
     }
     
-    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
-        if let currentUser = _currentUser {
-            completion(.success(currentUser))
-        }
-    }
-    
-    func getCurrentUser() -> Promise<User> {
-        return Promise<User> { seal in
-            if let currentUser = _currentUser {
-                seal.fulfill(currentUser)
-            } else {
-                seal.reject(UserRepositoryError.userNotFound)
-            }
-        }
-    }
-    
     func end() {
         _isLoggedIn = false
         _currentUser = nil
