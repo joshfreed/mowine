@@ -53,8 +53,9 @@ class FirebaseSession: Session {
         listener?.remove()
         listener = nil
         
-        listener = (userRepository as! FirestoreUserRepository).getUserByIdAndListenForUpdates(id: currentUserId) { result in
+        listener = userRepository.getUserByIdAndListenForUpdates(id: currentUserId) { result in
             if case let .success(user) = result {
+                SwiftyBeaver.debug("Updating session current user!")
                 self.currentUser = user
             }
         }
@@ -95,24 +96,6 @@ class FirebaseSession: Session {
         return authUser.photoURL
     }
 
-    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
-        if let currentUser = currentUser {
-            completion(.success(currentUser))
-        } else {
-            completion(.failure(UserRepositoryError.userNotFound))
-        }
-    }
-    
-    func getCurrentUser() -> Promise<User> {
-        return Promise<User> { seal in
-            if let currentUser = currentUser {
-                seal.fulfill(currentUser)
-            } else {
-                seal.reject(UserRepositoryError.userNotFound)
-            }
-        }
-    }
-    
     func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
         return Promise<Void> { seal in
             guard let authUser = Auth.auth().currentUser else {

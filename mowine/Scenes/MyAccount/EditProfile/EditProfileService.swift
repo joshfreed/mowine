@@ -14,31 +14,33 @@ class EditProfileService {
     let session: Session
     let profilePictureWorker: ProfilePictureWorkerProtocol
     let userProfileService: UserProfileService
+    let userRepository: UserRepository
 
     private(set) var newProfilePicture: UIImage?
     
-    init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService) {
+    init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService, userRepository: UserRepository) {
         self.session = session
         self.profilePictureWorker = profilePictureWorker
         self.userProfileService = userProfileService
+        self.userRepository = userRepository
     }
     
     func fetchProfile(completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
-        session.getCurrentUser { result in
+        getCurrentUser { result in
             switch result {
-            case .success(let user): self.fetchProfileForUser(user, completion: completion)
+            case .success(let user): self.presentUserProfile(user, completion: completion)
             case .failure(let error): completion(.failure(error))
             }
         }
     }
     
-    func fetchProfileForUser(_ user: User, completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
+    func presentUserProfile(_ user: User, completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
         let viewModel = ProfileViewModel(firstName: user.firstName, lastName: user.lastName, emailAddress: user.emailAddress)
         completion(.success(viewModel))
     }
     
     func getProfilePicture(completion: @escaping (JFLib.Result<Data?>) -> ()) {
-        session.getCurrentUser { result in
+        getCurrentUser { result in
             switch result {
             case .success(let user): self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
             case .failure(let error): completion(.failure(error))
@@ -66,7 +68,27 @@ class EditProfileService {
         }.catch { error in
             completion(.failure(error))
         }
-    }    
+    }
+    
+    private func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+
+        userRepository.getUserById(currentUserId) { result in
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    completion(.success(user))
+                } else {
+                    completion(.failure(UserRepositoryError.userNotFound))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }        
+    }
 }
 
 struct ProfileViewModel {

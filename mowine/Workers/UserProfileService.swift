@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import SwiftyBeaver
 
 class UserProfileService {
     let session: Session
@@ -21,6 +22,8 @@ class UserProfileService {
     }
     
     func updateProfilePicture(_ image: UIImage?) -> Promise<Void> {
+        SwiftyBeaver.info("updateProfilePicture")
+        
         if let newProfilePicture = image {
             return Promise<Void> { seal in
                 self.profilePictureWorker.setProfilePicture(image: newProfilePicture) { result in
@@ -36,16 +39,24 @@ class UserProfileService {
     }
     
     func updateEmailAddress(emailAddress: String) -> Promise<Void> {
+        SwiftyBeaver.info("updateEmailAddress (1)")
+        
+        guard let userId = session.currentUserId else {
+            return Promise(error: SessionError.notLoggedIn)
+        }
+        
         return firstly {
             session.updateEmailAddress(emailAddress)
         }.then {
-            self.session.getCurrentUser()
+            self.getUserById(userId)
         }.then { user in
             self.updateEmailAddress(user: user, emailAddress: emailAddress)
         }
     }
     
     private func updateEmailAddress(user: User, emailAddress: String) -> Promise<Void> {
+        SwiftyBeaver.info("updateEmailAddress (2)")
+        
         if user.emailAddress == emailAddress {
             return Promise()
         } else {
@@ -56,7 +67,13 @@ class UserProfileService {
     }
     
     func updateUserProfile(_ request: UpdateUserProfileRequest) -> Promise<Void> {
-        return session.getCurrentUser().then { user in
+        SwiftyBeaver.info("updateUserProfile")
+        
+        guard let userId = session.currentUserId else {
+            return Promise(error: SessionError.notLoggedIn)
+        }
+        
+        return getUserById(userId).then { user in
             self.updateUserProfile(user: user, request: request)
         }
     }
@@ -68,11 +85,27 @@ class UserProfileService {
         return save(user: _user)
     }
     
-    private func save(user: User) -> Promise<Void> {
+    private func save(user: User) -> Promise<Void> {        
         return Promise<Void> { seal in
             userRepository.save(user: user) { result in
                 switch result {
                 case .success: seal.fulfill_()
+                case .failure(let error): seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    private func getUserById(_ userId: UserId) -> Promise<User> {
+        return Promise<User> { seal in
+            userRepository.getUserById(userId) { result in
+                switch result {
+                case .success(let user):
+                    if let user = user {
+                        seal.fulfill(user)
+                    } else {
+                        seal.reject(UserRepositoryError.userNotFound)
+                    }
                 case .failure(let error): seal.reject(error)
                 }
             }

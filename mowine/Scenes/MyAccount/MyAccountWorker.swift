@@ -55,10 +55,21 @@ class MyAccountWorker {
     }
 
     func getProfilePicture(completion: @escaping (Result<Data?>) -> ()) {
-        session.getCurrentUser { result in
+        guard let currentUserId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+        
+        userRepository.getUserById(currentUserId) { result in
             switch result {
-            case .success(let user): self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
-            case .failure(let error): completion(.failure(error))
+            case .success(let user):
+                guard let user = user else {
+                    completion(.failure(UserRepositoryError.userNotFound))
+                    return
+                }
+                self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

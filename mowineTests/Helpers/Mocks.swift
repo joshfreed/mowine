@@ -180,8 +180,8 @@ class MockSession: Session {
         return photoUrl
     }
     
-    func updateEmailAddress(_ emailAddress: String, completion: @escaping (EmptyResult) -> ()) {
-        
+    func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
+        return Promise()
     }
 }
 

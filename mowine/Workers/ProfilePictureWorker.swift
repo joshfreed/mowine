@@ -36,10 +36,21 @@ where
             return
         }
         
-        session.getCurrentUser { result in
+        guard let userId = session.currentUserId else {
+            completion(.failure(SessionError.notLoggedIn))
+            return
+        }
+
+        userRepository.getUserById(userId) { result in
             switch result {
-            case .success(let user): self.uploadImage(imageData, user: user, completion: completion)
-            case .failure(let error): completion(.failure(error))
+            case .success(let user):
+                if let user = user {
+                    self.uploadImage(imageData, user: user, completion: completion)
+                } else {
+                    completion(.failure(UserRepositoryError.userNotFound))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

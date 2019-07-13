@@ -55,7 +55,7 @@ class JFContainer {
         
         // Scenes
         FriendsScene.configureDependencies(container)
-        container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2) }
+        container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
     }
     
     lazy var session: Session = try! container.resolve()

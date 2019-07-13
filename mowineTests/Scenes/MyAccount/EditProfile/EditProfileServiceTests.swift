@@ -16,9 +16,15 @@ class EditProfileServiceTests: XCTestCase {
     let session = MockSession()
     let profilePictureWorker = MockProfilePictureWorker()
     let userProfileService = MockUserProfileService()
+    let userRepository = MockUserRepository()
 
     override func setUp() {
-        sut = EditProfileService(session: session, profilePictureWorker: profilePictureWorker, userProfileService: userProfileService)
+        sut = EditProfileService(
+            session: session,
+            profilePictureWorker: profilePictureWorker,
+            userProfileService: userProfileService,
+            userRepository: userRepository
+        )
     }
 
     override func tearDown() {
