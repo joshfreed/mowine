@@ -19,6 +19,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var profilePictureOverlay: UIImageView!
     
     var editProfileService: EditProfileService!
+    var loadingView: LoadingView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class EditProfileViewController: UIViewController {
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         emailAddressTextField.delegate = self
+        
+        loadingView = LoadingView(parentView: navigationController!.view)
         
         editProfileService.fetchProfile { result in
             switch result {
@@ -63,7 +66,15 @@ class EditProfileViewController: UIViewController {
     // MARK: Save
     
     @IBAction func tappedSave(_ sender: Any) {
+        SwiftyBeaver.info("Saving profile...")
+        
+        loadingView.show("Saving...")
+        
         editProfileService.saveProfile(email: emailAddressTextField.text!, firstName: firstNameTextField.text!, lastName: lastNameTextField.text) { result in
+            SwiftyBeaver.info("Save profile complete")
+            
+            self.loadingView.hide()
+            
             switch result {
             case .success: self.performSegue(withIdentifier: "exit", sender: self)
             case .failure(let error):
