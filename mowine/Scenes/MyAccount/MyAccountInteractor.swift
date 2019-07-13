@@ -23,27 +23,19 @@ class MyAccountInteractor: MyAccountBusinessLogic {
 
     // MARK: Get User
 
-    func getUser(request: MyAccount.GetUser.Request) {        
-        worker?.getCurrentUser() { result in
-            switch result {
-            case .success(let user):
-                let response = MyAccount.GetUser.Response(user: user)
-                self.presenter?.presentUser(response: response)
-            case .failure(let error):
-                print("\(error)")
+    func getUser(request: MyAccount.GetUser.Request) {
+        worker?.fetchUserAccount(completion: { error in
+            if error != nil {
                 self.presenter?.presentErrorGettingUser()
-                break
             }
-        }
-
-        worker?.getProfilePicture() { result in
+        }, userCallback: { user in
+            let response = MyAccount.GetUser.Response(user: user)
+            self.presenter?.presentUser(response: response)
+        }, profilePictureCallback: { data in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let data): self.presenter?.presentProfilePicture(data: data)
-                case .failure(let error): self.presenter?.presentError(error)
-                }
+                self.presenter?.presentProfilePicture(data: data)
             }
-        }
+        })
     }
     
     // MARK: Sign Out

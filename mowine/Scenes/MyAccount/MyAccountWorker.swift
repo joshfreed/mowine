@@ -31,45 +31,29 @@ class MyAccountWorker {
         self.profilePictureWorker = profilePictureWorker
     }
     
-    func getCurrentUser(completion: @escaping (Result<User>) -> ()) {
+    func fetchUserAccount(completion: @escaping (Error?) -> (), userCallback: @escaping (User) -> (), profilePictureCallback: @escaping (Data?) -> ()) {
         guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-
-        listener = userRepository.getUserByIdAndListenForUpdates(id: currentUserId) { result in
-            SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
-            
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    completion(.success(user))
-                } else {
-                    completion(.failure(UserRepositoryError.userNotFound))
-                }
-            case .failure(let error):
-                // Remember, this closure can be called repeatedly!
-                SwiftyBeaver.error("\(error)")
-            }
-        }
-    }
-
-    func getProfilePicture(completion: @escaping (Result<Data?>) -> ()) {
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
+            completion(SessionError.notLoggedIn)
             return
         }
         
-        userRepository.getUserById(currentUserId) { result in
+        listener = userRepository.getUserByIdAndListenForUpdates(id: currentUserId) { result in
+            SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
+            
+            if case let .success(u) = result, let user = u {
+                userCallback(user)
+                self.fetchProfilePicture(for: user, completion: profilePictureCallback)
+            }
+        }
+        
+        completion(nil)
+    }
+    
+    func fetchProfilePicture(for user: User, completion: @escaping (Data?) -> ()) {
+        profilePictureWorker.getProfilePicture(user: user) { result in
             switch result {
-            case .success(let user):
-                guard let user = user else {
-                    completion(.failure(UserRepositoryError.userNotFound))
-                    return
-                }
-                self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
-            case .failure(let error):
-                completion(.failure(error))
+            case .success(let data): completion(data)
+            case .failure(let error): SwiftyBeaver.error("\(error)")
             }
         }
     }
