@@ -107,7 +107,6 @@ class WineCellarViewController: UIViewController, WineCellarDisplayLogic {
             }
             
             button.layoutIfNeeded()
-            button.applyGradient()
             
             lastView = button
         }

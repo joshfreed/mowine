@@ -95,7 +95,6 @@ class SelectVarietyViewController: UIViewController, SelectVarietyDisplayLogic {
             }
             
             button.layoutIfNeeded()
-            button.applyGradient()
             
             lastView = button
         }
