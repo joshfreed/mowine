@@ -29,6 +29,9 @@ PODS:
     - FirebaseAnalytics (= 5.4.0)
   - Firebase/CoreOnly (5.14.0):
     - FirebaseCore (= 5.1.9)
+  - Firebase/Database (5.14.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.0.4)
   - Firebase/Firestore (5.14.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 0.16.0)
@@ -58,6 +61,10 @@ PODS:
   - FirebaseAuthInterop (1.0.0)
   - FirebaseCore (5.1.9):
     - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.0.4):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.1)
+    - leveldb-library (~> 1.18)
   - FirebaseFirestore (0.16.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.1)
@@ -99,6 +106,35 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.1)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseUI (5.1.3):
+    - FirebaseUI/Auth (= 5.1.3)
+    - FirebaseUI/Database (= 5.1.3)
+    - FirebaseUI/Facebook (= 5.1.3)
+    - FirebaseUI/Firestore (= 5.1.3)
+    - FirebaseUI/Google (= 5.1.3)
+    - FirebaseUI/Phone (= 5.1.3)
+    - FirebaseUI/Storage (= 5.1.3)
+    - FirebaseUI/Twitter (= 5.1.3)
+  - FirebaseUI/Auth (5.1.3):
+    - Firebase/Auth (~> 5.0)
+  - FirebaseUI/Database (5.1.3):
+    - Firebase/Database (~> 5.0)
+  - FirebaseUI/Facebook (5.1.3):
+    - FBSDKLoginKit (~> 4.0)
+    - FirebaseUI/Auth
+  - FirebaseUI/Firestore (5.1.3):
+    - Firebase/Firestore
+  - FirebaseUI/Google (5.1.3):
+    - FirebaseUI/Auth
+    - GoogleSignIn (~> 4.0)
+  - FirebaseUI/Phone (5.1.3):
+    - FirebaseUI/Auth
+  - FirebaseUI/Storage (5.1.3):
+    - Firebase/Storage (~> 5.0)
+    - SDWebImage (~> 4.0)
+  - FirebaseUI/Twitter (5.1.3):
+    - FirebaseUI/Auth
+    - TwitterKit (~> 3.0)
   - GoogleAppMeasurement (5.4.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -175,7 +211,13 @@ PODS:
     - PromiseKit/CorePromise
   - Protobuf (3.6.1)
   - PureLayout (3.1.4)
+  - SDWebImage (4.4.7):
+    - SDWebImage/Core (= 4.4.7)
+  - SDWebImage/Core (4.4.7)
   - SwiftyBeaver (1.7.0)
+  - TwitterCore (3.2.0)
+  - TwitterKit (3.4.2):
+    - TwitterCore (>= 3.2.0)
 
 DEPENDENCIES:
   - Cosmos
@@ -190,6 +232,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Performance
   - Firebase/Storage
+  - FirebaseUI (~> 5.1.0)
   - GoogleSignIn
   - Nimble
   - PromiseKit (~> 6.8)
@@ -213,11 +256,13 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseDatabase
     - FirebaseFirestore
     - FirebaseInstanceID
     - FirebasePerformance
     - FirebaseRemoteConfig
     - FirebaseStorage
+    - FirebaseUI
     - GoogleAppMeasurement
     - GoogleSignIn
     - GoogleToolboxForMac
@@ -231,7 +276,10 @@ SPEC REPOS:
     - PromiseKit
     - Protobuf
     - PureLayout
+    - SDWebImage
     - SwiftyBeaver
+    - TwitterCore
+    - TwitterKit
 
 SPEC CHECKSUMS:
   Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
@@ -249,11 +297,13 @@ SPEC CHECKSUMS:
   FirebaseAuth: 1b7a30ce4e50e0be4c40bea25cb18450e7e4e278
   FirebaseAuthInterop: 165c11428f6ae3f7ec2262e53fdd8b6fb2c4922a
   FirebaseCore: fbabde8140c2977a597df3a26e8cebc688a217b4
+  FirebaseDatabase: 1fa1658cdd24e5fd7e369d4fb23b1b457577708a
   FirebaseFirestore: d08ced0a76008b464db68c82944314dde8b1aab7
   FirebaseInstanceID: 8d407bb087e6b74e19154e2e700fcb499b364a5f
   FirebasePerformance: 704b3e5648d4e3652dca01354be16fec96b37e46
   FirebaseRemoteConfig: adca8a6169d52b3fe53eb2e3715c5d205d52402e
   FirebaseStorage: 85f3c3b8b8133b9a7647b8b160509d31b5576cae
+  FirebaseUI: 1c069449c09d302ccf7a7f83828c21c285f7ca29
   GoogleAppMeasurement: 3ca0c97c372fa2355eb2b813bdd824ccd9c88f9d
   GoogleSignIn: ea3778511e551761685697560f3614b2b50f4e40
   GoogleToolboxForMac: 91a761a7c5ba525da1e2003e897736252ab8f3fe
@@ -267,8 +317,11 @@ SPEC CHECKSUMS:
   PromiseKit: 7d3d1e73adf135d7c379b61723cb19c1db72f947
   Protobuf: 6b0fc34ab8f2b7dbad2278a48be08a669427c59f
   PureLayout: cd5c97224004e45506d9e750161efdf70336c0af
+  SDWebImage: af73e67257399abb171e6405545b43181b4afb1b
   SwiftyBeaver: faff13c9b69e467c2d21425a0f8e5efaed8e6a35
+  TwitterCore: 578104d32408f2cfe5c8adfce93d75099661b934
+  TwitterKit: 029d6620b009ea1df27f26a400f3a0866c358da5
 
-PODFILE CHECKSUM: 69f0ff19104a3f83c1441453909eef1f8452fe01
+PODFILE CHECKSUM: 74b71206e647787d6857483936e4e75cb8bc5eac
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.5
