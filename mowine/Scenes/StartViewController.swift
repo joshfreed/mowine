@@ -11,14 +11,19 @@ import SwiftyBeaver
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
+import FirebaseUI
 
 class StartViewController: UIViewController, FirstTimeViewControllerDelegate, TabbedViewCoordinator {
     private var mainStoryboard: UIStoryboard!
     private var current: UIViewController?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if current is UINavigationController {
-            return .lightContent
+        if let current = current as? UINavigationController {
+            if current.topViewController is MyAuthPickerViewController {
+                return .default
+            } else {
+                return .lightContent
+            }
         } else if let current = current as? TabBarViewController {
             return current.preferredStatusBarStyle
         } else {
@@ -62,6 +67,21 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         let vc = nc.topViewController as! FirstTimeViewController
         vc.delegate = self
         show(viewController: nc)
+        
+        /*
+        let authUI = FUIAuth.defaultAuthUI()
+        authUI?.delegate = self
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth(),
+            FUIFacebookAuth()
+        ]
+        authUI?.providers = providers
+        authUI?.shouldHideCancelButton = true
+        
+        let authViewController = authUI!.authViewController()
+        
+        show(viewController: authViewController)
+        */
     }
     
     private func show(viewController: UIViewController) {
@@ -72,5 +92,16 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         current?.removeFromParent()
 
         current = viewController
+    }
+}
+
+extension StartViewController: FUIAuthDelegate {
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        SwiftyBeaver.info("Did sign in! \(authDataResult), \(error)")
+    }
+    
+    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+        let vc = MyAuthPickerViewController(authUI: authUI)
+        return vc
     }
 }

@@ -23,6 +23,7 @@ target 'mowine' do
   pod 'Firebase/Storage'
   pod 'Firebase/Performance'
   pod 'GoogleSignIn'
+  pod 'FirebaseUI', '~> 5.1.0'
   
   # Crashlytics
   pod 'Fabric', '~> 1.9.0'
