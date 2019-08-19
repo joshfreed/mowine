@@ -16,16 +16,6 @@ class WineDetailsHeader: NibDesignable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingView: CosmosView!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        fromNib()
-    }
-    
-    init() {
-        super.init(frame: CGRect.zero)
-        fromNib()
-    }
-    
     func configure(wine: WineDetails.WineViewModel) {
         nameLabel.text = wine.name        
         ratingView.rating = wine.rating
