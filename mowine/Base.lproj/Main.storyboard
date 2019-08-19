@@ -380,7 +380,7 @@
                         <viewControllerLayoutGuide type="bottom" id="l6I-8p-qcV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ueh-vL-DnX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3f-Hy-3Ol">
@@ -500,7 +500,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6eS-cY-GVt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CNf-8a-GKr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="515.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1i-vg-vF5">
@@ -528,7 +528,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="437.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -550,7 +550,7 @@
                         <viewControllerLayoutGuide type="bottom" id="vTt-aR-OBL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cki-Ja-uam">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="515.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no wines in the cellar." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slW-s3-tk9">
@@ -653,6 +653,7 @@
                     <tabBarItem key="tabBarItem" title="My Wines" image="My Wines Tab" id="VJZ-TW-gJ1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="jXT-la-aU0">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -675,7 +676,7 @@
         <scene sceneID="JeY-mN-rQe">
             <objects>
                 <tableViewController storyboardIdentifier="WineDetailsViewController" id="hnY-Au-Dpa" customClass="WineDetailsViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="9Uz-51-NxV">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="9Uz-51-NxV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -903,27 +904,27 @@
                                 <rect key="frame" x="16" y="60" width="382" height="656"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6SA-am-Wq9">
-                                        <rect key="frame" x="186" y="0.0" width="10" height="207.5"/>
+                                        <rect key="frame" x="186" y="0.0" width="10" height="115.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="um4-Dj-5kS"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="How's that look?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-iN-1Yw">
-                                        <rect key="frame" x="91.5" y="239.5" width="199.5" height="33.5"/>
+                                        <rect key="frame" x="91.5" y="147.5" width="199.5" height="33.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="9XF-mr-MeV">
-                                        <rect key="frame" x="183" y="305" width="16" height="16"/>
+                                        <rect key="frame" x="91" y="213" width="200" height="200"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="9XF-mr-MeV" secondAttribute="height" multiplier="1:1" id="UeW-pA-SIb"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="gGb-d0-wpD"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1J0-PM-mkm" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="353" width="382" height="64"/>
+                                        <rect key="frame" x="0.0" y="445" width="382" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Irt-sF-syg"/>
                                         </constraints>
@@ -934,7 +935,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAi-ci-aUd">
-                                        <rect key="frame" x="186" y="449" width="10" height="207"/>
+                                        <rect key="frame" x="186" y="541" width="10" height="115"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="8Dr-ts-okL"/>
