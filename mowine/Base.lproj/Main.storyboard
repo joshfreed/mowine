@@ -477,7 +477,7 @@
                     <navigationItem key="navigationItem" title="Edit Wine" id="zQG-SH-kKy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TED-eK-oLB">
                             <connections>
-                                <action selector="cancelAction:" destination="ZQf-Ib-L0c" id="N4B-9l-5zQ"/>
+                                <segue destination="UeZ-CR-MzF" kind="unwind" identifier="MyWines" unwindAction="unwindToMyWines:" id="O2i-fu-L27"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="bsh-bq-FDo">
@@ -488,6 +488,7 @@
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-HL-1U3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="UeZ-CR-MzF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3956" y="-197"/>
         </scene>
@@ -528,7 +529,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="437.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="673"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -1034,6 +1035,6 @@
         <image name="Profile Picture Overlay" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vw4-Zm-TUT"/>
+        <segue reference="vZ4-j4-jqs"/>
     </inferredMetricsTieBreakers>
 </document>

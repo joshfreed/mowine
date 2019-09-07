@@ -30,6 +30,8 @@ class JFContainer {
             container.register(.singleton) { FirestoreWineRepository() as WineRepository }
             container.register(.singleton) { FirebaseStorageService() }
         }
+        
+        container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
 
         // Images
         container.register(.singleton) { UrlSessionService() }
@@ -62,7 +64,7 @@ class JFContainer {
     lazy var emailAuthService: EmailAuthenticationService = try! container.resolve()
     lazy var facebookAuthService: FacebookAuthenticationService = try! container.resolve()
     lazy var fbGraphApi: GraphApi = GraphApi()    
-    lazy var wineTypeRepository: WineTypeRepository = MemoryWineTypeRepository()
+    lazy var wineTypeRepository: WineTypeRepository = try! container.resolve()
     lazy var wineRepository: WineRepository = try! container.resolve()
     lazy var wineImageWorker: WineImageWorkerProtocol = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()

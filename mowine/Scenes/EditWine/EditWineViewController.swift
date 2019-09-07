@@ -11,55 +11,84 @@
 
 import UIKit
 import Eureka
+import SwiftyBeaver
 
-protocol EditWineViewControllerInput {
-    func displayWine(viewModel: EditWine.FetchWine.ViewModel)
-    func displayPhoto(viewModel: EditWine.FetchPhoto.ViewModel)
-    func navigateToMyWines()
-    func presentError(_ error: Error)
-}
-
-protocol EditWineViewControllerOutput {
-    var wine: Wine! { get set }
-    func fetchWine(request: EditWine.FetchWine.Request)
-    func fetchPhoto(request: EditWine.FetchPhoto.Request)
-    func saveWine(request: EditWine.SaveWine.Request)
-}
-
-class EditWineViewController: FormViewController, EditWineViewControllerInput {
-    var output: EditWineViewControllerOutput!
-    var router: EditWineRouter!
+class EditWineViewController: FormViewController {
+    var editWineService: EditWineService!
     let wineForm = WineForm()
-
-    // MARK: - Object lifecycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        EditWineConfigurator.sharedInstance.configure(viewController: self)
-    }
-
-    // MARK: - View lifecycle
+    var wineId: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buildForm()
-        fetchWineOnLoad()
-    }
-    
-    func buildForm() {
+        editWineService = EditWineService(
+            wineRepository: try! JFContainer.shared.container.resolve(),
+            wineTypeRepository: try! JFContainer.shared.container.resolve(),
+            imageWorker: try! JFContainer.shared.container.resolve()
+        )
+        
         form = wineForm.makeWineForm()
+        
+        editWineService.getWineTypes { result in
+            switch result {
+            case .success(let wineTypes):
+                self.editWineService.getWine(wineId: self.wineId) { result2 in
+                    switch result2 {
+                    case .success(let wine): self.displayWine(wine, wineTypes: wineTypes)
+                    case .failure(let error): self.displayErrorLoadingWine(error)
+                    }
+                }
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+            }
+        }
+        
+        editWineService.getWinePhoto(wineId: wineId) { result in
+            switch result {
+            case .success(let photo): self.displayPhoto(photo)
+            case .failure(let error): SwiftyBeaver.error("\(error)")
+            }
+        }
     }
     
-    // MARK: - Event handling
-
-    func fetchWineOnLoad() {
-        output.fetchWine(request: EditWine.FetchWine.Request())
-        output.fetchPhoto(request: EditWine.FetchPhoto.Request())
+    func displayWine(_ wineViewModel: WineViewModel, wineTypes: [WineTypeViewModel]) {
+        wineForm.nameRow.value = wineViewModel.name
+        wineForm.ratingRow.value = wineViewModel.rating
+        wineForm.typeRow.options = wineTypes
+        wineForm.typeRow.value = wineViewModel.type
+        wineForm.varietyRow.value = wineViewModel.variety
+        wineForm.locationRow.value = wineViewModel.location
+        wineForm.priceRow.value = wineViewModel.price
+        wineForm.noteRow.value = wineViewModel.notes
+        
+        wineForm.varietyRow.hidden = Condition.function(["type"], { form in
+            if let value = self.wineForm.typeRow.value {
+                return value.varieties.count == 0
+            } else {
+                return true
+            }
+        })
+        
+        wineForm.varietyRow.evaluateHidden()
+        
+        for (index, name) in wineViewModel.pairings.enumerated() {
+            let newRow = NameRow("pairing_\(index + 1)") {
+                $0.placeholder = "e.g. Sushi, Cheese, etc"
+                $0.value = name
+            }
+            wineForm.pairingsSection.insert(newRow, at: index)
+        }
+        
+        tableView?.reloadData()
     }
     
-    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        router.navigateToMyWines()
+    func displayPhoto(_ photo: UIImage?) {
+        wineForm.photoRow.value = photo
+        wineForm.photoRow.updateCell()
+    }
+    
+    func displayErrorLoadingWine(_ error: Error) {
+        
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
@@ -80,7 +109,7 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
         let price = valuesDictionary["price"] as? String
         let notes = valuesDictionary["notes"] as? String
         
-        var request = EditWine.SaveWine.Request(name: name, rating: rating, type: type.name)
+        var request = SaveWineRequest(name: name, rating: rating, type: type.name)
         request.variety = variety
         request.location = location
         request.price = price
@@ -94,51 +123,133 @@ class EditWineViewController: FormViewController, EditWineViewControllerInput {
             }
         }
         
-        output.saveWine(request: request)
-    }
-
-    // MARK: - Display logic
-
-    func displayWine(viewModel: EditWine.FetchWine.ViewModel) {
-        wineForm.nameRow.value = viewModel.wineViewModel.name
-        wineForm.ratingRow.value = viewModel.wineViewModel.rating
-        wineForm.typeRow.options = viewModel.wineTypes
-        wineForm.typeRow.value = viewModel.wineViewModel.type
-        wineForm.varietyRow.value = viewModel.wineViewModel.variety
-        wineForm.locationRow.value = viewModel.wineViewModel.location
-        wineForm.priceRow.value = viewModel.wineViewModel.price
-        wineForm.noteRow.value = viewModel.wineViewModel.notes
-
-        wineForm.varietyRow.hidden = Condition.function(["type"], { form in
-            if let value = self.wineForm.typeRow.value {
-                return value.varieties.count == 0
-            } else {
-                return true
+        editWineService.saveWine(wineId: wineId, request: request) { result in
+            switch result {
+            case .success: self.onSaveSuccess()
+            case .failure(let error): self.onSaveError(error)
             }
-        })
-        wineForm.varietyRow.evaluateHidden()
-        
-        for (index, name) in viewModel.wineViewModel.pairings.enumerated() {
-            let newRow = NameRow("pairing_\(index + 1)") {
-                $0.placeholder = "e.g. Sushi, Cheese, etc"
-                $0.value = name
-            }
-            wineForm.pairingsSection.insert(newRow, at: index)
         }
     }
     
-    func navigateToMyWines() {
-        router.navigateToMyWines()
+    func onSaveSuccess() {
+        performSegue(withIdentifier: "MyWines", sender: nil)
     }
     
-    func presentError(_ error: Error) {
-//        showAlert(error: error)
+    func onSaveError(_ error: Error) {
+        
+    }
+}
+
+class EditWineService {
+    let wineRepository: WineRepository
+    let wineTypeRepository: WineTypeRepository
+    let imageWorker: WineImageWorkerProtocol
+    
+    private var wineTypes: [WineType] = []
+    
+    init(wineRepository: WineRepository, wineTypeRepository: WineTypeRepository, imageWorker: WineImageWorkerProtocol) {
+        self.wineRepository = wineRepository
+        self.wineTypeRepository = wineTypeRepository
+        self.imageWorker = imageWorker
     }
     
-    // MARK: Fetch photo
+    func getWine(wineId: String, completion: @escaping (Result<WineViewModel, Error>) -> ()) {
+        wineRepository.getWine(by: WineId(string: wineId)) { result in
+            switch result {
+            case .success(let wine): completion(.success(WineViewModel.from(model: wine)))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
     
-    func displayPhoto(viewModel: EditWine.FetchPhoto.ViewModel) {
-        wineForm.photoRow.value = viewModel.photo
-        wineForm.photoRow.updateCell()
+    func getWineTypes(completion: @escaping (Result<[WineTypeViewModel], Error>) -> ()) {
+        wineTypeRepository.getAll { result in
+            switch result {
+            case .success(let wineTypes):
+                self.wineTypes = wineTypes
+                completion(.success(wineTypes.map({ WineTypeViewModel.from(model: $0) })))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func getWinePhoto(wineId: String, completion: @escaping (Result<UIImage?, Error>) -> ()) {
+        imageWorker.fetchPhoto(wineId: WineId(string: wineId)) { result in
+            switch result {
+            case .success(let data):
+                var photo: UIImage? = nil
+                if let data = data {
+                    photo = UIImage(data: data)
+                }
+                completion(.success(photo))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func saveWine(wineId: String, request: SaveWineRequest, completion: @escaping (Result<Void, Error>) -> ()) {
+        let wineId = WineId(string: wineId)
+        
+        if let thumbnail = imageWorker.createImages(wineId: wineId, photo: request.image) {
+            NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wineId": wineId.asString, "thumbnail": thumbnail])
+        }
+        
+        wineRepository.getWine(by: wineId) { result in
+            switch result {
+            case .success(let wine): self.updateWine(wine: wine, from: request, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    private func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Result<Void, Error>) -> ()) {
+        wine.name = request.name
+        wine.rating = request.rating
+        wine.location = request.location
+        wine.notes = request.notes
+        wine.price = request.price
+        wine.pairings = request.pairings
+        
+        guard let newType = wineTypes.first(where: { $0.name == request.type }) else {
+            completion(.failure(EditWineServiceError.invalidWineType))
+            return
+        }
+        
+        wine.type = newType
+        
+        if let varietyName = request.variety, let variety = wine.type.getVariety(named: varietyName) {
+            wine.variety = variety
+        } else {
+            wine.variety = nil
+        }
+        
+        wineRepository.save(wine) { result in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+}
+
+enum EditWineServiceError: Error {
+    case invalidWineType
+}
+
+struct SaveWineRequest {
+    let name: String
+    let rating: Double
+    let type: String
+    var variety: String?
+    var location: String?
+    var price: String?
+    var notes: String?
+    var image: UIImage?
+    var pairings: [String] = []
+    
+    init(name: String, rating: Double, type: String) {
+        self.name = name
+        self.rating = rating
+        self.type = type
     }
 }

@@ -11,127 +11,106 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
-protocol MyWinesDisplayLogic: class {
-    func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel)
-    func displayNewWine(viewModel: WineListViewModel)
-    func displayUpdatedWine(viewModel: WineListViewModel)
-    func displayThumbnail(viewModel: MyWines.FetchThumbnail.ViewModel)
-}
-
-class MyWinesViewController: UIViewController, MyWinesDisplayLogic {
-    var interactor: MyWinesBusinessLogic?
-    var router: (NSObjectProtocol & MyWinesRoutingLogic & MyWinesDataPassing)?
+class MyWinesViewController: UIViewController {
     weak var wineListViewController: WineListViewController?
+    
+    private var myWinesService: MyWinesService!
+    private var selectedWineId: String?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    // MARK: Object lifecycle
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // MARK: Setup
-
-    private func setup() {
-        let viewController = self
-        let interactor = MyWinesInteractor()
-        let presenter = MyWinesPresenter()
-        let router = MyWinesRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        interactor.worker = MyWinesWorker(
-            wineRepository: JFContainer.shared.wineRepository,
-            session: JFContainer.shared.session
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        myWinesService = MyWinesService(
+            wineRepository: try! JFContainer.shared.container.resolve(),
+            session: try! JFContainer.shared.container.resolve()
         )
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
+        
+        fetchMyWines()
     }
-
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
+    
+    @objc func wineUpdated(notification: Notification) {
+        guard let wineId = notification.userInfo?["wineId"] as? String else {
+            return
+        }        
+        
+        guard let thumbnail = notification.userInfo?["thumbnail"] as? Data else {
+            return
         }
         
+        wineListViewController?.updateThumbnail(thumbnail, for: wineId)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "WineList" {
             let vc = segue.destination as! WineListViewController
             wineListViewController = vc
             wineListViewController?.delegate = self
             wineListViewController?.thumbnailFetcher = try! JFContainer.shared.container.resolve()
         }
+        
+        if segue.identifier == "EditWine" {
+            let vc = segue.destination as! EditWineViewController
+            vc.wineId = selectedWineId
+        }
     }
 
-    // MARK: View lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()        
-        fetchMyWines()
-    }
-
-    // MARK: Fetch my wines
-    
     func fetchMyWines() {
-        let request = MyWines.FetchMyWines.Request()
-        interactor?.fetchMyWines(request: request)
-    }
-    
-    func displayMyWines(viewModel: MyWines.FetchMyWines.ViewModel) {
-        wineListViewController?.wines = viewModel.wines
-    }
-    
-    // MARK: Fetch thumbnail
-    
-    func displayThumbnail(viewModel: MyWines.FetchThumbnail.ViewModel) {
-        var wineViewModel = wineListViewController?.wines.first(where: { $0.id == viewModel.wineId })
-        
-        guard wineViewModel != nil else {
-            return
-        }
-        
-        if let data = viewModel.thumbnail {
-            wineViewModel!.thumbnail = data
-            wineListViewController?.update(wine: wineViewModel!)
+        myWinesService.getMyWines { result in
+            SwiftyBeaver.info("Received updated getMyWines query")
+            switch result {
+            case .success(let wines): self.wineListViewController?.wines = wines
+            case .failure(let error): SwiftyBeaver.error("\(error)")
+            }
         }
     }
     
-    // MARK: Display new wine
-    
-    func displayNewWine(viewModel: WineListViewModel) {
-        wineListViewController?.insert(wine: viewModel, at: 0)
-    }
-    
-    // MARK: Display updated wine
-    
-    func displayUpdatedWine(viewModel: WineListViewModel) {
-        wineListViewController?.update(wine: viewModel)
-    }
-    
-    // MARK: Select wine
-    
-    func selectWine(atIndex index: Int) {
-        interactor?.selectWine(atIndex: index)
+    func selectWine(_ wine: WineListViewModel) {
+        selectedWineId = wine.id
         performSegue(withIdentifier: "EditWine", sender: nil)
+    }
+    
+    @IBAction func unwindToMyWines(_ unwindSegue: UIStoryboardSegue) {
+        
     }
 }
 
 extension MyWinesViewController: WineListViewControllerDelegate {
     func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath) {
-        selectWine(atIndex: indexPath.row)
+        selectWine(wine)
     }
+}
+
+class MyWinesService {
+    let wineRepository: WineRepository
+    let session: Session
+
+    init(wineRepository: WineRepository, session: Session) {
+        self.wineRepository = wineRepository
+        self.session = session
+    }
+    
+    func getMyWines(completion: @escaping (Result<[WineListViewModel], Error>) -> ()) {
+        guard let userId = session.currentUserId else {
+            return
+        }
+        
+        wineRepository.getWines(userId: userId) { result in
+            switch result {
+            case .success(let wines):
+                let wines = wines
+                    .sorted(by: { $0.createdAt > $1.createdAt })
+                    .map({ WineListViewModel.from(wine: $0) })
+                completion(.success(wines))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }    
 }
