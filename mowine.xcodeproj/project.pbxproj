@@ -116,6 +116,7 @@
 		539717C422B6BFC200EFA97F /* ProfilePictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 539717C322B6BFC200EFA97F /* ProfilePictureView.xib */; };
 		539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717C522B6BFD300EFA97F /* ProfilePictureView.swift */; };
 		539717CC22B6C6A300EFA97F /* EditProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717CB22B6C6A300EFA97F /* EditProfileService.swift */; };
+		5399E158232445A20071655F /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5399E157232445A20071655F /* ForgotPasswordViewController.swift */; };
 		539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */; };
 		53A8D5E92046029F000AD7A3 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
@@ -343,6 +344,7 @@
 		539717C322B6BFC200EFA97F /* ProfilePictureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePictureView.xib; sourceTree = "<group>"; };
 		539717C522B6BFD300EFA97F /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		539717CB22B6C6A300EFA97F /* EditProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileService.swift; sourceTree = "<group>"; };
+		5399E157232445A20071655F /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
 		53A8D5E52046029F000AD7A3 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				532A345622F8FB2A005E447D /* MyAuthPickerViewController.swift */,
+				5399E157232445A20071655F /* ForgotPasswordViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1570,6 +1573,7 @@
 				537740A41E5BC73600A1D282 /* Models.swift in Sources */,
 				532FB08420584C2C0056D1B2 /* UserProfilePresenter.swift in Sources */,
 				534895F1203CBAA400B7547A /* Wine.swift in Sources */,
+				5399E158232445A20071655F /* ForgotPasswordViewController.swift in Sources */,
 				532FB08520584C2C0056D1B2 /* UserProfileWorker.swift in Sources */,
 				5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */,
 				5327BC372062BB35006787E9 /* WineDetailsHeader.swift in Sources */,

@@ -62,6 +62,10 @@ class SignInViewController: UIViewController {
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
     
+    @IBAction func unwindToSignInWithEmail(_ unwindSegue: UIStoryboardSegue) {
+        
+    }
+    
     // MARK: Sign In
 
     @IBOutlet weak var emailAddressTextField: JPFFancyTextField!
