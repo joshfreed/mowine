@@ -58,6 +58,11 @@ class WineListViewController: UITableViewController {
         }        
     }
     
+    func updateThumbnail(_ imageData: Data?, for wineId: String) {
+        // Would be nice if I could just update the image view for that particular wine buuuuut this seems to work out okay
+        tableView.reloadData()
+    }
+    
     // MARK: - UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

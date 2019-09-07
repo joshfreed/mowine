@@ -23,6 +23,17 @@ struct WineViewModel {
         self.name = name
         self.rating = rating        
     }
+    
+    public static func from(model wine: Wine) -> WineViewModel {
+        var viewModel = WineViewModel(name: wine.name, rating: wine.rating)
+        viewModel.type = WineTypeViewModel.from(model: wine.type)
+        viewModel.variety = wine.variety?.name
+        viewModel.location = wine.location
+        viewModel.price = wine.price
+        viewModel.notes = wine.notes
+        viewModel.pairings = wine.pairings
+        return viewModel
+    }
 }
 
 struct WineListViewModel: Equatable {
@@ -58,5 +69,9 @@ struct WineTypeViewModel: Equatable, CustomStringConvertible {
     
     public static func ==(lhs: WineTypeViewModel, rhs: WineTypeViewModel) -> Bool {
         return lhs.name == rhs.name
+    }
+    
+    public static func from(model wineType: WineType) -> WineTypeViewModel {
+        return WineTypeViewModel(name: wineType.name, varieties: wineType.varieties.map({ $0.name }))
     }
 }
