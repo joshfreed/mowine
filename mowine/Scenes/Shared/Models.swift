@@ -11,7 +11,7 @@ import UIKit
 struct WineViewModel {
     var name: String
     var rating: Double
-    var type: WineTypeViewModel?
+    var typeName: String?
     var variety: String?
     var location: String?
     var price: String?
@@ -26,7 +26,7 @@ struct WineViewModel {
     
     public static func from(model wine: Wine) -> WineViewModel {
         var viewModel = WineViewModel(name: wine.name, rating: wine.rating)
-        viewModel.type = WineTypeViewModel.from(model: wine.type)
+        viewModel.typeName = wine.type.name
         viewModel.variety = wine.variety?.name
         viewModel.location = wine.location
         viewModel.price = wine.price
