@@ -12,6 +12,7 @@
 import UIKit
 import Eureka
 import SwiftyBeaver
+import PromiseKit
 
 class EditWineViewController: FormViewController {
     var editWineService: EditWineService!
@@ -29,18 +30,29 @@ class EditWineViewController: FormViewController {
         
         form = wineForm.makeWineForm()
         
-        editWineService.getWineTypes { result in
-            switch result {
-            case .success(let wineTypes):
-                self.editWineService.getWine(wineId: self.wineId) { result2 in
-                    switch result2 {
-                    case .success(let wine): self.displayWine(wine, wineTypes: wineTypes)
-                    case .failure(let error): self.displayErrorLoadingWine(error)
-                    }
-                }
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
+        wineForm.varietyRow.hidden = Condition.function(["type"], { form in
+            if let value = self.wineForm.typeRow.value {
+                return value.varieties.count == 0
+            } else {
+                return true
             }
+        })
+        
+        firstly {
+            self.editWineService.getWineTypes()
+        }.done { wineTypes in
+            self.wineForm.typeRow.options = wineTypes
+        }.catch { error in
+            SwiftyBeaver.error("\(error)")
+        }
+        
+        firstly {
+            self.editWineService.getWine(wineId: self.wineId)
+        }.done { wine in
+            self.displayWine(wine)
+        }.catch { error in
+            SwiftyBeaver.error("\(error)")
+            self.displayErrorLoadingWine(error)
         }
         
         editWineService.getWinePhoto(wineId: wineId) { result in
@@ -51,26 +63,19 @@ class EditWineViewController: FormViewController {
         }
     }
     
-    func displayWine(_ wineViewModel: WineViewModel, wineTypes: [WineTypeViewModel]) {
+    func displayWine(_ wineViewModel: WineViewModel) {
+        wineForm.typeRow.value = wineForm.typeRow.options?.first(where: { $0.name == wineViewModel.typeName })
+        
         wineForm.nameRow.value = wineViewModel.name
         wineForm.ratingRow.value = wineViewModel.rating
-        wineForm.typeRow.options = wineTypes
-        wineForm.typeRow.value = wineViewModel.type
         wineForm.varietyRow.value = wineViewModel.variety
         wineForm.locationRow.value = wineViewModel.location
         wineForm.priceRow.value = wineViewModel.price
         wineForm.noteRow.value = wineViewModel.notes
         
-        wineForm.varietyRow.hidden = Condition.function(["type"], { form in
-            if let value = self.wineForm.typeRow.value {
-                return value.varieties.count == 0
-            } else {
-                return true
-            }
-        })
-        
         wineForm.varietyRow.evaluateHidden()
         
+        wineForm.pairingsSection.removeAll()
         for (index, name) in wineViewModel.pairings.enumerated() {
             let newRow = NameRow("pairing_\(index + 1)") {
                 $0.placeholder = "e.g. Sushi, Cheese, etc"
@@ -152,28 +157,34 @@ class EditWineService {
         self.wineTypeRepository = wineTypeRepository
         self.imageWorker = imageWorker
     }
-    
-    func getWine(wineId: String, completion: @escaping (Result<WineViewModel, Error>) -> ()) {
-        wineRepository.getWine(by: WineId(string: wineId)) { result in
-            switch result {
-            case .success(let wine): completion(.success(WineViewModel.from(model: wine)))
-            case .failure(let error): completion(.failure(error))
+
+    func getWine(wineId: String) -> Promise<WineViewModel> {
+        return Promise<WineViewModel> { seal in
+            wineRepository.getWine(by: WineId(string: wineId)) { result in
+                switch result {
+                case .success(let wine): seal.fulfill(WineViewModel.from(model: wine))
+                case .failure(let error): seal.reject(error)
+                }
             }
         }
     }
     
-    func getWineTypes(completion: @escaping (Result<[WineTypeViewModel], Error>) -> ()) {
-        wineTypeRepository.getAll { result in
-            switch result {
-            case .success(let wineTypes):
-                self.wineTypes = wineTypes
-                completion(.success(wineTypes.map({ WineTypeViewModel.from(model: $0) })))
-            case .failure(let error): completion(.failure(error))
+    func getWineTypes() -> Promise<[WineTypeViewModel]> {
+        return Promise<[WineTypeViewModel]> { seal in
+            wineTypeRepository.getAll { result in
+                switch result {
+                case .success(let wineTypes):
+                    self.wineTypes = wineTypes
+                    let mapped = wineTypes.map({ WineTypeViewModel.from(model: $0) })
+                    seal.fulfill(mapped)                    
+                case .failure(let error):
+                    seal.reject(error)
+                }
             }
         }
     }
     
-    func getWinePhoto(wineId: String, completion: @escaping (Result<UIImage?, Error>) -> ()) {
+    func getWinePhoto(wineId: String, completion: @escaping (Swift.Result<UIImage?, Error>) -> ()) {
         imageWorker.fetchPhoto(wineId: WineId(string: wineId)) { result in
             switch result {
             case .success(let data):
@@ -187,7 +198,7 @@ class EditWineService {
         }
     }
     
-    func saveWine(wineId: String, request: SaveWineRequest, completion: @escaping (Result<Void, Error>) -> ()) {
+    func saveWine(wineId: String, request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         let wineId = WineId(string: wineId)
         
         if let thumbnail = imageWorker.createImages(wineId: wineId, photo: request.image) {
@@ -202,7 +213,7 @@ class EditWineService {
         }
     }
     
-    private func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Result<Void, Error>) -> ()) {
+    private func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         wine.name = request.name
         wine.rating = request.rating
         wine.location = request.location
