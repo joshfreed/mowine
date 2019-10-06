@@ -29,3 +29,18 @@ class DefaultContentNavigationController: UINavigationController {
         return .default
     }
 }
+
+extension UINavigationController {
+    func mwPrimaryAppearance() {
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
+            navigationBar.standardAppearance = appearance
+            navigationBar.compactAppearance = appearance
+            navigationBar.scrollEdgeAppearance = appearance
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        navigationBar.tintColor = UIColor.mwButtonSecondary
+    }
+}

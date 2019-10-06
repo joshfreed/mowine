@@ -50,6 +50,8 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.mwPrimaryAppearance()
+        
         setUpActivityIndicator()
 
         let searchController = UISearchController(searchResultsController: nil)

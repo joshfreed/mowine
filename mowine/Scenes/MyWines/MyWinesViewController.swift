@@ -33,6 +33,8 @@ class MyWinesViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(wineUpdated), name: .wineUpdated, object: nil)
         
+        navigationController?.mwPrimaryAppearance()
+        
         fetchMyWines()
     }
     

@@ -38,11 +38,8 @@ class SignInByEmailViewController: UIViewController {
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: #selector(cancelSignUp))
         
         rootViewController = UINavigationController(rootViewController: vc)
+        rootViewController.mwPrimaryAppearance()
         rootViewController.navigationBar.prefersLargeTitles = true
-        rootViewController.navigationBar.barTintColor = .mwPrimary
-        rootViewController.navigationBar.isTranslucent = false
-        rootViewController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        rootViewController.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         addChild(rootViewController)
         view.addSubview(rootViewController.view)

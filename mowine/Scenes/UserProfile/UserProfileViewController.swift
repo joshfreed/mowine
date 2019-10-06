@@ -92,8 +92,15 @@ class UserProfileViewController: UIViewController, UserProfileDisplayLogic {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.standardAppearance.shadowColor = nil
+            navigationController?.navigationBar.standardAppearance.shadowImage = nil
+        } else {
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
