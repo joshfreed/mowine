@@ -14,6 +14,7 @@
 		5301D5381F72D0F6004A66A9 /* NameWinePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */; };
 		5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */; };
 		5301D53A1F72D0F6004A66A9 /* NameWineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */; };
+		530ABC3C234A9B7E0078FB3B /* UINavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */; };
 		530BCA542155823C002F785C /* Syncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530BCA532155823C002F785C /* Syncable.swift */; };
 		530BCA572157EB6B002F785C /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530BCA562157EB6B002F785C /* Secrets.plist */; };
 		530D3F5D21E9503200885167 /* SignUpByEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530D3F5C21E9503200885167 /* SignUpByEmailViewController.swift */; };
@@ -241,6 +242,7 @@
 		5301D5321F72D0F6004A66A9 /* NameWinePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWinePresenter.swift; sourceTree = "<group>"; };
 		5301D5331F72D0F6004A66A9 /* NameWineRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineRouter.swift; sourceTree = "<group>"; };
 		5301D5341F72D0F6004A66A9 /* NameWineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameWineViewController.swift; sourceTree = "<group>"; };
+		530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarAppearance.swift; sourceTree = "<group>"; };
 		530BCA532155823C002F785C /* Syncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syncable.swift; sourceTree = "<group>"; };
 		530BCA562157EB6B002F785C /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		530D3F5C21E9503200885167 /* SignUpByEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpByEmailViewController.swift; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				531265101F75B04E006353CB /* UIViewController.swift */,
 				53C3E66D1FF6E048003F6676 /* UINavigationController.swift */,
 				E9AFC6C7F3E6ABECDD25B916 /* UIImage.swift */,
+				530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1646,6 +1649,7 @@
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
 				5327BC2420619D34006787E9 /* WineCellarListWorker.swift in Sources */,
 				534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */,
+				530ABC3C234A9B7E0078FB3B /* UINavigationBarAppearance.swift in Sources */,
 				53A8D5FA204611A1000AD7A3 /* MyAccountViewController.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				532FB08620584C2C0056D1B2 /* UserProfileRouter.swift in Sources */,
@@ -1856,6 +1860,7 @@
 			baseConfigurationReference = 5D9F985AF797F23BE4CE9CC8 /* Pods-mowine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1877,6 +1882,7 @@
 			baseConfigurationReference = BE06DCB59E70D80C524D4C3F /* Pods-mowine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
