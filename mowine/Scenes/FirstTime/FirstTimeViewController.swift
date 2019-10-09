@@ -20,7 +20,7 @@ protocol FirstTimeViewControllerDelegate: class {
     func showSignedInView()
 }
 
-class FirstTimeViewController: UIViewController, GIDSignInUIDelegate {
+class FirstTimeViewController: UIViewController {
     weak var delegate: FirstTimeViewControllerDelegate?
     var worker: FirstTimeWorker!
     var loadingView: LoadingView!
@@ -43,7 +43,6 @@ class FirstTimeViewController: UIViewController, GIDSignInUIDelegate {
         loadingView = LoadingView(parentView: navigationController!.view)
         
         GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,15 +53,15 @@ class FirstTimeViewController: UIViewController, GIDSignInUIDelegate {
     // MARK: Continue with Facebook
 
     @IBAction func tappedContinueWithFacebook(_ sender: MWButton) {
-        let login = FBSDKLoginManager()
-        login.logIn(withReadPermissions: ["public_profile", "email"], from: nil) { result, error in
+        let login = LoginManager()
+        login.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in
             if let error = error {
                 SwiftyBeaver.error("FB Error: \(error)")
                 return
             }
             
-            if let result = result, !result.isCancelled {
-                self.linkToFacebookLogin(fbToken: result.token.tokenString)
+            if let result = result, !result.isCancelled, let token = result.token {
+                self.linkToFacebookLogin(fbToken: token.tokenString)
             }
         }
     }
@@ -75,6 +74,7 @@ class FirstTimeViewController: UIViewController, GIDSignInUIDelegate {
     // MARK: Continue with Google
     
     @IBAction func tappedContinueWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().presentingViewController = self
         GIDSignIn.sharedInstance().signIn()        
     }
     

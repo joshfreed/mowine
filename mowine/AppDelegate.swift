@@ -24,9 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.rootViewController = StartViewController()
         window?.makeKeyAndVisible()
-        
-//        Container.shared.syncManager.initialize()
-
         return true
     }
     
@@ -43,18 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        var handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
+        var handled = ApplicationDelegate.shared.application(application, open: url, options: options)
         if handled {
             return handled
         }
-        handled = GIDSignIn.sharedInstance().handle(url,
-                                                    sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                    annotation: [:])
+        
+        handled = GIDSignIn.sharedInstance().handle(url)
+        
         return handled
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

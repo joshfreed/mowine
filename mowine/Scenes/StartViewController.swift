@@ -39,9 +39,9 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         show(viewController: current!)
 
         #if DEBUG
-        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(false)
+        Analytics.setAnalyticsCollectionEnabled(false)
         #else
-        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(true)
+        Analytics.setAnalyticsCollectionEnabled(false)
         #endif
         
         FirebaseApp.configure()
