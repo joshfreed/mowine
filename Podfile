@@ -5,30 +5,28 @@ target 'mowine' do
   use_frameworks!
 
   # Pods for mowine
-  pod 'Eureka', '~> 4.3.0'
-  pod 'Cosmos', '~> 17.0.0'
+  pod 'Eureka', '~> 5.1.0'
+  pod 'Cosmos', '~> 20.0.1'
   pod 'PureLayout', '~> 3.1.4'
   pod 'SwiftyBeaver', '~> 1.7'
   pod 'Dip', '~> 7.0.0'
   pod 'PromiseKit', '~> 6.8'
   
   # Facebook
-  pod 'FBSDKCoreKit', '~> 4.38.0'
-  pod 'FBSDKLoginKit', '~> 4.38.0'
+  pod 'FBSDKCoreKit', '~> 5.8.0'
+  pod 'FBSDKLoginKit', '~> 5.8.0'
+  
+  # Google
+  pod 'GoogleSignIn', '~> 5.0.0'
   
   # Firebase
-  pod 'Firebase/Core', '~> 5.14.0'
-  pod 'Firebase/Auth', '~> 5.14.0'
-  pod 'Firebase/Firestore', '~> 5.14.0'
-  pod 'Firebase/Storage', '~> 5.14.0'
-  pod 'Firebase/Performance', '~> 5.14.0'
-  pod 'GoogleSignIn', '~> 4.4.0'
-  pod 'FirebaseUI', '~> 5.1.0'
+  pod 'Firebase/Analytics', '~> 6.10.0'
+  pod 'Firebase/Auth', '~> 6.10.0'
+  pod 'Firebase/Firestore', '~> 6.10.0'
+  pod 'Firebase/Storage', '~> 6.10.0'
+  pod 'Firebase/Performance', '~> 6.10.0'
+  pod 'FirebaseUI', '~> 8.1.0'
   
-  # Crashlytics
-  pod 'Fabric', '~> 1.9.0'
-  pod 'Crashlytics', '~> 3.12.0'
-
   target 'mowineTests' do
     inherit! :search_paths
     # Pods for testing

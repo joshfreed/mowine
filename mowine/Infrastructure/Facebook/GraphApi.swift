@@ -16,8 +16,8 @@ enum GraphApiError: Error {
 
 class GraphApi {
     func me(params: [String: String], completion: @escaping (Result<[String: Any]>) -> ()) {
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: params)
-        _ = request?.start { connection, result, error in
+        let request = GraphRequest(graphPath: "me", parameters: params)
+        _ = request.start { connection, result, error in
             if let e = error {
                 let error = e as NSError
                 print("\(error)")
