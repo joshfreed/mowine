@@ -38,7 +38,7 @@ extension UINavigationController {
             navigationBar.compactAppearance = appearance
             navigationBar.scrollEdgeAppearance = appearance
         } else {
-            // Fallback on earlier versions
+            navigationBar.barTintColor = .mwPrimary
         }
         
         navigationBar.tintColor = UIColor.mwButtonSecondary
