@@ -39,6 +39,9 @@ extension UINavigationController {
             navigationBar.scrollEdgeAppearance = appearance
         } else {
             navigationBar.barTintColor = .mwPrimary
+            navigationBar.isTranslucent = false
+            navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         }
         
         navigationBar.tintColor = UIColor.mwButtonSecondary
