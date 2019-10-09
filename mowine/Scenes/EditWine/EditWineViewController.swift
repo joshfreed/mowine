@@ -75,7 +75,6 @@ class EditWineViewController: FormViewController {
         
         wineForm.varietyRow.evaluateHidden()
         
-        wineForm.pairingsSection.removeAll()
         for (index, name) in wineViewModel.pairings.enumerated() {
             let newRow = NameRow("pairing_\(index + 1)") {
                 $0.placeholder = "e.g. Sushi, Cheese, etc"
