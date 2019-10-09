@@ -14,8 +14,8 @@ PODS:
   - Cosmos (17.0.0)
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
-  - Dip (7.0.0)
-  - Eureka (4.3.0)
+  - Dip (7.0.1)
+  - Eureka (4.3.1)
   - Fabric (1.9.0)
   - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
@@ -145,36 +145,36 @@ PODS:
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.2.0):
-    - GoogleToolboxForMac/Defines (= 2.2.0)
-  - GoogleToolboxForMac/Defines (2.2.0)
-  - GoogleToolboxForMac/Logger (2.2.0):
-    - GoogleToolboxForMac/Defines (= 2.2.0)
-  - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
-    - GoogleToolboxForMac/Defines (= 2.2.0)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
-    - GoogleToolboxForMac/DebugUtils (= 2.2.0)
-    - GoogleToolboxForMac/Defines (= 2.2.0)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
-  - GoogleUtilities/AppDelegateSwizzler (5.3.6):
+  - GoogleToolboxForMac/DebugUtils (2.2.1):
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - GoogleToolboxForMac/Defines (2.2.1)
+  - GoogleToolboxForMac/Logger (2.2.1):
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.1)":
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.1)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.1)
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.1)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.1)"
+  - GoogleUtilities/AppDelegateSwizzler (5.8.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.6)
-  - GoogleUtilities/ISASwizzler (5.3.6)
-  - GoogleUtilities/Logger (5.3.6):
+  - GoogleUtilities/Environment (5.8.0)
+  - GoogleUtilities/ISASwizzler (5.8.0)
+  - GoogleUtilities/Logger (5.8.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.6):
+  - GoogleUtilities/MethodSwizzler (5.8.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.6):
+  - GoogleUtilities/Network (5.8.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.6)"
-  - GoogleUtilities/Reachability (5.3.6):
+  - "GoogleUtilities/NSData+zlib (5.8.0)"
+  - GoogleUtilities/Reachability (5.8.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (5.3.6):
+  - GoogleUtilities/UserDefaults (5.8.0):
     - GoogleUtilities/Logger
   - "gRPC-C++ (0.0.5)":
     - "gRPC-C++/Implementation (= 0.0.5)"
@@ -192,55 +192,56 @@ PODS:
     - gRPC-Core/Interface (= 1.14.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.14.0)
-  - GTMSessionFetcher/Core (1.2.1)
-  - leveldb-library (1.20)
+  - GTMSessionFetcher/Core (1.2.2)
+  - leveldb-library (1.22)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Nimble (8.0.1)
-  - PromiseKit (6.8.4):
-    - PromiseKit/CorePromise (= 6.8.4)
-    - PromiseKit/Foundation (= 6.8.4)
-    - PromiseKit/UIKit (= 6.8.4)
-  - PromiseKit/CorePromise (6.8.4)
-  - PromiseKit/Foundation (6.8.4):
+  - Nimble (8.0.4)
+  - PromiseKit (6.11.0):
+    - PromiseKit/CorePromise (= 6.11.0)
+    - PromiseKit/Foundation (= 6.11.0)
+    - PromiseKit/UIKit (= 6.11.0)
+  - PromiseKit/CorePromise (6.11.0)
+  - PromiseKit/Foundation (6.11.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.8.4):
+  - PromiseKit/UIKit (6.11.0):
     - PromiseKit/CorePromise
-  - Protobuf (3.6.1)
-  - PureLayout (3.1.4)
+  - Protobuf (3.10.0)
+  - PureLayout (3.1.5)
   - SDWebImage (4.4.7):
     - SDWebImage/Core (= 4.4.7)
   - SDWebImage/Core (4.4.7)
-  - SwiftyBeaver (1.7.0)
+  - SwiftyBeaver (1.8.2)
   - TwitterCore (3.2.0)
   - TwitterKit (3.4.2):
     - TwitterCore (>= 3.2.0)
 
 DEPENDENCIES:
-  - Cosmos
+  - Cosmos (~> 17.0.0)
   - Crashlytics (~> 3.12.0)
-  - Dip
-  - Eureka
+  - Dip (~> 7.0.0)
+  - Eureka (~> 4.3.0)
   - Fabric (~> 1.9.0)
   - FBSDKCoreKit (~> 4.38.0)
   - FBSDKLoginKit (~> 4.38.0)
-  - Firebase/Auth
+  - Firebase/Auth (~> 5.14.0)
   - Firebase/Core
-  - Firebase/Firestore
-  - Firebase/Performance
-  - Firebase/Storage
+  - Firebase/Core (~> 5.14.0)
+  - Firebase/Firestore (~> 5.14.0)
+  - Firebase/Performance (~> 5.14.0)
+  - Firebase/Storage (~> 5.14.0)
   - FirebaseUI (~> 5.1.0)
-  - GoogleSignIn
+  - GoogleSignIn (~> 4.4.0)
   - Nimble
   - PromiseKit (~> 6.8)
-  - PureLayout
+  - PureLayout (~> 3.1.4)
   - SwiftyBeaver (~> 1.7)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Bolts
     - BoringSSL
     - Cosmos
@@ -282,46 +283,46 @@ SPEC REPOS:
     - TwitterKit
 
 SPEC CHECKSUMS:
-  Bolts: 548055440d1cf62d73167e2e5b7ebb9ad3fcb0a1
-  BoringSSL: 016eaed201a404d11981ba2cfce8c3a773e86a1b
-  Cosmos: bfc3f026cd36e4bfc8941ffe301687b212324298
-  Crashlytics: 0dbc1330db64921cf67e6a0d3402fc7d95675abd
-  Dip: c0428d6f8f80840e9ae1c8fccb08545389c623d1
-  Eureka: 524b63ee66dbdca913658081a31ce68b5585e115
-  Fabric: 64c408540b54db50bdd106de9d7a9845d35c95e9
-  FBSDKCoreKit: daf87d58d125ffc5cd891ad0645cdb88279d28e7
-  FBSDKLoginKit: 96bfaf921fe2519f827149c35888f0ccc36f7f01
-  Firebase: 961a2b4069c354937500e45945d502de98144b6f
-  FirebaseABTesting: c0993e02bdcd6dccd0cf9c1eaf472204430ee85c
-  FirebaseAnalytics: ac2d0962033bb9032400ebcae97c741086b3057a
-  FirebaseAuth: 1b7a30ce4e50e0be4c40bea25cb18450e7e4e278
-  FirebaseAuthInterop: 165c11428f6ae3f7ec2262e53fdd8b6fb2c4922a
-  FirebaseCore: fbabde8140c2977a597df3a26e8cebc688a217b4
-  FirebaseDatabase: 1fa1658cdd24e5fd7e369d4fb23b1b457577708a
-  FirebaseFirestore: d08ced0a76008b464db68c82944314dde8b1aab7
-  FirebaseInstanceID: 8d407bb087e6b74e19154e2e700fcb499b364a5f
-  FirebasePerformance: 704b3e5648d4e3652dca01354be16fec96b37e46
-  FirebaseRemoteConfig: adca8a6169d52b3fe53eb2e3715c5d205d52402e
-  FirebaseStorage: 85f3c3b8b8133b9a7647b8b160509d31b5576cae
-  FirebaseUI: 1c069449c09d302ccf7a7f83828c21c285f7ca29
-  GoogleAppMeasurement: 3ca0c97c372fa2355eb2b813bdd824ccd9c88f9d
-  GoogleSignIn: ea3778511e551761685697560f3614b2b50f4e40
-  GoogleToolboxForMac: 91a761a7c5ba525da1e2003e897736252ab8f3fe
-  GoogleUtilities: fd87f68d5791b938d8f25de9de1f404409099310
-  "gRPC-C++": 83bbb322462612a12a52a88d4b4b3780631cb746
-  gRPC-Core: e517327a7723b2efe3dcfc8533a92880aaa99e4b
-  GTMSessionFetcher: c1b726d3e27675e1dab34347e28325c873a468e6
-  leveldb-library: d2078c743a1ba226e4917345714d72423e0069cc
-  nanopb: 9f8aa4fc4e9d32c345e927e12c7bd9c0ea088353
-  Nimble: a3aa44d3310cf0e4e62e7bc64a84107ce843cb20
-  PromiseKit: 7d3d1e73adf135d7c379b61723cb19c1db72f947
-  Protobuf: 6b0fc34ab8f2b7dbad2278a48be08a669427c59f
-  PureLayout: cd5c97224004e45506d9e750161efdf70336c0af
-  SDWebImage: af73e67257399abb171e6405545b43181b4afb1b
-  SwiftyBeaver: faff13c9b69e467c2d21425a0f8e5efaed8e6a35
-  TwitterCore: 578104d32408f2cfe5c8adfce93d75099661b934
-  TwitterKit: 029d6620b009ea1df27f26a400f3a0866c358da5
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
+  Cosmos: 309e489f21ffc91a1eeecfebef7f817cd2fcfba6
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
+  Dip: 79509d5dc4f648e10e922ed79c608a7761c52b13
+  Eureka: 28ea296f06710f6745266b71f17862048941a32d
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
+  FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
+  Firebase: 963d5685fae888a56d6d4d9cfce6b9c976958798
+  FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
+  FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
+  FirebaseAuth: 4a5cc5fc2d1721e509e24699b93ebc3d94b1e195
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 8f49b70f57ab5cbb032ef41d64992ded21606459
+  FirebaseDatabase: 0621689f77528d62b47e1c06ca737c4c19275d1a
+  FirebaseFirestore: 0b2495ff27e5749fa0984c405ea58db3d070e075
+  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebasePerformance: 071ef097e7fb2d4f2f27fac1d4ed72ae3dd737d7
+  FirebaseRemoteConfig: 7e11c65f0769c09bff6947997c209515058c5318
+  FirebaseStorage: 3d22c041370593e639fba013d1eb698a8dae2881
+  FirebaseUI: 6d3f86249a4de8288424e154c9ff1a976aae3910
+  GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
+  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
+  "gRPC-C++": 19eec1ffd34de29453f5fab5b4697ad0f240ad51
+  gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  PromiseKit: e4863d06976e7dee5e41c04fc7371c16b3600292
+  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+  PureLayout: 9b4ad47b2f0388c84ff534af23d96e720c1b875a
+  SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
+  SwiftyBeaver: aaf2ebd7dac2e952991f46a82ed24ad642867ae2
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 74b71206e647787d6857483936e4e75cb8bc5eac
+PODFILE CHECKSUM: e2fe812238f15feed6ff5af0621d5d8571eb9818
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3
