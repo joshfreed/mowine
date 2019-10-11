@@ -11,8 +11,11 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
   - Cosmos (20.0.1)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
   - Dip (7.0.1)
   - Eureka (5.1.0)
+  - Fabric (1.10.2)
   - FBSDKCoreKit (5.8.0):
     - FBSDKCoreKit/Basics (= 5.8.0)
     - FBSDKCoreKit/Core (= 5.8.0)
@@ -246,8 +249,10 @@ PODS:
 
 DEPENDENCIES:
   - Cosmos (~> 20.0.1)
+  - Crashlytics (~> 3.14.0)
   - Dip (~> 7.0.0)
   - Eureka (~> 5.1.0)
+  - Fabric (~> 1.10.2)
   - FBSDKCoreKit (~> 5.8.0)
   - FBSDKLoginKit (~> 5.8.0)
   - Firebase/Analytics (~> 6.10.0)
@@ -268,8 +273,10 @@ SPEC REPOS:
     - AppAuth
     - BoringSSL-GRPC
     - Cosmos
+    - Crashlytics
     - Dip
     - Eureka
+    - Fabric
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -311,8 +318,10 @@ SPEC CHECKSUMS:
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   Dip: 79509d5dc4f648e10e922ed79c608a7761c52b13
   Eureka: 18a5076dcf0c41f9cd9748aa1c42f4d11434bdae
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
   FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
   Firebase: 5e6b7b12bf9adb90986688edc06b156c37e109cd
@@ -350,6 +359,6 @@ SPEC CHECKSUMS:
   SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
   SwiftyBeaver: aaf2ebd7dac2e952991f46a82ed24ad642867ae2
 
-PODFILE CHECKSUM: 2a789b9b44ed59af134a4ee52a9f2624358e6948
+PODFILE CHECKSUM: 27ffc371edb62360d81e0a88cf40e5a47f44fbef
 
 COCOAPODS: 1.8.3

@@ -27,6 +27,10 @@ target 'mowine' do
   pod 'Firebase/Performance', '~> 6.10.0'
   pod 'FirebaseUI', '~> 8.1.0'
   
+  # Crashlytics
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
+  
   target 'mowineTests' do
     inherit! :search_paths
     # Pods for testing
