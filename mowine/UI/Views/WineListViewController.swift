@@ -9,6 +9,7 @@
 import UIKit
 import JFLib
 import SwiftyBeaver
+import Crashlytics
 
 protocol WineListViewControllerDelegate: class {
     func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath)
@@ -76,7 +77,9 @@ class WineListViewController: UITableViewController {
         thumbnailFetcher?.fetchThumbnail(for: wine.id) { result in
             switch result {
             case .success(let data): cell.configure(thumbnail: data)
-            case .failure(let error): SwiftyBeaver.warning("\(error)")
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.sharedInstance().recordError(error as NSError)
             }
         }
         return cell
