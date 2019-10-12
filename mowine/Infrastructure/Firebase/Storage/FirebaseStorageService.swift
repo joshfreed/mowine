@@ -42,8 +42,15 @@ class FirebaseStorageService {
 
         pathReference.getData(maxSize: maxSize) { data, error in
             if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
+                let errorCode = (error as NSError).code
+                guard let storageError = StorageErrorCode(rawValue: errorCode) else {
+                    completion(.failure(error))
+                    return
+                }
+                switch storageError {
+                case .objectNotFound: completion(.success(nil))
+                default: completion(.failure(error))
+                }
             } else {
                 completion(.success(data))
             }

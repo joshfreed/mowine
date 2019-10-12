@@ -13,6 +13,7 @@ import UIKit
 import Eureka
 import SwiftyBeaver
 import PromiseKit
+import Crashlytics
 
 class EditWineViewController: FormViewController {
     var editWineService: EditWineService!
@@ -58,7 +59,9 @@ class EditWineViewController: FormViewController {
         editWineService.getWinePhoto(wineId: wineId) { result in
             switch result {
             case .success(let photo): self.displayPhoto(photo)
-            case .failure(let error): SwiftyBeaver.error("\(error)")
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.sharedInstance().recordError(error as NSError)
             }
         }
     }
