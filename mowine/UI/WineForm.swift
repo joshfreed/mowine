@@ -38,6 +38,10 @@ class WineForm: NSObject {
         $0.placeholder = "How much was this wine?"
     }
     let noteRow = TextAreaRow("notes")
+    let deleteButtonRow = ButtonRow() {
+        $0.title = "Delete Wine"
+        $0.cell.tintColor = .red
+    }
     
     var pairingsSection: MultivaluedSection!
 
@@ -75,6 +79,8 @@ class WineForm: NSObject {
             +++ pairingsSection
             +++ Section("Notes")
             <<< noteRow
+            +++ Section()
+            <<< deleteButtonRow
         
         return form
     }
