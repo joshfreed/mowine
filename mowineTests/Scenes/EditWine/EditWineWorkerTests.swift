@@ -17,7 +17,7 @@ import Nimble
 class EditWineWorkerTests: XCTestCase {
     // MARK: - Subject under test
 
-    var sut: EditWineWorker!
+    var sut: EditWineService!
     var imageWorker = MockWineImageWorker()
     var wine: Wine!
     let wineRepo = MockWineRepository()
@@ -56,7 +56,7 @@ class EditWineWorkerTests: XCTestCase {
     // MARK: - Test setup
 
     func setupEditWineWorker() {
-        sut = EditWineWorker(
+        sut = EditWineService(
             wineRepository: wineRepo,
             wineTypeRepository: typeRepo,
             imageWorker: imageWorker
@@ -69,57 +69,50 @@ class EditWineWorkerTests: XCTestCase {
 
     func testUpdateWine() {
         // Given
-        var request = EditWine.SaveWine.Request(name: "New Name", rating: 4, type: "Red")
+        var request = SaveWineRequest(name: "New Name", rating: 4, type: "Red")
         request.variety = "Other Variety"
         request.location = "Wegmans"
         request.notes = "Wine tasted good"
         request.price = "400"
         request.pairings = ["Tacos", "Sushi"]
-        var updatedWine: Wine?
+        _ = sut.getWineTypes()
 
         // When
-        sut.updateWine(wine: wine, from: request) { result in            
-            if case let .success(w) = result {
-                updatedWine = w
-            }
-        }
+        sut.updateWine(wine: wine, from: request) { _ in  }
 
         // Then
-        expect(updatedWine).toNot(beNil())
-        expect(updatedWine?.variety?.name).to(equal("Other Variety"))
-        expect(updatedWine?.name).to(equal(request.name))
-        expect(updatedWine?.rating).to(equal(request.rating))
-        expect(updatedWine?.location).to(equal(request.location))
-        expect(updatedWine?.notes).to(equal(request.notes))
-        expect(updatedWine?.price).to(equal("400"))
-        expect(updatedWine?.pairings).to(haveCount(2))
-        expect(updatedWine?.pairings).to(contain(["Tacos", "Sushi"]))
+        expect(self.wine.variety?.name).to(equal("Other Variety"))
+        expect(self.wine.name).to(equal(request.name))
+        expect(self.wine.rating).to(equal(request.rating))
+        expect(self.wine.location).to(equal(request.location))
+        expect(self.wine.notes).to(equal(request.notes))
+        expect(self.wine.price).to(equal("400"))
+        expect(self.wine.pairings).to(haveCount(2))
+        expect(self.wine.pairings).to(contain(["Tacos", "Sushi"]))
 //        XCTAssertNil(updatedWine?.photo)
 //        XCTAssertNil(updatedWine?.thumbnail)
     }
     
     func testUpdateWine_changeType() {
         // Given
-        var request = EditWine.SaveWine.Request(name: "Test Wine", rating: 5, type: "Other")
+        var request = SaveWineRequest(name: "Test Wine", rating: 5, type: "Other")
         request.variety = "Other Variety"
-        var updatedWine: Wine?
+        _ = sut.getWineTypes()
         
         // When
         sut.updateWine(wine: wine, from: request) { result in
-            if case let .success(w) = result {
-                updatedWine = w
-            } else {
+            if case .failure = result {
                 fail("Update failed")
             }
         }
         
         // Then
-        expect(updatedWine?.type.name).to(equal("Other"))
+        expect(self.wine.type.name).to(equal("Other"))
     }
     
     func testUpdateWine_returnsErrorIfTypeNotInRepo() {
         // Given
-        let request = EditWine.SaveWine.Request(name: "Test Wine", rating: 5, type: "UNKNOWN")
+        let request = SaveWineRequest(name: "Test Wine", rating: 5, type: "UNKNOWN")
         var error: Error?
         
         // When
@@ -132,26 +125,24 @@ class EditWineWorkerTests: XCTestCase {
         }
         
         // Then
-        expect(error).to(matchError(EditWineWorkerError.invalidWineType))
+        expect(error).to(matchError(EditWineServiceError.invalidWineType))
     }
     
     func testUpdateWine_nilVariety() {
         // Given
-        var request = EditWine.SaveWine.Request(name: "Test Wine", rating: 5, type: "Red")
+        _ = sut.getWineTypes()
+        var request = SaveWineRequest(name: "Test Wine", rating: 5, type: "Red")
         request.variety = nil
-        var updatedWine: Wine?
         
         // When
         sut.updateWine(wine: wine, from: request) { result in
-            if case let .success(w) = result {
-                updatedWine = w
-            } else {
+            if case .failure = result {
                 fail("Update failed")
             }
         }
         
         // Then
-        expect(updatedWine?.variety).to(beNil())
+        expect(self.wine.variety).to(beNil())
     }
     
 }
