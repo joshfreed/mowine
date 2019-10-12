@@ -56,13 +56,3 @@ class MockWineImageRepository: WineImageRepository {
     
     
 }
-
-class MockEditWineWorker: EditWineWorker {
-    init() {
-        super.init(
-            wineRepository: MockWineRepository(),
-            wineTypeRepository: MockWineTypeRepository(),
-            imageWorker: MockWineImageWorker()
-        )
-    }
-}

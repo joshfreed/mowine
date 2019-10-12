@@ -251,7 +251,7 @@ class EditWineService {
         }
     }
     
-    private func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         wine.name = request.name
         wine.rating = request.rating
         wine.location = request.location
