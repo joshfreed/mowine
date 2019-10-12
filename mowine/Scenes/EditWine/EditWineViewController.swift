@@ -39,6 +39,10 @@ class EditWineViewController: FormViewController {
             }
         })
         
+        wineForm.deleteButtonRow.onCellSelection { cell, row in
+            self.showDeleteConfirmation()
+        }
+        
         firstly {
             self.editWineService.getWineTypes()
         }.done { wineTypes in
@@ -65,6 +69,8 @@ class EditWineViewController: FormViewController {
             }
         }
     }
+    
+    // MARK: - Display Wine
     
     func displayWine(_ wineViewModel: WineViewModel) {
         wineForm.typeRow.value = wineForm.typeRow.options?.first(where: { $0.name == wineViewModel.typeName })
@@ -97,6 +103,8 @@ class EditWineViewController: FormViewController {
     func displayErrorLoadingWine(_ error: Error) {
         
     }
+    
+    // MARK: - Save Wine
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         let valuesDictionary = form.values()
@@ -145,7 +153,35 @@ class EditWineViewController: FormViewController {
     func onSaveError(_ error: Error) {
         
     }
+    
+    // MARK: - Delete Wine
+    
+    func showDeleteConfirmation() {
+        let alertController = UIAlertController(title: "Are you sure?", message: "This cannot be undone.", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Delete Wine", style: .destructive, handler: { _ in self.deleteWine() }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func deleteWine() {
+        editWineService.deleteWine(wineId: wineId) { result in
+            switch result {
+            case .success: self.onDeleteSuccess()
+            case .failure(let error): self.onDeleteError(error)
+            }
+        }
+    }
+    
+    private func onDeleteSuccess() {
+        performSegue(withIdentifier: "MyWines", sender: nil)
+    }
+    
+    private func onDeleteError(_ error: Error) {
+        showAlert(error: error)
+    }
 }
+
+// MARK: - EditWineService
 
 class EditWineService {
     let wineRepository: WineRepository
@@ -237,6 +273,25 @@ class EditWineService {
         }
         
         wineRepository.save(wine) { result in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteWine(wineId: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+        let wineId = WineId(string: wineId)
+        wineRepository.getWine(by: wineId) { result in
+            switch result {
+            case .success(let wine): self.deleteWine(wine, completion: completion)
+            case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    private func deleteWine(_ wine: Wine, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+        wineRepository.delete(wine) { result in
             switch result {
             case .success: completion(.success(()))
             case .failure(let error): completion(.failure(error))

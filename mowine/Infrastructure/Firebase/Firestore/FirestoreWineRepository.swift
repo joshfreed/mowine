@@ -40,7 +40,14 @@ class FirestoreWineRepository: WineRepository {
     }
     
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        fatalError("Not implemented")
+        db.collection("wines").document(wine.id.asString).delete() { err in
+            if let err = err {
+                SwiftyBeaver.error("Error deleting wine document: \(err)")
+                completion(.failure(err))
+            } else {
+                completion(.success)
+            }
+        }
     }
     
     func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
