@@ -35,7 +35,8 @@ class MemoryWineTypeRepository: WineTypeRepository {
         
         let bubbly = WineType(name: "Bubbly", varieties: [
             WineVariety(name: "Champagne"),
-            WineVariety(name: "Prosecco")
+            WineVariety(name: "Prosecco"),
+            WineVariety(name: "Sparkling"),
         ])
         
         let other = WineType(name: "Other", varieties: [])
