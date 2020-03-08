@@ -41,6 +41,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if viewController is AddWineViewController {
             let storyboard = UIStoryboard(name: "AddWine", bundle: nil)
             if let vc = storyboard.instantiateInitialViewController() {
+                vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)
                 return false
             }
