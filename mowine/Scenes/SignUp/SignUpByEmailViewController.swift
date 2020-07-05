@@ -99,7 +99,7 @@ class SignUpByEmailViewController: UIViewController {
     }
 
     func confirmProfilePicture(photo: UIImage) {
-        guard let newUserId = session.currentUserId else {
+        guard session.currentUserId != nil else {
             fatalError("NO USER AFTER SIGN UP")
         }
 

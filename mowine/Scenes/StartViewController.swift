@@ -97,7 +97,7 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
 
 extension StartViewController: FUIAuthDelegate {
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        SwiftyBeaver.info("Did sign in! \(authDataResult), \(error)")
+        SwiftyBeaver.info("Did sign in! \(String(describing: authDataResult)), \(String(describing: error))")
     }
     
     func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {

@@ -36,7 +36,7 @@ class FirebaseSession: Session {
         Auth.auth().addStateDidChangeListener { (auth, user) in
             if user != nil {
                 self.listenForUserUpdates()
-                SwiftyBeaver.info("FireBase Session Info: \(user?.email), \(user?.displayName)")
+                SwiftyBeaver.info("FireBase Session Info: \(String(describing: user?.email)), \(String(describing: user?.displayName))")
             }
         }
     }

@@ -54,7 +54,7 @@ class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore {
     
     private func presentUserProfile(user: User?) {
         guard let user = user else {
-            print("User \(userId) not found!")
+            print("User \(String(describing: userId)) not found!")
             return
         }
         
@@ -101,7 +101,7 @@ class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore {
         worker?.unfriend(userId: userId) { result in
             switch result {
             case .success:
-                NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": self.userId])
+                NotificationCenter.default.post(name: .friendRemoved, object: nil, userInfo: ["friendId": self.userId!])
                 let response = UserProfile.Unfriend.Response()
                 self.presenter?.presentUnfriended(response: response)
             case .failure(let error):

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WU9-gR-Vw5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WU9-gR-Vw5">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -448,7 +447,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfA-FT-ZCV" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfA-FT-ZCV" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="65" y="154" width="245" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -529,7 +528,7 @@
         <!--Add Wine Summary View Controller-->
         <scene sceneID="rDA-4s-j8s">
             <objects>
-                <viewController id="zob-5b-4jf" customClass="AddWineSummaryViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddWineSummaryViewController" id="zob-5b-4jf" customClass="AddWineSummaryViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iIx-q7-5Qz"/>
                         <viewControllerLayoutGuide type="bottom" id="Hah-bt-1Ih"/>
@@ -699,11 +698,11 @@
             <point key="canvasLocation" x="2080" y="-309.44527736131937"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="add-wine-header" width="248" height="93"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7pM-bq-uHV"/>
         <segue reference="G7Y-pl-4IX"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="add-wine-header" width="248" height="93"/>
+    </resources>
 </document>

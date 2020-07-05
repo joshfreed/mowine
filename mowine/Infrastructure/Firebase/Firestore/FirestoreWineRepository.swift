@@ -167,7 +167,7 @@ extension Wine {
         let wineId = WineId(string: documentId)
         let userId = UserId(string: userIdStr)
         let wineType = WineType(name: typeName, varieties: [])
-        var wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: rating)
+        let wine = Wine(id: wineId, userId: userId, type: wineType, name: name, rating: rating)
         
         if let varietyName = data["variety"] as? String {
             wine.variety = WineVariety(name: varietyName)

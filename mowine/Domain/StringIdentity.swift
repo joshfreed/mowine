@@ -26,11 +26,11 @@ class StringIdentity: Hashable, CustomStringConvertible {
     init(string: String) {
         identityId = string
     }
-    
-    var hashValue: Int {
-        return identityId.hashValue
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identityId)
     }
-    
+
     static func ==(lhs: StringIdentity, rhs: StringIdentity) -> Bool {
         return lhs.identityId == rhs.identityId
     }

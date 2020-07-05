@@ -29,7 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupSwiftyBeaverLogging() {
         let console = ConsoleDestination()
+        #if DEBUG
         console.minLevel = .verbose
+        #else
+        console.minLevel = .warning
+        #endif
         SwiftyBeaver.addDestination(console)
         
         let platform = SBPlatformDestination(appID: Secrets.SwiftyBeaver.appId,

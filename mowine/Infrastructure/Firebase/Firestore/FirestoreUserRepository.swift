@@ -14,12 +14,6 @@ import SwiftyBeaver
 class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()
     
-    init() {
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
-    }
-    
     func add(user: User, completion: @escaping (Result<User>) -> ()) {        
         let data = user.toFirestore()
         
