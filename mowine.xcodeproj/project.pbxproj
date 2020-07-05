@@ -1873,7 +1873,7 @@
 			baseConfigurationReference = 3E96B14267EE27AFAAE9E8E7 /* Pods-mowine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1895,7 +1895,7 @@
 			baseConfigurationReference = 66467F43289DFF54847981AF /* Pods-mowine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
