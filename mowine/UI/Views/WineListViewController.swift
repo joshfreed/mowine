@@ -9,7 +9,7 @@
 import UIKit
 import JFLib
 import SwiftyBeaver
-import Crashlytics
+import FirebaseCrashlytics
 
 protocol WineListViewControllerDelegate: class {
     func didSelectWine(_ wine: WineListViewModel, at indexPath: IndexPath)
@@ -79,7 +79,7 @@ class WineListViewController: UITableViewController {
             case .success(let data): cell.configure(thumbnail: data)
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
-                Crashlytics.sharedInstance().recordError(error as NSError)
+                Crashlytics.crashlytics().record(error: error)
             }
         }
         return cell

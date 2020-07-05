@@ -119,7 +119,7 @@ class FirebaseSession: Session {
             
             SwiftyBeaver.debug("User info: \(authUser.providerData)")
             SwiftyBeaver.debug("Provider ID: \(authUser.providerID)")
-            
+
             authUser.updateEmail(to: emailAddress) { error in
                 if let error = error {
                     let nserror = error as NSError

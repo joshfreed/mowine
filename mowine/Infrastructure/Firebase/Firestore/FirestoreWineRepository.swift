@@ -10,7 +10,7 @@ import Foundation
 import JFLib
 import FirebaseFirestore
 import SwiftyBeaver
-import Crashlytics
+import FirebaseCrashlytics
 
 class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()
@@ -25,7 +25,7 @@ class FirestoreWineRepository: WineRepository {
         db.collection("wines").document(wine.id.asString).setData(data) { err in
             if let err = err {
                 SwiftyBeaver.error("Error adding wine document: \(err)")
-                Crashlytics.sharedInstance().recordError(err)
+                Crashlytics.crashlytics().record(error: err)
                 completion(.failure(err))
             } else {
                 completion(.success(wine))
@@ -43,7 +43,7 @@ class FirestoreWineRepository: WineRepository {
         db.collection("wines").document(wine.id.asString).delete() { err in
             if let err = err {
                 SwiftyBeaver.error("Error deleting wine document: \(err)")
-                Crashlytics.sharedInstance().recordError(err)
+                Crashlytics.crashlytics().record(error: err)
                 completion(.failure(err))
             } else {
                 completion(.success)
@@ -56,7 +56,7 @@ class FirestoreWineRepository: WineRepository {
         docRef.getDocument(source: .cache) { (document, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
-                Crashlytics.sharedInstance().recordError(error)
+                Crashlytics.crashlytics().record(error: error)
                 completion(.failure(error))
                 return
             }
@@ -79,7 +79,7 @@ class FirestoreWineRepository: WineRepository {
         query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
-                Crashlytics.sharedInstance().recordError(error)
+                Crashlytics.crashlytics().record(error: error)
                 completion(.failure(error))
             } else if let documents = querySnapshot?.documents {
                 let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
@@ -99,7 +99,7 @@ class FirestoreWineRepository: WineRepository {
         query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
-                Crashlytics.sharedInstance().recordError(error)
+                Crashlytics.crashlytics().record(error: error)
                 completion(.failure(error))
             } else if let documents = querySnapshot?.documents {
                 let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
@@ -120,7 +120,7 @@ class FirestoreWineRepository: WineRepository {
         query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
-                Crashlytics.sharedInstance().recordError(error)
+                Crashlytics.crashlytics().record(error: error)
                 completion(.failure(error))
             } else if let documents = querySnapshot?.documents {
                 let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
@@ -137,7 +137,7 @@ class FirestoreWineRepository: WineRepository {
         query.getDocuments { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
-                Crashlytics.sharedInstance().recordError(error)
+                Crashlytics.crashlytics().record(error: error)
                 completion(.failure(error))
             } else {
                 if let documents = querySnapshot?.documents {

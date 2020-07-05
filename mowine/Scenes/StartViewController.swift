@@ -38,13 +38,13 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         current = mainStoryboard.instantiateViewController(withIdentifier: "SplashViewController")
         show(viewController: current!)
 
+        FirebaseApp.configure()
+
         #if DEBUG
         Analytics.setAnalyticsCollectionEnabled(false)
         #else
-        Analytics.setAnalyticsCollectionEnabled(false)
+        Analytics.setAnalyticsCollectionEnabled(true)
         #endif
-        
-        FirebaseApp.configure()
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
