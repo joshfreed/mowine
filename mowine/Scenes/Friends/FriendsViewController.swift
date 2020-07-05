@@ -75,7 +75,8 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
     }
     
     private func setUpActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator!.color = .gray
         activityIndicator!.hidesWhenStopped = true
         view.addSubview(activityIndicator!)
         activityIndicator!.translatesAutoresizingMaskIntoConstraints = false
@@ -263,7 +264,7 @@ extension FriendsViewController: UserTableViewCellDelegate {
 
 public extension UIImage {
     
-    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: .zero, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         color.setFill()
@@ -275,7 +276,7 @@ public extension UIImage {
         self.init(cgImage: cgImage)
     }
     
-    public func withRoundCorners(_ cornerRadius: CGFloat) -> UIImage? {
+    func withRoundCorners(_ cornerRadius: CGFloat) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         let rect = CGRect(origin: CGPoint.zero, size: size)
         let context = UIGraphicsGetCurrentContext()

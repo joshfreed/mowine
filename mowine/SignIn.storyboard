@@ -199,41 +199,41 @@
                         <viewControllerLayoutGuide type="bottom" id="CsP-Xz-cM2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dKj-Ag-id2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="d2c-mm-kIX">
-                                <rect key="frame" x="16" y="16" width="343" height="458"/>
+                                <rect key="frame" x="16" y="60" width="343" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSx-xt-cVA">
-                                        <rect key="frame" x="146.66666666666666" y="0.0" width="50" height="35.333333333333336"/>
+                                        <rect key="frame" x="146.66666666666666" y="0.0" width="50" height="67.333333333333329"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="cIA-fQ-Ous">
-                                        <rect key="frame" x="71.666666666666686" y="51.333333333333343" width="200" height="200"/>
+                                        <rect key="frame" x="71.666666666666686" y="83.333333333333343" width="200" height="200.00000000000003"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="cIA-fQ-Ous" secondAttribute="height" multiplier="1:1" id="JW7-TU-731"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="xEE-cL-kUz"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKj-dD-JkQ">
-                                        <rect key="frame" x="146.66666666666666" y="267.33333333333331" width="50" height="35.333333333333314"/>
+                                        <rect key="frame" x="146.66666666666666" y="299.33333333333331" width="50" height="67.333333333333314"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="You're Beautiful!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hA-wv-4Pg">
-                                        <rect key="frame" x="70.666666666666686" y="318.66666666666669" width="202" height="33.666666666666686"/>
+                                        <rect key="frame" x="70.666666666666686" y="382.66666666666669" width="202" height="33.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Let friends see your beautiful face by uploading a profile picture." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Va-Q4-hON">
-                                        <rect key="frame" x="35.333333333333343" y="368.33333333333337" width="272.33333333333326" height="38.333333333333314"/>
+                                        <rect key="frame" x="35.333333333333343" y="432.33333333333331" width="272.33333333333326" height="38.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CML-bO-zwa">
-                                        <rect key="frame" x="146.66666666666666" y="422.66666666666663" width="50" height="35.333333333333314"/>
+                                        <rect key="frame" x="146.66666666666666" y="486.66666666666657" width="50" height="67.333333333333314"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -243,7 +243,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4E-7K-0IF" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="16" y="558" width="343" height="64"/>
+                                <rect key="frame" x="16" y="698" width="343" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="7Z3-9F-3qk"/>
                                 </constraints>
@@ -254,7 +254,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLL-sZ-jxR" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
-                                <rect key="frame" x="16" y="490" width="343" height="64"/>
+                                <rect key="frame" x="16" y="630" width="343" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="G7o-wD-uMh"/>
                                 </constraints>
@@ -763,9 +763,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cih-Rs-sVu"/>
-                    <connections>
-                        <segue destination="Hge-jT-Nm0" kind="show" id="peo-Eg-MZw"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxU-so-vAu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

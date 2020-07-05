@@ -18,7 +18,7 @@ extension FirebaseSocialAuth: FacebookAuthenticationService {
     func linkFacebookAccount(token: String, completion: @escaping (EmptyResult) -> ()) {
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
         
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -33,7 +33,7 @@ extension FirebaseSocialAuth: GoogleAuthenticationService {
     func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ()) {
         let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
         
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 completion(.failure(error))
                 return
