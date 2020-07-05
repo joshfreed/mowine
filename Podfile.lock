@@ -226,15 +226,15 @@ PODS:
   - Cosmos (20.0.1)
   - Dip (7.0.1)
   - Eureka (5.1.0)
-  - FBSDKCoreKit (5.8.0):
-    - FBSDKCoreKit/Basics (= 5.8.0)
-    - FBSDKCoreKit/Core (= 5.8.0)
-  - FBSDKCoreKit/Basics (5.8.0)
-  - FBSDKCoreKit/Core (5.8.0):
+  - FBSDKCoreKit (5.15.1):
+    - FBSDKCoreKit/Basics (= 5.15.1)
+    - FBSDKCoreKit/Core (= 5.15.1)
+  - FBSDKCoreKit/Basics (5.15.1)
+  - FBSDKCoreKit/Core (5.15.1):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.8.0):
-    - FBSDKLoginKit/Login (= 5.8.0)
-  - FBSDKLoginKit/Login (5.8.0):
+  - FBSDKLoginKit (5.15.1):
+    - FBSDKLoginKit/Login (= 5.15.1)
+  - FBSDKLoginKit/Login (5.15.1):
     - FBSDKCoreKit (~> 5.0)
   - Firebase/Analytics (6.27.0):
     - Firebase/Core
@@ -468,8 +468,8 @@ DEPENDENCIES:
   - Cosmos (~> 20.0.1)
   - Dip (~> 7.0.0)
   - Eureka (~> 5.1.0)
-  - FBSDKCoreKit (~> 5.8.0)
-  - FBSDKLoginKit (~> 5.8.0)
+  - FBSDKCoreKit (~> 5.15.0)
+  - FBSDKLoginKit (~> 5.15.0)
   - Firebase/Analytics (~> 6.27.0)
   - Firebase/Auth (~> 6.27.0)
   - Firebase/Core
@@ -535,8 +535,8 @@ SPEC CHECKSUMS:
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
   Dip: 79509d5dc4f648e10e922ed79c608a7761c52b13
   Eureka: 18a5076dcf0c41f9cd9748aa1c42f4d11434bdae
-  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
-  FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
+  FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
+  FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
   FirebaseABTesting: b7f8b6c8c9398e98bb30c4195f697b5b73a330d0
   FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
@@ -571,6 +571,6 @@ SPEC CHECKSUMS:
   SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
   SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
 
-PODFILE CHECKSUM: b10bf7ba9092a0f634618f4acb3a663e6a44e3f7
+PODFILE CHECKSUM: b8320707e736e51514a1dc27db13c0014c92eecf
 
 COCOAPODS: 1.9.3

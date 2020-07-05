@@ -1,4 +1,4 @@
-platform :ios, '11.0'
+platform :ios, '13.0'
 
 target 'mowine' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
@@ -13,8 +13,8 @@ target 'mowine' do
   pod 'PromiseKit', '~> 6.8'
   
   # Facebook
-  pod 'FBSDKCoreKit', '~> 5.8.0'
-  pod 'FBSDKLoginKit', '~> 5.8.0'
+  pod 'FBSDKCoreKit', '~> 5.15.0'
+  pod 'FBSDKLoginKit', '~> 5.15.0'
   
   # Google
   pod 'GoogleSignIn', '~> 5.0.0'
