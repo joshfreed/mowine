@@ -20,17 +20,14 @@ target 'mowine' do
   pod 'GoogleSignIn', '~> 5.0.0'
   
   # Firebase
-  pod 'Firebase/Analytics', '~> 6.10.0'
-  pod 'Firebase/Auth', '~> 6.10.0'
-  pod 'Firebase/Firestore', '~> 6.10.0'
-  pod 'Firebase/Storage', '~> 6.10.0'
-  pod 'Firebase/Performance', '~> 6.10.0'
-  pod 'FirebaseUI', '~> 8.1.0'
-  
-  # Crashlytics
-  pod 'Fabric', '~> 1.10.2'
-  pod 'Crashlytics', '~> 3.14.0'
-  
+  pod 'Firebase/Analytics', '~> 6.27.0'
+  pod 'Firebase/Auth', '~> 6.27.0'
+  pod 'Firebase/Firestore', '~> 6.27.0'
+  pod 'Firebase/Storage', '~> 6.27.0'
+  pod 'Firebase/Performance', '~> 6.27.0'
+  pod 'Firebase/Crashlytics', '~> 6.27.0'
+  pod 'FirebaseUI', '~> 8.4.2'
+
   target 'mowineTests' do
     inherit! :search_paths
     # Pods for testing
