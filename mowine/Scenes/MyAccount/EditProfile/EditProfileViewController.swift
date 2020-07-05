@@ -66,6 +66,10 @@ class EditProfileViewController: UIViewController {
     // MARK: Save
     
     @IBAction func tappedSave(_ sender: Any) {
+        saveProfile()
+    }
+    
+    func saveProfile() {
         SwiftyBeaver.info("Saving profile...")
         
         loadingView.show("Saving...")
@@ -78,8 +82,12 @@ class EditProfileViewController: UIViewController {
             switch result {
             case .success: self.performSegue(withIdentifier: "exit", sender: self)
             case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                self.showAlert(error: error)
+                if case SessionError.requiresRecentLogin = error {
+                    self.showReauthenticationView()
+                } else {
+                    SwiftyBeaver.error("\(error)")
+                    self.showAlert(error: error)
+                }
             }
         }
     }
@@ -123,6 +131,16 @@ class EditProfileViewController: UIViewController {
         enableSaveButton()
         profilePictureOverlay.isHidden = true
     }
+    
+    // MARK: Reauthenticate
+    
+    func showReauthenticationView() {
+        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+        let nc = storyboard.instantiateViewController(withIdentifier: "reauthenticate") as! UINavigationController
+        let vc = nc.topViewController as! ReauthenticationViewController
+        vc.delegate = self
+        present(nc, animated: true, completion: nil)
+    }
 }
 
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -154,5 +172,11 @@ extension EditProfileViewController: JPFFancyTextFieldDelegate {
             
         }
         enableSaveButton()
+    }
+}
+
+extension EditProfileViewController: ReauthenticationViewControllerDelegate {
+    func reauthenticationSucceeded() {
+        self.saveProfile()
     }
 }

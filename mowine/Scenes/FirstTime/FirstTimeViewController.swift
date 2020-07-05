@@ -40,9 +40,7 @@ class FirstTimeViewController: UIViewController {
         let googleSignInWorker = SocialSignInWorker<GoogleProvider>(userRepository: userRepository, session: session, provider: googleProvider)
         worker = FirstTimeWorker(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker)
 
-        loadingView = LoadingView(parentView: navigationController!.view)
-        
-        GIDSignIn.sharedInstance().delegate = self
+        loadingView = LoadingView(parentView: navigationController!.view)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +72,7 @@ class FirstTimeViewController: UIViewController {
     // MARK: Continue with Google
     
     @IBAction func tappedContinueWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().presentingViewController = self
         GIDSignIn.sharedInstance().signIn()        
     }
