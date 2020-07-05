@@ -133,6 +133,15 @@ class FakeSession: Session {
         UserDefaults.standard.removeObject(forKey: "loggedIn")
     }
 
+    func getCurrentAuth() -> MoWineAuth? {
+        return FakeMoWineAuth(email: "boobs@butts.com")
+    }
+
+    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+        completion(.success(()))
+//        completion(.failure(MoWineError.error(message: "Just a test error")))
+    }
+
     func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
         _photoUrl = url
         completion(.success)
@@ -143,8 +152,13 @@ class FakeSession: Session {
     }
     
     func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
+//        return Promise(error: SessionError.requiresRecentLogin)
         return Promise()
     }
+}
+
+struct FakeMoWineAuth: MoWineAuth {
+    var email: String?
 }
 
 class FakeEmailAuth: EmailAuthenticationService {

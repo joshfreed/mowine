@@ -61,6 +61,20 @@ class FirebaseSession: Session {
         }
     }
 
+    func getCurrentAuth() -> MoWineAuth? { Auth.auth().currentUser }
+
+    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+
+        Auth.auth().currentUser?.reauthenticate(with: credential) { (result, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
     func end() {
         currentUser = nil        
         
@@ -103,13 +117,25 @@ class FirebaseSession: Session {
                 return
             }
             
-            authUser.updateEmail(to: emailAddress) { (error) in
+            SwiftyBeaver.debug("User info: \(authUser.providerData)")
+            SwiftyBeaver.debug("Provider ID: \(authUser.providerID)")
+            
+            authUser.updateEmail(to: emailAddress) { error in
                 if let error = error {
-                    seal.reject(error)
+                    let nserror = error as NSError
+                    if nserror.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                        seal.reject(SessionError.requiresRecentLogin)
+                    } else {
+                        seal.reject(error)
+                    }
                 } else {
                     seal.fulfill_()
                 }
             }
         }
     }
+}
+
+extension FirebaseAuth.User: MoWineAuth {
+
 }

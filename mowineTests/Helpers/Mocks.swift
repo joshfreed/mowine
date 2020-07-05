@@ -150,6 +150,14 @@ class MockSession: Session {
     func login(user: User) {
         _currentUser = user
     }
+
+    func getCurrentAuth() -> MoWineAuth? {
+        if let currentUser = _currentUser {
+            return MockAuth(email: currentUser.emailAddress)
+        } else {
+            return nil
+        }
+    }
     
     func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
         if let currentUser = _currentUser {
@@ -183,6 +191,14 @@ class MockSession: Session {
     func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
         return Promise()
     }
+
+    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+
+    }
+}
+
+struct MockAuth: MoWineAuth {
+    var email: String?
 }
 
 class MockEmailAuthService: EmailAuthenticationService {

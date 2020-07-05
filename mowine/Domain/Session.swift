@@ -12,13 +12,20 @@ import PromiseKit
 
 enum SessionError: Error {
     case notLoggedIn
+    case requiresRecentLogin
 }
 
 protocol Session {
     var isLoggedIn: Bool { get }
     var currentUserId: UserId? { get }
     func end()
+    func getCurrentAuth() -> MoWineAuth?
+    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ())
     func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ())
     func getPhotoUrl() -> URL?
     func updateEmailAddress(_ emailAddress: String) -> Promise<Void>
+}
+
+protocol MoWineAuth {
+    var email: String? { get }
 }
