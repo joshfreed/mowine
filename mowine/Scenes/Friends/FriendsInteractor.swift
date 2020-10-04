@@ -107,7 +107,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     func searchUsers(request: Friends.SearchUsers.Request) {
         displayMode = .search
 
-        print("Searching for: \(request.searchString)")
+        SwiftyBeaver.debug("Searching for: \(request.searchString)")
 
         cancelSearchTimer()
         
@@ -116,7 +116,7 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
             return
         }
 
-        print("Scheduling a search after \(debounceTime) seconds")
+        SwiftyBeaver.debug("Scheduling a search after \(debounceTime) seconds")
         
         searchTimer = Timer.scheduledTimer(withTimeInterval: debounceTime, repeats: false, block: { _ in
             self.doSearch(request: request)
@@ -126,19 +126,20 @@ class FriendsInteractor: FriendsBusinessLogic, FriendsDataStore {
     private func doSearch(request: Friends.SearchUsers.Request) {
         let searchJobId = UUID()
         
-        print("doSearch \(searchJobId) \(request.searchString)")
+        SwiftyBeaver.debug("doSearch \(searchJobId) \(request.searchString)")
         
         searches.append(searchJobId)
         
         worker?.searchUsers(searchString: request.searchString) { result in
-            print("Work complete for \(request.searchString)")
+            SwiftyBeaver.debug("Work complete for \(request.searchString)")
             
             switch result {
             case .success(let users):
                 guard self.searches.contains(searchJobId) else {
+                    SwiftyBeaver.debug("Not displaying search results because the search job was (probably) cancelled. \(searchJobId)")
                     return
                 }
-                print("Presenting search results for \(searchJobId), \(request.searchString)")
+                SwiftyBeaver.debug("Presenting search results for \(searchJobId), \(request.searchString)")
                 self.lastSearchResults = users
                 self.presentSearchResults(users: users)
             case .failure(let error): print("\(error)")
