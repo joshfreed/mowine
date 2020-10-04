@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WU9-gR-Vw5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WU9-gR-Vw5">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                     <constraint firstAttribute="height" constant="93" id="Uzz-Bc-FUp"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7M-ux-Bld" customClass="ButtonPrimaryGradient" customModule="mowine">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7M-ux-Bld" customClass="ButtonPrimaryGradient" customModule="mowine">
                                 <rect key="frame" x="16" y="153" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -38,7 +39,7 @@
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="RUy-I3-bSm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6g-m6-cAg" customClass="ButtonPrimaryGradient" customModule="mowine">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6g-m6-cAg" customClass="ButtonPrimaryGradient" customModule="mowine">
                                 <rect key="frame" x="16" y="237" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -51,7 +52,7 @@
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="OeP-Ke-Bz3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dO5-ju-Dj0" customClass="ButtonPrimaryGradient" customModule="mowine">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dO5-ju-Dj0" customClass="ButtonPrimaryGradient" customModule="mowine">
                                 <rect key="frame" x="16" y="321" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -64,7 +65,7 @@
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="IrK-4J-QMs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyM-gb-5Da" customClass="ButtonPrimaryGradient" customModule="mowine">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyM-gb-5Da" customClass="ButtonPrimaryGradient" customModule="mowine">
                                 <rect key="frame" x="16" y="405" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -77,7 +78,7 @@
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="aVy-xO-LVa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18U-0z-6pQ" customClass="ButtonPrimaryGradient" customModule="mowine">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18U-0z-6pQ" customClass="ButtonPrimaryGradient" customModule="mowine">
                                 <rect key="frame" x="16" y="489" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -230,12 +231,12 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap the Bottle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ge-ON-jl5">
-                                <rect key="frame" x="45" y="163" width="285" height="44.5"/>
+                                <rect key="frame" x="45.5" y="163" width="284" height="44.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca5-sd-LSG" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca5-sd-LSG" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
                                 <rect key="frame" x="16" y="227.5" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -249,7 +250,7 @@
                                     <action selector="takePhoto:" destination="Ndr-H1-xxV" eventType="touchUpInside" id="Iyx-4I-tuC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-xk-Q56" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuD-xk-Q56" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
                                 <rect key="frame" x="16" y="311.5" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -263,7 +264,7 @@
                                     <action selector="selectWineType:" destination="0F1-Cv-DyL" eventType="touchUpInside" id="oWm-5K-d1P"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-0b-qtZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-0b-qtZ">
                                 <rect key="frame" x="140.5" y="613" width="94" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Take Later">
@@ -317,7 +318,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtj-94-vbb">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtj-94-vbb">
                                 <rect key="frame" x="32" y="575" width="311" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Take Photo">
@@ -327,7 +328,7 @@
                                     <action selector="takeAnotherPhoto:" destination="61x-xl-9Rt" eventType="touchUpInside" id="kFg-ML-AWH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp3-nv-tEI">
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp3-nv-tEI">
                                 <rect key="frame" x="32" y="613" width="311" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Choose from Library">
@@ -352,7 +353,7 @@
                                     <constraint firstAttribute="width" secondItem="XDS-YG-dd1" secondAttribute="height" multiplier="1:1" id="FPx-BW-AEA"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-D3-y0b" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEc-D3-y0b" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
                                 <rect key="frame" x="16" y="353.5" width="343" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="yjY-ac-anv"/>
@@ -442,12 +443,12 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How'd you like it?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feg-QJ-zWI">
-                                                <rect key="frame" x="124.5" y="126.5" width="126" height="19.5"/>
+                                                <rect key="frame" x="124.5" y="126.5" width="126.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfA-FT-ZCV" customClass="CosmosView" customModule="Cosmos">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfA-FT-ZCV" customClass="CosmosView" customModule="Cosmos">
                                                 <rect key="frame" x="65" y="154" width="245" height="45"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -465,7 +466,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rM-JR-l5W" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rM-JR-l5W" customClass="ButtonPrimaryGradient" customModule="mowine" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="223" width="343" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="7RR-ld-22w"/>
@@ -555,7 +556,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPj-6D-Kms">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPj-6D-Kms">
                                 <rect key="frame" x="161.5" y="567" width="52" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Edit It">
@@ -566,7 +567,7 @@
                                     <action selector="takeAnotherPhoto:" destination="61x-xl-9Rt" eventType="touchUpInside" id="ca9-4r-8pD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uV2-uS-MxL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uV2-uS-MxL">
                                 <rect key="frame" x="149.5" y="613" width="76" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Delete It">
@@ -577,7 +578,7 @@
                                     <action selector="takeAnotherPhoto:" destination="61x-xl-9Rt" eventType="touchUpInside" id="o5g-OJ-3M3"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mKP-Mh-z7i" customClass="CosmosView" customModule="Cosmos">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKP-Mh-z7i" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="97.5" y="384" width="180" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -596,7 +597,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17p-Nh-YNp" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17p-Nh-YNp" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
                                 <rect key="frame" x="32" y="495" width="311" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="Mez-lm-NPJ"/>
@@ -698,6 +699,44 @@
             <point key="canvasLocation" x="2080" y="-309.44527736131937"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0rM-JR-l5W">
+            <size key="intrinsicContentSize" width="119" height="46"/>
+        </designable>
+        <designable name="17p-Nh-YNp">
+            <size key="intrinsicContentSize" width="142" height="46"/>
+        </designable>
+        <designable name="18U-0z-6pQ">
+            <size key="intrinsicContentSize" width="89" height="57"/>
+        </designable>
+        <designable name="FfA-FT-ZCV">
+            <size key="intrinsicContentSize" width="245" height="45"/>
+        </designable>
+        <designable name="MuD-xk-Q56">
+            <size key="intrinsicContentSize" width="239" height="46"/>
+        </designable>
+        <designable name="U7M-ux-Bld">
+            <size key="intrinsicContentSize" width="62" height="57"/>
+        </designable>
+        <designable name="ca5-sd-LSG">
+            <size key="intrinsicContentSize" width="130" height="46"/>
+        </designable>
+        <designable name="cyM-gb-5Da">
+            <size key="intrinsicContentSize" width="108" height="57"/>
+        </designable>
+        <designable name="dO5-ju-Dj0">
+            <size key="intrinsicContentSize" width="78" height="57"/>
+        </designable>
+        <designable name="iEc-D3-y0b">
+            <size key="intrinsicContentSize" width="125" height="57"/>
+        </designable>
+        <designable name="mKP-Mh-z7i">
+            <size key="intrinsicContentSize" width="180" height="32"/>
+        </designable>
+        <designable name="z6g-m6-cAg">
+            <size key="intrinsicContentSize" width="91" height="57"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="7pM-bq-uHV"/>
         <segue reference="G7Y-pl-4IX"/>
