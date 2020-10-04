@@ -272,7 +272,7 @@ class FriendsInteractorTests: XCTestCase {
         sut.searchUsers(request: request2)
         
         // Then
-        expect(self.spy.presentSearchResultsCallCount).toEventually(equal(1), timeout: 3, pollInterval: 3)
+        expect(self.spy.presentSearchResultsCallCount).toEventually(equal(1), timeout: DispatchTimeInterval.seconds(6), pollInterval: DispatchTimeInterval.seconds(2))
         expect(self.spy.presentSearchResultsResponse?.matches).to(equal([user3, user4]))
     }
 

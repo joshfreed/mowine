@@ -5,7 +5,7 @@ target 'mowine' do
   use_frameworks!
 
   # Pods for mowine
-  pod 'Eureka', '~> 5.2.0'
+  pod 'Eureka', '~> 5.3.0'
   pod 'Cosmos', '~> 20.0.1'
   pod 'PureLayout', '~> 3.1.4'
   pod 'SwiftyBeaver', '~> 1.7'
