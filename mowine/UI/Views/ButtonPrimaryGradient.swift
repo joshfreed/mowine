@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable
 class ButtonPrimaryGradient: UIButton {
     let gradient: CAGradientLayer = CAGradientLayer()
+    var activityIndicator: UIActivityIndicatorView!
+    private var previousTitle: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +28,7 @@ class ButtonPrimaryGradient: UIButton {
         tintColor = .white
         layer.cornerRadius = 5
         layer.masksToBounds = true
+        setupActivityIndicator()
     }
     
     override func layoutSubviews() {
@@ -46,5 +49,31 @@ class ButtonPrimaryGradient: UIButton {
         gradient.colors = colours.map { $0.cgColor }
         gradient.locations = locations
         layer.addSublayer(gradient)
+    }
+
+    // MARK: Loading
+
+    private func setupActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.isHidden = true
+        addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+
+    func displayLoading() {
+        activityIndicator.startAnimating()
+        previousTitle = title(for: .normal)
+        setTitle(nil, for: .normal)
+        isEnabled = false
+    }
+
+    func displayNotLoading() {
+        activityIndicator.stopAnimating()
+        setTitle(previousTitle, for: .normal)
+        isEnabled = true
     }
 }

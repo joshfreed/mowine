@@ -108,12 +108,14 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var doneButton: ButtonPrimary!
+    @IBOutlet weak var doneButton: ButtonPrimaryGradient!
     @IBOutlet weak var ratingView: CosmosView!
-    
+
     // MARK: Create wine
     
     @IBAction func tappedNext(_ sender: ButtonPrimary) {
+        doneButton.displayLoading()
+
         let request = NameWine.CreateWine.Request(name: nameTextField.text ?? "", rating: ratingView.rating)
         interactor?.createWine(request: request)
     }
@@ -123,9 +125,10 @@ class NameWineViewController: UIViewController, NameWineDisplayLogic {
     }
     
     func displayErrorCreatingWine(_ message: String) {
-        
+        doneButton.displayNotLoading()
+        showAlert(message: message)
     }
-    
+
     // MARK: Helper funcs
 
     func showDoneButton() {
