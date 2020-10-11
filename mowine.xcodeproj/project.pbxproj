@@ -83,6 +83,7 @@
 		5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */; };
 		53547C7D218E3F8700EDD2A8 /* Friendship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7C218E3F8700EDD2A8 /* Friendship.swift */; };
 		53547C7F218E40FC00EDD2A8 /* StringIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */; };
+		5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5358BF6C252A894500E151CF /* SceneDelegate.swift */; };
 		535C6A8021EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535C6A7F21EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift */; };
 		535D6D20205AA8B6004D51AB /* MyWinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D6D1A205AA8B6004D51AB /* MyWinesViewController.swift */; };
 		535F66912062FEE20006B26A /* SignUpWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F668B2062FEE20006B26A /* SignUpWorker.swift */; };
@@ -165,6 +166,7 @@
 		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
 		53D91FC622BED429004F94B0 /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D91FC522BED429004F94B0 /* UserProfileService.swift */; };
 		53D91FCA22C12537004F94B0 /* EditProfileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D91FC922C12537004F94B0 /* EditProfileServiceTests.swift */; };
+		53E36492252A77DF00BA1CD2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53E36491252A77DF00BA1CD2 /* Preview Assets.xcassets */; };
 		53EAFA0F225E8EA0002BCAB0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA0E225E8EA0002BCAB0 /* DataService.swift */; };
 		53EAFA13225E930F002BCAB0 /* DataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */; };
 		53ED1F7C20489DBD00C129BC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED1F7B20489DBD00C129BC /* User.swift */; };
@@ -312,6 +314,7 @@
 		5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
 		53547C7C218E3F8700EDD2A8 /* Friendship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendship.swift; sourceTree = "<group>"; };
 		53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIdentity.swift; sourceTree = "<group>"; };
+		5358BF6C252A894500E151CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		535C6A7F21EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPhoto2ViewController.swift; sourceTree = "<group>"; };
 		535D6D1A205AA8B6004D51AB /* MyWinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWinesViewController.swift; sourceTree = "<group>"; };
 		535F668B2062FEE20006B26A /* SignUpWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWorker.swift; sourceTree = "<group>"; };
@@ -393,6 +396,7 @@
 		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		53D91FC522BED429004F94B0 /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		53D91FC922C12537004F94B0 /* EditProfileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileServiceTests.swift; sourceTree = "<group>"; };
+		53E36491252A77DF00BA1CD2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		53EAFA0E225E8EA0002BCAB0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceTests.swift; sourceTree = "<group>"; };
 		53ED1F7B20489DBD00C129BC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -958,6 +962,14 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		53E36490252A77C900BA1CD2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				53E36491252A77DF00BA1CD2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		53EAFA0D225E8E8D002BCAB0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1080,7 @@
 				539C4D8A21ACA99500B0F8E0 /* Workers */,
 				53B61B7F219B34C200A0258E /* main.swift */,
 				53F5ABF31E2176080067AB62 /* AppDelegate.swift */,
+				5358BF6C252A894500E151CF /* SceneDelegate.swift */,
 				534895FC203CBFB900B7547A /* JFContainer.swift */,
 				53F5ABF71E2176080067AB62 /* Main.storyboard */,
 				53112843205F01CD0094DC35 /* AddWine.storyboard */,
@@ -1076,6 +1089,7 @@
 				53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */,
 				53F5AC021E2176080067AB62 /* Info.plist */,
 				530BCA562157EB6B002F785C /* Secrets.plist */,
+				53E36490252A77C900BA1CD2 /* Preview Content */,
 			);
 			path = mowine;
 			sourceTree = "<group>";
@@ -1304,6 +1318,7 @@
 				5327BC392062BB41006787E9 /* WineDetailsHeader.xib in Resources */,
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				53112846205F04580094DC35 /* AddWine.storyboard in Resources */,
+				53E36492252A77DF00BA1CD2 /* Preview Assets.xcassets in Resources */,
 				5327BC1720617FC2006787E9 /* SignIn.storyboard in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
@@ -1680,6 +1695,7 @@
 				E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */,
 				E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */,
 				E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */,
+				5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */,
 				E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1878,13 +1894,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_ASSET_PATHS = "\"mowine/Preview Content\"";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Cosmos\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Eureka\"",
-					"$(SRCROOT)/**",
-				);
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mowine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1900,13 +1912,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_ASSET_PATHS = "\"mowine/Preview Content\"";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Cosmos\"",
-					"\"$PODS_CONFIGURATION_BUILD_DIR/Eureka\"",
-					"$(SRCROOT)/**",
-				);
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mowine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
