@@ -32,18 +32,10 @@ class DefaultContentNavigationController: UINavigationController {
 
 extension UINavigationController {
     func mwPrimaryAppearance() {
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
-            navigationBar.standardAppearance = appearance
-            navigationBar.compactAppearance = appearance
-            navigationBar.scrollEdgeAppearance = appearance
-        } else {
-            navigationBar.barTintColor = .mwPrimary
-            navigationBar.isTranslucent = false
-            navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        }
-        
+        let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
         navigationBar.tintColor = UIColor.mwButtonSecondary
     }
 }

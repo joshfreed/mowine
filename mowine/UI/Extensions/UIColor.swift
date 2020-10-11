@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIColor {
     class var mwPrimary: UIColor {
@@ -42,5 +43,11 @@ extension UIColor {
     
     class var google: UIColor {
         return #colorLiteral(red: 0.8588235294, green: 0.1960784314, blue: 0.2117647059, alpha: 1)
+    }
+}
+
+extension Color {
+    static var mwSecondary: Color {
+        return Color(UIColor.mwSecondary)
     }
 }
