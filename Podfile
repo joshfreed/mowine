@@ -24,7 +24,7 @@ target 'mowine' do
   pod 'Firebase/Auth', '~> 6.27.0'
   pod 'Firebase/Firestore', '~> 6.27.0'
   pod 'Firebase/Storage', '~> 6.27.0'
-  pod 'Firebase/Performance', '~> 6.27.0'
+#  pod 'Firebase/Performance', '~> 6.27.0'
   pod 'Firebase/Crashlytics', '~> 6.27.0'
   pod 'FirebaseUI', '~> 8.4.2'
 
