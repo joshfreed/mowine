@@ -8,7 +8,7 @@
 
 import SwiftUI
 import SwiftyBeaver
-import SwiftyBeaver
+import Combine
 import FirebaseCrashlytics
 
 
@@ -18,9 +18,12 @@ class WineCellarListViewModel: ObservableObject {
     let session: Session
     let wineType: WineType
     let thumbnailFetcher: WineListThumbnailFetcher
-    @Published private(set) var wines: [WineItemViewModel] = []
+    var onEditWine: (String) -> Void = { _ in }
+
+    @Published var wines: [WineItemViewModel] = []
 
     private var isSubscribed = false
+    private var wineUpdatedSubscription: AnyCancellable?
 
     init(
         navigationBarTitle: String,
@@ -48,6 +51,18 @@ class WineCellarListViewModel: ObservableObject {
             return
         }
 
+        wineUpdatedSubscription = NotificationCenter.default.publisher(for: .wineUpdated).sink { [weak self] notification in
+            guard let wineId = notification.userInfo?["wineId"] as? String else {
+                return
+            }
+
+            guard let thumbnail = notification.userInfo?["thumbnail"] as? Data else {
+                return
+            }
+
+            self?.setThumbnail(thumbnail, for: wineId)
+        }
+
         wineRepository.getWines(userId: userId, wineType: wineType) { result in
             switch result {
             case .success(let wines):
@@ -70,14 +85,20 @@ class WineCellarListViewModel: ObservableObject {
         thumbnailFetcher.fetchThumbnail(for: wine) { result in
             switch result {
             case .success(let data):
-                if let index = self.wines.firstIndex(where: { $0.id == wine.id.asString }) {
-                    self.wines[index].thumbnail = data
-                }
+                self.setThumbnail(data, for: wine.id.asString)
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
             }
         }
+    }
+
+    private func setThumbnail(_ data: Data?, for wineId: String) {
+        guard let index = self.wines.firstIndex(where: { $0.id == wineId }) else {
+            return
+        }
+
+        wines[index].thumbnail = data
     }
 
     private func makeWineItemViewModel(wine: Wine) -> WineItemViewModel {

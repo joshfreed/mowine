@@ -22,6 +22,8 @@ class EditWineViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.mwPrimaryAppearance()
         
         editWineService = EditWineService(
             wineRepository: try! JFContainer.shared.container.resolve(),
@@ -147,7 +149,7 @@ class EditWineViewController: FormViewController {
     }
     
     func onSaveSuccess() {
-        performSegue(withIdentifier: "MyWines", sender: nil)
+        performSegue(withIdentifier: "MyCellar", sender: nil)
     }
     
     func onSaveError(_ error: Error) {

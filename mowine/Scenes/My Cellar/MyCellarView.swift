@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MyCellarView: View {
-    @ObservedObject private(set) var viewModel: MyCellarViewModel
+    @ObservedObject private(set) var viewModel: MyCellarViewModel    
 
     init(viewModel: MyCellarViewModel) {
         self.viewModel = viewModel
@@ -72,6 +72,7 @@ struct MyCellarView: View {
             wineType: wineType,
             thumbnailFetcher: try! JFContainer.shared.container.resolve()
         )
+        vm.onEditWine = viewModel.onEditWine
         return WineCellarListView(viewModel: vm)
     }
 }
