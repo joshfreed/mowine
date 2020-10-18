@@ -17,6 +17,7 @@ protocol WineListViewControllerDelegate: class {
 
 protocol WineListThumbnailFetcher: class {
     func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?>) -> ())
+    func fetchThumbnail(for wine: Wine, completion: @escaping (Result<Data?>) -> ())
 }
 
 class WineListViewController: UITableViewController {
