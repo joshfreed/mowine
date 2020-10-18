@@ -17,7 +17,8 @@ class MyCellarViewController: UIViewController {
     }
 
     @IBSegueAction func addSwiftUIView(_ coder: NSCoder) -> UIViewController? {
-        viewModel = MyCellarViewModel()
-        return UIHostingController(coder: coder, rootView: MyCellarView(viewModel: viewModel))
+        viewModel = MyCellarViewModel(wineTypeRepository: JFContainer.shared.wineTypeRepository)
+        let rootView = MyCellarView(viewModel: viewModel)
+        return UIHostingController(coder: coder, rootView: rootView)
     }
 }

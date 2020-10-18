@@ -78,7 +78,7 @@ extension WineImageWorker: WineListThumbnailFetcher {
         }
     }
 
-    private func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?>) -> ()) {
         let name = "\(wine.userId)/\(wine.id)-thumb.png"
         SwiftyBeaver.info("Requested wine image thumbnail. WineId: \(wine.id)")
         imageService.getData(url: name, completion: completion)

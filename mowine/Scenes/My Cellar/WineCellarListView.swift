@@ -7,18 +7,32 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct WineCellarListView: View {
-    let title: String
-    
+    @ObservedObject var viewModel: WineCellarListViewModel
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .navigationBarTitle(title)
+        List(viewModel.wines) { wine in
+            WineItemView(viewModel: wine)
+        }
+            .listStyle(PlainListStyle())
+            .navigationBarTitle(viewModel.navigationBarTitle)
+            .onAppear(perform: {
+                SwiftyBeaver.info("onAppear \(viewModel.navigationBarTitle)")
+                viewModel.loadWines()
+            })
     }
 }
 
 struct WineCellarListView_Previews: PreviewProvider {
     static var previews: some View {
-        WineCellarListView(title: "Red")
+        WineCellarListView(viewModel: WineCellarListViewModel(
+                            navigationBarTitle: "Red",
+                            wineRepository: MemoryWineRepository(),
+                            session: FakeSession(),
+                            wineType: WineType(name: "Red"),
+                            thumbnailFetcher: FakeWineThumbnailFetcher()
+        ))
     }
 }

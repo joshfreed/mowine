@@ -25,12 +25,12 @@ struct MyCellarView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    NavigationLink(destination: WineCellarListView(title: "Red Wines")) {
+                    NavigationLink(destination: makeView(title: "Red Wines", wineType: viewModel.red)) {
                         WineTypeMenuButton(name: "Red", icon: "Red Wine Button")
                     }
 
                     Spacer()
-                    NavigationLink(destination: WineCellarListView(title: "White Wines")) {
+                    NavigationLink(destination: makeView(title: "White Wines", wineType: viewModel.white)) {
                         WineTypeMenuButton(name: "White", icon: "White Wine Button")
                     }
                     Spacer()
@@ -38,17 +38,17 @@ struct MyCellarView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    NavigationLink(destination: WineCellarListView(title: "Rose")) {
+                    NavigationLink(destination: makeView(title: "Rose", wineType: viewModel.rose)) {
                         WineTypeMenuButton(name: "Rose", icon: "Rose Button")
                     }
                     Spacer()
-                    NavigationLink(destination: WineCellarListView(title: "Bubbly")) {
+                    NavigationLink(destination: makeView(title: "Bubbly", wineType: viewModel.bubbly)) {
                         WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
                     }
                     Spacer()
                 }
                 Spacer()
-                NavigationLink(destination: WineCellarListView(title: "Other Wines")) {
+                NavigationLink(destination: makeView(title: "Other Wines", wineType: viewModel.other)) {
                     Text("Other")
                         .font(.system(size: 37))
                         .foregroundColor(Color(UIColor.mwSecondary))
@@ -59,6 +59,20 @@ struct MyCellarView: View {
                 .navigationBarTitle("My Cellar")
         }
         .accentColor(.mwSecondary)
+        .onAppear {
+            self.viewModel.loadWineTypes()
+        }
+    }
+
+    private func makeView(title: String, wineType: WineType) -> WineCellarListView {
+        let vm = WineCellarListViewModel(
+            navigationBarTitle: title,
+            wineRepository: JFContainer.shared.wineRepository,
+            session: JFContainer.shared.session,
+            wineType: wineType,
+            thumbnailFetcher: try! JFContainer.shared.container.resolve()
+        )
+        return WineCellarListView(viewModel: vm)
     }
 }
 
@@ -83,6 +97,6 @@ struct WineTypeMenuButton: View {
 
 struct MyCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarView(viewModel: MyCellarViewModel())
+        MyCellarView(viewModel: MyCellarViewModel(wineTypeRepository: MemoryWineTypeRepository()))
     }
 }

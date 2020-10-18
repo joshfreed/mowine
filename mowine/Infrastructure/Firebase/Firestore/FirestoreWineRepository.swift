@@ -91,6 +91,8 @@ class FirestoreWineRepository: WineRepository {
     }
     
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+        SwiftyBeaver.info("getWines \(userId) \(wineType.name)")
+
         let query = db
             .collection("wines")
             .whereField("userId", isEqualTo: userId.asString)
