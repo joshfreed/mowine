@@ -12,6 +12,8 @@ import SwiftyBeaver
 class MyCellarViewModel: ObservableObject {
     let wineTypeRepository: WineTypeRepository
 
+    var onEditWine: (String) -> Void = { _ in }
+
     var red: WineType { wineTypes.first { $0.name == "Red" }! }
     var white: WineType { wineTypes.first { $0.name == "White" }! }
     var rose: WineType { wineTypes.first { $0.name == "Rosé" }! }

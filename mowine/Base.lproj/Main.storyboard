@@ -469,14 +469,14 @@
                         <viewControllerLayoutGuide type="bottom" id="Ijl-Zr-nVW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3CW-vZ-yxq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Wine" id="zQG-SH-kKy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TED-eK-oLB">
                             <connections>
-                                <segue destination="UeZ-CR-MzF" kind="unwind" identifier="MyWines" unwindAction="unwindToMyWines:" id="O2i-fu-L27"/>
+                                <segue destination="UeZ-CR-MzF" kind="unwind" identifier="MyCellar" unwindAction="unwindToMyCellar:" id="feA-3b-8vW"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="bsh-bq-FDo">
@@ -646,11 +646,11 @@
             </objects>
             <point key="canvasLocation" x="5886" y="1925"/>
         </scene>
-        <!--My Cellar-->
+        <!--My Cellar 2-->
         <scene sceneID="nAh-OR-12x">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jCD-dz-nfh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Cellar" image="My Wines Tab" id="VJZ-TW-gJ1"/>
+                    <tabBarItem key="tabBarItem" title="My Cellar 2" image="My Wines Tab" id="VJZ-TW-gJ1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="jXT-la-aU0">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -699,6 +699,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Cellar" image="My Wines Tab" id="K9R-yf-pKE"/>
+                    <connections>
+                        <segue destination="Hb9-bm-aX5" kind="presentation" identifier="editWine" id="lB0-tp-FIV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZV-AW-LNA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1064,6 +1067,28 @@
             </objects>
             <point key="canvasLocation" x="3094" y="662"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FC4-pS-Apf">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-s7-vpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="Hb9-bm-aX5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6O2-p7-Aiu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ZQf-Ib-L0c" kind="relationship" relationship="rootViewController" id="0ED-FH-Y8K"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="4997" y="-987"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="1J0-PM-mkm">
@@ -1072,6 +1097,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="vZ4-j4-jqs"/>
+        <segue reference="0ED-FH-Y8K"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Wine Tab" width="23" height="23"/>
