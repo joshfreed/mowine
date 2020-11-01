@@ -18,7 +18,17 @@ class MyCellarViewController: UIViewController {
     }
 
     @IBSegueAction func addSwiftUIView(_ coder: NSCoder) -> UIViewController? {
-        viewModel = MyCellarViewModel(wineTypeRepository: JFContainer.shared.wineTypeRepository)
+        let searchMyCellarQuery = SearchMyCellarQuery(
+            wineRepository: JFContainer.shared.wineRepository,
+            session: JFContainer.shared.session
+        )
+        viewModel = MyCellarViewModel(
+            wineTypeRepository: JFContainer.shared.wineTypeRepository,
+            wineRepository: JFContainer.shared.wineRepository,
+            session: JFContainer.shared.session,
+            thumbnailFetcher: try! JFContainer.shared.container.resolve(),
+            searchMyCellarQuery: searchMyCellarQuery
+        )
         viewModel.onEditWine = { [weak self] wineId in
             self?.selectedWineId = wineId
             self?.performSegue(withIdentifier: "editWine", sender: nil)

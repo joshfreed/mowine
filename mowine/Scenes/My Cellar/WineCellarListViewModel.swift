@@ -11,7 +11,6 @@ import SwiftyBeaver
 import Combine
 import FirebaseCrashlytics
 
-
 class WineCellarListViewModel: ObservableObject {
     let navigationBarTitle: String
     let wineRepository: WineRepository
@@ -74,11 +73,15 @@ class WineCellarListViewModel: ObservableObject {
         }
     }
 
-    private func setWines(_ wines: [Wine]) {
+    func setWines(_ wines: [Wine]) {
         self.wines = wines
             .sorted(by: { $0.rating > $1.rating })
             .map { makeWineItemViewModel(wine: $0) }
         wines.forEach { fetchThumbnail(for: $0) }
+    }
+
+    func setWineViewModels(_ wines: [WineItemViewModel]) {
+        self.wines = wines
     }
 
     private func fetchThumbnail(for wine: Wine) {
@@ -110,4 +113,11 @@ class WineCellarListViewModel: ObservableObject {
             thumbnail: nil
         )
     }
+
+    func makeWineListViewModel() -> WineListViewModelSwiftUI {
+        let vm = WineListViewModelSwiftUI(wines: wines)
+        vm.onEditWine = onEditWine
+        return vm
+    }
 }
+
