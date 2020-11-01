@@ -7,9 +7,11 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
 
 struct MyCellarView: View {
-    @ObservedObject private(set) var viewModel: MyCellarViewModel    
+    @ObservedObject private(set) var viewModel: MyCellarViewModel
+    @ObservedObject private(set) var searchBar: SearchBar = SearchBar()
 
     init(viewModel: MyCellarViewModel) {
         self.viewModel = viewModel
@@ -21,83 +23,38 @@ struct MyCellarView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    NavigationLink(destination: makeView(title: "Red Wines", wineType: viewModel.red)) {
-                        WineTypeMenuButton(name: "Red", icon: "Red Wine Button")
-                    }
-
-                    Spacer()
-                    NavigationLink(destination: makeView(title: "White Wines", wineType: viewModel.white)) {
-                        WineTypeMenuButton(name: "White", icon: "White Wine Button")
-                    }
-                    Spacer()
+            Group {
+                if searchBar.isActive {
+                    MyCellarSearchView(viewModel: viewModel.makeMyCellarSearchViewModel(), searchBar: searchBar)
+                } else {
+                    MyCellarContentView(viewModel: viewModel)
                 }
-                Spacer()
-                HStack {
-                    Spacer()
-                    NavigationLink(destination: makeView(title: "Rose", wineType: viewModel.rose)) {
-                        WineTypeMenuButton(name: "Rose", icon: "Rose Button")
-                    }
-                    Spacer()
-                    NavigationLink(destination: makeView(title: "Bubbly", wineType: viewModel.bubbly)) {
-                        WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
-                    }
-                    Spacer()
-                }
-                Spacer()
-                NavigationLink(destination: makeView(title: "Other Wines", wineType: viewModel.other)) {
-                    Text("Other")
-                        .font(.system(size: 37))
-                        .foregroundColor(Color(UIColor.mwSecondary))
-                        .padding(.bottom, 32)
-                }
-
-            }            
+            }
                 .navigationBarTitle("My Cellar")
+                .add(searchBar)
+                .onReceive(searchBar.$text) { output in
+                    viewModel.searchCellar(searchText: output)
+                }
         }
         .accentColor(.mwSecondary)
         .onAppear {
             self.viewModel.loadWineTypes()
         }
     }
-
-    private func makeView(title: String, wineType: WineType) -> WineCellarListView {
-        let vm = WineCellarListViewModel(
-            navigationBarTitle: title,
-            wineRepository: JFContainer.shared.wineRepository,
-            session: JFContainer.shared.session,
-            wineType: wineType,
-            thumbnailFetcher: try! JFContainer.shared.container.resolve()
-        )
-        vm.onEditWine = viewModel.onEditWine
-        return WineCellarListView(viewModel: vm)
-    }
 }
 
-struct WineTypeMenuButton: View {
-    let name: String
-    let icon: String
-
-    var body: some View {
-        VStack {
-            Image(icon)
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(Color(UIColor.mwSecondary))
-                .frame(width: 60, height: 90)
-
-            Text(name)
-                .font(.system(size: 37))
-                .foregroundColor(Color(UIColor.mwSecondary))
-        }
-    }
+fileprivate func makeViewModel() -> MyCellarViewModel {
+    MyCellarViewModel(
+        wineTypeRepository: MemoryWineTypeRepository(),
+        wineRepository: MemoryWineRepository(),
+        session: FakeSession(),
+        thumbnailFetcher: FakeWineThumbnailFetcher(),
+        searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession())
+    )
 }
 
 struct MyCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarView(viewModel: MyCellarViewModel(wineTypeRepository: MemoryWineTypeRepository()))
+        MyCellarView(viewModel: makeViewModel())
     }
 }

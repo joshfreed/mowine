@@ -11,15 +11,12 @@ import SwiftyBeaver
 
 struct WineCellarListView: View {
     @ObservedObject var viewModel: WineCellarListViewModel
+    @ObservedObject var searchBar: SearchBar = SearchBar()
 
     var body: some View {
-        List(viewModel.wines) { wine in
-            WineItemView(viewModel: wine)
-                .contentShape(Rectangle())
-                .onTapGesture { viewModel.onEditWine(wine.id) }
-        }
-            .listStyle(PlainListStyle())
+        WineListView(viewModel: viewModel.makeWineListViewModel(), searchText: $searchBar.text)
             .navigationBarTitle(viewModel.navigationBarTitle)
+            .add(self.searchBar)
             .onAppear(perform: {
                 SwiftyBeaver.info("onAppear \(viewModel.navigationBarTitle)")
                 viewModel.loadWines()
@@ -35,11 +32,11 @@ fileprivate func makeViewModel() -> WineCellarListViewModel {
         wineType: WineType(name: "Red"),
         thumbnailFetcher: FakeWineThumbnailFetcher()
     )
-    vm.wines = [
+    vm.setWineViewModels([
         WineItemViewModel(id: "A", name: "Merlot 1", rating: 1, type: "Red", thumbnail: nil),
         WineItemViewModel(id: "B", name: "Merlot 2", rating: 2, type: "Red", thumbnail: nil),
         WineItemViewModel(id: "C", name: "Merlot 3", rating: 3, type: "Red", thumbnail: nil),
-    ]
+    ])
     return vm
 }
 

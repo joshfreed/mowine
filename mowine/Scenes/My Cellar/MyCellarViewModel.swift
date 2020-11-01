@@ -8,9 +8,14 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Combine
 
 class MyCellarViewModel: ObservableObject {
     let wineTypeRepository: WineTypeRepository
+    let wineRepository: WineRepository
+    let session: Session
+    let thumbnailFetcher: WineListThumbnailFetcher
+    let searchMyCellarQuery: SearchMyCellarQuery
 
     var onEditWine: (String) -> Void = { _ in }
 
@@ -22,9 +27,20 @@ class MyCellarViewModel: ObservableObject {
 
     private var wineTypes: [WineType] = []
 
-    init(wineTypeRepository: WineTypeRepository) {
+    init(
+        wineTypeRepository: WineTypeRepository,
+        wineRepository: WineRepository,
+        session: Session,
+        thumbnailFetcher: WineListThumbnailFetcher,
+        searchMyCellarQuery: SearchMyCellarQuery
+    ) {
         SwiftyBeaver.debug("init")
         self.wineTypeRepository = wineTypeRepository
+        self.wineRepository = wineRepository
+        self.session = session
+        self.thumbnailFetcher = thumbnailFetcher
+        self.searchMyCellarQuery = searchMyCellarQuery
+
         loadWineTypes()
     }
 
@@ -39,5 +55,27 @@ class MyCellarViewModel: ObservableObject {
             case .failure(let error): break
             }
         }
+    }
+
+    func searchCellar(searchText: String) {
+        searchMyCellarQuery.searchMyCellar(searchText: searchText)
+    }
+
+    func makeWineCellarListViewModel(title: String, wineType: WineType) -> WineCellarListViewModel {
+        let vm = WineCellarListViewModel(
+            navigationBarTitle: title,
+            wineRepository: wineRepository,
+            session: session,
+            wineType: wineType,
+            thumbnailFetcher: thumbnailFetcher
+        )
+        vm.onEditWine = onEditWine
+        return vm
+    }
+
+    func makeMyCellarSearchViewModel() -> MyCellarSearchViewModel {
+        let vm = MyCellarSearchViewModel(searchMyCellarQuery: searchMyCellarQuery)
+        vm.onEditWine = onEditWine
+        return vm
     }
 }
