@@ -62,10 +62,10 @@ class MyCellarViewModel: ObservableObject {
     }
 
     func makeWineCellarListViewModel(title: String, wineType: WineType) -> WineCellarListViewModel {
+        let getWineByTypeQuery = GetWinesByTypeQuery(wineRepository: wineRepository, session: session)
         let vm = WineCellarListViewModel(
             navigationBarTitle: title,
-            wineRepository: wineRepository,
-            session: session,
+            getWineByTypeQuery: getWineByTypeQuery,
             wineType: wineType,
             thumbnailFetcher: thumbnailFetcher
         )
@@ -74,7 +74,7 @@ class MyCellarViewModel: ObservableObject {
     }
 
     func makeMyCellarSearchViewModel() -> MyCellarSearchViewModel {
-        let vm = MyCellarSearchViewModel(searchMyCellarQuery: searchMyCellarQuery)
+        let vm = MyCellarSearchViewModel(searchMyCellarQuery: searchMyCellarQuery, thumbnailFetcher: thumbnailFetcher)
         vm.onEditWine = onEditWine
         return vm
     }

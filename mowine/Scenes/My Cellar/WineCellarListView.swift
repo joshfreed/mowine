@@ -27,8 +27,7 @@ struct WineCellarListView: View {
 fileprivate func makeViewModel() -> WineCellarListViewModel {
     let vm = WineCellarListViewModel(
         navigationBarTitle: "Red",
-        wineRepository: MemoryWineRepository(),
-        session: FakeSession(),
+        getWineByTypeQuery: GetWinesByTypeQuery(wineRepository: MemoryWineRepository(), session: FakeSession()),
         wineType: WineType(name: "Red"),
         thumbnailFetcher: FakeWineThumbnailFetcher()
     )
