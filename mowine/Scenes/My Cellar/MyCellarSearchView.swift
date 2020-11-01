@@ -34,7 +34,8 @@ struct MyCellarSearchView_Previews: PreviewProvider {
     static var previews: some View {
         MyCellarSearchView(
             viewModel: MyCellarSearchViewModel(
-                searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession())
+                searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession()),
+                thumbnailFetcher: FakeWineThumbnailFetcher()
             ),
             searchBar: SearchBar()
         )

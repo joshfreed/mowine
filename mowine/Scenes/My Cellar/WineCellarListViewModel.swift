@@ -13,8 +13,7 @@ import FirebaseCrashlytics
 
 class WineCellarListViewModel: ObservableObject {
     let navigationBarTitle: String
-    let wineRepository: WineRepository
-    let session: Session
+    let getWineByTypeQuery: GetWinesByTypeQuery
     let wineType: WineType
     let thumbnailFetcher: WineListThumbnailFetcher
     var onEditWine: (String) -> Void = { _ in }
@@ -23,18 +22,17 @@ class WineCellarListViewModel: ObservableObject {
 
     private var isSubscribed = false
     private var wineUpdatedSubscription: AnyCancellable?
+    private var getWinesSubscription: AnyCancellable?
 
     init(
         navigationBarTitle: String,
-        wineRepository: WineRepository,
-        session: Session,
+        getWineByTypeQuery: GetWinesByTypeQuery,
         wineType: WineType,
         thumbnailFetcher: WineListThumbnailFetcher
     ) {
         SwiftyBeaver.debug("init")
         self.navigationBarTitle = navigationBarTitle
-        self.wineRepository = wineRepository
-        self.session = session
+        self.getWineByTypeQuery = getWineByTypeQuery
         self.wineType = wineType
         self.thumbnailFetcher = thumbnailFetcher
     }
@@ -44,9 +42,8 @@ class WineCellarListViewModel: ObservableObject {
     }
 
     func loadWines() {
-        guard !isSubscribed else { return }
-
-        guard let userId = session.currentUserId else {
+        guard !isSubscribed else {
+            SwiftyBeaver.debug("Already subscribed; not subscribing again")
             return
         }
 
@@ -62,39 +59,52 @@ class WineCellarListViewModel: ObservableObject {
             self?.setThumbnail(thumbnail, for: wineId)
         }
 
-        wineRepository.getWines(userId: userId, wineType: wineType) { result in
-            switch result {
-            case .success(let wines):
-                self.isSubscribed = true
-                self.setWines(wines)
-            case .failure(let error):
-                self.isSubscribed = false
-            }
-        }
-    }
-
-    func setWines(_ wines: [Wine]) {
-        self.wines = wines
-            .sorted(by: { $0.rating > $1.rating })
-            .map { makeWineItemViewModel(wine: $0) }
-        wines.forEach { fetchThumbnail(for: $0) }
+        getWinesSubscription = AnyCancellable(
+            getWineByTypeQuery
+                .getWinesByType(wineType)
+                .sink(receiveCompletion: { [weak self] error in
+                    SwiftyBeaver.error("\(error)")
+                    self?.isSubscribed = false
+                }, receiveValue: { [weak self] wines in
+                    SwiftyBeaver.debug("Received wines: \(wines)")
+                    self?.isSubscribed = true
+                    self?.setWines(wines)
+                })
+        )
     }
 
     func setWineViewModels(_ wines: [WineItemViewModel]) {
         self.wines = wines
     }
 
-    private func fetchThumbnail(for wine: Wine) {
-        thumbnailFetcher.fetchThumbnail(for: wine) { result in
-            switch result {
-            case .success(let data):
-                self.setThumbnail(data, for: wine.id.asString)
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-            }
-        }
-    }
+//    func setWines(_ wines: [Wine]) {
+//        self.wines = wines
+//            .sorted(by: { $0.rating > $1.rating })
+//            .map { makeWineItemViewModel(wine: $0) }
+//        wines.forEach { fetchThumbnail(for: $0) }
+//    }
+//
+//    private func makeWineItemViewModel(wine: Wine) -> WineItemViewModel {
+//        WineItemViewModel(
+//            id: wine.id.asString,
+//            name: wine.name,
+//            rating: Int(wine.rating),
+//            type: self.wineType.name,
+//            thumbnail: nil
+//        )
+//    }
+//
+//    private func fetchThumbnail(for wine: Wine) {
+//        thumbnailFetcher.fetchThumbnail(for: wine) { result in
+//            switch result {
+//            case .success(let data):
+//                self.setThumbnail(data, for: wine.id.asString)
+//            case .failure(let error):
+//                SwiftyBeaver.error("\(error)")
+//                Crashlytics.crashlytics().record(error: error)
+//            }
+//        }
+//    }
 
     private func setThumbnail(_ data: Data?, for wineId: String) {
         guard let index = self.wines.firstIndex(where: { $0.id == wineId }) else {
@@ -104,14 +114,33 @@ class WineCellarListViewModel: ObservableObject {
         wines[index].thumbnail = data
     }
 
-    private func makeWineItemViewModel(wine: Wine) -> WineItemViewModel {
+    func setWines(_ wines: [GetWinesByTypeQuery.WineDto]) {
+        self.wines = wines
+            .sorted(by: { $0.rating > $1.rating })
+            .map { makeWineItemViewModel(wine: $0) }
+        wines.forEach { fetchThumbnail(for: $0) }
+    }
+
+    private func makeWineItemViewModel(wine: GetWinesByTypeQuery.WineDto) -> WineItemViewModel {
         WineItemViewModel(
-            id: wine.id.asString,
+            id: wine.id,
             name: wine.name,
-            rating: Int(wine.rating),
-            type: self.wineType.name,
+            rating: wine.rating,
+            type: wine.type,
             thumbnail: nil
         )
+    }
+
+    private func fetchThumbnail(for wine: GetWinesByTypeQuery.WineDto) {
+        thumbnailFetcher.fetchThumbnail(for: wine.id) { result in
+            switch result {
+            case .success(let data):
+                self.setThumbnail(data, for: wine.id)
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
+            }
+        }
     }
 
     func makeWineListViewModel() -> WineListViewModelSwiftUI {
