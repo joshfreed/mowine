@@ -11,7 +11,7 @@ import SwiftyBeaver
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
-import FirebaseUI
+//import FirebaseUI
 
 class StartViewController: UIViewController, FirstTimeViewControllerDelegate, TabbedViewCoordinator {
     private var mainStoryboard: UIStoryboard!
@@ -19,11 +19,11 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let current = current as? UINavigationController {
-            if current.topViewController is MyAuthPickerViewController {
-                return .default
-            } else {
+//            if current.topViewController is MyAuthPickerViewController {
+//                return .default
+//            } else {
                 return .lightContent
-            }
+//            }
         } else if let current = current as? TabBarViewController {
             return current.preferredStatusBarStyle
         } else {
@@ -95,13 +95,13 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
     }
 }
 
-extension StartViewController: FUIAuthDelegate {
-    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        SwiftyBeaver.info("Did sign in! \(String(describing: authDataResult)), \(String(describing: error))")
-    }
-    
-    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
-        let vc = MyAuthPickerViewController(authUI: authUI)
-        return vc
-    }
-}
+//extension StartViewController: FUIAuthDelegate {
+//    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+//        SwiftyBeaver.info("Did sign in! \(String(describing: authDataResult)), \(String(describing: error))")
+//    }
+//
+//    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+//        let vc = MyAuthPickerViewController(authUI: authUI)
+//        return vc
+//    }
+//}
