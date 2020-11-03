@@ -7,23 +7,23 @@
 //
 
 import UIKit
-import FirebaseUI
-
-class MyAuthPickerViewController: FUIAuthPickerViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        view.backgroundColor = .white
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = .mwPrimary
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-}
+//import FirebaseUI
+//
+//class MyAuthPickerViewController: FUIAuthPickerViewController {
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+////        view.backgroundColor = .white
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.barTintColor = .mwPrimary
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//    }
+//    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        navigationController?.setNavigationBarHidden(false, animated: true)
+//    }
+//}
