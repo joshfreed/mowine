@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,42 +29,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TyA-Lj-dGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="564" y="135"/>
-        </scene>
-        <!--My Cellar-->
-        <scene sceneID="Yho-9N-F6B">
-            <objects>
-                <viewController storyboardIdentifier="MyWinesViewController" id="vzF-3n-jSP" customClass="MyWinesViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HcY-5D-fwo"/>
-                        <viewControllerLayoutGuide type="bottom" id="t1b-g9-Ua9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tte-87-Xa7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="29X-u0-kfx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
-                                <connections>
-                                    <segue destination="7NJ-7w-5oe" kind="embed" identifier="WineList" id="vZ4-j4-jqs"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="t1b-g9-Ua9" firstAttribute="top" secondItem="29X-u0-kfx" secondAttribute="bottom" id="Evh-Rj-qg9"/>
-                            <constraint firstAttribute="trailing" secondItem="29X-u0-kfx" secondAttribute="trailing" id="HPe-Lr-OaD"/>
-                            <constraint firstItem="29X-u0-kfx" firstAttribute="leading" secondItem="tte-87-Xa7" secondAttribute="leading" id="diq-dX-qYp"/>
-                            <constraint firstItem="29X-u0-kfx" firstAttribute="top" secondItem="HcY-5D-fwo" secondAttribute="bottom" id="xmG-1C-lLj"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="My Cellar" id="eRv-6D-TPd"/>
-                    <connections>
-                        <segue destination="ZQf-Ib-L0c" kind="show" identifier="EditWine" id="olj-Kp-8M0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ae1-ZX-EQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3018" y="-197"/>
         </scene>
         <!--My Account-->
         <scene sceneID="a0g-fA-ZS5">
@@ -182,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMs-cN-fB5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2078" y="615"/>
+            <point key="canvasLocation" x="2078" y="720"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="AyI-XU-X1P">
@@ -295,7 +259,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0J2-ya-QnQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ZrU-gy-VzW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3953.6231884057975" y="661.60714285714278"/>
+            <point key="canvasLocation" x="3887" y="720"/>
         </scene>
         <!--Friends-->
         <scene sceneID="tsU-q8-lcS">
@@ -489,7 +453,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-HL-1U3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="UeZ-CR-MzF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3956" y="-197"/>
+            <point key="canvasLocation" x="3888" y="-18"/>
         </scene>
         <!--Top Wines View Controller-->
         <scene sceneID="rLp-aF-ahb">
@@ -528,7 +492,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="458.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -646,31 +610,6 @@
             </objects>
             <point key="canvasLocation" x="5886" y="1925"/>
         </scene>
-        <!--My Cellar 2-->
-        <scene sceneID="nAh-OR-12x">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jCD-dz-nfh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Cellar 2" image="My Wines Tab" id="VJZ-TW-gJ1"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="jXT-la-aU0">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="vzF-3n-jSP" kind="relationship" relationship="rootViewController" id="SNn-Qz-uqo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9FY-1a-G1F" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2078" y="-197"/>
-        </scene>
         <!--My Cellar-->
         <scene sceneID="az3-KA-W0t">
             <objects>
@@ -705,7 +644,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZV-AW-LNA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3116" y="-943"/>
+            <point key="canvasLocation" x="2078" y="-198"/>
         </scene>
         <!--Hosting Controller-->
         <scene sceneID="2kQ-Hp-Unh">
@@ -713,7 +652,7 @@
                 <hostingController id="sHa-aG-jT3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1k-Tg-nu9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3952" y="-944"/>
+            <point key="canvasLocation" x="3091" y="-692"/>
         </scene>
         <!--Wine Details View Controller-->
         <scene sceneID="JeY-mN-rQe">
@@ -1065,12 +1004,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fom-ve-Zjv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3094" y="662"/>
+            <point key="canvasLocation" x="3093" y="720"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FC4-pS-Apf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-s7-vpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="Hb9-bm-aX5" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6O2-p7-Aiu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -1086,8 +1024,9 @@
                         <segue destination="ZQf-Ib-L0c" kind="relationship" relationship="rootViewController" id="0ED-FH-Y8K"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-s7-vpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4997" y="-987"/>
+            <point key="canvasLocation" x="3094" y="-18"/>
         </scene>
     </scenes>
     <designables>
@@ -1096,8 +1035,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="vZ4-j4-jqs"/>
-        <segue reference="0ED-FH-Y8K"/>
+        <segue reference="vw4-Zm-TUT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Add Wine Tab" width="23" height="23"/>
