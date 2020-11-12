@@ -22,12 +22,15 @@ class MyCellarViewController: UIViewController {
             wineRepository: JFContainer.shared.wineRepository,
             session: JFContainer.shared.session
         )
+        let getWinesByTypeQuery = GetWinesByTypeQuery(
+            wineRepository: JFContainer.shared.wineRepository,
+            session: JFContainer.shared.session
+        )
         viewModel = MyCellarViewModel(
             wineTypeRepository: JFContainer.shared.wineTypeRepository,
-            wineRepository: JFContainer.shared.wineRepository,
-            session: JFContainer.shared.session,
             thumbnailFetcher: try! JFContainer.shared.container.resolve(),
-            searchMyCellarQuery: searchMyCellarQuery
+            searchMyCellarQuery: searchMyCellarQuery,
+            getWinesByTypeQuery: getWinesByTypeQuery
         )
         viewModel.onEditWine = { [weak self] wineId in
             self?.selectedWineId = wineId

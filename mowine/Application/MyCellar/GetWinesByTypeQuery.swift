@@ -22,6 +22,7 @@ class GetWinesByTypeQuery {
     let session: Session
 
     private var subjects: [String: CurrentValueSubject<[WineDto], Error>] = [:]
+    private var listeners: [String: MoWineListenerRegistration] = [:]
 
     init(wineRepository: WineRepository, session: Session) {
         SwiftyBeaver.debug("init")
@@ -31,6 +32,7 @@ class GetWinesByTypeQuery {
 
     deinit {
         SwiftyBeaver.debug("deinit")
+        listeners.values.forEach { $0.remove() }
     }
 
     func getWinesByType(_ wineType: WineType) -> AnyPublisher<[WineDto], Error> {
@@ -53,7 +55,7 @@ class GetWinesByTypeQuery {
             return
         }
 
-        wineRepository.getWines(userId: userId, wineType: wineType) { [weak self] result in
+        listeners[wineType.name] = wineRepository.getWines(userId: userId, wineType: wineType) { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
             case .success(let wines):

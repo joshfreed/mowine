@@ -23,6 +23,7 @@ class SearchMyCellarQuery {
 
     private(set) var results = CurrentValueSubject<[WineDto], Error>([])
 
+    private var listener: MoWineListenerRegistration?
     private var wines: [Wine] = []
     private var searchText: String = ""
 
@@ -35,12 +36,13 @@ class SearchMyCellarQuery {
 
     deinit {
         SwiftyBeaver.debug("deinit")
+        listener?.remove()
     }
 
     private func startListening() {
         guard let userId = session.currentUserId else { return }
 
-        wineRepository.getWines(userId: userId) { [weak self] result in
+        listener = wineRepository.getWines(userId: userId) { [weak self] result in
             SwiftyBeaver.debug("getWines was updated")
 
             switch result {
@@ -48,7 +50,7 @@ class SearchMyCellarQuery {
                 self?.wines = wines
                 self?.updateResults()
             case .failure(let error):
-                SwiftyBeaver.error("\(error)")
+                self?.results.send(completion: .failure(error))
             }
         }
     }

@@ -6,17 +6,11 @@
 //  Copyright © 2020 Josh Freed. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 import SwiftyBeaver
 import Combine
 
 class MyCellarViewModel: ObservableObject {
-    let wineTypeRepository: WineTypeRepository
-    let wineRepository: WineRepository
-    let session: Session
-    let thumbnailFetcher: WineListThumbnailFetcher
-    let searchMyCellarQuery: SearchMyCellarQuery
-
     var onEditWine: (String) -> Void = { _ in }
 
     var red: WineType { wineTypes.first { $0.name == "Red" }! }
@@ -25,21 +19,23 @@ class MyCellarViewModel: ObservableObject {
     var bubbly: WineType { wineTypes.first { $0.name == "Bubbly" }! }
     var other: WineType { wineTypes.first { $0.name == "Other" }! }
 
+    private let wineTypeRepository: WineTypeRepository
+    private let thumbnailFetcher: WineListThumbnailFetcher
+    private let searchMyCellarQuery: SearchMyCellarQuery
+    private let getWinesByTypeQuery: GetWinesByTypeQuery
     private var wineTypes: [WineType] = []
 
     init(
         wineTypeRepository: WineTypeRepository,
-        wineRepository: WineRepository,
-        session: Session,
         thumbnailFetcher: WineListThumbnailFetcher,
-        searchMyCellarQuery: SearchMyCellarQuery
+        searchMyCellarQuery: SearchMyCellarQuery,
+        getWinesByTypeQuery: GetWinesByTypeQuery
     ) {
         SwiftyBeaver.debug("init")
         self.wineTypeRepository = wineTypeRepository
-        self.wineRepository = wineRepository
-        self.session = session
         self.thumbnailFetcher = thumbnailFetcher
         self.searchMyCellarQuery = searchMyCellarQuery
+        self.getWinesByTypeQuery = getWinesByTypeQuery
 
         loadWineTypes()
     }
@@ -62,10 +58,9 @@ class MyCellarViewModel: ObservableObject {
     }
 
     func makeWineCellarListViewModel(title: String, wineType: WineType) -> WineCellarListViewModel {
-        let getWineByTypeQuery = GetWinesByTypeQuery(wineRepository: wineRepository, session: session)
         let vm = WineCellarListViewModel(
             navigationBarTitle: title,
-            getWineByTypeQuery: getWineByTypeQuery,
+            getWineByTypeQuery: getWinesByTypeQuery,
             wineType: wineType,
             thumbnailFetcher: thumbnailFetcher
         )

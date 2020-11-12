@@ -6,14 +6,14 @@
 //  Copyright © 2020 Josh Freed. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 import SwiftyBeaver
 
 class WineListViewModelSwiftUI: ObservableObject {
     var onEditWine: (String) -> Void = { _ in }
     private var wines: [WineItemViewModel] = []
 
-    public static var instanceCount = 0
+    private static var instanceCount = 0
 
     init(wines: [WineItemViewModel]) {
         WineListViewModelSwiftUI.instanceCount += 1

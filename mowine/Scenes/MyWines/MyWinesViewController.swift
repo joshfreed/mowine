@@ -104,7 +104,7 @@ class MyWinesService {
             return
         }
         
-        wineRepository.getWines(userId: userId) { result in
+        _ = wineRepository.getWines(userId: userId) { result in
             switch result {
             case .success(let wines):
                 let wines = wines

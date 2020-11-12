@@ -14,8 +14,8 @@ protocol WineRepository {
     func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ())
     func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ())
     func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ())
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ())
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ())
     func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String]>) -> ())
 }

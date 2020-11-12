@@ -46,10 +46,9 @@ struct MyCellarView: View {
 fileprivate func makeViewModel() -> MyCellarViewModel {
     MyCellarViewModel(
         wineTypeRepository: MemoryWineTypeRepository(),
-        wineRepository: MemoryWineRepository(),
-        session: FakeSession(),
         thumbnailFetcher: FakeWineThumbnailFetcher(),
-        searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession())
+        searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession()),
+        getWinesByTypeQuery: GetWinesByTypeQuery(wineRepository: MemoryWineRepository(), session: FakeSession())
     )
 }
 
