@@ -73,10 +73,12 @@ class FirestoreWineRepository: WineRepository {
         }
     }
     
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        let query = db.collection("wines").whereField("userId", isEqualTo: userId.asString)
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+        let query = db
+            .collection("wines")
+            .whereField("userId", isEqualTo: userId.asString)
         
-        query.addSnapshotListener { (querySnapshot, error) in
+        let listener = query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
@@ -88,9 +90,11 @@ class FirestoreWineRepository: WineRepository {
                 fatalError("unknown error with query")
             }
         }
+
+        return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
         SwiftyBeaver.info("getWines \(userId) \(wineType.name)")
 
         let query = db
@@ -98,7 +102,7 @@ class FirestoreWineRepository: WineRepository {
             .whereField("userId", isEqualTo: userId.asString)
             .whereField("type", isEqualTo: wineType.name)
         
-        query.addSnapshotListener { (querySnapshot, error) in
+        let listener = query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
@@ -110,6 +114,8 @@ class FirestoreWineRepository: WineRepository {
                 fatalError("unknown error with query")
             }
         }
+
+        return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {

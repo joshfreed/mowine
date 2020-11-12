@@ -6,19 +6,18 @@
 //  Copyright © 2020 Josh Freed. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 import Combine
 import SwiftyBeaver
 import FirebaseCrashlytics
 
 class MyCellarSearchViewModel: ObservableObject {
-    let searchMyCellarQuery: SearchMyCellarQuery
-    let thumbnailFetcher: WineListThumbnailFetcher
-
     @Published var results: [WineItemViewModel] = []
 
     var onEditWine: (String) -> Void = { _ in }
 
+    private let searchMyCellarQuery: SearchMyCellarQuery
+    private let thumbnailFetcher: WineListThumbnailFetcher
     private var cancellable: AnyCancellable?
     private var cancellable2: AnyCancellable?
 
@@ -29,12 +28,16 @@ class MyCellarSearchViewModel: ObservableObject {
 
         cancellable = searchMyCellarQuery.results
             .map { $0.map { self.toViewModel(wine: $0) } }
-            .sink(receiveCompletion: { completion in
-                SwiftyBeaver.error("\(completion)")
-            }, receiveValue: { [weak self] models in
+            .sink { completion in
+                SwiftyBeaver.info("\(completion)")
+                if case let .failure(error) = completion {
+                    SwiftyBeaver.error("\(error)")
+                    Crashlytics.crashlytics().record(error: error)
+                }
+            } receiveValue: { [weak self] models in
                 self?.results = models
                 self?.results.forEach { self?.fetchThumbnail(for: $0) }
-            })
+            }
 
         cancellable2 = NotificationCenter.default.publisher(for: .wineUpdated).sink { [weak self] notification in
             guard let wineId = notification.userInfo?["wineId"] as? String else { return }

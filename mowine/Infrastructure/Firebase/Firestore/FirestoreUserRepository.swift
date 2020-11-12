@@ -246,15 +246,3 @@ class FirestoreUserRepository: UserRepository {
         }
     }
 }
-
-class MyFirebaseListenerRegistration: MoWineListenerRegistration {
-    let wrapped: ListenerRegistration
-    
-    init(wrapped: ListenerRegistration) {
-        self.wrapped = wrapped
-    }
-    
-    func remove() {
-        wrapped.remove()
-    }
-}

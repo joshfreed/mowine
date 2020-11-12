@@ -41,12 +41,13 @@ class MemoryWineRepository: WineRepository {
         completion(.success(wine))
     }
     
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
         completion(.success(wines))
+        return FakeRegistration()
     }
 
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
-        
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
     }
     
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {

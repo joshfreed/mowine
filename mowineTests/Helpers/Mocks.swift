@@ -24,8 +24,8 @@ class MockWineRepository: WineRepository {
         
     }
     
-    func getWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
-        
+    func getWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
     }
     
     func save(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
@@ -40,8 +40,8 @@ class MockWineRepository: WineRepository {
         
     }
     
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
-        
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (JFLib.Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
     }
 }
 

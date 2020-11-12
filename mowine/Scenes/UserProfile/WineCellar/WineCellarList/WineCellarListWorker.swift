@@ -21,6 +21,6 @@ class WineCellarListWorker {
     }
     
     func fetchWines(for userId: UserId, type: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
-        wineRepository.getWines(userId: userId, wineType: type, completion: completion)
+        _ = wineRepository.getWines(userId: userId, wineType: type, completion: completion)
     }
 }

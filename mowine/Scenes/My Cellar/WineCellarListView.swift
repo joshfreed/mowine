@@ -31,10 +31,10 @@ fileprivate func makeViewModel() -> WineCellarListViewModel {
         wineType: WineType(name: "Red"),
         thumbnailFetcher: FakeWineThumbnailFetcher()
     )
-    vm.setWineViewModels([
-        WineItemViewModel(id: "A", name: "Merlot 1", rating: 1, type: "Red", thumbnail: nil),
-        WineItemViewModel(id: "B", name: "Merlot 2", rating: 2, type: "Red", thumbnail: nil),
-        WineItemViewModel(id: "C", name: "Merlot 3", rating: 3, type: "Red", thumbnail: nil),
+    vm.setWines([
+        GetWinesByTypeQuery.WineDto(id: "A", name: "Merlot 1", rating: 1, type: "Red"),
+        GetWinesByTypeQuery.WineDto(id: "B", name: "Merlot 2", rating: 2, type: "Red"),
+        GetWinesByTypeQuery.WineDto(id: "C", name: "Merlot 3", rating: 3, type: "Red"),
     ])
     return vm
 }
