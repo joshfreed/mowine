@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 enum UserProfileWorkerError: Error {
     case notLoggedIn
@@ -28,7 +27,7 @@ class UserProfileWorker {
         self.profilePictureWorker = profilePictureWorker
     }
     
-    func fetchUser(userId: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func fetchUser(userId: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
         userRepository.getUserById(userId) { result in
             switch result {
             case .success(let user): completion(.success(user))
@@ -37,7 +36,7 @@ class UserProfileWorker {
         }
     }
     
-    func fetchProfilePicture(userId: UserId, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchProfilePicture(userId: UserId, completion: @escaping (Result<Data?, Error>) -> ()) {
         userRepository.getUserById(userId) { result in
             switch result {
             case .success(let user):
@@ -52,7 +51,7 @@ class UserProfileWorker {
         }
     }
     
-    func fetchFriendStatus(userId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+    func fetchFriendStatus(userId: UserId, completion: @escaping (Result<Bool, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(UserProfileWorkerError.notLoggedIn))
             return
@@ -61,7 +60,7 @@ class UserProfileWorker {
         userRepository.isFriendOf(userId: currentUserId, otherUserId: userId, completion: completion)
     }
     
-    func friend(userId: UserId, completion: @escaping (Result<User>) -> ()) {
+    func friend(userId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(UserProfileWorkerError.notLoggedIn))
             return
@@ -70,7 +69,7 @@ class UserProfileWorker {
         userRepository.addFriend(owningUserId: currentUserId, friendId: userId, completion: completion)
     }
     
-    func unfriend(userId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func unfriend(userId: UserId, completion: @escaping (Result<Void, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(UserProfileWorkerError.notLoggedIn))
             return

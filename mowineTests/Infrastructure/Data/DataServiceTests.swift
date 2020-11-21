@@ -9,15 +9,14 @@
 import XCTest
 @testable import mowine
 import Nimble
-import JFLib
 
 class DataServiceTests: XCTestCase {
     var sut: DataService<MockRead, MockWrite>!
     let mockRead = MockRead()
     let mockWrite = MockWrite()
     var completionWasCalled = false
-    var result: Result<Data?>?
-    var putResult: Result<URL>?
+    var result: Result<Data?, Error>?
+    var putResult: Result<URL, Error>?
     var data: Data!
     
     override func setUp() {
@@ -32,10 +31,10 @@ class DataServiceTests: XCTestCase {
     // MARK: - Mocks
     
     class MockRead: DataReadService {
-        var nextResult: Result<Data?>? = .success(nil)
+        var nextResult: Result<Data?, Error>? = .success(nil)
         var getDataWasCalled = false
         var getData_url: String?
-        func getData(url: String, completion: @escaping (Result<Data?>) -> ()) {
+        func getData(url: String, completion: @escaping (Result<Data?, Error>) -> ()) {
             getDataWasCalled = true
             getData_url = url
             completion(nextResult!)
@@ -52,12 +51,12 @@ class DataServiceTests: XCTestCase {
     }
     
     class MockWrite: DataWriteService {
-        var nextResult: Result<URL>? = .success(URL(fileURLWithPath: "/"))
+        var nextResult: Result<URL, Error>? = .success(URL(fileURLWithPath: "/"))
         var putDataWasCalled = false
         var putData_data: Data?
         var putData_url: String?
         
-        func putData(_ data: Data, url: String, completion: @escaping (Result<URL>) -> ()) {
+        func putData(_ data: Data, url: String, completion: @escaping (Result<URL, Error>) -> ()) {
             putDataWasCalled = true
             putData_data = data
             putData_url = url

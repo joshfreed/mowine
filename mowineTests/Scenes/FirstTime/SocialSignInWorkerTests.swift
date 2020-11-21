@@ -9,7 +9,6 @@
 import XCTest
 @testable import mowine
 import Nimble
-import JFLib
 
 class SocialSignInWorkerTests: XCTestCase {
     var sut: SocialSignInWorker<FakeSocialProvider>!
@@ -22,10 +21,10 @@ class SocialSignInWorkerTests: XCTestCase {
     }
     
     class FakeSocialProvider: SocialSignInProvider {
-        func linkAccount(token: FakeSocialToken, completion: @escaping (EmptyResult) -> ()) {
+        func linkAccount(token: FakeSocialToken, completion: @escaping (Result<Void, Error>) -> ()) {
             
         }
-        func getNewUserInfo(completion: @escaping (Result<NewUserInfo>) -> ()) {
+        func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
             
         }
         func getProfilePictureUrl(_ urlString: String) -> String {

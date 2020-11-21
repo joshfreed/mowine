@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 class SignInWorker {
     let emailAuth: EmailAuthenticationService
@@ -20,7 +19,7 @@ class SignInWorker {
         self.emailAuth = emailAuth
     }
     
-    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
+    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool, Error>) -> ()) {
         emailAuth.signIn(emailAddress: emailAddress, password: password) { result in
             switch result {
             case .success:

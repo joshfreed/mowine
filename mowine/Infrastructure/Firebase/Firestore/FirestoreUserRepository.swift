@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import JFLib
 import FirebaseFirestore
 import SwiftyBeaver
 
 class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()
     
-    func add(user: User, completion: @escaping (Result<User>) -> ()) {        
+    func add(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         let data = user.toFirestore()
         
         db.collection("users").document(user.id.asString).setData(data) { err in
@@ -27,13 +26,13 @@ class FirestoreUserRepository: UserRepository {
         }
     }
     
-    func save(user: User, completion: @escaping (Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         let data = user.toFirestore()
         db.collection("users").document(user.id.asString).setData(data, merge: true)
         completion(.success(user))
     }
     
-    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func getUserById(_ id: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
         let query = db.collection("users").document(id.asString)
 
         query.getDocument { (document, error) in
@@ -59,7 +58,7 @@ class FirestoreUserRepository: UserRepository {
         }
     }
     
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         let listener = db.collection("users").document(id.asString).addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
@@ -93,7 +92,7 @@ class FirestoreUserRepository: UserRepository {
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
+    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) {
         let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
         
         query.getDocuments { (querySnapshot, error) in
@@ -115,7 +114,7 @@ class FirestoreUserRepository: UserRepository {
         }
     }
 
-    private func getUsers(by ids: [UserId], completion: @escaping (Result<[User]>) -> ()) {
+    private func getUsers(by ids: [UserId], completion: @escaping (Result<[User], Error>) -> ()) {
         guard ids.count > 0 else {
             completion(.success([]))
             return
@@ -146,7 +145,7 @@ class FirestoreUserRepository: UserRepository {
         }
     }
 
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ()) {
         let query = db.collection("users")
         
         query.getDocuments { (querySnapshot, error) in
@@ -181,7 +180,7 @@ class FirestoreUserRepository: UserRepository {
         return matches
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
         let docId = "\(owningUserId)_\(friendId)"
         db.collection("friends").document(docId).setData([
             "userId": owningUserId.asString,
@@ -196,19 +195,19 @@ class FirestoreUserRepository: UserRepository {
         }
     }
     
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<Void, Error>) -> ()) {
         let docId = "\(owningUserId)_\(friendId)"
         db.collection("friends").document(docId).delete() { err in
             if let err = err {
                 SwiftyBeaver.error("Error writing document: \(err)")
                 completion(.failure(err))
             } else {
-                completion(.success)
+                completion(.success(()))
             }
         }
     }
 
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool, Error>) -> ()) {
         let docId = "\(userId)_\(otherUserId)"
         db.collection("friends").document(docId).getDocument { (document, error) in
             if let error = error {
@@ -229,7 +228,7 @@ class FirestoreUserRepository: UserRepository {
     // Privates
     //
     
-    private func getUserFromCache(userId: UserId, completion: @escaping (Result<User>) -> ()) {
+    private func getUserFromCache(userId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
         let query = db.collection("users").document(userId.asString)
         query.getDocument(source: .cache) { (document, error) in
             if let error = error {

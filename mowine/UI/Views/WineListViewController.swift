@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JFLib
 import SwiftyBeaver
 import FirebaseCrashlytics
 
@@ -16,8 +15,8 @@ protocol WineListViewControllerDelegate: class {
 }
 
 protocol WineListThumbnailFetcher: class {
-    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?>) -> ())
-    func fetchThumbnail(for wine: Wine, completion: @escaping (Result<Data?>) -> ())
+    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ())
+    func fetchThumbnail(for wine: Wine, completion: @escaping (Result<Data?, Error>) -> ())
 }
 
 class WineListViewController: UITableViewController {

@@ -8,7 +8,6 @@
 
 import Foundation
 @testable import mowine
-import JFLib
 import Nimble
 
 class TestEmailAuthService: EmailAuthenticationService {
@@ -22,8 +21,8 @@ class TestEmailAuthService: EmailAuthenticationService {
         identities[emailAddress] = password
     }
     
-    var signInResult: EmptyResult?
-    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    var signInResult: Result<Void, Error>?
+    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
         if let result = signInResult {
             completion(result)
             return
@@ -39,15 +38,15 @@ class TestEmailAuthService: EmailAuthenticationService {
             return
         }
         
-        completion(.success)
+        completion(.success(()))
     }
     func signInWillFail(error: Error) {
         signInResult = .failure(error)
     }
     
-    var signUpResult: EmptyResult?
+    var signUpResult: Result<Void, Error>?
     var signedUp: String?
-    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    func signUp(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
         signedUp = emailAddress
         identities[emailAddress] = password
         if let result = signUpResult {
@@ -56,7 +55,7 @@ class TestEmailAuthService: EmailAuthenticationService {
     }
     
     func signUpWillSucceed() {
-        signUpResult = .success
+        signUpResult = .success(())
     }
     func signUpWillFail(error: Error) {
         signUpResult = .failure(error)
@@ -81,7 +80,7 @@ enum TestError: Error {
 }
 
 class TestUserRepository: UserRepository {
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
     
@@ -95,8 +94,8 @@ class TestUserRepository: UserRepository {
     
     var addUserCalled = false
     var addedUser: User?
-    var addUserResult: Result<User>?
-    func add(user: User, completion: @escaping (Result<User>) -> ()) {
+    var addUserResult: Result<User, Error>?
+    func add(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         addUserCalled = true
         addedUser = user
         if let result = addUserResult {
@@ -124,8 +123,8 @@ class TestUserRepository: UserRepository {
     
     var saveUserCalled = false
     var savedUser: User?
-    var saveUserResult: Result<User>?
-    func save(user: User, completion: @escaping (Result<User>) -> ()) {
+    var saveUserResult: Result<User, Error>?
+    func save(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         saveUserCalled = true
         savedUser = user
         if let result = saveUserResult {
@@ -151,27 +150,27 @@ class TestUserRepository: UserRepository {
         expect(self.savedUser).to(beNil())
     }
     
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ()) {
+    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) {
         
     }
     
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ()) {
         
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
         
     }
     
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<Void, Error>) -> ()) {
         
     }
     
-    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func getUserById(_ id: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
         completion(.success(_user))
     }
     
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ()) {
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool, Error>) -> ()) {
         
     }
 }

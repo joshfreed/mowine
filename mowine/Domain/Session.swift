@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import PromiseKit
 
 enum SessionError: Error {
@@ -21,7 +20,7 @@ protocol Session {
     func end()
     func getCurrentAuth() -> MoWineAuth?
     func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ())
-    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ())
+    func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ())
     func getPhotoUrl() -> URL?
     func updateEmailAddress(_ emailAddress: String) -> Promise<Void>
 }

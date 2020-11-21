@@ -5,12 +5,11 @@
 
 import UIKit
 import SwiftyBeaver
-import JFLib
 
 protocol ProfilePictureWorkerProtocol {
-    func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ())
-    func getProfilePicture(user: User, completion: @escaping (Result<Data?>) -> ())
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ())
+    func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ())
+    func getProfilePicture(user: User, completion: @escaping (Result<Data?, Error>) -> ())
+    func getProfilePicture(url: URL, completion: @escaping (Result<Data?, Error>) -> ())
 }
 
 class ProfilePictureWorker<DataServiceType: DataServiceProtocol>: ProfilePictureWorkerProtocol
@@ -28,7 +27,7 @@ where
         self.userRepository = userRepository
     }
 
-    func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ()) {
+    func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ()) {
         guard
             let downsizedImage = image.resize(to: CGSize(width: 400, height: 400)),
             let imageData = downsizedImage.pngData()
@@ -55,7 +54,7 @@ where
         }
     }
     
-    private func uploadImage(_ imageData: Data, user: User, completion: @escaping (EmptyResult) -> ()) {
+    private func uploadImage(_ imageData: Data, user: User, completion: @escaping (Result<Void, Error>) -> ()) {
         profilePictureService.putData(imageData, url: "\(user.id)/profile.png") { result in
             switch result {
             case .success(let url): self.setUserProfilePictureUrl(user: user, url: url, completion: completion)
@@ -64,18 +63,18 @@ where
         }
     }
 
-    private func setUserProfilePictureUrl(user: User, url: URL, completion: @escaping (EmptyResult) -> ()) {
+    private func setUserProfilePictureUrl(user: User, url: URL, completion: @escaping (Result<Void, Error>) -> ()) {
         var _user = user
         _user.profilePictureUrl = url
         userRepository.save(user: _user) { result in
             switch result {
-            case .success: completion(.success)
+            case .success: completion(.success(()))
             case .failure(let error): completion(.failure(error))
             }
         }
     }
     
-    func getProfilePicture(user: User, completion: @escaping (Result<Data?>) -> ()) {
+    func getProfilePicture(user: User, completion: @escaping (Result<Data?, Error>) -> ()) {
         guard let url = user.profilePictureUrl else {
             completion(.success(nil))
             return
@@ -83,7 +82,7 @@ where
         profilePictureService.getData(url: url, completion: completion)
     }
     
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?>) -> ()) {
+    func getProfilePicture(url: URL, completion: @escaping (Result<Data?, Error>) -> ()) {
         profilePictureService.getData(url: url, completion: completion)
     }
 }

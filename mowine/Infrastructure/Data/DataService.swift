@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import SwiftyBeaver
 
 protocol DataUrl {
@@ -28,19 +27,19 @@ extension URL: DataUrl {
 
 protocol DataReadService {
     associatedtype Url: DataUrl
-    func getData(url: Url, completion: @escaping (Result<Data?>) -> ())
+    func getData(url: Url, completion: @escaping (Result<Data?, Error>) -> ())
 }
 
 protocol DataWriteService {
     associatedtype Url: DataUrl
-    func putData(_ data: Data, url: Url, completion: @escaping (Result<URL>) -> ())
+    func putData(_ data: Data, url: Url, completion: @escaping (Result<URL, Error>) -> ())
 }
 
 protocol DataServiceProtocol {
     associatedtype GetDataUrl: DataUrl
     associatedtype PutDataUrl: DataUrl
-    func getData(url: GetDataUrl, completion: @escaping (Result<Data?>) -> ())
-    func putData(_ data: Data, url: PutDataUrl, completion: @escaping (Result<URL>) -> ())
+    func getData(url: GetDataUrl, completion: @escaping (Result<Data?, Error>) -> ())
+    func putData(_ data: Data, url: PutDataUrl, completion: @escaping (Result<URL, Error>) -> ())
 }
 
 //
@@ -56,7 +55,7 @@ class DataService<RemoteRead: DataReadService, RemoteWrite: DataWriteService>: D
         self.remoteWrite = remoteWrite
     }
     
-    func getData(url: RemoteRead.Url, completion: @escaping (Result<Data?>) -> ()) {
+    func getData(url: RemoteRead.Url, completion: @escaping (Result<Data?, Error>) -> ()) {
         SwiftyBeaver.verbose("Getting data... [\(url.cacheKey)]")
 
         if let cachedImage = dataCache.object(forKey: url.cacheKey) {
@@ -76,7 +75,7 @@ class DataService<RemoteRead: DataReadService, RemoteWrite: DataWriteService>: D
         }
     }
     
-    func putData(_ data: Data, url: RemoteWrite.Url, completion: @escaping (Result<URL>) -> ()) {
+    func putData(_ data: Data, url: RemoteWrite.Url, completion: @escaping (Result<URL, Error>) -> ()) {
         SwiftyBeaver.debug("Storing data. [\(url.cacheKey)]")
         dataCache.setObject(data as NSData, forKey: url.cacheKey)
         remoteWrite.putData(data, url: url, completion: completion)

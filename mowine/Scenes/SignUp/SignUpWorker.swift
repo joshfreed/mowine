@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 class SignUpWorker {
     let emailAuthService: EmailAuthenticationService
@@ -28,7 +27,7 @@ class SignUpWorker {
         self.session = session
     }
     
-    func signUp(emailAddress: String, password: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
+    func signUp(emailAddress: String, password: String, firstName: String, lastName: String?, completion: @escaping (Result<User, Error>) -> ()) {
         // TODO check password strength requirements?
         
         emailAuthService.signUp(emailAddress: emailAddress, password: password) { result in
@@ -39,7 +38,7 @@ class SignUpWorker {
         }
     }
 
-    func createUser(emailAddress: String, firstName: String, lastName: String?, completion: @escaping (Result<User>) -> ()) {
+    func createUser(emailAddress: String, firstName: String, lastName: String?, completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))
             return
@@ -57,7 +56,7 @@ class SignUpWorker {
         }
     }
     
-    func handleGetUserSuccess(newUser: User, existingUser: User?, completion: @escaping (Result<User>) -> ()) {
+    func handleGetUserSuccess(newUser: User, existingUser: User?, completion: @escaping (Result<User, Error>) -> ()) {
         if let existingUser = existingUser {
             completion(.success(existingUser))
         } else {
@@ -70,10 +69,10 @@ class SignUpWorker {
         }
     }
     
-    func saveNewUser(user: User, completion: @escaping (EmptyResult) -> ()) {
+    func saveNewUser(user: User, completion: @escaping (Result<Void, Error>) -> ()) {
         userRepository.add(user: user) { result in
             switch result {
-            case .success: completion(.success)
+            case .success: completion(.success(()))
             case .failure(let error): completion(.failure(error))
             }
         }

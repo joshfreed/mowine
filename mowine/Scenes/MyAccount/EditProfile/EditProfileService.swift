@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import PromiseKit
 
 class EditProfileService {
@@ -25,7 +24,7 @@ class EditProfileService {
         self.userRepository = userRepository
     }
     
-    func fetchProfile(completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
+    func fetchProfile(completion: @escaping (Swift.Result<ProfileViewModel, Error>) -> ()) {
         getCurrentUser { result in
             switch result {
             case .success(let user): self.presentUserProfile(user, completion: completion)
@@ -34,12 +33,12 @@ class EditProfileService {
         }
     }
     
-    func presentUserProfile(_ user: User, completion: @escaping (JFLib.Result<ProfileViewModel>) -> ()) {
+    func presentUserProfile(_ user: User, completion: @escaping (Swift.Result<ProfileViewModel, Error>) -> ()) {
         let viewModel = ProfileViewModel(firstName: user.firstName, lastName: user.lastName, emailAddress: user.emailAddress)
         completion(.success(viewModel))
     }
     
-    func getProfilePicture(completion: @escaping (JFLib.Result<Data?>) -> ()) {
+    func getProfilePicture(completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
         getCurrentUser { result in
             switch result {
             case .success(let user): self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
@@ -52,7 +51,7 @@ class EditProfileService {
         newProfilePicture = image
     }
     
-    func saveProfile(email: String, firstName: String, lastName: String?, completion: @escaping (EmptyResult) -> ()) {
+    func saveProfile(email: String, firstName: String, lastName: String?, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         firstly {
             userProfileService.updateProfilePicture(newProfilePicture)
         }.get {
@@ -64,13 +63,13 @@ class EditProfileService {
                 UpdateUserProfileRequest(firstName: firstName, lastName: lastName)
             )
         }.done {
-            completion(.success)
+            completion(.success(()))
         }.catch { error in
             completion(.failure(error))
         }
     }
     
-    private func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
+    private func getCurrentUser(completion: @escaping (Swift.Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))
             return

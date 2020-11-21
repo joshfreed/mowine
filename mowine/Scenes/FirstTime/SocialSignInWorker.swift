@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import SwiftyBeaver
 
 struct NewUserInfo {
@@ -20,8 +19,8 @@ protocol SocialToken {}
 
 protocol SocialSignInProvider {
     associatedtype Token: SocialToken
-    func linkAccount(token: Token, completion: @escaping (EmptyResult) -> ())
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo>) -> ())
+    func linkAccount(token: Token, completion: @escaping (Result<Void, Error>) -> ())
+    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ())
     func getProfilePictureUrl(_ urlString: String) -> String
 }
 
@@ -36,7 +35,7 @@ class SocialSignInWorker<T: SocialSignInProvider> {
         self.provider = provider
     }
     
-    func login(token: T.Token, completion: @escaping (Result<User>) -> ()) {
+    func login(token: T.Token, completion: @escaping (Result<User, Error>) -> ()) {
         provider.linkAccount(token: token) { result in
             switch result {
             case .success: self.findOrCreateUserObjectForCurrentSession(completion: completion)
@@ -45,7 +44,7 @@ class SocialSignInWorker<T: SocialSignInProvider> {
         }
     }
     
-    private func findOrCreateUserObjectForCurrentSession(completion: @escaping (Result<User>) -> ()) {
+    private func findOrCreateUserObjectForCurrentSession(completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))
             return
@@ -65,7 +64,7 @@ class SocialSignInWorker<T: SocialSignInProvider> {
         }
     }
     
-    private func fetchProfileAndCreateUser(completion: @escaping (Result<User>) -> ()) {
+    private func fetchProfileAndCreateUser(completion: @escaping (Result<User, Error>) -> ()) {
         provider.getNewUserInfo { result in
             switch result {
             case .success(let newUserInfo): self.createUser(newUserInfo, completion: completion)
@@ -74,7 +73,7 @@ class SocialSignInWorker<T: SocialSignInProvider> {
         }
     }
     
-    private func createUser(_ newUserInfo: NewUserInfo, completion: @escaping (Result<User>) -> ()) {
+    private func createUser(_ newUserInfo: NewUserInfo, completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))
             return
@@ -92,7 +91,7 @@ class SocialSignInWorker<T: SocialSignInProvider> {
         }
     }
     
-    private func setHigherResProfilePicture(_ user: User, completion: @escaping (Result<User>) -> ()) {
+    private func setHigherResProfilePicture(_ user: User, completion: @escaping (Result<User, Error>) -> ()) {
         guard let photoUrl = session.getPhotoUrl() else {
             completion(.success(user))
             return

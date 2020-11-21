@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JFLib
 
 class SelectTypeWorker {
     let wineTypeRepository: WineTypeRepository
@@ -16,7 +15,7 @@ class SelectTypeWorker {
         self.wineTypeRepository = wineTypeRepository
     }
     
-    func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ()) {
+    func getWineType(named name: String, completion: @escaping (Result<WineType?, Error>) -> ()) {
         wineTypeRepository.getWineType(named: name, completion: completion)
     }
 }

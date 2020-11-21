@@ -12,7 +12,6 @@
 
 @testable import mowine
 import XCTest
-import JFLib
 import Nimble
 
 class FriendsInteractorTests: XCTestCase {
@@ -90,8 +89,8 @@ class FriendsInteractorTests: XCTestCase {
             super.init(userRepository: MockUserRepository(), session: MockSession())
         }
 
-        var fetchMyFriendsResult: Result<[User]>?
-        override func fetchMyFriends(completion: @escaping (Result<[User]>) -> ()) {
+        var fetchMyFriendsResult: Result<[User], Error>?
+        override func fetchMyFriends(completion: @escaping (Result<[User], Error>) -> ()) {
             if let result = fetchMyFriendsResult {
                 completion(result)
             }
@@ -100,8 +99,8 @@ class FriendsInteractorTests: XCTestCase {
         var searchUsersDelay: Double = 0
         var searchUsers_searchString: String?
         var searchUsersCallCount = 0
-        private var searchUsersResults: [Int: Result<[User]>] = [:]
-        override func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+        private var searchUsersResults: [Int: Result<[User], Error>] = [:]
+        override func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ()) {
             searchUsersCallCount += 1
             searchUsers_searchString = searchString
             if let result = searchUsersResults[searchUsersCallCount] {
@@ -115,18 +114,18 @@ class FriendsInteractorTests: XCTestCase {
             }
         }
         
-        func mockSearchUsers(result: Result<[User]>) {
+        func mockSearchUsers(result: Result<[User], Error>) {
             searchUsersResults[1] = result
         }
         
-        func mockSearchUsers(callCount: Int, result: Result<[User]>) {
+        func mockSearchUsers(callCount: Int, result: Result<[User], Error>) {
             searchUsersResults[callCount] = result
         }
         
-        var addFriendResult: Result<User>?
+        var addFriendResult: Result<User, Error>?
         var addFriendCalled = false
         var addFriendUserId: UserId?
-        override func addFriend(userId: UserId, completion: @escaping (Result<User>) -> ()) {
+        override func addFriend(userId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
             addFriendCalled = true
             addFriendUserId = userId
             if let result = addFriendResult {

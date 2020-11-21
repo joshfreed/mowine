@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import GoogleSignIn
 import SwiftyBeaver
 
@@ -27,11 +26,11 @@ class GoogleProvider: SocialSignInProvider {
         self.googleAuth = googleAuth
     }
     
-    func linkAccount(token: GoogleToken, completion: @escaping (EmptyResult) -> ()) {
+    func linkAccount(token: GoogleToken, completion: @escaping (Result<Void, Error>) -> ()) {
         googleAuth.linkGoogleAccount(idToken: token.idToken, accessToken: token.accessToken, completion: completion)
     }
     
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo>) -> ()) {
+    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
         guard let profile = GIDSignIn.sharedInstance()?.currentUser.profile else {
             completion(.failure(CreateUserFromGoogleInfoError.failedToFetchProfile))
             return

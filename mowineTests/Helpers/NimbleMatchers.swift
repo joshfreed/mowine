@@ -8,10 +8,9 @@
 
 import XCTest
 import Nimble
-import JFLib
 
 extension XCTestCase {
-    func beSuccess<T>(test: @escaping (T) -> Void = { _ in }) -> Predicate<Result<T>> {
+    func beSuccess<T>(test: @escaping (T) -> Void = { _ in }) -> Predicate<Result<T, Error>> {
         return Predicate.define("be <success>") { expression, message in
             if let actual = try expression.evaluate(), case let .success(response) = actual {
                 test(response)
@@ -21,7 +20,7 @@ extension XCTestCase {
         }
     }
     
-    func beSuccess() -> Predicate<EmptyResult> {
+    func beSuccess() -> Predicate<Result<Void, Error>> {
         return Predicate.define("be <success>") { expression, message in
             if let actual = try expression.evaluate(), case let .success = actual {
                 return PredicateResult(status: .matches, message: message)
@@ -30,7 +29,7 @@ extension XCTestCase {
         }
     }
     
-    func beFailure<T>(test: @escaping (Error) -> Void = { _ in }) -> Predicate<Result<T>> {
+    func beFailure<T>(test: @escaping (Error) -> Void = { _ in }) -> Predicate<Result<T, Error>> {
         return Predicate.define("be <failure>") { expression, message in
             if let actual = try expression.evaluate(), case let .failure(error) = actual {
                 test(error)
@@ -40,7 +39,7 @@ extension XCTestCase {
         }
     }
     
-    func beFailure(test: @escaping (Error) -> Void = { _ in }) -> Predicate<EmptyResult> {
+    func beFailure(test: @escaping (Error) -> Void = { _ in }) -> Predicate<Result<Void, Error>> {
         return Predicate.define("be <failure>") { expression, message in
             if let actual = try expression.evaluate(), case let .failure(error) = actual {
                 test(error)

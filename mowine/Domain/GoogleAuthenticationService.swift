@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import JFLib
 
 protocol GoogleAuthenticationService {
-    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ())
+    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (Result<Void, Error>) -> ())
 }

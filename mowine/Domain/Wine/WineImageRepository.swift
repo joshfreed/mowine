@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import JFLib
 
 protocol WineImageRepository {
     func store(wineId: WineId, image: Data, thumbnail: Data)
-    func fetchThumbnail(wineId: WineId, userId: UserId, completion: @escaping (Result<Data?>) -> ())
-    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ())
+    func fetchThumbnail(wineId: WineId, userId: UserId, completion: @escaping (Result<Data?, Error>) -> ())
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ())
     func deleteImages(wineId: WineId)
 }

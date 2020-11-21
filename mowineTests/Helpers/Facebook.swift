@@ -9,15 +9,14 @@
 import Foundation
 @testable import mowine
 import Nimble
-import JFLib
 
 class MockFacebookAuthService: FacebookAuthenticationService {
-    var signInResult: EmptyResult?
+    var signInResult: Result<Void, Error>?
     func signInWillSucceed() {
-        signInResult = .success
+        signInResult = .success(())
     }
     var signInCalled = false
-    func linkFacebookAccount(token: String, completion: @escaping (EmptyResult) -> ()) {
+    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ()) {
         signInCalled = true
         if let result = signInResult {
             completion(result)
@@ -26,7 +25,7 @@ class MockFacebookAuthService: FacebookAuthenticationService {
 }
 
 class MockGoogleAuthService: GoogleAuthenticationService {
-    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ()) {
+    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (Result<Void, Error>) -> ()) {
         
     }
 }
@@ -42,7 +41,7 @@ class MockFacebookGraphApi: GraphApi {
         self.lastName = lastName
     }
     
-    override func me(params: [String: String], completion: @escaping (Result<[String: Any]>) -> ()) {
+    override func me(params: [String: String], completion: @escaping (Result<[String: Any], Error>) -> ()) {
         var response: [String: Any] = [:]
         if let email = emailAddress {
             response["email"] = email

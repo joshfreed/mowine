@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 class WineCellarWorker {
     let wineTypeRepository: WineTypeRepository
@@ -24,11 +23,11 @@ class WineCellarWorker {
         self.wineRepository = wineRepository
     }
     
-    func getUser(by userId: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func getUser(by userId: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
         userRepository.getUserById(userId, completion: completion)
     }
     
-    func getWineTypes(for userId: UserId, completion: @escaping (Result<[WineType]>) -> ()) {
+    func getWineTypes(for userId: UserId, completion: @escaping (Result<[WineType], Error>) -> ()) {
         wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: userId) { result in
             switch result {
             case .success(let wineTypeNames): self.convertToWineTypes(wineTypeNames, completion: completion)
@@ -37,7 +36,7 @@ class WineCellarWorker {
         }
     }
     
-    private func convertToWineTypes(_ wineTypeNames: [String], completion: @escaping (Result<[WineType]>) -> ()) {
+    private func convertToWineTypes(_ wineTypeNames: [String], completion: @escaping (Result<[WineType], Error>) -> ()) {
         wineTypeRepository.getAll { result in
             switch result {
             case .success(let allWineTypes):

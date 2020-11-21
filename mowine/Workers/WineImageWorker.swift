@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import JFLib
 import SwiftyBeaver
 
 protocol WineImageWorkerProtocol {
     func createImages(wineId: WineId, photo: UIImage?) -> Data?
-    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ())
-    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?>) -> ())
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ())
+    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?, Error>) -> ())
 }
 
 class WineImageWorker<DataServiceType: DataServiceProtocol>: WineImageWorkerProtocol
@@ -54,14 +53,14 @@ where
         return thumbnailData
     }
 
-    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ()) {
         guard let userId = session.currentUserId else { return }
         let name = "\(userId)/\(wineId).png"
         SwiftyBeaver.info("Requested full res wine image. WineId: \(wineId)")
         imageService.getData(url: name, completion: completion)
     }
     
-    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?, Error>) -> ()) {
         let name = "\(wine.userId)/\(wine.id).png"
         SwiftyBeaver.info("Requested full res wine image. WineId: \(wine.id)")
         imageService.getData(url: name, completion: completion)
@@ -69,7 +68,7 @@ where
 }
 
 extension WineImageWorker: WineListThumbnailFetcher {
-    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ()) {
         wineRepository.getWine(by: WineId(string: wineId)) { result in
             switch result {
             case .success(let wine): self.fetchThumbnail(for: wine, completion: completion)
@@ -78,7 +77,7 @@ extension WineImageWorker: WineListThumbnailFetcher {
         }
     }
 
-    func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?, Error>) -> ()) {
         let name = "\(wine.userId)/\(wine.id)-thumb.png"
         SwiftyBeaver.info("Requested wine image thumbnail. WineId: \(wine.id)")
         imageService.getData(url: name, completion: completion)

@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 import Dip
 
 protocol FriendsDisplayLogic: class {

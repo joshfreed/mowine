@@ -13,7 +13,6 @@
 @testable import mowine
 import XCTest
 import Nimble
-import JFLib
 
 class SignInViewControllerTests: XCTestCase {
     // MARK: Subject under test
@@ -60,7 +59,7 @@ class SignInViewControllerTests: XCTestCase {
         
         var signInWasCalled = false
         
-        override func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool>) -> ()) {
+        override func signIn(emailAddress: String, password: String, completion: @escaping (Result<Bool, Error>) -> ()) {
             signInWasCalled = true
         }
     }

@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import JFLib
 import FirebaseAuth
 import SwiftyBeaver
 
 class FirebaseEmailAuth: EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
         Auth.auth().signIn(withEmail: emailAddress, password: password) { (authResult, error) in
             switch error {
             case .some(let error):
@@ -23,7 +22,7 @@ class FirebaseEmailAuth: EmailAuthenticationService {
                 if let user = authResult?.user {
                     SwiftyBeaver.info("User signed in with firebase")
                     SwiftyBeaver.debug(user.uid)
-                    completion(.success)
+                    completion(.success(()))
                 } else {
                     fatalError("Unknown whatever?")
                 }
@@ -31,7 +30,7 @@ class FirebaseEmailAuth: EmailAuthenticationService {
         }
     }
     
-    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    func signUp(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
         Auth.auth().createUser(withEmail: emailAddress, password: password) { (authResult, error) in
             switch error {
             case .some(let error as NSError) where error.code == AuthErrorCode.emailAlreadyInUse.rawValue:
@@ -47,7 +46,7 @@ class FirebaseEmailAuth: EmailAuthenticationService {
                 if let user = authResult?.user {
                     SwiftyBeaver.info("User signed up with firebase")
                     SwiftyBeaver.debug(user.uid)
-                    completion(.success)
+                    completion(.success(()))
                 } else {
                     fatalError("Unknown whatever?")
                 }

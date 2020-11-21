@@ -7,22 +7,21 @@
 //
 
 import Foundation
-import JFLib
 
 class MemoryWineRepository: WineRepository {
     private var wines: [Wine] = []
     
-    func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+    func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         wines.append(wine)
     }
     
-    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
+    func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ()) {
         if let index = wines.firstIndex(of: wine) {
             wines.remove(at: index)
         }
     }
     
-    func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
         if let wine = wines.first(where: { $0.id == id }) {
             completion(.success(wine))
         } else {
@@ -30,7 +29,7 @@ class MemoryWineRepository: WineRepository {
         }
     }
 
-    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         guard let index = wines.firstIndex(of: wine) else {
             return
         }
@@ -41,20 +40,20 @@ class MemoryWineRepository: WineRepository {
         completion(.success(wine))
     }
     
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         completion(.success(wines))
         return FakeRegistration()
     }
 
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
     
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) {
         
     }
     
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String]>) -> ()) {
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String], Error>) -> ()) {
         
     }
 }
