@@ -7,18 +7,17 @@
 //
 
 import Foundation
-import JFLib
 
 protocol UserRepository {
-    func add(user: User, completion: @escaping (Result<User>) -> ())
-    func save(user: User, completion: @escaping (Result<User>) -> ())
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User]>) -> ())
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ())
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User>) -> ())
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ())
-    func getUserById(_ id: UserId, completion: @escaping (Result<User?>) -> ())
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool>) -> ())
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?>) -> ()) -> MoWineListenerRegistration
+    func add(user: User, completion: @escaping (Result<User, Error>) -> ())
+    func save(user: User, completion: @escaping (Result<User, Error>) -> ())
+    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User], Error>) -> ())
+    func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ())
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User, Error>) -> ())
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<Void, Error>) -> ())
+    func getUserById(_ id: UserId, completion: @escaping (Result<User?, Error>) -> ())
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool, Error>) -> ())
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration
 }
 
 enum UserRepositoryError: Error {

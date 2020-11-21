@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import FirebaseAuth
 import SwiftyBeaver
 import FirebaseFirestore
@@ -85,7 +84,7 @@ class FirebaseSession: Session {
         }
     }
 
-    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+    func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         guard let authUser = Auth.auth().currentUser else {
             completion(.failure(SessionError.notLoggedIn))
             return
@@ -97,7 +96,7 @@ class FirebaseSession: Session {
             if let error = error {
                 completion(.failure(error))
             } else {
-                completion(.success)
+                completion(.success(()))
             }
         }
     }

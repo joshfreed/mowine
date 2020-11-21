@@ -98,7 +98,7 @@ class FirstTimeViewController: UIViewController {
 
     // Helpers
 
-    func socialSignInComplete(result: Result<User>) {
+    func socialSignInComplete(result: Swift.Result<User, Error>) {
         loadingView.hide()
         
         switch result {

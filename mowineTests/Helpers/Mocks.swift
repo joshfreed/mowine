@@ -8,39 +8,38 @@
 
 import Foundation
 @testable import mowine
-import JFLib
 import PromiseKit
 
 class MockWineRepository: WineRepository {
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (JFLib.Result<[String]>) -> ()) {
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Swift.Result<[String], Error>) -> ()) {
         
     }
     
-    func getWine(by id: WineId, completion: @escaping (JFLib.Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (Swift.Result<Wine, Error>) -> ()) {
         
     }
     
-    func add(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
+    func add(_ wine: Wine, completion: @escaping (Swift.Result<Wine, Error>) -> ()) {
         
     }
     
-    func getWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
     
-    func save(_ wine: Wine, completion: @escaping (JFLib.Result<Wine>) -> ()) {
+    func save(_ wine: Wine, completion: @escaping (Swift.Result<Wine, Error>) -> ()) {
         completion(.success(wine))
     }
     
-    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
-        completion(.success)
+    func delete(_ wine: Wine, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+        completion(.success(()))
     }
     
-    func getTopWines(userId: UserId, completion: @escaping (JFLib.Result<[Wine]>) -> ()) {
+    func getTopWines(userId: UserId, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) {
         
     }
     
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (JFLib.Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
 }
@@ -48,37 +47,37 @@ class MockWineRepository: WineRepository {
 class MockWineTypeRepository: WineTypeRepository {
     var types: [WineType] = []
     
-    func getAll(completion: @escaping (JFLib.Result<[WineType]>) -> ()) {
+    func getAll(completion: @escaping (Swift.Result<[WineType], Error>) -> ()) {
         completion(.success(types))
     }
     
-    func getWineType(named name: String, completion: @escaping (JFLib.Result<WineType?>) -> ()) {
+    func getWineType(named name: String, completion: @escaping (Swift.Result<WineType?, Error>) -> ()) {
         let type = types.first(where: { $0.name == name })
         completion(.success(type))        
     }
 }
 
 class MockUserRepository: UserRepository {
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) -> MoWineListenerRegistration {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
     
-    func add(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
+    func add(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         
     }
     
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (JFLib.Result<Bool>) -> ()) {
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
         
     }
     
-    func save(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         
     }
     
-    var getFriendsOfResult: JFLib.Result<[User]>?
+    var getFriendsOfResult: Swift.Result<[User], Error>?
     var getFriendsOf_userId: UserId?
     var getFriendsOfWasCalled = false
-    func getFriendsOf(userId: UserId, completion: @escaping (JFLib.Result<[User]>) -> ()) {
+    func getFriendsOf(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
         getFriendsOfWasCalled = true
         getFriendsOf_userId = userId
         if let result = getFriendsOfResult {
@@ -86,10 +85,10 @@ class MockUserRepository: UserRepository {
         }
     }
     
-    var searchUsersResult: JFLib.Result<[User]>?
+    var searchUsersResult: Swift.Result<[User], Error>?
     var searchUsers_searchString: String?
     var searchUsersWasCalled = false
-    func searchUsers(searchString: String, completion: @escaping (JFLib.Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
         searchUsersWasCalled = true
         searchUsers_searchString = searchString
         if let result = searchUsersResult {
@@ -100,8 +99,8 @@ class MockUserRepository: UserRepository {
     var addFriendCalled = false
     var addFriend_owningUserId: UserId?
     var addFriend_friendId: UserId?
-    var addFriendResult: JFLib.Result<User>?
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
+    var addFriendResult: Swift.Result<User, Error>?
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         addFriendCalled = true
         addFriend_owningUserId = owningUserId
         addFriend_friendId = friendId
@@ -110,14 +109,14 @@ class MockUserRepository: UserRepository {
         }
     }
 
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
 
     }
 
-    var getUserByIdResult: JFLib.Result<User?>?
+    var getUserByIdResult: Swift.Result<User?, Error>?
     var getUserByIdCalled = false
     var getUserById_id: UserId?
-    func getUserById(_ id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) {
+    func getUserById(_ id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) {
         getUserByIdCalled = true
         getUserById_id = id
         if let result = getUserByIdResult {
@@ -139,7 +138,7 @@ class MockSession: Session {
         return _currentUserId ?? _currentUser?.id
     }
     
-    func resume(completion: @escaping (EmptyResult) -> ()) {
+    func resume(completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         
     }
     
@@ -159,7 +158,7 @@ class MockSession: Session {
         }
     }
     
-    func getCurrentUser(completion: @escaping (JFLib.Result<User>) -> ()) {
+    func getCurrentUser(completion: @escaping (Swift.Result<User, Error>) -> ()) {
         if let currentUser = _currentUser {
             completion(.success(currentUser))
         } else {
@@ -179,9 +178,9 @@ class MockSession: Session {
         _currentUser = nil
     }
     
-    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+    func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         photoUrl = url
-        completion(.success)
+        completion(.success(()))
     }
     
     func getPhotoUrl() -> URL? {
@@ -205,8 +204,8 @@ class MockEmailAuthService: EmailAuthenticationService {
     var signInCalled = false
     var signIn_emailAddress: String?
     var signIn_password: String?
-    var signInResult: EmptyResult?
-    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    var signInResult: Swift.Result<Void, Error>?
+    func signIn(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         signInCalled = true
         signIn_emailAddress = emailAddress
         signIn_password = password
@@ -218,8 +217,8 @@ class MockEmailAuthService: EmailAuthenticationService {
     var signUpCalled = false
     var signUp_emailAddress: String?
     var signUp_password: String?
-    var signUpResult: EmptyResult?
-    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    var signUpResult: Swift.Result<Void, Error>?
+    func signUp(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         signUpCalled = true
         signUp_emailAddress = emailAddress
         signUp_password = password
@@ -230,15 +229,15 @@ class MockEmailAuthService: EmailAuthenticationService {
 }
 
 class MockProfilePictureWorker: ProfilePictureWorkerProtocol {
-    func setProfilePicture(image: UIImage, completion: @escaping (EmptyResult) -> ()) {
+    func setProfilePicture(image: UIImage, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         
     }
     
-    func getProfilePicture(user: User, completion: @escaping (JFLib.Result<Data?>) -> ()) {
+    func getProfilePicture(user: User, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
         
     }
     
-    func getProfilePicture(url: URL, completion: @escaping (JFLib.Result<Data?>) -> ()) {
+    func getProfilePicture(url: URL, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
         
     }
 }

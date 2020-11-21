@@ -12,7 +12,6 @@
 
 import UIKit
 import Eureka
-import JFLib
 
 protocol WineDetailsDisplayLogic: class {
     func displayWine(viewModel: WineDetails.FetchWine.ViewModel)

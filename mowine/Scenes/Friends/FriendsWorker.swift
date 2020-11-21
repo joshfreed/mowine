@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 enum FriendsWorkerError: Error {
     case notLoggedIn
@@ -26,7 +25,7 @@ class FriendsWorker {
         self.session = session
     }
     
-    func fetchMyFriends(completion: @escaping (Result<[User]>) -> ()) {
+    func fetchMyFriends(completion: @escaping (Result<[User], Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(FriendsWorkerError.notLoggedIn))
             return
@@ -35,7 +34,7 @@ class FriendsWorker {
         userRepository.getFriendsOf(userId: currentUserId, completion: completion)
     }
     
-    func searchUsers(searchString: String, completion: @escaping (Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(FriendsWorkerError.notLoggedIn))
             return
@@ -56,7 +55,7 @@ class FriendsWorker {
         }
     }
     
-    func addFriend(userId: UserId, completion: @escaping (Result<User>) -> ()) {
+    func addFriend(userId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(FriendsWorkerError.notLoggedIn))
             return
@@ -65,7 +64,7 @@ class FriendsWorker {
         userRepository.addFriend(owningUserId: currentUserId, friendId: userId, completion: completion)
     }
 
-    func getUser(byId userId: UserId, completion: @escaping (Result<User?>) -> ()) {
+    func getUser(byId userId: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
         userRepository.getUserById(userId, completion: completion)
     }
 }

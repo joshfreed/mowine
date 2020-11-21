@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 import SwiftyBeaver
 
 enum MyAccountWorkerError: Error {

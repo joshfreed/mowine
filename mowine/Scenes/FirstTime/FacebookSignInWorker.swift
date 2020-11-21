@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import SwiftyBeaver
 
 struct FacebookToken: SocialToken {
@@ -28,11 +27,11 @@ class FacebookProvider: SocialSignInProvider {
         self.fbGraphApi = fbGraphApi
     }
     
-    func linkAccount(token: FacebookToken, completion: @escaping (EmptyResult) -> ()) {
+    func linkAccount(token: FacebookToken, completion: @escaping (Result<Void, Error>) -> ()) {
         fbAuth.linkFacebookAccount(token: token.token, completion: completion)
     }
     
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo>) -> ()) {
+    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
         fbGraphApi.me(params: ["fields": "email,first_name,last_name"]) { result in
             switch result {
             case .success(let fields): self.createNewUserFromFacebookFields(fields, completion: completion)
@@ -41,7 +40,7 @@ class FacebookProvider: SocialSignInProvider {
         }
     }
     
-    func createNewUserFromFacebookFields(_ fields: [String: Any], completion: @escaping (Result<NewUserInfo>) -> ()) {
+    func createNewUserFromFacebookFields(_ fields: [String: Any], completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
         guard let email = fields["email"] as? String else {
             completion(.failure(CreateUserFromFacebookInfoError.missingEmail))
             return

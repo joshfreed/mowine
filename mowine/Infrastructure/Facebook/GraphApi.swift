@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import FBSDKLoginKit
 
 enum GraphApiError: Error {
@@ -15,7 +14,7 @@ enum GraphApiError: Error {
 }
 
 class GraphApi {
-    func me(params: [String: String], completion: @escaping (Result<[String: Any]>) -> ()) {
+    func me(params: [String: String], completion: @escaping (Result<[String: Any], Error>) -> ()) {
         let request = GraphRequest(graphPath: "me", parameters: params)
         _ = request.start { connection, result, error in
             if let e = error {

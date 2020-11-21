@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 class WineCellarListWorker {
     let wineRepository: WineRepository
@@ -20,7 +19,7 @@ class WineCellarListWorker {
         self.wineRepository = wineRepository
     }
     
-    func fetchWines(for userId: UserId, type: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
+    func fetchWines(for userId: UserId, type: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) {
         _ = wineRepository.getWines(userId: userId, wineType: type, completion: completion)
     }
 }

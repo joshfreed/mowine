@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JFLib
 import SwiftyBeaver
 
 class WineWorker {
@@ -27,7 +26,7 @@ class WineWorker {
         name: String,
         rating: Double,
         photo: UIImage?,
-        completion: @escaping (Result<Wine>) -> ()
+        completion: @escaping (Result<Wine, Error>) -> ()
     ) {
         guard let userId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))

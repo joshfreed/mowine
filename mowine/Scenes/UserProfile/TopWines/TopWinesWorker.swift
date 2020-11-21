@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import JFLib
 
 class TopWinesWorker {
     let wineRepository: WineRepository
@@ -20,7 +19,7 @@ class TopWinesWorker {
         self.wineRepository = wineRepository
     }
     
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) {
         wineRepository.getTopWines(userId: userId, completion: completion)
     }
 }

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import JFLib
 
 protocol EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ())
-    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ())
+    func signIn(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ())
+    func signUp(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ())
 }
 
 enum EmailAuthenticationErrors: Error {

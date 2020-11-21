@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import JFLib
 
 protocol FacebookAuthenticationService {
-    func linkFacebookAccount(token: String, completion: @escaping (EmptyResult) -> ())    
+    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ())    
 }

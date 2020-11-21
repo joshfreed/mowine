@@ -115,7 +115,7 @@ class FakeSession: Session {
         loggedIn()
     }
     
-    func resume(completion: @escaping (EmptyResult) -> ()) {
+    func resume(completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         _isLoggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
         if let emailAddress = UserDefaults.standard.value(forKey: "emailAddress") as? String {
             _currentUser = usersDB.first(where: { $0.emailAddress == emailAddress })
@@ -123,7 +123,7 @@ class FakeSession: Session {
             UserDefaults.standard.set(false, forKey: "loggedIn")
             _isLoggedIn = false
         }
-        completion(.success)
+        completion(.success(()))
     }
     
     func end() {
@@ -142,9 +142,9 @@ class FakeSession: Session {
 //        completion(.failure(MoWineError.error(message: "Just a test error")))
     }
 
-    func setPhotoUrl(_ url: URL, completion: @escaping (EmptyResult) -> ()) {
+    func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         _photoUrl = url
-        completion(.success)
+        completion(.success(()))
     }
 
     func getPhotoUrl() -> URL? {
@@ -162,41 +162,41 @@ struct FakeMoWineAuth: MoWineAuth {
 }
 
 class FakeEmailAuth: EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    func signIn(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         if let user = usersDB.first(where: { $0.emailAddress == emailAddress }) {
             (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
-            completion(.success)
+            completion(.success(()))
         } else {
             completion(.failure(EmailAuthenticationErrors.userNotFound))
         }
     }
     
-    func signUp(emailAddress: String, password: String, completion: @escaping (EmptyResult) -> ()) {
+    func signUp(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         let user = User(emailAddress: emailAddress)
         (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
         usersDB.append(user)
-        completion(.success)
+        completion(.success(()))
     }
 }
 
 class FakeUserRepository: UserRepository {
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) -> MoWineListenerRegistration {
+    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
     
-    func add(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
+    func add(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         usersDB.append(user)
         completion(.success(user))
     }
     
-    func save(user: User, completion: @escaping (JFLib.Result<User>) -> ()) {
+    func save(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
             usersDB[index] = user
         }
         completion(.success(user))
     }
 
-    func getFriendsOf(userId: UserId, completion: @escaping (JFLib.Result<[User]>) -> ()) {
+    func getFriendsOf(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
         let friendIds = friendsDB[userId] ?? []
         var friends: [User] = []
         for friendId in friendIds {
@@ -210,7 +210,7 @@ class FakeUserRepository: UserRepository {
         }
     }
     
-    func searchUsers(searchString: String, completion: @escaping (JFLib.Result<[User]>) -> ()) {
+    func searchUsers(searchString: String, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
         let words = searchString.split(separator: " ")
         var matches: [User] = []
         
@@ -228,7 +228,7 @@ class FakeUserRepository: UserRepository {
         }
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (JFLib.Result<User>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         if friendsDB[owningUserId] == nil {
             friendsDB[owningUserId] = []
         }
@@ -237,19 +237,19 @@ class FakeUserRepository: UserRepository {
         completion(.success(newFriend))
     }
     
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (EmptyResult) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         if let index = friendsDB[owningUserId]?.firstIndex(of: friendId) {
             friendsDB[owningUserId]?.remove(at: index)
         }        
-        completion(.success)
+        completion(.success(()))
     }
     
-    func getUserById(_ id: UserId, completion: @escaping (JFLib.Result<User?>) -> ()) {
+    func getUserById(_ id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) {
         let user = usersDB.first(where: { $0.id == id })
         completion(.success(user))
     }
     
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (JFLib.Result<Bool>) -> ()) {
+    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
         
     }
 }

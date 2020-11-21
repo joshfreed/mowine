@@ -8,14 +8,13 @@
 
 import Foundation
 import FirebaseAuth
-import JFLib
 
 class FirebaseSocialAuth {
     
 }
 
 extension FirebaseSocialAuth: FacebookAuthenticationService {
-    func linkFacebookAccount(token: String, completion: @escaping (EmptyResult) -> ()) {
+    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ()) {
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
         
         Auth.auth().signIn(with: credential) { (authResult, error) in
@@ -24,13 +23,13 @@ extension FirebaseSocialAuth: FacebookAuthenticationService {
                 return
             }
             
-            completion(.success)
+            completion(.success(()))
         }
     }
 }
 
 extension FirebaseSocialAuth: GoogleAuthenticationService {
-    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (EmptyResult) -> ()) {
+    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (Result<Void, Error>) -> ()) {
         let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
         
         Auth.auth().signIn(with: credential) { (authResult, error) in
@@ -39,7 +38,7 @@ extension FirebaseSocialAuth: GoogleAuthenticationService {
                 return
             }
             
-            completion(.success)
+            completion(.success(()))
         }
     }
 }

@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import JFLib
 
 class FakeWineThumbnailFetcher: WineListThumbnailFetcher {
-    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ()) {
         completion(.success(nil))
     }
 
-    func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?>) -> ()) {
+    func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?, Error>) -> ()) {
         completion(.success(nil))
     }
 }

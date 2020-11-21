@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import FirebaseFirestore
 import SwiftyBeaver
 import FirebaseCrashlytics
@@ -19,7 +18,7 @@ class FirestoreWineRepository: WineRepository {
         
     }
     
-    func add(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+    func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         let data = wine.toFirestore()
         
         db.collection("wines").document(wine.id.asString).setData(data) { err in
@@ -33,25 +32,25 @@ class FirestoreWineRepository: WineRepository {
         }
     }
     
-    func save(_ wine: Wine, completion: @escaping (Result<Wine>) -> ()) {
+    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         let data = wine.toFirestore()
         db.collection("wines").document(wine.id.asString).setData(data, merge: true)
         completion(.success(wine))
     }
     
-    func delete(_ wine: Wine, completion: @escaping (EmptyResult) -> ()) {
+    func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ()) {
         db.collection("wines").document(wine.id.asString).delete() { err in
             if let err = err {
                 SwiftyBeaver.error("Error deleting wine document: \(err)")
                 Crashlytics.crashlytics().record(error: err)
                 completion(.failure(err))
             } else {
-                completion(.success)
+                completion(.success(()))
             }
         }
     }
     
-    func getWine(by id: WineId, completion: @escaping (Result<Wine>) -> ()) {
+    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
         let docRef = db.collection("wines").document(id.asString)
         docRef.getDocument(source: .cache) { (document, error) in
             if let error = error {
@@ -73,7 +72,7 @@ class FirestoreWineRepository: WineRepository {
         }
     }
     
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         let query = db
             .collection("wines")
             .whereField("userId", isEqualTo: userId.asString)
@@ -94,7 +93,7 @@ class FirestoreWineRepository: WineRepository {
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         SwiftyBeaver.info("getWines \(userId) \(wineType.name)")
 
         let query = db
@@ -118,7 +117,7 @@ class FirestoreWineRepository: WineRepository {
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
+    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) {
         let query = db
             .collection("wines")
             .whereField("userId", isEqualTo: userId.asString)
@@ -139,7 +138,7 @@ class FirestoreWineRepository: WineRepository {
         }
     }
     
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String]>) -> ()) {
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String], Error>) -> ()) {
         let query = db.collection("wines").whereField("userId", isEqualTo: userId.asString)
         
         query.getDocuments { (querySnapshot, error) in

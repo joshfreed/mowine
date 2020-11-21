@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import JFLib
 
 protocol WineTypeRepository {
-    func getAll(completion: @escaping (Result<[WineType]>) -> ())
-    func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ())
+    func getAll(completion: @escaping (Result<[WineType], Error>) -> ())
+    func getWineType(named name: String, completion: @escaping (Result<WineType?, Error>) -> ())
 }

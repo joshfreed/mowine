@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 
 class MemoryWineTypeRepository: WineTypeRepository {
     private(set) lazy var types: [WineType] = {
@@ -46,11 +45,11 @@ class MemoryWineTypeRepository: WineTypeRepository {
     
     // MARK: WineTypeRepository
     
-    func getAll(completion: @escaping (Result<[WineType]>) -> ()) {
+    func getAll(completion: @escaping (Result<[WineType], Error>) -> ()) {
         completion(.success(types))
     }
     
-    func getWineType(named name: String, completion: @escaping (Result<WineType?>) -> ()) {
+    func getWineType(named name: String, completion: @escaping (Result<WineType?, Error>) -> ()) {
         for type in types {
             if type.name == name {
                 completion(.success(type))
