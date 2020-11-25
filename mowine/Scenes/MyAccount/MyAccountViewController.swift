@@ -82,7 +82,7 @@ class MyAccountViewController: UIViewController, MyAccountDisplayLogic {
     @IBAction func unwindToMyAccount(_ unwindSegue: UIStoryboardSegue) {
     }
     
-    // MARK: Do something
+    // MARK: Get User
 
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!

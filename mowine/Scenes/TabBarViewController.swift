@@ -33,6 +33,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if let vc = viewControllers?[3] as? MyAccountViewController {
             vc.delegate = self
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didSignOut), name: .signedOut, object: nil)
     }
 
     // MARK: - UITabBarControllerDelegate
@@ -52,7 +54,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 }
 
 extension TabBarViewController: MyAccountViewControllerDelegate {
-    func didSignOut() {
+    @objc func didSignOut() {
         coordinator?.showSignedOutView()
     }
 }
