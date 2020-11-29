@@ -1,0 +1,90 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    background: rgb(193,174,226);
+    background: linear-gradient(180deg, rgba(193,174,226,1) 0%, rgba(150,118,205,1) 23%, rgba(103,58,183,1) 60%);
+    color: #fff;
+    font-family: "Helvetica Neue Light", "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+/* Layout */
+
+.container {
+    margin: auto;
+    max-width: 800px;
+}
+
+@media (min-width: 600px) {
+    .one-page {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.flex-grid {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+@media (max-width: 400px) {
+    .flex-grid {
+        display: block;
+    }
+}
+
+.col {
+    flex: 1;
+    text-align: center;
+}
+
+.vertical-align-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Element Styles */
+
+a {
+    color: #C1AEE2;
+}
+
+/* Custom Styles */
+
+.logo img {
+    width: 150px;
+}
+
+.phone-image {
+    width: 375px;
+}
+@media (max-width: 400px) {
+    .phone-image {
+        width: 100%;
+    }
+}
+
+.app-title {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.h2 {
+    font-size: 21px;
+    margin-top: 32px;
+    margin-bottom: 40px;
+}
+
+p.contact-me {
+    margin-top: 40px;
+}
+
+.privacy-policy-link {
+    margin-top: 32px;
+}
