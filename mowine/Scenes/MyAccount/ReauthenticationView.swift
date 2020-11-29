@@ -10,7 +10,18 @@ import SwiftUI
 
 struct ReauthenticationView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack(alignment: .leading, spacing: 28) {
+                Text("Please reauthenticate in order to continue.")
+                LoginProviderView()
+            }
+            .padding()
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") {
+                
+            })
+        }
+        .accentColor(.mwSecondary)
     }
 }
 

@@ -9,8 +9,20 @@
 import SwiftUI
 
 struct FacebookLoginButton: View {
+    var action: () -> Void = { }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: action, label: {
+            Text("Continue with Facebook")
+                .font(.system(size: 21))
+                .fontWeight(.light)
+                .foregroundColor(.white)
+        })
+        .padding()
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 72)
+        .background(Color("Brand Facebook"))
+        .cornerRadius(5)
     }
 }
 
