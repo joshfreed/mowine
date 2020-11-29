@@ -19,7 +19,7 @@ class MyAccountViewController2: UIViewController {
     }
     
     @IBSegueAction func addSwiftUIView(_ coder: NSCoder) -> UIViewController? {
-        let getMyAccountQuery = GetMyAccountQuery(userRepository: JFContainer.shared.userRepository, session: JFContainer.shared.session)
+        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: JFContainer.shared.userRepository, session: JFContainer.shared.session)
         let profilePictureWorker: ProfilePictureWorkerProtocol = try! JFContainer.shared.container.resolve()
         let signOutCommand = SignOutCommand(session: JFContainer.shared.session)
         let viewModel = MyAccountViewModel(

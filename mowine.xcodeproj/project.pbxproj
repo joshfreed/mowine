@@ -223,6 +223,9 @@
 		53F5AC171E2176090067AB62 /* mowineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* mowineUITests.swift */; };
 		53F725B3219CB79600F8176F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F725B2219CB79600F8176F /* StartViewController.swift */; };
 		53FFD6482051BE6700AC60EE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFD6472051BE6700AC60EE /* Errors.swift */; };
+		53FFECA9256F0D3100321944 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECA8256F0D3100321944 /* EditProfileView.swift */; };
+		53FFECAD256F0D4100321944 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */; };
+		53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECB2256F0E9D00321944 /* FancyTextField.swift */; };
 		E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */; };
 		E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */; };
 		E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */; };
@@ -487,6 +490,9 @@
 		53F5AC181E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F725B2219CB79600F8176F /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		53FFD6472051BE6700AC60EE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		53FFECA8256F0D3100321944 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		53FFECB2256F0E9D00321944 /* FancyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTextField.swift; sourceTree = "<group>"; };
 		5AA366BC6DE94D3A09174F0D /* Pods-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.release.xcconfig"; path = "Target Support Files/Pods-mowineUITests/Pods-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		66467F43289DFF54847981AF /* Pods-mowine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.release.xcconfig"; path = "Target Support Files/Pods-mowine/Pods-mowine.release.xcconfig"; sourceTree = "<group>"; };
 		A98AFEE42461238D95C0566B /* Pods-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.debug.xcconfig"; path = "Target Support Files/Pods-mowineUITests/Pods-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -993,6 +999,8 @@
 				532DB3C22569C1B9009A4740 /* MyAccountViewController2.swift */,
 				532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */,
 				532DB3C82569C2EF009A4740 /* MyAccountView.swift */,
+				53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */,
+				53FFECA8256F0D3100321944 /* EditProfileView.swift */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -1032,6 +1040,7 @@
 				539717C322B6BFC200EFA97F /* ProfilePictureView.xib */,
 				539717C522B6BFD300EFA97F /* ProfilePictureView.swift */,
 				536AEBED2540B366009EA107 /* SearchBar.swift */,
+				53FFECB2256F0E9D00321944 /* FancyTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1698,6 +1707,7 @@
 				53547C7D218E3F8700EDD2A8 /* Friendship.swift in Sources */,
 				53D1E3002059B68800A22476 /* TopWinesModels.swift in Sources */,
 				53D1E3012059B68800A22476 /* TopWinesViewController.swift in Sources */,
+				53FFECAD256F0D4100321944 /* EditProfileViewModel.swift in Sources */,
 				5327BC342062B362006787E9 /* WineDetailsViewController.swift in Sources */,
 				53B6CB8B205ADD9300AE8EFB /* WineCellarPresenter.swift in Sources */,
 				5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */,
@@ -1770,6 +1780,7 @@
 				5327BC322062B362006787E9 /* WineDetailsRouter.swift in Sources */,
 				533980942068295C004C080B /* FacebookAuthenticationService.swift in Sources */,
 				5301D5371F72D0F6004A66A9 /* NameWineModels.swift in Sources */,
+				53FFECA9256F0D3100321944 /* EditProfileView.swift in Sources */,
 				537614D11E591FA5005AABF0 /* WineForm.swift in Sources */,
 				530BCA542155823C002F785C /* Syncable.swift in Sources */,
 				538E104B253BB56200B26619 /* FakeWineThumbnailFetcher.swift in Sources */,
@@ -1840,6 +1851,7 @@
 				537E24072246D59E00DFFA4B /* GoogleSignInWorker.swift in Sources */,
 				E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */,
 				E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */,
+				53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */,
 				E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */,
 				5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */,
 				E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */,

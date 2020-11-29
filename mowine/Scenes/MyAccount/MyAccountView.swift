@@ -11,6 +11,7 @@ import SwiftUI
 struct MyAccountView: View {
     @ObservedObject var viewModel: MyAccountViewModel
     @State var isShowingSignOutConfirmation: Bool = false
+    @State var isEditingProfile: Bool = false
     
     var body: some View {
         VStack(spacing: 8) {
@@ -28,7 +29,9 @@ struct MyAccountView: View {
             
             Color.clear.frame(height: 48)
             
-            Button(action: {}) {
+            Button(action: {
+                isEditingProfile = true
+            }) {
                 Text("Edit Profile")
                     .font(.system(size: 21))
                     .fontWeight(.medium)
@@ -62,7 +65,11 @@ struct MyAccountView: View {
             Color.clear.frame(height: 8)
         }.onAppear {
             viewModel.loadMyAccount()
-        }
+        }.sheet(isPresented: $isEditingProfile, content: {
+            EditProfileView(vm: EditProfileViewModel.factory {
+                isEditingProfile = false
+            })
+        })
     }
 }
 
@@ -71,7 +78,10 @@ struct ProfilePictureView2: View {
     
     var body: some View {
         if let data = data, let uiImage = UIImage(data: data) {
-            Image(uiImage: uiImage).resizable()
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .clipShape(Circle())
         } else {
             Image("No Profile Picture").resizable()
         }

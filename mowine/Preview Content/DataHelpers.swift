@@ -10,7 +10,7 @@ import UIKit
 
 extension MyAccountViewModel {
     static func make(fullName: String, email: String) -> MyAccountViewModel {
-        let getMyAccountQuery = GetMyAccountQuery(userRepository: FakeUserRepository(), session: FakeSession())
+        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
         let profilePictureWorker = FakeProfilePictureWorker()
         let signOutCommand = SignOutCommand(session: FakeSession())
         let vm = MyAccountViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, signOutCommand: signOutCommand)
@@ -20,12 +20,35 @@ extension MyAccountViewModel {
     }
     
     static func make() -> MyAccountViewModel {
-        let getMyAccountQuery = GetMyAccountQuery(userRepository: FakeUserRepository(), session: FakeSession())
+        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
         let profilePictureWorker = FakeProfilePictureWorker()
         let signOutCommand = SignOutCommand(session: FakeSession())
         let vm = MyAccountViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, signOutCommand: signOutCommand)
         vm.fullName = "Barry Jones"
         vm.emailAddress = "bjones@gmail.com"
+        return vm
+    }
+}
+
+extension EditProfileViewModel {
+    static func make() -> EditProfileViewModel {
+        .make(firstName: "", lastName: "", emailAddress: "")
+    }
+    
+    static func make(firstName: String, lastName: String, emailAddress: String) -> EditProfileViewModel {
+        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
+        let profilePictureWorker = FakeProfilePictureWorker()
+        let userProfileService = UserProfileService(session: FakeSession(), userRepository: FakeUserRepository(), profilePictureWorker: profilePictureWorker)
+        let editProfileService = EditProfileService(
+            session: FakeSession(),
+            profilePictureWorker: profilePictureWorker,
+            userProfileService: userProfileService,
+            userRepository: FakeUserRepository()
+        )
+        let vm = EditProfileViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, editProfileService: editProfileService)
+        vm.firstName = firstName
+        vm.lastName = lastName
+        vm.emailAddress = emailAddress
         return vm
     }
 }
