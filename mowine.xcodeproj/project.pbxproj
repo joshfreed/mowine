@@ -176,6 +176,11 @@
 		53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
 		53C91A1F255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91A1E255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift */; };
+		53C91F4C25740E2E0065E778 /* ReauthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F4B25740E2E0065E778 /* ReauthenticationView.swift */; };
+		53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */; };
+		53C91F5725740E780065E778 /* GoogleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5625740E780065E778 /* GoogleLoginButton.swift */; };
+		53C91F5B25740E820065E778 /* EmailLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5A25740E820065E778 /* EmailLoginButton.swift */; };
+		53C91F5F257414150065E778 /* LoginProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5E257414150065E778 /* LoginProviderView.swift */; };
 		53CDB5141F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */; };
 		53CDB5151F3E271B00EF9CF6 /* ConfirmPhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */; };
 		53CDB5161F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */; };
@@ -437,6 +442,11 @@
 		53C3E66D1FF6E048003F6676 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		53C91A1E255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirebaseListenerRegistration.swift; sourceTree = "<group>"; };
+		53C91F4B25740E2E0065E778 /* ReauthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReauthenticationView.swift; sourceTree = "<group>"; };
+		53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginButton.swift; sourceTree = "<group>"; };
+		53C91F5625740E780065E778 /* GoogleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginButton.swift; sourceTree = "<group>"; };
+		53C91F5A25740E820065E778 /* EmailLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginButton.swift; sourceTree = "<group>"; };
+		53C91F5E257414150065E778 /* LoginProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProviderView.swift; sourceTree = "<group>"; };
 		53CDB50E1F3E271B00EF9CF6 /* ConfirmPhotoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoInteractor.swift; sourceTree = "<group>"; };
 		53CDB50F1F3E271B00EF9CF6 /* ConfirmPhotoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoModels.swift; sourceTree = "<group>"; };
 		53CDB5101F3E271B00EF9CF6 /* ConfirmPhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoPresenter.swift; sourceTree = "<group>"; };
@@ -1001,6 +1011,7 @@
 				532DB3C82569C2EF009A4740 /* MyAccountView.swift */,
 				53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */,
 				53FFECA8256F0D3100321944 /* EditProfileView.swift */,
+				53C91F4B25740E2E0065E778 /* ReauthenticationView.swift */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -1030,6 +1041,7 @@
 		53C88BFA1F085D17009B7D29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				53C91F4F25740E5F0065E778 /* Auth */,
 				5348960A203DE3A400B7547A /* ButtonPrimary.swift */,
 				5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */,
 				5327BC1A20618670006787E9 /* MWButton.swift */,
@@ -1043,6 +1055,17 @@
 				53FFECB2256F0E9D00321944 /* FancyTextField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		53C91F4F25740E5F0065E778 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */,
+				53C91F5625740E780065E778 /* GoogleLoginButton.swift */,
+				53C91F5A25740E820065E778 /* EmailLoginButton.swift */,
+				53C91F5E257414150065E778 /* LoginProviderView.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		53CDB50C1F3E263D00EF9CF6 /* ConfirmPhoto */ = {
@@ -1744,6 +1767,7 @@
 				534895F1203CBAA400B7547A /* Wine.swift in Sources */,
 				5399E158232445A20071655F /* ForgotPasswordViewController.swift in Sources */,
 				532FB08520584C2C0056D1B2 /* UserProfileWorker.swift in Sources */,
+				53C91F4C25740E2E0065E778 /* ReauthenticationView.swift in Sources */,
 				5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */,
 				5327BC372062BB35006787E9 /* WineDetailsHeader.swift in Sources */,
 				53013454225BE69B00A4B718 /* SignInByEmailViewController.swift in Sources */,
@@ -1758,6 +1782,7 @@
 				5398F51D252A6CE500BF61C0 /* MyCellarViewController.swift in Sources */,
 				534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
+				53C91F5725740E780065E778 /* GoogleLoginButton.swift in Sources */,
 				5327BC2820619D34006787E9 /* WineCellarListInteractor.swift in Sources */,
 				530D3F6121E95F1C00885167 /* ProfilePictureViewController.swift in Sources */,
 				53F725B3219CB79600F8176F /* StartViewController.swift in Sources */,
@@ -1799,6 +1824,7 @@
 				53958A9820617B6C00BA4B6C /* FirstTimeWorker.swift in Sources */,
 				5346A51222BAD7E900AC9C7A /* MoWineListenerRegistration.swift in Sources */,
 				53489602203DD11F00B7547A /* WineRepository.swift in Sources */,
+				53C91F5B25740E820065E778 /* EmailLoginButton.swift in Sources */,
 				5320BF391E436FF200F2405E /* PhotoRow.swift in Sources */,
 				537614CD1E591887005AABF0 /* EditWineViewController.swift in Sources */,
 				532DB3D3256AC763009A4740 /* DataHelpers.swift in Sources */,
@@ -1820,6 +1846,7 @@
 				5321FB961F0BEE27001D2040 /* SelectTypeModels.swift in Sources */,
 				5311284C206010520094DC35 /* ButtonPrimaryGradient.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
+				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
@@ -1842,6 +1869,7 @@
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
 				534895FD203CBFB900B7547A /* JFContainer.swift in Sources */,
 				53D1E3022059B68800A22476 /* TopWinesInteractor.swift in Sources */,
+				53C91F5F257414150065E778 /* LoginProviderView.swift in Sources */,
 				5321FBA91F0BFA09001D2040 /* VarietyCollectionViewCell.swift in Sources */,
 				5327BC352062B362006787E9 /* WineDetailsInteractor.swift in Sources */,
 				53D1E2FF2059B68800A22476 /* TopWinesRouter.swift in Sources */,
