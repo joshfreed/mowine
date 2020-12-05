@@ -45,11 +45,13 @@ class MyAccountViewModel: ObservableObject {
     private func fetchProfilePicture(url: URL?) {
         if let url = url {
             profilePictureWorker.getProfilePicture(url: url) { [weak self] result in
-                switch result {
-                case .success(let data): self?.profilePicture = data
-                case .failure(let error):
-                    SwiftyBeaver.error("\(error)")
-                    Crashlytics.crashlytics().record(error: error)
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data): self?.profilePicture = data
+                    case .failure(let error):
+                        SwiftyBeaver.error("\(error)")
+                        Crashlytics.crashlytics().record(error: error)
+                    }
                 }
             }
         } else {
