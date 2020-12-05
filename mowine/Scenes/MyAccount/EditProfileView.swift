@@ -19,7 +19,7 @@ struct EditProfileView: View {
                     vm.cancel()
                 }, trailing: Button("Save") {
                     vm.saveProfile()
-                })
+                }.disabled(!vm.canSave))
         }
         .accentColor(.mwSecondary)
         .onAppear {
@@ -31,6 +31,7 @@ struct EditProfileView: View {
         .sheet(isPresented: $vm.isReauthenticating) {
             Text("RE AUTH")
         }
+        .loading(isShowing: vm.isSaving, text: "Saving...")
     }
 }
 
