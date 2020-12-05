@@ -103,6 +103,7 @@
 		5367A3CF254B0812002A02A5 /* WineListViewModelSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367A3CE254B0812002A02A5 /* WineListViewModelSwiftUI.swift */; };
 		5367A3D3254B0A42002A02A5 /* WineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367A3D2254B0A42002A02A5 /* WineListView.swift */; };
 		5367A417254B135F002A02A5 /* SearchMyCellarQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367A416254B135F002A02A5 /* SearchMyCellarQuery.swift */; };
+		5369B7A72575E092003DD672 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5369B7A62575E092003DD672 /* LoadingView.swift */; };
 		536AEBE82540B306009EA107 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBE72540B306009EA107 /* ViewControllerResolver.swift */; };
 		536AEBEE2540B366009EA107 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBED2540B366009EA107 /* SearchBar.swift */; };
 		536AEBF22540BBBB009EA107 /* MyCellarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBF12540BBBB009EA107 /* MyCellarContentView.swift */; };
@@ -370,6 +371,7 @@
 		5367A3CE254B0812002A02A5 /* WineListViewModelSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListViewModelSwiftUI.swift; sourceTree = "<group>"; };
 		5367A3D2254B0A42002A02A5 /* WineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListView.swift; sourceTree = "<group>"; };
 		5367A416254B135F002A02A5 /* SearchMyCellarQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMyCellarQuery.swift; sourceTree = "<group>"; };
+		5369B7A62575E092003DD672 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		536AEBE72540B306009EA107 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
 		536AEBED2540B366009EA107 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		536AEBF12540BBBB009EA107 /* MyCellarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarContentView.swift; sourceTree = "<group>"; };
@@ -1053,6 +1055,7 @@
 				539717C522B6BFD300EFA97F /* ProfilePictureView.swift */,
 				536AEBED2540B366009EA107 /* SearchBar.swift */,
 				53FFECB2256F0E9D00321944 /* FancyTextField.swift */,
+				5369B7A62575E092003DD672 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1853,6 +1856,7 @@
 				538E1041253BB2C500B26619 /* WineCellarListViewModel.swift in Sources */,
 				532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */,
 				539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */,
+				5369B7A72575E092003DD672 /* LoadingView.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				53F24867206D40370046B031 /* GraphApi.swift in Sources */,
 				5327BC2320619D34006787E9 /* WineCellarListPresenter.swift in Sources */,

@@ -12,10 +12,23 @@ import FirebaseCrashlytics
 import SwiftyBeaver
 
 class EditProfileViewModel: ObservableObject {
-    @Published var firstName: String = ""
-    @Published var lastName: String = ""
-    @Published var emailAddress: String = ""
+    @Published var firstName: String = "" {
+        didSet {
+            enableSaveButton()
+        }
+    }
+    @Published var lastName: String = "" {
+        didSet {
+            enableSaveButton()
+        }
+    }
+    @Published var emailAddress: String = "" {
+        didSet {
+            enableSaveButton()
+        }
+    }
     @Published var profilePicture: Data?
+    @Published var canSave = false
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
@@ -41,15 +54,20 @@ class EditProfileViewModel: ObservableObject {
         getMyAccountQuery.getMyAccount { [weak self] result in
             switch result {
             case .success(let profile):
-                self?.firstName = profile.firstName ?? ""
-                self?.lastName = profile.lastName ?? ""
-                self?.emailAddress = profile.emailAddress
+                self?.setProfile(profile)
                 self?.fetchProfilePicture(url: profile.profilePictureUrl)
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
             }
         }
+    }
+    
+    private func setProfile(_ profile: GetMyAccountQueryResponse) {
+        firstName = profile.firstName ?? ""
+        lastName = profile.lastName ?? ""
+        emailAddress = profile.emailAddress
+        disableSaveButton()
     }
 
     private func fetchProfilePicture(url: URL?) {
@@ -70,14 +88,19 @@ class EditProfileViewModel: ObservableObject {
     func cancel() {
         closeModal?()
     }
+    
+    private func enableSaveButton() {
+        canSave = true
+    }
+    
+    private func disableSaveButton() {
+        canSave = false
+    }
 
     func saveProfile() {
-        SwiftyBeaver.info("Saving profile...")
-
         isSaving = true
 
         editProfileService.saveProfile(email: emailAddress, firstName: firstName, lastName: lastName) { [weak self] result in
-            SwiftyBeaver.info("Save profile complete")
             self?.isSaving = false
             self?.saveProfileCallback(result: result)
         }
