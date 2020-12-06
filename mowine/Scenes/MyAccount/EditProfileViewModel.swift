@@ -148,15 +148,6 @@ class EditProfileViewModel: ObservableObject {
 }
 
 extension EditProfileViewModel {
-    enum State {
-        case editing
-        case saving
-        case reauthenticate
-        case saveError(Error)
-    }
-}
-
-extension EditProfileViewModel {
     static func factory(onClose: @escaping () -> Void) -> EditProfileViewModel {
         let getMyAccountQuery = GetMyAccountQueryHandler(
             userRepository: JFContainer.shared.userRepository,

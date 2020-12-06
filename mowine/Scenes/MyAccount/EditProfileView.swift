@@ -21,12 +21,12 @@ struct EditProfileView: View {
             ) { pickerSourceType in
                 vm.selectProfilePicture(from: pickerSourceType)
             }
-                .navigationBarTitle("Edit Profile", displayMode: .inline)
-                .navigationBarItems(leading: Button("Cancel") {
-                    vm.cancel()
-                }, trailing: Button("Save") {
-                    vm.saveProfile()
-                }.disabled(!vm.canSave))
+            .navigationBarTitle("Edit Profile", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") {
+                vm.cancel()
+            }, trailing: Button("Save") {
+                vm.saveProfile()
+            }.disabled(!vm.canSave))
         }
         .accentColor(.mwSecondary)
         .onAppear {
@@ -57,29 +57,13 @@ struct EditProfileFormView: View {
     @Binding var lastName: String
     @Binding var emailAddress: String
     @Binding var profilePicture: Data?
-    @State var isShowingActionSheet: Bool = false
-    
     var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
 
     var body: some View {
         VStack(spacing: 6) {
             Color.clear.frame(height: 26)
 
-            ProfilePictureOverlayView(profilePicture: $profilePicture)
-                .onTapGesture {
-                    isShowingActionSheet = true
-                }
-                .actionSheet(isPresented: $isShowingActionSheet, content: {
-                    ActionSheet(title: Text("Change Profile Picture"), message: nil, buttons: [
-                        .default(Text("Camera"), action: {
-                            changeProfilePicture(.camera)
-                        }),
-                        .default(Text("Photo Library"), action: {
-                            changeProfilePicture(.photoLibrary)
-                        }),
-                        .cancel()
-                    ])
-                })
+            ProfilePictureOverlayView(profilePicture: $profilePicture, changeProfilePicture: changeProfilePicture)
 
             Color.clear.frame(height: 20)
 
@@ -93,7 +77,13 @@ struct EditProfileFormView: View {
 }
 
 struct ProfilePictureOverlayView: View {
-    @Binding var profilePicture: Data?
+    @Binding
+    var profilePicture: Data?
+    
+    var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
+    
+    @State
+    private var isShowingActionSheet: Bool = false
 
     var body: some View {
         ZStack {
@@ -103,6 +93,20 @@ struct ProfilePictureOverlayView: View {
                 .resizable()
                 .frame(width: 128, height: 128)
         }
+        .onTapGesture {
+            isShowingActionSheet = true
+        }
+        .actionSheet(isPresented: $isShowingActionSheet, content: {
+            ActionSheet(title: Text("Change Profile Picture"), message: nil, buttons: [
+                .default(Text("Camera"), action: {
+                    changeProfilePicture(.camera)
+                }),
+                .default(Text("Photo Library"), action: {
+                    changeProfilePicture(.photoLibrary)
+                }),
+                .cancel()
+            ])
+        })
     }
 }
 
