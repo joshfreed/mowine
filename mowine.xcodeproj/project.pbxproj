@@ -76,6 +76,7 @@
 		533D8B842533B13000CE297E /* WineItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D8B832533B13000CE297E /* WineItemView.swift */; };
 		533D8B882533B85000CE297E /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D8B872533B85000CE297E /* RatingView.swift */; };
 		533D8B8C2533B8DB00CE297E /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D8B8B2533B8DB00CE297E /* StarView.swift */; };
+		5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5345BABD257C286F00AD68D3 /* ImagePicker.swift */; };
 		5346A51222BAD7E900AC9C7A /* MoWineListenerRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5346A51122BAD7E900AC9C7A /* MoWineListenerRegistration.swift */; };
 		534895F1203CBAA400B7547A /* Wine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F0203CBAA400B7547A /* Wine.swift */; };
 		534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F3203CBB4200B7547A /* WineTypeRepository.swift */; };
@@ -344,6 +345,7 @@
 		533D8B832533B13000CE297E /* WineItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineItemView.swift; sourceTree = "<group>"; };
 		533D8B872533B85000CE297E /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		533D8B8B2533B8DB00CE297E /* StarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
+		5345BABD257C286F00AD68D3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5346A51122BAD7E900AC9C7A /* MoWineListenerRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoWineListenerRegistration.swift; sourceTree = "<group>"; };
 		534895F0203CBAA400B7547A /* Wine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wine.swift; sourceTree = "<group>"; };
 		534895F3203CBB4200B7547A /* WineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeRepository.swift; sourceTree = "<group>"; };
@@ -1044,6 +1046,7 @@
 			isa = PBXGroup;
 			children = (
 				53C91F4F25740E5F0065E778 /* Auth */,
+				5345BABD257C286F00AD68D3 /* ImagePicker.swift */,
 				5348960A203DE3A400B7547A /* ButtonPrimary.swift */,
 				5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */,
 				5327BC1A20618670006787E9 /* MWButton.swift */,
@@ -1850,6 +1853,7 @@
 				5311284C206010520094DC35 /* ButtonPrimaryGradient.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
+				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,

@@ -32,6 +32,9 @@ class EditProfileViewModel: ObservableObject {
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
+    @Published var isShowingSheet = false
+    @Published var isPickingImage = false
+    @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     @Published var isReauthenticating = false
 
     var closeModal: (() -> Void)?
@@ -112,13 +115,35 @@ class EditProfileViewModel: ObservableObject {
             closeModal?()
         case .failure(let error):
             if case SessionError.requiresRecentLogin = error {
-                isReauthenticating = true
+                reauthenticate()
             } else {
                 SwiftyBeaver.error("\(error)")
                 showErrorAlert = true
                 saveErrorMessage = error.localizedDescription
             }
         }
+    }
+    
+    func reauthenticate() {
+        isReauthenticating = true
+        isShowingSheet = true
+    }
+    
+    func selectProfilePicture(from sourceType: ImagePickerView.SourceType) {
+        isPickingImage = true
+        pickerSourceType = sourceType
+        isShowingSheet = true
+    }
+    
+    func changeProfilePicture(to image: UIImage) {
+        editProfileService.updateProfilePicture(image)
+        profilePicture = image.pngData()
+        isShowingSheet = false
+    }
+    
+    func cancelSelectProfilePicture() {
+        isPickingImage = false
+        isShowingSheet = false
     }
 }
 
