@@ -13,7 +13,14 @@ struct EditProfileView: View {
     
     var body: some View {
         NavigationView {
-            EditProfileFormView(firstName: $vm.firstName, lastName: $vm.lastName, emailAddress: $vm.emailAddress, profilePicture: $vm.profilePicture)
+            EditProfileFormView(
+                firstName: $vm.firstName,
+                lastName: $vm.lastName,
+                emailAddress: $vm.emailAddress,
+                profilePicture: $vm.profilePicture
+            ) { pickerSourceType in
+                vm.selectProfilePicture(from: pickerSourceType)
+            }
                 .navigationBarTitle("Edit Profile", displayMode: .inline)
                 .navigationBarItems(leading: Button("Cancel") {
                     vm.cancel()
@@ -28,9 +35,19 @@ struct EditProfileView: View {
         .alert(isPresented: $vm.showErrorAlert) {
             Alert(title: Text("Error"), message: Text(vm.saveErrorMessage))
         }
-        .sheet(isPresented: $vm.isReauthenticating) {
-            Text("RE AUTH")
-        }
+        .sheet(isPresented: $vm.isShowingSheet, content: {
+            if vm.isPickingImage {
+                ImagePickerView(sourceType: vm.pickerSourceType) { image in
+                    vm.changeProfilePicture(to: image)
+                } onCancel: {
+                    vm.cancelSelectProfilePicture()
+                }
+            } else if vm.isReauthenticating {
+                Text("RE AUTH")
+            } else {
+                EmptyView()
+            }
+        })
         .loading(isShowing: vm.isSaving, text: "Saving...")
     }
 }
@@ -41,6 +58,8 @@ struct EditProfileFormView: View {
     @Binding var emailAddress: String
     @Binding var profilePicture: Data?
     @State var isShowingActionSheet: Bool = false
+    
+    var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
 
     var body: some View {
         VStack(spacing: 6) {
@@ -53,10 +72,10 @@ struct EditProfileFormView: View {
                 .actionSheet(isPresented: $isShowingActionSheet, content: {
                     ActionSheet(title: Text("Change Profile Picture"), message: nil, buttons: [
                         .default(Text("Camera"), action: {
-
+                            changeProfilePicture(.camera)
                         }),
                         .default(Text("Photo Library"), action: {
-
+                            changeProfilePicture(.photoLibrary)
                         }),
                         .cancel()
                     ])
