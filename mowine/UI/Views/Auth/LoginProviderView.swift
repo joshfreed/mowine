@@ -9,17 +9,19 @@
 import SwiftUI
 
 struct LoginProviderView: View {
+    let onSelect: (ReauthenticationViewModel.LoginType) -> Void
+    
     var body: some View {
         VStack {
-            FacebookLoginButton()
-            GoogleLoginButton()
-            EmailLoginButton()
+            FacebookLoginButton() { onSelect(.facebook) }
+            GoogleLoginButton() { onSelect(.google) }
+            EmailLoginButton() { onSelect(.email) }
         }
     }
 }
 
 struct LoginProviderView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginProviderView()
+        LoginProviderView() { _ in }
     }
 }
