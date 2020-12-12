@@ -9,24 +9,35 @@
 import SwiftUI
 
 struct ReauthenticationView: View {
+    @ObservedObject var vm: ReauthenticationViewModel
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 28) {
                 Text("Please reauthenticate in order to continue.")
-                LoginProviderView()
+                LoginProviderView() {
+                    vm.continueWith($0)
+                }
+                NavigationLink(
+                    destination: EmailReauthView(vm: vm.makeEmailReauthViewModel()),
+                    isActive: $vm.showEmailReauth,
+                    label: { EmptyView() })
             }
             .padding()
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
-                
+                vm.cancel()
             })
         }
         .accentColor(.mwSecondary)
+        .alert(isPresented: $vm.showErrorAlert) {
+            Alert(title: Text("Error"), message: Text(vm.errorMessage))
+        }
     }
 }
 
 struct ReauthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        ReauthenticationView()
+        ReauthenticationView(vm: ReauthenticationViewModel(onSuccess: {}, onCancel: {}))
     }
 }

@@ -64,6 +64,8 @@ class GetMyAccountQueryHandler: GetMyAccountQuery {
     }
 
     func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void) {
+        SwiftyBeaver.info("getMyAccount w/ completion")
+        
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))
             return

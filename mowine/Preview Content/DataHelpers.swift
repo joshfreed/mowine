@@ -66,3 +66,16 @@ class FakeProfilePictureWorker: ProfilePictureWorkerProtocol {
         
     }
 }
+
+extension EmailReauthViewModel {
+    static func make(password: String? = nil, error: String? = nil) -> EmailReauthViewModel {
+        var vm = EmailReauthViewModel(session: FakeSession()) {}
+        if let password = password {
+            vm.password = password
+        }
+        if let error = error {
+            vm.error = error
+        }
+        return vm
+    }
+}

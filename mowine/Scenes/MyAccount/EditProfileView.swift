@@ -43,7 +43,11 @@ struct EditProfileView: View {
                     vm.cancelSelectProfilePicture()
                 }
             } else if vm.isReauthenticating {
-                Text("RE AUTH")
+                ReauthenticationView(vm: ReauthenticationViewModel {
+                    vm.reauthenticationSuccess()
+                } onCancel: {
+                    vm.cancel()
+                })
             } else {
                 EmptyView()
             }

@@ -48,9 +48,14 @@ class EditProfileViewModel: ObservableObject {
         profilePictureWorker: ProfilePictureWorkerProtocol,
         editProfileService: EditProfileService
     ) {
+        SwiftyBeaver.debug("init")
         self.getMyAccountQuery = getMyAccountQuery
         self.profilePictureWorker = profilePictureWorker
         self.editProfileService = editProfileService
+    }
+    
+    deinit {
+        SwiftyBeaver.debug("deinit")
     }
 
     func loadProfile() {
@@ -127,6 +132,12 @@ class EditProfileViewModel: ObservableObject {
     func reauthenticate() {
         isReauthenticating = true
         isShowingSheet = true
+    }
+    
+    func reauthenticationSuccess() {
+        isReauthenticating = false
+        isShowingSheet = false
+        saveProfile()
     }
     
     func selectProfilePicture(from sourceType: ImagePickerView.SourceType) {

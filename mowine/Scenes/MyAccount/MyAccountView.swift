@@ -66,7 +66,7 @@ struct MyAccountView: View {
         }.onAppear {
             viewModel.loadMyAccount()
         }.sheet(isPresented: $isEditingProfile, content: {
-            EditProfileView(vm: EditProfileViewModel.factory {
+            EditProfileView(vm: viewModel.editProfileViewModel {
                 isEditingProfile = false
             })
         })

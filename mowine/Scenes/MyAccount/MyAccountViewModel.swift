@@ -20,12 +20,17 @@ class MyAccountViewModel: ObservableObject {
     let profilePictureWorker: ProfilePictureWorkerProtocol
     let signOutCommand: SignOutCommand
     private var cancellable: AnyCancellable?
+    private var editProfileViewModel: EditProfileViewModel?
     
     init(getMyAccountQuery: GetMyAccountQuery, profilePictureWorker: ProfilePictureWorkerProtocol, signOutCommand: SignOutCommand) {
         SwiftyBeaver.debug("init")
         self.getMyAccountQuery = getMyAccountQuery
         self.profilePictureWorker = profilePictureWorker
         self.signOutCommand = signOutCommand
+    }
+    
+    deinit {
+        SwiftyBeaver.debug("deinit")
     }
     
     func loadMyAccount() {
@@ -61,5 +66,12 @@ class MyAccountViewModel: ObservableObject {
     
     func signOut() {
         signOutCommand.signOut()
+    }
+    
+    func editProfileViewModel(onClose: @escaping () -> Void) -> EditProfileViewModel {
+        if editProfileViewModel == nil {
+            editProfileViewModel = EditProfileViewModel.factory(onClose: onClose)
+        }
+        return editProfileViewModel!
     }
 }

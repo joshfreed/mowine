@@ -13,18 +13,9 @@ struct FancyTextField: View {
     let text: Binding<String>
     
     var body: some View {
-        ZStack(alignment: .leading) {
-            Text(title)
-                .foregroundColor(Color(.placeholderText))
-                .offset(y: text.wrappedValue.isEmpty ? 0 : -26)
-                .scaleEffect(text.wrappedValue.isEmpty ? 1 : 0.75, anchor: .leading)
-            VStack(spacing: 2) {
-                TextField("", text: text)
-                Divider()
-            }
-        }
-        .padding(.top, 16)
-        .animation(.spring(response: 0.2, dampingFraction: 0.5))
+        TextField("", text: text)
+            .fancyField(title: title, text: text)
+            .padding(.bottom, 4)
     }
 }
 
