@@ -112,6 +112,8 @@
 		536AEBF62540BBDB009EA107 /* WineTypeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBF52540BBDB009EA107 /* WineTypeMenuButton.swift */; };
 		536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBF92540BC3F009EA107 /* MyCellarSearchView.swift */; };
 		536AEC012540CD60009EA107 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEC002540CD60009EA107 /* StringProtocol.swift */; };
+		536E3ABB258E4EDA00D84F10 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ABA258E4EDA00D84F10 /* SignInView.swift */; };
+		536E3ABF258E578100D84F10 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ABE258E578100D84F10 /* SignInViewModel.swift */; };
 		536E85A4204F507D004D5426 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85A3204F507D004D5426 /* Fakes.swift */; };
 		536E85AF2050A31F004D5426 /* FriendsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85AB2050A31F004D5426 /* FriendsViewControllerTests.swift */; };
 		536E85B02050A31F004D5426 /* FriendsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85AC2050A31F004D5426 /* FriendsInteractorTests.swift */; };
@@ -381,6 +383,8 @@
 		536AEBF52540BBDB009EA107 /* WineTypeMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeMenuButton.swift; sourceTree = "<group>"; };
 		536AEBF92540BC3F009EA107 /* MyCellarSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarSearchView.swift; sourceTree = "<group>"; };
 		536AEC002540CD60009EA107 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
+		536E3ABA258E4EDA00D84F10 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		536E3ABE258E578100D84F10 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		536E85A3204F507D004D5426 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		536E85AB2050A31F004D5426 /* FriendsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewControllerTests.swift; sourceTree = "<group>"; };
 		536E85AC2050A31F004D5426 /* FriendsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsInteractorTests.swift; sourceTree = "<group>"; };
@@ -957,6 +961,8 @@
 				537E24082246D5B300DFFA4B /* SocialSignInWorker.swift */,
 				537E24042246D58600DFFA4B /* FacebookSignInWorker.swift */,
 				537E24062246D59E00DFFA4B /* GoogleSignInWorker.swift */,
+				536E3ABA258E4EDA00D84F10 /* SignInView.swift */,
+				536E3ABE258E578100D84F10 /* SignInViewModel.swift */,
 			);
 			path = FirstTime;
 			sourceTree = "<group>";
@@ -1737,6 +1743,7 @@
 				53FFECAD256F0D4100321944 /* EditProfileViewModel.swift in Sources */,
 				5327BC342062B362006787E9 /* WineDetailsViewController.swift in Sources */,
 				53B6CB8B205ADD9300AE8EFB /* WineCellarPresenter.swift in Sources */,
+				536E3ABB258E4EDA00D84F10 /* SignInView.swift in Sources */,
 				5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */,
 				532DB3C32569C1B9009A4740 /* MyAccountViewController.swift in Sources */,
 				53ED1F86204F2D5C00C129BC /* FriendsRouter.swift in Sources */,
@@ -1868,6 +1875,7 @@
 				531265111F75B04E006353CB /* UIViewController.swift in Sources */,
 				535FE73F256F043800543B75 /* SignOutCommand.swift in Sources */,
 				5327BC2420619D34006787E9 /* WineCellarListWorker.swift in Sources */,
+				536E3ABF258E578100D84F10 /* SignInViewModel.swift in Sources */,
 				534895F8203CBD0B00B7547A /* SelectTypeWorker.swift in Sources */,
 				530ABC3C234A9B7E0078FB3B /* UINavigationBarAppearance.swift in Sources */,
 				5367A3CF254B0812002A02A5 /* WineListViewModelSwiftUI.swift in Sources */,

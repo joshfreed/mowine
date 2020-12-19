@@ -28,17 +28,7 @@ class FirstTimeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO - Move into service container?
-        let fbAuth = JFContainer.shared.facebookAuthService
-        let fbGraphApi = JFContainer.shared.fbGraphApi
-        let userRepository = JFContainer.shared.userRepository
-        let session = JFContainer.shared.session
-        let googleAuth: GoogleAuthenticationService = try! JFContainer.shared.container.resolve()
-        let facebookProvider = FacebookProvider(fbAuth: fbAuth, fbGraphApi: fbGraphApi)
-        let googleProvider = GoogleProvider(googleAuth: googleAuth)
-        let facebookSignInWorker = SocialSignInWorker<FacebookProvider>(userRepository: userRepository, session: session, provider: facebookProvider)
-        let googleSignInWorker = SocialSignInWorker<GoogleProvider>(userRepository: userRepository, session: session, provider: googleProvider)
-        worker = FirstTimeWorker(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker)
+        worker = JFContainer.shared.firstTimeWorker()
 
         loadingView = LoadingView(parentView: navigationController!.view)        
     }

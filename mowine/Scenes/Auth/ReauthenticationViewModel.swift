@@ -63,7 +63,6 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     
     private func continueWithGoogle() {
         GIDSignIn.sharedInstance().delegate = self
-//        GIDSignIn.sharedInstance().presentingViewController = self
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -83,14 +82,6 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     
     func makeEmailReauthViewModel() -> EmailReauthViewModel {
         EmailReauthViewModel(session: JFContainer.shared.session, onSuccess: onSuccess)
-    }
-}
-
-extension ReauthenticationViewModel {
-    enum LoginType {
-        case email
-        case facebook
-        case google
     }
 }
 

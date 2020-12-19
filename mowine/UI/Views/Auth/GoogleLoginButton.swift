@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct GoogleLoginButton: View {
+    var height: CGFloat
     var action: () -> Void = { }
     
     var body: some View {
@@ -20,7 +21,7 @@ struct GoogleLoginButton: View {
         })
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity)
-        .frame(height: 72)
+        .frame(height: height)
         .background(Color("Brand Google"))
         .cornerRadius(5)
     }
@@ -28,6 +29,6 @@ struct GoogleLoginButton: View {
 
 struct GoogleLoginButton_Previews: PreviewProvider {
     static var previews: some View {
-        GoogleLoginButton()
+        GoogleLoginButton(height: 64)
     }
 }
