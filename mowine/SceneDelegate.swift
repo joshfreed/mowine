@@ -19,8 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
+        JFContainer.shared.configurators.forEach {
+            $0.configure()
+        }
+        
+        let startVC = StartViewController()
+        startVC.session = JFContainer.shared.session
+        
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = StartViewController()
+        window?.rootViewController = startVC
         window?.makeKeyAndVisible()
     }
 

@@ -26,7 +26,6 @@ target 'mowine' do
   pod 'Firebase/Storage', '~> 7.0.0'
   pod 'Firebase/Performance', '~> 7.0.0'
   pod 'Firebase/Crashlytics', '~> 7.0.0'
-#  pod 'FirebaseUI', '~> 8.4.2'
 
   target 'mowineTests' do
     inherit! :search_paths
@@ -38,4 +37,5 @@ end
 target 'mowineUITests' do
     # Pods for testing
     pod 'Firebase/Core'
+    pod 'Nimble'
 end

@@ -101,36 +101,20 @@ class FakeSession: Session {
     
     func notLoggedIn() {
         _isLoggedIn = false
-        UserDefaults.standard.set(_isLoggedIn, forKey: "loggedIn")
     }
     
     func loggedIn() {
         _isLoggedIn = true
-        UserDefaults.standard.set(_isLoggedIn, forKey: "loggedIn")
     }
     
     func setUser(user: User) {
         _currentUser = user
-        UserDefaults.standard.set(user.emailAddress, forKey: "emailAddress")
         loggedIn()
-    }
-    
-    func resume(completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        _isLoggedIn = UserDefaults.standard.bool(forKey: "loggedIn")
-        if let emailAddress = UserDefaults.standard.value(forKey: "emailAddress") as? String {
-            _currentUser = usersDB.first(where: { $0.emailAddress == emailAddress })
-        } else {
-            UserDefaults.standard.set(false, forKey: "loggedIn")
-            _isLoggedIn = false
-        }
-        completion(.success(()))
     }
     
     func end() {
         _isLoggedIn = false
         _currentUser = nil
-        UserDefaults.standard.removeObject(forKey: "emailAddress")
-        UserDefaults.standard.removeObject(forKey: "loggedIn")
     }
 
     func getCurrentAuth() -> MoWineAuth? {
@@ -180,6 +164,14 @@ class FakeEmailAuth: EmailAuthenticationService {
 }
 
 class FakeUserRepository: UserRepository {
+    func setUsers(_ users: [User]) {
+        usersDB = users
+    }
+    
+    func getById(_ id: UserId) -> User? {
+        usersDB.first(where: { $0.id == id })        
+    }
+    
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
@@ -251,6 +243,17 @@ class FakeUserRepository: UserRepository {
     
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
         
+    }
+}
+
+class FakeDataReadService: DataReadService {
+    func getData(url: String, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
+    }
+}
+
+
+class FakeDataWriteService: DataWriteService {
+    func putData(_ data: Data, url: String, completion: @escaping (Swift.Result<URL, Error>) -> ()) {
     }
 }
 
