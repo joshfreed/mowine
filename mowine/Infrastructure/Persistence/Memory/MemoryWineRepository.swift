@@ -13,12 +13,14 @@ class MemoryWineRepository: WineRepository {
     
     func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         wines.append(wine)
+        completion(.success(wine))
     }
     
     func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ()) {
         if let index = wines.firstIndex(of: wine) {
             wines.remove(at: index)
         }
+        completion(.success(()))
     }
     
     func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
@@ -41,11 +43,15 @@ class MemoryWineRepository: WineRepository {
     }
     
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        completion(.success(wines))
+        completion(.success(wines.filter { $0.userId == userId }))
         return FakeRegistration()
     }
 
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
+    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let matched = self.wines.filter { $0.userId == userId && $0.type == wineType }
+            completion(.success(matched))
+        }
         return FakeRegistration()
     }
     

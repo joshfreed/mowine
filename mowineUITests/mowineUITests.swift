@@ -7,20 +7,32 @@
 //
 
 import XCTest
+import Nimble
+
+extension XCTestCase {
+    func toString(_ object: [[String: Any]]) -> String {
+        let data = try! JSONSerialization.data(withJSONObject: object, options: [])
+        return String(data: data, encoding: .utf8)!
+    }
+}
 
 class mowineUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
         
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+                
+        let users: [[String: Any]] = [
+            ["id": "AAA", "emailAddress": "test@test.com", "firstName": "Jeff"]
+        ]
+        
+        let app = XCUIApplication()
+        app.launchArguments.append("UI_TESTING")
+        app.launchEnvironment["users"] = toString(users)
+        app.launchEnvironment["currentUserId"] = "AAA"
+        app.launch()
     }
     
     override func tearDown() {
@@ -30,6 +42,9 @@ class mowineUITests: XCTestCase {
     
     func testAddWine() {
         let app = XCUIApplication()
+        
+        let exists1 = app.navigationBars["My Cellar"].waitForExistence(timeout: 5)
+        expect(exists1).to(beTrue())
         
         app.tabBars["Tab Bar"].buttons["Add Wine"].tap()
         
@@ -42,7 +57,7 @@ class mowineUITests: XCTestCase {
         app.buttons["Take Later"].tap()
         
         // Type a name
-        elementsQuery.containing(.staticText, identifier:"Name and Rate").children(matching: .textField).element.typeText("My Test Wine")
+        app.textFields["wineName"].typeText("My Test Wine")
         
         // Rate it
         elementsQuery.otherElements["Rating"].tap()
@@ -51,9 +66,14 @@ class mowineUITests: XCTestCase {
         elementsQuery.buttons["Add Wine"].tap()
 
         // Modal should close
+        let exists = app.navigationBars["My Cellar"].waitForExistence(timeout: 5)
+        expect(exists).to(beTrue())
         
         // Make sure the new wine is in there
-        
+        app.buttons["Red"].tap()
+        let exists2 = app.navigationBars["Red Wines"].waitForExistence(timeout: 5)
+        expect(exists2).to(beTrue())
+        XCTAssertTrue(app.tables.staticTexts["My Test Wine"].exists)
     }
     
 }

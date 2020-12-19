@@ -8,22 +8,16 @@
 
 import UIKit
 import SwiftyBeaver
-import Firebase
-import FirebaseAuth
-import GoogleSignIn
-//import FirebaseUI
 
 class StartViewController: UIViewController, FirstTimeViewControllerDelegate, TabbedViewCoordinator {
+    var session: Session!
+    
     private var mainStoryboard: UIStoryboard!
     private var current: UIViewController?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let current = current as? UINavigationController {
-//            if current.topViewController is MyAuthPickerViewController {
-//                return .default
-//            } else {
-                return .lightContent
-//            }
+        if (current as? UINavigationController) != nil {
+            return .lightContent
         } else if let current = current as? TabBarViewController {
             return current.preferredStatusBarStyle
         } else {
@@ -37,21 +31,11 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         current = mainStoryboard.instantiateViewController(withIdentifier: "SplashViewController")
         show(viewController: current!)
-
-        FirebaseApp.configure()
-
-        #if DEBUG
-        Analytics.setAnalyticsCollectionEnabled(false)
-        #else
-        Analytics.setAnalyticsCollectionEnabled(true)
-        #endif
         
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        
-        if Auth.auth().currentUser == nil {
-            showSignedOutView()
-        } else {
+        if session.isLoggedIn {
             showSignedInView()
+        } else {
+            showSignedOutView()
         }
     }
     
@@ -67,21 +51,6 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         let vc = nc.topViewController as! FirstTimeViewController
         vc.delegate = self
         show(viewController: nc)
-        
-        /*
-        let authUI = FUIAuth.defaultAuthUI()
-        authUI?.delegate = self
-        let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth(),
-            FUIFacebookAuth()
-        ]
-        authUI?.providers = providers
-        authUI?.shouldHideCancelButton = true
-        
-        let authViewController = authUI!.authViewController()
-        
-        show(viewController: authViewController)
-        */
     }
     
     private func show(viewController: UIViewController) {
@@ -94,14 +63,3 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         current = viewController
     }
 }
-
-//extension StartViewController: FUIAuthDelegate {
-//    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-//        SwiftyBeaver.info("Did sign in! \(String(describing: authDataResult)), \(String(describing: error))")
-//    }
-//
-//    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
-//        let vc = MyAuthPickerViewController(authUI: authUI)
-//        return vc
-//    }
-//}
