@@ -18,7 +18,6 @@ class JFContainer {
     lazy var session: Session = try! container.resolve()
     lazy var emailAuthService: EmailAuthenticationService = try! container.resolve()
     lazy var facebookAuthService: FacebookAuthenticationService = try! container.resolve()
-    lazy var fbGraphApi: GraphApi = GraphApi()    
     lazy var wineTypeRepository: WineTypeRepository = try! container.resolve()
     lazy var wineRepository: WineRepository = try! container.resolve()
     lazy var wineImageWorker: WineImageWorkerProtocol = try! container.resolve()
@@ -41,6 +40,19 @@ class JFContainer {
         let container = DependencyContainer.configureForUITesting()
         let configurators: [Configurator] = []
         shared = JFContainer(container: container, configurators: configurators)
+    }
+    
+    func firstTimeWorker() -> FirstTimeWorker {
+        let fbAuth: FacebookAuthenticationService = try! JFContainer.shared.container.resolve()
+        let fbGraphApi: GraphApi = try! JFContainer.shared.container.resolve()
+        let userRepository: UserRepository = try! JFContainer.shared.container.resolve()
+        let session: Session = try! JFContainer.shared.container.resolve()
+        let googleAuth: GoogleAuthenticationService = try! JFContainer.shared.container.resolve()
+        let facebookProvider = FacebookProvider(fbAuth: fbAuth, fbGraphApi: fbGraphApi)
+        let googleProvider = GoogleProvider(googleAuth: googleAuth)
+        let facebookSignInWorker = SocialSignInWorker<FacebookProvider>(userRepository: userRepository, session: session, provider: facebookProvider)
+        let googleSignInWorker = SocialSignInWorker<GoogleProvider>(userRepository: userRepository, session: session, provider: googleProvider)
+        return FirstTimeWorkerImpl(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker)
     }
 }
 
@@ -104,6 +116,9 @@ extension DependencyContainer {
     static func configureCommonServices(container: DependencyContainer) {
         container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
 
+        // Social
+        container.register(.singleton) { GraphApi() }
+        
         // Images
         container.register(.singleton) { UrlSessionService() }
 

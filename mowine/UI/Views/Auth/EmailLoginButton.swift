@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct EmailLoginButton: View {
+    var height: CGFloat
     var action: () -> Void = { }
     
     var body: some View {
@@ -20,7 +21,7 @@ struct EmailLoginButton: View {
         })
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity)
-        .frame(height: 72)
+        .frame(height: height)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("Primary"), lineWidth: 1)
@@ -30,6 +31,6 @@ struct EmailLoginButton: View {
 
 struct EmailLoginButton_Previews: PreviewProvider {
     static var previews: some View {
-        EmailLoginButton()
+        EmailLoginButton(height: 64)
     }
 }

@@ -14,7 +14,12 @@ import UIKit
 import GoogleSignIn
 import SwiftyBeaver
 
-class FirstTimeWorker {
+protocol FirstTimeWorker {
+    func loginWithFacebook(token: String, completion: @escaping (Result<User, Error>) -> ())
+    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User, Error>) -> ())
+}
+
+class FirstTimeWorkerImpl: FirstTimeWorker {
     let facebookSignInWorker: SocialSignInWorker<FacebookProvider>
     let googleSignInWorker: SocialSignInWorker<GoogleProvider>
     
@@ -32,5 +37,15 @@ class FirstTimeWorker {
     
     func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User, Error>) -> ()) {
         googleSignInWorker.login(token: GoogleToken(idToken: idToken, accessToken: accessToken), completion: completion)
+    }
+}
+
+class FakeFirstTimeWorker: FirstTimeWorker {
+    func loginWithFacebook(token: String, completion: @escaping (Result<User, Error>) -> ()) {
+        
+    }
+    
+    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User, Error>) -> ()) {
+        
     }
 }

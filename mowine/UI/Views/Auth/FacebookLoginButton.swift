@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct FacebookLoginButton: View {
+    var height: CGFloat
     var action: () -> Void = { }
     
     var body: some View {
@@ -20,7 +21,7 @@ struct FacebookLoginButton: View {
         })
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity)
-        .frame(height: 72)
+        .frame(height: height)
         .background(Color("Brand Facebook"))
         .cornerRadius(5)
     }
@@ -28,6 +29,6 @@ struct FacebookLoginButton: View {
 
 struct FacebookLoginButton_Previews: PreviewProvider {
     static var previews: some View {
-        FacebookLoginButton()
+        FacebookLoginButton(height: 64)
     }
 }
