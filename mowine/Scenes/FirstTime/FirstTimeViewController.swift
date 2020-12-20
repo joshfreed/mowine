@@ -22,7 +22,7 @@ protocol FirstTimeViewControllerDelegate: class {
 
 class FirstTimeViewController: UIViewController {
     weak var delegate: FirstTimeViewControllerDelegate?
-    var worker: FirstTimeWorker!
+    var worker: AllSocialSignInWorker!
     var loadingView: LoadingView!
 
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class FirstTimeViewController: UIViewController {
     
     private func linkToFacebookLogin(fbToken: String) {
         loadingView.show("Signing in...")
-        worker.loginWithFacebook(token: fbToken, completion: socialSignInComplete)
+        worker.login(token: FacebookToken(token: fbToken), completion: socialSignInComplete)
     }
     
     // MARK: Continue with Google
@@ -69,7 +69,7 @@ class FirstTimeViewController: UIViewController {
     
     func linkToGoogleLogin(idToken: String, accessToken: String) {
         loadingView.show("Signing in...")
-        worker.loginWithGoogle(idToken: idToken, accessToken: accessToken, completion: socialSignInComplete)
+        worker.login(token: GoogleToken(idToken: idToken, accessToken: accessToken), completion: socialSignInComplete)
     }
     
     // MARK: Continue with email

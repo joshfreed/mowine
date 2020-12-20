@@ -42,7 +42,7 @@ class JFContainer {
         shared = JFContainer(container: container, configurators: configurators)
     }
     
-    func firstTimeWorker() -> FirstTimeWorker {
+    func firstTimeWorker() -> AllSocialSignInWorker {
         let fbAuth: FacebookAuthenticationService = try! JFContainer.shared.container.resolve()
         let fbGraphApi: GraphApi = try! JFContainer.shared.container.resolve()
         let userRepository: UserRepository = try! JFContainer.shared.container.resolve()
