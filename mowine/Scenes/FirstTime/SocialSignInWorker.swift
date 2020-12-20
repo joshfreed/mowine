@@ -9,21 +9,6 @@
 import Foundation
 import SwiftyBeaver
 
-struct NewUserInfo {
-    var email: String
-    var firstName: String
-    var lastName: String?
-}
-
-protocol SocialToken {}
-
-protocol SocialSignInProvider {
-    associatedtype Token: SocialToken
-    func linkAccount(token: Token, completion: @escaping (Result<Void, Error>) -> ())
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ())
-    func getProfilePictureUrl(_ urlString: String) -> String
-}
-
 class SocialSignInWorker<T: SocialSignInProvider> {
     let userRepository: UserRepository
     let session: Session

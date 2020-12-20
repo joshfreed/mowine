@@ -33,8 +33,11 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     func continueWith(_ loginType: LoginType) {
         switch loginType {
         case .email: continueWithEmail()
-        case .facebook: continueWithFacebook()
-        case .google: continueWithGoogle()
+        case .social(let type):
+            switch type {
+            case .facebook: continueWithFacebook()
+            case .google: continueWithGoogle()
+            }
         }
     }
     

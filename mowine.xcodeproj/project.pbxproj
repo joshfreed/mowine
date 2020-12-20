@@ -114,6 +114,10 @@
 		536AEC012540CD60009EA107 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEC002540CD60009EA107 /* StringProtocol.swift */; };
 		536E3ABB258E4EDA00D84F10 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ABA258E4EDA00D84F10 /* SignInView.swift */; };
 		536E3ABF258E578100D84F10 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ABE258E578100D84F10 /* SignInViewModel.swift */; };
+		536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */; };
+		536E3ACB258F9C4B00D84F10 /* SocialSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */; };
+		536E3AD1258F9CBD00D84F10 /* SignInWithFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */; };
+		536E3AD6258F9CE500D84F10 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */; };
 		536E85A4204F507D004D5426 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85A3204F507D004D5426 /* Fakes.swift */; };
 		536E85AF2050A31F004D5426 /* FriendsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85AB2050A31F004D5426 /* FriendsViewControllerTests.swift */; };
 		536E85B02050A31F004D5426 /* FriendsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85AC2050A31F004D5426 /* FriendsInteractorTests.swift */; };
@@ -385,6 +389,11 @@
 		536AEC002540CD60009EA107 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		536E3ABA258E4EDA00D84F10 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		536E3ABE258E578100D84F10 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		536E3AC2258EA3AA00D84F10 /* mowine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mowine.entitlements; sourceTree = "<group>"; };
+		536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
+		536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignIn.swift; sourceTree = "<group>"; };
+		536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithFacebook.swift; sourceTree = "<group>"; };
+		536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		536E85A3204F507D004D5426 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		536E85AB2050A31F004D5426 /* FriendsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewControllerTests.swift; sourceTree = "<group>"; };
 		536E85AC2050A31F004D5426 /* FriendsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsInteractorTests.swift; sourceTree = "<group>"; };
@@ -768,6 +777,7 @@
 				533597AC21BC3ED600CEFD45 /* Firebase */,
 				53F24865206D3F5E0046B031 /* Facebook */,
 				536E85A2204F506E004D5426 /* Fake */,
+				536E3AD4258F9CD500D84F10 /* Google */,
 				5348960C203DE44C00B7547A /* Persistence */,
 				E9AFC254CE7854D45CAB35BA /* URLSession */,
 			);
@@ -815,11 +825,8 @@
 				537D8A5721C1C14700A110FF /* Wine */,
 				539196951E6B612D001AE149 /* Notifications.swift */,
 				53F100E62044BFAF00B29FAF /* Session.swift */,
-				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
-				533980932068295C004C080B /* FacebookAuthenticationService.swift */,
 				530BCA532155823C002F785C /* Syncable.swift */,
 				53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */,
-				53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */,
 				5346A51122BAD7E900AC9C7A /* MoWineListenerRegistration.swift */,
 			);
 			path = Domain;
@@ -848,6 +855,7 @@
 		5367A414254B131B002A02A5 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				536E3AC9258F9C4400D84F10 /* Auth */,
 				53492547256DCAFC0066E792 /* MyAccount */,
 				5367A415254B133F002A02A5 /* MyCellar */,
 			);
@@ -869,6 +877,25 @@
 				536AEC002540CD60009EA107 /* StringProtocol.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		536E3AC9258F9C4400D84F10 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */,
+				533980932068295C004C080B /* FacebookAuthenticationService.swift */,
+				53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */,
+				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		536E3AD4258F9CD500D84F10 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */,
+			);
+			path = Google;
 			sourceTree = "<group>";
 		};
 		536E85A2204F506E004D5426 /* Fake */ = {
@@ -1075,6 +1102,7 @@
 				53C91F5625740E780065E778 /* GoogleLoginButton.swift */,
 				53C91F5A25740E820065E778 /* EmailLoginButton.swift */,
 				53C91F5E257414150065E778 /* LoginProviderView.swift */,
+				536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1190,6 +1218,7 @@
 			isa = PBXGroup;
 			children = (
 				53F24866206D40370046B031 /* GraphApi.swift */,
+				536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */,
 			);
 			path = Facebook;
 			sourceTree = "<group>";
@@ -1230,6 +1259,7 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
+				536E3AC2258EA3AA00D84F10 /* mowine.entitlements */,
 				5367A414254B131B002A02A5 /* Application */,
 				5348960F203DE4A300B7547A /* Infrastructure */,
 				5348960E203DE49F00B7547A /* UI */,
@@ -1796,11 +1826,13 @@
 				53D1E2FE2059B68800A22476 /* TopWinesWorker.swift in Sources */,
 				5398F51D252A6CE500BF61C0 /* MyCellarViewController.swift in Sources */,
 				534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */,
+				536E3ACB258F9C4B00D84F10 /* SocialSignIn.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				53C91F5725740E780065E778 /* GoogleLoginButton.swift in Sources */,
 				5327BC2820619D34006787E9 /* WineCellarListInteractor.swift in Sources */,
 				530D3F6121E95F1C00885167 /* ProfilePictureViewController.swift in Sources */,
 				53F725B3219CB79600F8176F /* StartViewController.swift in Sources */,
+				536E3AD1258F9CBD00D84F10 /* SignInWithFacebook.swift in Sources */,
 				530D3F5D21E9503200885167 /* SignUpByEmailViewController.swift in Sources */,
 				530F458F1F7BF80300DB3B13 /* SelectVarietyViewController.swift in Sources */,
 				53547C7F218E40FC00EDD2A8 /* StringIdentity.swift in Sources */,
@@ -1861,6 +1893,7 @@
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
 				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
+				536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */,
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
@@ -1894,6 +1927,7 @@
 				536AEBEE2540B366009EA107 /* SearchBar.swift in Sources */,
 				537E24072246D59E00DFFA4B /* GoogleSignInWorker.swift in Sources */,
 				E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */,
+				536E3AD6258F9CE500D84F10 /* SignInWithGoogle.swift in Sources */,
 				E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */,
 				53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */,
 				E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */,
@@ -2097,6 +2131,7 @@
 			baseConfigurationReference = 3E96B14267EE27AFAAE9E8E7 /* Pods-mowine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
@@ -2115,6 +2150,7 @@
 			baseConfigurationReference = 66467F43289DFF54847981AF /* Pods-mowine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;

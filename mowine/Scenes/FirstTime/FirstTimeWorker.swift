@@ -14,12 +14,7 @@ import UIKit
 import GoogleSignIn
 import SwiftyBeaver
 
-protocol FirstTimeWorker {
-    func loginWithFacebook(token: String, completion: @escaping (Result<User, Error>) -> ())
-    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User, Error>) -> ())
-}
-
-class FirstTimeWorkerImpl: FirstTimeWorker {
+class FirstTimeWorkerImpl: AllSocialSignInWorker {
     let facebookSignInWorker: SocialSignInWorker<FacebookProvider>
     let googleSignInWorker: SocialSignInWorker<GoogleProvider>
     
@@ -31,21 +26,19 @@ class FirstTimeWorkerImpl: FirstTimeWorker {
         self.googleSignInWorker = googleSignInWorker
     }
     
-    func loginWithFacebook(token: String, completion: @escaping (Result<User, Error>) -> ()) {
-        facebookSignInWorker.login(token: FacebookToken(token: token), completion: completion)
-    }
-    
-    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User, Error>) -> ()) {
-        googleSignInWorker.login(token: GoogleToken(idToken: idToken, accessToken: accessToken), completion: completion)
+    func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
+        if let token = token as? FacebookToken {
+            facebookSignInWorker.login(token: token, completion: completion)
+        } else if let token = token as? GoogleToken {
+            googleSignInWorker.login(token: token, completion: completion)
+        } else {
+            fatalError("Unknown token type \(token)")
+        }
     }
 }
 
-class FakeFirstTimeWorker: FirstTimeWorker {
-    func loginWithFacebook(token: String, completion: @escaping (Result<User, Error>) -> ()) {
-        
-    }
-    
-    func loginWithGoogle(idToken: String, accessToken: String, completion: @escaping (Result<User, Error>) -> ()) {
+class FakeFirstTimeWorker: AllSocialSignInWorker {
+    func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
         
     }
 }
