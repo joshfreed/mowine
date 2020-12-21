@@ -9,38 +9,34 @@
 import Foundation
 import FirebaseAuth
 
-class FirebaseSocialAuth {
-    func signIn(with credential: AuthCredential, completion: @escaping (Result<Void, Error>) -> ()) {
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+class FirebaseSocialAuth: SocialAuthService {
+    let credentialFactory: FirebaseCredentialMegaFactory
+
+    init(credentialFactory: FirebaseCredentialMegaFactory) {
+        self.credentialFactory = credentialFactory
+    }
+
+    func signIn(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {
+        let credential = credentialFactory.makeCredential(from: token)
+
+        Auth.auth().signIn(with: credential) { (result, error) in
             if let error = error {
                 completion(.failure(error))
-                return
+            } else {
+                completion(.success(()))
             }
-
-            completion(.success(()))
         }
     }
-}
 
-extension FirebaseSocialAuth: FacebookAuthenticationService {
-    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        let credential = FacebookAuthProvider.credential(withAccessToken: token)
-        signIn(with: credential, completion: completion)
-    }
-}
+    func reauthenticate(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {
+        let credential = credentialFactory.makeCredential(from: token)
 
-extension FirebaseSocialAuth: GoogleAuthenticationService {
-    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-        signIn(with: credential, completion: completion)
-    }
-}
-
-extension FirebaseSocialAuth: AppleAuthenticationService {
-    func linkAppleAccount(token: AppleToken, completion: @escaping (Result<Void, Error>) -> ()) {
-        let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                                                  idToken: token.idTokenString,
-                                                  rawNonce: token.nonce)
-        signIn(with: credential, completion: completion)
+        Auth.auth().currentUser?.reauthenticate(with: credential) { (result, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
 }

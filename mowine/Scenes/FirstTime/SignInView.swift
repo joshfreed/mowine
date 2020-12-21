@@ -62,6 +62,6 @@ struct SignInHeaderView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(vm: SignInViewModel(firstTimeWorker: FakeFirstTimeWorker()))
+        SignInView(vm: SignInViewModel(firstTimeWorker: FirstTimeWorker(workers: [:])))
     }
 }

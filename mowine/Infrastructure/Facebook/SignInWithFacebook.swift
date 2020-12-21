@@ -9,6 +9,10 @@
 import Foundation
 import FBSDKLoginKit
 
+struct FacebookToken: SocialToken {
+    let token: String
+}
+
 class SignInWithFacebook: SocialSignInMethod {
     let login = LoginManager()
     

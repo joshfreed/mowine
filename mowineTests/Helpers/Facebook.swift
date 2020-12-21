@@ -10,26 +10,6 @@ import Foundation
 @testable import mowine
 import Nimble
 
-class MockFacebookAuthService: FacebookAuthenticationService {
-    var signInResult: Result<Void, Error>?
-    func signInWillSucceed() {
-        signInResult = .success(())
-    }
-    var signInCalled = false
-    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        signInCalled = true
-        if let result = signInResult {
-            completion(result)
-        }
-    }
-}
-
-class MockGoogleAuthService: GoogleAuthenticationService {
-    func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        
-    }
-}
-
 class MockFacebookGraphApi: GraphApi {
     var emailAddress: String?
     var firstName: String?

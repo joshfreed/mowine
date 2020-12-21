@@ -13,19 +13,22 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class ReauthenticationViewModel: NSObject, ObservableObject {
+class ReauthenticationViewModel: ObservableObject {
     @Published var showEmailReauth = false
     @Published var showErrorAlert = false
     @Published var errorMessage: String = ""
     
     var onSuccess: () -> Void
     var onCancel: () -> Void
-    
-    let appleSignIn = SignInWithApple()
-    
+
+    let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
+    private(set) var socialAuthService: SocialAuthService!
+
     init(onSuccess: @escaping () -> Void, onCancel: @escaping () -> Void) {
         self.onSuccess = onSuccess
         self.onCancel = onCancel
+        self.socialAuthService = try! JFContainer.shared.container.resolve()
+        self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
     }
     
     func cancel() {
@@ -35,12 +38,7 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     func continueWith(_ loginType: LoginType) {
         switch loginType {
         case .email: continueWithEmail()
-        case .social(let type):
-            switch type {
-            case .apple: continueWithApple()
-            case .facebook: continueWithFacebook()
-            case .google: continueWithGoogle()
-            }
+        case .social(let type): socialSignIn(type: type)
         }
     }
     
@@ -52,50 +50,28 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     
     // MARK: Login Providers
 
-    private func continueWithApple() {
-        appleSignIn.signIn { [weak self] result in
+    private func socialSignIn(type: SocialProviderType) {
+        guard let method = socialSignInMethods[type] else {
+            fatalError("No sign in method registered for provider: \(type)")
+        }
+
+        method.signIn { result in
             switch result {
-            case .success(let token):
-                let token = token as! AppleToken
-                let credential = OAuthProvider.credential(withProviderID: "apple.com",
-                    idToken: token.idTokenString,
-                    rawNonce: token.nonce)
-                self?.reauthenticate(with: credential)
-            case .failure(let error): self?.showError(error)
+            case .success(let token): self.reauth(with: token)
+            case .failure(let error): self.showError(error)
             }
         }
     }
 
-    private func continueWithFacebook() {
-        let login = LoginManager()
-        login.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in
-            if let error = error {
-                SwiftyBeaver.error("FB Error: \(error)")
-                return
-            }
-            
-            if let result = result, !result.isCancelled, let token = result.token {
-                let credential = FacebookAuthProvider.credential(withAccessToken: token.tokenString)
-                self.reauthenticate(with: credential)
+    private func reauth(with token: SocialToken) {
+        socialAuthService.reauthenticate(with: token) { result in
+            switch result {
+            case .success: self.onSuccess()
+            case .failure(let error): self.showError(error)
             }
         }
     }
-    
-    private func continueWithGoogle() {
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().signIn()
-    }
-    
-    private func reauthenticate(with credential: AuthCredential) {
-        Auth.auth().currentUser?.reauthenticate(with: credential) { [weak self] (result, error) in
-            if let error = error {
-                self?.showError(error)
-            } else {
-                self?.onSuccess()
-            }
-        }
-    }
-    
+
     // MARK: View Model Factories
     
     func makeEmailReauthViewModel() -> EmailReauthViewModel {
@@ -108,27 +84,5 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
         SwiftyBeaver.error("\(error)")
         errorMessage = error.localizedDescription
         showErrorAlert = true
-    }
-}
-
-// MARK: - GIDSignInDelegate
-
-extension ReauthenticationViewModel: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error as NSError? {
-            SwiftyBeaver.error(error)
-            guard error.code != -5 else {
-                return
-            }
-            fatalError(error.localizedDescription)
-        } else {
-            let idToken = user.authentication.idToken!
-            let accessToken = user.authentication.accessToken!
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-            self.reauthenticate(with: credential)
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
     }
 }

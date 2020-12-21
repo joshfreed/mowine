@@ -9,19 +9,21 @@
 import Foundation
 import SwiftyBeaver
 
-class SocialSignInWorker<T: SocialSignInProvider> {
+class SocialSignInWorker {
     let userRepository: UserRepository
     let session: Session
-    let provider: T
+    let provider: SocialSignInProvider
+    let socialAuthService: SocialAuthService
     
-    init(userRepository: UserRepository, session: Session, provider: T) {
+    init(userRepository: UserRepository, session: Session, provider: SocialSignInProvider, socialAuthService: SocialAuthService) {
         self.userRepository = userRepository
         self.session = session
         self.provider = provider
+        self.socialAuthService = socialAuthService
     }
     
-    func login(token: T.Token, completion: @escaping (Result<User, Error>) -> ()) {
-        provider.linkAccount(token: token) { result in
+    func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
+        socialAuthService.signIn(with: token) { result in
             switch result {
             case .success: self.findOrCreateUserObjectForCurrentSession(completion: completion)
             case .failure(let error): completion(.failure(error))
