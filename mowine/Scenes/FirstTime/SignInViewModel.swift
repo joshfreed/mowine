@@ -22,6 +22,7 @@ class SignInViewModel: ObservableObject {
     
     let worker: AllSocialSignInWorker
     let socialSignInMethods: [SocialProviderType: SocialSignInMethod] = [
+        .apple: SignInWithApple(),
         .facebook: SignInWithFacebook(),
         .google: SignInWithGoogle()
     ]
@@ -46,7 +47,11 @@ class SignInViewModel: ObservableObject {
     // MARK: Sign in with social provider
     
     func socialSignIn(type: SocialProviderType) {
-        socialSignInMethods[type]?.signIn { result in
+        guard let method = socialSignInMethods[type] else {
+            fatalError("No sign in method registered for provider: \(type)")
+        }
+        
+        method.signIn { result in
             switch result {
             case .success(let token): self.linkToSession(token: token)
             case .failure(let error): self.showError(error)

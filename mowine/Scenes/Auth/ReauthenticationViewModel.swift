@@ -21,6 +21,8 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     var onSuccess: () -> Void
     var onCancel: () -> Void
     
+    let appleSignIn = SignInWithApple()
+    
     init(onSuccess: @escaping () -> Void, onCancel: @escaping () -> Void) {
         self.onSuccess = onSuccess
         self.onCancel = onCancel
@@ -35,6 +37,7 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
         case .email: continueWithEmail()
         case .social(let type):
             switch type {
+            case .apple: continueWithApple()
             case .facebook: continueWithFacebook()
             case .google: continueWithGoogle()
             }
@@ -48,7 +51,21 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     }
     
     // MARK: Login Providers
-    
+
+    private func continueWithApple() {
+        appleSignIn.signIn { [weak self] result in
+            switch result {
+            case .success(let token):
+                let token = token as! AppleToken
+                let credential = OAuthProvider.credential(withProviderID: "apple.com",
+                    idToken: token.idTokenString,
+                    rawNonce: token.nonce)
+                self?.reauthenticate(with: credential)
+            case .failure(let error): self?.showError(error)
+            }
+        }
+    }
+
     private func continueWithFacebook() {
         let login = LoginManager()
         login.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in
@@ -72,9 +89,7 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     private func reauthenticate(with credential: AuthCredential) {
         Auth.auth().currentUser?.reauthenticate(with: credential) { [weak self] (result, error) in
             if let error = error {
-                SwiftyBeaver.error("\(error)")
-                self?.errorMessage = error.localizedDescription
-                self?.showErrorAlert = true
+                self?.showError(error)
             } else {
                 self?.onSuccess()
             }
@@ -85,6 +100,14 @@ class ReauthenticationViewModel: NSObject, ObservableObject {
     
     func makeEmailReauthViewModel() -> EmailReauthViewModel {
         EmailReauthViewModel(session: JFContainer.shared.session, onSuccess: onSuccess)
+    }
+
+    // MARK: Utilities
+
+    private func showError(_ error: Error) {
+        SwiftyBeaver.error("\(error)")
+        errorMessage = error.localizedDescription
+        showErrorAlert = true
     }
 }
 

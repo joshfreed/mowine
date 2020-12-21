@@ -14,6 +14,7 @@ class SignInWithGoogle: NSObject, SocialSignInMethod, GIDSignInDelegate {
     private var completion: ((Result<SocialToken, Error>) -> Void)?
     
     func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
+        self.completion = completion
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signIn()
     }

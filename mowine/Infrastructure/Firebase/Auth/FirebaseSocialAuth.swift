@@ -10,35 +10,37 @@ import Foundation
 import FirebaseAuth
 
 class FirebaseSocialAuth {
-    
-}
-
-extension FirebaseSocialAuth: FacebookAuthenticationService {
-    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        let credential = FacebookAuthProvider.credential(withAccessToken: token)
-        
+    func signIn(with credential: AuthCredential, completion: @escaping (Result<Void, Error>) -> ()) {
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 completion(.failure(error))
                 return
             }
-            
+
             completion(.success(()))
         }
+    }
+}
+
+extension FirebaseSocialAuth: FacebookAuthenticationService {
+    func linkFacebookAccount(token: String, completion: @escaping (Result<Void, Error>) -> ()) {
+        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+        signIn(with: credential, completion: completion)
     }
 }
 
 extension FirebaseSocialAuth: GoogleAuthenticationService {
     func linkGoogleAccount(idToken: String, accessToken: String, completion: @escaping (Result<Void, Error>) -> ()) {
         let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-        
-        Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            completion(.success(()))
-        }
+        signIn(with: credential, completion: completion)
+    }
+}
+
+extension FirebaseSocialAuth: AppleAuthenticationService {
+    func linkAppleAccount(token: AppleToken, completion: @escaping (Result<Void, Error>) -> ()) {
+        let credential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                  idToken: token.idTokenString,
+                                                  rawNonce: token.nonce)
+        signIn(with: credential, completion: completion)
     }
 }

@@ -13,6 +13,7 @@ struct LoginProviderView: View {
     
     var body: some View {
         VStack {
+            AppleLoginButton(height: 64) { onSelect(.social(.apple)) }
             FacebookLoginButton(height: 64) { onSelect(.social(.facebook)) }
             GoogleLoginButton(height: 64) { onSelect(.social(.google)) }
             EmailLoginButton(height: 64) { onSelect(.email) }

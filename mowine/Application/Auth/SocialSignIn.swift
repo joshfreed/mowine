@@ -20,6 +20,7 @@ enum LoginType {
 }
 
 enum SocialProviderType {
+    case apple
     case facebook
     case google
 }
