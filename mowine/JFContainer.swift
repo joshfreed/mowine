@@ -17,7 +17,6 @@ class JFContainer {
     
     lazy var session: Session = try! container.resolve()
     lazy var emailAuthService: EmailAuthenticationService = try! container.resolve()
-    lazy var facebookAuthService: FacebookAuthenticationService = try! container.resolve()
     lazy var wineTypeRepository: WineTypeRepository = try! container.resolve()
     lazy var wineRepository: WineRepository = try! container.resolve()
     lazy var wineImageWorker: WineImageWorkerProtocol = try! container.resolve()
@@ -42,20 +41,36 @@ class JFContainer {
         shared = JFContainer(container: container, configurators: configurators)
     }
     
-    func firstTimeWorker() -> AllSocialSignInWorker {
-        let fbAuth: FacebookAuthenticationService = try! JFContainer.shared.container.resolve()
-        let fbGraphApi: GraphApi = try! JFContainer.shared.container.resolve()
+    func firstTimeWorker() -> FirstTimeWorker {
         let userRepository: UserRepository = try! JFContainer.shared.container.resolve()
         let session: Session = try! JFContainer.shared.container.resolve()
-        let googleAuth: GoogleAuthenticationService = try! JFContainer.shared.container.resolve()
-        let appleAuth: AppleAuthenticationService = try! JFContainer.shared.container.resolve()
-        let facebookProvider = FacebookProvider(fbAuth: fbAuth, fbGraphApi: fbGraphApi)
-        let googleProvider = GoogleProvider(googleAuth: googleAuth)
-        let appleProvider = AppleProvider(auth: appleAuth)
-        let facebookSignInWorker = SocialSignInWorker<FacebookProvider>(userRepository: userRepository, session: session, provider: facebookProvider)
-        let googleSignInWorker = SocialSignInWorker<GoogleProvider>(userRepository: userRepository, session: session, provider: googleProvider)
-        let appleSignInWorker = SocialSignInWorker<AppleProvider>(userRepository: userRepository, session: session, provider: appleProvider)
-        return FirstTimeWorkerImpl(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker, appleSignInWorker: appleSignInWorker)
+        let socialAuthService: SocialAuthService = try! JFContainer.shared.container.resolve()
+
+        let fbGraphApi: GraphApi = try! JFContainer.shared.container.resolve()
+        let facebookProvider = FacebookProvider(fbGraphApi: fbGraphApi)
+        let facebookSignInWorker = SocialSignInWorker(userRepository: userRepository, session: session, provider: facebookProvider, socialAuthService: socialAuthService)
+
+        let googleProvider = GoogleProvider()
+        let googleSignInWorker = SocialSignInWorker(userRepository: userRepository, session: session, provider: googleProvider, socialAuthService: socialAuthService)
+
+        let appleProvider = AppleProvider()
+        let appleSignInWorker = SocialSignInWorker(userRepository: userRepository, session: session, provider: appleProvider, socialAuthService: socialAuthService)
+
+        let workers: [SocialProviderType: SocialSignInWorker] = [
+            .apple: appleSignInWorker,
+            .facebook: facebookSignInWorker,
+            .google: googleSignInWorker
+        ]
+
+        return FirstTimeWorker(workers: workers)
+    }
+
+    func socialSignInMethods() -> [SocialProviderType: SocialSignInMethod] {
+        [
+            .apple: SignInWithApple(),
+            .facebook: SignInWithFacebook(),
+            .google: SignInWithGoogle()
+        ]
     }
 }
 
@@ -69,6 +84,8 @@ extension DependencyContainer {
             container.register(.singleton) { FirestoreUserRepository() as UserRepository }
             container.register(.singleton) { FirestoreWineRepository() as WineRepository }
             container.register(.singleton) { FirebaseStorageService() }
+            container.register(.singleton) { FirebaseCredentialMegaFactory() }
+            container.register(.singleton) { FirebaseSocialAuth(credentialFactory: $0) as SocialAuthService }
             
             // Images
             container.register(.singleton) {
@@ -125,10 +142,6 @@ extension DependencyContainer {
         // Images
         container.register(.singleton) { UrlSessionService() }
 
-        // Auth
-        container.register(.singleton) { FirebaseSocialAuth() }
-            .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self, AppleAuthenticationService.self)
-        
         // Domain Services
         container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }
         

@@ -14,36 +14,18 @@ import UIKit
 import GoogleSignIn
 import SwiftyBeaver
 
-class FirstTimeWorkerImpl: AllSocialSignInWorker {
-    let facebookSignInWorker: SocialSignInWorker<FacebookProvider>
-    let googleSignInWorker: SocialSignInWorker<GoogleProvider>
-    let appleSignInWorker: SocialSignInWorker<AppleProvider>
+class FirstTimeWorker {
+    let workers: [SocialProviderType: SocialSignInWorker]
 
-    init(
-        facebookSignInWorker: SocialSignInWorker<FacebookProvider>,
-        googleSignInWorker: SocialSignInWorker<GoogleProvider>,
-        appleSignInWorker: SocialSignInWorker<AppleProvider>
-    ) {
-        self.facebookSignInWorker = facebookSignInWorker
-        self.googleSignInWorker = googleSignInWorker
-        self.appleSignInWorker = appleSignInWorker
+    init(workers: [SocialProviderType: SocialSignInWorker]) {
+        self.workers = workers
     }
     
-    func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
-        if let token = token as? FacebookToken {
-            facebookSignInWorker.login(token: token, completion: completion)
-        } else if let token = token as? GoogleToken {
-            googleSignInWorker.login(token: token, completion: completion)
-        } else if let token = token as? AppleToken {
-            appleSignInWorker.login(token: token, completion: completion)
-        } else {
-            fatalError("Unknown token type \(token)")
+    func login(type: SocialProviderType, token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
+        guard let worker = workers[type] else {
+            fatalError("No worker for type: \(type)")
         }
-    }
-}
 
-class FakeFirstTimeWorker: AllSocialSignInWorker {
-    func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
-        
+        worker.login(token: token, completion: completion)
     }
 }

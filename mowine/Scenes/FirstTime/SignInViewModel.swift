@@ -20,15 +20,12 @@ class SignInViewModel: ObservableObject {
     var onEmailSignUp: () -> Void = { }
     var onSocialSignInSuccess: () -> Void = { }
     
-    let worker: AllSocialSignInWorker
-    let socialSignInMethods: [SocialProviderType: SocialSignInMethod] = [
-        .apple: SignInWithApple(),
-        .facebook: SignInWithFacebook(),
-        .google: SignInWithGoogle()
-    ]
+    let worker: FirstTimeWorker
+    let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
     
-    init(firstTimeWorker: AllSocialSignInWorker) {
+    init(firstTimeWorker: FirstTimeWorker) {
         self.worker = firstTimeWorker
+        self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
     }
     
     func continueWith(_ loginType: LoginType) {
@@ -53,16 +50,16 @@ class SignInViewModel: ObservableObject {
         
         method.signIn { result in
             switch result {
-            case .success(let token): self.linkToSession(token: token)
+            case .success(let token): self.linkToSession(type: type, token: token)
             case .failure(let error): self.showError(error)
             }
         }
     }
     
-    private func linkToSession(token: SocialToken) {
+    private func linkToSession(type: SocialProviderType, token: SocialToken) {
         isSigningIn = true
         
-        worker.login(token: token) { result in
+        worker.login(type: type, token: token) { result in
             self.isSigningIn = false
             
             switch result {

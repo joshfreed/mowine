@@ -1,5 +1,5 @@
 //
-//  AppleSignInWorker.swift
+//  AppleProvider.swift
 //  mowine
 //
 //  Created by Josh Freed on 12/20/20.
@@ -10,22 +10,7 @@ import Foundation
 import FirebaseAuth
 import SwiftyBeaver
 
-struct AppleToken: SocialToken {
-    let idTokenString: String
-    let nonce: String
-}
-
 class AppleProvider: SocialSignInProvider {
-    let auth: AppleAuthenticationService
-    
-    init(auth: AppleAuthenticationService) {
-        self.auth = auth
-    }
-    
-    func linkAccount(token: AppleToken, completion: @escaping (Result<Void, Error>) -> ()) {
-        auth.linkAppleAccount(token: token, completion: completion)
-    }
-    
     func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
         if let currentUser = Auth.auth().currentUser, let email = currentUser.email {
             let newUserInfo = NewUserInfo(email: email, firstName: currentUser.displayName ?? "")

@@ -10,6 +10,11 @@ import Foundation
 import GoogleSignIn
 import SwiftyBeaver
 
+struct GoogleToken: SocialToken {
+    let idToken: String
+    let accessToken: String
+}
+
 class SignInWithGoogle: NSObject, SocialSignInMethod, GIDSignInDelegate {
     private var completion: ((Result<SocialToken, Error>) -> Void)?
     

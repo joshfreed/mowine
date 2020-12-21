@@ -11,6 +11,11 @@ import AuthenticationServices
 import CryptoKit
 import SwiftyBeaver
 
+struct AppleToken: SocialToken {
+    let idTokenString: String
+    let nonce: String
+}
+
 fileprivate var currentNonce: String?
 
 class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDelegate {

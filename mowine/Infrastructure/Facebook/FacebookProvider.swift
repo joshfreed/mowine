@@ -1,5 +1,5 @@
 //
-//  FacebookSignInWorker.swift
+//  FacebookProvider.swift
 //  mowine
 //
 //  Created by Josh Freed on 3/23/19.
@@ -9,26 +9,16 @@
 import Foundation
 import SwiftyBeaver
 
-struct FacebookToken: SocialToken {
-    let token: String
-}
-
 enum CreateUserFromFacebookInfoError: Error {
     case missingEmail
     case missingFirstName
 }
 
 class FacebookProvider: SocialSignInProvider {
-    let fbAuth: FacebookAuthenticationService
     let fbGraphApi: GraphApi
     
-    init(fbAuth: FacebookAuthenticationService, fbGraphApi: GraphApi) {
-        self.fbAuth = fbAuth
+    init(fbGraphApi: GraphApi) {
         self.fbGraphApi = fbGraphApi
-    }
-    
-    func linkAccount(token: FacebookToken, completion: @escaping (Result<Void, Error>) -> ()) {
-        fbAuth.linkFacebookAccount(token: token.token, completion: completion)
     }
     
     func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
@@ -55,6 +45,6 @@ class FacebookProvider: SocialSignInProvider {
     }
     
     func getProfilePictureUrl(_ urlString: String) -> String {
-        return urlString + "?width=400"
+        urlString + "?width=400"
     }
 }
