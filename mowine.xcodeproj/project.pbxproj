@@ -118,6 +118,9 @@
 		536E3ACB258F9C4B00D84F10 /* SocialSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */; };
 		536E3AD1258F9CBD00D84F10 /* SignInWithFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */; };
 		536E3AD6258F9CE500D84F10 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */; };
+		536E3ADF258F9E6300D84F10 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ADE258F9E6300D84F10 /* SignInWithApple.swift */; };
+		536E3AE7258FA3D600D84F10 /* AppleSignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AE6258FA3D600D84F10 /* AppleSignInWorker.swift */; };
+		536E3AEB258FA4EF00D84F10 /* AppleAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AEA258FA4EF00D84F10 /* AppleAuthenticationService.swift */; };
 		536E85A4204F507D004D5426 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85A3204F507D004D5426 /* Fakes.swift */; };
 		536E85AF2050A31F004D5426 /* FriendsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85AB2050A31F004D5426 /* FriendsViewControllerTests.swift */; };
 		536E85B02050A31F004D5426 /* FriendsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85AC2050A31F004D5426 /* FriendsInteractorTests.swift */; };
@@ -394,6 +397,9 @@
 		536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignIn.swift; sourceTree = "<group>"; };
 		536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithFacebook.swift; sourceTree = "<group>"; };
 		536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
+		536E3ADE258F9E6300D84F10 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
+		536E3AE6258FA3D600D84F10 /* AppleSignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInWorker.swift; sourceTree = "<group>"; };
+		536E3AEA258FA4EF00D84F10 /* AppleAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthenticationService.swift; sourceTree = "<group>"; };
 		536E85A3204F507D004D5426 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
 		536E85AB2050A31F004D5426 /* FriendsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewControllerTests.swift; sourceTree = "<group>"; };
 		536E85AC2050A31F004D5426 /* FriendsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsInteractorTests.swift; sourceTree = "<group>"; };
@@ -773,6 +779,7 @@
 		5348960F203DE4A300B7547A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				536E3ADD258F9E5A00D84F10 /* Apple */,
 				53EAFA0D225E8E8D002BCAB0 /* Data */,
 				533597AC21BC3ED600CEFD45 /* Firebase */,
 				53F24865206D3F5E0046B031 /* Facebook */,
@@ -886,6 +893,7 @@
 				533980932068295C004C080B /* FacebookAuthenticationService.swift */,
 				53766EE721CEEB4300174E97 /* GoogleAuthenticationService.swift */,
 				53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */,
+				536E3AEA258FA4EF00D84F10 /* AppleAuthenticationService.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -896,6 +904,14 @@
 				536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */,
 			);
 			path = Google;
+			sourceTree = "<group>";
+		};
+		536E3ADD258F9E5A00D84F10 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				536E3ADE258F9E6300D84F10 /* SignInWithApple.swift */,
+			);
+			path = Apple;
 			sourceTree = "<group>";
 		};
 		536E85A2204F506E004D5426 /* Fake */ = {
@@ -986,6 +1002,7 @@
 				53958A9520617B6C00BA4B6C /* FirstTimeViewController.swift */,
 				53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */,
 				537E24082246D5B300DFFA4B /* SocialSignInWorker.swift */,
+				536E3AE6258FA3D600D84F10 /* AppleSignInWorker.swift */,
 				537E24042246D58600DFFA4B /* FacebookSignInWorker.swift */,
 				537E24062246D59E00DFFA4B /* GoogleSignInWorker.swift */,
 				536E3ABA258E4EDA00D84F10 /* SignInView.swift */,
@@ -1813,6 +1830,7 @@
 				53013454225BE69B00A4B718 /* SignInByEmailViewController.swift in Sources */,
 				5321FBA21F0BF594001D2040 /* SelectVarietyInteractor.swift in Sources */,
 				53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */,
+				536E3ADF258F9E6300D84F10 /* SignInWithApple.swift in Sources */,
 				533D8B3E2533601600CE297E /* MyCellarViewModel.swift in Sources */,
 				53DD1E1A257D84DC008C1DA7 /* FancySecureField.swift in Sources */,
 				53B564D91F11952D00459BB8 /* SnapPhotoPresenter.swift in Sources */,
@@ -1856,6 +1874,7 @@
 				530BCA542155823C002F785C /* Syncable.swift in Sources */,
 				538E104B253BB56200B26619 /* FakeWineThumbnailFetcher.swift in Sources */,
 				5321FBA51F0BF594001D2040 /* SelectVarietyRouter.swift in Sources */,
+				536E3AE7258FA3D600D84F10 /* AppleSignInWorker.swift in Sources */,
 				5327BC192061855B006787E9 /* ButtonOutline.swift in Sources */,
 				53CDB5181F3E271B00EF9CF6 /* ConfirmPhotoViewController.swift in Sources */,
 				53257F01207D49CD00E1AB5F /* WineImageRepository.swift in Sources */,
@@ -1897,6 +1916,7 @@
 				53F100FE2045E08F00B29FAF /* SignInViewController.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
 				5348961A203DE5C000B7547A /* MemoryWineRepository.swift in Sources */,
+				536E3AEB258FA4EF00D84F10 /* AppleAuthenticationService.swift in Sources */,
 				53DD1E1E257D84FF008C1DA7 /* FancyFieldViewModifier.swift in Sources */,
 				538E1041253BB2C500B26619 /* WineCellarListViewModel.swift in Sources */,
 				532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */,

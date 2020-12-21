@@ -48,11 +48,14 @@ class JFContainer {
         let userRepository: UserRepository = try! JFContainer.shared.container.resolve()
         let session: Session = try! JFContainer.shared.container.resolve()
         let googleAuth: GoogleAuthenticationService = try! JFContainer.shared.container.resolve()
+        let appleAuth: AppleAuthenticationService = try! JFContainer.shared.container.resolve()
         let facebookProvider = FacebookProvider(fbAuth: fbAuth, fbGraphApi: fbGraphApi)
         let googleProvider = GoogleProvider(googleAuth: googleAuth)
+        let appleProvider = AppleProvider(auth: appleAuth)
         let facebookSignInWorker = SocialSignInWorker<FacebookProvider>(userRepository: userRepository, session: session, provider: facebookProvider)
         let googleSignInWorker = SocialSignInWorker<GoogleProvider>(userRepository: userRepository, session: session, provider: googleProvider)
-        return FirstTimeWorkerImpl(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker)
+        let appleSignInWorker = SocialSignInWorker<AppleProvider>(userRepository: userRepository, session: session, provider: appleProvider)
+        return FirstTimeWorkerImpl(facebookSignInWorker: facebookSignInWorker, googleSignInWorker: googleSignInWorker, appleSignInWorker: appleSignInWorker)
     }
 }
 
@@ -124,7 +127,7 @@ extension DependencyContainer {
 
         // Auth
         container.register(.singleton) { FirebaseSocialAuth() }
-            .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self)
+            .implements(FacebookAuthenticationService.self, GoogleAuthenticationService.self, AppleAuthenticationService.self)
         
         // Domain Services
         container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }

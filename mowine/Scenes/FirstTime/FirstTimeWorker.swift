@@ -17,13 +17,16 @@ import SwiftyBeaver
 class FirstTimeWorkerImpl: AllSocialSignInWorker {
     let facebookSignInWorker: SocialSignInWorker<FacebookProvider>
     let googleSignInWorker: SocialSignInWorker<GoogleProvider>
-    
+    let appleSignInWorker: SocialSignInWorker<AppleProvider>
+
     init(
         facebookSignInWorker: SocialSignInWorker<FacebookProvider>,
-        googleSignInWorker: SocialSignInWorker<GoogleProvider>        
+        googleSignInWorker: SocialSignInWorker<GoogleProvider>,
+        appleSignInWorker: SocialSignInWorker<AppleProvider>
     ) {
         self.facebookSignInWorker = facebookSignInWorker
         self.googleSignInWorker = googleSignInWorker
+        self.appleSignInWorker = appleSignInWorker
     }
     
     func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
@@ -31,6 +34,8 @@ class FirstTimeWorkerImpl: AllSocialSignInWorker {
             facebookSignInWorker.login(token: token, completion: completion)
         } else if let token = token as? GoogleToken {
             googleSignInWorker.login(token: token, completion: completion)
+        } else if let token = token as? AppleToken {
+            appleSignInWorker.login(token: token, completion: completion)
         } else {
             fatalError("Unknown token type \(token)")
         }
