@@ -37,14 +37,14 @@ struct MyAccountView: View {
                     .fontWeight(.medium)
                     .foregroundColor(Color("Primary Light"))
                     .frame(height: 38)
-            }
+            }.disabled(!viewModel.isLoaded)
             Button(action: {}) {
                 Text("Change Password")
                     .font(.system(size: 21))
                     .fontWeight(.medium)
                     .foregroundColor(Color("Primary Light"))
                     .frame(height: 38)
-            }
+            }.disabled(!viewModel.isLoaded)
             Button(action: {
                 isShowingSignOutConfirmation.toggle()
             }) {
