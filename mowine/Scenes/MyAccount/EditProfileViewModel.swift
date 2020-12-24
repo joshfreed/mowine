@@ -28,7 +28,6 @@ class EditProfileViewModel: ObservableObject {
         }
     }
     @Published var profilePicture: Data?
-    @Published var canSave = false
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
@@ -42,6 +41,7 @@ class EditProfileViewModel: ObservableObject {
     private let getMyAccountQuery: GetMyAccountQuery
     private let profilePictureWorker: ProfilePictureWorkerProtocol
     private let editProfileService: EditProfileService
+    private var hasChanges = false
 
     init(
         getMyAccountQuery: GetMyAccountQuery,
@@ -98,14 +98,19 @@ class EditProfileViewModel: ObservableObject {
     }
     
     private func enableSaveButton() {
-        canSave = true
+        hasChanges = true
     }
     
     private func disableSaveButton() {
-        canSave = false
+        hasChanges = false
     }
 
     func saveProfile() {
+        if !hasChanges {
+            closeModal?()
+            return
+        }
+        
         isSaving = true
 
         editProfileService.saveProfile(email: emailAddress, firstName: firstName, lastName: lastName) { [weak self] result in

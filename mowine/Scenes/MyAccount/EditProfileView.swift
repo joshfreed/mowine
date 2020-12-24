@@ -26,7 +26,7 @@ struct EditProfileView: View {
                 vm.cancel()
             }, trailing: Button("Save") {
                 vm.saveProfile()
-            }.disabled(!vm.canSave))
+            })
         }
         .accentColor(.mwSecondary)
         .onAppear {
