@@ -29,6 +29,7 @@ class JFContainer {
     
     static func configure() {
         let container = DependencyContainer.configure()
+        DependencyContainer.uiContainers = [container]
         let configurators: [Configurator] = [
             FirebaseConfigurator()
         ]
