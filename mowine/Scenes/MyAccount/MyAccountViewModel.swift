@@ -12,6 +12,7 @@ import Combine
 import FirebaseCrashlytics
 
 class MyAccountViewModel: ObservableObject {
+    @Published var isLoaded = false
     @Published var fullName: String = ""
     @Published var emailAddress: String = ""
     @Published var profilePicture: Data?
@@ -41,6 +42,7 @@ class MyAccountViewModel: ObservableObject {
                 Crashlytics.crashlytics().record(error: error)
             }
         } receiveValue: { [weak self] value in
+            self?.isLoaded = true
             self?.fullName = value.fullName
             self?.emailAddress = value.emailAddress
             self?.fetchProfilePicture(url: value.profilePictureUrl)
