@@ -141,7 +141,7 @@ class FriendsViewController: UITableViewController, FriendsDisplayLogic {
         if displayedUsers.count > 0 {
             hideEmptyMessageFromHeader()
         } else {
-            showEmptyMessageInHeader("You don't have any friends, loser.")
+            showEmptyMessageInHeader("Your friend list is empty! Try searching for people you know to see their favorite wines.")
         }
         
         tableView.reloadData()
