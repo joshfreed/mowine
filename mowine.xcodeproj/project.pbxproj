@@ -2128,7 +2128,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;
@@ -2147,7 +2147,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;
