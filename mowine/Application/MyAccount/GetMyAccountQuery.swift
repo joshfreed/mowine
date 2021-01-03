@@ -34,6 +34,8 @@ class GetMyAccountQueryHandler: GetMyAccountQuery {
         SwiftyBeaver.debug("init")
         self.userRepository = userRepository
         self.session = session
+
+        NotificationCenter.default.addObserver(self, selector: #selector(userDidLogOut), name: .signedOut, object: nil)
     }
     
     deinit {
@@ -84,6 +86,12 @@ class GetMyAccountQueryHandler: GetMyAccountQuery {
                 completion(.failure(error))
             }
         }
+    }
+    
+    @objc func userDidLogOut() {
+        listener?.remove()
+        listener = nil
+        subject.send(nil)
     }
 }
 

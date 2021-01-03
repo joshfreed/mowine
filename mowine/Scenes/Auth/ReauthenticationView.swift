@@ -15,13 +15,17 @@ struct ReauthenticationView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 28) {
                 Text("Please reauthenticate in order to continue.")
-                LoginProviderView() {
-                    vm.continueWith($0)
+                
+                NavigationLink(destination: EmailReauthView(vm: vm.makeEmailReauthViewModel())) {
+                    Text("Continue with Email")
+                        .buttonPrimaryOutline()
                 }
-                NavigationLink(
-                    destination: EmailReauthView(vm: vm.makeEmailReauthViewModel()),
-                    isActive: $vm.showEmailReauth,
-                    label: { EmptyView() })
+                
+                FancyDivider(text: "OR")
+                
+                SocialLoginProviderView() {
+                    vm.continueWith($0)
+                }                
             }
             .padding()
             .navigationBarTitle("", displayMode: .inline)

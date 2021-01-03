@@ -9,54 +9,56 @@
 import Foundation
 import FirebaseAuth
 import SwiftyBeaver
-import FirebaseFirestore
 import PromiseKit
+import Combine
 
 class FirebaseSession: Session {
-    let userRepository: UserRepository
-   
-    var isLoggedIn: Bool {
-        return Auth.auth().currentUser != nil
-    }
-
     var currentUserId: UserId? {
         guard let uid = Auth.auth().currentUser?.uid else {
+            SwiftyBeaver.warning("No user logged in")
             return nil
         }
         return UserId(string: uid)
     }
     
-    private var currentUser: User?
-    private var listener: MoWineListenerRegistration?
-
-    init(userRepository: UserRepository) {
-        self.userRepository = userRepository
-        
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
-                self.listenForUserUpdates()
-                SwiftyBeaver.info("FireBase Session Info: \(String(describing: user?.email)), \(String(describing: user?.displayName))")
-            }
-        }
+    var isAnonymous: Bool {
+        Auth.auth().currentUser?.isAnonymous ?? false
     }
     
-    private func listenForUserUpdates() {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
+    var authStateDidChange: AnyPublisher<Void, Never> {
+        _authStateDidChange.eraseToAnyPublisher()
+    }
+    
+    private var _authStateDidChange = PassthroughSubject<Void, Never>()
+    private var handler: AuthStateDidChangeListenerHandle?
+    
+    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+        let auth = Auth.auth()
+
+        if let handler = handler {
+            auth.removeStateDidChangeListener(handler)
         }
         
-        let currentUserId = UserId(string: uid)
-        
-        SwiftyBeaver.info("Listening for changes to User \(currentUserId)")
-        
-        listener?.remove()
-        listener = nil
-        
-        listener = userRepository.getUserByIdAndListenForUpdates(id: currentUserId) { result in
-            if case let .success(user) = result {
-                SwiftyBeaver.debug("Updating session current user!")
-                self.currentUser = user
+        handler = auth.addStateDidChangeListener { [weak self] (auth, user) in
+            if let user = user {
+                SwiftyBeaver.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
+            } else {
+                SwiftyBeaver.warning("No user")
             }
+            
+            self?._authStateDidChange.send()
+        }
+        
+        if auth.currentUser == nil {
+            auth.signInAnonymously() { (authResult, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }                
+            }
+        } else {
+            completion(.success(()))
         }
     }
 
@@ -75,13 +77,13 @@ class FirebaseSession: Session {
     }
     
     func end() {
-        currentUser = nil        
-        
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
             SwiftyBeaver.error("Error signing out: \(signOutError)")
         }
+        
+        Auth.auth().signInAnonymously() { (_, _) in }
     }
 
     func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {

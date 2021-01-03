@@ -23,15 +23,34 @@ class MyAccountViewController: UIViewController {
     }
     
     @IBSegueAction func addSwiftUIView(_ coder: NSCoder) -> UIViewController? {
-        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: JFContainer.shared.userRepository, session: JFContainer.shared.session)
+        let session = ObservableSession(session: JFContainer.shared.session)
+        
+        let emailLogInViewModel = EmailLogInViewModel(emailAuth: try! JFContainer.shared.container.resolve())
+        let signUpWorker = SignUpWorker(
+            emailAuthService: try! JFContainer.shared.container.resolve(),
+            userRepository: try! JFContainer.shared.container.resolve(),
+            session: try! JFContainer.shared.container.resolve()
+        )
+        let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
+        let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
+        
+        let rootView = MyAccountViewContainer(session: session, viewModel: makeMyAccountViewModel())
+            .environmentObject(emailLogInViewModel)
+            .environmentObject(emailSignUpViewModel)
+            .environmentObject(socialAuthViewModel)
+        
+        return UIHostingController(coder: coder, rootView: rootView)
+    }
+
+    private func makeMyAccountViewModel() -> MyAccountViewModel {
+        let session: Session = try! JFContainer.shared.container.resolve()
+        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: JFContainer.shared.userRepository, session: session)
         let profilePictureWorker: ProfilePictureWorkerProtocol = try! JFContainer.shared.container.resolve()
-        let signOutCommand = SignOutCommand(session: JFContainer.shared.session)
-        let viewModel = MyAccountViewModel(
+        let signOutCommand = SignOutCommand(session: session)
+        return MyAccountViewModel(
             getMyAccountQuery: getMyAccountQuery,
             profilePictureWorker: profilePictureWorker,
             signOutCommand: signOutCommand
         )
-        let rootView = MyAccountView(viewModel: viewModel)
-        return UIHostingController(coder: coder, rootView: rootView)
     }
 }

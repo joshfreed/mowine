@@ -12,6 +12,7 @@ struct PrimaryButton: View {
     let action: () -> Void
     let title: String
     @Binding var isLoading: Bool
+    var height: CGFloat = 48
     
     var body: some View {
         Button(action: action) {
@@ -19,7 +20,7 @@ struct PrimaryButton: View {
                 if #available(iOS 14.0, *) {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .frame(height: 48)
+                        .frame(height: height)
                         .frame(minWidth: 0, maxWidth: .infinity)
                 } else {
                     // Fallback on earlier versions
@@ -29,7 +30,7 @@ struct PrimaryButton: View {
                     .font(.system(size: 21))
                     .fontWeight(.light)
                     .foregroundColor(.white)
-                    .frame(height: 48)
+                    .frame(height: height)
                     .frame(minWidth: 0, maxWidth: .infinity)
             }
         }

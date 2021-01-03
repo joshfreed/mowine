@@ -9,6 +9,7 @@
 import Foundation
 @testable import mowine
 import PromiseKit
+import Combine
 
 class MockWineRepository: WineRepository {
     func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Swift.Result<[String], Error>) -> ()) {
@@ -126,6 +127,14 @@ class MockUserRepository: UserRepository {
 }
 
 class MockSession: Session {
+    var isAnonymous: Bool = false
+    
+    var _authStateDidChange = PassthroughSubject<Void, Never>()
+    
+    var authStateDidChange: AnyPublisher<Void, Never> {
+        _authStateDidChange.eraseToAnyPublisher()
+    }
+    
     private var _currentUser: User?
     var photoUrl: URL?
     
@@ -138,7 +147,7 @@ class MockSession: Session {
         return _currentUserId ?? _currentUser?.id
     }
     
-    func resume(completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
         
     }
     

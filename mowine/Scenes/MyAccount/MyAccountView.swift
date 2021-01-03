@@ -8,10 +8,45 @@
 
 import SwiftUI
 
+enum AuthSheet: Identifiable {
+    case logIn
+    case signUp
+    case editProfile
+    
+    var id: Int {
+        hashValue
+    }
+}
+
+struct MyAccountViewContainer: View {
+    @ObservedObject var session: ObservableSession
+    var viewModel: MyAccountViewModel
+    
+    @State private var activeSheet: AuthSheet?
+    
+    var body: some View {
+        Group {
+            if session.isAnonymous {
+                AnonymousUserView() { activeSheet = $0 }
+            } else {
+                MyAccountView(viewModel: viewModel, activeSheet: $activeSheet)
+            }
+        }
+        .sheet(item: $activeSheet) { item in
+            switch item {
+            case .logIn: LogInView() { activeSheet = nil }
+            case .signUp: SignUpView() { activeSheet = nil }
+            case .editProfile: EditProfileView(vm: viewModel.editProfileViewModel { activeSheet = nil })
+            }
+        }
+    }
+}
+
 struct MyAccountView: View {
     @ObservedObject var viewModel: MyAccountViewModel
-    @State var isShowingSignOutConfirmation: Bool = false
-    @State var isEditingProfile: Bool = false
+    @Binding var activeSheet: AuthSheet?
+    
+    @State private var isShowingSignOutConfirmation: Bool = false
     
     var body: some View {
         VStack(spacing: 8) {
@@ -29,9 +64,7 @@ struct MyAccountView: View {
             
             Color.clear.frame(height: 48)
             
-            Button(action: {
-                isEditingProfile = true
-            }) {
+            Button(action: { activeSheet = .editProfile }) {
                 Text("Edit Profile")
                     .font(.system(size: 21))
                     .fontWeight(.medium)
@@ -69,12 +102,7 @@ struct MyAccountView: View {
             Color.clear.frame(height: 8)
         }.onAppear {
             viewModel.loadMyAccount()
-        }.sheet(isPresented: $isEditingProfile, content: {
-            EditProfileView(vm: viewModel.editProfileViewModel {
-                isEditingProfile = false
-            })
-        })
-    }
+        }    }
 }
 
 struct ProfilePictureView2: View {
@@ -95,6 +123,6 @@ struct ProfilePictureView2: View {
 
 struct MyAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        MyAccountView(viewModel: MyAccountViewModel.make())
+        MyAccountView(viewModel: MyAccountViewModel.make(), activeSheet: .constant(nil))
     }
 }

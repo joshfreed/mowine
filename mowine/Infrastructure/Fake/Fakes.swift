@@ -9,6 +9,7 @@
 import Foundation
 import JFLib
 import PromiseKit
+import Combine
 
 var josh = User.make(emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
 var maureen = User.make(emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
@@ -87,16 +88,19 @@ extension User {
 
 class FakeSession: Session {
     private var _isLoggedIn = false
-    private var _photoUrl: URL?
-    
-    var isLoggedIn: Bool {
-        return _isLoggedIn
-    }
-    
+    private var _photoUrl: URL?    
     private var _currentUser: User?
     
     var currentUserId: UserId? {
         return _currentUser?.id
+    }
+    
+    var isAnonymous = false
+    
+    var _authStateDidChange = PassthroughSubject<Void, Never>()
+    
+    var authStateDidChange: AnyPublisher<Void, Never> {
+        _authStateDidChange.eraseToAnyPublisher()
     }
     
     func notLoggedIn() {
@@ -110,6 +114,11 @@ class FakeSession: Session {
     func setUser(user: User) {
         _currentUser = user
         loggedIn()
+    }
+    
+    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+        _isLoggedIn = true
+        completion(.success(()))
     }
     
     func end() {
