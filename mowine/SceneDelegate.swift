@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftUI
+import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,12 +24,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         JFContainer.shared.configurators.forEach {
             $0.configure()
         }
-        
-        let startVC = StartViewController()
-        startVC.session = JFContainer.shared.session
+
+        let appView = AppView()
+       
+        let rootVC = UIHostingController(rootView: appView)
+
+        GIDSignIn.sharedInstance().presentingViewController = rootVC
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = startVC
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
 
