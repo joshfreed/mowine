@@ -119,6 +119,8 @@
 		536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBF92540BC3F009EA107 /* MyCellarSearchView.swift */; };
 		536AEC012540CD60009EA107 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEC002540CD60009EA107 /* StringProtocol.swift */; };
 		536E301725A23CF900608A29 /* SwiftUIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E301625A23CF900608A29 /* SwiftUIVersion.swift */; };
+		536E301B25A2615500608A29 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E301A25A2615500608A29 /* AppView.swift */; };
+		536E301F25A2616E00608A29 /* TabbedRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E301E25A2616E00608A29 /* TabbedRootView.swift */; };
 		536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */; };
 		536E3ACB258F9C4B00D84F10 /* SocialSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */; };
 		536E3AD1258F9CBD00D84F10 /* SignInWithFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */; };
@@ -404,6 +406,8 @@
 		536AEBF92540BC3F009EA107 /* MyCellarSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarSearchView.swift; sourceTree = "<group>"; };
 		536AEC002540CD60009EA107 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		536E301625A23CF900608A29 /* SwiftUIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIVersion.swift; sourceTree = "<group>"; };
+		536E301A25A2615500608A29 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		536E301E25A2616E00608A29 /* TabbedRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedRootView.swift; sourceTree = "<group>"; };
 		536E3AC2258EA3AA00D84F10 /* mowine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mowine.entitlements; sourceTree = "<group>"; };
 		536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignIn.swift; sourceTree = "<group>"; };
@@ -1366,9 +1370,11 @@
 				53ED1F7D204F2D2F00C129BC /* Friends */,
 				532FB07B20584BC70056D1B2 /* UserProfile */,
 				5327BC292062B33F006787E9 /* WineDetails */,
+				536E301A25A2615500608A29 /* AppView.swift */,
 				53112848205F06800094DC35 /* TabBarViewController.swift */,
 				53F725B2219CB79600F8176F /* StartViewController.swift */,
 				530D3F5E21E95AC000885167 /* SplashViewController.swift */,
+				536E301E25A2616E00608A29 /* TabbedRootView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1839,6 +1845,7 @@
 				5327BC2620619D34006787E9 /* WineCellarListModels.swift in Sources */,
 				53ED1F8B204F323F00C129BC /* UserRepository.swift in Sources */,
 				533F1031259FD8E700DAA4B6 /* FancyDivider.swift in Sources */,
+				536E301F25A2616E00608A29 /* TabbedRootView.swift in Sources */,
 				535F66942062FEE20006B26A /* SignUpViewController.swift in Sources */,
 				53CDB5171F3E271B00EF9CF6 /* ConfirmPhotoRouter.swift in Sources */,
 				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
@@ -1989,6 +1996,7 @@
 				5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */,
 				E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */,
 				536AEC012540CD60009EA107 /* StringProtocol.swift in Sources */,
+				536E301B25A2615500608A29 /* AppView.swift in Sources */,
 				E9AFC0EEF0DDE04612FD7B5F /* AppleProvider.swift in Sources */,
 				E9AFC1B22362621B1AE56842 /* FacebookProvider.swift in Sources */,
 				E9AFCFD8AA38E97B4E23E348 /* GoogleProvider.swift in Sources */,
