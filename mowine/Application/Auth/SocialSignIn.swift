@@ -14,11 +14,6 @@ struct NewUserInfo {
     var lastName: String?
 }
 
-enum LoginType {
-    case email
-    case social(SocialProviderType)
-}
-
 enum SocialProviderType {
     case apple
     case facebook

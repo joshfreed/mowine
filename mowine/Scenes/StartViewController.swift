@@ -33,13 +33,15 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
         GIDSignIn.sharedInstance().presentingViewController = self
         
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
         current = mainStoryboard.instantiateViewController(withIdentifier: "SplashViewController")
         show(viewController: current!)
-        
-        if session.isLoggedIn {
-            showSignedInView()
-        } else {
-            showSignedOutView()
+
+        session.start { result in
+            switch result {
+            case .success: self.showSignedInView()
+            case .failure(let error): fatalError(error.localizedDescription)
+            }
         }
     }
     
@@ -50,29 +52,23 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
     }
     
     func showSignedOutView() {
-//        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-//        let nc = storyboard.instantiateInitialViewController() as! UINavigationController
-//        let vc = nc.topViewController as! FirstTimeViewController
-//        vc.delegate = self
-//        show(viewController: nc)
-        
-        let vm = SignInViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
-        vm.onEmailSignIn = { [weak self] in
-            guard let strongSelf = self else { return }
-            let signIn = SignInByEmailViewController(delegate: strongSelf)
-            strongSelf.present(signIn, animated: true, completion: nil)
-        }
-        vm.onEmailSignUp = { [weak self] in
-            guard let strongSelf = self else { return }
-            let signUp = SignUpByEmailViewController(delegate: strongSelf)
-            strongSelf.present(signUp, animated: true, completion: nil)
-        }
-        vm.onSocialSignInSuccess = { [weak self] in
-            self?.showSignedInView()
-        }
-        let rootView = SignInView(vm: vm)
-        let vc = UIHostingController(rootView: rootView)
-        show(viewController: vc)
+//        let vm = SignInViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
+//        vm.onEmailSignIn = { [weak self] in
+//            guard let strongSelf = self else { return }
+//            let signIn = SignInByEmailViewController(delegate: strongSelf)
+//            strongSelf.present(signIn, animated: true, completion: nil)
+//        }
+//        vm.onEmailSignUp = { [weak self] in
+//            guard let strongSelf = self else { return }
+//            let signUp = SignUpByEmailViewController(delegate: strongSelf)
+//            strongSelf.present(signUp, animated: true, completion: nil)
+//        }
+//        vm.onSocialSignInSuccess = { [weak self] in
+//            self?.showSignedInView()
+//        }
+//        let rootView = SignInView(vm: vm)
+//        let vc = UIHostingController(rootView: rootView)
+//        show(viewController: vc)
     }
     
     private func show(viewController: UIViewController) {

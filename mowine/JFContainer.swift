@@ -81,7 +81,7 @@ extension DependencyContainer {
     static func configure() -> DependencyContainer {
         DependencyContainer { container in
             container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
-            container.register(.singleton) { FirebaseSession(userRepository: $0) as Session }
+            container.register(.singleton) { FirebaseSession() as Session }
             container.register(.singleton) { FirestoreUserRepository() as UserRepository }
             container.register(.singleton) { FirestoreWineRepository() as WineRepository }
             container.register(.singleton) { FirebaseStorageService() }

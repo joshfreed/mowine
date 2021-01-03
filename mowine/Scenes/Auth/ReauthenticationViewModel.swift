@@ -14,7 +14,6 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 class ReauthenticationViewModel: ObservableObject {
-    @Published var showEmailReauth = false
     @Published var showErrorAlert = false
     @Published var errorMessage: String = ""
     
@@ -34,21 +33,10 @@ class ReauthenticationViewModel: ObservableObject {
     func cancel() {
         onCancel()
     }
-    
-    func continueWith(_ loginType: LoginType) {
-        switch loginType {
-        case .email: continueWithEmail()
-        case .social(let type): socialSignIn(type: type)
-        }
+
+    func continueWith(_ type: SocialProviderType) {
+        socialSignIn(type: type)
     }
-    
-    // MARK: Email
-    
-    private func continueWithEmail() {
-        showEmailReauth = true
-    }
-    
-    // MARK: Login Providers
 
     private func socialSignIn(type: SocialProviderType) {
         guard let method = socialSignInMethods[type] else {
