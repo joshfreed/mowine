@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +21,7 @@
                     <connections>
                         <segue destination="VwN-c7-4z2" kind="relationship" relationship="viewControllers" id="gvg-rd-h8U"/>
                         <segue destination="YDa-gT-T75" kind="relationship" relationship="viewControllers" id="rBs-Ha-H3W"/>
-                        <segue destination="Izw-Ei-IUV" kind="relationship" relationship="viewControllers" id="Y47-9C-0UO"/>
+                        <segue destination="dyD-3X-zvv" kind="relationship" relationship="viewControllers" id="nTw-Cj-kEh"/>
                         <segue destination="hcW-wD-wIi" kind="relationship" relationship="viewControllers" id="bnX-HG-c4o"/>
                     </connections>
                 </tabBarController>
@@ -192,13 +191,13 @@
                                 <color key="tintColor" red="0.70196078429999997" green="0.61568627450000002" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="nwZ-Uh-Quo">
-                                <rect key="frame" x="0.0" y="160.5" width="414" height="512.5"/>
+                                <rect key="frame" x="0.0" y="160.5" width="414" height="561.5"/>
                                 <connections>
                                     <segue destination="rqY-LH-bqH" kind="embed" identifier="TopWines" id="VcQ-aY-gsx"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tM-Qm-f1S">
-                                <rect key="frame" x="0.0" y="160.5" width="414" height="512.5"/>
+                                <rect key="frame" x="0.0" y="160.5" width="414" height="561.5"/>
                                 <connections>
                                     <segue destination="lDX-bs-0sz" kind="embed" identifier="WineCellar" id="Kyp-iS-BQ4"/>
                                 </connections>
@@ -274,11 +273,11 @@
                         <viewControllerLayoutGuide type="bottom" id="6eS-cY-GVt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CNf-8a-GKr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="512.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="561.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1i-vg-vF5">
-                                <rect key="frame" x="0.0" y="44" width="414" height="468.5"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="517.5"/>
                                 <connections>
                                     <segue destination="7NJ-7w-5oe" kind="embed" identifier="WineList" id="zG4-fF-NmX"/>
                                 </connections>
@@ -302,7 +301,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WineListViewController" id="7NJ-7w-5oe" customClass="WineListViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Awr-nc-ydz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="458.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="507.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -324,17 +323,17 @@
                         <viewControllerLayoutGuide type="bottom" id="vTt-aR-OBL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cki-Ja-uam">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="512.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="561.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no wines in the cellar." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slW-s3-tk9">
-                                <rect key="frame" x="36" y="44" width="342" height="468.5"/>
+                                <rect key="frame" x="36" y="44" width="342" height="517.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKB-2R-FSe">
-                                <rect key="frame" x="0.0" y="44" width="414" height="468.5"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="517.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBT-dM-G1l" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
@@ -396,11 +395,11 @@
                         <viewControllerLayoutGuide type="bottom" id="sWf-HN-7Pl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KDZ-aF-khW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="458.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="507.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-wN-IwQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="458.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="507.5"/>
                                 <connections>
                                     <segue destination="7NJ-7w-5oe" kind="embed" identifier="WineList" id="vw4-Zm-TUT"/>
                                 </connections>
@@ -596,7 +595,7 @@
         <!--Friends-->
         <scene sceneID="Yrh-RS-68m">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Izw-Ei-IUV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="friendsNavController" automaticallyAdjustsScrollViewInsets="NO" id="Izw-Ei-IUV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="Friends Tab" id="5nn-bz-NI7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="1cF-7t-PCi">
@@ -819,6 +818,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-s7-vpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3094" y="-18"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="w0I-VU-rPa">
+            <objects>
+                <viewController id="dyD-3X-zvv" customClass="FriendsHostingController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rmj-Fv-uPl"/>
+                        <viewControllerLayoutGuide type="bottom" id="qco-YQ-fbR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tT5-T4-Zb9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klW-ss-lhz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <segue destination="tGL-iQ-44H" kind="embed" destinationCreationSelector="addSwiftUIView:" id="FUn-bc-zJ3"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="klW-ss-lhz" secondAttribute="trailing" id="Dkn-jC-tFp"/>
+                            <constraint firstItem="klW-ss-lhz" firstAttribute="top" secondItem="tT5-T4-Zb9" secondAttribute="top" id="Yy3-NL-fqE"/>
+                            <constraint firstItem="klW-ss-lhz" firstAttribute="leading" secondItem="tT5-T4-Zb9" secondAttribute="leading" id="m6r-zV-hrX"/>
+                            <constraint firstAttribute="bottom" secondItem="klW-ss-lhz" secondAttribute="bottom" id="wiw-af-yty"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Friends" image="Friends Tab" id="wsp-jH-s8J"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f5L-ea-Tcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1396" y="1179"/>
+        </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="nn3-E6-iQp">
+            <objects>
+                <hostingController id="tGL-iQ-44H" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JU2-Jm-ycn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2165" y="1138"/>
         </scene>
     </scenes>
     <designables>

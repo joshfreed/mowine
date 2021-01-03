@@ -118,6 +118,7 @@
 		536AEBF62540BBDB009EA107 /* WineTypeMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBF52540BBDB009EA107 /* WineTypeMenuButton.swift */; };
 		536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEBF92540BC3F009EA107 /* MyCellarSearchView.swift */; };
 		536AEC012540CD60009EA107 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536AEC002540CD60009EA107 /* StringProtocol.swift */; };
+		536E301725A23CF900608A29 /* SwiftUIVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E301625A23CF900608A29 /* SwiftUIVersion.swift */; };
 		536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */; };
 		536E3ACB258F9C4B00D84F10 /* SocialSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */; };
 		536E3AD1258F9CBD00D84F10 /* SignInWithFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */; };
@@ -402,6 +403,7 @@
 		536AEBF52540BBDB009EA107 /* WineTypeMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeMenuButton.swift; sourceTree = "<group>"; };
 		536AEBF92540BC3F009EA107 /* MyCellarSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarSearchView.swift; sourceTree = "<group>"; };
 		536AEC002540CD60009EA107 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
+		536E301625A23CF900608A29 /* SwiftUIVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIVersion.swift; sourceTree = "<group>"; };
 		536E3AC2258EA3AA00D84F10 /* mowine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mowine.entitlements; sourceTree = "<group>"; };
 		536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleLoginButton.swift; sourceTree = "<group>"; };
 		536E3ACA258F9C4B00D84F10 /* SocialSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignIn.swift; sourceTree = "<group>"; };
@@ -1236,12 +1238,13 @@
 				537D8A4C21C067EF00A110FF /* FriendsScene.swift */,
 				53ED1F7E204F2D5C00C129BC /* FriendsPresenter.swift */,
 				53ED1F7F204F2D5C00C129BC /* FriendsWorker.swift */,
-				53ED1F80204F2D5C00C129BC /* FriendsRouter.swift */,
 				53ED1F81204F2D5C00C129BC /* FriendsModels.swift */,
 				53ED1F82204F2D5C00C129BC /* FriendsViewController.swift */,
 				53ED1F83204F2D5C00C129BC /* FriendsInteractor.swift */,
 				53ED1F8C204F359C00C129BC /* UserTableViewCell.swift */,
 				53ED1F8D204F359C00C129BC /* UserTableViewCell.xib */,
+				53ED1F80204F2D5C00C129BC /* FriendsRouter.swift */,
+				536E301625A23CF900608A29 /* SwiftUIVersion.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -1870,6 +1873,7 @@
 				5318863F2586777C00ED9CF8 /* Configurator.swift in Sources */,
 				5367A3D3254B0A42002A02A5 /* WineListView.swift in Sources */,
 				53DD1E12257D7A25008C1DA7 /* ReauthenticationViewModel.swift in Sources */,
+				536E301725A23CF900608A29 /* SwiftUIVersion.swift in Sources */,
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				53D3B44025A0FB3400F15974 /* EmailLogInViewModel.swift in Sources */,
 				53D1E2FE2059B68800A22476 /* TopWinesWorker.swift in Sources */,

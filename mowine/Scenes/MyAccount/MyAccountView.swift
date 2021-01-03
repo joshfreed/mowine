@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-enum AuthSheet: Identifiable {
+enum MyAccountSheet: Identifiable {
     case logIn
     case signUp
     case editProfile
@@ -22,7 +22,7 @@ struct MyAccountViewContainer: View {
     @ObservedObject var session: ObservableSession
     var viewModel: MyAccountViewModel
     
-    @State private var activeSheet: AuthSheet?
+    @State private var activeSheet: MyAccountSheet?
     
     var body: some View {
         Group {
@@ -44,7 +44,7 @@ struct MyAccountViewContainer: View {
 
 struct MyAccountView: View {
     @ObservedObject var viewModel: MyAccountViewModel
-    @Binding var activeSheet: AuthSheet?
+    @Binding var activeSheet: MyAccountSheet?
     
     @State private var isShowingSignOutConfirmation: Bool = false
     

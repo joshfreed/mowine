@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AnonymousUserView: View {
-    var action: (AuthSheet) -> Void
+    var action: (MyAccountSheet) -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
