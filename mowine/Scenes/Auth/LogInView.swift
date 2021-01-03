@@ -13,18 +13,20 @@ struct LogInView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 32) {
-                EmailLogInView(onLogIn: onLogIn)
-                NavigationLink(destination: ForgotPasswordView()) {
-                    Text("Forgot your password?")
-                        .foregroundColor(Color("Primary Light"))
+            ScrollView {
+                VStack(spacing: 32) {
+                    EmailLogInView(onLogIn: onLogIn)
+                    NavigationLink(destination: ForgotPasswordView()) {
+                        Text("Forgot your password?")
+                            .foregroundColor(Color("Primary Light"))
+                    }
+                    FancyDivider(text: "OR")
+                    SocialAuthView(onLogIn: onLogIn)
+                    Spacer()
                 }
-                FancyDivider(text: "OR")
-                SocialAuthView(onLogIn: onLogIn)
-                Spacer()
+                .padding()
+                .navigationTitle("Log In")
             }
-            .padding()
-            .navigationTitle("Log In")
         }
         .accentColor(.mwSecondary)
     }
