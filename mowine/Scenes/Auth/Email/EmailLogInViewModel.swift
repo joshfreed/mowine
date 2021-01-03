@@ -34,6 +34,7 @@ class EmailLogInViewModel: ObservableObject {
             switch result {
             case .success:
                 onLogIn()
+                NotificationCenter.default.post(name: .signedIn, object: nil)
             case .failure(let error):
                 switch error {
                 case
