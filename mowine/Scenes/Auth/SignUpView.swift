@@ -13,14 +13,16 @@ struct SignUpView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 32) {
-                EmailSignUpView(onSignUp: onSignUp)
-                FancyDivider(text: "OR")
-                SocialAuthView(onLogIn: onSignUp)
-                Spacer()
-            }
+            ScrollView {
+                VStack(spacing: 32) {
+                    EmailSignUpView(onSignUp: onSignUp)
+                    FancyDivider(text: "OR")
+                    SocialAuthView(onLogIn: onSignUp)
+                    Spacer()
+                }
                 .padding()
                 .navigationTitle("Sign Up")
+            }
         }
     }
 }
