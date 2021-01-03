@@ -31,7 +31,9 @@ class EmailSignUpViewModel: ObservableObject {
             self?.isLoading = false
             
             switch result {
-            case .success: onSignUp()
+            case .success:
+                onSignUp()
+                NotificationCenter.default.post(name: .signedIn, object: nil)
             case .failure(let error): self?.displaySignUpError(error)
             }
         }

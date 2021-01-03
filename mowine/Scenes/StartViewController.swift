@@ -30,6 +30,9 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(didLogIn), name: .signedIn, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didLogIn), name: .signedOut, object: nil)
+        
         GIDSignIn.sharedInstance().presentingViewController = self
         
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -42,6 +45,18 @@ class StartViewController: UIViewController, FirstTimeViewControllerDelegate, Ta
             case .success: self.showSignedInView()
             case .failure(let error): fatalError(error.localizedDescription)
             }
+        }
+    }
+    
+    @objc func didLogIn() {
+        dismiss(animated: false, completion: nil)
+        
+        let splash = self.mainStoryboard.instantiateViewController(withIdentifier: "SplashViewController")
+        
+        self.show(viewController: splash)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showSignedInView()
         }
     }
     
