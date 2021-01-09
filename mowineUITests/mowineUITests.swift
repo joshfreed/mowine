@@ -25,7 +25,7 @@ class mowineUITests: XCTestCase {
         continueAfterFailure = false
                 
         let users: [[String: Any]] = [
-            ["id": "AAA", "emailAddress": "test@test.com", "firstName": "Jeff"]
+            ["id": "AAA", "emailAddress": "test@test.com", "fullName": "Jeff Jones"]
         ]
         
         let app = XCUIApplication()

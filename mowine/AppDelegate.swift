@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userObjects = try! JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
             let users: [User] = userObjects.map {
                 var user = User(id: UserId(string: $0["id"] as! String), emailAddress: $0["emailAddress"] as! String)
-                user.firstName = $0["firstName"] as? String
+                user.fullName = $0["fullName"] as? String ?? ""
                 return user
             }
             

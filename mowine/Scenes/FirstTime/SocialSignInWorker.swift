@@ -67,8 +67,10 @@ class SocialSignInWorker {
         }
         
         var user = User(id: currentUserId, emailAddress: newUserInfo.email)
-        user.firstName = newUserInfo.firstName
-        user.lastName = newUserInfo.lastName
+        user.fullName = newUserInfo.firstName
+        if let lastName = newUserInfo.lastName {
+            user.fullName += " " + lastName
+        }
         
         userRepository.add(user: user) { result in
             switch result {

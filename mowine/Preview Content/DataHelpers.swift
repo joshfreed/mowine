@@ -32,10 +32,10 @@ extension MyAccountViewModel {
 
 extension EditProfileViewModel {
     static func make() -> EditProfileViewModel {
-        .make(firstName: "", lastName: "", emailAddress: "")
+        .make(emailAddress: "", fullName: "Barry Jones")
     }
     
-    static func make(firstName: String, lastName: String, emailAddress: String) -> EditProfileViewModel {
+    static func make(emailAddress: String, fullName: String) -> EditProfileViewModel {
         let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
         let profilePictureWorker = FakeProfilePictureWorker()
         let userProfileService = UserProfileService(session: FakeSession(), userRepository: FakeUserRepository(), profilePictureWorker: profilePictureWorker)
@@ -46,8 +46,7 @@ extension EditProfileViewModel {
             userRepository: FakeUserRepository()
         )
         let vm = EditProfileViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, editProfileService: editProfileService)
-        vm.firstName = firstName
-        vm.lastName = lastName
+        vm.fullName = fullName
         vm.emailAddress = emailAddress
         return vm
     }

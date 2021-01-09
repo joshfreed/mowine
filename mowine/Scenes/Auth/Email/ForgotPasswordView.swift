@@ -27,13 +27,14 @@ struct ForgotPasswordView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            Text("Please enter the email address you used to create your account and we'll send you instructions for resetting your password.")
-                
+            Text("Please enter the email address you used to create your account and we'll send you instructions for resetting your password.")                
                 .font(.body)
                 .multilineTextAlignment(.center)
             
             TextField("", text: $emailAddress)
                 .textContentType(.emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 .fancyField(title: "Email Address", text: $emailAddress)
                 .padding(.bottom, 4)
             

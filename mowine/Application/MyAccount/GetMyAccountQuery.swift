@@ -17,8 +17,6 @@ protocol GetMyAccountQuery {
 
 struct GetMyAccountQueryResponse {
     let fullName: String
-    let firstName: String?
-    let lastName: String?
     let emailAddress: String
     let profilePictureUrl: URL?
 }
@@ -99,8 +97,6 @@ extension GetMyAccountQueryResponse {
     static func mapResponse(_ user: User) -> GetMyAccountQueryResponse {
         GetMyAccountQueryResponse(
             fullName: user.fullName,
-            firstName: user.firstName,
-            lastName: user.lastName,
             emailAddress: user.emailAddress,
             profilePictureUrl: user.profilePictureUrl
         )

@@ -15,22 +15,9 @@ typealias UserId = StringIdentity
 struct User: Equatable {
     let id: UserId
     var emailAddress: String
-    var firstName: String?
-    var lastName: String?
+    var fullName: String = ""
     var profilePictureUrl: URL?
     var friends: [Friendship] = []
-    
-    var fullName: String {
-        let firstName = self.firstName ?? ""
-        let lastName = self.lastName ?? ""
-        
-        var _fullName = firstName
-        if !_fullName.isEmpty {
-            _fullName += " "
-        }
-        _fullName += lastName
-        return _fullName
-    }
     
     init(emailAddress: String) {
         self.id = UserId()
@@ -95,27 +82,41 @@ extension User {
         }
         let userId = UserId(string: document.documentID)
         var user = User(id: userId, emailAddress: emailAddress)
-        user.firstName = dataDict["firstName"] as? String
-        user.lastName = dataDict["lastName"] as? String
+        
+        if let fullName = dataDict["fullName"] as? String {
+            user.fullName = fullName
+        } else {
+            user.fullName = fullName(dataDict)
+        }
+        
         if let photoUrlString = dataDict["photoURL"] as? String {
             user.profilePictureUrl = URL(string: photoUrlString)
         }
         return user
     }
     
+    private static func fullName(_ dataDict: [String: Any]) -> String {
+        let firstName = (dataDict["firstName"] as? String) ?? ""
+        let lastName = (dataDict["lastName"] as? String) ?? ""
+        
+        var _fullName = firstName
+        if !_fullName.isEmpty {
+            _fullName += " "
+        }
+        _fullName += lastName
+        return _fullName
+    }
+    
     func toFirestore() -> [String: Any] {
         var data: [String: Any] = [
-            "email": emailAddress
+            "email": emailAddress,
+            "fullName": fullName
         ]
-        if let firstName = firstName {
-            data["firstName"] = firstName
-        }
-        if let lastName = lastName {
-            data["lastName"] = lastName
-        }
+                
         if let photoURL = profilePictureUrl {
             data["photoURL"] = photoURL.absoluteString
         }
+        
         return data
     }
 }

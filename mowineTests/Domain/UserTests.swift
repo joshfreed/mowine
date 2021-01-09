@@ -28,21 +28,15 @@ class UserTests: XCTestCase {
     func test_toFirestore_defaults() {
         let output = user.toFirestore()
         expect(output["email"] as? String).to(equal("test@test.com"))
-        expect(output["firstName"]).to(beNil())
-        expect(output["lastName"]).to(beNil())
+        expect(output["fullName"] as? String).to(equal(""))
     }
 
-    func test_toFirestore_firstName() {
-        user.firstName = "Barry"
+    func test_toFirestore_fullName() {
+        user.fullName = "Barry Jones"
         let output = user.toFirestore()
-        expect(output["firstName"] as? String).to(equal("Barry"))
+        expect(output["fullName"] as? String).to(equal("Barry Jones"))
     }
 
-    func test_toFirestore_lastName() {
-        user.lastName = "Jones"
-        let output = user.toFirestore()
-        expect(output["lastName"] as? String).to(equal("Jones"))
-    }
 
     func test_toFirestore_profilePictureUrl() {
         user.profilePictureUrl = URL(string: "http://images.fakefakefake.com/path/to/image.png")

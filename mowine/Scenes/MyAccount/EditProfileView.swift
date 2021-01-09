@@ -14,8 +14,7 @@ struct EditProfileView: View {
     var body: some View {
         NavigationView {
             EditProfileFormView(
-                firstName: $vm.firstName,
-                lastName: $vm.lastName,
+                fullName: $vm.fullName,
                 emailAddress: $vm.emailAddress,
                 profilePicture: $vm.profilePicture
             ) { pickerSourceType in
@@ -57,8 +56,7 @@ struct EditProfileView: View {
 }
 
 struct EditProfileFormView: View {
-    @Binding var firstName: String
-    @Binding var lastName: String
+    @Binding var fullName: String
     @Binding var emailAddress: String
     @Binding var profilePicture: Data?
     var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
@@ -71,9 +69,15 @@ struct EditProfileFormView: View {
 
             Color.clear.frame(height: 20)
 
-            FancyTextField(title: "First Name", text: $firstName)
-            FancyTextField(title: "Last Name", text: $lastName)
-            FancyTextField(title: "Email Address", text: $emailAddress)
+            TextField("", text: $fullName)
+                .fancyField(title: "Full Name", text: $fullName)
+                .padding(.bottom, 4)
+            
+            TextField("", text: $emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .fancyField(title: "Email Address", text: $emailAddress)
+                .padding(.bottom, 4)            
 
             Spacer()
         }.padding([.leading, .trailing], 16)

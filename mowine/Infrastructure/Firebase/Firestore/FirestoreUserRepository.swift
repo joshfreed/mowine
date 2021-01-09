@@ -170,9 +170,10 @@ class FirestoreUserRepository: UserRepository {
         
         for word in words {
             let m = allUsers.filter {
-                let firstName = ($0.firstName ?? "").lowercased()
-                let lastName = ($0.lastName ?? "").lowercased()
-                return firstName.starts(with: word) || lastName.starts(with: word)
+                $0.fullName
+                    .lowercased()
+                    .split(separator: " ")
+                    .contains { name in name.starts(with: word) }
             }
             matches.append(contentsOf: m)
         }

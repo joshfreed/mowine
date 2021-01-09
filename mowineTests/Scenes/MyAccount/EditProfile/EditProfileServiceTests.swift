@@ -50,7 +50,7 @@ class EditProfileServiceTests: XCTestCase {
         let newPicture = UIImage(color: .black)!
         sut.updateProfilePicture(newPicture)
 
-        sut.saveProfile(email: "test@test.com", firstName: "Jeff", lastName: "Jones") { result in
+        sut.saveProfile(email: "test@test.com", fullName: "Jeff Jones") { result in
             expect(result).to(self.beSuccess())
             async.fulfill()
         }
@@ -64,8 +64,7 @@ class EditProfileServiceTests: XCTestCase {
         expect(self.userProfileService.updateUserProfileWasCalled).to(beTrue())
         let request = self.userProfileService.updateUserProfile_request
         expect(request).toNot(beNil())
-        expect(request?.firstName).to(equal("Jeff"))
-        expect(request?.lastName).to(equal("Jones"))
+        expect(request?.fullName).to(equal("Jeff Jones"))
     }
 
     func test_saveProfile_updatingProfilePictureThrowsAnError() {
@@ -74,7 +73,7 @@ class EditProfileServiceTests: XCTestCase {
         sut.updateProfilePicture(newPicture)
         userProfileService.updateProfilePicture_rejection = TestError.someError
 
-        sut.saveProfile(email: "test@test.com", firstName: "Jeff", lastName: "Jones") { result in
+        sut.saveProfile(email: "test@test.com", fullName: "Jeff Jones") { result in
             expect(result).to(self.beFailure { expect($0).to(matchError(TestError.someError)) })
             async.fulfill()
         }

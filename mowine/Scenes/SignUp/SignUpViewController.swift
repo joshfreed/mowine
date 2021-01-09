@@ -135,7 +135,7 @@ class SignUpViewController: UIViewController {
         
         signUpButton.displayLoading()
         
-        worker.signUp(emailAddress: emailAddress, password: password, firstName: firstName, lastName: lastName) { result in
+        worker.signUp(emailAddress: emailAddress, password: password, fullName: "") { result in
             switch result {
             case .success: self.displaySignUpSuccess()
             case .failure(let error): self.displaySignUpError(error)

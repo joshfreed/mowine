@@ -27,26 +27,25 @@ class SignUpWorker {
         self.session = session
     }
     
-    func signUp(emailAddress: String, password: String, firstName: String, lastName: String?, completion: @escaping (Result<User, Error>) -> ()) {
+    func signUp(emailAddress: String, password: String, fullName: String, completion: @escaping (Result<User, Error>) -> ()) {
         // TODO check password strength requirements?
         
         emailAuthService.signUp(emailAddress: emailAddress, password: password) { result in
             switch result {
-            case .success: self.createUser(emailAddress: emailAddress, firstName: firstName, lastName: lastName, completion: completion)
+            case .success: self.createUser(emailAddress: emailAddress, fullName: fullName, completion: completion)
             case .failure(let error): completion(.failure(error))
             }
         }
     }
 
-    func createUser(emailAddress: String, firstName: String, lastName: String?, completion: @escaping (Result<User, Error>) -> ()) {
+    func createUser(emailAddress: String, fullName: String, completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))
             return
         }
         
         var user = User(id: currentUserId, emailAddress: emailAddress)
-        user.firstName = firstName
-        user.lastName = lastName
+        user.fullName = fullName
         
         userRepository.getUserById(currentUserId) { result in
             switch result {
