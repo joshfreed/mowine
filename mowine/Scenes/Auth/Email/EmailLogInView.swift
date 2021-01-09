@@ -17,6 +17,8 @@ struct EmailLogInView: View {
     var body: some View {
         VStack(spacing: 16) {
             TextField("", text: $emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 .fancyField(title: "Email Address", text: $emailAddress)
                 .padding(.bottom, 4)
             

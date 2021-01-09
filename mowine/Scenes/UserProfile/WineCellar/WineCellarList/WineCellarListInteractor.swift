@@ -34,7 +34,7 @@ class WineCellarListInteractor: WineCellarListBusinessLogic, WineCellarListDataS
     // MARK: Fetch wines
 
     func fetchWines(request: WineCellarList.FetchWines.Request) {
-        presenter?.presentCellarName(response: WineCellarList.GetCellarName.Response(firstName: user.firstName))
+        presenter?.presentCellarName(response: WineCellarList.GetCellarName.Response(firstName: user.fullName))
         
         worker?.fetchWines(for: user.id, type: wineType) { result in
             switch result {

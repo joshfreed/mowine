@@ -80,8 +80,7 @@ func randomDelay(action: @escaping () -> ()) {
 extension User {
     static func make(emailAddress: String, firstName: String, lastName: String) -> User {
         var user = User(emailAddress: emailAddress)
-        user.firstName = firstName
-        user.lastName = lastName
+        user.fullName = firstName + " " + lastName
         return user
     }
 }
@@ -217,9 +216,7 @@ class FakeUserRepository: UserRepository {
         
         for word in words {
             let m = usersDB.filter {
-                let firstName = $0.firstName ?? ""
-                let lastName = $0.lastName ?? ""
-                return firstName.starts(with: word) || lastName.starts(with: word)
+                $0.fullName.lowercased().starts(with: word)
             }
             matches.append(contentsOf: m)
         }

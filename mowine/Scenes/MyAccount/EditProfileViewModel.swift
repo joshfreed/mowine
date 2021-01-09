@@ -12,19 +12,14 @@ import FirebaseCrashlytics
 import SwiftyBeaver
 
 class EditProfileViewModel: ObservableObject {
-    @Published var firstName: String = "" {
+    @Published var fullName: String = "" {
         didSet {
-            enableSaveButton()
-        }
-    }
-    @Published var lastName: String = "" {
-        didSet {
-            enableSaveButton()
+            profileDidChange()
         }
     }
     @Published var emailAddress: String = "" {
         didSet {
-            enableSaveButton()
+            profileDidChange()
         }
     }
     @Published var profilePicture: Data?
@@ -64,6 +59,7 @@ class EditProfileViewModel: ObservableObject {
             case .success(let profile):
                 self?.setProfile(profile)
                 self?.fetchProfilePicture(url: profile.profilePictureUrl)
+                self?.hasChanges = false
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
@@ -72,10 +68,8 @@ class EditProfileViewModel: ObservableObject {
     }
     
     private func setProfile(_ profile: GetMyAccountQueryResponse) {
-        firstName = profile.firstName ?? ""
-        lastName = profile.lastName ?? ""
+        fullName = profile.fullName
         emailAddress = profile.emailAddress
-        disableSaveButton()
     }
 
     private func fetchProfilePicture(url: URL?) {
@@ -97,14 +91,10 @@ class EditProfileViewModel: ObservableObject {
         closeModal?()
     }
     
-    private func enableSaveButton() {
+    private func profileDidChange() {
         hasChanges = true
     }
     
-    private func disableSaveButton() {
-        hasChanges = false
-    }
-
     func saveProfile() {
         if !hasChanges {
             closeModal?()
@@ -113,7 +103,7 @@ class EditProfileViewModel: ObservableObject {
         
         isSaving = true
 
-        editProfileService.saveProfile(email: emailAddress, firstName: firstName, lastName: lastName) { [weak self] result in
+        editProfileService.saveProfile(email: emailAddress, fullName: fullName) { [weak self] result in
             self?.isSaving = false
             self?.saveProfileCallback(result: result)
         }
@@ -155,6 +145,7 @@ class EditProfileViewModel: ObservableObject {
         editProfileService.updateProfilePicture(image)
         profilePicture = image.pngData()
         isShowingSheet = false
+        profileDidChange()
     }
     
     func cancelSelectProfilePicture() {

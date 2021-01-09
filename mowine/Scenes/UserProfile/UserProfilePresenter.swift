@@ -39,10 +39,10 @@ class UserProfilePresenter: UserProfilePresentationLogic {
 //    }
     
     func makeUserCellarTitle(from user: User) -> String {
-        if let firstName = user.firstName {
-            return "\(firstName)'s Cellar"
-        } else {
+        if user.fullName.isEmpty {
             return "Wine Cellar"
+        } else {
+            return "\(user.fullName)'s Cellar"            
         }
     }
     

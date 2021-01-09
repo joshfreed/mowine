@@ -27,7 +27,7 @@ class EmailSignUpViewModel: ObservableObject {
             return
         }
         
-        worker.signUp(emailAddress: emailAddress, password: password, firstName: fullName, lastName: "") { [weak self] result in
+        worker.signUp(emailAddress: emailAddress, password: password, fullName: fullName) { [weak self] result in
             self?.isLoading = false
             
             switch result {

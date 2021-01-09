@@ -80,8 +80,7 @@ class UserProfileService {
     
     private func updateUserProfile(user: User, request: UpdateUserProfileRequest) -> Promise<Void> {
         var _user = user
-        _user.firstName = request.firstName
-        _user.lastName = request.lastName
+        _user.fullName = request.fullName
         return save(user: _user)
     }
     
@@ -114,6 +113,5 @@ class UserProfileService {
 }
 
 struct UpdateUserProfileRequest {
-    let firstName: String?
-    let lastName: String?
+    let fullName: String
 }

@@ -34,7 +34,7 @@ class EditProfileService {
     }
     
     func presentUserProfile(_ user: User, completion: @escaping (Swift.Result<ProfileViewModel, Error>) -> ()) {
-        let viewModel = ProfileViewModel(firstName: user.firstName, lastName: user.lastName, emailAddress: user.emailAddress)
+        let viewModel = ProfileViewModel(fullName: user.fullName, emailAddress: user.emailAddress)
         completion(.success(viewModel))
     }
     
@@ -51,7 +51,7 @@ class EditProfileService {
         newProfilePicture = image
     }
     
-    func saveProfile(email: String, firstName: String, lastName: String?, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func saveProfile(email: String, fullName: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         firstly {
             userProfileService.updateProfilePicture(newProfilePicture)
         }.get {
@@ -60,7 +60,7 @@ class EditProfileService {
             self.userProfileService.updateEmailAddress(emailAddress: email)
         }.then {
             self.userProfileService.updateUserProfile(
-                UpdateUserProfileRequest(firstName: firstName, lastName: lastName)
+                UpdateUserProfileRequest(fullName: fullName)
             )
         }.done {
             completion(.success(()))
@@ -91,7 +91,6 @@ class EditProfileService {
 }
 
 struct ProfileViewModel {
-    var firstName: String?
-    var lastName: String?
+    var fullName: String
     var emailAddress: String
 }
