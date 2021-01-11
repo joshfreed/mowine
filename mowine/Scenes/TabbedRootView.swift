@@ -7,107 +7,73 @@
 //
 
 import SwiftUI
+import Combine
+
+final class MainTabBarData: ObservableObject {
+    /// This is true when the user has selected the Item with the custom action
+    @Published var isCustomItemSelected: Bool = false
+    
+    /// The index of the currently selected tab
+    @Published var itemSelected: Int {
+        didSet {
+            if itemSelected == customActionItemIndex {
+                previousItem = oldValue
+                itemSelected = oldValue
+                isCustomItemSelected = true
+            }
+        }
+    }
+    
+    /// This is the index of the item that fires a custom action
+    let customActionItemIndex: Int
+    
+    private var previousItem: Int
+
+    init(customItemIndex: Int, initialIndex: Int = 1) {
+        self.customActionItemIndex = customItemIndex
+        self.itemSelected = initialIndex
+        self.previousItem = initialIndex
+    }
+}
 
 struct TabbedRootView: View {
+    @StateObject var model = MainTabBarData(customItemIndex: 2)
+    
     var body: some View {
-        TabView {
-            myCellarView()
+        TabView(selection: $model.itemSelected) {
+            MyCellarView()
                 .tabItem {
                     Image("My Wines Tab").renderingMode(.template)
                     Text("My Cellar")
                 }
+                .tag(1)
             
-            AddWineUIKitView()
+            Text("Nothing")
                 .tabItem {
                     Image("Add Wine Tab").renderingMode(.template)
                     Text("Add Wine")
                 }
+                .tag(2)
             
-            friendsView()
+            FriendsContainerView()
                 .tabItem {
                     Image("Friends Tab").renderingMode(.template)
                     Text("Friends")
                 }
+                .tag(3)
             
-            myAccountView()
+            MyAccountViewContainer()
                 .tabItem {
                     Image("My Account Tab").renderingMode(.template)
                     Text("My Account")
                 }
+                .tag(4)
         }
         .accentColor(Color("Primary"))
-    }
-    
-    private func myCellarView() -> some View {
-        let searchMyCellarQuery = SearchMyCellarQuery(
-            wineRepository: JFContainer.shared.wineRepository,
-            session: JFContainer.shared.session
-        )
-        let getWinesByTypeQuery = GetWinesByTypeQuery(
-            wineRepository: JFContainer.shared.wineRepository,
-            session: JFContainer.shared.session
-        )
-        let viewModel = MyCellarViewModel(
-            wineTypeRepository: JFContainer.shared.wineTypeRepository,
-            thumbnailFetcher: try! JFContainer.shared.container.resolve(),
-            searchMyCellarQuery: searchMyCellarQuery,
-            getWinesByTypeQuery: getWinesByTypeQuery
-        )
-        viewModel.onEditWine = { wineId in
-//            self?.selectedWineId = wineId
-//            self?.performSegue(withIdentifier: "editWine", sender: nil)
+        .sheet(isPresented: $model.isCustomItemSelected) {
+            AddWineUIKitView()
         }
-        return MyCellarView(viewModel: viewModel)
-    }
-    
-    private func friendsView() -> some View {
-        let session = ObservableSession(session: JFContainer.shared.session)
-        
-        let emailLogInViewModel = EmailLogInViewModel(emailAuth: try! JFContainer.shared.container.resolve())
-        let signUpWorker = SignUpWorker(
-            emailAuthService: try! JFContainer.shared.container.resolve(),
-            userRepository: try! JFContainer.shared.container.resolve(),
-            session: try! JFContainer.shared.container.resolve()
-        )
-        let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
-        let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
-        
-        return FriendsContainerView()
-            .environmentObject(session)
-            .environmentObject(emailLogInViewModel)
-            .environmentObject(emailSignUpViewModel)
-            .environmentObject(socialAuthViewModel)
-    }
-    
-    private func myAccountView() -> some View {
-        let session = ObservableSession(session: JFContainer.shared.session)
-        
-        let emailLogInViewModel = EmailLogInViewModel(emailAuth: try! JFContainer.shared.container.resolve())
-        let signUpWorker = SignUpWorker(
-            emailAuthService: try! JFContainer.shared.container.resolve(),
-            userRepository: try! JFContainer.shared.container.resolve(),
-            session: try! JFContainer.shared.container.resolve()
-        )
-        let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
-        let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
-        
-        return MyAccountViewContainer(session: session, viewModel: makeMyAccountViewModel())
-            .environmentObject(emailLogInViewModel)
-            .environmentObject(emailSignUpViewModel)
-            .environmentObject(socialAuthViewModel)
-    }
-    
-    private func makeMyAccountViewModel() -> MyAccountViewModel {
-        let session: Session = try! JFContainer.shared.container.resolve()
-        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: JFContainer.shared.userRepository, session: session)
-        let profilePictureWorker: ProfilePictureWorkerProtocol = try! JFContainer.shared.container.resolve()
-        let signOutCommand = SignOutCommand(session: session)
-        return MyAccountViewModel(
-            getMyAccountQuery: getMyAccountQuery,
-            profilePictureWorker: profilePictureWorker,
-            signOutCommand: signOutCommand
-        )
-    }
+    }      
 }
 
 struct TabbedRootView_Previews: PreviewProvider {
@@ -129,13 +95,17 @@ struct AddWineUIKitView: UIViewControllerRepresentable {
 }
 
 struct EditWineUIKitView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> EditWineViewController {
+    let wineId: String
+    
+    func makeUIViewController(context: Context) -> UINavigationController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "EditWineViewController") as! EditWineViewController
-        return vc
+        let nc = storyboard.instantiateViewController(identifier: "EditWineNavViewController") as! UINavigationController
+        let vc = nc.topViewController as! EditWineViewController
+        vc.wineId = wineId
+        return nc
     }
     
-    func updateUIViewController(_ uiViewController: EditWineViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
         
     }
 }

@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let appView = AppView()
+            .addAppEnvironment()
        
         let rootVC = UIHostingController(rootView: appView)
 
@@ -64,4 +65,55 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
     
+}
+
+extension View {
+    func addAppEnvironment() -> some View {
+        let session = ObservableSession(session: JFContainer.shared.session)                
+        let emailLogInViewModel = EmailLogInViewModel(emailAuth: try! JFContainer.shared.container.resolve())        
+        let signUpWorker = SignUpWorker(
+            emailAuthService: try! JFContainer.shared.container.resolve(),
+            userRepository: try! JFContainer.shared.container.resolve(),
+            session: try! JFContainer.shared.container.resolve()
+        )
+        let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
+        let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
+        
+        return self
+            .environmentObject(makeMyCellarViewModel())
+            .environmentObject(makeMyAccountViewModel())
+            .environmentObject(session)
+            .environmentObject(emailLogInViewModel)
+            .environmentObject(emailSignUpViewModel)
+            .environmentObject(socialAuthViewModel)
+    }
+}
+
+fileprivate func makeMyCellarViewModel() -> MyCellarViewModel {
+    let searchMyCellarQuery = SearchMyCellarQuery(
+        wineRepository: JFContainer.shared.wineRepository,
+        session: JFContainer.shared.session
+    )
+    let getWinesByTypeQuery = GetWinesByTypeQuery(
+        wineRepository: JFContainer.shared.wineRepository,
+        session: JFContainer.shared.session
+    )
+    return MyCellarViewModel(
+        wineTypeRepository: JFContainer.shared.wineTypeRepository,
+        thumbnailFetcher: try! JFContainer.shared.container.resolve(),
+        searchMyCellarQuery: searchMyCellarQuery,
+        getWinesByTypeQuery: getWinesByTypeQuery
+    )
+}
+
+fileprivate func makeMyAccountViewModel() -> MyAccountViewModel {
+    let session: Session = try! JFContainer.shared.container.resolve()
+    let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: JFContainer.shared.userRepository, session: session)
+    let profilePictureWorker: ProfilePictureWorkerProtocol = try! JFContainer.shared.container.resolve()
+    let signOutCommand = SignOutCommand(session: session)
+    return MyAccountViewModel(
+        getMyAccountQuery: getMyAccountQuery,
+        profilePictureWorker: profilePictureWorker,
+        signOutCommand: signOutCommand
+    )
 }

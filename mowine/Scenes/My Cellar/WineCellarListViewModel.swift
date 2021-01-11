@@ -30,7 +30,7 @@ class WineCellarListViewModel: ObservableObject {
         wineType: WineType,
         thumbnailFetcher: WineListThumbnailFetcher
     ) {
-        SwiftyBeaver.debug("init")
+        SwiftyBeaver.debug("init \(wineType.name)")
         self.navigationBarTitle = navigationBarTitle
         self.getWineByTypeQuery = getWineByTypeQuery
         self.wineType = wineType
@@ -38,7 +38,7 @@ class WineCellarListViewModel: ObservableObject {
     }
 
     deinit {
-        SwiftyBeaver.debug("deinit")
+        SwiftyBeaver.debug("deinit \(wineType.name)")
     }
 
     func loadWines() {
@@ -112,4 +112,3 @@ class WineCellarListViewModel: ObservableObject {
         return vm
     }
 }
-

@@ -32,11 +32,11 @@ class MyCellarViewController: UIViewController {
             searchMyCellarQuery: searchMyCellarQuery,
             getWinesByTypeQuery: getWinesByTypeQuery
         )
-        viewModel.onEditWine = { [weak self] wineId in
-            self?.selectedWineId = wineId
-            self?.performSegue(withIdentifier: "editWine", sender: nil)
-        }
-        let rootView = MyCellarView(viewModel: viewModel)
+//        viewModel.onEditWine = { [weak self] wineId in
+//            self?.selectedWineId = wineId
+//            self?.performSegue(withIdentifier: "editWine", sender: nil)
+//        }
+        let rootView = MyCellarView().environmentObject(viewModel)
         return UIHostingController(coder: coder, rootView: rootView)
     }
 

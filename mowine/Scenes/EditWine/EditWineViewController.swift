@@ -72,6 +72,10 @@ class EditWineViewController: FormViewController {
         }
     }
     
+    @IBAction func onCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Display Wine
     
     func displayWine(_ wineViewModel: WineViewModel) {
@@ -149,7 +153,7 @@ class EditWineViewController: FormViewController {
     }
     
     func onSaveSuccess() {
-        performSegue(withIdentifier: "MyCellar", sender: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func onSaveError(_ error: Error) {
