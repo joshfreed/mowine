@@ -22,6 +22,8 @@ protocol Session {
     
     var isAnonymous: Bool { get }
     
+    var currentUserIdPublisher: AnyPublisher<UserId?, Never> { get }
+    
     var authStateDidChange: AnyPublisher<Void, Never> { get }
     
     /// Begins a session. It will attempt to resume a previously authenticated session if a user logged in previously. Otherwise it will start a new anonymous session.

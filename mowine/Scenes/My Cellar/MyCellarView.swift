@@ -13,13 +13,6 @@ struct MyCellarView: View {
     @EnvironmentObject var viewModel: MyCellarViewModel
     @StateObject var searchBar = SearchBar()
 
-    init() {
-        let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
-
     var body: some View {
         NavigationView {
             Group {
@@ -38,7 +31,7 @@ struct MyCellarView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
         .onAppear {
-            self.viewModel.loadWineTypes()
+            viewModel.loadWineTypes()
         }
         .sheet(isPresented: $viewModel.isEditingWine) {
             viewModel.selectedWineId.map {

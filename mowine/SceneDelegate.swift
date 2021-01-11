@@ -24,6 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         JFContainer.shared.configurators.forEach {
             $0.configure()
         }
+        
+        let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
 
         let appView = AppView()
             .addAppEnvironment()
