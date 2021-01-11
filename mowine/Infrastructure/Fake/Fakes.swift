@@ -97,9 +97,14 @@ class FakeSession: Session {
     var isAnonymous = false
     
     var _authStateDidChange = PassthroughSubject<Void, Never>()
+    var _currentUserId = CurrentValueSubject<UserId?, Never>(nil)
     
     var authStateDidChange: AnyPublisher<Void, Never> {
         _authStateDidChange.eraseToAnyPublisher()
+    }
+    
+    var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
+        _currentUserId.eraseToAnyPublisher()
     }
     
     func notLoggedIn() {

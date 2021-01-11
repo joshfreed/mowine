@@ -32,6 +32,7 @@ class MyAccountViewModel: ObservableObject {
     
     deinit {
         SwiftyBeaver.debug("deinit")
+        cancellable = nil
     }
     
     func loadMyAccount() {

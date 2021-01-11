@@ -23,6 +23,7 @@ class GetWinesByTypeQuery {
 
     private var subjects: [String: CurrentValueSubject<[WineDto], Error>] = [:]
     private var listeners: [String: MoWineListenerRegistration] = [:]
+    private var sessionCancellable: AnyCancellable?
 
     init(wineRepository: WineRepository, session: Session) {
         SwiftyBeaver.debug("init")
@@ -33,6 +34,7 @@ class GetWinesByTypeQuery {
     deinit {
         SwiftyBeaver.debug("deinit")
         listeners.values.forEach { $0.remove() }
+        sessionCancellable = nil
     }
 
     func getWinesByType(_ wineType: WineType) -> AnyPublisher<[WineDto], Error> {
@@ -51,10 +53,20 @@ class GetWinesByTypeQuery {
     }
 
     private func subscribeToDomain(wineType: WineType) {
-        guard let userId = session.currentUserId else {
+        sessionCancellable = session.currentUserIdPublisher
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] userId in
+                self?.updateSubscription(userId: userId, wineType: wineType)
+            })
+    }
+    
+    private func updateSubscription(userId: UserId?, wineType: WineType) {
+        listeners[wineType.name]?.remove()
+
+        guard let userId = userId else {
             return
         }
-
+        
         listeners[wineType.name] = wineRepository.getWines(userId: userId, wineType: wineType) { [weak self] result in
             guard let strongSelf = self else { return }
             switch result {
@@ -66,7 +78,7 @@ class GetWinesByTypeQuery {
             }
         }
     }
-
+    
     private func toDto(_ wine: Wine) -> WineDto {
         WineDto(id: wine.id.asString, name: wine.name, rating: Int(wine.rating), type: wine.type.name)
     }

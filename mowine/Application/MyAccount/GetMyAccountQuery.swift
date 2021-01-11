@@ -27,32 +27,39 @@ class GetMyAccountQueryHandler: GetMyAccountQuery {
     
     private var subject = CurrentValueSubject<GetMyAccountQueryResponse?, Error>(nil)
     private var listener: MoWineListenerRegistration?
+    private var sessionCancellable: AnyCancellable?
     
     init(userRepository: UserRepository, session: Session) {
         SwiftyBeaver.debug("init")
+        
         self.userRepository = userRepository
         self.session = session
-
-        NotificationCenter.default.addObserver(self, selector: #selector(userDidLogOut), name: .signedOut, object: nil)
+        
+        startListening()
     }
     
     deinit {
         SwiftyBeaver.debug("deinit")
         listener?.remove()
+        sessionCancellable = nil
     }
     
-    func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse, Error> {
-        if listener == nil, let currentUserId = session.currentUserId {
-            registerListener(currentUserId)
+    private func startListening() {
+        sessionCancellable = session.currentUserIdPublisher
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] userId in
+                self?.updateSubscription(userId)
+            })
+    }
+    
+    private func updateSubscription(_ userId: UserId?) {
+        listener?.remove()
+        
+        guard let userId = userId else {
+            return
         }
         
-        return subject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
-    }
-    
-    private func registerListener(_ currentUserId: UserId) {
-        listener = userRepository.getUserByIdAndListenForUpdates(id: currentUserId) { [weak self] result in
+        listener = userRepository.getUserByIdAndListenForUpdates(id: userId) { [weak self] result in
             guard let strongSelf = self else { return }
             
             SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
@@ -62,7 +69,13 @@ class GetMyAccountQueryHandler: GetMyAccountQuery {
             }
         }
     }
-
+    
+    func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse, Error> {
+        return subject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
+    }
+    
     func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void) {
         SwiftyBeaver.info("getMyAccount w/ completion")
         
@@ -84,12 +97,6 @@ class GetMyAccountQueryHandler: GetMyAccountQuery {
                 completion(.failure(error))
             }
         }
-    }
-    
-    @objc func userDidLogOut() {
-        listener?.remove()
-        listener = nil
-        subject.send(nil)
     }
 }
 

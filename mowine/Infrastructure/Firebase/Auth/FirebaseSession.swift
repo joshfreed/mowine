@@ -14,11 +14,7 @@ import Combine
 
 class FirebaseSession: Session {
     var currentUserId: UserId? {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            SwiftyBeaver.warning("No user logged in")
-            return nil
-        }
-        return UserId(string: uid)
+        _currentUserId.value
     }
     
     var isAnonymous: Bool {
@@ -26,10 +22,19 @@ class FirebaseSession: Session {
     }
     
     var authStateDidChange: AnyPublisher<Void, Never> {
-        _authStateDidChange.eraseToAnyPublisher()
+        _authStateDidChange
+            .print("AuthStateDidChange")
+            .eraseToAnyPublisher()
+    }
+    
+    var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
+        _currentUserId
+            .print("CurrentUserId")
+            .eraseToAnyPublisher()
     }
     
     private var _authStateDidChange = PassthroughSubject<Void, Never>()
+    private var _currentUserId = CurrentValueSubject<UserId?, Never>(nil)
     private var handler: AuthStateDidChangeListenerHandle?
     
     func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
@@ -42,8 +47,10 @@ class FirebaseSession: Session {
         handler = auth.addStateDidChangeListener { [weak self] (auth, user) in
             if let user = user {
                 SwiftyBeaver.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
+                self?._currentUserId.send(UserId(string: user.uid))
             } else {
                 SwiftyBeaver.warning("No user")
+                self?._currentUserId.send(nil)
             }
             
             self?._authStateDidChange.send()

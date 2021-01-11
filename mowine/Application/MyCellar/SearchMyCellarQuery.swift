@@ -26,6 +26,7 @@ class SearchMyCellarQuery {
     private var listener: MoWineListenerRegistration?
     private var wines: [Wine] = []
     private var searchText: String = ""
+    private var sessionCancellable: AnyCancellable?
 
     init(wineRepository: WineRepository, session: Session) {
         SwiftyBeaver.debug("init")
@@ -37,11 +38,24 @@ class SearchMyCellarQuery {
     deinit {
         SwiftyBeaver.debug("deinit")
         listener?.remove()
+        sessionCancellable = nil
     }
 
     private func startListening() {
-        guard let userId = session.currentUserId else { return }
-
+        sessionCancellable = session.currentUserIdPublisher
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] userId in
+                self?.updateSubscription(userId)
+            })
+    }
+    
+    private func updateSubscription(_ userId: UserId?) {
+        listener?.remove()
+        
+        guard let userId = userId else {
+            return
+        }
+        
         listener = wineRepository.getWines(userId: userId) { [weak self] result in
             SwiftyBeaver.debug("getWines was updated")
 
