@@ -11,7 +11,8 @@ import SwiftyBeaver
 import Combine
 
 class MyCellarViewModel: ObservableObject {
-    var onEditWine: (String) -> Void = { _ in }
+    @Published var isEditingWine: Bool = false
+    @Published var selectedWineId: String?
 
     var red: WineType { wineTypes.first { $0.name == "Red" }! }
     var white: WineType { wineTypes.first { $0.name == "White" }! }
@@ -24,6 +25,12 @@ class MyCellarViewModel: ObservableObject {
     private let searchMyCellarQuery: SearchMyCellarQuery
     private let getWinesByTypeQuery: GetWinesByTypeQuery
     private var wineTypes: [WineType] = []
+    private var viewModels: [String: WineCellarListViewModel] = [:]
+    lazy private var myCellarSearchViewModel: MyCellarSearchViewModel = {
+        let vm = MyCellarSearchViewModel(searchMyCellarQuery: searchMyCellarQuery, thumbnailFetcher: thumbnailFetcher)
+        vm.onEditWine = onEditWine
+        return vm
+    }()
 
     init(
         wineTypeRepository: WineTypeRepository,
@@ -58,6 +65,13 @@ class MyCellarViewModel: ObservableObject {
     }
 
     func makeWineCellarListViewModel(title: String, wineType: WineType) -> WineCellarListViewModel {
+        if viewModels[wineType.name] == nil {
+            viewModels[wineType.name] = makeWineCellarListViewModel2(title: title, wineType: wineType)
+        }
+        return viewModels[wineType.name]!
+    }
+    
+    private func makeWineCellarListViewModel2(title: String, wineType: WineType) -> WineCellarListViewModel {
         let vm = WineCellarListViewModel(
             navigationBarTitle: title,
             getWineByTypeQuery: getWinesByTypeQuery,
@@ -69,8 +83,11 @@ class MyCellarViewModel: ObservableObject {
     }
 
     func makeMyCellarSearchViewModel() -> MyCellarSearchViewModel {
-        let vm = MyCellarSearchViewModel(searchMyCellarQuery: searchMyCellarQuery, thumbnailFetcher: thumbnailFetcher)
-        vm.onEditWine = onEditWine
-        return vm
+        return myCellarSearchViewModel
+    }
+    
+    func onEditWine(_ wineId: String) {
+        selectedWineId = wineId
+        isEditingWine = true
     }
 }

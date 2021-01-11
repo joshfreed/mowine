@@ -34,7 +34,9 @@ class MyAccountViewController: UIViewController {
         let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
         let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
         
-        let rootView = MyAccountViewContainer(session: session, viewModel: makeMyAccountViewModel())
+        let rootView = MyAccountViewContainer()
+            .environmentObject(session)
+            .environmentObject(makeMyAccountViewModel())
             .environmentObject(emailLogInViewModel)
             .environmentObject(emailSignUpViewModel)
             .environmentObject(socialAuthViewModel)

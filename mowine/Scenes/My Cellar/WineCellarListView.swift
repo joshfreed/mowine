@@ -11,7 +11,7 @@ import SwiftyBeaver
 
 struct WineCellarListView: View {
     @ObservedObject var viewModel: WineCellarListViewModel
-    @ObservedObject var searchBar: SearchBar = SearchBar()
+    @StateObject var searchBar = SearchBar()
 
     var body: some View {
         WineListView(viewModel: viewModel.makeWineListViewModel(), searchText: $searchBar.text)

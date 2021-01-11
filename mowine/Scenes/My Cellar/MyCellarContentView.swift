@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MyCellarContentView: View {
-    @ObservedObject private(set) var viewModel: MyCellarViewModel
+    private(set) var viewModel: MyCellarViewModel
 
     var body: some View {
         VStack {

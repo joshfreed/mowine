@@ -19,8 +19,8 @@ enum MyAccountSheet: Identifiable {
 }
 
 struct MyAccountViewContainer: View {
-    @ObservedObject var session: ObservableSession
-    var viewModel: MyAccountViewModel
+    @EnvironmentObject var session: ObservableSession
+    @EnvironmentObject var viewModel: MyAccountViewModel
     
     @State private var activeSheet: MyAccountSheet?
     
@@ -29,7 +29,7 @@ struct MyAccountViewContainer: View {
             if session.isAnonymous {
                 AnonymousUserView() { activeSheet = $0 }
             } else {
-                MyAccountView(viewModel: viewModel, activeSheet: $activeSheet)
+                MyAccountView(activeSheet: $activeSheet)
             }
         }
         .sheet(item: $activeSheet) { item in
@@ -43,7 +43,7 @@ struct MyAccountViewContainer: View {
 }
 
 struct MyAccountView: View {
-    @ObservedObject var viewModel: MyAccountViewModel
+    @EnvironmentObject var viewModel: MyAccountViewModel
     @Binding var activeSheet: MyAccountSheet?
     
     @State private var isShowingSignOutConfirmation: Bool = false
@@ -123,6 +123,7 @@ struct ProfilePictureView2: View {
 
 struct MyAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        MyAccountView(viewModel: MyAccountViewModel.make(), activeSheet: .constant(nil))
+        MyAccountView(activeSheet: .constant(nil))
+            .environmentObject(MyAccountViewModel.make())
     }
 }

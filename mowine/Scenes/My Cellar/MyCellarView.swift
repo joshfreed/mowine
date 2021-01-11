@@ -10,11 +10,10 @@ import SwiftUI
 import SwiftyBeaver
 
 struct MyCellarView: View {
-    @ObservedObject private(set) var viewModel: MyCellarViewModel
-    @ObservedObject private(set) var searchBar: SearchBar = SearchBar()
+    @EnvironmentObject var viewModel: MyCellarViewModel
+    @StateObject var searchBar = SearchBar()
 
-    init(viewModel: MyCellarViewModel) {
-        self.viewModel = viewModel
+    init() {
         let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
@@ -36,9 +35,15 @@ struct MyCellarView: View {
                     viewModel.searchCellar(searchText: output)
                 }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
         .onAppear {
             self.viewModel.loadWineTypes()
+        }
+        .sheet(isPresented: $viewModel.isEditingWine) {
+            viewModel.selectedWineId.map {
+                EditWineUIKitView(wineId: $0)
+            }
         }
     }
 }
@@ -54,6 +59,7 @@ fileprivate func makeViewModel() -> MyCellarViewModel {
 
 struct MyCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarView(viewModel: makeViewModel())
+        MyCellarView()
+            .environmentObject(makeViewModel())
     }
 }
