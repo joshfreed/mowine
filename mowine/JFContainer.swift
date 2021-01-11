@@ -112,6 +112,7 @@ extension DependencyContainer {
             container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
             container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
             container.register(.singleton) { MemoryWineRepository() as WineRepository }
+            container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
             
             // Images
             container.register(.singleton) { FakeDataReadService() }
@@ -149,27 +150,5 @@ extension DependencyContainer {
         // Scenes
         FriendsScene.configureDependencies(container)
         container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
-    }
-}
-
-// MARK: Secrets
-
-class Secrets {
-    
-    struct SwiftyBeaver {
-        static var appId: String { return Secrets.valueFor(key: "SwiftyBeaver.appId") }
-        static var appSecret: String { return Secrets.valueFor(key: "SwiftyBeaver.appSecret") }
-        static var encryptionKey: String { return Secrets.valueFor(key: "SwiftyBeaver.encryptionKey") }
-    }
-
-    static func valueFor(key: String) -> String {
-        let filePath = Bundle.main.path(forResource: "Secrets", ofType: "plist")
-        let plist = NSDictionary(contentsOfFile: filePath!)
-        
-        guard let value = plist?.object(forKey: key) as? String else {
-            fatalError("Couldn't find secret for key '\(key)'")
-        }
-        
-        return value
     }
 }

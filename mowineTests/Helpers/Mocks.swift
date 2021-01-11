@@ -129,6 +129,12 @@ class MockUserRepository: UserRepository {
 class MockSession: Session {
     var isAnonymous: Bool = false
     
+    var _currentUserIdPub = CurrentValueSubject<UserId?, Never>(nil)
+    
+    var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
+        _currentUserIdPub.eraseToAnyPublisher()
+    }
+    
     var _authStateDidChange = PassthroughSubject<Void, Never>()
     
     var authStateDidChange: AnyPublisher<Void, Never> {
