@@ -3,73 +3,9 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar View Controller-->
-        <scene sceneID="Tqa-V7-TU0">
-            <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="zZM-Ts-cp2" customClass="TabBarViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Fvf-cp-ikb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" red="0.4039215686" green="0.2274509804" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="VwN-c7-4z2" kind="relationship" relationship="viewControllers" id="gvg-rd-h8U"/>
-                        <segue destination="YDa-gT-T75" kind="relationship" relationship="viewControllers" id="rBs-Ha-H3W"/>
-                        <segue destination="dyD-3X-zvv" kind="relationship" relationship="viewControllers" id="nTw-Cj-kEh"/>
-                        <segue destination="hcW-wD-wIi" kind="relationship" relationship="viewControllers" id="bnX-HG-c4o"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TyA-Lj-dGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="564" y="135"/>
-        </scene>
-        <!--Hosting Controller-->
-        <scene sceneID="4o2-R1-X1p">
-            <objects>
-                <hostingController id="7Au-xc-auY" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pIo-89-KPa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3012" y="714"/>
-        </scene>
-        <!--My Account-->
-        <scene sceneID="qmj-Eb-ORk">
-            <objects>
-                <viewController id="hcW-wD-wIi" customClass="MyAccountViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lgG-v4-0CI"/>
-                        <viewControllerLayoutGuide type="bottom" id="dKa-1J-VhJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cSF-W8-DpM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zco-bh-Q1x">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
-                                <connections>
-                                    <segue destination="7Au-xc-auY" kind="embed" destinationCreationSelector="addSwiftUIView:" id="M5P-Ut-PiS"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="dKa-1J-VhJ" firstAttribute="top" secondItem="Zco-bh-Q1x" secondAttribute="bottom" id="8E2-Zb-50G"/>
-                            <constraint firstItem="Zco-bh-Q1x" firstAttribute="top" secondItem="cSF-W8-DpM" secondAttribute="top" id="eU5-mF-oZK"/>
-                            <constraint firstItem="Zco-bh-Q1x" firstAttribute="leading" secondItem="cSF-W8-DpM" secondAttribute="leading" id="kMW-h5-MlN"/>
-                            <constraint firstAttribute="trailing" secondItem="Zco-bh-Q1x" secondAttribute="trailing" id="zsn-B1-vz8"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="My Account" image="My Account Tab" id="SjS-fa-pzt"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J3p-41-czw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2077" y="713"/>
-        </scene>
         <!--Friends-->
         <scene sceneID="tsU-q8-lcS">
             <objects>
@@ -242,7 +178,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Ijl-Zr-nVW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3CW-vZ-yxq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -261,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-HL-1U3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3888" y="-18"/>
+            <point key="canvasLocation" x="3261" y="344"/>
         </scene>
         <!--Top Wines View Controller-->
         <scene sceneID="rLp-aF-ahb">
@@ -311,7 +247,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9p-Va-lrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7827.5362318840589" y="957.58928571428567"/>
+            <point key="canvasLocation" x="6649" y="1221"/>
         </scene>
         <!--Wine Cellar View Controller-->
         <scene sceneID="e3x-Wp-Hcd">
@@ -417,50 +353,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LYw-I9-hSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5886" y="1925"/>
-        </scene>
-        <!--My Cellar-->
-        <scene sceneID="az3-KA-W0t">
-            <objects>
-                <viewController id="VwN-c7-4z2" customClass="MyCellarViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rx6-Kf-I27"/>
-                        <viewControllerLayoutGuide type="bottom" id="GQG-jf-3Vu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="aEl-m6-Iaq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGk-3k-Zrh">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
-                                <connections>
-                                    <segue destination="sHa-aG-jT3" kind="embed" destinationCreationSelector="addSwiftUIView:" id="enj-eC-wzK"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="EGk-3k-Zrh" firstAttribute="top" secondItem="aEl-m6-Iaq" secondAttribute="top" id="N58-Xg-QjZ"/>
-                            <constraint firstItem="GQG-jf-3Vu" firstAttribute="top" secondItem="EGk-3k-Zrh" secondAttribute="bottom" id="NBY-yP-TZH"/>
-                            <constraint firstItem="EGk-3k-Zrh" firstAttribute="leading" secondItem="aEl-m6-Iaq" secondAttribute="leading" id="bUe-fY-Fkb"/>
-                            <constraint firstAttribute="trailing" secondItem="EGk-3k-Zrh" secondAttribute="trailing" id="egV-LI-5gD"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="My Cellar" image="My Wines Tab" id="K9R-yf-pKE"/>
-                    <connections>
-                        <segue destination="Hb9-bm-aX5" kind="presentation" identifier="editWine" id="lB0-tp-FIV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GZV-AW-LNA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2078" y="-198"/>
-        </scene>
-        <!--Hosting Controller-->
-        <scene sceneID="2kQ-Hp-Unh">
-            <objects>
-                <hostingController id="sHa-aG-jT3" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g1k-Tg-nu9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3091" y="-692"/>
         </scene>
         <!--Wine Details View Controller-->
         <scene sceneID="JeY-mN-rQe">
@@ -617,29 +509,10 @@
             </objects>
             <point key="canvasLocation" x="2078" y="1612"/>
         </scene>
-        <!--Add Wine-->
-        <scene sceneID="Hqc-fS-PGt">
-            <objects>
-                <viewController id="YDa-gT-T75" customClass="AddWineViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TY8-Yo-WSm"/>
-                        <viewControllerLayoutGuide type="bottom" id="NS1-hc-bRN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2F7-9T-ARf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Add Wine" image="Add Wine Tab" id="Zlj-2P-Cs4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8sj-Ir-fgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2079" y="-1068"/>
-        </scene>
-        <!--Splash View Controller-->
+        <!--View Controller-->
         <scene sceneID="Fp1-Zg-mxd">
             <objects>
-                <viewController storyboardIdentifier="SplashViewController" id="KS2-oq-eEB" customClass="SplashViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashViewController" id="KS2-oq-eEB" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eYj-8y-EtB"/>
                         <viewControllerLayoutGuide type="bottom" id="9d3-8h-NWJ"/>
@@ -801,7 +674,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EditWineNavViewController" id="Hb9-bm-aX5" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6O2-p7-Aiu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -816,69 +689,128 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-s7-vpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3094" y="-18"/>
+            <point key="canvasLocation" x="2467" y="344"/>
         </scene>
-        <!--Friends-->
-        <scene sceneID="w0I-VU-rPa">
+        <!--Profile Picture-->
+        <scene sceneID="Bzw-Ig-P8K">
             <objects>
-                <viewController id="dyD-3X-zvv" customClass="FriendsHostingController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfilePictureViewController" id="0be-fn-aCq" customClass="ProfilePictureViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rmj-Fv-uPl"/>
-                        <viewControllerLayoutGuide type="bottom" id="qco-YQ-fbR"/>
+                        <viewControllerLayoutGuide type="top" id="kPV-Kl-PtX"/>
+                        <viewControllerLayoutGuide type="bottom" id="LJW-Y2-ERe"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tT5-T4-Zb9">
+                    <view key="view" contentMode="scaleToFill" id="WwX-1a-S9e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klW-ss-lhz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TxL-mX-OZq">
+                                <rect key="frame" x="16" y="60" width="382" height="638"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ieC-OL-wTE">
+                                        <rect key="frame" x="166" y="0.0" width="50" height="95.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Profile Picture" translatesAutoresizingMaskIntoConstraints="NO" id="j9f-Q2-NMJ">
+                                        <rect key="frame" x="91" y="111.5" width="200" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="9qQ-BP-QWA"/>
+                                            <constraint firstAttribute="width" secondItem="j9f-Q2-NMJ" secondAttribute="height" multiplier="1:1" id="aua-GA-U1O"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3I-gM-MOU">
+                                        <rect key="frame" x="166" y="327.5" width="50" height="95"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="You're Beautiful!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAv-dg-8NQ">
+                                        <rect key="frame" x="89" y="438.5" width="204" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Let friends see your beautiful face by uploading a profile picture." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkc-PQ-ZA9">
+                                        <rect key="frame" x="10.5" y="488" width="361" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yst-s4-R6A">
+                                        <rect key="frame" x="166" y="542.5" width="50" height="95.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="S3I-gM-MOU" firstAttribute="height" secondItem="ieC-OL-wTE" secondAttribute="height" id="37A-dZ-jPK"/>
+                                    <constraint firstItem="yst-s4-R6A" firstAttribute="height" secondItem="ieC-OL-wTE" secondAttribute="height" id="etK-oL-DwG"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Nw-I5-QUE" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="20" y="782" width="374" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="iEk-Wj-O1J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <state key="normal" title="Choose from Library"/>
                                 <connections>
-                                    <segue destination="tGL-iQ-44H" kind="embed" destinationCreationSelector="addSwiftUIView:" id="FUn-bc-zJ3"/>
+                                    <action selector="chooseFromLibrary:" destination="0be-fn-aCq" eventType="touchUpInside" id="OgS-OY-LY5"/>
                                 </connections>
-                            </containerView>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF3-Sj-Ee9" customClass="ButtonPrimary" customModule="mowine" customModuleProvider="target">
+                                <rect key="frame" x="20" y="714" width="374" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="86a-Y1-3ks"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="28"/>
+                                <state key="normal" title="Take Photo"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="0be-fn-aCq" eventType="touchUpInside" id="vJy-xz-UQU"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="klW-ss-lhz" secondAttribute="trailing" id="Dkn-jC-tFp"/>
-                            <constraint firstItem="klW-ss-lhz" firstAttribute="top" secondItem="tT5-T4-Zb9" secondAttribute="top" id="Yy3-NL-fqE"/>
-                            <constraint firstItem="klW-ss-lhz" firstAttribute="leading" secondItem="tT5-T4-Zb9" secondAttribute="leading" id="m6r-zV-hrX"/>
-                            <constraint firstAttribute="bottom" secondItem="klW-ss-lhz" secondAttribute="bottom" id="wiw-af-yty"/>
+                            <constraint firstItem="zF3-Sj-Ee9" firstAttribute="leading" secondItem="WwX-1a-S9e" secondAttribute="leadingMargin" id="EfO-Id-1w4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Nw-I5-QUE" secondAttribute="trailing" id="L2i-25-h0j"/>
+                            <constraint firstItem="8Nw-I5-QUE" firstAttribute="top" secondItem="zF3-Sj-Ee9" secondAttribute="bottom" constant="4" id="Qaz-vu-oKQ"/>
+                            <constraint firstItem="8Nw-I5-QUE" firstAttribute="leading" secondItem="WwX-1a-S9e" secondAttribute="leadingMargin" id="UBy-MJ-4l7"/>
+                            <constraint firstItem="TxL-mX-OZq" firstAttribute="top" secondItem="kPV-Kl-PtX" secondAttribute="bottom" constant="16" id="aSG-yj-eda"/>
+                            <constraint firstItem="zF3-Sj-Ee9" firstAttribute="top" secondItem="TxL-mX-OZq" secondAttribute="bottom" constant="16" id="bll-zr-Ndr"/>
+                            <constraint firstItem="TxL-mX-OZq" firstAttribute="leading" secondItem="WwX-1a-S9e" secondAttribute="leading" constant="16" id="fVk-Vr-4wm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zF3-Sj-Ee9" secondAttribute="trailing" id="iAd-9u-16A"/>
+                            <constraint firstItem="LJW-Y2-ERe" firstAttribute="top" secondItem="8Nw-I5-QUE" secondAttribute="bottom" constant="16" id="uH3-VQ-oZG"/>
+                            <constraint firstAttribute="trailing" secondItem="TxL-mX-OZq" secondAttribute="trailing" constant="16" id="wUg-jh-Z3y"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Friends" image="Friends Tab" id="wsp-jH-s8J"/>
+                    <navigationItem key="navigationItem" title="Profile Picture" id="01L-cb-6Fn">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="CKP-dC-BI5"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="j9f-Q2-NMJ" id="Dnc-mq-Xbv"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f5L-ea-Tcu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RlN-9H-fuf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="1179"/>
-        </scene>
-        <!--Hosting Controller-->
-        <scene sceneID="nn3-E6-iQp">
-            <objects>
-                <hostingController id="tGL-iQ-44H" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JU2-Jm-ycn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2165" y="1138"/>
+            <point key="canvasLocation" x="-399" y="2323"/>
         </scene>
     </scenes>
     <designables>
         <designable name="1J0-PM-mkm">
             <size key="intrinsicContentSize" width="125" height="57"/>
         </designable>
+        <designable name="8Nw-I5-QUE">
+            <size key="intrinsicContentSize" width="239" height="46"/>
+        </designable>
+        <designable name="zF3-Sj-Ee9">
+            <size key="intrinsicContentSize" width="130" height="46"/>
+        </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="vw4-Zm-TUT"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Add Wine Tab" width="23" height="23"/>
         <image name="Friends Tab" width="23" height="23"/>
-        <image name="My Account Tab" width="23" height="23"/>
-        <image name="My Wines Tab" width="23" height="23"/>
         <image name="No Profile Picture" width="400" height="400"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
