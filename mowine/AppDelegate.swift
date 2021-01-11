@@ -33,13 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         console.minLevel = .warning
         #endif
-        SwiftyBeaver.addDestination(console)
-        
-//        let platform = SBPlatformDestination(appID: Secrets.SwiftyBeaver.appId,
-//                                             appSecret: Secrets.SwiftyBeaver.appSecret,
-//                                             encryptionKey: Secrets.SwiftyBeaver.encryptionKey)
-//        
-//        SwiftyBeaver.addDestination(platform)
+        SwiftyBeaver.addDestination(console)        
     }
     
     private func setupUITestingEnvironment() {
