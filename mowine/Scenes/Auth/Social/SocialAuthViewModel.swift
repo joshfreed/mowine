@@ -46,7 +46,8 @@ class SocialAuthViewModel: ObservableObject {
             case .success:
                 onLogIn()
                 NotificationCenter.default.post(name: .signedIn, object: nil)
-            case .failure(let error): self.showError(error)
+            case .failure(let error):
+                self.showError(error)
             }
         }
     }
