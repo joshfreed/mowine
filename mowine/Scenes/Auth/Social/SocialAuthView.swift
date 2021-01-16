@@ -16,6 +16,9 @@ struct SocialAuthView: View {
         SocialLoginProviderView() { type in
             vm.socialSignIn(type: type, onLogIn: onLogIn)
         }
+        .alert(isPresented: $vm.isSignInError) {
+            Alert(title: Text("Login Error"), message: Text(vm.signInError))
+        }
     }
 }
 
