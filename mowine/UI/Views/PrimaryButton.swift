@@ -13,18 +13,15 @@ struct PrimaryButton: View {
     let title: String
     @Binding var isLoading: Bool
     var height: CGFloat = 48
-    
+    var backgroundColor: Color = Color("Primary")
+
     var body: some View {
         Button(action: action) {
             if isLoading {
-                if #available(iOS 14.0, *) {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .frame(height: height)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                } else {
-                    // Fallback on earlier versions
-                }
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .frame(height: height)
+                    .frame(minWidth: 0, maxWidth: .infinity)
             } else {
                 Text(title)
                     .font(.system(size: 21))
@@ -35,13 +32,13 @@ struct PrimaryButton: View {
             }
         }
         .disabled(isLoading)
-        .background(Color("Primary"))
+        .background(backgroundColor)
         .cornerRadius(5)
     }
 }
 
 struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        PrimaryButton(action: {}, title: "Click Me", isLoading: .constant(true))
+        PrimaryButton(action: {}, title: "Click Me", isLoading: .constant(false))
     }
 }
