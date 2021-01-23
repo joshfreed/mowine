@@ -97,6 +97,8 @@
 		535C6A8021EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535C6A7F21EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift */; };
 		535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 535D73FE2569A7160027BC27 /* Preview Assets.xcassets */; };
 		535D74402569BBF60027BC27 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D743F2569BBF60027BC27 /* Utilities.swift */; };
+		535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */; };
+		535DE8CF25BCACB900C6CB7B /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE8CE25BCACB900C6CB7B /* SplashScreen.swift */; };
 		535F66912062FEE20006B26A /* SignUpWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535F668B2062FEE20006B26A /* SignUpWorker.swift */; };
 		535FE73F256F043800543B75 /* SignOutCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535FE73E256F043800543B75 /* SignOutCommand.swift */; };
 		5367A3CF254B0812002A02A5 /* WineListViewModelSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367A3CE254B0812002A02A5 /* WineListViewModelSwiftUI.swift */; };
@@ -370,6 +372,8 @@
 		535C6A7F21EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPhoto2ViewController.swift; sourceTree = "<group>"; };
 		535D73FE2569A7160027BC27 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		535D743F2569BBF60027BC27 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewEnvironment.swift; sourceTree = "<group>"; };
+		535DE8CE25BCACB900C6CB7B /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		535F668B2062FEE20006B26A /* SignUpWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWorker.swift; sourceTree = "<group>"; };
 		535FE73E256F043800543B75 /* SignOutCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutCommand.swift; sourceTree = "<group>"; };
 		5367A3CE254B0812002A02A5 /* WineListViewModelSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListViewModelSwiftUI.swift; sourceTree = "<group>"; };
@@ -1163,6 +1167,7 @@
 			children = (
 				535D73FE2569A7160027BC27 /* Preview Assets.xcassets */,
 				532DB3D2256AC763009A4740 /* DataHelpers.swift */,
+				535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -1321,6 +1326,7 @@
 				532FB07B20584BC70056D1B2 /* UserProfile */,
 				5327BC292062B33F006787E9 /* WineDetails */,
 				536E301A25A2615500608A29 /* AppView.swift */,
+				535DE8CE25BCACB900C6CB7B /* SplashScreen.swift */,
 				536E301E25A2616E00608A29 /* TabbedRootView.swift */,
 			);
 			path = Scenes;
@@ -1895,6 +1901,7 @@
 				538E1041253BB2C500B26619 /* WineCellarListViewModel.swift in Sources */,
 				532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */,
 				539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */,
+				535DE8CF25BCACB900C6CB7B /* SplashScreen.swift in Sources */,
 				5369B7A72575E092003DD672 /* LoadingView.swift in Sources */,
 				5321FB981F0BEE27001D2040 /* SelectTypeRouter.swift in Sources */,
 				534F3405259E3C2D00C03E47 /* AnonymousUserView.swift in Sources */,
@@ -1908,6 +1915,7 @@
 				5367A3CF254B0812002A02A5 /* WineListViewModelSwiftUI.swift in Sources */,
 				5301D5391F72D0F6004A66A9 /* NameWineRouter.swift in Sources */,
 				532FB08620584C2C0056D1B2 /* UserProfileRouter.swift in Sources */,
+				535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */,
 				538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
 				534895FD203CBFB900B7547A /* JFContainer.swift in Sources */,
@@ -2128,7 +2136,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;
@@ -2147,7 +2155,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;

@@ -14,7 +14,7 @@ struct AppView: View {
     var body: some View {
         Group {
             if isPreparing {
-                Text("Splash...")
+                SplashScreen()
             } else {
                 TabbedRootView()
             }
@@ -34,5 +34,6 @@ struct AppView: View {
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
         AppView()
+            .addPreviewEnvironment()
     }
 }
