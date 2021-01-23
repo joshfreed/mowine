@@ -13,7 +13,7 @@ struct SocialLoginProviderView: View {
     let height: CGFloat = 48
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             AppleLoginButton(height: height) { onSelect(.apple) }
             FacebookLoginButton(height: height) { onSelect(.facebook) }
             GoogleLoginButton(height: height) { onSelect(.google) }

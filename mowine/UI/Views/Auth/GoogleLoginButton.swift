@@ -13,17 +13,13 @@ struct GoogleLoginButton: View {
     var action: () -> Void = { }
     
     var body: some View {
-        Button(action: action, label: {
-            Text("Continue with Google")
-                .font(.system(size: 21))
-                .fontWeight(.light)
-                .foregroundColor(.white)
-        })
-        .padding()
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .frame(height: height)
-        .background(Color("Brand Google"))
-        .cornerRadius(5)
+        PrimaryButton(
+            action: action,
+            title: "Continue with Google",
+            isLoading: .constant(false),
+            height: height,
+            backgroundColor: Color("Brand Google")
+        )
     }
 }
 

@@ -13,17 +13,13 @@ struct FacebookLoginButton: View {
     var action: () -> Void = { }
     
     var body: some View {
-        Button(action: action, label: {
-            Text("Continue with Facebook")
-                .font(.system(size: 21))
-                .fontWeight(.light)
-                .foregroundColor(.white)
-        })
-        .padding()
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .frame(height: height)
-        .background(Color("Brand Facebook"))
-        .cornerRadius(5)
+        PrimaryButton(
+            action: action,
+            title: "Continue with Facebook",
+            isLoading: .constant(false),
+            height: height,
+            backgroundColor: Color("Brand Facebook")
+        )
     }
 }
 
