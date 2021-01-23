@@ -13,8 +13,8 @@ target 'mowine' do
   pod 'PromiseKit', '~> 6.8'
   
   # Facebook
-  pod 'FBSDKCoreKit', '~> 5.15.0'
-  pod 'FBSDKLoginKit', '~> 5.15.0'
+  pod 'FBSDKCoreKit', '~> 9.0.0'
+  pod 'FBSDKLoginKit', '~> 9.0.0'
   
   # Google
   pod 'GoogleSignIn', '~> 5.0.0'

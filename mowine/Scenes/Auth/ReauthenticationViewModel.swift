@@ -10,7 +10,6 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import FirebaseAuth
-import FBSDKLoginKit
 import GoogleSignIn
 
 class ReauthenticationViewModel: ObservableObject {
