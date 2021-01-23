@@ -11,6 +11,8 @@ import SwiftUI
 struct LogInView: View {
     var onLogIn: () -> Void
     
+    @State var isLoading: Bool = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -21,7 +23,7 @@ struct LogInView: View {
                             .foregroundColor(Color("Primary Light"))
                     }
                     FancyDivider(text: "OR")
-                    SocialAuthView(onLogIn: onLogIn)
+                    SocialAuthView(isSigningIn: $isLoading, onLogIn: onLogIn)
                     Spacer()
                 }
                 .padding()
@@ -29,6 +31,7 @@ struct LogInView: View {
             }
         }
         .accentColor(.mwSecondary)
+        .loading(isShowing: isLoading, text: "Signing in...")
     }
 }
 

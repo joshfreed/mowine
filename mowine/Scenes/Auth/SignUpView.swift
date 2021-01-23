@@ -11,19 +11,22 @@ import SwiftUI
 struct SignUpView: View {
     var onSignUp: () -> Void
     
+    @State var isLoading: Bool = false
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 32) {
                     EmailSignUpView(onSignUp: onSignUp)
                     FancyDivider(text: "OR")
-                    SocialAuthView(onLogIn: onSignUp)
+                    SocialAuthView(isSigningIn: $isLoading, onLogIn: onSignUp)
                     Spacer()
                 }
                 .padding()
                 .navigationTitle("Sign Up")
             }
         }
+        .loading(isShowing: isLoading, text: "Signing in...")
     }
 }
 
