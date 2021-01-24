@@ -425,12 +425,11 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 9.0.0)
   - Firebase/Analytics (~> 7.0.0)
   - Firebase/Auth (~> 7.0.0)
-  - Firebase/Core
   - Firebase/Crashlytics (~> 7.0.0)
   - Firebase/Firestore (~> 7.0.0)
   - Firebase/Performance (~> 7.0.0)
   - Firebase/Storage (~> 7.0.0)
-  - GoogleSignIn
+  - GoogleSignIn (~> 5.0.0)
   - Nimble
   - PromiseKit (~> 6.8)
   - PureLayout (~> 3.1.4)
@@ -515,6 +514,6 @@ SPEC CHECKSUMS:
   PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
 
-PODFILE CHECKSUM: 757b8e81161b58381f93439b133a375dfaa61d06
+PODFILE CHECKSUM: 4c61e520e35291bacabf88804e1deec6d381aa90
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

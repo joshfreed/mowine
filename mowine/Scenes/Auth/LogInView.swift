@@ -28,6 +28,7 @@ struct LogInView: View {
                 }
                 .padding()
                 .navigationTitle("Log In")
+                .navigationBarItems(leading: Button("Cancel") { onLogIn() })
             }
         }
         .accentColor(.mwSecondary)

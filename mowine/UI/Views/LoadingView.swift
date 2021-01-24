@@ -17,14 +17,10 @@ struct LoadingOverlayView: View {
             Color.black.opacity(0.4)
             VStack {
                 Text(text)
-                if #available(iOS 14.0, *) {
-                    ProgressView()
-                } else {
-                    // Fallback on earlier versions
-                }
+                ProgressView()
             }
                 .padding(16)
-                .background(Color.white)
+                .background(Color(UIColor.systemBackground))
                 .cornerRadius(8)
 
         }
@@ -43,5 +39,6 @@ extension View {
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
         LoadingOverlayView(isShowing: true, text: "Loading...")
+            
     }
 }

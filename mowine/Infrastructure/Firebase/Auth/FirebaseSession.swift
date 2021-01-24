@@ -38,6 +38,8 @@ class FirebaseSession: Session {
     private var handler: AuthStateDidChangeListenerHandle?
     
     func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+        SwiftyBeaver.info("Starting session...")
+        
         let auth = Auth.auth()
 
         if let handler = handler {

@@ -24,8 +24,10 @@ struct SignUpView: View {
                 }
                 .padding()
                 .navigationTitle("Sign Up")
+                .navigationBarItems(leading: Button("Cancel") { onSignUp() })
             }
         }
+        .accentColor(Color("Primary Light"))
         .loading(isShowing: isLoading, text: "Signing in...")
     }
 }

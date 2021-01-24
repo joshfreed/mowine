@@ -20,12 +20,13 @@ class EmailSignUpViewModel: ObservableObject {
     }
     
     func signUp(fullName: String, emailAddress: String, password: String, onSignUp: @escaping () -> Void) {
-        isLoading = true
         errorMessage = ""
         
         guard !fullName.isEmpty, !emailAddress.isEmpty, !password.isEmpty else {
             return
         }
+
+        isLoading = true        
         
         worker.signUp(emailAddress: emailAddress, password: password, fullName: fullName) { [weak self] result in
             self?.isLoading = false
