@@ -21,6 +21,9 @@ enum MyAccountSheet: Identifiable {
 struct MyAccountViewContainer: View {
     @EnvironmentObject var session: ObservableSession
     @EnvironmentObject var viewModel: MyAccountViewModel
+    @EnvironmentObject var emailLogInViewModel: EmailLogInViewModel
+    @EnvironmentObject var emailSignUpViewModel: EmailSignUpViewModel
+    @EnvironmentObject var socialAuthViewModel: SocialAuthViewModel
     
     @State private var activeSheet: MyAccountSheet?
     
@@ -35,7 +38,11 @@ struct MyAccountViewContainer: View {
         .sheet(item: $activeSheet) { item in
             switch item {
             case .logIn: LogInView() { activeSheet = nil }
+                .environmentObject(emailLogInViewModel)
+                .environmentObject(socialAuthViewModel)
             case .signUp: SignUpView() { activeSheet = nil }
+                .environmentObject(emailSignUpViewModel)
+                .environmentObject(socialAuthViewModel)
             case .editProfile: EditProfileView(vm: viewModel.editProfileViewModel { activeSheet = nil })
             }
         }

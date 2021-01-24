@@ -22,6 +22,8 @@ struct EmailSignUpView: View {
                 .padding(.bottom, 4)
             
             TextField("", text: $emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 .fancyField(title: "Email Address", text: $emailAddress)
                 .padding(.bottom, 4)
             

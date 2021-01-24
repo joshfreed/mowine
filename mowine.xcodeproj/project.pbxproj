@@ -135,6 +135,10 @@
 		537E24092246D5B300DFFA4B /* SocialSignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537E24082246D5B300DFFA4B /* SocialSignInWorker.swift */; };
 		5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35421BC49F700221219 /* FirestoreUserRepository.swift */; };
 		5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35621BC759300221219 /* FirebaseSocialAuth.swift */; };
+		5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCD25BE2B9600B8A8F5 /* storage.rules */; };
+		5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCE25BE2B9600B8A8F5 /* firebase.json */; };
+		5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */; };
+		5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABD025BE2B9600B8A8F5 /* firestore.rules */; };
 		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
 		538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B41EE476A100CF1330 /* TestDoubles.swift */; };
 		538B239D21BB22BD002F278A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 538B239C21BB22BD002F278A /* GoogleService-Info.plist */; };
@@ -411,6 +415,10 @@
 		537E24082246D5B300DFFA4B /* SocialSignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInWorker.swift; sourceTree = "<group>"; };
 		5380F35421BC49F700221219 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		5380F35621BC759300221219 /* FirebaseSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSocialAuth.swift; sourceTree = "<group>"; };
+		5386ABCD25BE2B9600B8A8F5 /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = storage.rules; sourceTree = SOURCE_ROOT; };
+		5386ABCE25BE2B9600B8A8F5 /* firebase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase.json; sourceTree = SOURCE_ROOT; };
+		5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firestore.indexes.json; sourceTree = SOURCE_ROOT; };
+		5386ABD025BE2B9600B8A8F5 /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = firestore.rules; sourceTree = SOURCE_ROOT; };
 		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorkerTests.swift; sourceTree = "<group>"; };
 		538995B41EE476A100CF1330 /* TestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
 		538B239C21BB22BD002F278A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -725,6 +733,7 @@
 		533597AC21BC3ED600CEFD45 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				5386ABCC25BE2B5600B8A8F5 /* Config */,
 				532AD8A821C7207400A93BDA /* Storage */,
 				5380F35321BC49E000221219 /* Firestore */,
 				533597AF21BC439E00CEFD45 /* Auth */,
@@ -967,6 +976,17 @@
 				53C91A1E255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift */,
 			);
 			path = Firestore;
+			sourceTree = "<group>";
+		};
+		5386ABCC25BE2B5600B8A8F5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5386ABCE25BE2B9600B8A8F5 /* firebase.json */,
+				5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */,
+				5386ABD025BE2B9600B8A8F5 /* firestore.rules */,
+				5386ABCD25BE2B9600B8A8F5 /* storage.rules */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		538995AA1EE475BB00CF1330 /* Scenes */ = {
@@ -1507,6 +1527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53D1E2F62059B3AB00A22476 /* WineCell.xib in Resources */,
+				5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */,
 				53D8EDD41E4186A300696FAE /* Podfile in Resources */,
 				538F29431F72EB1F006EEDB1 /* RatingCell.xib in Resources */,
 				5327BC392062BB41006787E9 /* WineDetailsHeader.xib in Resources */,
@@ -1517,8 +1538,11 @@
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				53ED1F8F204F359C00C129BC /* UserTableViewCell.xib in Resources */,
 				5320BF371E42B0BB00F2405E /* PhotoCell.xib in Resources */,
+				5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */,
+				5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */,
 				539717C422B6BFC200EFA97F /* ProfilePictureView.xib in Resources */,
 				538B239D21BB22BD002F278A /* GoogleService-Info.plist in Resources */,
+				5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1676,20 +1700,20 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore-framework/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics-framework/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations-framework/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport-framework/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities-ac14cd06/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC-framework/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
@@ -1697,7 +1721,7 @@
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb-framework/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -2136,7 +2160,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;
@@ -2155,7 +2179,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;

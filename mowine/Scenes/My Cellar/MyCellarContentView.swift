@@ -16,34 +16,46 @@ struct MyCellarContentView: View {
             Spacer()
             HStack {
                 Spacer()
+                
                 NavigationLink(destination: makeView(title: "Red Wines", wineType: viewModel.red)) {
-                    WineTypeMenuButton(name: "Red", icon: "Red Wine Button")
+                    WineTypeMenuButton(name: "Reds", icon: "Red Wine Button")
                 }
-
+                .accessibility(identifier: "Show My Red Wines")
+                
                 Spacer()
+                
                 NavigationLink(destination: makeView(title: "White Wines", wineType: viewModel.white)) {
-                    WineTypeMenuButton(name: "White", icon: "White Wine Button")
+                    WineTypeMenuButton(name: "Whites", icon: "White Wine Button")
                 }
+                .accessibility(identifier: "Show My White Wines")
+                
                 Spacer()
             }
             Spacer()
             HStack {
                 Spacer()
+                
                 NavigationLink(destination: makeView(title: "Rose", wineType: viewModel.rose)) {
-                    WineTypeMenuButton(name: "Rose", icon: "Rose Button")
+                    WineTypeMenuButton(name: "Rosè", icon: "Rose Button")
                 }
+                .accessibility(identifier: "Show My Rosès")
+                
                 Spacer()
+                
                 NavigationLink(destination: makeView(title: "Bubbly", wineType: viewModel.bubbly)) {
                     WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
                 }
+                .accessibility(identifier: "Show My Bubblies")
+                
                 Spacer()
             }
             Spacer()
             NavigationLink(destination: makeView(title: "Other Wines", wineType: viewModel.other)) {
-                Text("Other")
+                Text("Others")
                     .font(.system(size: 37))
                     .foregroundColor(Color(UIColor.mwSecondary))
                     .padding(.bottom, 32)
+                    .accessibility(identifier: "Show My Other Wines")
             }
 
         }

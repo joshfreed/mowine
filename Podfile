@@ -36,6 +36,5 @@ end
 
 target 'mowineUITests' do
     # Pods for testing
-    pod 'Firebase/Core'
     pod 'Nimble'
 end

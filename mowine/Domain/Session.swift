@@ -64,9 +64,20 @@ class ObservableSession: ObservableObject {
         self.session = session
         self.isAnonymous = session.isAnonymous
         
-        cancellable = self.session.authStateDidChange.eraseToAnyPublisher().sink { [weak self] _ in
-            guard let strongSelf = self else { return }
+        observe()
+    }
+    
+    private func observe() {
+        let publisher1 = session.authStateDidChange.map { _ in true }
+        let publisher2 = NotificationCenter.default.publisher(for: .signedIn).map { _ in true }
+        
+        cancellable = publisher1.merge(with: publisher2).sink { [weak self] _ in
+            guard let strongSelf = self else {
+                SwiftyBeaver.warning("authStateDidChange weak self is nil")
+                return
+            }
             strongSelf.isAnonymous = strongSelf.session.isAnonymous
+            SwiftyBeaver.info("authStateDidChange isAnonymous: \(strongSelf.isAnonymous)")
         }
     }
     

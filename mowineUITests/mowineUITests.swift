@@ -23,15 +23,9 @@ class mowineUITests: XCTestCase {
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-                
-        let users: [[String: Any]] = [
-            ["id": "AAA", "emailAddress": "test@test.com", "fullName": "Jeff Jones"]
-        ]
-        
+
         let app = XCUIApplication()
         app.launchArguments.append("UI_TESTING")
-        app.launchEnvironment["users"] = toString(users)
-        app.launchEnvironment["currentUserId"] = "AAA"
         app.launch()
     }
     
@@ -48,6 +42,8 @@ class mowineUITests: XCTestCase {
         
         app.tabBars["Tab Bar"].buttons["Add Wine"].tap()
         
+        _ = app.buttons["Red"].waitForExistence(timeout: 3)
+        XCTAssertTrue(app.buttons["Red"].exists)
         app.buttons["Red"].tap()
         
         let elementsQuery = app.scrollViews.otherElements
@@ -70,7 +66,7 @@ class mowineUITests: XCTestCase {
         expect(exists).to(beTrue())
         
         // Make sure the new wine is in there
-        app.buttons["Red"].tap()
+        app.buttons["Show My Red Wines"].tap()
         let exists2 = app.navigationBars["Red Wines"].waitForExistence(timeout: 5)
         expect(exists2).to(beTrue())
         XCTAssertTrue(app.tables.staticTexts["My Test Wine"].exists)

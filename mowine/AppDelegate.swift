@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupUITestingEnvironment()
         return true
     }
-    
+
     private func setupSwiftyBeaverLogging() {
         let console = ConsoleDestination()
         #if DEBUG
@@ -44,24 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         JFContainer.configureForUITesting()
         
-        let userRepository: FakeUserRepository = try! JFContainer.shared.container.resolve()
-        let session: FakeSession = try! JFContainer.shared.container.resolve()
-        
-        if let usersString = ProcessInfo.processInfo.environment["users"] {
-            let data = usersString.data(using: .utf8)!
-            let userObjects = try! JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
-            let users: [User] = userObjects.map {
-                var user = User(id: UserId(string: $0["id"] as! String), emailAddress: $0["emailAddress"] as! String)
-                user.fullName = $0["fullName"] as? String ?? ""
-                return user
-            }
-            
-            userRepository.setUsers(users)
-        }
-        
-        if let currentUserId = ProcessInfo.processInfo.environment["currentUserId"], let user = userRepository.getById(UserId(string: currentUserId)) {
-            session.setUser(user: user)
-        }
+//        let userRepository: FakeUserRepository = try! JFContainer.shared.container.resolve()
+//        let session: FakeSession = try! JFContainer.shared.container.resolve()
+//        
+//        if let usersString = ProcessInfo.processInfo.environment["users"] {
+//            let data = usersString.data(using: .utf8)!
+//            let userObjects = try! JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
+//            let users: [User] = userObjects.map {
+//                var user = User(id: UserId(string: $0["id"] as! String), emailAddress: $0["emailAddress"] as! String)
+//                user.fullName = $0["fullName"] as? String ?? ""
+//                return user
+//            }
+//            
+//            userRepository.setUsers(users)
+//        }
+//        
+//        if let currentUserId = ProcessInfo.processInfo.environment["currentUserId"], let user = userRepository.getById(UserId(string: currentUserId)) {
+//            session.setUser(user: user)
+//        }
     }
   
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {

@@ -35,26 +35,31 @@ class FirebaseEmailAuth: EmailAuthenticationService {
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        Auth.auth().createUser(withEmail: emailAddress, password: password) { (authResult, error) in
-            switch error {
-            case .some(let error as NSError) where error.code == AuthErrorCode.emailAlreadyInUse.rawValue:
-                completion(.failure(EmailAuthenticationErrors.emailAddressAlreadyInUse))
-            case .some(let error as NSError) where error.code == AuthErrorCode.weakPassword.rawValue:
-                let reason = error.userInfo[NSLocalizedFailureReasonErrorKey] as? String
-                completion(.failure(EmailAuthenticationErrors.invalidPassword(message: reason)))
-            case .some(let error):
-                SwiftyBeaver.error("\(error)")
-                SwiftyBeaver.error(error.localizedDescription)
-                completion(.failure(error))
-            case .none:
-                if let user = authResult?.user {
-                    SwiftyBeaver.info("User signed up with firebase")
-                    SwiftyBeaver.debug(user.uid)
-                    completion(.success(()))
+        guard let user = Auth.auth().currentUser, user.isAnonymous else {
+            fatalError("Attempted to sign up but there is not an anonymous user logged in.")
+        }
+        
+        let credential = EmailAuthProvider.credential(withEmail: emailAddress, password: password)
+        
+        user.link(with: credential) { (result, error) in
+            if let error = error {
+                let nserror = error as NSError
+                let code = nserror.code
+                if code == AuthErrorCode.emailAlreadyInUse.rawValue {
+                    completion(.failure(EmailAuthenticationErrors.emailAddressAlreadyInUse))
+                } else if code == AuthErrorCode.weakPassword.rawValue {
+                    let reason = nserror.userInfo[NSLocalizedFailureReasonErrorKey] as? String
+                    completion(.failure(EmailAuthenticationErrors.invalidPassword(message: reason)))
                 } else {
-                    fatalError("No error or user set in auth createUser(withEmail:password:)")
+                    SwiftyBeaver.error("\(error)")
+                    SwiftyBeaver.error(error.localizedDescription)
+                    completion(.failure(error))
                 }
+            } else {
+                SwiftyBeaver.info("User signed up with firebase")
+                SwiftyBeaver.debug(user.uid)
+                completion(.success(()))
             }
         }
-    }
+    }    
 }

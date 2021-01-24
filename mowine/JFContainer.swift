@@ -31,14 +31,16 @@ class JFContainer {
         let container = DependencyContainer.configure()
         DependencyContainer.uiContainers = [container]
         let configurators: [Configurator] = [
-            FirebaseConfigurator()
+            FirebaseConfigurator(useEmulator: false)
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
     
     static func configureForUITesting() {
         let container = DependencyContainer.configureForUITesting()
-        let configurators: [Configurator] = []
+        let configurators: [Configurator] = [
+            FirebaseConfigurator(useEmulator: true)
+        ]
         shared = JFContainer(container: container, configurators: configurators)
     }
     
@@ -80,13 +82,16 @@ class JFContainer {
 extension DependencyContainer {
     static func configure() -> DependencyContainer {
         DependencyContainer { container in
+            // Firebase Auth
             container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
             container.register(.singleton) { FirebaseSession() as Session }
-            container.register(.singleton) { FirestoreUserRepository() as UserRepository }
-            container.register(.singleton) { FirestoreWineRepository() as WineRepository }
-            container.register(.singleton) { FirebaseStorageService() }
             container.register(.singleton) { FirebaseCredentialMegaFactory() }
             container.register(.singleton) { FirebaseSocialAuth(credentialFactory: $0) as SocialAuthService }
+            // Firebase Firestore
+            container.register(.singleton) { FirestoreUserRepository() as UserRepository }
+            container.register(.singleton) { FirestoreWineRepository() as WineRepository }
+            // Firebase Storage
+            container.register(.singleton) { FirebaseStorageService() }
             
             // Images
             container.register(.singleton) {
@@ -108,11 +113,19 @@ extension DependencyContainer {
     
     static func configureForUITesting() -> DependencyContainer {
         DependencyContainer { container in
-            container.register(.singleton) { FakeSession() }.implements(Session.self)
-            container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
-            container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
-            container.register(.singleton) { MemoryWineRepository() as WineRepository }
-            container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
+//            container.register(.singleton) { FakeSession() }.implements(Session.self)
+//            container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
+//            container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
+//            container.register(.singleton) { MemoryWineRepository() as WineRepository }
+//            container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
+            // Firebase Auth
+            container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
+            container.register(.singleton) { FirebaseSession() as Session }
+            container.register(.singleton) { FirebaseCredentialMegaFactory() }
+            container.register(.singleton) { FirebaseSocialAuth(credentialFactory: $0) as SocialAuthService }
+            // Firebase Firestore
+            container.register(.singleton) { FirestoreUserRepository() as UserRepository }
+            container.register(.singleton) { FirestoreWineRepository() as WineRepository }
             
             // Images
             container.register(.singleton) { FakeDataReadService() }
