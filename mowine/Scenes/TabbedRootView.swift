@@ -79,6 +79,7 @@ struct TabbedRootView: View {
 struct TabbedRootView_Previews: PreviewProvider {
     static var previews: some View {
         TabbedRootView()
+            .addPreviewEnvironment()
     }
 }
 

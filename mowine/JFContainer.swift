@@ -8,8 +8,9 @@
 
 import Foundation
 import Dip
+import Combine
 
-class JFContainer {
+class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!
     
     let container: DependencyContainer
@@ -42,6 +43,16 @@ class JFContainer {
             FirebaseConfigurator(useEmulator: true)
         ]
         shared = JFContainer(container: container, configurators: configurators)
+    }
+    
+    static func configureForPreviews() {
+        let container = DependencyContainer.configureForPreviews()
+        let configurators: [Configurator] = []
+        shared = JFContainer(container: container, configurators: configurators)
+    }
+    
+    func resolve<T>() throws -> T {
+        try container.resolve()
     }
     
     func firstTimeWorker() -> FirstTimeWorker {
@@ -82,14 +93,8 @@ class JFContainer {
 extension DependencyContainer {
     static func configure() -> DependencyContainer {
         DependencyContainer { container in
-            // Firebase Auth
-            container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
-            container.register(.singleton) { FirebaseSession() as Session }
-            container.register(.singleton) { FirebaseCredentialMegaFactory() }
-            container.register(.singleton) { FirebaseSocialAuth(credentialFactory: $0) as SocialAuthService }
-            // Firebase Firestore
-            container.register(.singleton) { FirestoreUserRepository() as UserRepository }
-            container.register(.singleton) { FirestoreWineRepository() as WineRepository }
+            addFirebaseServices(container: container)
+            
             // Firebase Storage
             container.register(.singleton) { FirebaseStorageService() }
             
@@ -113,38 +118,52 @@ extension DependencyContainer {
     
     static func configureForUITesting() -> DependencyContainer {
         DependencyContainer { container in
-//            container.register(.singleton) { FakeSession() }.implements(Session.self)
-//            container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
-//            container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
-//            container.register(.singleton) { MemoryWineRepository() as WineRepository }
-//            container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
-            // Firebase Auth
-            container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
-            container.register(.singleton) { FirebaseSession() as Session }
-            container.register(.singleton) { FirebaseCredentialMegaFactory() }
-            container.register(.singleton) { FirebaseSocialAuth(credentialFactory: $0) as SocialAuthService }
-            // Firebase Firestore
-            container.register(.singleton) { FirestoreUserRepository() as UserRepository }
-            container.register(.singleton) { FirestoreWineRepository() as WineRepository }
-            
-            // Images
-            container.register(.singleton) { FakeDataReadService() }
-            container.register(.singleton) { FakeDataWriteService() }
-            container.register(.singleton) {
-                WineImageWorker<DataService<FakeDataReadService, FakeDataWriteService>>(session: $0, wineRepository: $1, imageService: $2)
-            }
-                .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
-
-            container.register(.singleton) { DataService<UrlSessionService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
-            container.register(.singleton) { DataService<FakeDataReadService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
-            container.register(.singleton) {
-                ProfilePictureWorker<DataService<UrlSessionService, FakeDataWriteService>>(session: $0, profilePictureService: $1, userRepository: $2)
-            }
-                .implements(ProfilePictureWorkerProtocol.self)
-            
-            // Common
-            DependencyContainer.configureCommonServices(container: container)
+            addFirebaseServices(container: container)
+            addFakeImageServices(container: container)
+            configureCommonServices(container: container)
         }
+    }
+    
+    static func configureForPreviews() -> DependencyContainer {
+        DependencyContainer { container in
+            container.register(.singleton) { FakeSession() }.implements(Session.self)
+            container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
+            container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
+            container.register(.singleton) { MemoryWineRepository() as WineRepository }
+            container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
+            
+            addFakeImageServices(container: container)
+            configureCommonServices(container: container)
+        }
+    }
+    
+    static func addFirebaseServices(container: DependencyContainer) {
+        // Firebase Auth
+        container.register(.singleton) { FirebaseEmailAuth() as EmailAuthenticationService }
+        container.register(.singleton) { FirebaseSession() as Session }
+        container.register(.singleton) { FirebaseCredentialMegaFactory() }
+        container.register(.singleton) { FirebaseSocialAuth(credentialFactory: $0) as SocialAuthService }
+        
+        // Firebase Firestore
+        container.register(.singleton) { FirestoreUserRepository() as UserRepository }
+        container.register(.singleton) { FirestoreWineRepository() as WineRepository }
+    }
+    
+    static func addFakeImageServices(container: DependencyContainer) {
+        // Images
+        container.register(.singleton) { FakeDataReadService() }
+        container.register(.singleton) { FakeDataWriteService() }
+        container.register(.singleton) {
+            WineImageWorker<DataService<FakeDataReadService, FakeDataWriteService>>(session: $0, wineRepository: $1, imageService: $2)
+        }
+            .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
+
+        container.register(.singleton) { DataService<UrlSessionService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
+        container.register(.singleton) { DataService<FakeDataReadService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
+        container.register(.singleton) {
+            ProfilePictureWorker<DataService<UrlSessionService, FakeDataWriteService>>(session: $0, profilePictureService: $1, userRepository: $2)
+        }
+            .implements(ProfilePictureWorkerProtocol.self)
     }
     
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both prod and UI testing.
@@ -163,5 +182,6 @@ extension DependencyContainer {
         // Scenes
         FriendsScene.configureDependencies(container)
         container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
+        container.register(.singleton) { EditWineServiceImpl(wineRepository: $0, wineTypeRepository: $1, imageWorker: $2) }.implements(EditWineService.self)
     }
 }

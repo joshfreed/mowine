@@ -99,6 +99,7 @@ extension View {
         let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
         
         return self
+            .environmentObject(JFContainer.shared)
             .environmentObject(makeMyCellarViewModel())
             .environmentObject(makeMyAccountViewModel())
             .environmentObject(session)

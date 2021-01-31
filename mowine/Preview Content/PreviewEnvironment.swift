@@ -15,7 +15,7 @@ extension View {
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
-        JFContainer.configureForUITesting()
+        JFContainer.configureForPreviews()
         
         return addAppEnvironment()
     }

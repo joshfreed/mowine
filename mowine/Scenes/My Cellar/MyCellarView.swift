@@ -11,6 +11,7 @@ import SwiftyBeaver
 
 struct MyCellarView: View {
     @EnvironmentObject var viewModel: MyCellarViewModel
+    @EnvironmentObject var container: JFContainer
     @StateObject var searchBar = SearchBar()
 
     var body: some View {
@@ -35,7 +36,7 @@ struct MyCellarView: View {
         }
         .sheet(isPresented: $viewModel.isEditingWine) {
             viewModel.selectedWineId.map {
-                EditWineUIKitView(wineId: $0)
+                EditWineView(wineId: $0, vm: EditWineViewModel(editWineService: try! container.resolve()))
             }
         }
     }
