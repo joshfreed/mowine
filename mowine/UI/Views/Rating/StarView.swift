@@ -10,8 +10,9 @@ import SwiftUI
 
 struct Star: Shape {
     // store how many corners the star has, and how smooth/pointed it is
-    let corners: Int
-    let smoothness: CGFloat
+    // the default values for these two properties creates a normal 5-pointed star
+    var corners: Int = 5
+    var smoothness: CGFloat = 0.38
 
     func path(in rect: CGRect) -> Path {
         // ensure we have at least two corners, otherwise send back an empty path
@@ -90,7 +91,7 @@ struct Star: Shape {
 
 struct StarView_Previews: PreviewProvider {
     static var previews: some View {
-        Star(corners: 5, smoothness: 0.40)
+        Star()
 //            .fill(Color.red)
             .stroke(Color.blue)
             .previewLayout(.fixed(width: 100, height: 100))
