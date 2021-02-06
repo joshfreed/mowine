@@ -17,12 +17,17 @@ class EditWineViewModel: ObservableObject {
     
     let editWineService: EditWineService
     let form = EditWineFormModel()
-    
+    private var onDelete: () -> Void
     private var wineId: String?
     
-    init(editWineService: EditWineService) {
+    init(editWineService: EditWineService, onDelete: @escaping () -> Void = { }) {
         SwiftyBeaver.debug("init")
         self.editWineService = editWineService
+        self.onDelete = onDelete
+        
+        self.form.onDelete = { [weak self] in
+            self?.deleteWine()
+        }
     }
     
     deinit {
@@ -79,6 +84,17 @@ class EditWineViewModel: ObservableObject {
             
             switch result {
             case .success: completion()
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
+            }
+        }
+    }
+    
+    func deleteWine() {
+        editWineService.deleteWine(wineId: wineId!) { [weak self] result in
+            switch result {
+            case .success: self?.onDelete()
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)

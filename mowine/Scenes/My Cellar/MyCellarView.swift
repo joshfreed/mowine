@@ -36,7 +36,7 @@ struct MyCellarView: View {
         }
         .sheet(isPresented: $viewModel.isEditingWine) {
             viewModel.selectedWineId.map {
-                EditWineView(wineId: $0, vm: EditWineViewModel(editWineService: try! container.resolve()))
+                EditWineView(wineId: $0, vm: EditWineViewModel(editWineService: try! container.resolve()) { viewModel.isEditingWine = false })
             }
         }
     }
