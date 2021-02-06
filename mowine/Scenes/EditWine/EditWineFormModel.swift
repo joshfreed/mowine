@@ -18,6 +18,9 @@ class EditWineFormModel: ObservableObject {
     @Published var price: String = ""
     @Published var notes: String = ""
     @Published var pairings: [String] = []
+    @Published var showConfirmDelete = false
+    
+    var onDelete: () -> Void = { }
     
     var type: WineType? {
         types.first { $0.id == selectedTypeId }
@@ -46,5 +49,13 @@ class EditWineFormModel: ObservableObject {
         price = wine.price ?? ""
         notes = wine.notes ?? ""
         pairings = wine.pairings
+    }
+    
+    func confirmDeleteWine() {
+        showConfirmDelete = true
+    }
+    
+    func deleteWine() {
+        onDelete()
     }
 }
