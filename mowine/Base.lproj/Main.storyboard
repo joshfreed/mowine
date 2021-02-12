@@ -169,36 +169,6 @@
             </objects>
             <point key="canvasLocation" x="3785" y="1609"/>
         </scene>
-        <!--Edit Wine-->
-        <scene sceneID="MJw-el-CeI">
-            <objects>
-                <viewController storyboardIdentifier="EditWineViewController" id="ZQf-Ib-L0c" customClass="EditWineViewController" customModule="mowine" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qwq-oB-0cc"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ijl-Zr-nVW"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3CW-vZ-yxq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Edit Wine" id="zQG-SH-kKy">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TED-eK-oLB">
-                            <connections>
-                                <action selector="onCancel:" destination="ZQf-Ib-L0c" id="Ujm-qp-7Mh"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="bsh-bq-FDo">
-                            <connections>
-                                <action selector="saveAction:" destination="ZQf-Ib-L0c" id="kBB-0d-ck6"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-HL-1U3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3261" y="344"/>
-        </scene>
         <!--Top Wines View Controller-->
         <scene sceneID="rLp-aF-ahb">
             <objects>
@@ -668,28 +638,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bc-I6-g62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="506" y="2323"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="FC4-pS-Apf">
-            <objects>
-                <navigationController storyboardIdentifier="EditWineNavViewController" id="Hb9-bm-aX5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6O2-p7-Aiu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="ZQf-Ib-L0c" kind="relationship" relationship="rootViewController" id="0ED-FH-Y8K"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hde-s7-vpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2467" y="344"/>
         </scene>
         <!--Profile Picture-->
         <scene sceneID="Bzw-Ig-P8K">
