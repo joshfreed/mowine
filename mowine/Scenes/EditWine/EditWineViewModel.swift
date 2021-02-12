@@ -14,6 +14,8 @@ import FirebaseCrashlytics
 
 class EditWineViewModel: ObservableObject {
     @Published var isSaving = false
+    @Published var isShowingSheet = false
+    @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     
     let editWineService: EditWineService
     let form = EditWineFormModel()
@@ -37,27 +39,27 @@ class EditWineViewModel: ObservableObject {
     func load(wineId: String) {
         self.wineId = wineId
         
-        editWineService.getWineTypes() { result in
+        editWineService.getWineTypes() { [weak self] result in
             switch result {
-            case .success(let types): self.form.setTypes(types)
+            case .success(let types): self?.form.setTypes(types)
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
             }
         }
         
-        editWineService.getWine(wineId: wineId) { result in
+        editWineService.getWine(wineId: wineId) { [weak self] result in
             switch result {
-            case .success(let wine): self.form.setWine(wine)
+            case .success(let wine): self?.form.setWine(wine)
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
             }
         }
         
-        editWineService.getWinePhoto(wineId: wineId) { result in
+        editWineService.getWinePhoto(wineId: wineId) { [weak self] result in
             switch result {
-            case .success(let photo): break//self.displayPhoto(photo)
+            case .success(let photo): self?.form.image = photo?.pngData()
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
@@ -78,6 +80,9 @@ class EditWineViewModel: ObservableObject {
         request.price = form.price
         request.notes = form.notes
         request.pairings = form.pairings
+        if let imageData = form.image {
+            request.image = UIImage(data: imageData)            
+        }
         
         editWineService.saveWine(wineId: wineId!, request: request) { [weak self] result in
             self?.isSaving = false
@@ -100,5 +105,19 @@ class EditWineViewModel: ObservableObject {
                 Crashlytics.crashlytics().record(error: error)
             }
         }
+    }
+    
+    func selectWinePhoto(from sourceType: ImagePickerView.SourceType) {
+        isShowingSheet = true
+        pickerSourceType = sourceType
+    }
+    
+    func changeWinePhoto(to image: UIImage) {
+        form.image = image.pngData()
+        isShowingSheet = false
+    }
+    
+    func cancelSelectWinePhoto() {
+        isShowingSheet = false
     }
 }

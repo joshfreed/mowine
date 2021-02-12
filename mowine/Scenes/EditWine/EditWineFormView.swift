@@ -10,6 +10,7 @@ import SwiftUI
 
 struct EditWineFormView: View {
     @ObservedObject var vm: EditWineFormModel
+    var changeImage: (ImagePickerView.SourceType) -> Void = { _ in }
     
     var body: some View {
         Form {
@@ -50,6 +51,10 @@ struct EditWineFormView: View {
                     TextField("How much was this wine?", text: $vm.price).multilineTextAlignment(.trailing)
                 }
             }
+            
+            Section(header: Text("Photo")) {
+                EditWineImageView(image: $vm.image) { changeImage($0) }
+            }.padding(.vertical, 8)
             
             Section(header: Text("Pairs Well With")) {
                 EditPairingsView(pairings: $vm.pairings)
