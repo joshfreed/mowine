@@ -195,8 +195,8 @@ extension Wine {
         return wine
     }
     
-    func toFirestore() -> [String: Any] {
-        var data: [String: Any] = [
+    func toFirestore() -> [String: Any?] {
+        var data: [String: Any?] = [
             "userId": userId.asString,
             "type": type.name,
             "name": name,
@@ -204,9 +204,13 @@ extension Wine {
             "createdAt": ISO8601DateFormatter().string(from: createdAt),
             "pairings": pairings
         ]
+        
         if let variety = variety {
             data["variety"] = variety.name
+        } else {
+            data["variety"] = nil as Any?
         }
+
         if let location = location {
             data["location"] = location
         }

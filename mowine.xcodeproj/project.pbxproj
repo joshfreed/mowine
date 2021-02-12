@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -164,6 +164,8 @@
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
+		53AC400125D706050041AED9 /* WineMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC400025D706050041AED9 /* WineMappingTests.swift */; };
+		53AC400825D7075F0041AED9 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53AC400725D7075F0041AED9 /* SwiftPackageProductDependency */; };
 		53B35F9725ACCA3500D36133 /* FakeSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */; };
 		53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */; };
 		53B564CC1F11879500459BB8 /* SelectVarietyPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */; };
@@ -453,6 +455,7 @@
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
+		53AC400025D706050041AED9 /* WineMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineMappingTests.swift; sourceTree = "<group>"; };
 		53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSocialAuth.swift; sourceTree = "<group>"; };
 		53B564C71F11879500459BB8 /* SelectVarietyInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyInteractorTests.swift; sourceTree = "<group>"; };
 		53B564C81F11879500459BB8 /* SelectVarietyPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectVarietyPresenterTests.swift; sourceTree = "<group>"; };
@@ -572,6 +575,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14963683E6756A8B35C28ADF /* Pods_mowineTests.framework in Frameworks */,
+				53AC400825D7075F0041AED9 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,6 +1106,22 @@
 			path = MyAccount;
 			sourceTree = "<group>";
 		};
+		53AC3FFE25D705E40041AED9 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				53AC3FFF25D705ED0041AED9 /* Firestore */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		53AC3FFF25D705ED0041AED9 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				53AC400025D706050041AED9 /* WineMappingTests.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
 		53B564C51F11859300459BB8 /* SelectVariety */ = {
 			isa = PBXGroup;
 			children = (
@@ -1246,6 +1266,7 @@
 		53EAFA10225E92EF002BCAB0 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				53AC3FFE25D705E40041AED9 /* Firebase */,
 				53EAFA11225E92F9002BCAB0 /* Data */,
 			);
 			path = Infrastructure;
@@ -1480,7 +1501,6 @@
 				53F5AC031E2176090067AB62 /* Sources */,
 				53F5AC041E2176090067AB62 /* Frameworks */,
 				53F5AC051E2176090067AB62 /* Resources */,
-				594561DC4E697FB9C180C235 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1488,6 +1508,9 @@
 				53F5AC091E2176090067AB62 /* PBXTargetDependency */,
 			);
 			name = mowineTests;
+			packageProductDependencies = (
+				53AC400725D7075F0041AED9 /* SwiftPackageProductDependency */,
+			);
 			productName = mowineTests;
 			productReference = 53F5AC071E2176090067AB62 /* mowineTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1553,6 +1576,9 @@
 				Base,
 			);
 			mainGroup = 53F5ABE71E2176080067AB62;
+			packageReferences = (
+				53AC400625D7075F0041AED9 /* RemoteSwiftPackageReference */,
+			);
 			productRefGroup = 53F5ABF11E2176080067AB62 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1664,24 +1690,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
-		};
-		594561DC4E697FB9C180C235 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble-framework/Nimble.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mowineTests/Pods-mowineTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		68B91997339E128D406E645B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2035,6 +2043,7 @@
 				537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */,
 				53B564CB1F11879500459BB8 /* SelectVarietyInteractorTests.swift in Sources */,
 				53F24872206D4A760046B031 /* MoreDoubles.swift in Sources */,
+				53AC400125D706050041AED9 /* WineMappingTests.swift in Sources */,
 				53F100DD203F6C1E00B29FAF /* SelectTypePresenterTests.swift in Sources */,
 				536E85B02050A31F004D5426 /* FriendsInteractorTests.swift in Sources */,
 				538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */,
@@ -2200,7 +2209,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2218,7 +2228,10 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mowine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.joshfreed.mowine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2237,7 +2250,10 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = mowine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.joshfreed.mowine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2251,7 +2267,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowineTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2266,7 +2286,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowineTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2280,7 +2304,11 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowineUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2294,7 +2322,11 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowineUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -2342,6 +2374,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		53AC400625D7075F0041AED9 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Quick/Nimble";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		53AC400725D7075F0041AED9 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 53AC400625D7075F0041AED9 /* RemoteSwiftPackageReference */;
+			productName = Nimble;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 53F5ABE81E2176080067AB62 /* Project object */;
 }

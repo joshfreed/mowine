@@ -18,8 +18,6 @@ class WineBuilder {
     private var location: String?
     private var notes: String?
     private var price: String?
-    private var photo: Data?
-    private var thumbnail: Data?
     private var pairings: [String] = []
     private var userId: UserId?
     
@@ -49,8 +47,6 @@ class WineBuilder {
         wine.location = location
         wine.notes = notes
         wine.price = price
-//        wine.photo = photo
-//        wine.thumbnail = thumbnail
         wine.pairings = pairings
         
         return wine
@@ -66,7 +62,7 @@ class WineBuilder {
         return self
     }
     
-    func withVariety(_ variety: WineVariety) -> WineBuilder {
+    func withVariety(_ variety: WineVariety?) -> WineBuilder {
         self.variety = variety
         return self
     }
@@ -87,17 +83,12 @@ class WineBuilder {
     }
     
     func withNotes(_ notes: String) -> WineBuilder {
+        self.notes = notes
         return self
     }
     
     func withPrice(_ price: String?) -> WineBuilder {
         self.price = price
-        return self
-    }
-    
-    func withPhoto() -> WineBuilder {
-        photo = Data(repeating: 99, count: 11)
-        thumbnail = Data(repeating: 99, count: 2)
         return self
     }
     

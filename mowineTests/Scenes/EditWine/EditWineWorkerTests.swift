@@ -56,7 +56,7 @@ class EditWineWorkerTests: XCTestCase {
     // MARK: - Test setup
 
     func setupEditWineWorker() {
-        sut = EditWineService(
+        sut = EditWineServiceImpl(
             wineRepository: wineRepo,
             wineTypeRepository: typeRepo,
             imageWorker: imageWorker
