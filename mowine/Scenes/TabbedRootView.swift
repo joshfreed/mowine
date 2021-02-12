@@ -94,20 +94,3 @@ struct AddWineUIKitView: UIViewControllerRepresentable {
         
     }
 }
-
-struct EditWineUIKitView: UIViewControllerRepresentable {
-    let wineId: String
-    
-    func makeUIViewController(context: Context) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let nc = storyboard.instantiateViewController(identifier: "EditWineNavViewController") as! UINavigationController
-        let vc = nc.topViewController as! EditWineViewController
-        vc.wineId = wineId
-        return nc
-    }
-    
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-        
-    }
-}
-

@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 
 /// Responsible for bootstrapping Firebase services at app launch.
@@ -31,9 +32,7 @@ class FirebaseConfigurator: Configurator {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 
-        // Use local emulator for development / testing
-        
-        #if DEBUG
+        // Use local emulator for development or testing
         if useEmulator {
             let settings = Firestore.firestore().settings
             settings.host = "localhost:8080"
@@ -43,6 +42,5 @@ class FirebaseConfigurator: Configurator {
 
             Auth.auth().useEmulator(withHost:"localhost", port:9099)
         }
-        #endif
     }
 }

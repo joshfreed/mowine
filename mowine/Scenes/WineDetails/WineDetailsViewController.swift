@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import Eureka
 
 protocol WineDetailsDisplayLogic: class {
     func displayWine(viewModel: WineDetails.FetchWine.ViewModel)
