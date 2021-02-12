@@ -91,6 +91,8 @@
 		53492549256DCB3D0066E792 /* GetMyAccountQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53492548256DCB3D0066E792 /* GetMyAccountQuery.swift */; };
 		534F3405259E3C2D00C03E47 /* AnonymousUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F3404259E3C2D00C03E47 /* AnonymousUserView.swift */; };
 		5350B590203F4E8800C6B2D2 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */; };
+		5352404F25CF5516002CB2A5 /* EditWineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352404E25CF5516002CB2A5 /* EditWineImageView.swift */; };
+		5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352405325CF5E5E002CB2A5 /* WineImageView.swift */; };
 		53547C7D218E3F8700EDD2A8 /* Friendship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7C218E3F8700EDD2A8 /* Friendship.swift */; };
 		53547C7F218E40FC00EDD2A8 /* StringIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */; };
 		5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5358BF6C252A894500E151CF /* SceneDelegate.swift */; };
@@ -377,6 +379,8 @@
 		53492548256DCB3D0066E792 /* GetMyAccountQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyAccountQuery.swift; sourceTree = "<group>"; };
 		534F3404259E3C2D00C03E47 /* AnonymousUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousUserView.swift; sourceTree = "<group>"; };
 		5350B58F203F4E8800C6B2D2 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
+		5352404E25CF5516002CB2A5 /* EditWineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineImageView.swift; sourceTree = "<group>"; };
+		5352405325CF5E5E002CB2A5 /* WineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageView.swift; sourceTree = "<group>"; };
 		53547C7C218E3F8700EDD2A8 /* Friendship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendship.swift; sourceTree = "<group>"; };
 		53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIdentity.swift; sourceTree = "<group>"; };
 		5358BF6C252A894500E151CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -845,6 +849,14 @@
 			path = MyAccount;
 			sourceTree = "<group>";
 		};
+		5352405225CF5E52002CB2A5 /* Wine */ = {
+			isa = PBXGroup;
+			children = (
+				5352405325CF5E5E002CB2A5 /* WineImageView.swift */,
+			);
+			path = Wine;
+			sourceTree = "<group>";
+		};
 		535C0B1D1E3579EB008A8117 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -962,6 +974,7 @@
 				5381EFEE25C5E4F4004D2DF9 /* EditPairingsView.swift */,
 				5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */,
 				5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */,
+				5352404E25CF5516002CB2A5 /* EditWineImageView.swift */,
 			);
 			path = EditWine;
 			sourceTree = "<group>";
@@ -1114,6 +1127,7 @@
 		53C88BFA1F085D17009B7D29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5352405225CF5E52002CB2A5 /* Wine */,
 				5378DFDD25CEFB3900094E49 /* Rating */,
 				53C91F4F25740E5F0065E778 /* Auth */,
 				5345BABD257C286F00AD68D3 /* ImagePicker.swift */,
@@ -1847,6 +1861,7 @@
 				53D3B45125A2337400F15974 /* TextStyles.swift in Sources */,
 				53ED1F89204F2D5C00C129BC /* FriendsInteractor.swift in Sources */,
 				53F47F0F2585440E00910BDC /* ErrorLabel.swift in Sources */,
+				5352404F25CF5516002CB2A5 /* EditWineImageView.swift in Sources */,
 				5327BC2620619D34006787E9 /* WineCellarListModels.swift in Sources */,
 				53ED1F8B204F323F00C129BC /* UserRepository.swift in Sources */,
 				533F1031259FD8E700DAA4B6 /* FancyDivider.swift in Sources */,
@@ -1979,6 +1994,7 @@
 				538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */,
 				5321FB971F0BEE27001D2040 /* SelectTypePresenter.swift in Sources */,
 				534895FD203CBFB900B7547A /* JFContainer.swift in Sources */,
+				5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */,
 				53D1E3022059B68800A22476 /* TopWinesInteractor.swift in Sources */,
 				53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */,
 				53F44CC02591066200FF319E /* FirebaseCredentialFactory.swift in Sources */,

@@ -15,20 +15,29 @@ struct EditWineView: View {
     
     var body: some View {
         NavigationView {
-            EditWineFormView(vm: vm.form)
-                .navigationBarTitle("Edit Wine", displayMode: .inline)
-                .navigationBarItems(leading: Button("Cancel") {
+            EditWineFormView(vm: vm.form) { pickerSourceType in
+                vm.selectWinePhoto(from: pickerSourceType)
+            }
+            .navigationBarTitle("Edit Wine", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") {
+                presentationMode.wrappedValue.dismiss()
+            }, trailing: Button("Save") {
+                vm.save() {
                     presentationMode.wrappedValue.dismiss()
-                }, trailing: Button("Save") {
-                    vm.save() {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                })
+                }
+            })
         }
         .loading(isShowing: vm.isSaving, text: "Saving...")
         .accentColor(.mwSecondary)
         .onAppear {
             vm.load(wineId: wineId)
+        }
+        .sheet(isPresented: $vm.isShowingSheet) {
+            ImagePickerView(sourceType: vm.pickerSourceType) { image in
+                vm.changeWinePhoto(to: image)
+            } onCancel: {
+                vm.cancelSelectWinePhoto()
+            }
         }
     }
 }
