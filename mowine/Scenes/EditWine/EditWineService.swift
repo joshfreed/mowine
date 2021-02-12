@@ -18,6 +18,7 @@ protocol EditWineService {
     func getWineTypes(completion: @escaping (Swift.Result<[WineType], Error>) -> Void)
     func getWinePhoto(wineId: String, completion: @escaping (Swift.Result<UIImage?, Error>) -> ())
     func saveWine(wineId: String, request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ())
+    func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ())
     func deleteWine(wineId: String, completion: @escaping (Swift.Result<Void, Error>) -> ())
 }
 

@@ -34,6 +34,7 @@ struct EditWineFormView: View {
                 }
                 
                 Picker("Variety", selection: $vm.selectedVarietyId) {
+                    Text("").tag(-1)
                     ForEach(vm.varieties) {
                         Text($0.name)
                     }

@@ -36,6 +36,10 @@ class FakeEditWineService: EditWineService {
         
     }
     
+    func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+        
+    }
+    
     func deleteWine(wineId: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         
     }

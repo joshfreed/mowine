@@ -22,7 +22,6 @@ final class Wine: Equatable {
     var notes: String?
     var price: String?
     var pairings: [String] = []
-//    var thumbnail: Data?
     var createdAt: Date = Date()
     
     var varietyName: String {

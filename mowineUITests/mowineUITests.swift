@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Nimble
 
 extension XCTestCase {
     func toString(_ object: [[String: Any]]) -> String {
@@ -38,7 +37,7 @@ class mowineUITests: XCTestCase {
         let app = XCUIApplication()
         
         let exists1 = app.navigationBars["My Cellar"].waitForExistence(timeout: 5)
-        expect(exists1).to(beTrue())
+        XCTAssertTrue(exists1)
         
         app.tabBars["Tab Bar"].buttons["Add Wine"].tap()
         
@@ -62,13 +61,14 @@ class mowineUITests: XCTestCase {
         elementsQuery.buttons["Add Wine"].tap()
 
         // Modal should close
+        // blah this always returns true because the navigation bar is *behind* the modal
         let exists = app.navigationBars["My Cellar"].waitForExistence(timeout: 5)
-        expect(exists).to(beTrue())
+        XCTAssertTrue(exists)
         
         // Make sure the new wine is in there
         app.buttons["Show My Red Wines"].tap()
         let exists2 = app.navigationBars["Red Wines"].waitForExistence(timeout: 5)
-        expect(exists2).to(beTrue())
+        XCTAssertTrue(exists2)
         XCTAssertTrue(app.tables.staticTexts["My Test Wine"].exists)
     }
     
