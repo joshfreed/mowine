@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EditWineImageView: View {
     @Binding
-    var image: Data?
+    var image: UIImage?
     
     var changeImage: (ImagePickerView.SourceType) -> Void = { _ in }
     
@@ -21,7 +21,7 @@ struct EditWineImageView: View {
     
     var body: some View {
         HStack {
-            WineImageView(data: image)
+            WineImageView(image: image)
                 .frame(width: size, height: size)
             Spacer()
             VStack(spacing: 8) {
@@ -62,7 +62,7 @@ struct ImagePickerSourceButton: View {
 
 struct EditWineImageView_Previews: PreviewProvider {
     struct ShimView: View {
-        @State var imageData: Data? = UIImage(named: "Wine1 Thumb")?.pngData()
+        @State var imageData = UIImage(named: "Wine1 Thumb")
         
         var body: some View {
             EditWineImageView(image: $imageData)

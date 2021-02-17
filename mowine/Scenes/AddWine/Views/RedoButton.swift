@@ -12,7 +12,7 @@ struct RedoButton: View {
     let title: String
     let sourceType: ImagePickerView.SourceType
     @Binding var isPicking: Bool
-    @Binding var image: Data?
+    @Binding var image: UIImage?
     
     var body: some View {
         Button(action: { isPicking = true }) {
@@ -22,7 +22,7 @@ struct RedoButton: View {
                 .frame(height: 38)
         }.sheet(isPresented: $isPicking) {
             ImagePickerView(sourceType: sourceType) {
-                image = $0.pngData()
+                image = $0
                 isPicking = false
             } onCancel: {
                 isPicking = false
@@ -34,7 +34,7 @@ struct RedoButton: View {
 struct RedoButton_Previews: PreviewProvider {
     struct ShimView: View {
         @State var isPicking = false
-        @State var image: Data?
+        @State var image: UIImage?
         
         var body: some View {
             RedoButton(title: "Pick Image", sourceType: .photoLibrary, isPicking: $isPicking, image: $image)

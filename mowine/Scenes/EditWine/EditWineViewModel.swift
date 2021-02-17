@@ -59,7 +59,7 @@ class EditWineViewModel: ObservableObject {
         
         editWineService.getWinePhoto(wineId: wineId) { [weak self] result in
             switch result {
-            case .success(let photo): self?.form.image = photo?.pngData()
+            case .success(let photo): self?.form.image = photo
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
@@ -80,9 +80,7 @@ class EditWineViewModel: ObservableObject {
         request.price = form.price
         request.notes = form.notes
         request.pairings = form.pairings
-        if let imageData = form.image {
-            request.image = UIImage(data: imageData)            
-        }
+        request.image = form.image
         
         editWineService.saveWine(wineId: wineId!, request: request) { [weak self] result in
             self?.isSaving = false
@@ -113,7 +111,7 @@ class EditWineViewModel: ObservableObject {
     }
     
     func changeWinePhoto(to image: UIImage) {
-        form.image = image.pngData()
+        form.image = image
         isShowingSheet = false
     }
     

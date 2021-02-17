@@ -15,7 +15,7 @@ class MyAccountViewModel: ObservableObject {
     @Published var isLoaded = false
     @Published var fullName: String = ""
     @Published var emailAddress: String = ""
-    @Published var profilePicture: Data?
+    @Published var profilePicture: UIImage?
     
     let getMyAccountQuery: GetMyAccountQuery
     let profilePictureWorker: ProfilePictureWorkerProtocol
@@ -55,7 +55,10 @@ class MyAccountViewModel: ObservableObject {
             profilePictureWorker.getProfilePicture(url: url) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success(let data): self?.profilePicture = data
+                    case .success(let data):
+                        if let data = data {
+                            self?.profilePicture = UIImage(data: data)
+                        }
                     case .failure(let error):
                         SwiftyBeaver.error("\(error)")
                         Crashlytics.crashlytics().record(error: error)
