@@ -10,7 +10,6 @@ import SwiftUI
 
 struct AnonymousUserView: View {
     var action: (MyAccountSheet) -> Void
-    let buttonHeight: CGFloat = 50
     
     var body: some View {
         VStack(spacing: 0) {
@@ -43,19 +42,8 @@ struct AnonymousUserView: View {
             Spacer()
             
             HStack {
-                PrimaryButton(
-                    action: { action(.logIn) },
-                    title: "Log In",
-                    isLoading: .constant(false),
-                    height: buttonHeight
-                )
-                
-                PrimaryButton(
-                    action: { action(.signUp) },
-                    title: "Sign Up",
-                    isLoading: .constant(false),
-                    height: buttonHeight
-                )
+                PrimaryButton(action: { action(.logIn) }, title: "Log In")                
+                PrimaryButton(action: { action(.signUp) }, title: "Sign Up")
             }
             .padding([.leading, .trailing])
             

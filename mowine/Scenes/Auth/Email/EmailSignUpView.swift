@@ -35,7 +35,7 @@ struct EmailSignUpView: View {
             
             PrimaryButton(action: {
                 vm.signUp(fullName: fullName, emailAddress: emailAddress, password: password, onSignUp: onSignUp)
-            }, title: "Sign Up", isLoading: $vm.isLoading, height: 48)            
+            }, title: "Sign Up", isLoading: $vm.isLoading)            
         }
     }
 }

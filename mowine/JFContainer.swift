@@ -32,7 +32,7 @@ class JFContainer: ObservableObject {
         let container = DependencyContainer.configure()
         DependencyContainer.uiContainers = [container]
         let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: false)
+            FirebaseConfigurator(useEmulator: true)
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
@@ -178,6 +178,7 @@ extension DependencyContainer {
 
         // Domain Services
         container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }
+        container.register(.singleton) { WineWorker(wineRepository: $0, imageWorker: $1, session: $2) }
         
         // Scenes
         FriendsScene.configureDependencies(container)

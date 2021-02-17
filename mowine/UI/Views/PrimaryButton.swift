@@ -13,8 +13,22 @@ struct PrimaryButton: View {
     let title: String
     @Binding var isLoading: Bool
     var height: CGFloat = 48
-    var backgroundColor: Color = Color("Primary")
+    var fontSize: CGFloat = 21
 
+    init(
+        action: @escaping () -> Void,
+        title: String,
+        isLoading: Binding<Bool> = .constant(false),
+        height: CGFloat = 48,
+        fontSize: CGFloat = 21
+    ) {
+        self.action = action
+        self.title = title
+        self._isLoading = isLoading
+        self.height = height
+        self.fontSize = fontSize
+    }
+    
     var body: some View {
         Button(action: action) {
             if isLoading {
@@ -22,23 +36,48 @@ struct PrimaryButton: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     .frame(height: height)
                     .frame(minWidth: 0, maxWidth: .infinity)
+                    .background(PrimaryGradient())
+                    .cornerRadius(5)
             } else {
-                Text(title)
-                    .font(.system(size: 21))
-                    .fontWeight(.light)
-                    .foregroundColor(.white)
-                    .frame(height: height)
-                    .frame(minWidth: 0, maxWidth: .infinity)
+                PrimaryButtonLabel(title: title, height: height, fontSize: fontSize)
             }
         }
         .disabled(isLoading)
-        .background(backgroundColor)
-        .cornerRadius(5)
+    }
+}
+
+struct PrimaryButtonLabel: View {
+    let title: String
+    var height: CGFloat = 48
+    var fontSize: CGFloat = 21
+    
+    var body: some View {
+        Text(title)
+            .font(.system(size: fontSize))
+            .fontWeight(.light)
+            .foregroundColor(.white)
+            .frame(height: height)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(PrimaryGradient())
+            .cornerRadius(5)
+    }
+}
+
+struct PrimaryGradient: View {
+    let colors: [Color] = [
+        Color(.mwDefaultGradient1),
+        Color(.mwDefaultGradient2)
+    ]
+    
+    var body: some View {
+        LinearGradient(gradient: .init(colors: colors), startPoint: .top, endPoint: .bottom)
     }
 }
 
 struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        PrimaryButton(action: {}, title: "Click Me", isLoading: .constant(false))
+        PrimaryButton(action: {}, title: "Click Me").previewLayout(.sizeThatFits)
+        PrimaryButton(action: {}, title: "Click Me", isLoading: .constant(true)).previewLayout(.sizeThatFits)
+        PrimaryButtonLabel(title: "My Label").previewLayout(.sizeThatFits)
     }
 }

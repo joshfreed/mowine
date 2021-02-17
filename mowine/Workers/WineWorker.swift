@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Combine
 import SwiftyBeaver
 
-class WineWorker {
+class WineWorker: ObservableObject {
     let wineRepository: WineRepository
     let imageWorker: WineImageWorkerProtocol
     let session: Session

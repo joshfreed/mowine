@@ -288,3 +288,27 @@ class FakeRemoteWineDataStore: RemoteWineDataStore {
     }
 }
 */
+
+class FakeWineWorker: WineWorker {
+    init() {
+        super.init(
+            wineRepository: MemoryWineRepository(),
+            imageWorker: FakeWineImageWorker(),
+            session: FakeSession()
+        )
+    }
+}
+
+class FakeWineImageWorker: WineImageWorkerProtocol {
+    func createImages(wineId: WineId, photo: UIImage?) -> Data? {
+        return nil
+    }
+    
+    func fetchPhoto(wineId: WineId, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
+        
+    }
+    
+    func fetchPhoto(wine: Wine, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
+        
+    }
+}

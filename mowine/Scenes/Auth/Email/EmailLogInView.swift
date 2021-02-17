@@ -30,7 +30,7 @@ struct EmailLogInView: View {
             
             PrimaryButton(action: {
                 vm.logIn(emailAddress: emailAddress, password: password, onLogIn: onLogIn)
-            }, title: "Log In", isLoading: $vm.isLoggingIn, height: 48)
+            }, title: "Log In", isLoading: $vm.isLoggingIn)
         }
     }
 }

@@ -36,40 +36,38 @@ class mowineUITests: XCTestCase {
     func testAddWine() {
         let app = XCUIApplication()
         
-        let exists1 = app.navigationBars["My Cellar"].waitForExistence(timeout: 5)
-        XCTAssertTrue(exists1)
+        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: 5))
         
         app.tabBars["Tab Bar"].buttons["Add Wine"].tap()
         
-        _ = app.buttons["Red"].waitForExistence(timeout: 3)
-        XCTAssertTrue(app.buttons["Red"].exists)
+        XCTAssertTrue(app.buttons["Red"].waitForExistence(timeout: 3))
         app.buttons["Red"].tap()
         
-        let elementsQuery = app.scrollViews.otherElements
-        elementsQuery.buttons["Malbec"].tap()
+        app.buttons["Malbec"].tap()
         
         // Photo - take it later
         app.buttons["Take Later"].tap()
         
         // Type a name
+        XCTAssertTrue(app.textFields["wineName"].waitForExistence(timeout: 10))
+        app.textFields["wineName"].tap()
         app.textFields["wineName"].typeText("My Test Wine")
         
         // Rate it
-        elementsQuery.otherElements["Rating"].tap()
+        XCTAssertTrue(app.buttons["Star3"].waitForExistence(timeout: 10))
+        app.buttons["Star3"].tap()
         
         // Save it!
-        elementsQuery.buttons["Add Wine"].tap()
+        XCTAssertTrue(app.buttons["createWineButton"].waitForExistence(timeout: 10))
+        app.buttons["createWineButton"].tap()
 
         // Modal should close
         // blah this always returns true because the navigation bar is *behind* the modal
-        let exists = app.navigationBars["My Cellar"].waitForExistence(timeout: 5)
-        XCTAssertTrue(exists)
+        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: 5))
         
         // Make sure the new wine is in there
         app.buttons["Show My Red Wines"].tap()
-        let exists2 = app.navigationBars["Red Wines"].waitForExistence(timeout: 5)
-        XCTAssertTrue(exists2)
+        XCTAssertTrue(app.navigationBars["Red Wines"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.tables.staticTexts["My Test Wine"].exists)
     }
-    
 }

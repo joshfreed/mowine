@@ -13,10 +13,17 @@ struct WineImageView: View {
     
     var body: some View {
         if let data = data, let uiImage = UIImage(data: data) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .clipShape(Circle())
+            ZStack {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .layoutPriority(-1)
+                    .clipShape(Circle())
+                
+                Color.clear.frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .clipped()
+            .aspectRatio(1, contentMode: .fit)            
         } else {
             Image("Default Wine Image").resizable()
         }        
@@ -26,6 +33,6 @@ struct WineImageView: View {
 struct WineImageView_Previews: PreviewProvider {
     static var previews: some View {
         WineImageView(data: nil).frame(width: 150, height: 150).previewLayout(.sizeThatFits)
-        WineImageView(data: UIImage(named: "Wine1 Thumb")?.pngData()).frame(width: 150, height: 150).previewLayout(.sizeThatFits)
+        WineImageView(data: UIImage(named: "Wine1")?.pngData()).previewLayout(.sizeThatFits)
     }
 }
