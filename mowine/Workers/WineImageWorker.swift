@@ -48,9 +48,15 @@ where
 
         let imageName = "\(userId)/\(wineId).png"
         let thumbnailName = "\(userId)/\(wineId)-thumb.png"
-        imageService.putData(imageData, url: imageName, completion: { _ in })
-        imageService.putData(thumbnailData, url: thumbnailName, completion: { _ in })
+        imageService.putData(imageData, url: imageName, completion: putDataCompletion)
+        imageService.putData(thumbnailData, url: thumbnailName, completion: putDataCompletion)
         return thumbnailData
+    }
+    
+    private func putDataCompletion(_ result: Result<URL, Error>) {
+        if case let .failure(error) = result {
+            SwiftyBeaver.error("\(error)")
+        }
     }
 
     func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ()) {

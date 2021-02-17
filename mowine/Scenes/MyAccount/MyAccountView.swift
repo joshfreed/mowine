@@ -58,7 +58,7 @@ struct MyAccountView: View {
     var body: some View {
         VStack(spacing: 8) {
             
-            ProfilePictureView2(data: viewModel.profilePicture)
+            ProfilePictureView2(image: viewModel.profilePicture)
                 .frame(width: 128, height: 128)
             
             Color.clear.frame(height: 0)
@@ -113,10 +113,10 @@ struct MyAccountView: View {
 }
 
 struct ProfilePictureView2: View {
-    let data: Data?
+    let image: UIImage?
     
     var body: some View {
-        if let data = data, let uiImage = UIImage(data: data) {
+        if let uiImage = image {
             Image(uiImage: uiImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)

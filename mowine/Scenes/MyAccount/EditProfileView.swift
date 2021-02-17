@@ -58,7 +58,7 @@ struct EditProfileView: View {
 struct EditProfileFormView: View {
     @Binding var fullName: String
     @Binding var emailAddress: String
-    @Binding var profilePicture: Data?
+    @Binding var profilePicture: UIImage?
     var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
 
     var body: some View {
@@ -86,7 +86,7 @@ struct EditProfileFormView: View {
 
 struct ProfilePictureOverlayView: View {
     @Binding
-    var profilePicture: Data?
+    var profilePicture: UIImage?
     
     var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
     
@@ -95,7 +95,7 @@ struct ProfilePictureOverlayView: View {
 
     var body: some View {
         ZStack {
-            ProfilePictureView2(data: profilePicture)
+            ProfilePictureView2(image: profilePicture)
                 .frame(width: 128, height: 128)
             Image("Profile Picture Overlay")
                 .resizable()

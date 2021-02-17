@@ -22,7 +22,7 @@ class EditProfileViewModel: ObservableObject {
             profileDidChange()
         }
     }
-    @Published var profilePicture: Data?
+    @Published var profilePicture: UIImage?
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
@@ -76,7 +76,10 @@ class EditProfileViewModel: ObservableObject {
         if let url = url {
             profilePictureWorker.getProfilePicture(url: url) { [weak self] result in
                 switch result {
-                case .success(let data): self?.profilePicture = data
+                case .success(let data):
+                    if let data = data {
+                        self?.profilePicture = UIImage(data: data)
+                    }
                 case .failure(let error):
                     SwiftyBeaver.error("\(error)")
                     Crashlytics.crashlytics().record(error: error)
@@ -143,7 +146,7 @@ class EditProfileViewModel: ObservableObject {
     
     func changeProfilePicture(to image: UIImage) {
         editProfileService.updateProfilePicture(image)
-        profilePicture = image.pngData()
+        profilePicture = image
         isShowingSheet = false
         profileDidChange()
     }

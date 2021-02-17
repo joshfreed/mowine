@@ -20,7 +20,7 @@ struct ConfirmPhotoView: View {
                     .font(.system(size: 37))
                     .fontWeight(.black)
                 
-                WineImageView(data: model.image)
+                WineImageView(image: model.image)
                     .frame(minWidth: geometry.size.width * 0.25, maxWidth: geometry.size.width * 0.6)
 
                 NavigationLink(destination: FinalizeWineView(model: model)) {
@@ -46,7 +46,7 @@ struct ConfirmPhotoView: View {
 
 fileprivate func makeModel() -> NewWineModel {
     let model = NewWineModel()
-    model.image = UIImage(named: "Wine1")?.pngData()
+    model.image = UIImage(named: "Wine1")
     return model
 }
 

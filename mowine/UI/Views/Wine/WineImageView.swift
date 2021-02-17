@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct WineImageView: View {
-    let data: Data?
+    let image: UIImage?
     
     var body: some View {
-        if let data = data, let uiImage = UIImage(data: data) {
+        if let uiImage = image {
             ZStack {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -32,7 +32,7 @@ struct WineImageView: View {
 
 struct WineImageView_Previews: PreviewProvider {
     static var previews: some View {
-        WineImageView(data: nil).frame(width: 150, height: 150).previewLayout(.sizeThatFits)
-        WineImageView(data: UIImage(named: "Wine1")?.pngData()).previewLayout(.sizeThatFits)
+        WineImageView(image: nil).frame(width: 150, height: 150).previewLayout(.sizeThatFits)
+        WineImageView(image: UIImage(named: "Wine1")).previewLayout(.sizeThatFits)
     }
 }

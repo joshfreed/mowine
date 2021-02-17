@@ -8,9 +8,10 @@
 
 import Foundation
 import Combine
+import UIKit.UIImage
 
 class EditWineFormModel: ObservableObject {
-    @Published var image: Data? = nil
+    @Published var image: UIImage? = nil
     @Published var name: String = ""
     @Published var rating: Int = 0
     @Published var selectedTypeId: Int = -1

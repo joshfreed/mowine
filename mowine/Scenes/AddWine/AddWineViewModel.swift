@@ -30,19 +30,13 @@ class AddWineViewModel: ObservableObject {
         }
     }
     
-    func createWine(model: NewWineModel, onError: @escaping (Error) -> Void) {
-        var photoImage: UIImage?
-        
-        if let data = model.image {
-            photoImage = UIImage(data: data)
-        }
-        
+    func createWine(model: NewWineModel, onError: @escaping (Error) -> Void) {        
         worker.createWine(
             type: model.wineType!,
             variety: model.wineVariety,
             name: model.name,
             rating: Double(model.rating),
-            photo: photoImage
+            photo: model.image
         ) { result in
             switch result {
             case .success: self.closeModal = true
