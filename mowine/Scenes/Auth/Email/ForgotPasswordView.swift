@@ -38,7 +38,7 @@ struct ForgotPasswordView: View {
                 .fancyField(title: "Email Address", text: $emailAddress)
                 .padding(.bottom, 4)
             
-            PrimaryButton(action: sendInstructions, title: "Send Instructions", isLoading: $isSending, height: 48)
+            PrimaryButton(action: sendInstructions, title: "Send Instructions", isLoading: $isSending)
             
             Spacer()
         }

@@ -10,15 +10,16 @@ import SwiftUI
 
 struct RatingView: View {
     @Binding var rating: Int
+    var starSize: CGFloat = 20
 
     var body: some View {
         HStack {
             ForEach(1...5, id: \.self) { index in
-                RatingStar(rating: rating, value: index)
-                    .frame(width: 20, height: 20)
-                    .onTapGesture {
-                        rating = index
-                    }
+                Button(action: { rating = index }) {
+                    RatingStar(rating: rating, value: index)
+                        .frame(width: starSize, height: starSize)
+                }
+                .accessibility(identifier: "Star\(index)")
             }
         }
     }
