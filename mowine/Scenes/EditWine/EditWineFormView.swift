@@ -24,7 +24,7 @@ struct EditWineFormView: View {
                 HStack {
                     Text("Rating")
                     Spacer()
-                    RatingView(rating: $vm.rating)
+                    FormRatingPicker(rating: $vm.rating)
                 }
             
                 Picker("Type", selection: $vm.selectedTypeId) {

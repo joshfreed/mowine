@@ -68,7 +68,7 @@ struct RateWineView: View {
     var body: some View {
         VStack(spacing: 8) {
             Text("How'd you like it?")
-            RatingView(rating: $rating, starSize: 45)
+            RatingPicker(rating: $rating, starSize: 45)
         }
     }
 }

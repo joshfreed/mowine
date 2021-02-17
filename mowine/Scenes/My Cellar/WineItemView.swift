@@ -30,11 +30,10 @@ struct WineItemView: View {
                     .font(.system(size: 16))
                     .foregroundColor(Color("Dark Gray"))
 
-                RatingView(rating: .constant(viewModel.rating))
+                RatingLabel(rating: viewModel.rating)
             }
             Spacer()
         }
-//        .padding([.leading, .trailing], 16)
         .padding([.top, .bottom], 8)
     }
 }
