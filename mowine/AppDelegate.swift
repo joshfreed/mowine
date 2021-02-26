@@ -14,6 +14,8 @@ import FBSDKCoreKit
 import Dip
 import GoogleSignIn
 
+let NSAppErrorDomain = "com.joshfreed.mowine"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

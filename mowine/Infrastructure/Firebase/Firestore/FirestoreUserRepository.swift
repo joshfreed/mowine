@@ -12,7 +12,7 @@ import SwiftyBeaver
 
 class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()
-    
+        
     func add(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         let data = user.toFirestore()
         
@@ -113,6 +113,30 @@ class FirestoreUserRepository: UserRepository {
             }
         }
     }
+    
+    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
+        let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
+        
+        let listener = query.addSnapshotListener { (querySnapshot, error) in
+            if let error = error {
+                SwiftyBeaver.error("\(error)")
+                completion(.failure(error))
+            } else {
+                if let documents = querySnapshot?.documents {
+                    let friendIds: [UserId] = documents.compactMap {
+                        let data = $0.data()
+                        guard let friendIdStr = data["friendId"] as? String else { return nil }
+                        return UserId(string: friendIdStr)
+                    }
+                    self.getUsers(by: friendIds, completion: completion)
+                } else {
+                    completion(.success([]))
+                }
+            }
+        }
+        
+        return MyFirebaseListenerRegistration(wrapped: listener)
+    }
 
     private func getUsers(by ids: [UserId], completion: @escaping (Result<[User], Error>) -> ()) {
         guard ids.count > 0 else {
@@ -152,14 +176,15 @@ class FirestoreUserRepository: UserRepository {
             if let error = error {
                 SwiftyBeaver.error("\(error)")
                 completion(.failure(error))
+                return
+            }
+            
+            if let documents = querySnapshot?.documents {
+                let users = documents.compactMap { User.fromFirestore($0) }
+                let matches = self.filterUsers(searchString: searchString, allUsers: users)
+                completion(.success(matches))
             } else {
-                if let documents = querySnapshot?.documents {
-                    let users = documents.compactMap { User.fromFirestore($0) }
-                    let matches = self.filterUsers(searchString: searchString, allUsers: users)
-                    completion(.success(matches))
-                } else {
-                    completion(.success([]))
-                }
+                completion(.success([]))
             }
         }
     }
@@ -178,7 +203,7 @@ class FirestoreUserRepository: UserRepository {
             matches.append(contentsOf: m)
         }
         
-        return matches
+        return Array(Set(matches))
     }
     
     func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User, Error>) -> ()) {

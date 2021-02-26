@@ -79,7 +79,7 @@ func randomDelay(action: @escaping () -> ()) {
 
 extension User {
     static func make(emailAddress: String, firstName: String, lastName: String) -> User {
-        var user = User(emailAddress: emailAddress)
+        var user = User(id: UserId(), emailAddress: emailAddress)
         user.fullName = firstName + " " + lastName
         return user
     }
@@ -169,7 +169,7 @@ class FakeEmailAuth: EmailAuthenticationService {
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        let user = User(emailAddress: emailAddress)
+        let user = User(id: UserId(), emailAddress: emailAddress)
         (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
         usersDB.append(user)
         completion(.success(()))
@@ -254,6 +254,10 @@ class FakeUserRepository: UserRepository {
     
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
         
+    }
+    
+    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
     }
 }
 

@@ -106,6 +106,8 @@ extension View {
             .environmentObject(emailLogInViewModel)
             .environmentObject(emailSignUpViewModel)
             .environmentObject(socialAuthViewModel)
+            .environmentObject(try! JFContainer.shared.container.resolve() as FriendsService)
+            .environmentObject(try! JFContainer.shared.container.resolve() as UsersService)
     }
 }
 
