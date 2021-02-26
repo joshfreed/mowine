@@ -1,0 +1,30 @@
+//
+//  UserPhotoView.swift
+//  mowine
+//
+//  Created by Josh Freed on 2/23/21.
+//  Copyright © 2021 Josh Freed. All rights reserved.
+//
+
+import SwiftUI
+
+struct UserPhotoView: View {
+    let photoUrl: String
+    let size: CGFloat = 44
+    
+    var body: some View {
+        CachedImage(
+            url: photoUrl,
+            noImage: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
+            loading: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
+            error: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
+            loaded: { $0.resizable().frame(width: size, height: size) }
+        )
+    }
+}
+
+struct UserPhotoView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserPhotoView(photoUrl: "")
+    }
+}

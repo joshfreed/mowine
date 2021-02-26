@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol UserRepository {
     func add(user: User, completion: @escaping (Result<User, Error>) -> ())
@@ -18,6 +19,7 @@ protocol UserRepository {
     func getUserById(_ id: UserId, completion: @escaping (Result<User?, Error>) -> ())
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool, Error>) -> ())
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration
+    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration
 }
 
 enum UserRepositoryError: Error {

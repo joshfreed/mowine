@@ -83,15 +83,3 @@ struct TabbedRootView_Previews: PreviewProvider {
             .addPreviewEnvironment()
     }
 }
-
-struct AddWineUIKitView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UINavigationController {
-        let storyboard = UIStoryboard(name: "AddWine", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController() as! UINavigationController
-        return vc
-    }
-    
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {
-        
-    }
-}

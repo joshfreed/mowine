@@ -225,7 +225,6 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.7)
   - Cosmos (20.0.1)
   - Dip (7.0.1)
-  - Eureka (5.3.2)
   - FBSDKCoreKit (9.0.0):
     - FBSDKCoreKit/Basics (= 9.0.0)
     - FBSDKCoreKit/Core (= 9.0.0)
@@ -419,7 +418,6 @@ PODS:
 DEPENDENCIES:
   - Cosmos (~> 20.0.1)
   - Dip (~> 7.0.0)
-  - Eureka (~> 5.3.0)
   - FBSDKCoreKit (~> 9.0.0)
   - FBSDKLoginKit (~> 9.0.0)
   - Firebase/Analytics (~> 7.0.0)
@@ -440,7 +438,6 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - Cosmos
     - Dip
-    - Eureka
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -478,7 +475,6 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
   Dip: 79509d5dc4f648e10e922ed79c608a7761c52b13
-  Eureka: 1c2b8b5892bfb0e972d0fe05f8c09fd89f8625ec
   FBSDKCoreKit: ac6cc500b8e104bb9a4dd20b1527b5d199123c2e
   FBSDKLoginKit: e9b6542fdee322333502ab497f628b011dce7d78
   Firebase: 50be68416f50eb4eb2ecb0e78acab9a051ef95df
@@ -510,6 +506,6 @@ SPEC CHECKSUMS:
   PureLayout: bd3c4ec3a3819ad387c99ebb72c6b129c3ed4d2d
   SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
 
-PODFILE CHECKSUM: 8b1f83f8339820d560f4b49862bc800e41705c17
+PODFILE CHECKSUM: 8f016ebf849b1139e47270a099bd959bd0c94098
 
 COCOAPODS: 1.10.1

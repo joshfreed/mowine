@@ -78,3 +78,22 @@ extension EmailReauthViewModel {
         return vm
     }
 }
+
+extension FriendsService {
+    static func make() -> FriendsService {
+        let service = FriendsService(session: FakeSession(), userRepository: FakeUserRepository())
+        service.friends = [
+            .init(id: "1", name: "Barry Jones", profilePictureUrl: ""),
+            .init(id: "2", name: "Mark Buffalo", profilePictureUrl: ""),
+            .init(id: "3", name: "Hanky Panky", profilePictureUrl: ""),
+        ]
+        return service
+    }
+}
+
+extension UsersService {
+    static func make() -> UsersService {
+        let service = UsersService(session: FakeSession(), userRepository: FakeUserRepository())
+        return service
+    }
+}
