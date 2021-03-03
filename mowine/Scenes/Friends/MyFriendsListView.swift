@@ -12,8 +12,10 @@ struct MyFriendsListView: View {
     @EnvironmentObject var friends: FriendsService
 
     var body: some View {
-        List(friends.friends) {
-            FriendListItemView(name: $0.name, thumbnail: $0.profilePictureUrl)
+        List(friends.friends) { friend in
+            NavigationLink(destination: UserProfileView(userId: friend.id)) {                
+                FriendListItemView(name: friend.name, thumbnail: friend.profilePictureUrl)
+            }
         }
             .listStyle(PlainListStyle())
             .onAppear {

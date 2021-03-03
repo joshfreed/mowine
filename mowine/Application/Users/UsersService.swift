@@ -23,6 +23,25 @@ class UsersService: ObservableObject {
             case .success(let users):
                 let usersWithoutCurrent = users.filter({ $0.id != currentUserId })
                 publisher.send(usersWithoutCurrent)
+                publisher.send(completion: .finished)
+            case .failure(let error):
+                publisher.send(completion: .failure(error))
+            }
+        }
+        return publisher.eraseToAnyPublisher()
+    }
+    
+    func getUserById(_ id: String) -> AnyPublisher<User, Error> {
+        let publisher = PassthroughSubject<User, Error>()
+        userRepository.getUserById(UserId(string: id)) { result in
+            switch result {
+            case .success(let user):
+                if let user = user {
+                    publisher.send(user)
+                    publisher.send(completion: .finished)
+                } else {
+                    publisher.send(completion: .failure(UserRepositoryError.userNotFound))
+                }
             case .failure(let error):
                 publisher.send(completion: .failure(error))
             }
@@ -32,7 +51,7 @@ class UsersService: ObservableObject {
 }
 
 extension UsersService {
-    struct UserSearchResult: Identifiable {
+    struct UserSearchResult: Identifiable, Equatable {
         var id: String
         var email: String
         var fullName: String

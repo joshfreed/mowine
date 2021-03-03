@@ -10,7 +10,7 @@ import SwiftUI
 
 struct UserPhotoView: View {
     let photoUrl: String
-    let size: CGFloat = 44
+    var size: CGFloat = 44
     
     var body: some View {
         CachedImage(

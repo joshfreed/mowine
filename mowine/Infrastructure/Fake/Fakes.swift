@@ -316,3 +316,9 @@ class FakeWineImageWorker: WineImageWorkerProtocol {
         
     }
 }
+
+class FakeUsersService: UsersService {
+    init() {
+        super.init(session: FakeSession(), userRepository: FakeUserRepository())
+    }
+}
