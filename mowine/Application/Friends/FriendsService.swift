@@ -66,6 +66,10 @@ class FriendsService: ObservableObject {
 
         }
     }
+    
+    func removeFriend(_ userId: String) {
+        
+    }
 }
 
 extension FriendsService {

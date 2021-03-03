@@ -20,6 +20,7 @@ struct MiniAddFriendButton: View {
                     .frame(width: 25, height: 25)
                     .foregroundColor(Color("Primary Light"))
             }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 }
