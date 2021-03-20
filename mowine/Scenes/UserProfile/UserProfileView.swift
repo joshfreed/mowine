@@ -10,11 +10,31 @@ import SwiftUI
 
 struct UserProfileView: View {
     @EnvironmentObject var users: UsersService
+    @EnvironmentObject var services: JFContainer
     let userId: String
+    
+    @State private var selectedView = 1
     
     var body: some View {
         VStack(spacing: 0) {
             UserProfileHeaderView(vm: .init(userId: userId, users: users))
+            
+            Group {
+                Picker(selection: $selectedView, label: EmptyView(), content: {
+                    Text("Top Wines").tag(1)
+                    Text("Cellar").tag(2)
+                })
+                .pickerStyle(SegmentedPickerStyle())
+                .frame(width: 260)
+            }
+            .padding(.vertical, 8)
+            
+            if selectedView == 1 {
+                TopWinesView(vm: .init(userId: userId, getTopWines: try! services.container.resolve()))
+            } else {
+                Text("MO CELLERZ")
+            }
+            
             Spacer()
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
@@ -41,7 +61,6 @@ struct UserProfileView_Previews: PreviewProvider {
         NavigationView {
             UserProfileView(userId: "1")
         }
-        .environmentObject(FriendsService.make())
-        .environmentObject(UsersService.make())
+        .addPreviewEnvironment()
     }
 }

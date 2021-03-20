@@ -97,3 +97,9 @@ extension UsersService {
         return service
     }
 }
+
+extension GetTopWinesQuery {
+    static func make() -> GetTopWinesQuery {
+        GetTopWinesQuery(wineRepository: MemoryWineRepository())
+    }
+}
