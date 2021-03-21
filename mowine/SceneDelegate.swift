@@ -108,6 +108,7 @@ extension View {
             .environmentObject(socialAuthViewModel)
             .environmentObject(try! JFContainer.shared.container.resolve() as FriendsService)
             .environmentObject(try! JFContainer.shared.container.resolve() as UsersService)
+            .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
     }
 }
 

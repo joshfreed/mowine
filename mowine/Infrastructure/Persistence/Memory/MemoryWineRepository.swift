@@ -9,7 +9,7 @@
 import Foundation
 
 class MemoryWineRepository: WineRepository {
-    private var wines: [Wine] = []
+    var wines: [Wine] = []
     
     func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         wines.append(wine)

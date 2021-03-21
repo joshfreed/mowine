@@ -187,5 +187,6 @@ extension DependencyContainer {
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
         container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
+        container.register(.singleton) { GetUserWinesByTypeQuery(wineRepository: $0) }
     }
 }
