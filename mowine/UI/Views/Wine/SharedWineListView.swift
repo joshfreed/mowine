@@ -10,10 +10,13 @@ import SwiftUI
 
 struct SharedWineListView: View {
     let wines: [WineItemViewModel]
+    var onTapWine: (String) -> Void = { _ in }
 
     var body: some View {
-        List(wines) {
-            WineItemView(viewModel: $0)
+        List(wines) { wine in
+            WineItemView(viewModel: wine)
+                .contentShape(Rectangle())
+                .onTapGesture { onTapWine(wine.id) }
         }
     }
 }

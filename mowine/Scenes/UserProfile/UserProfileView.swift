@@ -32,7 +32,7 @@ struct UserProfileView: View {
             if selectedView == 1 {
                 TopWinesView(vm: .init(userId: userId, getTopWines: try! services.container.resolve()))
             } else {
-                Text("MO CELLERZ")
+                WineCellarView(userId: userId)
             }
             
             Spacer()

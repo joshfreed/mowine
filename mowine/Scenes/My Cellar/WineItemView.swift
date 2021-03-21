@@ -14,6 +14,10 @@ struct WineItemViewModel: Identifiable {
     var rating: Int
     var type: String
     var thumbnail: Data?
+
+    static func toDto(_ wine: Wine) -> WineItemViewModel {
+        .init(id: wine.id.asString, name: wine.name, rating: Int(wine.rating), type: wine.type.name)
+    }
 }
 
 struct WineItemView: View {
