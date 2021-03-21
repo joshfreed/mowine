@@ -68,7 +68,13 @@ class FriendsService: ObservableObject {
     }
     
     func removeFriend(_ userId: String) {
-        
+        guard let currentUserId = session.currentUserId else { return }
+
+        let friendId = UserId(string: userId)
+
+        userRepository.removeFriend(owningUserId: currentUserId, friendId: friendId) { result in
+
+        }
     }
 }
 
