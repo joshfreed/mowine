@@ -59,6 +59,10 @@ class MockWineTypeRepository: WineTypeRepository {
 }
 
 class MockUserRepository: UserRepository {
+    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
+    }
+
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
