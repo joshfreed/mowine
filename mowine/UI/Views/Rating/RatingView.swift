@@ -14,11 +14,12 @@ import SwiftUI
 struct RatingLabel: View {
     let rating: Int
     var starSize: CGFloat = 20
+    var showEmptyStars: Bool = true
     
     var body: some View {
         HStack {
             ForEach(1...5, id: \.self) { index in
-                RatingStar(rating: rating, value: index)
+                RatingStar(rating: rating, value: index, showIfEmpty: showEmptyStars)
                     .frame(width: starSize, height: starSize)
             }
         }
@@ -69,11 +70,13 @@ struct RatingStar: View {
     let rating: Int
     /// The value of this particular star, from 1 to max rating (5)
     let value: Int
+    /// Indicates whether this view should display an outline or blank if it is empty
+    var showIfEmpty = true
     
     var body: some View {
         if value <= rating {
             Star().fill(Color("Rating"))
-        } else {
+        } else if showIfEmpty {
             Star().stroke(Color("Rating"))
         }
     }
@@ -109,6 +112,14 @@ struct RatingView_Previews: PreviewProvider {
             RatingLabel(rating: 4)
             RatingLabel(rating: 5)
             RatingLabel(rating: 6)
+        }.previewLayout(.sizeThatFits)
+        VStack {
+            RatingLabel(rating: 0, showEmptyStars: false)
+            RatingLabel(rating: 1, showEmptyStars: false)
+            RatingLabel(rating: 2, showEmptyStars: false)
+            RatingLabel(rating: 3, showEmptyStars: false)
+            RatingLabel(rating: 4, showEmptyStars: false)
+            RatingLabel(rating: 5, showEmptyStars: false)
         }.previewLayout(.sizeThatFits)
     }
 }

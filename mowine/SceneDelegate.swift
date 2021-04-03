@@ -109,6 +109,7 @@ extension View {
             .environmentObject(try! JFContainer.shared.container.resolve() as FriendsService)
             .environmentObject(try! JFContainer.shared.container.resolve() as UsersService)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
+            .environmentObject(try! JFContainer.shared.container.resolve() as GetWineDetailsQuery)        
     }
 }
 
