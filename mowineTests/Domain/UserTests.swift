@@ -11,7 +11,7 @@ import XCTest
 import Nimble
 
 class UserTests: XCTestCase {
-    var user = User(emailAddress: "test@test.com")
+    var user = User(id: UserId(string: "111"), emailAddress: "test@test.com")
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

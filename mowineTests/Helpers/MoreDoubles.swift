@@ -80,6 +80,10 @@ enum TestError: Error {
 }
 
 class TestUserRepository: UserRepository {
+    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
+        return FakeRegistration()
+    }
+
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
     }
@@ -103,7 +107,7 @@ class TestUserRepository: UserRepository {
         }
     }
     func addUserWillSucceed() {
-        let userToReturn = User(emailAddress: "smelly@mybutt.com")
+        let userToReturn = User(id: UserId(string: "111"), emailAddress: "smelly@mybutt.com")
         addUserResult = .success(userToReturn)
     }
     func addUserWillFail(error: Error) {
@@ -131,7 +135,7 @@ class TestUserRepository: UserRepository {
         }
     }
     func saveUserWillSucceed() {
-        let userToReturn = User(emailAddress: "smelly@mybutt.com")
+        let userToReturn = User(id: UserId(string: "111"), emailAddress: "smelly@mybutt.com")
         saveUserResult = .success(userToReturn)
     }
     func saveUserWillFail(error: Error) {
