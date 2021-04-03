@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import JFLib
 import PromiseKit
 import Combine
 
@@ -72,8 +71,10 @@ var winesDB: [UserId: [Wine]] = [
 ]
 
 func randomDelay(action: @escaping () -> ()) {
-    let wait = Double(arc4random_uniform(4) + 1)
-    delay(seconds: wait, action: action)
+    let wait = Int(arc4random_uniform(4) + 1)
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(wait)) {
+        action()
+    }
 //    action()
 }
 
