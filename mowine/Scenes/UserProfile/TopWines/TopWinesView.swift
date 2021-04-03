@@ -10,12 +10,21 @@ import SwiftUI
 
 struct TopWinesView: View {
     @StateObject var vm: TopWinesViewModel
-    
+    @State private var showWineDetails = false
+    @State private var selectedWineId: String = ""
+
     var body: some View {
-        SharedWineListView(wines: vm.topWines)
-            .onAppear {
-                vm.loadTopWines()
-            }
+        SharedWineListView(wines: vm.topWines) { wineId in
+            showWineDetails = true
+            selectedWineId = wineId
+        }
+        .onAppear {
+            vm.loadTopWines()
+        }
+
+        NavigationLink(destination: WineDetailsView(wineId: selectedWineId), isActive: $showWineDetails) {
+            EmptyView()
+        }
     }
 }
 

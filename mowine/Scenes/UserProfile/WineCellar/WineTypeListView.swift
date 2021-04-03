@@ -13,11 +13,21 @@ struct WineTypeListView: View {
     let userId: String
     let typeName: String
 
+    @State private var showWineDetails = false
+    @State private var selectedWineId: String = ""
+
     var body: some View {
-        SharedWineListView(wines: query.wines)
-            .onAppear {
-                query.execute(userId: userId, typeName: typeName)
-            }
+        SharedWineListView(wines: query.wines) { wineId in
+            showWineDetails = true
+            selectedWineId = wineId
+        }
+        .onAppear {
+            query.execute(userId: userId, typeName: typeName)
+        }
+
+        NavigationLink(destination: WineDetailsView(wineId: selectedWineId), isActive: $showWineDetails) {
+            EmptyView()
+        }
     }
 }
 
