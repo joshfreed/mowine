@@ -267,17 +267,6 @@
             <point key="canvasLocation" x="291" y="883"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="1J0-PM-mkm">
-            <size key="intrinsicContentSize" width="125" height="57"/>
-        </designable>
-        <designable name="8Nw-I5-QUE">
-            <size key="intrinsicContentSize" width="239" height="46"/>
-        </designable>
-        <designable name="zF3-Sj-Ee9">
-            <size key="intrinsicContentSize" width="130" height="46"/>
-        </designable>
-    </designables>
     <resources>
         <image name="No Profile Picture" width="400" height="400"/>
     </resources>

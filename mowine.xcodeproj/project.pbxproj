@@ -18,14 +18,11 @@
 		5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC692607BCC80061C413 /* WineTypeListView.swift */; };
 		5306CC6E2607BF470061C413 /* GetUserWinesByTypeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC6D2607BF470061C413 /* GetUserWinesByTypeQuery.swift */; };
 		530ABC3C234A9B7E0078FB3B /* UINavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */; };
-		5311284C206010520094DC35 /* ButtonPrimaryGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */; };
 		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
 		531865D225E46B7600474738 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531865D125E46B7600474738 /* FirestoreUser.swift */; };
 		5318863F2586777C00ED9CF8 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318863E2586777C00ED9CF8 /* Configurator.swift */; };
 		53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */; };
 		53257F01207D49CD00E1AB5F /* WineImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53257F00207D49CD00E1AB5F /* WineImageRepository.swift */; };
-		5327BC192061855B006787E9 /* ButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327BC182061855B006787E9 /* ButtonOutline.swift */; };
-		5327BC1B20618670006787E9 /* MWButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327BC1A20618670006787E9 /* MWButton.swift */; };
 		532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3C82569C2EF009A4740 /* MyAccountView.swift */; };
 		532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */; };
 		532DB3D3256AC763009A4740 /* DataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3D2256AC763009A4740 /* DataHelpers.swift */; };
@@ -52,7 +49,6 @@
 		534895F4203CBB4200B7547A /* WineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895F3203CBB4200B7547A /* WineTypeRepository.swift */; };
 		534895FD203CBFB900B7547A /* JFContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* JFContainer.swift */; };
 		53489602203DD11F00B7547A /* WineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489601203DD11F00B7547A /* WineRepository.swift */; };
-		5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5348960A203DE3A400B7547A /* ButtonPrimary.swift */; };
 		53489612203DE54500B7547A /* WineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489611203DE54500B7547A /* WineType.swift */; };
 		53489614203DE55000B7547A /* WineVariety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489613203DE55000B7547A /* WineVariety.swift */; };
 		53489616203DE5A100B7547A /* MemoryWineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489615203DE5A100B7547A /* MemoryWineTypeRepository.swift */; };
@@ -122,8 +118,6 @@
 		538E104B253BB56200B26619 /* FakeWineThumbnailFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E104A253BB56200B26619 /* FakeWineThumbnailFetcher.swift */; };
 		539196961E6B612D001AE149 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539196951E6B612D001AE149 /* Notifications.swift */; };
 		53958A9820617B6C00BA4B6C /* FirstTimeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */; };
-		539717C422B6BFC200EFA97F /* ProfilePictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 539717C322B6BFC200EFA97F /* ProfilePictureView.xib */; };
-		539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717C522B6BFD300EFA97F /* ProfilePictureView.swift */; };
 		539717CC22B6C6A300EFA97F /* EditProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539717CB22B6C6A300EFA97F /* EditProfileService.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
@@ -146,9 +140,8 @@
 		53BC1C54261903FA00ECD078 /* GetWineDetailsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC1C53261903FA00ECD078 /* GetWineDetailsQuery.swift */; };
 		53BC1C7326191C6800ECD078 /* WineCellarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B6CB85205ADD9300AE8EFB /* WineCellarPresenter.swift */; };
 		53BC1C8D26191E0700ECD078 /* WineListThumbnailFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC1C8C26191E0700ECD078 /* WineListThumbnailFetcher.swift */; };
+		53BC1C99261926A700ECD078 /* UISearchBar+setSearchFieldColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC1C98261926A700ECD078 /* UISearchBar+setSearchFieldColor.swift */; };
 		53C3E66E1FF6E048003F6676 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C3E66D1FF6E048003F6676 /* UINavigationController.swift */; };
-		53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; };
-		53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 531550DE1F5848C70017DA70 /* JFLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
 		53C91A1F255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91A1E255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift */; };
 		53C91F4C25740E2E0065E778 /* ReauthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F4B25740E2E0065E778 /* ReauthenticationView.swift */; };
@@ -234,20 +227,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		53C50BC11F795FC50049AC92 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				53C50BC01F795FC50049AC92 /* JFLib.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		18511F50AD603F18B126ADA7 /* Pods-mowineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.release.xcconfig"; path = "Target Support Files/Pods-mowineTests/Pods-mowineTests.release.xcconfig"; sourceTree = "<group>"; };
 		2AFFDFC526A7F29495BDF9FA /* Pods-mowineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.debug.xcconfig"; path = "Target Support Files/Pods-mowineTests/Pods-mowineTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -262,15 +241,12 @@
 		5306CC692607BCC80061C413 /* WineTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeListView.swift; sourceTree = "<group>"; };
 		5306CC6D2607BF470061C413 /* GetUserWinesByTypeQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserWinesByTypeQuery.swift; sourceTree = "<group>"; };
 		530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarAppearance.swift; sourceTree = "<group>"; };
-		5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPrimaryGradient.swift; sourceTree = "<group>"; };
 		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		531550DE1F5848C70017DA70 /* JFLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JFLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		531865D125E46B7600474738 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		5318863E2586777C00ED9CF8 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
 		53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfigurator.swift; sourceTree = "<group>"; };
 		53257F00207D49CD00E1AB5F /* WineImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageRepository.swift; sourceTree = "<group>"; };
-		5327BC182061855B006787E9 /* ButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOutline.swift; sourceTree = "<group>"; };
-		5327BC1A20618670006787E9 /* MWButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWButton.swift; sourceTree = "<group>"; };
 		532DB3C82569C2EF009A4740 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
 		532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		532DB3D2256AC763009A4740 /* DataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelpers.swift; sourceTree = "<group>"; };
@@ -297,7 +273,6 @@
 		534895F3203CBB4200B7547A /* WineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeRepository.swift; sourceTree = "<group>"; };
 		534895FC203CBFB900B7547A /* JFContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFContainer.swift; sourceTree = "<group>"; };
 		53489601203DD11F00B7547A /* WineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineRepository.swift; sourceTree = "<group>"; };
-		5348960A203DE3A400B7547A /* ButtonPrimary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonPrimary.swift; sourceTree = "<group>"; };
 		53489611203DE54500B7547A /* WineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineType.swift; sourceTree = "<group>"; };
 		53489613203DE55000B7547A /* WineVariety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineVariety.swift; sourceTree = "<group>"; };
 		53489615203DE5A100B7547A /* MemoryWineTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWineTypeRepository.swift; sourceTree = "<group>"; };
@@ -368,8 +343,6 @@
 		538E104A253BB56200B26619 /* FakeWineThumbnailFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeWineThumbnailFetcher.swift; sourceTree = "<group>"; };
 		539196951E6B612D001AE149 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		53958A9220617B6C00BA4B6C /* FirstTimeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeWorker.swift; sourceTree = "<group>"; };
-		539717C322B6BFC200EFA97F /* ProfilePictureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePictureView.xib; sourceTree = "<group>"; };
-		539717C522B6BFD300EFA97F /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		539717CB22B6C6A300EFA97F /* EditProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileService.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
@@ -392,6 +365,7 @@
 		53BC1C4F2619031B00ECD078 /* WineDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineDetailsView.swift; sourceTree = "<group>"; };
 		53BC1C53261903FA00ECD078 /* GetWineDetailsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWineDetailsQuery.swift; sourceTree = "<group>"; };
 		53BC1C8C26191E0700ECD078 /* WineListThumbnailFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineListThumbnailFetcher.swift; sourceTree = "<group>"; };
+		53BC1C98261926A700ECD078 /* UISearchBar+setSearchFieldColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+setSearchFieldColor.swift"; sourceTree = "<group>"; };
 		53C3E66D1FF6E048003F6676 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		53C91A1E255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirebaseListenerRegistration.swift; sourceTree = "<group>"; };
@@ -475,7 +449,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53C50BBF1F795FC50049AC92 /* JFLib.framework in Frameworks */,
 				009DBAF4A0FC6A5DD8F81AC4 /* Pods_mowine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -964,12 +937,6 @@
 				5378DFDD25CEFB3900094E49 /* Rating */,
 				53C91F4F25740E5F0065E778 /* Auth */,
 				5345BABD257C286F00AD68D3 /* ImagePicker.swift */,
-				5348960A203DE3A400B7547A /* ButtonPrimary.swift */,
-				5311284B206010520094DC35 /* ButtonPrimaryGradient.swift */,
-				5327BC1A20618670006787E9 /* MWButton.swift */,
-				5327BC182061855B006787E9 /* ButtonOutline.swift */,
-				539717C322B6BFC200EFA97F /* ProfilePictureView.xib */,
-				539717C522B6BFD300EFA97F /* ProfilePictureView.swift */,
 				536AEBED2540B366009EA107 /* SearchBar.swift */,
 				53FFECB2256F0E9D00321944 /* FancyTextField.swift */,
 				53DD1E19257D84DC008C1DA7 /* FancySecureField.swift */,
@@ -1219,6 +1186,7 @@
 				53C3E66D1FF6E048003F6676 /* UINavigationController.swift */,
 				E9AFC6C7F3E6ABECDD25B916 /* UIImage.swift */,
 				530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */,
+				53BC1C98261926A700ECD078 /* UISearchBar+setSearchFieldColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1288,7 +1256,6 @@
 				53F5ABEC1E2176080067AB62 /* Sources */,
 				53F5ABED1E2176080067AB62 /* Frameworks */,
 				53F5ABEE1E2176080067AB62 /* Resources */,
-				53C50BC11F795FC50049AC92 /* Embed Frameworks */,
 				EDCE8F7336DE0664648DEFB5 /* [CP] Embed Pods Frameworks */,
 				192C72D6FA64156B4081C944 /* [CP] Copy Pods Resources */,
 				5390E86A2351160A004A24F0 /* ShellScript */,
@@ -1412,7 +1379,6 @@
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */,
 				5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */,
-				539717C422B6BFC200EFA97F /* ProfilePictureView.xib in Resources */,
 				538B239D21BB22BD002F278A /* GoogleService-Info.plist in Resources */,
 				5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */,
 			);
@@ -1633,7 +1599,6 @@
 				535C6A8021EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift in Sources */,
 				535F66912062FEE20006B26A /* SignUpWorker.swift in Sources */,
 				539717CC22B6C6A300EFA97F /* EditProfileService.swift in Sources */,
-				5348960B203DE3A400B7547A /* ButtonPrimary.swift in Sources */,
 				53489614203DE55000B7547A /* WineVariety.swift in Sources */,
 				53D1425B254F4A6C00533515 /* GetWinesByTypeQuery.swift in Sources */,
 				5330C20E25E5B5710063E7C4 /* UserSearchResultView.swift in Sources */,
@@ -1645,6 +1610,7 @@
 				533F103D259FE42900DAA4B6 /* SocialAuthView.swift in Sources */,
 				536AEBE82540B306009EA107 /* ViewControllerResolver.swift in Sources */,
 				5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */,
+				53BC1C99261926A700ECD078 /* UISearchBar+setSearchFieldColor.swift in Sources */,
 				53547C7D218E3F8700EDD2A8 /* Friendship.swift in Sources */,
 				5381EFF325C5E830004D2DF9 /* EditWineViewModel.swift in Sources */,
 				53D3B43A25A0F25F00F15974 /* ForgotPasswordView.swift in Sources */,
@@ -1653,7 +1619,6 @@
 				5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */,
 				533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */,
 				53047E2D25DC09C0005CC14D /* PickImageButton.swift in Sources */,
-				5327BC1B20618670006787E9 /* MWButton.swift in Sources */,
 				53D3B45125A2337400F15974 /* TextStyles.swift in Sources */,
 				53CFCA5C25E945CC003EADB3 /* FriendsService.swift in Sources */,
 				53F47F0F2585440E00910BDC /* ErrorLabel.swift in Sources */,
@@ -1715,7 +1680,6 @@
 				53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */,
 				53FFECA9256F0D3100321944 /* EditProfileView.swift in Sources */,
 				538E104B253BB56200B26619 /* FakeWineThumbnailFetcher.swift in Sources */,
-				5327BC192061855B006787E9 /* ButtonOutline.swift in Sources */,
 				53257F01207D49CD00E1AB5F /* WineImageRepository.swift in Sources */,
 				53489616203DE5A100B7547A /* MemoryWineTypeRepository.swift in Sources */,
 				53DD1E22257DBADC008C1DA7 /* EmailReauthViewModel.swift in Sources */,
@@ -1737,7 +1701,6 @@
 				53ED1F7C20489DBD00C129BC /* User.swift in Sources */,
 				53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */,
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
-				5311284C206010520094DC35 /* ButtonPrimaryGradient.swift in Sources */,
 				539196961E6B612D001AE149 /* Notifications.swift in Sources */,
 				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
 				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
@@ -1749,7 +1712,6 @@
 				533467CC25F538620088A0D6 /* GetTopWinesQuery.swift in Sources */,
 				538E1041253BB2C500B26619 /* WineCellarListViewModel.swift in Sources */,
 				532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */,
-				539717C622B6BFD300EFA97F /* ProfilePictureView.swift in Sources */,
 				535DE8CF25BCACB900C6CB7B /* SplashScreen.swift in Sources */,
 				53BC1C7326191C6800ECD078 /* WineCellarPresenter.swift in Sources */,
 				535CC81925F0453400D49D57 /* TopWinesViewModel.swift in Sources */,
