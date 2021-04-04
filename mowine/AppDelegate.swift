@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PureLayout
 import SwiftyBeaver
 import FBSDKCoreKit
 import Dip

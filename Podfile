@@ -4,17 +4,6 @@ target 'mowine' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for mowine
-  pod 'Cosmos', '~> 20.0.1'
-  pod 'PureLayout', '~> 3.1.4'
-  pod 'SwiftyBeaver', '~> 1.7'
-  pod 'Dip', '~> 7.0.0'
-  pod 'PromiseKit', '~> 6.8'
-  
-  # Facebook
-  pod 'FBSDKCoreKit', '~> 9.0.0'
-  pod 'FBSDKLoginKit', '~> 9.0.0'
-  
   # Google
   pod 'GoogleSignIn', '~> 5.0.0'
   
