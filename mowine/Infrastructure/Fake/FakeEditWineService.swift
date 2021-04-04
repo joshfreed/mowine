@@ -6,7 +6,7 @@
 //  Copyright © 2021 Josh Freed. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import PromiseKit
 
 class FakeEditWineService: EditWineService {
