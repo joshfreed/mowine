@@ -61,7 +61,6 @@
 		5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352405325CF5E5E002CB2A5 /* WineImageView.swift */; };
 		53547C7D218E3F8700EDD2A8 /* Friendship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7C218E3F8700EDD2A8 /* Friendship.swift */; };
 		53547C7F218E40FC00EDD2A8 /* StringIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */; };
-		5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5358BF6C252A894500E151CF /* SceneDelegate.swift */; };
 		535C6A8021EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535C6A7F21EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift */; };
 		535CC81125F0404B00D49D57 /* UserProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81025F0404B00D49D57 /* UserProfileHeaderViewModel.swift */; };
 		535CC81525F0451F00D49D57 /* TopWinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81425F0451F00D49D57 /* TopWinesView.swift */; };
@@ -123,11 +122,12 @@
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
 		53993E0325DC4A200007DFCB /* NewWineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993E0225DC4A200007DFCB /* NewWineModel.swift */; };
 		539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */; };
-		53A697BA261A1645004BCE43 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697B9261A1645004BCE43 /* SwiftPackageProductDependency */; };
-		53A697E7261A16C5004BCE43 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697E6261A16C5004BCE43 /* SwiftPackageProductDependency */; };
-		53A697ED261A1711004BCE43 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697EC261A1711004BCE43 /* SwiftPackageProductDependency */; };
-		53A69818261A17FE004BCE43 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53A69817261A17FE004BCE43 /* SwiftPackageProductDependency */; };
-		53A6981A261A17FE004BCE43 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53A69819261A17FE004BCE43 /* SwiftPackageProductDependency */; };
+		53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697B9261A1645004BCE43 /* SwiftyBeaver */; };
+		53A697E7261A16C5004BCE43 /* Dip in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697E6261A16C5004BCE43 /* Dip */; };
+		53A697ED261A1711004BCE43 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697EC261A1711004BCE43 /* PromiseKit */; };
+		53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 53A69817261A17FE004BCE43 /* FacebookCore */; };
+		53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 53A69819261A17FE004BCE43 /* FacebookLogin */; };
+		53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A69841261A1DE4004BCE43 /* MoWineApp.swift */; };
 		53A8D5EE204609FE000AD7A3 /* EmailAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */; };
 		53AC400125D706050041AED9 /* WineMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC400025D706050041AED9 /* WineMappingTests.swift */; };
 		53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC403D25D71DB20041AED9 /* AddWineView.swift */; };
@@ -194,7 +194,7 @@
 		53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
 		53F5AC171E2176090067AB62 /* mowineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* mowineUITests.swift */; };
-		53FAECFE25EAF2480099B2E1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 53AC400725D7075F0041AED9 /* SwiftPackageProductDependency */; };
+		53FAECFE25EAF2480099B2E1 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 53AC400725D7075F0041AED9 /* Nimble */; };
 		53FAED0025EAF7B40099B2E1 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAECFF25EAF7B40099B2E1 /* UserProfileView.swift */; };
 		53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAED0325EAF9C30099B2E1 /* UserProfileHeaderView.swift */; };
 		53FAED0825EAFBF00099B2E1 /* FriendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAED0725EAFBF00099B2E1 /* FriendButton.swift */; };
@@ -290,7 +290,6 @@
 		5352405325CF5E5E002CB2A5 /* WineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageView.swift; sourceTree = "<group>"; };
 		53547C7C218E3F8700EDD2A8 /* Friendship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendship.swift; sourceTree = "<group>"; };
 		53547C7E218E40FC00EDD2A8 /* StringIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIdentity.swift; sourceTree = "<group>"; };
-		5358BF6C252A894500E151CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		535C6A7F21EBC4DB00430FA5 /* ConfirmPhoto2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPhoto2ViewController.swift; sourceTree = "<group>"; };
 		535CC81025F0404B00D49D57 /* UserProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		535CC81425F0451F00D49D57 /* TopWinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWinesView.swift; sourceTree = "<group>"; };
@@ -353,6 +352,7 @@
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
 		53993E0225DC4A200007DFCB /* NewWineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWineModel.swift; sourceTree = "<group>"; };
 		539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageWorker.swift; sourceTree = "<group>"; };
+		53A69841261A1DE4004BCE43 /* MoWineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoWineApp.swift; sourceTree = "<group>"; };
 		53A8D5ED204609FE000AD7A3 /* EmailAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationService.swift; sourceTree = "<group>"; };
 		53AC400025D706050041AED9 /* WineMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineMappingTests.swift; sourceTree = "<group>"; };
 		53AC403D25D71DB20041AED9 /* AddWineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineView.swift; sourceTree = "<group>"; };
@@ -454,12 +454,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53A697E7261A16C5004BCE43 /* BuildFile in Frameworks */,
-				53A69818261A17FE004BCE43 /* BuildFile in Frameworks */,
-				53A6981A261A17FE004BCE43 /* BuildFile in Frameworks */,
-				53A697ED261A1711004BCE43 /* BuildFile in Frameworks */,
+				53A697E7261A16C5004BCE43 /* Dip in Frameworks */,
+				53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */,
+				53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */,
+				53A697ED261A1711004BCE43 /* PromiseKit in Frameworks */,
 				009DBAF4A0FC6A5DD8F81AC4 /* Pods_mowine.framework in Frameworks */,
-				53A697BA261A1645004BCE43 /* BuildFile in Frameworks */,
+				53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14963683E6756A8B35C28ADF /* Pods_mowineTests.framework in Frameworks */,
-				53FAECFE25EAF2480099B2E1 /* BuildFile in Frameworks */,
+				53FAECFE25EAF2480099B2E1 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,8 +1133,8 @@
 				539C4D8A21ACA99500B0F8E0 /* Workers */,
 				536AEBFF2540CD53009EA107 /* Extensions */,
 				5318863D2586776400ED9CF8 /* Config */,
+				53A69841261A1DE4004BCE43 /* MoWineApp.swift */,
 				53F5ABF31E2176080067AB62 /* AppDelegate.swift */,
-				5358BF6C252A894500E151CF /* SceneDelegate.swift */,
 				534895FC203CBFB900B7547A /* JFContainer.swift */,
 				53F5ABF71E2176080067AB62 /* Main.storyboard */,
 				53F5ABFD1E2176080067AB62 /* Assets.xcassets */,
@@ -1276,11 +1276,11 @@
 			);
 			name = mowine;
 			packageProductDependencies = (
-				53A697B9261A1645004BCE43 /* SwiftPackageProductDependency */,
-				53A697E6261A16C5004BCE43 /* SwiftPackageProductDependency */,
-				53A697EC261A1711004BCE43 /* SwiftPackageProductDependency */,
-				53A69817261A17FE004BCE43 /* SwiftPackageProductDependency */,
-				53A69819261A17FE004BCE43 /* SwiftPackageProductDependency */,
+				53A697B9261A1645004BCE43 /* SwiftyBeaver */,
+				53A697E6261A16C5004BCE43 /* Dip */,
+				53A697EC261A1711004BCE43 /* PromiseKit */,
+				53A69817261A17FE004BCE43 /* FacebookCore */,
+				53A69819261A17FE004BCE43 /* FacebookLogin */,
 			);
 			productName = mowine;
 			productReference = 53F5ABF01E2176080067AB62 /* mowine.app */;
@@ -1302,7 +1302,7 @@
 			);
 			name = mowineTests;
 			packageProductDependencies = (
-				53AC400725D7075F0041AED9 /* SwiftPackageProductDependency */,
+				53AC400725D7075F0041AED9 /* Nimble */,
 			);
 			productName = mowineTests;
 			productReference = 53F5AC071E2176090067AB62 /* mowineTests.xctest */;
@@ -1370,11 +1370,11 @@
 			);
 			mainGroup = 53F5ABE71E2176080067AB62;
 			packageReferences = (
-				53AC400625D7075F0041AED9 /* RemoteSwiftPackageReference */,
-				53A697B8261A1645004BCE43 /* RemoteSwiftPackageReference */,
-				53A697E5261A16C5004BCE43 /* RemoteSwiftPackageReference */,
-				53A697EB261A1711004BCE43 /* RemoteSwiftPackageReference */,
-				53A69816261A17FE004BCE43 /* RemoteSwiftPackageReference */,
+				53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */,
+				53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */,
+				53A697EB261A1711004BCE43 /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 53F5ABF11E2176080067AB62 /* Products */;
 			projectDirPath = "";
@@ -1684,6 +1684,7 @@
 				5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */,
 				532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */,
 				533F1035259FE2F300DAA4B6 /* EmailSignUpView.swift in Sources */,
+				53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */,
 				53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */,
 				53FFECA9256F0D3100321944 /* EditProfileView.swift in Sources */,
 				538E104B253BB56200B26619 /* FakeWineThumbnailFetcher.swift in Sources */,
@@ -1754,7 +1755,6 @@
 				E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */,
 				53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */,
 				E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */,
-				5358BF6D252A894500E151CF /* SceneDelegate.swift in Sources */,
 				E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */,
 				536AEC012540CD60009EA107 /* StringProtocol.swift in Sources */,
 				536E301B25A2615500608A29 /* AppView.swift in Sources */,
@@ -2107,7 +2107,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		53A697B8261A1645004BCE43 /* RemoteSwiftPackageReference */ = {
+		53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -2115,7 +2115,7 @@
 				minimumVersion = 1.9.3;
 			};
 		};
-		53A697E5261A16C5004BCE43 /* RemoteSwiftPackageReference */ = {
+		53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/Dip";
 			requirement = {
@@ -2123,7 +2123,7 @@
 				minimumVersion = 7.1.1;
 			};
 		};
-		53A697EB261A1711004BCE43 /* RemoteSwiftPackageReference */ = {
+		53A697EB261A1711004BCE43 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mxcl/PromiseKit";
 			requirement = {
@@ -2131,7 +2131,7 @@
 				minimumVersion = 6.13.3;
 			};
 		};
-		53A69816261A17FE004BCE43 /* RemoteSwiftPackageReference */ = {
+		53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -2139,7 +2139,7 @@
 				minimumVersion = 9.1.0;
 			};
 		};
-		53AC400625D7075F0041AED9 /* RemoteSwiftPackageReference */ = {
+		53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Quick/Nimble";
 			requirement = {
@@ -2150,34 +2150,34 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		53A697B9261A1645004BCE43 /* SwiftPackageProductDependency */ = {
+		53A697B9261A1645004BCE43 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53A697B8261A1645004BCE43 /* RemoteSwiftPackageReference */;
+			package = 53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
 		};
-		53A697E6261A16C5004BCE43 /* SwiftPackageProductDependency */ = {
+		53A697E6261A16C5004BCE43 /* Dip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53A697E5261A16C5004BCE43 /* RemoteSwiftPackageReference */;
+			package = 53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */;
 			productName = Dip;
 		};
-		53A697EC261A1711004BCE43 /* SwiftPackageProductDependency */ = {
+		53A697EC261A1711004BCE43 /* PromiseKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53A697EB261A1711004BCE43 /* RemoteSwiftPackageReference */;
+			package = 53A697EB261A1711004BCE43 /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
 		};
-		53A69817261A17FE004BCE43 /* SwiftPackageProductDependency */ = {
+		53A69817261A17FE004BCE43 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53A69816261A17FE004BCE43 /* RemoteSwiftPackageReference */;
+			package = 53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
-		53A69819261A17FE004BCE43 /* SwiftPackageProductDependency */ = {
+		53A69819261A17FE004BCE43 /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53A69816261A17FE004BCE43 /* RemoteSwiftPackageReference */;
+			package = 53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
-		53AC400725D7075F0041AED9 /* SwiftPackageProductDependency */ = {
+		53AC400725D7075F0041AED9 /* Nimble */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53AC400625D7075F0041AED9 /* RemoteSwiftPackageReference */;
+			package = 53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
 		};
 /* End XCSwiftPackageProductDependency section */
