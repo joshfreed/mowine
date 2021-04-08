@@ -9,13 +9,24 @@ import SwiftyBeaver
 
 class FirebaseStorageService {
     let storage: Storage
+    private let basePath: String?
 
-    init() {
+    init(basePath: String? = nil) {
         storage = Storage.storage()
+        self.basePath = basePath
+    }
+
+    private func reference() -> StorageReference {
+        var storageRef = storage.reference()
+        if let basePath = basePath {
+            storageRef = storageRef.child(basePath)
+        }
+        return storageRef
     }
 
     func putData(_ data: Data, path: String, completion: @escaping (Result<URL, Error>) -> ()) {
-        let uploadRef = storage.reference().child(path)
+        let storageRef = reference()
+        let uploadRef = storageRef.child(path)
 
         uploadRef.putData(data, metadata: nil) { (metadata, error) in
             if let err = error {
@@ -37,7 +48,8 @@ class FirebaseStorageService {
 
     func getData(path: String, completion: @escaping (Result<Data?, Error>) -> ()) {
         let maxSize: Int64 = 1 * 1024 * 1024
-        let pathReference = storage.reference(withPath: path)
+        let storageRef = reference()
+        let pathReference = storageRef.child(path)
 
         pathReference.getData(maxSize: maxSize) { data, error in
             if let error = error {

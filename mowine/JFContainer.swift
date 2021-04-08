@@ -32,7 +32,7 @@ class JFContainer: ObservableObject {
         let container = DependencyContainer.configure()
         DependencyContainer.uiContainers = [container]
         let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: true)
+            FirebaseConfigurator(useEmulator: false)
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
@@ -94,25 +94,8 @@ extension DependencyContainer {
     static func configure() -> DependencyContainer {
         DependencyContainer { container in
             addFirebaseServices(container: container)
-            
-            // Firebase Storage
-            container.register(.singleton) { FirebaseStorageService() }
-            
-            // Images
-            container.register(.singleton) {
-                WineImageWorker<DataService<FirebaseStorageService, FirebaseStorageService>>(session: $0, wineRepository: $1, imageService: $2)
-            }
-                .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
-
-            container.register(.singleton) { DataService<UrlSessionService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
-            container.register(.singleton) { DataService<FirebaseStorageService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
-            container.register(.singleton) {
-                ProfilePictureWorker<DataService<UrlSessionService, FirebaseStorageService>>(session: $0, profilePictureService: $1, userRepository: $2)
-            }
-                .implements(ProfilePictureWorkerProtocol.self)
-            
-            // Common
-            DependencyContainer.configureCommonServices(container: container)
+            addImageServices(container: container)
+            configureCommonServices(container: container)
         }
     }
     
@@ -148,9 +131,28 @@ extension DependencyContainer {
         container.register(.singleton) { FirestoreUserRepository() as UserRepository }
         container.register(.singleton) { FirestoreWineRepository() as WineRepository }
     }
-    
+
+    static func addImageServices(container: DependencyContainer) {
+        #if DEBUG
+        container.register(.singleton) { FirebaseStorageService(basePath: "dev") }
+        #else
+        container.register(.singleton) { FirebaseStorageService() }
+        #endif
+
+        container.register(.singleton) {
+            WineImageWorker<DataService<FirebaseStorageService, FirebaseStorageService>>(session: $0, wineRepository: $1, imageService: $2)
+        }
+            .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
+
+        container.register(.singleton) { DataService<UrlSessionService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
+        container.register(.singleton) { DataService<FirebaseStorageService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
+        container.register(.singleton) {
+            ProfilePictureWorker<DataService<UrlSessionService, FirebaseStorageService>>(session: $0, profilePictureService: $1, userRepository: $2)
+        }
+            .implements(ProfilePictureWorkerProtocol.self)
+    }
+
     static func addFakeImageServices(container: DependencyContainer) {
-        // Images
         container.register(.singleton) { FakeDataReadService() }
         container.register(.singleton) { FakeDataWriteService() }
         container.register(.singleton) {
@@ -166,7 +168,7 @@ extension DependencyContainer {
             .implements(ProfilePictureWorkerProtocol.self)
     }
     
-    /// Configures services who don't require fakes while UI testing. These service definitions are the same for both prod and UI testing.
+    /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
     static func configureCommonServices(container: DependencyContainer) {
         container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
 
