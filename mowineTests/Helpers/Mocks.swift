@@ -6,7 +6,7 @@
 //  Copyright © 2018 Josh Freed. All rights reserved.
 //
 
-import Foundation
+import UIKit
 @testable import mowine
 import PromiseKit
 import Combine

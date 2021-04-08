@@ -20,6 +20,7 @@ class SignInWithGoogle: NSObject, SocialSignInMethod, GIDSignInDelegate {
     
     func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
         self.completion = completion
+        GIDSignIn.sharedInstance().presentingViewController = UIApplication.shared.windows.first?.rootViewController
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signIn()
     }
