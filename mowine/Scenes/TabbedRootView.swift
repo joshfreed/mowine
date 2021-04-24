@@ -11,7 +11,6 @@ import Combine
 import Model
 
 struct TabbedRootView: View {
-    @EnvironmentObject var container: JFContainer
     @StateObject var model = MainTabBarData(customItemIndex: 2)
     
     var body: some View {
@@ -46,7 +45,7 @@ struct TabbedRootView: View {
         }
         .accentColor(Color("Primary"))
         .sheet(isPresented: $model.isCustomItemSelected) {
-            AddWineView(vm: AddWineViewModel(wineTypeRepository: try! container.resolve(), worker: try! container.resolve()))
+            AddWineView()
         }
     }      
 }

@@ -12,12 +12,13 @@ import Model
 
 struct AddWineView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var vm: AddWineViewModel
+    @EnvironmentObject var wineTypeService: WineTypeService
+    @StateObject var vm = AddWineViewModel()
     @StateObject var newWineModel = NewWineModel()
     
     var body: some View {
         NavigationView {
-            SelectTypeView(model: newWineModel, wineTypes: vm.wineTypes)
+            SelectTypeView(model: newWineModel, wineTypes: wineTypeService.wineTypes)
                 .navigationBarTitle("Add a Wine", displayMode: .inline)
                 .navigationBarItems(leading: Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
@@ -25,7 +26,7 @@ struct AddWineView: View {
         }
         .accentColor(.mwSecondary)
         .onAppear {
-            vm.load()
+            wineTypeService.fetchWineTypes()
         }
         .onChange(of: vm.closeModal, perform: { value in
             if value {
@@ -38,9 +39,7 @@ struct AddWineView: View {
 
 struct AddWineView_Previews: PreviewProvider {
     static var previews: some View {
-        AddWineView(vm: AddWineViewModel(
-            wineTypeRepository: MemoryWineTypeRepository(),
-            worker: FakeWineWorker()
-        ))
+        AddWineView()
+            .addPreviewEnvironment()
     }
 }
