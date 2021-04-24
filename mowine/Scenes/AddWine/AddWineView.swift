@@ -12,7 +12,7 @@ import Model
 
 struct AddWineView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var wineTypeService: WineTypeService
+    @EnvironmentObject var wineTypeService: WineTypeService    
     @StateObject var vm = AddWineViewModel()
     @StateObject var newWineModel = NewWineModel()
     
@@ -33,7 +33,7 @@ struct AddWineView: View {
                 presentationMode.wrappedValue.dismiss()
             }
         })
-        .environmentObject(vm)
+        .environmentObject(vm)        
     }
 }
 

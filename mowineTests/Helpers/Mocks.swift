@@ -10,6 +10,7 @@ import UIKit
 @testable import mowine
 import PromiseKit
 import Combine
+import Model
 
 class MockWineRepository: WineRepository {
     func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Swift.Result<[String], Error>) -> ()) {

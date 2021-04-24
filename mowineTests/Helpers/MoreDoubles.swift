@@ -9,6 +9,7 @@
 import Foundation
 @testable import mowine
 import Nimble
+import Model
 
 class TestEmailAuthService: EmailAuthenticationService {
     var identities: [String: String] = [:]
