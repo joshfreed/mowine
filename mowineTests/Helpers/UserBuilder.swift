@@ -8,6 +8,7 @@
 
 import Foundation
 @testable import mowine
+import Model
 
 class UserBuilder {
     private var userId: UserId?

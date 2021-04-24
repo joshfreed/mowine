@@ -11,8 +11,8 @@
 
 @testable import mowine
 import XCTest
-import JFLib
 import Nimble
+import Model
 
 class EditWineWorkerTests: XCTestCase {
     // MARK: - Subject under test

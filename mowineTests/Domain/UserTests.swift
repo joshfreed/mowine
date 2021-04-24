@@ -9,6 +9,7 @@
 import XCTest
 @testable import mowine
 import Nimble
+import Model
 
 class UserTests: XCTestCase {
     var user = User(id: UserId(string: "111"), emailAddress: "test@test.com")

@@ -9,6 +9,7 @@
 import Foundation
 @testable import mowine
 import UIKit
+import Model
 
 class MockWineImageWorker: WineImageWorkerProtocol {
     func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?, Error>) -> ()) {

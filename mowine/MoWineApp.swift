@@ -78,6 +78,12 @@ extension View {
             socialSignInMethods: JFContainer.shared.socialSignInMethods()
         )
 
+        let wineWorker = WineWorker(
+            wineRepository: try! container.resolve(),
+            imageWorker: try! container.resolve(),
+            session: try! container.resolve()
+        )
+
         return self
             .environmentObject(JFContainer.shared)
             .environmentObject(makeMyCellarViewModel())
@@ -91,6 +97,7 @@ extension View {
             .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetWineDetailsQuery)
             .environmentObject(WineTypeService(wineTypeRepository: try! container.resolve()))
+            .environmentObject(wineWorker)
     }
 }
 

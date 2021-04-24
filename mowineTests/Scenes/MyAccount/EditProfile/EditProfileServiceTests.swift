@@ -9,7 +9,6 @@
 import XCTest
 @testable import mowine
 import Nimble
-import JFLib
 
 class EditProfileServiceTests: XCTestCase {
     var sut: EditProfileService!
