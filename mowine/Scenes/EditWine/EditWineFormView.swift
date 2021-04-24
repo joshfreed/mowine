@@ -11,8 +11,11 @@ import Model
 
 struct EditWineFormView: View {
     @ObservedObject var vm: EditWineFormModel
+    var onDelete: () -> Void = { }
     var changeImage: (ImagePickerView.SourceType) -> Void = { _ in }
-    
+
+    @State private var showConfirmDelete = false
+
     var body: some View {
         Form {
             Section(header: Text("")) {
@@ -67,16 +70,16 @@ struct EditWineFormView: View {
             }
             
             Section(header: Text("")) {
-                Button(action: { vm.confirmDeleteWine() }) {
+                Button(action: { showConfirmDelete = true }) {
                     Text("Delete Wine")
                         .foregroundColor(.red)
                         
                 }
             }
         }
-        .actionSheet(isPresented: $vm.showConfirmDelete, content: {
+        .actionSheet(isPresented: $showConfirmDelete, content: {
             ActionSheet(title: Text("Are you sure?"), message: Text("This cannot be undone."), buttons: [
-                .destructive(Text("Delete Wine")) { vm.deleteWine() },
+                .destructive(Text("Delete Wine")) { onDelete() },
                 .cancel()
             ])
         })

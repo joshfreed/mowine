@@ -18,26 +18,18 @@ class EditWineViewModel: ObservableObject {
     @Published var isShowingSheet = false
     @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     
-    let editWineService: EditWineService
     let form = EditWineFormModel()
-    private var onDelete: () -> Void
     private var wineId: String?
     
-    init(editWineService: EditWineService, onDelete: @escaping () -> Void = { }) {
+    init() {
         SwiftyBeaver.debug("init")
-        self.editWineService = editWineService
-        self.onDelete = onDelete
-        
-        self.form.onDelete = { [weak self] in
-            self?.deleteWine()
-        }
     }
     
     deinit {
         SwiftyBeaver.debug("deinit")
     }
     
-    func load(wineId: String) {
+    func load(wineId: String, editWineService: EditWineService) {
         self.wineId = wineId
         
         editWineService.getWineTypes() { [weak self] result in
@@ -68,7 +60,7 @@ class EditWineViewModel: ObservableObject {
         }
     }
     
-    func save(completion: @escaping () -> Void) {
+    func save(editWineService: EditWineService, completion: @escaping () -> Void) {
         guard let type = form.type else {
             return
         }
@@ -94,18 +86,7 @@ class EditWineViewModel: ObservableObject {
             }
         }
     }
-    
-    func deleteWine() {
-        editWineService.deleteWine(wineId: wineId!) { [weak self] result in
-            switch result {
-            case .success: self?.onDelete()
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-            }
-        }
-    }
-    
+
     func selectWinePhoto(from sourceType: ImagePickerView.SourceType) {
         isShowingSheet = true
         pickerSourceType = sourceType

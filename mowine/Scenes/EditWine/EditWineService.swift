@@ -12,18 +12,7 @@ import PromiseKit
 import FirebaseCrashlytics
 import Model
 
-protocol EditWineService {
-    func getWine(wineId: String) -> Promise<WineViewModel>
-    func getWineTypes() -> Promise<[WineTypeViewModel]>
-    func getWine(wineId: String, completion: @escaping (Swift.Result<Wine, Error>) -> Void)
-    func getWineTypes(completion: @escaping (Swift.Result<[WineType], Error>) -> Void)
-    func getWinePhoto(wineId: String, completion: @escaping (Swift.Result<UIImage?, Error>) -> ())
-    func saveWine(wineId: String, request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ())
-    func updateWine(wine: Wine, from request: SaveWineRequest, completion: @escaping (Swift.Result<Void, Error>) -> ())
-    func deleteWine(wineId: String, completion: @escaping (Swift.Result<Void, Error>) -> ())
-}
-
-class EditWineServiceImpl: EditWineService {
+class EditWineService: ObservableObject {
     let wineRepository: WineRepository
     let wineTypeRepository: WineTypeRepository
     let imageWorker: WineImageWorkerProtocol
