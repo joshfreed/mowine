@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Model
 
 protocol WineCellarBusinessLogic {
     func getWineTypes(request: WineCellar.GetWineTypes.Request)

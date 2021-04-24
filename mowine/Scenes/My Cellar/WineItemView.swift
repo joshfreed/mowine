@@ -7,18 +7,7 @@
 //
 
 import SwiftUI
-
-struct WineItemViewModel: Identifiable {
-    var id: String
-    var name: String
-    var rating: Int
-    var type: String
-    var thumbnail: Data?
-
-    static func toDto(_ wine: Wine) -> WineItemViewModel {
-        .init(id: wine.id.asString, name: wine.name, rating: Int(wine.rating), type: wine.type.name)
-    }
-}
+import Model
 
 struct WineItemView: View {
     let viewModel: WineItemViewModel

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct SelectVarietyView: View {
     @ObservedObject var model: NewWineModel

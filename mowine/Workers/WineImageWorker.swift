@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyBeaver
+import Model
 
 protocol WineImageWorkerProtocol {
     func createImages(wineId: WineId, photo: UIImage?) -> Data?

@@ -10,6 +10,7 @@ import Foundation
 import FirebaseFirestore
 import SwiftyBeaver
 import FirebaseCrashlytics
+import Model
 
 class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()

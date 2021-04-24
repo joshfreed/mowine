@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import SwiftyBeaver
+import Model
 
 class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()

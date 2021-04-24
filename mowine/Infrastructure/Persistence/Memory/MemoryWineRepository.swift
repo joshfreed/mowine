@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []

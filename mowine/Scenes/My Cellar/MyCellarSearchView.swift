@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 import SwiftyBeaver
+import Model
 
 struct MyCellarSearchView: View {
     @ObservedObject var viewModel: MyCellarSearchViewModel

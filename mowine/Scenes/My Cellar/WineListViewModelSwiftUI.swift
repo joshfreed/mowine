@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
+import Model
 
 class WineListViewModelSwiftUI: ObservableObject {
     var onEditWine: (String) -> Void = { _ in }

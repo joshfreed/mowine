@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Model
 
 class SignUpWorker {
     let emailAuthService: EmailAuthenticationService

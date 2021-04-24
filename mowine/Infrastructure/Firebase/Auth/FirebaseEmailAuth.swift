@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import SwiftyBeaver
+import Model
 
 class FirebaseEmailAuth: EmailAuthenticationService {
     func signIn(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {

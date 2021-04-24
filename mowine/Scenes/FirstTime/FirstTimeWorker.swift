@@ -13,6 +13,7 @@
 import UIKit
 import GoogleSignIn
 import SwiftyBeaver
+import Model
 
 class FirstTimeWorker {
     let workers: [SocialProviderType: SocialSignInWorker]

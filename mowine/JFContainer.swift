@@ -9,6 +9,7 @@
 import Foundation
 import Dip
 import Combine
+import Model
 
 class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!

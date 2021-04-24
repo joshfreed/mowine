@@ -9,6 +9,7 @@
 import UIKit
 import Combine
 import SwiftyBeaver
+import Model
 
 class WineWorker: ObservableObject {
     let wineRepository: WineRepository

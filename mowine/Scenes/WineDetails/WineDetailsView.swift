@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct WineDetailsView: View {
     @EnvironmentObject var query: GetWineDetailsQuery

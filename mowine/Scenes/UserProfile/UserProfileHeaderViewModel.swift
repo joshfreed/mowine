@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftyBeaver
+import Model
 
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""

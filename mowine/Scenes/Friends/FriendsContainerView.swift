@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct FriendsContainerView: View {
     @EnvironmentObject var session: ObservableSession

@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Model
 
 enum WineCellar {
     // MARK: Use cases

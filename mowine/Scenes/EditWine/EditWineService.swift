@@ -10,6 +10,7 @@ import Foundation
 import SwiftyBeaver
 import PromiseKit
 import FirebaseCrashlytics
+import Model
 
 protocol EditWineService {
     func getWine(wineId: String) -> Promise<WineViewModel>

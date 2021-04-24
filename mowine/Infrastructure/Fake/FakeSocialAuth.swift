@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 class FakeSocialAuth: SocialAuthService {
     func signIn(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {

@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import Model
 
 class FirebaseSocialAuth: SocialAuthService {
     let credentialFactory: FirebaseCredentialMegaFactory

@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import FirebaseCrashlytics
+import Model
 
 class MyCellarSearchViewModel: ObservableObject {
     @Published var results: [WineItemViewModel] = []

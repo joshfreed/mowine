@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct FriendsPage: View {
     @StateObject var searchBar = SearchBar()

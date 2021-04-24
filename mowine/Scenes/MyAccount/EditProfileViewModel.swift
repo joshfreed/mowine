@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import FirebaseCrashlytics
 import SwiftyBeaver
+import Model
 
 class EditProfileViewModel: ObservableObject {
     @Published var fullName: String = "" {

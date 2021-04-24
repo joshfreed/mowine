@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
+import Model
 
 class SocialSignInWorker {
     let userRepository: UserRepository

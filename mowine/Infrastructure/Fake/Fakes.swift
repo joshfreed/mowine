@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import Combine
+import Model
 
 var josh = User.make(emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
 var maureen = User.make(emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")

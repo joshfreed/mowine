@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyBeaver
 import Combine
+import Model
 
 class MyCellarViewModel: ObservableObject {
     @Published var isEditingWine: Bool = false

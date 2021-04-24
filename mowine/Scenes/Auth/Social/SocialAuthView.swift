@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct SocialAuthView: View {
     @Binding var isSigningIn: Bool
@@ -28,6 +29,6 @@ struct SocialAuthView_Previews: PreviewProvider {
     static var previews: some View {
         SocialAuthView(isSigningIn: .constant(false)) { }
             .padding()
-            .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:])))
+            .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }
 }

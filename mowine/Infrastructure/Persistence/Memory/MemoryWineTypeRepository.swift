@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 class MemoryWineTypeRepository: WineTypeRepository {
     private(set) lazy var types: [WineType] = {

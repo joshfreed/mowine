@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Model
 
 struct MyCellarView: View {
     @EnvironmentObject var viewModel: MyCellarViewModel
