@@ -7,22 +7,27 @@
 //
 
 import SwiftUI
+import SwiftyBeaver
+import FirebaseCrashlytics
 
 struct EditWineView: View {
     let wineId: String
-    @StateObject var vm: EditWineViewModel
+    @EnvironmentObject var editWineService: EditWineService
     @Environment(\.presentationMode) var presentationMode
+    @StateObject private var vm = EditWineViewModel()
     
     var body: some View {
         NavigationView {
-            EditWineFormView(vm: vm.form) { pickerSourceType in
+            EditWineFormView(vm: vm.form) {
+                deleteWine()
+            } changeImage: { pickerSourceType in
                 vm.selectWinePhoto(from: pickerSourceType)
             }
             .navigationBarTitle("Edit Wine", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
                 presentationMode.wrappedValue.dismiss()
             }, trailing: Button("Save") {
-                vm.save() {
+                vm.save(editWineService: editWineService) {
                     presentationMode.wrappedValue.dismiss()
                 }
             })
@@ -30,7 +35,7 @@ struct EditWineView: View {
         .loading(isShowing: vm.isSaving, text: "Saving...")
         .accentColor(.mwSecondary)
         .onAppear {
-            vm.load(wineId: wineId)
+            vm.load(wineId: wineId, editWineService: editWineService)
         }
         .sheet(isPresented: $vm.isShowingSheet) {
             ImagePickerView(sourceType: vm.pickerSourceType) { image in
@@ -40,10 +45,22 @@ struct EditWineView: View {
             }
         }
     }
+
+    func deleteWine() {
+        editWineService.deleteWine(wineId: wineId) { result in
+            switch result {
+            case .success: presentationMode.wrappedValue.dismiss()
+            case .failure(let error):
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
+            }
+        }
+    }
 }
 
 struct EditWineView_Previews: PreviewProvider {
     static var previews: some View {
-        EditWineView(wineId: "", vm: EditWineViewModel(editWineService: FakeEditWineService()))
+        EditWineView(wineId: "")
+            .addPreviewEnvironment()
     }
 }

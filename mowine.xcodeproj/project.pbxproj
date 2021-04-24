@@ -87,7 +87,6 @@
 		5381EFF925C7267E004D2DF9 /* EditWineFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */; };
 		5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */; };
 		5381F00125C74E7D004D2DF9 /* EditWineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381F00025C74E7D004D2DF9 /* EditWineService.swift */; };
-		5381F00725C75009004D2DF9 /* FakeEditWineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381F00625C75009004D2DF9 /* FakeEditWineService.swift */; };
 		5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCD25BE2B9600B8A8F5 /* storage.rules */; };
 		5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCE25BE2B9600B8A8F5 /* firebase.json */; };
 		5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */; };
@@ -291,7 +290,6 @@
 		5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormView.swift; sourceTree = "<group>"; };
 		5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormModel.swift; sourceTree = "<group>"; };
 		5381F00025C74E7D004D2DF9 /* EditWineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineService.swift; sourceTree = "<group>"; };
-		5381F00625C75009004D2DF9 /* FakeEditWineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeEditWineService.swift; sourceTree = "<group>"; };
 		5386ABCD25BE2B9600B8A8F5 /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = storage.rules; sourceTree = SOURCE_ROOT; };
 		5386ABCE25BE2B9600B8A8F5 /* firebase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase.json; sourceTree = SOURCE_ROOT; };
 		5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firestore.indexes.json; sourceTree = SOURCE_ROOT; };
@@ -670,7 +668,6 @@
 				536E85A3204F507D004D5426 /* Fakes.swift */,
 				538E104A253BB56200B26619 /* FakeWineThumbnailFetcher.swift */,
 				53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */,
-				5381F00625C75009004D2DF9 /* FakeEditWineService.swift */,
 			);
 			path = Fake;
 			sourceTree = "<group>";
@@ -1484,7 +1481,6 @@
 				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
 				5381EFEF25C5E4F4004D2DF9 /* EditPairingsView.swift in Sources */,
 				536AEBF22540BBBB009EA107 /* MyCellarContentView.swift in Sources */,
-				5381F00725C75009004D2DF9 /* FakeEditWineService.swift in Sources */,
 				533F102D259FD63900DAA4B6 /* EmailLogInView.swift in Sources */,
 				53B6CB8C205ADD9300AE8EFB /* WineCellarWorker.swift in Sources */,
 				533D8B8C2533B8DB00CE297E /* StarView.swift in Sources */,

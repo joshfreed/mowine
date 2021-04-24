@@ -185,7 +185,7 @@ extension DependencyContainer {
         
         // Scenes
         container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
-        container.register(.singleton) { EditWineServiceImpl(wineRepository: $0, wineTypeRepository: $1, imageWorker: $2) }.implements(EditWineService.self)
+        container.register(.singleton) { EditWineService(wineRepository: $0, wineTypeRepository: $1, imageWorker: $2) }
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
         container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
