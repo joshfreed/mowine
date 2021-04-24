@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 class FakeWineThumbnailFetcher: WineListThumbnailFetcher {
     func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ()) {

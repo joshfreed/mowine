@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct UserSearchResultView: View {
     let user: UsersService.UserSearchResult

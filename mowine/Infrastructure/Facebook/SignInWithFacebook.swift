@@ -8,6 +8,7 @@
 
 import Foundation
 import FBSDKLoginKit
+import Model
 
 struct FacebookToken: SocialToken {
     let token: String

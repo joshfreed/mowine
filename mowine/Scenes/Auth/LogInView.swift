@@ -52,6 +52,6 @@ struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
         ShimView()
             .environmentObject(EmailLogInViewModel(emailAuth: FakeEmailAuth()))
-            .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:])))
+            .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }
 }

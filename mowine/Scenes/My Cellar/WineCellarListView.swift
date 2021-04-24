@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Model
 
 struct WineCellarListView: View {
     @ObservedObject var viewModel: WineCellarListViewModel

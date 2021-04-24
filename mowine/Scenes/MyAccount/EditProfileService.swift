@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import Model
 
 class EditProfileService {
     let session: Session

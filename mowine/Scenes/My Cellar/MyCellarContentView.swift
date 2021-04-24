@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct MyCellarContentView: View {
     private(set) var viewModel: MyCellarViewModel

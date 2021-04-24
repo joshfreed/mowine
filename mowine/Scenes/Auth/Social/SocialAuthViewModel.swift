@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftyBeaver
+import Model
 
 class SocialAuthViewModel: ObservableObject {
     @Published var isSigningIn: Bool = false
@@ -18,9 +19,9 @@ class SocialAuthViewModel: ObservableObject {
     let worker: FirstTimeWorker
     let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
     
-    init(firstTimeWorker: FirstTimeWorker) {
+    init(firstTimeWorker: FirstTimeWorker, socialSignInMethods: [SocialProviderType: SocialSignInMethod]) {
         self.worker = firstTimeWorker
-        self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
+        self.socialSignInMethods = socialSignInMethods
     }
     
     func socialSignIn(type: SocialProviderType, onLogIn: @escaping () -> Void) {

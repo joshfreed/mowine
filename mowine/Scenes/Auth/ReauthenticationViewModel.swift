@@ -11,6 +11,7 @@ import Combine
 import SwiftyBeaver
 import FirebaseAuth
 import GoogleSignIn
+import Model
 
 class ReauthenticationViewModel: ObservableObject {
     @Published var showErrorAlert = false

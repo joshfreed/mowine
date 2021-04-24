@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseFirestore
+import Model
 
 extension User {
     static func fromFirestore(_ document: DocumentSnapshot) -> User? {

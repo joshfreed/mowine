@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct EditWineFormView: View {
     @ObservedObject var vm: EditWineFormModel

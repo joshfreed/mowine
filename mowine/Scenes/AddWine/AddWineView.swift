@@ -8,9 +8,9 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Model
 
 struct AddWineView: View {
-    @EnvironmentObject var container: JFContainer
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var vm: AddWineViewModel
     @StateObject var newWineModel = NewWineModel()

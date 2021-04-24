@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct FriendButton: View {
     @EnvironmentObject var friends: FriendsService

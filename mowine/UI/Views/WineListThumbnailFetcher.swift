@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 protocol WineListThumbnailFetcher: class {
     func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ())

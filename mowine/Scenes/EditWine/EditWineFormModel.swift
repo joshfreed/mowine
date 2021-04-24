@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import UIKit.UIImage
+import Model
 
 class EditWineFormModel: ObservableObject {
     @Published var image: UIImage? = nil

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct SharedWineListView: View {
     let wines: [WineItemViewModel]

@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftyBeaver
+import Model
 
 class SearchUsersViewModel: ObservableObject {
     @Published var hasSearched = false

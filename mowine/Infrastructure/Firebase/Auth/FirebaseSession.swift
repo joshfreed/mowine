@@ -11,6 +11,7 @@ import FirebaseAuth
 import SwiftyBeaver
 import PromiseKit
 import Combine
+import Model
 
 class FirebaseSession: Session {
     var currentUserId: UserId? {

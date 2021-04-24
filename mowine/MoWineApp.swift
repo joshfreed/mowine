@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Model
 
 @main
 struct WoWineApp: App {
@@ -70,7 +71,10 @@ extension View {
             session: try! JFContainer.shared.container.resolve()
         )
         let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
-        let socialAuthViewModel = SocialAuthViewModel(firstTimeWorker: JFContainer.shared.firstTimeWorker())
+        let socialAuthViewModel = SocialAuthViewModel(
+            firstTimeWorker: JFContainer.shared.firstTimeWorker(),
+            socialSignInMethods: JFContainer.shared.socialSignInMethods()
+        )
 
         return self
             .environmentObject(JFContainer.shared)

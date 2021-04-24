@@ -5,6 +5,7 @@
 
 import UIKit
 import SwiftyBeaver
+import Model
 
 protocol ProfilePictureWorkerProtocol {
     func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ())

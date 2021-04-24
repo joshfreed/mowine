@@ -45,10 +45,10 @@ struct SignUpView_Previews: PreviewProvider {
             SignUpView() { }
         }
     }
-    
+
     static var previews: some View {
         ShimView()
             .environmentObject(EmailSignUpViewModel(worker: SignUpWorker(emailAuthService: FakeEmailAuth(), userRepository: FakeUserRepository(), session: FakeSession())))
-            .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:])))
+        .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }
 }

@@ -8,33 +8,7 @@
 
 import SwiftUI
 import Combine
-
-final class MainTabBarData: ObservableObject {
-    /// This is true when the user has selected the Item with the custom action
-    @Published var isCustomItemSelected: Bool = false
-    
-    /// The index of the currently selected tab
-    @Published var itemSelected: Int {
-        didSet {
-            if itemSelected == customActionItemIndex {
-                previousItem = oldValue
-                itemSelected = oldValue
-                isCustomItemSelected = true
-            }
-        }
-    }
-    
-    /// This is the index of the item that fires a custom action
-    let customActionItemIndex: Int
-    
-    private var previousItem: Int
-
-    init(customItemIndex: Int, initialIndex: Int = 1) {
-        self.customActionItemIndex = customItemIndex
-        self.itemSelected = initialIndex
-        self.previousItem = initialIndex
-    }
-}
+import Model
 
 struct TabbedRootView: View {
     @EnvironmentObject var container: JFContainer

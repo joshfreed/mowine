@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct UserProfileView: View {
     @EnvironmentObject var users: UsersService

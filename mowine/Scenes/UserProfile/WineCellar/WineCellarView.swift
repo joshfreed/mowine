@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 class WineCellarViewModel: ObservableObject, WineCellarDisplayLogic {
     @Published var types: [String] = []

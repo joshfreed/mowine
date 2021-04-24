@@ -10,6 +10,7 @@ import Foundation
 import SwiftyBeaver
 import Combine
 import FirebaseCrashlytics
+import Model
 
 class WineCellarListViewModel: ObservableObject {
     let navigationBarTitle: String

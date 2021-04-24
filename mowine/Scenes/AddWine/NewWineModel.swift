@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import UIKit.UIImage
+import Model
 
 class NewWineModel: ObservableObject {
     @Published var wineType: WineType?

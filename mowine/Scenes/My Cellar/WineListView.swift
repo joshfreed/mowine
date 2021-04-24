@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct WineListView: View {
     @ObservedObject var viewModel: WineListViewModelSwiftUI

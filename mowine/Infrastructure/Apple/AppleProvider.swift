@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import SwiftyBeaver
+import Model
 
 class AppleProvider: SocialSignInProvider {
     func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {

@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import SwiftyBeaver
+import Model
 
 class UserProfileService {
     let session: Session

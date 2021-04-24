@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Model
 
 class WineCellarWorker {
     let wineTypeRepository: WineTypeRepository

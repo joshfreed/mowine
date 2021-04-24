@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
+import Model
 
 class AddWineViewModel: ObservableObject {
     @Published private(set) var wineTypes: [WineType] = []

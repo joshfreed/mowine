@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Model
 
 class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false

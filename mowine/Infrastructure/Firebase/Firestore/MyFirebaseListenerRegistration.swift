@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseFirestore
+import Model
 
 class MyFirebaseListenerRegistration: MoWineListenerRegistration {
     let wrapped: ListenerRegistration

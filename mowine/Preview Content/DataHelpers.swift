@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Model
 
 extension MyAccountViewModel {
     static func make(fullName: String, email: String) -> MyAccountViewModel {

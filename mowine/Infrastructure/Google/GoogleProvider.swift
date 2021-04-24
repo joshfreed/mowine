@@ -9,6 +9,7 @@
 import Foundation
 import GoogleSignIn
 import SwiftyBeaver
+import Model
 
 enum CreateUserFromGoogleInfoError: Error {
     case failedToFetchProfile

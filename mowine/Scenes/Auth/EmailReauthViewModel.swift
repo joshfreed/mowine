@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Model
 
 class EmailReauthViewModel: ObservableObject {
     let session: Session

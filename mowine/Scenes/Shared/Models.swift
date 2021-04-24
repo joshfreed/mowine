@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Model
 
 struct WineViewModel {
     var name: String

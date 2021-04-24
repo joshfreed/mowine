@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import Model
 
 class FakeEditWineService: EditWineService {
     func getWine(wineId: String) -> Promise<WineViewModel> {

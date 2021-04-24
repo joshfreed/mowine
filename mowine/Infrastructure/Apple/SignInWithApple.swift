@@ -10,6 +10,7 @@ import Foundation
 import AuthenticationServices
 import CryptoKit
 import SwiftyBeaver
+import Model
 
 struct AppleToken: SocialToken {
     let idTokenString: String
