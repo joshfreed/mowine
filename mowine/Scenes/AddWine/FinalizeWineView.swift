@@ -8,9 +8,11 @@
 
 import SwiftUI
 import SwiftyBeaver
+import Model
 
 struct FinalizeWineView: View {
     @EnvironmentObject var vm: AddWineViewModel
+    @EnvironmentObject var wineWorker: WineWorker
     @ObservedObject var model: NewWineModel
     
     @State private var isSaving = false
@@ -33,13 +35,20 @@ struct FinalizeWineView: View {
     
     func addWine() {
         isSaving = true
-        
-        vm.createWine(model: model) { error in
-            isSaving = false
-            SwiftyBeaver.error("\(error)")
-            isErrorSaving = true
-            errorMessage = error.localizedDescription
+
+        wineWorker.createWine(from: model) { result in
+            switch result {
+            case .success: vm.closeModal = true
+            case .failure(let error): displayAddWineError(error)
+            }
         }
+    }
+
+    private func displayAddWineError(_ error: Error) {
+        isSaving = false
+        SwiftyBeaver.error("\(error)")
+        isErrorSaving = true
+        errorMessage = error.localizedDescription
     }
 }
 
@@ -76,5 +85,6 @@ struct RateWineView: View {
 struct FinalizeWineView_Previews: PreviewProvider {
     static var previews: some View {
         FinalizeWineView(model: NewWineModel())
+            .addPreviewEnvironment()
     }
 }

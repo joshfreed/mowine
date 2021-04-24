@@ -9,19 +9,29 @@
 import UIKit
 import Combine
 import SwiftyBeaver
-import Model
 
-class WineWorker: ObservableObject {
+open class WineWorker: ObservableObject {
     let wineRepository: WineRepository
     let imageWorker: WineImageWorkerProtocol
     let session: Session
     
-    init(wineRepository: WineRepository, imageWorker: WineImageWorkerProtocol, session: Session) {
+    public init(wineRepository: WineRepository, imageWorker: WineImageWorkerProtocol, session: Session) {
         self.wineRepository = wineRepository
         self.imageWorker = imageWorker
         self.session = session
     }
-    
+
+    public func createWine(from model: NewWineModel, completion: @escaping (Result<Wine, Error>) -> ()) {
+        createWine(
+            type: model.wineType!,
+            variety: model.wineVariety,
+            name: model.name,
+            rating: Double(model.rating),
+            photo: model.image,
+            completion: completion
+        )
+    }
+
     func createWine(
         type: WineType,
         variety: WineVariety?,

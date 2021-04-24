@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+import Model
 
 struct AppView: View {
+    @EnvironmentObject var session: ObservableSession
     @State private var isPreparing: Bool = true
     
     var body: some View {
@@ -25,7 +27,7 @@ struct AppView: View {
     }
     
     private func startSession() {
-        JFContainer.shared.session.start { result in
+        session.start { result in
             isPreparing = false
         }
     }

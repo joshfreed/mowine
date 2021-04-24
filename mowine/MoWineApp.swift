@@ -63,6 +63,8 @@ struct WoWineApp: App {
 
 extension View {
     func addAppEnvironment() -> some View {
+        let container = JFContainer.shared.container
+
         let session = ObservableSession(session: JFContainer.shared.session)
         let emailLogInViewModel = EmailLogInViewModel(emailAuth: try! JFContainer.shared.container.resolve())
         let signUpWorker = SignUpWorker(
@@ -88,6 +90,7 @@ extension View {
             .environmentObject(try! JFContainer.shared.container.resolve() as UsersService)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetWineDetailsQuery)
+            .environmentObject(WineTypeService(wineTypeRepository: try! container.resolve()))
     }
 }
 

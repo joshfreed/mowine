@@ -84,6 +84,10 @@ public class ObservableSession: ObservableObject {
     deinit {
         SwiftyBeaver.debug("deinit")
     }
+
+    public func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+        session.start(completion: completion)
+    }
     
     func didLogIn() {
         isAnonymous = false

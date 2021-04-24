@@ -10,12 +10,6 @@ import UIKit
 import SwiftyBeaver
 import Model
 
-protocol WineImageWorkerProtocol {
-    func createImages(wineId: WineId, photo: UIImage?) -> Data?
-    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ())
-    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?, Error>) -> ())
-}
-
 class WineImageWorker<DataServiceType: DataServiceProtocol>: WineImageWorkerProtocol
 where
     DataServiceType.GetDataUrl == String,
