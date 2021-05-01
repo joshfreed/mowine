@@ -19,22 +19,16 @@ struct MyCellarView: View {
         NavigationView {
             Group {
                 if searchBar.isActive {
-                    MyCellarSearchView(viewModel: viewModel.makeMyCellarSearchViewModel(), searchBar: searchBar)
+                    MyCellarSearchView(searchBar: searchBar, onEditWine: { viewModel.onEditWine($0) })
                 } else {
-                    MyCellarContentView(viewModel: viewModel)
+                    MyCellarContentView(onEditWine: { viewModel.onEditWine($0) })
                 }
             }
                 .navigationBarTitle("My Cellar")
                 .add(searchBar)
-                .onReceive(searchBar.$text) { output in
-                    viewModel.searchCellar(searchText: output)
-                }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
-        .onAppear {
-            viewModel.loadWineTypes()
-        }
         .sheet(isPresented: $viewModel.isEditingWine) {
             viewModel.selectedWineId.map {
                 EditWineView(wineId: $0)
@@ -55,6 +49,6 @@ fileprivate func makeViewModel() -> MyCellarViewModel {
 struct MyCellarView_Previews: PreviewProvider {
     static var previews: some View {
         MyCellarView()
-            .environmentObject(makeViewModel())
+            .addPreviewEnvironment()
     }
 }

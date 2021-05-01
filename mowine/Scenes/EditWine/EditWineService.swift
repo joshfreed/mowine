@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftyBeaver
-import PromiseKit
 import FirebaseCrashlytics
 import Model
 
@@ -25,32 +24,6 @@ class EditWineService: ObservableObject {
         self.imageWorker = imageWorker
     }
 
-    func getWine(wineId: String) -> Promise<WineViewModel> {
-        return Promise<WineViewModel> { seal in
-            wineRepository.getWine(by: WineId(string: wineId)) { result in
-                switch result {
-                case .success(let wine): seal.fulfill(WineViewModel.from(model: wine))
-                case .failure(let error): seal.reject(error)
-                }
-            }
-        }
-    }
-    
-    func getWineTypes() -> Promise<[WineTypeViewModel]> {
-        return Promise<[WineTypeViewModel]> { seal in
-            wineTypeRepository.getAll { result in
-                switch result {
-                case .success(let wineTypes):
-                    self.wineTypes = wineTypes
-                    let mapped = wineTypes.map({ WineTypeViewModel.from(model: $0) })
-                    seal.fulfill(mapped)
-                case .failure(let error):
-                    seal.reject(error)
-                }
-            }
-        }
-    }
-    
     func getWine(wineId: String, completion: @escaping (Swift.Result<Wine, Error>) -> Void) {
         wineRepository.getWine(by: WineId(string: wineId), completion: completion)
     }

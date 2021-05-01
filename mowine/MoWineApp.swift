@@ -99,6 +99,7 @@ extension View {
             .environmentObject(WineTypeService(wineTypeRepository: try! container.resolve()))
             .environmentObject(wineWorker)
             .environmentObject(try! container.resolve() as EditWineService)
+            .environmentObject(try! container.resolve() as MyWinesService)
     }
 }
 

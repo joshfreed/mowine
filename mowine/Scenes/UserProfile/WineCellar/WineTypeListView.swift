@@ -18,7 +18,7 @@ struct WineTypeListView: View {
     @State private var selectedWineId: String = ""
 
     var body: some View {
-        SharedWineListView(wines: query.wines) { wineId in
+        WineListView(wines: query.wines) { wineId in
             showWineDetails = true
             selectedWineId = wineId
         }
