@@ -12,33 +12,29 @@ import SwiftyBeaver
 import Model
 
 struct MyCellarSearchView: View {
-    @ObservedObject var viewModel: MyCellarSearchViewModel
+    @EnvironmentObject var myWines: MyWinesService
     @ObservedObject private(set) var searchBar: SearchBar
+    let onEditWine: (String) -> Void
 
     var body: some View {
-        if searchBar.text.isEmpty {
-            Text("Search for your favorite wines!")
-        } else if viewModel.results.isEmpty {
-            Text("No wines match your search terms.")
-        } else {
-            List(viewModel.results) { wine in
-                WineItemView(viewModel: wine)
-                    .contentShape(Rectangle())
-                    .onTapGesture { viewModel.onEditWine(wine.id) }
+        Group {
+            if searchBar.text.isEmpty {
+                Text("Search for your favorite wines!")
+            } else if myWines.searchResults.isEmpty {
+                Text("No wines match your search terms.")
+            } else {
+                WineListView(wines: myWines.searchResults, onTapWine: onEditWine)
             }
-                .listStyle(PlainListStyle())
+        }
+        .onReceive(searchBar.$text) { searchBarText in
+            myWines.filter(by: searchBarText)
         }
     }
 }
 
 struct MyCellarSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarSearchView(
-            viewModel: MyCellarSearchViewModel(
-                searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession()),
-                thumbnailFetcher: FakeWineThumbnailFetcher()
-            ),
-            searchBar: SearchBar()
-        )
+        MyCellarSearchView(searchBar: SearchBar(), onEditWine: { _ in })
+            .addPreviewEnvironment()
     }
 }

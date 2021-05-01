@@ -11,6 +11,7 @@ import Model
 
 struct WineItemView: View {
     let viewModel: WineItemViewModel
+    var onTap: (String) -> Void = { _ in }
 
     var body: some View {
         HStack(spacing: 16) {
@@ -28,6 +29,8 @@ struct WineItemView: View {
             Spacer()
         }
         .padding([.top, .bottom], 8)
+        .contentShape(Rectangle())
+        .onTapGesture { onTap(viewModel.id) }
     }
 }
 

@@ -11,6 +11,12 @@ import SwiftyBeaver
 public class WineTypeService: ObservableObject {
     @Published public private(set) var wineTypes: [WineType] = []
 
+    public var red: WineType { wineTypes.first { $0.name == "Red" }! }
+    public var white: WineType { wineTypes.first { $0.name == "White" }! }
+    public var rose: WineType { wineTypes.first { $0.name == "Rosé" }! }
+    public var bubbly: WineType { wineTypes.first { $0.name == "Bubbly" }! }
+    public var other: WineType { wineTypes.first { $0.name == "Other" }! }
+
     private let wineTypeRepository: WineTypeRepository
 
     public init(wineTypeRepository: WineTypeRepository) {

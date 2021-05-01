@@ -191,5 +191,6 @@ extension DependencyContainer {
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
         container.register(.singleton) { GetUserWinesByTypeQuery(wineRepository: $0) }
         container.register(.singleton) { GetWineDetailsQuery(wineRepository: $0) }
+        container.register(.singleton) { MyWinesService(session: $0, wineTypeRepository: $1, wineRepository: $2) }
     }
 }

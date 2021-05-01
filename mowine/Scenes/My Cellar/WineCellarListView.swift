@@ -11,37 +11,35 @@ import SwiftyBeaver
 import Model
 
 struct WineCellarListView: View {
-    @ObservedObject var viewModel: WineCellarListViewModel
-    @StateObject var searchBar = SearchBar()
+    @EnvironmentObject var myWines: MyWinesService
+    let wineTypeId: Int
+    let navigationBarTitle: String
+    let onEditWine: (String) -> Void
+
+    private let wineFilteringService = WineFilteringService()
+    private var allWines: [WineItemViewModel] {
+        myWines.wines[wineTypeId, default: []]
+    }
+
+    @StateObject private var searchBar = SearchBar()
+    @State private var searchResults: [WineItemViewModel] = []
 
     var body: some View {
-        WineListView(viewModel: viewModel.makeWineListViewModel(), searchText: $searchBar.text)
-            .navigationBarTitle(viewModel.navigationBarTitle)
+        WineListView(wines: searchResults, onTapWine: onEditWine)
+            .navigationBarTitle(navigationBarTitle)
             .add(self.searchBar)
-            .onAppear(perform: {
-                SwiftyBeaver.info("onAppear \(viewModel.navigationBarTitle)")
-                viewModel.loadWines()
-            })
+            .onReceive(searchBar.$text) { searchBarText in
+                searchResults = wineFilteringService.filter(wines: allWines, by: searchBarText)
+            }
+            .onAppear {
+                searchResults = allWines
+            }
     }
-}
-
-fileprivate func makeViewModel() -> WineCellarListViewModel {
-    let vm = WineCellarListViewModel(
-        navigationBarTitle: "Red",
-        getWineByTypeQuery: GetWinesByTypeQuery(wineRepository: MemoryWineRepository(), session: FakeSession()),
-        wineType: WineType(name: "Red"),
-        thumbnailFetcher: FakeWineThumbnailFetcher()
-    )
-    vm.setWines([
-        GetWinesByTypeQuery.WineDto(id: "A", name: "Merlot 1", rating: 1, type: "Red"),
-        GetWinesByTypeQuery.WineDto(id: "B", name: "Merlot 2", rating: 2, type: "Red"),
-        GetWinesByTypeQuery.WineDto(id: "C", name: "Merlot 3", rating: 3, type: "Red"),
-    ])
-    return vm
 }
 
 struct WineCellarListView_Previews: PreviewProvider {
     static var previews: some View {
-        WineCellarListView(viewModel: makeViewModel())
+        WineCellarListView(wineTypeId: 1, navigationBarTitle: "Red", onEditWine: { _ in })
+            .addPreviewEnvironment()
     }
 }
