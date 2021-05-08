@@ -4,9 +4,10 @@
 //
 
 import UIKit
+import Model
 
 extension UIImage {
-    func resize(to desiredSize: CGSize) -> UIImage? {
+    public func resizeImage(to desiredSize: CGSize) -> UIImage? {
         let scale = min(desiredSize.width / size.width, desiredSize.height / size.height)
         let newSize = CGSize(width: size.width * scale, height: size.height * scale)
 
@@ -18,5 +19,11 @@ extension UIImage {
         UIGraphicsEndImageContext()
 
         return newImage
+    }
+}
+
+extension UIImage: WineImage {
+    public func resize(to desiredSize: CGSize) -> WineImage? {
+        resizeImage(to: desiredSize)
     }
 }

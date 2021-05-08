@@ -6,7 +6,8 @@
 //  Copyright © 2018 Josh Freed. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import CoreGraphics
 import SwiftyBeaver
 import Model
 
@@ -25,7 +26,7 @@ where
         self.wineRepository = wineRepository
     }
     
-    func createImages(wineId: WineId, photo: UIImage?) -> Data? {
+    func createImages(wineId: WineId, photo: WineImage?) -> Data? {
         guard let image = photo else {
             return nil
         }

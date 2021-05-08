@@ -306,8 +306,8 @@ class FakeWineWorker: WineWorker {
 }
 
 class FakeWineImageWorker: WineImageWorkerProtocol {
-    func createImages(wineId: WineId, photo: UIImage?) -> Data? {
-        return nil
+    func createImages(wineId: WineId, photo: WineImage?) -> Data? {
+        nil
     }
     
     func fetchPhoto(wineId: WineId, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {

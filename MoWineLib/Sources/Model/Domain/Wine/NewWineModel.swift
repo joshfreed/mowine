@@ -8,12 +8,11 @@
 
 import Foundation
 import Combine
-import UIKit.UIImage
 
 public class NewWineModel: ObservableObject {
     @Published public var wineType: WineType?
     @Published public var wineVariety: WineVariety?
-    @Published public var image: UIImage?
+    @Published public var image: WineImage?
     @Published public var name: String = ""
     @Published public var rating: Int = 0
 
