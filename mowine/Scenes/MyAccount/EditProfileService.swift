@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import PromiseKit
 import Model
+import Combine
 
 class EditProfileService {
     let session: Session
@@ -17,6 +17,8 @@ class EditProfileService {
     let userRepository: UserRepository
 
     private(set) var newProfilePicture: UIImage?
+
+    private var cancellable: AnyCancellable?
     
     init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService, userRepository: UserRepository) {
         self.session = session
@@ -53,21 +55,21 @@ class EditProfileService {
     }
     
     func saveProfile(email: String, fullName: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        firstly {
-            userProfileService.updateProfilePicture(newProfilePicture)
-        }.get {
-            self.newProfilePicture = nil
-        }.then {
-            self.userProfileService.updateEmailAddress(emailAddress: email)
-        }.then {
-            self.userProfileService.updateUserProfile(
-                UpdateUserProfileRequest(fullName: fullName)
-            )
-        }.done {
-            completion(.success(()))
-        }.catch { error in
-            completion(.failure(error))
-        }
+        cancellable = userProfileService
+            .updateProfilePicture(newProfilePicture)
+            .handleEvents(receiveOutput: { [weak self] in self?.newProfilePicture = nil })
+            .compactMap { [weak self] in self?.userProfileService.updateEmailAddress(emailAddress: email) }
+            .switchToLatest()
+            .compactMap { [weak self] in self?.userProfileService.updateUserProfile(.init(fullName: fullName)) }
+            .switchToLatest()
+            .sink { compl in
+                switch compl {
+                case .finished: completion(.success(()))
+                case .failure(let error): completion(.failure(error))
+                }
+            } receiveValue: {
+
+            }
     }
     
     private func getCurrentUser(completion: @escaping (Swift.Result<User, Error>) -> ()) {

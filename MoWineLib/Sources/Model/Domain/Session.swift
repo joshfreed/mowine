@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PromiseKit
 import Combine
 import SwiftyBeaver
 
@@ -45,7 +44,7 @@ public protocol Session {
     func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ())
     
     /// Changes the user's login email address.
-    func updateEmailAddress(_ emailAddress: String) -> Promise<Void>
+    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error>
 }
 
 public protocol MoWineAuth {
