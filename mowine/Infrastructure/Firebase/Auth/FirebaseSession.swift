@@ -9,7 +9,6 @@
 import Foundation
 import FirebaseAuth
 import SwiftyBeaver
-import PromiseKit
 import Combine
 import Model
 
@@ -121,10 +120,10 @@ class FirebaseSession: Session {
         return authUser.photoURL
     }
 
-    func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
-        return Promise<Void> { seal in
+    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error> {
+        Future { promise in
             guard let authUser = Auth.auth().currentUser else {
-                seal.reject(SessionError.notLoggedIn)
+                promise(.failure(SessionError.notLoggedIn))
                 return
             }
             
@@ -135,12 +134,12 @@ class FirebaseSession: Session {
                 if let error = error {
                     let nserror = error as NSError
                     if nserror.code == AuthErrorCode.requiresRecentLogin.rawValue {
-                        seal.reject(SessionError.requiresRecentLogin)
+                        promise(.failure(SessionError.requiresRecentLogin))
                     } else {
-                        seal.reject(error)
+                        promise(.failure(error))
                     }
                 } else {
-                    seal.fulfill_()
+                    promise(.success(()))
                 }
             }
         }

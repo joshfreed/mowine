@@ -100,7 +100,6 @@
 		539C4D8C21ACA9A600B0F8E0 /* WineImageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539C4D8B21ACA9A600B0F8E0 /* WineImageWorker.swift */; };
 		53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697B9261A1645004BCE43 /* SwiftyBeaver */; };
 		53A697E7261A16C5004BCE43 /* Dip in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697E6261A16C5004BCE43 /* Dip */; };
-		53A697ED261A1711004BCE43 /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697EC261A1711004BCE43 /* PromiseKit */; };
 		53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 53A69817261A17FE004BCE43 /* FacebookCore */; };
 		53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 53A69819261A17FE004BCE43 /* FacebookLogin */; };
 		53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A69841261A1DE4004BCE43 /* MoWineApp.swift */; };
@@ -394,7 +393,6 @@
 				53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */,
 				53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */,
 				53CA99D726305E5C009C0F87 /* mowineLib in Frameworks */,
-				53A697ED261A1711004BCE43 /* PromiseKit in Frameworks */,
 				009DBAF4A0FC6A5DD8F81AC4 /* Pods_mowine.framework in Frameworks */,
 				53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */,
 			);
@@ -1103,7 +1101,6 @@
 			packageProductDependencies = (
 				53A697B9261A1645004BCE43 /* SwiftyBeaver */,
 				53A697E6261A16C5004BCE43 /* Dip */,
-				53A697EC261A1711004BCE43 /* PromiseKit */,
 				53A69817261A17FE004BCE43 /* FacebookCore */,
 				53A69819261A17FE004BCE43 /* FacebookLogin */,
 				53CA99D626305E5C009C0F87 /* mowineLib */,
@@ -1199,7 +1196,6 @@
 				53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */,
 				53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */,
-				53A697EB261A1711004BCE43 /* XCRemoteSwiftPackageReference "PromiseKit" */,
 				53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 53F5ABF11E2176080067AB62 /* Products */;
@@ -1916,14 +1912,6 @@
 				minimumVersion = 7.1.1;
 			};
 		};
-		53A697EB261A1711004BCE43 /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mxcl/PromiseKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.13.3;
-			};
-		};
 		53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1952,11 +1940,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */;
 			productName = Dip;
-		};
-		53A697EC261A1711004BCE43 /* PromiseKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 53A697EB261A1711004BCE43 /* XCRemoteSwiftPackageReference "PromiseKit" */;
-			productName = PromiseKit;
 		};
 		53A69817261A17FE004BCE43 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import PromiseKit
 import SwiftyBeaver
 import Model
+import Combine
 
 class UserProfileService {
     let session: Session
@@ -21,45 +21,48 @@ class UserProfileService {
         self.userRepository = userRepository
         self.profilePictureWorker = profilePictureWorker
     }
-    
-    func updateProfilePicture(_ image: UIImage?) -> Promise<Void> {
-        SwiftyBeaver.info("updateProfilePicture")
-        
-        if let newProfilePicture = image {
-            return Promise<Void> { seal in
-                self.profilePictureWorker.setProfilePicture(image: newProfilePicture) { result in
-                    switch result {
-                    case .success: seal.fulfill_()
-                    case .failure(let error): seal.reject(error)
+
+    func updateProfilePicture(_ image: UIImage?) -> AnyPublisher<Void, Error> {
+        Deferred {
+            Future { promise in
+                SwiftyBeaver.info("updateProfilePicture")
+
+                if let newProfilePicture = image {
+                    self.profilePictureWorker.setProfilePicture(image: newProfilePicture) { result in
+                        switch result {
+                        case .success: promise(.success(()))
+                        case .failure(let error): promise(.failure(error))
+                        }
                     }
+                } else {
+                    promise(.success(()))
                 }
             }
-        } else {
-            return Promise()
         }
+        .eraseToAnyPublisher()
     }
-    
-    func updateEmailAddress(emailAddress: String) -> Promise<Void> {
+
+    func updateEmailAddress(emailAddress: String) -> AnyPublisher<Void, Error> {
         SwiftyBeaver.info("updateEmailAddress (1)")
-        
-        guard let userId = session.currentUserId else {
-            return Promise(error: SessionError.notLoggedIn)
+
+        guard let userId = self.session.currentUserId else {
+            return Fail(error: SessionError.notLoggedIn).eraseToAnyPublisher()
         }
-        
-        return firstly {
-            session.updateEmailAddress(emailAddress)
-        }.then {
-            self.getUserById(userId)
-        }.then { user in
-            self.updateEmailAddress(user: user, emailAddress: emailAddress)
-        }
+
+        return session
+            .updateEmailAddress(emailAddress)
+            .compactMap { [weak self] in self?.getUserById(userId) }
+            .switchToLatest()
+            .compactMap { [weak self] in self?.updateEmailAddress(user: $0, emailAddress: emailAddress) }
+            .switchToLatest()
+            .eraseToAnyPublisher()
     }
-    
-    private func updateEmailAddress(user: User, emailAddress: String) -> Promise<Void> {
+
+    private func updateEmailAddress(user: User, emailAddress: String) -> AnyPublisher<Void, Error> {
         SwiftyBeaver.info("updateEmailAddress (2)")
         
         if user.emailAddress == emailAddress {
-            return Promise()
+            return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
         } else {
             var _user = user
             _user.emailAddress = emailAddress
@@ -67,49 +70,56 @@ class UserProfileService {
         }
     }
     
-    func updateUserProfile(_ request: UpdateUserProfileRequest) -> Promise<Void> {
+    func updateUserProfile(_ request: UpdateUserProfileRequest) -> AnyPublisher<Void, Error> {
         SwiftyBeaver.info("updateUserProfile")
         
         guard let userId = session.currentUserId else {
-            return Promise(error: SessionError.notLoggedIn)
+            return Fail(error: SessionError.notLoggedIn).eraseToAnyPublisher()
         }
         
-        return getUserById(userId).then { user in
-            self.updateUserProfile(user: user, request: request)
-        }
+        return getUserById(userId)
+            .compactMap { [weak self] user in self?.updateUserProfile(user: user, request: request) }
+            .switchToLatest()
+            .eraseToAnyPublisher()
     }
     
-    private func updateUserProfile(user: User, request: UpdateUserProfileRequest) -> Promise<Void> {
+    private func updateUserProfile(user: User, request: UpdateUserProfileRequest) -> AnyPublisher<Void, Error> {
         var _user = user
         _user.fullName = request.fullName
         return save(user: _user)
     }
     
-    private func save(user: User) -> Promise<Void> {        
-        return Promise<Void> { seal in
-            userRepository.save(user: user) { result in
-                switch result {
-                case .success: seal.fulfill_()
-                case .failure(let error): seal.reject(error)
+    private func save(user: User) -> AnyPublisher<Void, Error> {
+        Deferred {
+            Future { [weak self] promise in
+                self?.userRepository.save(user: user) { result in
+                    switch result {
+                    case .success: promise(.success(()))
+                    case .failure(let error): promise(.failure(error))
+                    }
                 }
             }
         }
+        .eraseToAnyPublisher()
     }
     
-    private func getUserById(_ userId: UserId) -> Promise<User> {
-        return Promise<User> { seal in
-            userRepository.getUserById(userId) { result in
-                switch result {
-                case .success(let user):
-                    if let user = user {
-                        seal.fulfill(user)
-                    } else {
-                        seal.reject(UserRepositoryError.userNotFound)
+    private func getUserById(_ userId: UserId) -> AnyPublisher<User, Error> {
+        Deferred {
+            Future { [weak self] promise in
+                self?.userRepository.getUserById(userId) { result in
+                    switch result {
+                    case .success(let user):
+                        if let user = user {
+                            promise(.success(user))
+                        } else {
+                            promise(.failure(UserRepositoryError.userNotFound))
+                        }
+                    case .failure(let error): promise(.failure(error))
                     }
-                case .failure(let error): seal.reject(error)
                 }
             }
         }
+        .eraseToAnyPublisher()
     }
 }
 

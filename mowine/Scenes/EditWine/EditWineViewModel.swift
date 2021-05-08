@@ -9,7 +9,6 @@
 import Foundation
 import Combine
 import SwiftyBeaver
-import PromiseKit
 import FirebaseCrashlytics
 import Model
 

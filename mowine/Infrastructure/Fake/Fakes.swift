@@ -150,9 +150,9 @@ class FakeSession: Session {
         return _photoUrl
     }
     
-    func updateEmailAddress(_ emailAddress: String) -> Promise<Void> {
+    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error> {
 //        return Promise(error: SessionError.requiresRecentLogin)
-        return Promise()
+        return Future { promise in promise(.success(())) }
     }
 }
 

@@ -75,7 +75,7 @@ class EditWineWorkerTests: XCTestCase {
         request.notes = "Wine tasted good"
         request.price = "400"
         request.pairings = ["Tacos", "Sushi"]
-        _ = sut.getWineTypes()
+        sut.getWineTypes() { _ in }
 
         // When
         sut.updateWine(wine: wine, from: request) { _ in  }
@@ -97,7 +97,7 @@ class EditWineWorkerTests: XCTestCase {
         // Given
         var request = SaveWineRequest(name: "Test Wine", rating: 5, type: "Other")
         request.variety = "Other Variety"
-        _ = sut.getWineTypes()
+        sut.getWineTypes() { _ in }
         
         // When
         sut.updateWine(wine: wine, from: request) { result in
@@ -130,7 +130,7 @@ class EditWineWorkerTests: XCTestCase {
     
     func testUpdateWine_nilVariety() {
         // Given
-        _ = sut.getWineTypes()
+        sut.getWineTypes() { _ in }
         var request = SaveWineRequest(name: "Test Wine", rating: 5, type: "Red")
         request.variety = nil
         
