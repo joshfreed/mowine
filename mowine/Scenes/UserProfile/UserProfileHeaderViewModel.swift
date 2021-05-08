@@ -18,12 +18,7 @@ class UserProfileHeaderViewModel: ObservableObject {
     private let userId: String
     private let users: UsersService
     private var cancellables = Set<AnyCancellable>()
-    
-    init(userId: String) {
-        self.userId = userId
-        self.users = try! JFContainer.shared.container.resolve()
-    }
-    
+
     init(userId: String, users: UsersService) {
         self.userId = userId
         self.users = users

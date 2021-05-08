@@ -12,7 +12,6 @@ import Model
 
 struct MyCellarView: View {
     @EnvironmentObject var viewModel: MyCellarViewModel
-    @EnvironmentObject var container: JFContainer
     @StateObject var searchBar = SearchBar()
 
     var body: some View {
