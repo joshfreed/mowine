@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import Model
 
 struct RedoButton: View {
     let title: String
     let sourceType: ImagePickerView.SourceType
     @Binding var isPicking: Bool
-    @Binding var image: UIImage?
+    @Binding var image: WineImage?
     
     var body: some View {
         Button(action: { isPicking = true }) {
@@ -34,7 +35,7 @@ struct RedoButton: View {
 struct RedoButton_Previews: PreviewProvider {
     struct ShimView: View {
         @State var isPicking = false
-        @State var image: UIImage?
+        @State var image: WineImage?
         
         var body: some View {
             RedoButton(title: "Pick Image", sourceType: .photoLibrary, isPicking: $isPicking, image: $image)

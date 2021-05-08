@@ -6,7 +6,7 @@
 //  Copyright © 2018 BleepSmazz. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SwiftyBeaver
 
 public typealias WineId = StringIdentity

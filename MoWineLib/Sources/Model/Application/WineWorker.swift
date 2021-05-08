@@ -6,7 +6,7 @@
 //  Copyright © 2018 Josh Freed. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Combine
 import SwiftyBeaver
 
@@ -37,7 +37,7 @@ open class WineWorker: ObservableObject {
         variety: WineVariety?,
         name: String,
         rating: Double,
-        photo: UIImage?,
+        photo: WineImage?,
         completion: @escaping (Result<Wine, Error>) -> ()
     ) {
         guard let userId = session.currentUserId else {

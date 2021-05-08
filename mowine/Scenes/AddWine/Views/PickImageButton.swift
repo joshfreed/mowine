@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import Model
 
 struct PickImageButton: View {
     let title: String
     let sourceType: ImagePickerView.SourceType
     @Binding var isPicking: Bool
-    @Binding var image: UIImage?
+    @Binding var image: WineImage?
     @Binding var showNextScreen: Bool
     
     var body: some View {
@@ -32,7 +33,7 @@ struct PickImageButton: View {
 struct PickImageButton_Previews: PreviewProvider {
     struct ShimView: View {
         @State var isPicking = false
-        @State var image: UIImage?
+        @State var image: WineImage?
         @State var showNextScreen = false
         
         var body: some View {
