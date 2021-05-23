@@ -110,7 +110,8 @@ struct MyAccountView: View {
             Color.clear.frame(height: 8)
         }.onAppear {
             viewModel.loadMyAccount()
-        }    }
+        }
+    }
 }
 
 struct ProfilePictureView2: View {
