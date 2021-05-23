@@ -8,7 +8,6 @@
 
 import Foundation
 @testable import mowine
-import UIKit
 import Model
 
 class MockWineImageWorker: WineImageWorkerProtocol {
@@ -16,7 +15,7 @@ class MockWineImageWorker: WineImageWorkerProtocol {
         
     }
     
-    func createImages(wineId: WineId, photo: UIImage?) -> Data? {
+    func createImages(wineId: WineId, photo: WineImage?) -> Data? {
         return nil
     }
     
