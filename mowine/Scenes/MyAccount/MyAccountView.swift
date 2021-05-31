@@ -126,7 +126,6 @@ struct ProfilePictureView2: View {
         } else {
             Image("No Profile Picture").resizable()
         }
-        
     }
 }
 

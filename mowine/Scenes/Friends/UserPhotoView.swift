@@ -13,7 +13,7 @@ struct UserPhotoView: View {
     var size: CGFloat = 44
     
     var body: some View {
-        CachedImage(
+        RemoteImageView(
             url: photoUrl,
             noImage: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
             loading: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
