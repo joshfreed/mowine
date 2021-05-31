@@ -27,10 +27,7 @@ class RemoteImageLoader: ObservableObject {
             return
         }
 
-        guard
-            let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let url = URL(string: encodedUrl)
-        else {
+        guard let url = URL(string: urlString) else {
             let nsError = NSError.appError(code: .invalidUrl, userInfo: ["url": urlString])
             Crashlytics.crashlytics().record(error: nsError)
             state = .noImage
