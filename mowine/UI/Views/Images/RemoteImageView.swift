@@ -1,15 +1,16 @@
 //
-//  CachedImage.swift
-//  ConstantImprovers
+//  RemoteImageView.swift
+//  mowine
 //
 //  Created by Josh Freed on 5/20/20.
-//  Copyright © 2020 Clay Steadman. All rights reserved.
+//  Copyright © 2020 Josh Freed. All rights reserved.
 //
 
 import SwiftUI
+import SwiftyBeaver
 
-struct CachedImage<NoImageView: View, LoadingView: View, ErrorView: View, LoadedView: View>: View {
-    @ObservedObject var remoteImageLoader: RemoteImageLoader
+struct RemoteImageView<NoImageView: View, LoadingView: View, ErrorView: View, LoadedView: View>: View {
+    @ObservedObject var remoteImageModel: RemoteImageModel
     let noImage: NoImageView
     let loading: LoadingView
     let error: ErrorView
@@ -20,28 +21,30 @@ struct CachedImage<NoImageView: View, LoadingView: View, ErrorView: View, Loaded
         @ViewBuilder noImage: () -> NoImageView,
         @ViewBuilder loading: () -> LoadingView,
         @ViewBuilder error: () -> ErrorView,
-                     loaded: @escaping (Image) -> LoadedView
+        loaded: @escaping (Image) -> LoadedView
     ) {
-        remoteImageLoader = RemoteImageLoader(urlString: url)
+        remoteImageModel = .init(imageLoader: URLSessionImageLoader())
         self.noImage = noImage()
         self.loading = loading()
         self.error = error()
         self.loaded = loaded
+
+        remoteImageModel.load(urlString: url)
     }
 
     var body: some View {
-        switch remoteImageLoader.state {
-        case .noImage: return AnyView(noImage)
-        case .loading: return AnyView(loading)
-        case .loaded(let image): return AnyView(loaded(Image(uiImage: image).resizable()))
-        case .error: return AnyView(error)
+        switch remoteImageModel.state {
+        case .noImage: noImage
+        case .loading: loading
+        case .loaded(let image): loaded(Image(uiImage: image).resizable())
+        case .error: error
         }
     }
 }
 
 struct CachedImage_Previews: PreviewProvider {
     static var previews: some View {
-        CachedImage(url: "", noImage: {
+        RemoteImageView(url: "", noImage: {
             Text("No image")
         }, loading: {
             Text("Loading...")
