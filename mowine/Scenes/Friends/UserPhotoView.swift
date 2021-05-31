@@ -18,7 +18,12 @@ struct UserPhotoView: View {
             noImage: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
             loading: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
             error: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
-            loaded: { $0.resizable().frame(width: size, height: size) }
+            loaded: {
+                $0.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: size, height: size)
+                    .clipShape(Circle())
+            }
         )
     }
 }
