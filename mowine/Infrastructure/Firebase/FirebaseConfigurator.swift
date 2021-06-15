@@ -41,6 +41,8 @@ class FirebaseConfigurator: Configurator {
             Firestore.firestore().settings = settings
 
             Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+
+            Storage.storage().useEmulator(withHost: "localhost", port: 9199)
         }
     }
 }
