@@ -18,6 +18,11 @@
 		5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC692607BCC80061C413 /* WineTypeListView.swift */; };
 		530ABC3C234A9B7E0078FB3B /* UINavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */; };
 		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
+		531277A52678393300C5E717 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A42678393300C5E717 /* FirebaseAnalytics */; };
+		531277A72678393300C5E717 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A62678393300C5E717 /* FirebaseAuth */; };
+		531277A92678393300C5E717 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A82678393300C5E717 /* FirebaseCrashlytics */; };
+		531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 531277AA2678393300C5E717 /* FirebaseFirestore */; };
+		531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 531277AC2678393300C5E717 /* FirebaseStorage */; };
 		531865D225E46B7600474738 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531865D125E46B7600474738 /* FirestoreUser.swift */; };
 		5318863F2586777C00ED9CF8 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318863E2586777C00ED9CF8 /* Configurator.swift */; };
 		53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */; };
@@ -399,12 +404,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531277A52678393300C5E717 /* FirebaseAnalytics in Frameworks */,
 				53A697E7261A16C5004BCE43 /* Dip in Frameworks */,
 				53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */,
+				531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */,
 				53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */,
 				53CA99D726305E5C009C0F87 /* mowineLib in Frameworks */,
 				009DBAF4A0FC6A5DD8F81AC4 /* Pods_mowine.framework in Frameworks */,
+				531277A92678393300C5E717 /* FirebaseCrashlytics in Frameworks */,
+				531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */,
 				53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */,
+				531277A72678393300C5E717 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,7 +1116,7 @@
 				53F5ABEE1E2176080067AB62 /* Resources */,
 				EDCE8F7336DE0664648DEFB5 /* [CP] Embed Pods Frameworks */,
 				192C72D6FA64156B4081C944 /* [CP] Copy Pods Resources */,
-				5390E86A2351160A004A24F0 /* ShellScript */,
+				531277AE26783EA100C5E717 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1119,6 +1129,11 @@
 				53A69817261A17FE004BCE43 /* FacebookCore */,
 				53A69819261A17FE004BCE43 /* FacebookLogin */,
 				53CA99D626305E5C009C0F87 /* mowineLib */,
+				531277A42678393300C5E717 /* FirebaseAnalytics */,
+				531277A62678393300C5E717 /* FirebaseAuth */,
+				531277A82678393300C5E717 /* FirebaseCrashlytics */,
+				531277AA2678393300C5E717 /* FirebaseFirestore */,
+				531277AC2678393300C5E717 /* FirebaseStorage */,
 			);
 			productName = mowine;
 			productReference = 53F5ABF01E2176080067AB62 /* mowine.app */;
@@ -1212,6 +1227,7 @@
 				53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */,
 				53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 53F5ABF11E2176080067AB62 /* Products */;
 			projectDirPath = "";
@@ -1299,7 +1315,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5390E86A2351160A004A24F0 /* ShellScript */ = {
+		531277AE26783EA100C5E717 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1307,8 +1323,6 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -1316,7 +1330,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
 		};
 		68B91997339E128D406E645B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1370,54 +1384,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1916,6 +1890,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
@@ -1951,6 +1933,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		531277A42678393300C5E717 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		531277A62678393300C5E717 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		531277A82678393300C5E717 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		531277AA2678393300C5E717 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		531277AC2678393300C5E717 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		53A697B9261A1645004BCE43 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;

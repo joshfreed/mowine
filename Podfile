@@ -6,14 +6,6 @@ target 'mowine' do
 
   # Google
   pod 'GoogleSignIn', '~> 5.0.0'
-  
-  # Firebase
-  pod 'Firebase/Analytics', '~> 7.0.0'
-  pod 'Firebase/Auth', '~> 7.0.0'
-  pod 'Firebase/Firestore', '~> 7.0.0'
-  pod 'Firebase/Storage', '~> 7.0.0'
-  pod 'Firebase/Performance', '~> 7.0.0'
-  pod 'Firebase/Crashlytics', '~> 7.0.0'
 
   target 'mowineTests' do
     inherit! :search_paths
