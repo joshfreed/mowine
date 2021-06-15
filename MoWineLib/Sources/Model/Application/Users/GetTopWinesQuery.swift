@@ -27,7 +27,7 @@ public class GetTopWinesQuery {
             switch result {
             case .success(let topWines):
                 let mappedWines = topWines.map {
-                    TopWine(id: $0.id.asString, name: $0.name, rating: Int($0.rating), type: $0.type.name)
+                    TopWine(id: $0.id.asString, name: $0.name, rating: Int($0.rating), type: $0.type.name, userId: $0.userId.asString)
                 }
                 let response = Response(topWines: mappedWines)
                 self?.publisher.send(response)
@@ -48,5 +48,6 @@ extension GetTopWinesQuery {
         public let name: String
         public let rating: Int
         public let type: String
+        public let userId: String
     }
 }

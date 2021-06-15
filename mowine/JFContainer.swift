@@ -23,6 +23,7 @@ class JFContainer: ObservableObject {
     lazy var wineRepository: WineRepository = try! container.resolve()
     lazy var wineImageWorker: WineImageWorkerProtocol = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()
+    lazy var wineImageLoader: ImageLoader = try! container.resolve()
     
     private init(container: DependencyContainer, configurators: [Configurator]) {
         self.container = container
@@ -140,6 +141,9 @@ extension DependencyContainer {
         container.register(.singleton) { FirebaseStorageService() }
         #endif
 
+        container.register(.singleton) { FirebaseStorageLoader(storage: $0) }
+            .implements(ImageLoader.self)
+
         container.register(.singleton) {
             WineImageWorker<DataService<FirebaseStorageService, FirebaseStorageService>>(session: $0, wineRepository: $1, imageService: $2)
         }
@@ -167,6 +171,8 @@ extension DependencyContainer {
             ProfilePictureWorker<DataService<UrlSessionService, FakeDataWriteService>>(session: $0, profilePictureService: $1, userRepository: $2)
         }
             .implements(ProfilePictureWorkerProtocol.self)
+        container.register(.singleton) { AssetImageLoader() }
+            .implements(ImageLoader.self)
     }
     
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
