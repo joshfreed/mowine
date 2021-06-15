@@ -18,12 +18,13 @@ struct RemoteImageView<NoImageView: View, LoadingView: View, ErrorView: View, Lo
 
     init(
         url: String,
+        remoteImageModel: RemoteImageModel = .init(imageLoader: URLSessionImageLoader()),
         @ViewBuilder noImage: () -> NoImageView,
         @ViewBuilder loading: () -> LoadingView,
         @ViewBuilder error: () -> ErrorView,
         loaded: @escaping (Image) -> LoadedView
     ) {
-        remoteImageModel = .init(imageLoader: URLSessionImageLoader())
+        self.remoteImageModel = remoteImageModel
         self.noImage = noImage()
         self.loading = loading()
         self.error = error()

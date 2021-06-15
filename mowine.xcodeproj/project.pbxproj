@@ -113,6 +113,7 @@
 		53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC404925D738B90041AED9 /* SnapPhotoView.swift */; };
 		53AC404E25D73BCD0041AED9 /* FinalizeWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC404D25D73BCD0041AED9 /* FinalizeWineView.swift */; };
 		53AC405225D74AD90041AED9 /* ConfirmPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC405125D74AD90041AED9 /* ConfirmPhotoView.swift */; };
+		53AE6036267829060072B634 /* AssetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AE6035267829060072B634 /* AssetImageLoader.swift */; };
 		53B35F9725ACCA3500D36133 /* FakeSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */; };
 		53B6CB8C205ADD9300AE8EFB /* WineCellarWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B6CB86205ADD9300AE8EFB /* WineCellarWorker.swift */; };
 		53B6CB8E205ADD9300AE8EFB /* WineCellarModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B6CB88205ADD9300AE8EFB /* WineCellarModels.swift */; };
@@ -173,6 +174,7 @@
 		53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECB2256F0E9D00321944 /* FancyTextField.swift */; };
 		E9AFC0EEF0DDE04612FD7B5F /* AppleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCA86776975810090DFF0 /* AppleProvider.swift */; };
 		E9AFC1B22362621B1AE56842 /* FacebookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCF59AC2D5931D15DAF4D /* FacebookProvider.swift */; };
+		E9AFC205F2938618BA3B2E8F /* FirebaseStorageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCAE03959DB002951D4A9 /* FirebaseStorageLoader.swift */; };
 		E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */; };
 		E9AFC6A2A53EAFED47ACE03F /* ProfilePictureWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */; };
 		E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */; };
@@ -309,6 +311,7 @@
 		53AC404925D738B90041AED9 /* SnapPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapPhotoView.swift; sourceTree = "<group>"; };
 		53AC404D25D73BCD0041AED9 /* FinalizeWineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeWineView.swift; sourceTree = "<group>"; };
 		53AC405125D74AD90041AED9 /* ConfirmPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPhotoView.swift; sourceTree = "<group>"; };
+		53AE6035267829060072B634 /* AssetImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImageLoader.swift; sourceTree = "<group>"; };
 		53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSocialAuth.swift; sourceTree = "<group>"; };
 		53B6CB85205ADD9300AE8EFB /* WineCellarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarPresenter.swift; sourceTree = "<group>"; };
 		53B6CB86205ADD9300AE8EFB /* WineCellarWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarWorker.swift; sourceTree = "<group>"; };
@@ -383,6 +386,7 @@
 		E9AFC816F729F2505C02F653 /* RemoteImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		E9AFC93131AAD3543DB3909A /* TestingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingExtensions.swift; sourceTree = "<group>"; };
 		E9AFCA86776975810090DFF0 /* AppleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleProvider.swift; sourceTree = "<group>"; };
+		E9AFCAE03959DB002951D4A9 /* FirebaseStorageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageLoader.swift; sourceTree = "<group>"; };
 		E9AFCD1D08A48D54852EDC64 /* ProfilePictureWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePictureWorker.swift; sourceTree = "<group>"; };
 		E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionService.swift; sourceTree = "<group>"; };
 		E9AFCF19F02DACC217402068 /* FirebaseCredentialFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseCredentialFactory.swift; sourceTree = "<group>"; };
@@ -483,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */,
+				E9AFCAE03959DB002951D4A9 /* FirebaseStorageLoader.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -656,6 +661,7 @@
 				536E85A3204F507D004D5426 /* Fakes.swift */,
 				538E104A253BB56200B26619 /* FakeWineThumbnailFetcher.swift */,
 				53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */,
+				53AE6035267829060072B634 /* AssetImageLoader.swift */,
 			);
 			path = Fake;
 			sourceTree = "<group>";
@@ -1203,7 +1209,7 @@
 			mainGroup = 53F5ABE71E2176080067AB62;
 			packageReferences = (
 				53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */,
-				53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */,
+				53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */,
 				53A69816261A17FE004BCE43 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
@@ -1437,6 +1443,7 @@
 				53A2D0122662F54C00370DAD /* URLSessionImageLoader.swift in Sources */,
 				539717CC22B6C6A300EFA97F /* EditProfileService.swift in Sources */,
 				5330C20E25E5B5710063E7C4 /* UserSearchResultView.swift in Sources */,
+				53AE6036267829060072B634 /* AssetImageLoader.swift in Sources */,
 				5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */,
 				53C91A1F255DDEED00A7E9C0 /* MyFirebaseListenerRegistration.swift in Sources */,
 				53018B8A259FC6D8006A7008 /* LogInView.swift in Sources */,
@@ -1566,6 +1573,7 @@
 				535CC81125F0404B00D49D57 /* UserProfileHeaderViewModel.swift in Sources */,
 				E9AFCC58AF392BD97A67CB71 /* RemoteImageModel.swift in Sources */,
 				E9AFCAF63D4806E48205119C /* RemoteImageView.swift in Sources */,
+				E9AFC205F2938618BA3B2E8F /* FirebaseStorageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1908,7 +1916,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */ = {
+		53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -1945,7 +1953,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		53A697B9261A1645004BCE43 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */;
+			package = 53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
 		};
 		53A697E6261A16C5004BCE43 /* Dip */ = {

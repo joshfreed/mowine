@@ -35,7 +35,7 @@ struct WineDetailsHeaderView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            WineImageView(image: nil).frame(width: 172, height: 172)
+            WineThumbnail(thumbnailPath: wine.thumbnailPath, size: 172)
             Text(wine.name)
                 .foregroundColor(.white)
                 .fontWeight(.black)
@@ -92,7 +92,8 @@ struct WineDetailsView_Previews: PreviewProvider {
             varietyName: "Merlot",
             typeName: "Red",
             price: "",
-            location: ""
+            location: "",
+            thumbnailPath: "Wine1"
         )
         return q
     }()
@@ -100,5 +101,6 @@ struct WineDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         WineDetailsView(wineId: "ABC")
             .environmentObject(query)
+            .addPreviewEnvironment()
     }
 }

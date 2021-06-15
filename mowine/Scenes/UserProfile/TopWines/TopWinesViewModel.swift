@@ -47,7 +47,7 @@ extension WineItemViewModel {
             name: topWine.name,
             rating: topWine.rating,
             type: topWine.type,
-            thumbnail: nil
+            userId: topWine.userId
         )
     }
 }

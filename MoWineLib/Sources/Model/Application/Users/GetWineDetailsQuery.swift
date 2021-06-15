@@ -29,7 +29,8 @@ public class GetWineDetailsQuery: ObservableObject {
                     varietyName: wine.varietyName,
                     typeName: wine.type.name,
                     price: wine.price ?? "",
-                    location: wine.location ?? ""
+                    location: wine.location ?? "",
+                    thumbnailPath: "\(wine.userId)/\(wine.id).png"
                 )
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
@@ -47,8 +48,9 @@ extension GetWineDetailsQuery {
         public let typeName: String
         public let price: String
         public let location: String
+        public let thumbnailPath: String
 
-        public init(id: String, name: String, rating: Int, varietyName: String, typeName: String, price: String, location: String) {
+        public init(id: String, name: String, rating: Int, varietyName: String, typeName: String, price: String, location: String, thumbnailPath: String) {
             self.id = id
             self.name = name
             self.rating = rating
@@ -56,6 +58,7 @@ extension GetWineDetailsQuery {
             self.typeName = typeName
             self.price = price
             self.location = location
+            self.thumbnailPath = thumbnailPath
         }
     }
 }

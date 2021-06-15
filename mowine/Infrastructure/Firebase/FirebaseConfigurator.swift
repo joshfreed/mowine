@@ -40,7 +40,7 @@ class FirebaseConfigurator: Configurator {
             settings.isSSLEnabled = false
             Firestore.firestore().settings = settings
 
-            Auth.auth().useEmulator(withHost:"localhost", port:9099)
+            Auth.auth().useEmulator(withHost: "localhost", port: 9099)
         }
     }
 }

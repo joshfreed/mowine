@@ -17,5 +17,5 @@ protocol ImageLoader {
 enum ImageLoadingError: Error {
     case invalidUrl(String)
     case invalidImage
-    case other
+    case notFound
 }

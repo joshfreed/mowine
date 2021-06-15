@@ -9,25 +9,30 @@
 import SwiftUI
 
 struct WineThumbnail: View {
-    let data: Data?
+    @EnvironmentObject var container: JFContainer
+    let thumbnailPath: String
+    var size: CGFloat = 80
 
     var body: some View {
-        if let data = data, let uiImage = UIImage(data: data) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
-                .clipShape(Circle())
-        } else {
-            Image("Default Wine Image")
-                .resizable()
-                .frame(width: 80, height: 80)
-        }
+        RemoteImageView(
+            url: thumbnailPath,
+            remoteImageModel: RemoteImageModel(imageLoader: container.wineImageLoader),
+            noImage: { Image("Default Wine Image").resizable().frame(width: size, height: size) },
+            loading: { Image("Default Wine Image").resizable().frame(width: size, height: size) },
+            error: { Image("Default Wine Image").resizable().frame(width: size, height: size) },
+            loaded: {
+                $0.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: size, height: size)
+                    .clipShape(Circle())
+            }
+        )
     }
 }
 
 struct WineThumbnail_Previews: PreviewProvider {
     static var previews: some View {
-        WineThumbnail(data: nil)
+        WineThumbnail(thumbnailPath: "Wine1")
+            .addPreviewEnvironment()
     }
 }
