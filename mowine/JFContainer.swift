@@ -11,6 +11,12 @@ import Dip
 import Combine
 import Model
 
+#if DEBUG
+let useEmulator = true
+#else
+let useEmulator = false
+#endif
+
 class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!
     
@@ -34,7 +40,7 @@ class JFContainer: ObservableObject {
         let container = DependencyContainer.configure()
         DependencyContainer.uiContainers = [container]
         let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: false)
+            FirebaseConfigurator(useEmulator: useEmulator)
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
@@ -135,11 +141,7 @@ extension DependencyContainer {
     }
 
     static func addImageServices(container: DependencyContainer) {
-        #if DEBUG
-        container.register(.singleton) { FirebaseStorageService(basePath: "dev") }
-        #else
         container.register(.singleton) { FirebaseStorageService() }
-        #endif
 
         container.register(.singleton) { FirebaseStorageLoader(storage: $0) }
             .implements(ImageLoader.self)
