@@ -11,6 +11,7 @@ import SwiftyBeaver
 import Combine
 import FirebaseCrashlytics
 import Model
+import UIKit.UIImage
 
 class MyAccountViewModel: ObservableObject {
     @Published var isLoaded = false

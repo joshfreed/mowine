@@ -11,6 +11,7 @@ import Combine
 import SwiftyBeaver
 import FirebaseCrashlytics
 import Model
+import UIKit.UIImage
 
 class EditWineViewModel: ObservableObject {
     @Published var isSaving = false
