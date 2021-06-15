@@ -11,6 +11,7 @@ import Combine
 import FirebaseCrashlytics
 import SwiftyBeaver
 import Model
+import UIKit.UIImage
 
 class EditProfileViewModel: ObservableObject {
     @Published var fullName: String = "" {

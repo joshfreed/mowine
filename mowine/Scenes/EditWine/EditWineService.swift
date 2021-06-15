@@ -10,6 +10,7 @@ import Foundation
 import SwiftyBeaver
 import FirebaseCrashlytics
 import Model
+import UIKit.UIImage
 
 class EditWineService: ObservableObject {
     let wineRepository: WineRepository
