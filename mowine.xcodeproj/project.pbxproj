@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		009DBAF4A0FC6A5DD8F81AC4 /* Pods_mowine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFFB2074AF4662A8CCAAB292 /* Pods_mowine.framework */; };
-		14963683E6756A8B35C28ADF /* Pods_mowineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6D019736212BF1CE1BF021 /* Pods_mowineTests.framework */; };
 		53018B8A259FC6D8006A7008 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53018B89259FC6D8006A7008 /* LogInView.swift */; };
 		53018B8E259FC6E0006A7008 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53018B8D259FC6E0006A7008 /* SignUpView.swift */; };
 		53047E2325DC080B005CC14D /* AddWineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53047E2225DC080B005CC14D /* AddWineHeaderView.swift */; };
@@ -26,6 +24,13 @@
 		531865D225E46B7600474738 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531865D125E46B7600474738 /* FirestoreUser.swift */; };
 		5318863F2586777C00ED9CF8 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318863E2586777C00ED9CF8 /* Configurator.swift */; };
 		53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */; };
+		532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F5267979C700649624 /* LocalAuthentication.framework */; };
+		532789F8267979D400649624 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F7267979D400649624 /* SafariServices.framework */; };
+		532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F9267979E100649624 /* AuthenticationServices.framework */; };
+		532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789FB267979E900649624 /* SystemConfiguration.framework */; };
+		53278A0026797C5A00649624 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 532789FD26797C5900649624 /* GoogleSignIn.bundle */; };
+		53278A0126797C5A00649624 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789FE26797C5900649624 /* GoogleSignIn.framework */; };
+		53278A0226797C5A00649624 /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789FF26797C5900649624 /* GoogleSignInDependencies.framework */; };
 		532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3C82569C2EF009A4740 /* MyAccountView.swift */; };
 		532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */; };
 		532DB3D3256AC763009A4740 /* DataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3D2256AC763009A4740 /* DataHelpers.swift */; };
@@ -143,7 +148,6 @@
 		53D3B44B25A2304D00F15974 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D3B44A25A2304D00F15974 /* SignInHeaderView.swift */; };
 		53D3B45125A2337400F15974 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D3B45025A2337400F15974 /* TextStyles.swift */; };
 		53D4F21F25EEED68007A15F9 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4F21E25EEED68007A15F9 /* SearchUsersViewModel.swift */; };
-		53D8EDD41E4186A300696FAE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 53D8EDD31E4186A300696FAE /* Podfile */; };
 		53D91FC622BED429004F94B0 /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D91FC522BED429004F94B0 /* UserProfileService.swift */; };
 		53D91FCA22C12537004F94B0 /* EditProfileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D91FC922C12537004F94B0 /* EditProfileServiceTests.swift */; };
 		53DD1E12257D7A25008C1DA7 /* ReauthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD1E11257D7A25008C1DA7 /* ReauthenticationViewModel.swift */; };
@@ -189,7 +193,6 @@
 		E9AFCC58AF392BD97A67CB71 /* RemoteImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC34117FE7BDB48648C0F /* RemoteImageModel.swift */; };
 		E9AFCEFDC022CD5477282E7F /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC6C7F3E6ABECDD25B916 /* UIImage.swift */; };
 		E9AFCFD8AA38E97B4E23E348 /* GoogleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC2B93327F2455BAA2A11 /* GoogleProvider.swift */; };
-		F0B36AC9B2BE07C5302E1BD7 /* libPods-mowineUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD60E19498581E3D38B9BEDC /* libPods-mowineUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,10 +213,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18511F50AD603F18B126ADA7 /* Pods-mowineTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.release.xcconfig"; path = "Target Support Files/Pods-mowineTests/Pods-mowineTests.release.xcconfig"; sourceTree = "<group>"; };
-		2AFFDFC526A7F29495BDF9FA /* Pods-mowineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineTests.debug.xcconfig"; path = "Target Support Files/Pods-mowineTests/Pods-mowineTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2E6D019736212BF1CE1BF021 /* Pods_mowineTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowineTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E96B14267EE27AFAAE9E8E7 /* Pods-mowine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.debug.xcconfig"; path = "Target Support Files/Pods-mowine/Pods-mowine.debug.xcconfig"; sourceTree = "<group>"; };
 		53018B89259FC6D8006A7008 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		53018B8D259FC6E0006A7008 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		53047E2225DC080B005CC14D /* AddWineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineHeaderView.swift; sourceTree = "<group>"; };
@@ -223,10 +222,16 @@
 		5306CC692607BCC80061C413 /* WineTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeListView.swift; sourceTree = "<group>"; };
 		530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarAppearance.swift; sourceTree = "<group>"; };
 		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		531550DE1F5848C70017DA70 /* JFLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JFLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		531865D125E46B7600474738 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
 		5318863E2586777C00ED9CF8 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
 		53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfigurator.swift; sourceTree = "<group>"; };
+		532789F5267979C700649624 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		532789F7267979D400649624 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		532789F9267979E100649624 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		532789FB267979E900649624 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		532789FD26797C5900649624 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = GoogleSignIn/GoogleSignIn.bundle; sourceTree = "<group>"; };
+		532789FE26797C5900649624 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = GoogleSignIn/GoogleSignIn.framework; sourceTree = "<group>"; };
+		532789FF26797C5900649624 /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignInDependencies.framework; path = GoogleSignIn/GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		532DB3C82569C2EF009A4740 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
 		532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		532DB3D2256AC763009A4740 /* DataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelpers.swift; sourceTree = "<group>"; };
@@ -341,7 +346,6 @@
 		53D3B44A25A2304D00F15974 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		53D3B45025A2337400F15974 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		53D4F21E25EEED68007A15F9 /* SearchUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModel.swift; sourceTree = "<group>"; };
-		53D8EDD31E4186A300696FAE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		53D91FC522BED429004F94B0 /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		53D91FC922C12537004F94B0 /* EditProfileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileServiceTests.swift; sourceTree = "<group>"; };
 		53DD1E11257D7A25008C1DA7 /* ReauthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReauthenticationViewModel.swift; sourceTree = "<group>"; };
@@ -379,10 +383,6 @@
 		53FFECA8256F0D3100321944 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		53FFECB2256F0E9D00321944 /* FancyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyTextField.swift; sourceTree = "<group>"; };
-		5AA366BC6DE94D3A09174F0D /* Pods-mowineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.release.xcconfig"; path = "Target Support Files/Pods-mowineUITests/Pods-mowineUITests.release.xcconfig"; sourceTree = "<group>"; };
-		66467F43289DFF54847981AF /* Pods-mowine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowine.release.xcconfig"; path = "Target Support Files/Pods-mowine/Pods-mowine.release.xcconfig"; sourceTree = "<group>"; };
-		A98AFEE42461238D95C0566B /* Pods-mowineUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mowineUITests.debug.xcconfig"; path = "Target Support Files/Pods-mowineUITests/Pods-mowineUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		BD60E19498581E3D38B9BEDC /* libPods-mowineUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mowineUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		E9AFC15D86F3FD8314B3EAD6 /* UserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		E9AFC2B93327F2455BAA2A11 /* GoogleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleProvider.swift; sourceTree = "<group>"; };
@@ -396,7 +396,6 @@
 		E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionService.swift; sourceTree = "<group>"; };
 		E9AFCF19F02DACC217402068 /* FirebaseCredentialFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseCredentialFactory.swift; sourceTree = "<group>"; };
 		E9AFCF59AC2D5931D15DAF4D /* FacebookProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookProvider.swift; sourceTree = "<group>"; };
-		EFFB2074AF4662A8CCAAB292 /* Pods_mowine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mowine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,12 +404,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				531277A52678393300C5E717 /* FirebaseAnalytics in Frameworks */,
+				532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */,
+				53278A0226797C5A00649624 /* GoogleSignInDependencies.framework in Frameworks */,
 				53A697E7261A16C5004BCE43 /* Dip in Frameworks */,
 				53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */,
+				53278A0126797C5A00649624 /* GoogleSignIn.framework in Frameworks */,
 				531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */,
+				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */,
+				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
 				53CA99D726305E5C009C0F87 /* mowineLib in Frameworks */,
-				009DBAF4A0FC6A5DD8F81AC4 /* Pods_mowine.framework in Frameworks */,
+				532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */,
 				531277A92678393300C5E717 /* FirebaseCrashlytics in Frameworks */,
 				531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */,
 				53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */,
@@ -422,7 +426,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14963683E6756A8B35C28ADF /* Pods_mowineTests.framework in Frameworks */,
 				53FAECFE25EAF2480099B2E1 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,26 +434,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0B36AC9B2BE07C5302E1BD7 /* libPods-mowineUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		25F485164ACA6E1997F2D336 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3E96B14267EE27AFAAE9E8E7 /* Pods-mowine.debug.xcconfig */,
-				66467F43289DFF54847981AF /* Pods-mowine.release.xcconfig */,
-				2AFFDFC526A7F29495BDF9FA /* Pods-mowineTests.debug.xcconfig */,
-				18511F50AD603F18B126ADA7 /* Pods-mowineTests.release.xcconfig */,
-				A98AFEE42461238D95C0566B /* Pods-mowineUITests.debug.xcconfig */,
-				5AA366BC6DE94D3A09174F0D /* Pods-mowineUITests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		53047E2125DC07F7005CC14D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -968,8 +957,6 @@
 				53CA99CF262FA817009C0F87 /* mowineLib */,
 				53F5ABF11E2176080067AB62 /* Products */,
 				8E45E83822A4C492508A446C /* Frameworks */,
-				25F485164ACA6E1997F2D336 /* Pods */,
-				53D8EDD31E4186A300696FAE /* Podfile */,
 				538B239C21BB22BD002F278A /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
@@ -1079,10 +1066,13 @@
 		8E45E83822A4C492508A446C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				531550DE1F5848C70017DA70 /* JFLib.framework */,
-				EFFB2074AF4662A8CCAAB292 /* Pods_mowine.framework */,
-				2E6D019736212BF1CE1BF021 /* Pods_mowineTests.framework */,
-				BD60E19498581E3D38B9BEDC /* libPods-mowineUITests.a */,
+				532789FD26797C5900649624 /* GoogleSignIn.bundle */,
+				532789FE26797C5900649624 /* GoogleSignIn.framework */,
+				532789FF26797C5900649624 /* GoogleSignInDependencies.framework */,
+				532789FB267979E900649624 /* SystemConfiguration.framework */,
+				532789F9267979E100649624 /* AuthenticationServices.framework */,
+				532789F7267979D400649624 /* SafariServices.framework */,
+				532789F5267979C700649624 /* LocalAuthentication.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1110,12 +1100,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F5AC1B1E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowine" */;
 			buildPhases = (
-				7912B559AB66885619602C74 /* [CP] Check Pods Manifest.lock */,
 				53F5ABEC1E2176080067AB62 /* Sources */,
 				53F5ABED1E2176080067AB62 /* Frameworks */,
 				53F5ABEE1E2176080067AB62 /* Resources */,
-				EDCE8F7336DE0664648DEFB5 /* [CP] Embed Pods Frameworks */,
-				192C72D6FA64156B4081C944 /* [CP] Copy Pods Resources */,
 				531277AE26783EA100C5E717 /* ShellScript */,
 			);
 			buildRules = (
@@ -1143,7 +1130,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F5AC1E1E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineTests" */;
 			buildPhases = (
-				68B91997339E128D406E645B /* [CP] Check Pods Manifest.lock */,
 				53F5AC031E2176090067AB62 /* Sources */,
 				53F5AC041E2176090067AB62 /* Frameworks */,
 				53F5AC051E2176090067AB62 /* Resources */,
@@ -1165,7 +1151,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F5AC211E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineUITests" */;
 			buildPhases = (
-				529DCA1330151C8CDC55B03B /* [CP] Check Pods Manifest.lock */,
 				53F5AC0E1E2176090067AB62 /* Sources */,
 				53F5AC0F1E2176090067AB62 /* Frameworks */,
 				53F5AC101E2176090067AB62 /* Resources */,
@@ -1246,12 +1231,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */,
-				53D8EDD41E4186A300696FAE /* Podfile in Resources */,
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */,
+				53278A0026797C5A00649624 /* GoogleSignIn.bundle in Resources */,
 				5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */,
 				538B239D21BB22BD002F278A /* GoogleService-Info.plist in Resources */,
 				5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */,
@@ -1275,46 +1260,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		192C72D6FA64156B4081C944 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mowine/Pods-mowine-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mowine/Pods-mowine-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		529DCA1330151C8CDC55B03B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mowineUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		531277AE26783EA100C5E717 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1331,72 +1276,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
-		};
-		68B91997339E128D406E645B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mowineTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7912B559AB66885619602C74 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mowine-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EDCE8F7336DE0664648DEFB5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mowine/Pods-mowine-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1732,7 +1611,6 @@
 		};
 		53F5AC1C1E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E96B14267EE27AFAAE9E8E7 /* Pods-mowine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
@@ -1740,6 +1618,10 @@
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleSignIn",
+				);
 				INFOPLIST_FILE = mowine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1754,7 +1636,6 @@
 		};
 		53F5AC1D1E2176090067AB62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66467F43289DFF54847981AF /* Pods-mowine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = mowine/mowine.entitlements;
@@ -1762,6 +1643,10 @@
 				DEVELOPMENT_ASSET_PATHS = "mowine/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleSignIn",
+				);
 				INFOPLIST_FILE = mowine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1776,7 +1661,6 @@
 		};
 		53F5AC1F1E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AFFDFC526A7F29495BDF9FA /* Pods-mowineTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
@@ -1795,7 +1679,6 @@
 		};
 		53F5AC201E2176090067AB62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18511F50AD603F18B126ADA7 /* Pods-mowineTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
@@ -1814,7 +1697,6 @@
 		};
 		53F5AC221E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A98AFEE42461238D95C0566B /* Pods-mowineUITests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowineUITests/Info.plist;
@@ -1832,7 +1714,6 @@
 		};
 		53F5AC231E2176090067AB62 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AA366BC6DE94D3A09174F0D /* Pods-mowineUITests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q96RZM5NAK;
 				INFOPLIST_FILE = mowineUITests/Info.plist;
