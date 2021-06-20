@@ -27,7 +27,7 @@ struct WineCellarListView: View {
     var body: some View {
         WineListView(wines: searchResults, onTapWine: onEditWine)
             .navigationBarTitle(navigationBarTitle)
-            .add(self.searchBar)
+            .add(searchBar)
             .onReceive(searchBar.$text) { searchBarText in
                 searchResults = wineFilteringService.filter(wines: allWines, by: searchBarText)
             }

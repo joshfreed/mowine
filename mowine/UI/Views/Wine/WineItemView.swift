@@ -37,5 +37,6 @@ struct WineItemView: View {
 struct WineItemView_Previews: PreviewProvider {
     static var previews: some View {
         WineItemView(viewModel: WineItemViewModel(id: "A", name: "2019 Fancypants", rating: 3, type: "Merlot", thumbnail: nil))
+            .addPreviewEnvironment()
     }
 }
