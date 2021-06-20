@@ -27,5 +27,6 @@ struct WineListView_Previews: PreviewProvider {
             .init(id: "B", name: "Merlot 2", rating: 2, type: "Red", thumbnail: nil),
             .init(id: "C", name: "Merlot 3", rating: 3, type: "Red", thumbnail: nil),
         ])
+            .addPreviewEnvironment()
     }
 }

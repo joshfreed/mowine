@@ -125,7 +125,7 @@ class FirestoreWineRepository: WineRepository {
             .order(by: "rating", descending: true)
             .limit(to: 3)
         
-        query.addSnapshotListener { (querySnapshot, error) in
+        query.getDocuments { (querySnapshot, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
