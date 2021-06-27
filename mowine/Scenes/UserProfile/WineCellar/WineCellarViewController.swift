@@ -12,7 +12,7 @@
 
 import UIKit
 
-protocol WineCellarDisplayLogic: class {
+protocol WineCellarDisplayLogic: AnyObject {
     func displayWineTypes(viewModel: WineCellar.GetWineTypes.ViewModel)
     func displaySelectedType(viewModel: WineCellar.SelectType.ViewModel)
 }

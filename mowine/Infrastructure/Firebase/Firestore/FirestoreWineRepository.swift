@@ -22,7 +22,7 @@ class FirestoreWineRepository: WineRepository {
     func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         let data = wine.toFirestore()
         
-        db.collection("wines").document(wine.id.asString).setData(data) { err in
+        db.collection("wines").document(wine.id.asString).setData(data as [String: Any]) { err in
             if let err = err {
                 SwiftyBeaver.error("Error adding wine document: \(err)")
                 Crashlytics.crashlytics().record(error: err)
@@ -35,7 +35,7 @@ class FirestoreWineRepository: WineRepository {
     
     func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
         let data = wine.toFirestore()
-        db.collection("wines").document(wine.id.asString).setData(data, merge: true)
+        db.collection("wines").document(wine.id.asString).setData(data as [String: Any], merge: true)
         completion(.success(wine))
     }
     

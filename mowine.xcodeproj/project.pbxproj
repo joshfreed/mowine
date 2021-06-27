@@ -1199,10 +1199,9 @@
 			};
 			buildConfigurationList = 53F5ABEB1E2176080067AB62 /* Build configuration list for PBXProject "mowine" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
