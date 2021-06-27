@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ConfirmPhotoViewControllerDelegate: class {
+protocol ConfirmPhotoViewControllerDelegate: AnyObject {
     func confirm(_ controller: ConfirmPhoto2ViewController, photo: UIImage)
 }
 

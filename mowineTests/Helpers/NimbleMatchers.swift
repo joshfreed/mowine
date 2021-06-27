@@ -22,7 +22,7 @@ extension XCTestCase {
     
     func beSuccess() -> Predicate<Result<Void, Error>> {
         return Predicate.define("be <success>") { expression, message in
-            if let actual = try expression.evaluate(), case let .success = actual {
+            if let actual = try expression.evaluate(), case .success = actual {
                 return PredicateResult(status: .matches, message: message)
             }
             return PredicateResult(status: .fail, message: message)

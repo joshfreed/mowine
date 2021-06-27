@@ -9,7 +9,7 @@
 import Foundation
 import Model
 
-protocol WineListThumbnailFetcher: class {
+protocol WineListThumbnailFetcher: AnyObject {
     func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ())
     func fetchThumbnail(for wine: Wine, completion: @escaping (Result<Data?, Error>) -> ())
 }
