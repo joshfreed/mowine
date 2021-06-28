@@ -23,6 +23,7 @@ struct SearchUsersView: View {
                         UserSearchResultView(user: result)
                     }
                 }
+                .listStyle(.plain)
             }
         } else {
             SearchUsersMessage(message: "Try searching for people you know")
