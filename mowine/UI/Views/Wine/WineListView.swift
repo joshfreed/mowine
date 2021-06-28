@@ -17,6 +17,7 @@ struct WineListView: View {
         List(wines) { wine in
             WineItemView(viewModel: wine, onTap: onTapWine)
         }
+        .listStyle(.plain)
     }
 }
 

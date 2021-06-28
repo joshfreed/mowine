@@ -52,7 +52,10 @@ class FirestoreWineRepository: WineRepository {
     }
     
     func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
+        SwiftyBeaver.info("getWine \(id)")
+
         let docRef = db.collection("wines").document(id.asString)
+
         docRef.getDocument(source: .cache) { (document, error) in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
@@ -119,6 +122,8 @@ class FirestoreWineRepository: WineRepository {
     }
     
     func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) {
+        SwiftyBeaver.info("getTopWines \(userId)")
+
         let query = db
             .collection("wines")
             .whereField("userId", isEqualTo: userId.asString)

@@ -18,10 +18,10 @@ struct MyFriendsListView: View {
                 FriendListItemView(name: friend.name, thumbnail: friend.profilePictureUrl)
             }
         }
-            .listStyle(PlainListStyle())
-            .onAppear {
-                friends.getMyFriends()
-            }
+        .listStyle(.plain)
+        .onAppear {
+            friends.getMyFriends()
+        }
     }
 }
 
