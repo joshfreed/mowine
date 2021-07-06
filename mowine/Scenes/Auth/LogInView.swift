@@ -37,20 +37,8 @@ struct LogInView: View {
 }
 
 struct LogInView_Previews: PreviewProvider {
-    struct ShimView: View {
-        init() {
-            let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
-            UINavigationBar.appearance().standardAppearance = appearance
-            UINavigationBar.appearance().compactAppearance = appearance
-            UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        }
-        
-        var body: some View {
-            LogInView() { }
-        }
-    }
     static var previews: some View {
-        ShimView()
+        LogInView() { }
             .environmentObject(EmailLogInViewModel(emailAuth: FakeEmailAuth()))
             .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }

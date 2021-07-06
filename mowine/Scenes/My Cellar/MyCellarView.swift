@@ -12,20 +12,14 @@ import Model
 
 struct MyCellarView: View {
     @EnvironmentObject var viewModel: MyCellarViewModel
-    @StateObject var searchBar = SearchBar()
+    @State private var searchText: String = ""
 
     var body: some View {
         NavigationView {
-            Group {
-                if searchBar.isActive {
-                    MyCellarSearchView(searchBar: searchBar, onEditWine: { viewModel.onEditWine($0) })
-                } else {
-                    MyCellarContentView(onEditWine: { viewModel.onEditWine($0) })
-                }
-            }
+            InnerCellarView(searchText: $searchText)
                 .navigationBarTitle("My Cellar")
-                .add(searchBar)
         }
+        .searchable(text: $searchText)
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
         .sheet(isPresented: $viewModel.isEditingWine) {
@@ -36,13 +30,18 @@ struct MyCellarView: View {
     }
 }
 
-fileprivate func makeViewModel() -> MyCellarViewModel {
-    MyCellarViewModel(
-        wineTypeRepository: MemoryWineTypeRepository(),
-        thumbnailFetcher: FakeWineThumbnailFetcher(),
-        searchMyCellarQuery: SearchMyCellarQuery(wineRepository: MemoryWineRepository(), session: FakeSession()),
-        getWinesByTypeQuery: GetWinesByTypeQuery(wineRepository: MemoryWineRepository(), session: FakeSession())
-    )
+struct InnerCellarView: View {
+    @EnvironmentObject var viewModel: MyCellarViewModel
+    @Environment(\.isSearching) var isSearching
+    @Binding var searchText: String
+
+    var body: some View {
+        if isSearching {
+            MyCellarSearchView(searchText: $searchText, onEditWine: { viewModel.onEditWine($0) })
+        } else {
+            MyCellarContentView(onEditWine: { viewModel.onEditWine($0) })
+        }
+    }
 }
 
 struct MyCellarView_Previews: PreviewProvider {

@@ -16,24 +16,26 @@ struct WineCellarListView: View {
     let navigationBarTitle: String
     let onEditWine: (String) -> Void
 
+    @State private var searchText: String = ""
+
     private let wineFilteringService = WineFilteringService()
+
     private var allWines: [WineItemViewModel] {
         myWines.wines[wineTypeId, default: []]
     }
 
-    @StateObject private var searchBar = SearchBar()
-    @State private var searchResults: [WineItemViewModel] = []
+    private var searchResults: [WineItemViewModel] {
+        if searchText.isEmpty {
+            return allWines
+        } else {
+            return wineFilteringService.filter(wines: allWines, by: searchText)
+        }
+    }
 
     var body: some View {
         WineListView(wines: searchResults, onTapWine: onEditWine)
             .navigationBarTitle(navigationBarTitle)
-            .add(searchBar)
-            .onReceive(searchBar.$text) { searchBarText in
-                searchResults = wineFilteringService.filter(wines: allWines, by: searchBarText)
-            }
-            .onAppear {
-                searchResults = allWines
-            }
+            .searchable(text: $searchText)
     }
 }
 
