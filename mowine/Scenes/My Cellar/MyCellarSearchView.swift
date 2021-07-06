@@ -13,12 +13,12 @@ import Model
 
 struct MyCellarSearchView: View {
     @EnvironmentObject var myWines: MyWinesService
-    @ObservedObject private(set) var searchBar: SearchBar
+    @Binding var searchText: String
     let onEditWine: (String) -> Void
 
     var body: some View {
         Group {
-            if searchBar.text.isEmpty {
+            if searchText.isEmpty {
                 Text("Search for your favorite wines!")
             } else if myWines.searchResults.isEmpty {
                 Text("No wines match your search terms.")
@@ -26,7 +26,7 @@ struct MyCellarSearchView: View {
                 WineListView(wines: myWines.searchResults, onTapWine: onEditWine)
             }
         }
-        .onReceive(searchBar.$text) { searchBarText in
+        .onChange(of: searchText) { searchBarText in
             myWines.filter(by: searchBarText)
         }
     }
@@ -34,7 +34,7 @@ struct MyCellarSearchView: View {
 
 struct MyCellarSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarSearchView(searchBar: SearchBar(), onEditWine: { _ in })
+        MyCellarSearchView(searchText: .constant(""), onEditWine: { _ in })
             .addPreviewEnvironment()
     }
 }

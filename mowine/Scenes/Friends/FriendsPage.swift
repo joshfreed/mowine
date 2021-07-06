@@ -10,25 +10,33 @@ import SwiftUI
 import Model
 
 struct FriendsPage: View {
-    @StateObject var searchBar = SearchBar()
     @StateObject var vm = SearchUsersViewModel()
-    
+    @State private var searchText: String = ""
+
     var body: some View {
         NavigationView {
-            Group {
-                if searchBar.isActive {
-                    SearchUsersView(hasSearched: vm.hasSearched, searchResults: vm.searchResults)
-                        .onReceive(searchBar.$text) {
-                            vm.searchTextDidChange(to: $0)
-                        }
-                } else {
-                    MyFriendsListView()
+            InnerFriendsPage(vm: vm, searchText: $searchText)
+                .navigationBarTitle("Friends")
+                .searchable(text: $searchText)
+                .onChange(of: searchText) {
+                    vm.searchTextDidChange(to: $0)
                 }
-            }
-            .navigationBarTitle("Friends")
-            .add(searchBar)
         }
         .accentColor(.mwSecondary)
+    }
+}
+
+struct InnerFriendsPage: View {
+    @Environment(\.isSearching) var isSearching
+    @ObservedObject var vm: SearchUsersViewModel
+    @Binding var searchText: String
+
+    var body: some View {
+        if isSearching {
+            SearchUsersView(hasSearched: vm.hasSearched, searchResults: vm.searchResults)
+        } else {
+            MyFriendsListView()
+        }
     }
 }
 
