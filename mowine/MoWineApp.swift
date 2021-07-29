@@ -14,18 +14,23 @@ import Model
 struct WoWineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
+    @StateObject var session = ObservableSession(session: try! JFContainer.shared.container.resolve())
+    @StateObject var wineTypeService = WineTypeService(wineTypeRepository: try! JFContainer.shared.container.resolve())
+
     init() {
         JFContainer.configure()
         setupSwiftyBeaverLogging()
         setupUITestingEnvironment()
+        configureUIKit()
         configureStuff()
-        configureNavBar()
     }
 
     var body: some Scene {
         WindowGroup {
             AppView()
                 .addAppEnvironment()
+                .environmentObject(session)
+                .environmentObject(wineTypeService)
         }
     }
 
@@ -40,10 +45,7 @@ struct WoWineApp: App {
     }
 
     private func setupUITestingEnvironment() {
-        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else {
-            return
-        }
-
+        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
         JFContainer.configureForUITesting()
     }
 
@@ -53,7 +55,7 @@ struct WoWineApp: App {
         }
     }
 
-    private func configureNavBar() {
+    private func configureUIKit() {
         let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
@@ -65,19 +67,6 @@ extension View {
     func addAppEnvironment() -> some View {
         let container = JFContainer.shared.container
 
-        let session = ObservableSession(session: JFContainer.shared.session)
-        let emailLogInViewModel = EmailLogInViewModel(emailAuth: try! JFContainer.shared.container.resolve())
-        let signUpWorker = SignUpWorker(
-            emailAuthService: try! JFContainer.shared.container.resolve(),
-            userRepository: try! JFContainer.shared.container.resolve(),
-            session: try! JFContainer.shared.container.resolve()
-        )
-        let emailSignUpViewModel = EmailSignUpViewModel(worker: signUpWorker)
-        let socialAuthViewModel = SocialAuthViewModel(
-            firstTimeWorker: JFContainer.shared.firstTimeWorker(),
-            socialSignInMethods: JFContainer.shared.socialSignInMethods()
-        )
-
         let wineWorker = WineWorker(
             wineRepository: try! container.resolve(),
             imageWorker: try! container.resolve(),
@@ -87,16 +76,10 @@ extension View {
         return self
             .environmentObject(JFContainer.shared)
             .environmentObject(makeMyCellarViewModel())
-            .environmentObject(makeMyAccountViewModel())
-            .environmentObject(session)
-            .environmentObject(emailLogInViewModel)
-            .environmentObject(emailSignUpViewModel)
-            .environmentObject(socialAuthViewModel)
             .environmentObject(try! JFContainer.shared.container.resolve() as FriendsService)
             .environmentObject(try! JFContainer.shared.container.resolve() as UsersService)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetWineDetailsQuery)
-            .environmentObject(WineTypeService(wineTypeRepository: try! container.resolve()))
             .environmentObject(wineWorker)
             .environmentObject(try! container.resolve() as EditWineService)
             .environmentObject(try! container.resolve() as MyWinesService)
@@ -117,17 +100,5 @@ fileprivate func makeMyCellarViewModel() -> MyCellarViewModel {
         thumbnailFetcher: try! JFContainer.shared.container.resolve(),
         searchMyCellarQuery: searchMyCellarQuery,
         getWinesByTypeQuery: getWinesByTypeQuery
-    )
-}
-
-fileprivate func makeMyAccountViewModel() -> MyAccountViewModel {
-    let session: Session = try! JFContainer.shared.container.resolve()
-    let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: JFContainer.shared.userRepository, session: session)
-    let profilePictureWorker: ProfilePictureWorkerProtocol = try! JFContainer.shared.container.resolve()
-    let signOutCommand = SignOutCommand(session: session)
-    return MyAccountViewModel(
-        getMyAccountQuery: getMyAccountQuery,
-        profilePictureWorker: profilePictureWorker,
-        signOutCommand: signOutCommand
     )
 }

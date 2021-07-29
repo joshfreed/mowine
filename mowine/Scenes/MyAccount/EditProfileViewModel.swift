@@ -33,12 +33,17 @@ class EditProfileViewModel: ObservableObject {
     @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     @Published var isReauthenticating = false
 
-    var closeModal: (() -> Void)?
-
     private let getMyAccountQuery: GetMyAccountQuery
     private let profilePictureWorker: ProfilePictureWorkerProtocol
     private let editProfileService: EditProfileService
     private var hasChanges = false
+
+    init() {
+        SwiftyBeaver.debug("init")
+        self.getMyAccountQuery = try! JFContainer.shared.container.resolve()
+        self.profilePictureWorker = try! JFContainer.shared.container.resolve()
+        self.editProfileService = try! JFContainer.shared.container.resolve()
+    }
 
     init(
         getMyAccountQuery: GetMyAccountQuery,
@@ -91,18 +96,13 @@ class EditProfileViewModel: ObservableObject {
             profilePicture = nil
         }
     }
-
-    func cancel() {
-        closeModal?()
-    }
-    
     private func profileDidChange() {
         hasChanges = true
     }
     
-    func saveProfile() {
+    func saveProfile(completion: @escaping () -> Void) {
         if !hasChanges {
-            closeModal?()
+            completion()
             return
         }
         
@@ -110,14 +110,14 @@ class EditProfileViewModel: ObservableObject {
 
         editProfileService.saveProfile(email: emailAddress, fullName: fullName) { [weak self] result in
             self?.isSaving = false
-            self?.saveProfileCallback(result: result)
+            self?.saveProfileCallback(result: result, completion: completion)
         }
     }
 
-    private func saveProfileCallback(result: Result<Void, Error>) {
+    private func saveProfileCallback(result: Result<Void, Error>, completion: () -> Void) {
         switch result {
         case .success:
-            closeModal?()
+            completion()
         case .failure(let error):
             if case SessionError.requiresRecentLogin = error {
                 reauthenticate()
@@ -134,10 +134,10 @@ class EditProfileViewModel: ObservableObject {
         isShowingSheet = true
     }
     
-    func reauthenticationSuccess() {
+    func reauthenticationSuccess(completion: @escaping () -> Void) {
         isReauthenticating = false
         isShowingSheet = false
-        saveProfile()
+        saveProfile(completion: completion)
     }
     
     func selectProfilePicture(from sourceType: ImagePickerView.SourceType) {
@@ -156,23 +156,5 @@ class EditProfileViewModel: ObservableObject {
     func cancelSelectProfilePicture() {
         isPickingImage = false
         isShowingSheet = false
-    }
-}
-
-extension EditProfileViewModel {
-    static func factory(onClose: @escaping () -> Void) -> EditProfileViewModel {
-        let getMyAccountQuery = GetMyAccountQueryHandler(
-            userRepository: JFContainer.shared.userRepository,
-            session: JFContainer.shared.session
-        )
-        let profilePictureWorker: ProfilePictureWorkerProtocol = try! JFContainer.shared.container.resolve()
-        let editProfileService: EditProfileService = try! JFContainer.shared.container.resolve()
-        let vm = EditProfileViewModel(
-            getMyAccountQuery: getMyAccountQuery,
-            profilePictureWorker: profilePictureWorker,
-            editProfileService: editProfileService
-        )
-        vm.closeModal = onClose
-        return vm
     }
 }

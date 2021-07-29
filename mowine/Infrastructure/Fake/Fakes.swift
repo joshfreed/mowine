@@ -96,14 +96,13 @@ class FakeSession: Session {
     }
     
     var isAnonymous = false
-    
-    var _authStateDidChange = PassthroughSubject<Void, Never>()
-    var _currentUserId = CurrentValueSubject<UserId?, Never>(nil)
-    
-    var authStateDidChange: AnyPublisher<Void, Never> {
+
+    var _authStateDidChange = PassthroughSubject<AuthState, Never>()
+    var authStateDidChange: AnyPublisher<AuthState, Never> {
         _authStateDidChange.eraseToAnyPublisher()
     }
-    
+
+    var _currentUserId = CurrentValueSubject<UserId?, Never>(nil)
     var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
         _currentUserId.eraseToAnyPublisher()
     }
@@ -121,9 +120,8 @@ class FakeSession: Session {
         loggedIn()
     }
     
-    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+    func start() {
         _isLoggedIn = true
-        completion(.success(()))
     }
     
     func end() {

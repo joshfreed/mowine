@@ -19,12 +19,19 @@ class MyAccountViewModel: ObservableObject {
     @Published var emailAddress: String = ""
     @Published var profilePicture: UIImage?
     
-    let getMyAccountQuery: GetMyAccountQuery
-    let profilePictureWorker: ProfilePictureWorkerProtocol
-    let signOutCommand: SignOutCommand
+    private let getMyAccountQuery: GetMyAccountQuery
+    private let profilePictureWorker: ProfilePictureWorkerProtocol
+    private let signOutCommand: SignOutCommand
     private var cancellable: AnyCancellable?
     private var editProfileViewModel: EditProfileViewModel?
-    
+
+    init() {
+        SwiftyBeaver.debug("init")
+        self.getMyAccountQuery = try! JFContainer.shared.container.resolve()
+        self.profilePictureWorker = try! JFContainer.shared.container.resolve()
+        self.signOutCommand = try! JFContainer.shared.container.resolve()
+    }
+
     init(getMyAccountQuery: GetMyAccountQuery, profilePictureWorker: ProfilePictureWorkerProtocol, signOutCommand: SignOutCommand) {
         SwiftyBeaver.debug("init")
         self.getMyAccountQuery = getMyAccountQuery
@@ -38,20 +45,22 @@ class MyAccountViewModel: ObservableObject {
     }
     
     func loadMyAccount() {
-        cancellable = getMyAccountQuery.getMyAccount().sink { completion in
-            SwiftyBeaver.info("\(completion)")
-            if case let .failure(error) = completion {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+        cancellable = getMyAccountQuery.getMyAccount()
+            .compactMap { $0 }
+            .sink { completion in
+                SwiftyBeaver.info("\(completion)")
+                if case let .failure(error) = completion {
+                    SwiftyBeaver.error("\(error)")
+                    Crashlytics.crashlytics().record(error: error)
+                }
+            } receiveValue: { [weak self] value in
+                self?.isLoaded = true
+                self?.fullName = value.fullName
+                self?.emailAddress = value.emailAddress
+                self?.fetchProfilePicture(url: value.profilePictureUrl)
             }
-        } receiveValue: { [weak self] value in
-            self?.isLoaded = true
-            self?.fullName = value.fullName
-            self?.emailAddress = value.emailAddress
-            self?.fetchProfilePicture(url: value.profilePictureUrl)
-        }
     }
-    
+
     private func fetchProfilePicture(url: URL?) {
         if let url = url {
             profilePictureWorker.getProfilePicture(url: url) { [weak self] result in
@@ -74,12 +83,5 @@ class MyAccountViewModel: ObservableObject {
     
     func signOut() {
         signOutCommand.signOut()
-    }
-    
-    func editProfileViewModel(onClose: @escaping () -> Void) -> EditProfileViewModel {
-        if editProfileViewModel == nil {
-            editProfileViewModel = EditProfileViewModel.factory(onClose: onClose)
-        }
-        return editProfileViewModel!
     }
 }

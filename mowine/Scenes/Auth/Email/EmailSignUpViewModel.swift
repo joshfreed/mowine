@@ -15,7 +15,11 @@ class EmailSignUpViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     private let worker: SignUpWorker
-    
+
+    init() {
+        self.worker = try! JFContainer.shared.container.resolve()
+    }
+
     init(worker: SignUpWorker) {
         self.worker = worker
     }
@@ -35,6 +39,8 @@ class EmailSignUpViewModel: ObservableObject {
             switch result {
             case .success:
                 onSignUp()
+                // Need this b/c firebase session handler doesn't fire when linking anonymous to full account
+                // Also we shouldn't have current user id listeners fire until the user account object was created
                 NotificationCenter.default.post(name: .signedIn, object: nil)
             case .failure(let error): self?.displaySignUpError(error)
             }

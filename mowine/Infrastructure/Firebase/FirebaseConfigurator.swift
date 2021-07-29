@@ -15,13 +15,15 @@ import GoogleSignIn
 /// Responsible for bootstrapping Firebase services at app launch.
 class FirebaseConfigurator: Configurator {
     let useEmulator: Bool
+    let clearPersistence: Bool
     
-    init(useEmulator: Bool) {
+    init(useEmulator: Bool, clearPersistence: Bool = false) {
         self.useEmulator = useEmulator
+        self.clearPersistence = clearPersistence
     }
     
     func configure() {
-        
+
         FirebaseApp.configure()
 
         #if DEBUG
@@ -41,6 +43,11 @@ class FirebaseConfigurator: Configurator {
             Firestore.firestore().settings = settings
 
             Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+        }
+
+        if clearPersistence {
+            Firestore.firestore().clearPersistence()
+            try! Auth.auth().signOut()
         }
     }
 }

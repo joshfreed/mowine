@@ -25,9 +25,6 @@ struct AddWineView: View {
                 })
         }
         .accentColor(.mwSecondary)
-        .onAppear {
-            wineTypeService.fetchWineTypes()
-        }
         .onChange(of: vm.closeModal, perform: { value in
             if value {
                 presentationMode.wrappedValue.dismiss()

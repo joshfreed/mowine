@@ -12,7 +12,7 @@ import Model
 struct SocialAuthView: View {
     @Binding var isSigningIn: Bool
     var onLogIn: () -> Void
-    @EnvironmentObject var vm: SocialAuthViewModel
+    @StateObject var vm = SocialAuthViewModel()
     
     var body: some View {
         SocialLoginProviderView() { type in
@@ -29,6 +29,5 @@ struct SocialAuthView_Previews: PreviewProvider {
     static var previews: some View {
         SocialAuthView(isSigningIn: .constant(false)) { }
             .padding()
-            .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }
 }

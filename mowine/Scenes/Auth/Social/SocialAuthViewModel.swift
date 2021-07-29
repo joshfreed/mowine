@@ -18,7 +18,12 @@ class SocialAuthViewModel: ObservableObject {
     
     let worker: FirstTimeWorker
     let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
-    
+
+    init() {
+        self.worker = JFContainer.shared.firstTimeWorker()
+        self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
+    }
+
     init(firstTimeWorker: FirstTimeWorker, socialSignInMethods: [SocialProviderType: SocialSignInMethod]) {
         self.worker = firstTimeWorker
         self.socialSignInMethods = socialSignInMethods
@@ -46,7 +51,7 @@ class SocialAuthViewModel: ObservableObject {
             switch result {
             case .success:
                 onLogIn()
-                NotificationCenter.default.post(name: .signedIn, object: nil)
+//                NotificationCenter.default.post(name: .signedIn, object: nil)
             case .failure(let error):
                 self.showError(error)
             }

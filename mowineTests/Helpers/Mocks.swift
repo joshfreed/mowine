@@ -139,9 +139,9 @@ class MockSession: Session {
         _currentUserIdPub.eraseToAnyPublisher()
     }
     
-    var _authStateDidChange = PassthroughSubject<Void, Never>()
+    var _authStateDidChange = PassthroughSubject<AuthState, Never>()
     
-    var authStateDidChange: AnyPublisher<Void, Never> {
+    var authStateDidChange: AnyPublisher<AuthState, Never> {
         _authStateDidChange.eraseToAnyPublisher()
     }
     
@@ -157,9 +157,7 @@ class MockSession: Session {
         return _currentUserId ?? _currentUser?.id
     }
     
-    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
-        
-    }
+    func start() {}
     
     func login(userId: UserId) {
         _currentUserId = userId

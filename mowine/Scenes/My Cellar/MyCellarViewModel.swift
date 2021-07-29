@@ -31,10 +31,6 @@ class MyCellarViewModel: ObservableObject {
         SwiftyBeaver.debug("deinit")
     }
 
-    func searchCellar(searchText: String) {
-        searchMyCellarQuery.searchMyCellar(searchText: searchText)
-    }
-    
     func onEditWine(_ wineId: String) {
         selectedWineId = wineId
         isEditingWine = true

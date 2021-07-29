@@ -21,14 +21,11 @@ enum MyAccountSheet: Identifiable {
 
 struct MyAccountViewContainer: View {
     @EnvironmentObject var session: ObservableSession
-    @EnvironmentObject var viewModel: MyAccountViewModel
-    @EnvironmentObject var emailLogInViewModel: EmailLogInViewModel
-    @EnvironmentObject var emailSignUpViewModel: EmailSignUpViewModel
-    @EnvironmentObject var socialAuthViewModel: SocialAuthViewModel
-    
+
     @State private var activeSheet: MyAccountSheet?
     
     var body: some View {
+        let _ = Self._printChanges()
         Group {
             if session.isAnonymous {
                 AnonymousUserView() { activeSheet = $0 }
@@ -39,19 +36,15 @@ struct MyAccountViewContainer: View {
         .sheet(item: $activeSheet) { item in
             switch item {
             case .logIn: LogInView() { activeSheet = nil }
-                .environmentObject(emailLogInViewModel)
-                .environmentObject(socialAuthViewModel)
             case .signUp: SignUpView() { activeSheet = nil }
-                .environmentObject(emailSignUpViewModel)
-                .environmentObject(socialAuthViewModel)
-            case .editProfile: EditProfileView(vm: viewModel.editProfileViewModel { activeSheet = nil })
+            case .editProfile: EditProfileView() { activeSheet = nil }
             }
         }
     }
 }
 
 struct MyAccountView: View {
-    @EnvironmentObject var viewModel: MyAccountViewModel
+    @StateObject var viewModel = MyAccountViewModel()
     @Binding var activeSheet: MyAccountSheet?
     
     @State private var isShowingSignOutConfirmation: Bool = false
@@ -67,8 +60,10 @@ struct MyAccountView: View {
             Text(viewModel.fullName)
                 .font(.system(size: 28))
                 .fontWeight(.black)
+                .accessibility(identifier: "fullName")
             Text(viewModel.emailAddress)
                 .font(.system(size: 17))
+                .accessibility(identifier: "emailAddress")
             
             Color.clear.frame(height: 48)
             
@@ -98,7 +93,9 @@ struct MyAccountView: View {
                     .fontWeight(.medium)
                     .foregroundColor(.red)
                     .frame(height: 38)
-            }.actionSheet(isPresented: $isShowingSignOutConfirmation, content: {
+            }
+            .accessibility(identifier: "signOutButton")
+            .actionSheet(isPresented: $isShowingSignOutConfirmation, content: {
                 ActionSheet(title: Text("Are you sure?"), message: nil, buttons: [
                     .destructive(Text("Sign Out"), action: {
                         viewModel.signOut()

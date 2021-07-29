@@ -11,63 +11,55 @@ import FirebaseAuth
 import SwiftyBeaver
 import Combine
 import Model
+import FirebaseCrashlytics
 
 class FirebaseSession: Session {
-    var currentUserId: UserId? {
-        _currentUserId.value
-    }
+    var currentUserId: UserId? { authState.userId }
     
-    var isAnonymous: Bool {
-        Auth.auth().currentUser?.isAnonymous ?? false
-    }
+    var isAnonymous: Bool { authState.isAnonymous }
     
-    var authStateDidChange: AnyPublisher<Void, Never> {
-        _authStateDidChange
+    var authStateDidChange: AnyPublisher<AuthState, Never> {
+        authStateSubject
             .print("AuthStateDidChange")
             .eraseToAnyPublisher()
     }
     
     var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
-        _currentUserId
+        authStateDidChange
+            .map { $0.userId }
             .print("CurrentUserId")
             .eraseToAnyPublisher()
     }
     
-    private var _authStateDidChange = PassthroughSubject<Void, Never>()
-    private var _currentUserId = CurrentValueSubject<UserId?, Never>(nil)
+    private var authState = AuthState()
+    private var authStateSubject = CurrentValueSubject<AuthState, Never>(AuthState())
     private var handler: AuthStateDidChangeListenerHandle?
-    
-    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+    private var cancellables = Set<AnyCancellable>()
+
+    func start() {
         SwiftyBeaver.info("Starting session...")
-        
+
         let auth = Auth.auth()
 
         if let handler = handler {
             auth.removeStateDidChangeListener(handler)
         }
-        
+
         handler = auth.addStateDidChangeListener { [weak self] (auth, user) in
-            if let user = user {
-                SwiftyBeaver.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
-                self?._currentUserId.send(UserId(string: user.uid))
-            } else {
-                SwiftyBeaver.warning("No user")
-                self?._currentUserId.send(nil)
-            }
-            
-            self?._authStateDidChange.send()
+            self?.updateAuthState(from: user)
         }
-        
+
+        NotificationCenter.default.publisher(for: .signedIn)
+            .sink { [weak self] _ in self?.updateAuthState(from: Auth.auth().currentUser) }
+            .store(in: &cancellables)
+
         if auth.currentUser == nil {
             auth.signInAnonymously() { (authResult, error) in
                 if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }                
+                    SwiftyBeaver.error("\(error)")
+                    Crashlytics.crashlytics().record(error: error)
+                }
             }
-        } else {
-            completion(.success(()))
         }
     }
 
@@ -146,6 +138,20 @@ class FirebaseSession: Session {
     }
 }
 
-extension FirebaseAuth.User: MoWineAuth {
-
+extension FirebaseSession {
+    func updateAuthState(from user: FirebaseAuth.User?) {
+        if let user = user {
+            SwiftyBeaver.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
+            let userId = UserId(string: user.uid)
+            let isAnonymous = user.isAnonymous
+            self.authState = AuthState(userId: userId, isAnonymous: isAnonymous)
+            authStateSubject.send(authState)
+        } else {
+            SwiftyBeaver.warning("No user")
+            self.authState = AuthState()
+            authStateSubject.send(AuthState())
+        }
+    }
 }
+
+extension FirebaseAuth.User: MoWineAuth {}

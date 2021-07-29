@@ -48,7 +48,7 @@ class JFContainer: ObservableObject {
     static func configureForUITesting() {
         let container = DependencyContainer.configureForUITesting()
         let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: true)
+            FirebaseConfigurator(useEmulator: true, clearPersistence: true)
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
@@ -181,6 +181,10 @@ extension DependencyContainer {
     static func configureCommonServices(container: DependencyContainer) {
         container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
 
+        // Auth
+        container.register(.unique) { SignOutCommand(session: $0) }
+        container.register(.unique) { SignUpWorker(emailAuthService: $0, userRepository: $1, session: $2) }
+
         // Social
         container.register(.singleton) { GraphApi() }
         
@@ -192,6 +196,7 @@ extension DependencyContainer {
         container.register(.singleton) { WineWorker(wineRepository: $0, imageWorker: $1, session: $2) }
         
         // Scenes
+        container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
         container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
         container.register(.singleton) { EditWineService(wineRepository: $0, wineTypeRepository: $1, imageWorker: $2) }
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }

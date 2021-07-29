@@ -8,11 +8,12 @@
 
 import SwiftUI
 import Model
+import SwiftyBeaver
 
+@MainActor
 struct AppView: View {
     @EnvironmentObject var session: ObservableSession
-    @EnvironmentObject var myWines: MyWinesService
-    @EnvironmentObject var wineTypes: WineTypeService
+    @EnvironmentObject var wineTypeService: WineTypeService
     @State private var isPreparing: Bool = true
     
     var body: some View {
@@ -22,18 +23,19 @@ struct AppView: View {
             } else {
                 TabbedRootView()
             }
-        }        
+        }
         .onAppear {
-            startSession()
+            Task {
+                await loadUserData()
+            }
         }
     }
-    
-    private func startSession() {
-        wineTypes.fetchWineTypes()
 
-        session.start { result in
-            isPreparing = false
-        }
+    private func loadUserData() async {
+        SwiftyBeaver.debug("loadUserData \(String(describing: session.userId))")
+        await wineTypeService.fetchWineTypes()
+        isPreparing = false
+        SwiftyBeaver.info("loadUserData complete")
     }
 }
 

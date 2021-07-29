@@ -23,7 +23,7 @@ public class WineTypeService: ObservableObject {
         self.wineTypeRepository = wineTypeRepository
     }
 
-    public func fetchWineTypes() {
+    public func fetchWineTypes() async {
         wineTypeRepository.getAll { result in
             switch result {
             case .success(let types): self.wineTypes = types

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EmailLogInView: View {
     var onLogIn: () -> Void
-    @EnvironmentObject var vm: EmailLogInViewModel
+    @StateObject var vm = EmailLogInViewModel()
     @State private var emailAddress: String = ""
     @State private var password: String = ""
     
@@ -19,10 +19,12 @@ struct EmailLogInView: View {
             TextField("", text: $emailAddress)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
+                .accessibility(identifier: "emailAddress")
                 .fancyField(title: "Email Address", text: $emailAddress)
                 .padding(.bottom, 4)
             
             SecureField("", text: $password)
+                .accessibility(identifier: "password")
                 .fancyField(title: "Password", text: $password)
                 .padding(.bottom, 4)
             
@@ -31,6 +33,7 @@ struct EmailLogInView: View {
             PrimaryButton(action: {
                 vm.logIn(emailAddress: emailAddress, password: password, onLogIn: onLogIn)
             }, title: "Log In", isLoading: $vm.isLoggingIn)
+                .accessibility(identifier: "logIn")
         }
     }
 }
@@ -39,6 +42,5 @@ struct EmailLogInView_Previews: PreviewProvider {
     static var previews: some View {
         EmailLogInView() { }
             .padding()
-            .environmentObject(EmailLogInViewModel(emailAuth: FakeEmailAuth()))
     }
 }

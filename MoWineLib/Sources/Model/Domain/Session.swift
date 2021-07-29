@@ -18,15 +18,16 @@ public enum SessionError: Error {
 public protocol Session {
     /// Returns the id of the currently logged in user.
     var currentUserId: UserId? { get }
-    
+
+    /// Returns whether the current session is an anonymous user
     var isAnonymous: Bool { get }
     
     var currentUserIdPublisher: AnyPublisher<UserId?, Never> { get }
     
-    var authStateDidChange: AnyPublisher<Void, Never> { get }
+    var authStateDidChange: AnyPublisher<AuthState, Never> { get }
     
     /// Begins a session. It will attempt to resume a previously authenticated session if a user logged in previously. Otherwise it will start a new anonymous session.
-    func start(completion: @escaping (Swift.Result<Void, Error>) -> Void)
+    func start()
     
     /// Ends the current session.
     func end()
@@ -47,52 +48,49 @@ public protocol Session {
     func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error>
 }
 
+public struct AuthState: Equatable {
+    public let userId: UserId?
+    public let isAnonymous: Bool
+
+    public init() {
+        userId = nil
+        isAnonymous = false
+    }
+
+    public init(userId: UserId?, isAnonymous: Bool) {
+        self.userId = userId
+        self.isAnonymous = isAnonymous
+    }
+}
+
 public protocol MoWineAuth {
     var email: String? { get }
 }
 
 public class ObservableSession: ObservableObject {
-    @Published public var isAnonymous: Bool
+    @Published public var userId: UserId? = nil
+    @Published public var isAnonymous: Bool = false
     
-    let session: Session
+    private let session: Session
     private var cancellable: AnyCancellable?
-    
+
     public init(session: Session) {
-        SwiftyBeaver.debug("init")
-        
+        SwiftyBeaver.debug("ObservableSession::init")
         self.session = session
-        self.isAnonymous = session.isAnonymous
-        
         observe()
     }
-    
-    private func observe() {
-        let publisher1 = session.authStateDidChange.map { _ in true }
-        let publisher2 = NotificationCenter.default.publisher(for: .signedIn).map { _ in true }
-        
-        cancellable = publisher1.merge(with: publisher2).sink { [weak self] _ in
-            guard let strongSelf = self else {
-                SwiftyBeaver.warning("authStateDidChange weak self is nil")
-                return
-            }
-            strongSelf.isAnonymous = strongSelf.session.isAnonymous
-            SwiftyBeaver.info("authStateDidChange isAnonymous: \(strongSelf.isAnonymous)")
-        }
-    }
-    
+
     deinit {
-        SwiftyBeaver.debug("deinit")
+        SwiftyBeaver.debug("ObservableSession::deinit")
     }
 
-    public func start(completion: @escaping (Swift.Result<Void, Error>) -> Void) {
-        session.start(completion: completion)
-    }
-    
-    func didLogIn() {
-        isAnonymous = false
-    }
-    
-    func didLogOut() {
-        isAnonymous = true
+    private func observe() {
+        cancellable = session.authStateDidChange
+            .sink { [weak self] authState in
+                self?.userId = authState.userId
+                self?.isAnonymous = authState.isAnonymous
+            }
+
+        session.start()
     }
 }

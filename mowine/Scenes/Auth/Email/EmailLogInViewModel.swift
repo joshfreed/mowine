@@ -15,7 +15,11 @@ class EmailLogInViewModel: ObservableObject {
     @Published var error: String = ""
     
     let emailAuth: EmailAuthenticationService
-    
+
+    init() {
+        self.emailAuth = try! JFContainer.shared.container.resolve()
+    }
+
     init(emailAuth: EmailAuthenticationService) {
         self.emailAuth = emailAuth
     }
@@ -35,7 +39,6 @@ class EmailLogInViewModel: ObservableObject {
             switch result {
             case .success:
                 onLogIn()
-                NotificationCenter.default.post(name: .signedIn, object: nil)
             case .failure(let error):
                 switch error {
                 case

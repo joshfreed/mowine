@@ -11,8 +11,12 @@ import Combine
 import SwiftyBeaver
 
 public protocol GetMyAccountQuery {
-    func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse, Error>
+    func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse?, Error>
+
     func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void)
+
+    @available(iOSApplicationExtension 15.0, *)
+    func getMyAccount() async throws -> GetMyAccountQueryResponse?
 }
 
 public struct GetMyAccountQueryResponse {
@@ -22,20 +26,16 @@ public struct GetMyAccountQueryResponse {
 }
 
 public class GetMyAccountQueryHandler: GetMyAccountQuery {
-    let userRepository: UserRepository
-    let session: Session
-    
+    private let userRepository: UserRepository
+    private let session: Session
     private var subject = CurrentValueSubject<GetMyAccountQueryResponse?, Error>(nil)
-    private var listener: MoWineListenerRegistration?
     private var sessionCancellable: AnyCancellable?
+    private var listener: MoWineListenerRegistration?
     
     public init(userRepository: UserRepository, session: Session) {
         SwiftyBeaver.debug("init")
-        
         self.userRepository = userRepository
         self.session = session
-        
-        startListening()
     }
     
     deinit {
@@ -44,36 +44,12 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
         sessionCancellable = nil
     }
     
-    private func startListening() {
-        sessionCancellable = session.currentUserIdPublisher
-            .removeDuplicates()
-            .sink(receiveValue: { [weak self] userId in
-                self?.updateSubscription(userId)
-            })
-    }
-    
-    private func updateSubscription(_ userId: UserId?) {
-        listener?.remove()
-        
-        guard let userId = userId else {
-            return
+    public func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse?, Error> {
+        if listener == nil {
+            startListening()
         }
-        
-        listener = userRepository.getUserByIdAndListenForUpdates(id: userId) { [weak self] result in
-            guard let strongSelf = self else { return }
-            
-            SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
-            
-            if case let .success(u) = result, let user = u {
-                strongSelf.subject.send(.mapResponse(user))
-            }
-        }
-    }
-    
-    public func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse, Error> {
-        return subject
-            .compactMap { $0 }
-            .eraseToAnyPublisher()
+
+        return subject.eraseToAnyPublisher()
     }
     
     public func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void) {
@@ -95,6 +71,57 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
                 }
             case .failure(let error):
                 completion(.failure(error))
+            }
+        }
+    }
+
+    @available(iOSApplicationExtension 15.0, *)
+    public func getMyAccount() async throws -> GetMyAccountQueryResponse? {
+        SwiftyBeaver.info("getMyAccount async")
+
+        guard let currentUserId = session.currentUserId else { return nil }
+        guard !session.isAnonymous else { return nil }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            userRepository.getUserById(currentUserId) { result in
+                switch result {
+                case .success(let user):
+                    if let user = user {
+                        continuation.resume(returning: .mapResponse(user))
+                    } else {
+                        continuation.resume(returning: nil)
+                    }
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+}
+
+// MARK: Listener
+
+extension GetMyAccountQueryHandler {
+    private func startListening() {
+        sessionCancellable = session.currentUserIdPublisher
+            .removeDuplicates()
+            .sink { [weak self] userId in
+                self?.updateSubscription(userId)
+            }
+    }
+
+    private func updateSubscription(_ userId: UserId?) {
+        listener?.remove()
+
+        guard let userId = userId else {
+            return
+        }
+
+        listener = userRepository.getUserByIdAndListenForUpdates(id: userId) { [weak self] result in
+            SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
+
+            if case let .success(u) = result, let user = u {
+                self?.subject.send(.mapResponse(user))
             }
         }
     }
