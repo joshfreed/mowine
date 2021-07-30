@@ -123,6 +123,8 @@ class FakeSession: Session {
     func start() {
         _isLoggedIn = true
     }
+
+    func startAnonymous() async throws {}
     
     func end() {
         _isLoggedIn = false

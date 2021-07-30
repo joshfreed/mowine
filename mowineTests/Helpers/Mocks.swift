@@ -20,9 +20,7 @@ class MockWineRepository: WineRepository {
         
     }
     
-    func add(_ wine: Wine, completion: @escaping (Swift.Result<Wine, Error>) -> ()) {
-        
-    }
+    func add(_ wine: Wine) async throws {}
     
     func getWines(userId: UserId, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
@@ -158,6 +156,8 @@ class MockSession: Session {
     }
     
     func start() {}
+
+    func startAnonymous() async throws {}
     
     func login(userId: UserId) {
         _currentUserId = userId

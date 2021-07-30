@@ -52,15 +52,11 @@ class FirebaseSession: Session {
         NotificationCenter.default.publisher(for: .signedIn)
             .sink { [weak self] _ in self?.updateAuthState(from: Auth.auth().currentUser) }
             .store(in: &cancellables)
+    }
 
-        if auth.currentUser == nil {
-            auth.signInAnonymously() { (authResult, error) in
-                if let error = error {
-                    SwiftyBeaver.error("\(error)")
-                    Crashlytics.crashlytics().record(error: error)
-                }
-            }
-        }
+    func startAnonymous() async throws {
+        let result = try await Auth.auth().signInAnonymously()
+        updateAuthState(from: result.user)
     }
 
     func getCurrentAuth() -> MoWineAuth? { Auth.auth().currentUser }
@@ -82,9 +78,8 @@ class FirebaseSession: Session {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
             SwiftyBeaver.error("Error signing out: \(signOutError)")
+            Crashlytics.crashlytics().record(error: signOutError)
         }
-        
-        Auth.auth().signInAnonymously() { (_, _) in }
     }
 
     func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
@@ -144,12 +139,12 @@ extension FirebaseSession {
             SwiftyBeaver.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
             let userId = UserId(string: user.uid)
             let isAnonymous = user.isAnonymous
-            self.authState = AuthState(userId: userId, isAnonymous: isAnonymous)
+            authState = AuthState(userId: userId, isAnonymous: isAnonymous)
             authStateSubject.send(authState)
         } else {
             SwiftyBeaver.warning("No user")
-            self.authState = AuthState()
-            authStateSubject.send(AuthState())
+            authState = AuthState(userId: nil, isAnonymous: true)
+            authStateSubject.send(authState)
         }
     }
 }

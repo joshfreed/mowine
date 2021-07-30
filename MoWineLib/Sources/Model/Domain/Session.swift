@@ -28,6 +28,9 @@ public protocol Session {
     
     /// Begins a session. It will attempt to resume a previously authenticated session if a user logged in previously. Otherwise it will start a new anonymous session.
     func start()
+
+    /// Begins an anonymous session
+    func startAnonymous() async throws
     
     /// Ends the current session.
     func end()

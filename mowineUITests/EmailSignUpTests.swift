@@ -14,6 +14,9 @@ class EmailSignUpTests: XCTestCase {
     var signUpPage: SignUpPage!
     var myAccount: MyAccountPage!
     var logInPage: LogInPage!
+    var fullName: String!
+    var emailAddress: String!
+    var password = "Testing123!"
 
     override func setUpWithError() throws {
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -28,6 +31,10 @@ class EmailSignUpTests: XCTestCase {
         signUpPage = SignUpPage(app: app)
         myAccount = MyAccountPage(app: app)
         logInPage = LogInPage(app: app)
+
+        let num = Int.random(in: 1..<1000)
+        fullName = "Test User\(num)"
+        emailAddress = "test\(num)@jpfreed.com"
     }
 
     override func tearDownWithError() throws {
@@ -43,14 +50,14 @@ class EmailSignUpTests: XCTestCase {
         anonymousUser.signUp()
 
         signUpPage.waitForExistence()
-        signUpPage.typeFullName("Test User1")
-        signUpPage.typeEmailAddress("test1@jpfreed.com")
-        signUpPage.typePassword("Testing123!")
+        signUpPage.typeFullName(fullName)
+        signUpPage.typeEmailAddress(emailAddress)
+        signUpPage.typePassword(password)
         signUpPage.signUp()
 
         myAccount.waitForExistence()
-        XCTAssertEqual("Test User1", myAccount.fullName)
-        XCTAssertEqual("test1@jpfreed.com", myAccount.emailAddress)
+        XCTAssertEqual(fullName, myAccount.fullName)
+        XCTAssertEqual(emailAddress, myAccount.emailAddress)
         myAccount.tapSignOut()
         myAccount.confirmSignOut()
 
@@ -58,12 +65,12 @@ class EmailSignUpTests: XCTestCase {
         anonymousUser.logIn()
 
         logInPage.waitForExistence()
-        logInPage.typeEmailAddress("test1@jpfreed.com")
-        logInPage.typePassword("Testing123!")
+        logInPage.typeEmailAddress(emailAddress)
+        logInPage.typePassword(password)
         logInPage.logIn()
 
         myAccount.waitForExistence()
-        XCTAssertEqual("Test User1", myAccount.fullName)
-        XCTAssertEqual("test1@jpfreed.com", myAccount.emailAddress)
+        XCTAssertEqual(fullName, myAccount.fullName)
+        XCTAssertEqual(emailAddress, myAccount.emailAddress)
     }
 }

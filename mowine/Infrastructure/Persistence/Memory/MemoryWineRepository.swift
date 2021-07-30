@@ -12,9 +12,8 @@ import Model
 class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []
     
-    func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
+    func add(_ wine: Wine) async throws {
         wines.append(wine)
-        completion(.success(wine))
     }
     
     func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ()) {

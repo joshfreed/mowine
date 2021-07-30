@@ -36,7 +36,7 @@ class FirebaseEmailAuth: EmailAuthenticationService {
     }
     
     func signUp(emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        if let user = Auth.auth().currentUser {
+        if let user = Auth.auth().currentUser, user.isAnonymous {
             /// Link the current anonymous user with a username and password.
             doLink(user: user, emailAddress: emailAddress, password: password, completion: completion)
         } else {
@@ -47,10 +47,8 @@ class FirebaseEmailAuth: EmailAuthenticationService {
     }
     
     private func doLink(user: FirebaseAuth.User, emailAddress: String, password: String, completion: @escaping (Result<Void, Error>) -> ()) {
-        guard user.isAnonymous else {
-            fatalError("Attempted to sign up but there is not an anonymous user logged in.")
-        }
-        
+        assert(user.isAnonymous, "Attempted to sign up but there is not an anonymous user logged in.")
+
         let credential = EmailAuthProvider.credential(withEmail: emailAddress, password: password)
         
         user.link(with: credential) { (result, error) in

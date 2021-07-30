@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftyBeaver
 import Model
+import FirebaseCrashlytics
 
 struct FinalizeWineView: View {
     @EnvironmentObject var vm: AddWineViewModel
@@ -24,7 +25,17 @@ struct FinalizeWineView: View {
             EnterNameView(name: $model.name)
             RateWineView(rating: $model.rating)
             if model.isComplete {
-                PrimaryButton(action: { addWine() }, title: "Add Wine", isLoading: $isSaving, height: 64, fontSize: 28)
+                PrimaryButton(
+                    action: {
+                        Task {
+                            await addWine()
+                        }
+                    },
+                    title: "Add Wine",
+                    isLoading: $isSaving,
+                    height: 64,
+                    fontSize: 28
+                )
                     .accessibility(identifier: "createWineButton")
             }
             Spacer()
@@ -32,23 +43,21 @@ struct FinalizeWineView: View {
         .navigationTitle("Add Wine")
         .padding(16)
     }
-    
-    func addWine() {
+
+    @MainActor
+    func addWine() async {
         isSaving = true
 
-        wineWorker.createWine(from: model) { result in
-            switch result {
-            case .success: vm.closeModal = true
-            case .failure(let error): displayAddWineError(error)
-            }
+        do {
+            try await wineWorker.createWine(from: model)
+            vm.closeModal = true
+        } catch {
+            isSaving = false
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
+            isErrorSaving = true
+            errorMessage = error.localizedDescription
         }
-    }
-
-    private func displayAddWineError(_ error: Error) {
-        isSaving = false
-        SwiftyBeaver.error("\(error)")
-        isErrorSaving = true
-        errorMessage = error.localizedDescription
     }
 }
 

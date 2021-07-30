@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol WineRepository {
-    func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ())
+    func add(_ wine: Wine) async throws
     func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ())
     func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ())
     func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ())

@@ -16,10 +16,8 @@ extension XCTestCase {
 }
 
 class mowineUITests: XCTestCase {
-        
-    override func setUp() {
-        super.setUp()
-        
+
+    override func setUpWithError() throws {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
@@ -28,9 +26,8 @@ class mowineUITests: XCTestCase {
         app.launch()
     }
     
-    override func tearDown() {
+    override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
     
     func testAddWine() {

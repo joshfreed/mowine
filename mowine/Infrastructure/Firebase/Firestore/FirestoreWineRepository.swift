@@ -14,23 +14,10 @@ import Model
 
 class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()
-    
-    init() {
-        
-    }
-    
-    func add(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
-        let data = wine.toFirestore()
-        
-        db.collection("wines").document(wine.id.asString).setData(data as [String: Any]) { err in
-            if let err = err {
-                SwiftyBeaver.error("Error adding wine document: \(err)")
-                Crashlytics.crashlytics().record(error: err)
-                completion(.failure(err))
-            } else {
-                completion(.success(wine))
-            }
-        }
+
+    func add(_ wine: Wine) async throws {
+        let data = wine.toFirestore() as [String: Any]
+        try await db.collection("wines").document(wine.id.asString).setData(data)
     }
     
     func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {

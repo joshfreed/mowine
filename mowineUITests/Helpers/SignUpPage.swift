@@ -23,7 +23,7 @@ class SignUpPage {
         let textField = app.textFields["fullName"]
         XCTAssertTrue(textField.exists)
         textField.tap()
-        textField.typeText("Test User1")
+        textField.typeText(text)
     }
 
     func typeEmailAddress(_ text: String) {
