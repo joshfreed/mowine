@@ -21,8 +21,16 @@ class FacebookProvider: SocialSignInProvider {
     init(fbGraphApi: GraphApi) {
         self.fbGraphApi = fbGraphApi
     }
-    
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
+
+    func getNewUserInfo() async throws -> NewUserInfo {
+        return try await withCheckedThrowingContinuation { cont in
+            getNewUserInfo()  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
+
+    private func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
         fbGraphApi.me(params: ["fields": "email,first_name,last_name"]) { result in
             switch result {
             case .success(let fields): self.createNewUserFromFacebookFields(fields, completion: completion)

@@ -17,47 +17,39 @@ class FirebaseSocialAuth: SocialAuthService {
         self.credentialFactory = credentialFactory
     }
 
-    func signIn(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {
+    func signIn(with token: SocialToken) async throws {
         let credential = credentialFactory.makeCredential(from: token)
 
         if let user = Auth.auth().currentUser, user.isAnonymous {
-            link(user: user, with: credential, completion: completion)
+            try await link(user: user, with: credential)
         } else {
-            signIn(with: credential, completion: completion)
+            try await signIn(with: credential)
         }
     }
-    
-    private func signIn(with credential: AuthCredential, completion: @escaping (Result<Void, Error>) -> ()) {
-        Auth.auth().signIn(with: credential) { (result, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        }
+
+    private func signIn(with credential: AuthCredential) async throws {
+        try await Auth.auth().signIn(with: credential)
     }
     
-    private func link(user: FirebaseAuth.User, with credential: AuthCredential, completion: @escaping (Result<Void, Error>) -> ()) {
+    private func link(user: FirebaseAuth.User, with credential: AuthCredential) async throws {
         let duplicateAccountCodes = [
             AuthErrorCode.credentialAlreadyInUse.rawValue,
             AuthErrorCode.emailAlreadyInUse.rawValue
         ]
-        
-        user.link(with: credential) { (result, error) in
-            if let error = error {
-                let code = (error as NSError).code
-                if duplicateAccountCodes.contains(code) {
-                    self.switchToSignIn(with: credential, error: error, completion: completion)
-                } else {
-                    completion(.failure(error))
-                }
+
+        do {
+            try await user.link(with: credential)
+        } catch {
+            let code = (error as NSError).code
+            if duplicateAccountCodes.contains(code) {
+                try await switchToSignIn(with: credential, error: error)
             } else {
-                completion(.success(()))
+                throw error
             }
         }
     }
     
-    private func switchToSignIn(with credential: AuthCredential, error: Error, completion: @escaping (Result<Void, Error>) -> ()) {
+    private func switchToSignIn(with credential: AuthCredential, error: Error) async throws {
         // An anonymous user provided valid credentials to an existing account.
         // That means this should be a sign in attempt for that account.
         // Note that this will clear any wines stored for the anonymous user. Perhaps one day I could consider merging.
@@ -68,7 +60,7 @@ class FirebaseSocialAuth: SocialAuthService {
             _credential = updatedCredential
         }
         
-        signIn(with: _credential, completion: completion)
+        try await signIn(with: _credential)
     }
     
     func reauthenticate(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {

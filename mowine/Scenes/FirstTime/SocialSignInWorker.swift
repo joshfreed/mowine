@@ -22,82 +22,56 @@ class SocialSignInWorker {
         self.provider = provider
         self.socialAuthService = socialAuthService
     }
-    
-    func login(token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
-        socialAuthService.signIn(with: token) { result in
-            switch result {
-            case .success: self.findOrCreateUserObjectForCurrentSession(completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
+
+    func login(token: SocialToken) async throws {
+        try await socialAuthService.signIn(with: token)
+        try await findOrCreateUserObjectForCurrentSession()
     }
     
-    private func findOrCreateUserObjectForCurrentSession(completion: @escaping (Result<User, Error>) -> ()) {
+    private func findOrCreateUserObjectForCurrentSession() async throws {
         guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
+            throw SessionError.notLoggedIn
+        }
+
+        if try await userRepository.getUserById(currentUserId) != nil {
             return
         }
-        
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    completion(.success(user))
-                } else {
-                    self.fetchProfileAndCreateUser(completion: completion)
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+
+        try await fetchProfileAndCreateUser()
     }
     
-    private func fetchProfileAndCreateUser(completion: @escaping (Result<User, Error>) -> ()) {
-        provider.getNewUserInfo { result in
-            switch result {
-            case .success(let newUserInfo): self.createUser(newUserInfo, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
+    private func fetchProfileAndCreateUser() async throws {
+        let newUserInfo = try await provider.getNewUserInfo()
+        try await createUser(newUserInfo)
     }
     
-    private func createUser(_ newUserInfo: NewUserInfo, completion: @escaping (Result<User, Error>) -> ()) {
+    private func createUser(_ newUserInfo: NewUserInfo) async throws {
         guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
+            throw SessionError.notLoggedIn
         }
-        
+
         var user = User(id: currentUserId, emailAddress: newUserInfo.email)
         user.fullName = newUserInfo.firstName
         if let lastName = newUserInfo.lastName {
             user.fullName += " " + lastName
         }
-        
-        userRepository.add(user: user) { result in
-            switch result {
-            case .success(let user): self.setHigherResProfilePicture(user, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
+
+        try await userRepository.add(user: user)
+
+        try await setHigherResProfilePicture(user)
     }
     
-    private func setHigherResProfilePicture(_ user: User, completion: @escaping (Result<User, Error>) -> ()) {
+    private func setHigherResProfilePicture(_ user: User) async throws {
         guard let photoUrl = session.getPhotoUrl() else {
-            completion(.success(user))
             return
         }
-        
+
         let newUrlString = provider.getProfilePictureUrl(photoUrl.absoluteString)
         let highResUrl = URL(string: newUrlString)
 
         var _user = user
         _user.profilePictureUrl = highResUrl
-        
-        userRepository.save(user: _user) { result in
-            switch result {
-            case .success(let user): completion(.success(user))
-            case .failure(let error): completion(.failure(error))
-            }
-        }        
+
+        try await userRepository.save(user: _user)
     }
 }

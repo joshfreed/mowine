@@ -16,15 +16,14 @@ enum CreateUserFromGoogleInfoError: Error {
 }
 
 class GoogleProvider: SocialSignInProvider {
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
+    func getNewUserInfo() async throws -> NewUserInfo {
         guard let profile = GIDSignIn.sharedInstance()?.currentUser.profile else {
-            completion(.failure(CreateUserFromGoogleInfoError.failedToFetchProfile))
-            return
+            throw CreateUserFromGoogleInfoError.failedToFetchProfile
         }
-        
+
         let newUserInfo = NewUserInfo(email: profile.email, firstName: profile.givenName, lastName: profile.familyName)
-        
-        completion(.success(newUserInfo))
+
+        return newUserInfo
     }
     
     func getProfilePictureUrl(_ urlString: String) -> String {

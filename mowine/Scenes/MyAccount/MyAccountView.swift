@@ -9,44 +9,22 @@
 import SwiftUI
 import Model
 
-enum MyAccountSheet: Identifiable {
-    case logIn
-    case signUp
-    case editProfile
-    
-    var id: Int {
-        hashValue
-    }
-}
-
 struct MyAccountViewContainer: View {
     @EnvironmentObject var session: ObservableSession
 
-    @State private var activeSheet: MyAccountSheet?
-    
     var body: some View {
-        let _ = Self._printChanges()
-        Group {
-            if session.isAnonymous {
-                AnonymousUserView() { activeSheet = $0 }
-            } else {
-                MyAccountView(activeSheet: $activeSheet)
-            }
-        }
-        .sheet(item: $activeSheet) { item in
-            switch item {
-            case .logIn: LogInView() { activeSheet = nil }
-            case .signUp: SignUpView() { activeSheet = nil }
-            case .editProfile: EditProfileView() { activeSheet = nil }
-            }
+        if session.isAnonymous {
+            AnonymousUserView()
+        } else {
+            MyAccountView()
         }
     }
 }
 
 struct MyAccountView: View {
     @StateObject var viewModel = MyAccountViewModel()
-    @Binding var activeSheet: MyAccountSheet?
-    
+
+    @State private var editProfile = false
     @State private var isShowingSignOutConfirmation: Bool = false
     
     var body: some View {
@@ -67,13 +45,19 @@ struct MyAccountView: View {
             
             Color.clear.frame(height: 48)
             
-            Button(action: { activeSheet = .editProfile }) {
+            Button(action: {
+                editProfile = true
+            }) {
                 Text("Edit Profile")
                     .font(.system(size: 21))
                     .fontWeight(.medium)
                     .foregroundColor(Color("Primary Light"))
                     .frame(height: 38)
-            }.disabled(!viewModel.isLoaded)
+            }
+            .disabled(!viewModel.isLoaded)
+            .sheet(isPresented: $editProfile) {
+                EditProfileView()
+            }
             
             /*
             Button(action: {}) {
@@ -127,8 +111,14 @@ struct ProfilePictureView2: View {
 }
 
 struct MyAccountView_Previews: PreviewProvider {
+    static var viewModel: MyAccountViewModel = {
+        let vm = MyAccountViewModel()
+        vm.fullName = "Barry Jones"
+        vm.emailAddress = "jonesy@barryjones.com"
+        return vm
+    }()
+
     static var previews: some View {
-        MyAccountView(activeSheet: .constant(nil))
-            .environmentObject(MyAccountViewModel.make())
+        MyAccountView(viewModel: viewModel)
     }
 }

@@ -21,12 +21,12 @@ class FirstTimeWorker {
     init(workers: [SocialProviderType: SocialSignInWorker]) {
         self.workers = workers
     }
-    
-    func login(type: SocialProviderType, token: SocialToken, completion: @escaping (Result<User, Error>) -> ()) {
+
+    func login(type: SocialProviderType, token: SocialToken) async throws {
         guard let worker = workers[type] else {
             fatalError("No worker for type: \(type)")
         }
 
-        worker.login(token: token, completion: completion)
+        try await worker.login(token: token)
     }
 }

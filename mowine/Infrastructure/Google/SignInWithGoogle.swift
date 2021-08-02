@@ -25,6 +25,14 @@ class SignInWithGoogle: NSObject, SocialSignInMethod, GIDSignInDelegate {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().signIn()
     }
+
+    func signIn() async throws -> SocialToken {
+        return try await withCheckedThrowingContinuation { cont in
+            signIn()  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error as NSError? {

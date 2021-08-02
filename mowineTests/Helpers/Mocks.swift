@@ -68,6 +68,9 @@ class MockUserRepository: UserRepository {
     func add(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         
     }
+
+    func add(user: User) async throws {
+    }
     
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
         
@@ -76,6 +79,8 @@ class MockUserRepository: UserRepository {
     func save(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         
     }
+
+    func save(user: User) async throws {}
     
     var getFriendsOfResult: Swift.Result<[User], Error>?
     var getFriendsOf_userId: UserId?
@@ -124,6 +129,14 @@ class MockUserRepository: UserRepository {
         getUserById_id = id
         if let result = getUserByIdResult {
             completion(result)
+        }
+    }
+
+    func getUserById(_ id: UserId) async throws -> User? {
+        return try await withCheckedThrowingContinuation { cont in
+            getUserById(id)  { res in
+                cont.resume(with: res)
+            }
         }
     }
 }
@@ -222,6 +235,14 @@ class MockEmailAuthService: EmailAuthenticationService {
             completion(result)
         }
     }
+
+    func signIn(emailAddress: String, password: String) async throws {
+        return try await withCheckedThrowingContinuation { cont in
+            signIn(emailAddress: emailAddress, password: password)  { res in
+                cont.resume(with: res)
+            }
+        }
+    }    
     
     var signUpCalled = false
     var signUp_emailAddress: String?
@@ -233,6 +254,14 @@ class MockEmailAuthService: EmailAuthenticationService {
         signUp_password = password
         if let result = signUpResult {
             completion(result)
+        }
+    }
+
+    func signUp(emailAddress: String, password: String) async throws {
+        return try await withCheckedThrowingContinuation { cont in
+            signUp(emailAddress: emailAddress, password: password)  { res in
+                cont.resume(with: res)
+            }
         }
     }
 }

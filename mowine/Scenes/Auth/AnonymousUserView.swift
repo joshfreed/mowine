@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct AnonymousUserView: View {
-    var action: (MyAccountSheet) -> Void
-    
+    @State private var showLogIn = false
+    @State private var showSignUp = false
+
     var body: some View {
         VStack(spacing: 0) {
             Text("Get mo' out of mo' wine with a free account")
@@ -38,12 +39,18 @@ struct AnonymousUserView: View {
                 )
             }
             .padding([.leading, .trailing])
-                        
+            
             Spacer()
             
             HStack {
-                PrimaryButton(action: { action(.logIn) }, title: "Log In")                
-                PrimaryButton(action: { action(.signUp) }, title: "Sign Up")
+                PrimaryButton(action: { showLogIn = true }, title: "Log In")
+                    .sheet(isPresented: $showLogIn) {
+                        LogInView()
+                    }
+                PrimaryButton(action: { showSignUp = true }, title: "Sign Up")
+                    .sheet(isPresented: $showSignUp) {
+                        SignUpView()
+                    }
             }
             .padding([.leading, .trailing])
             
@@ -76,6 +83,6 @@ struct CoolCopyView: View {
 
 struct AnonymousUserView_Previews: PreviewProvider {
     static var previews: some View {
-        AnonymousUserView() { _ in }
+        AnonymousUserView()
     }
 }

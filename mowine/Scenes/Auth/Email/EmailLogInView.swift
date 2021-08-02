@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EmailLogInView: View {
-    var onLogIn: () -> Void
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm = EmailLogInViewModel()
     @State private var emailAddress: String = ""
     @State private var password: String = ""
@@ -31,7 +31,10 @@ struct EmailLogInView: View {
             ErrorLabel(vm.error)
             
             PrimaryButton(action: {
-                vm.logIn(emailAddress: emailAddress, password: password, onLogIn: onLogIn)
+                Task {
+                    await vm.logIn(emailAddress: emailAddress, password: password)
+                    dismiss()
+                }
             }, title: "Log In", isLoading: $vm.isLoggingIn)
                 .accessibility(identifier: "logIn")
         }
@@ -40,7 +43,7 @@ struct EmailLogInView: View {
 
 struct EmailLogInView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailLogInView() { }
+        EmailLogInView()
             .padding()
     }
 }

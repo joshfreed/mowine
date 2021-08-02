@@ -28,53 +28,19 @@ class SignUpWorker {
         self.session = session
     }
     
-    func signUp(emailAddress: String, password: String, fullName: String, completion: @escaping (Result<User, Error>) -> ()) {
-        // TODO check password strength requirements?
-        
-        emailAuthService.signUp(emailAddress: emailAddress, password: password) { result in
-            switch result {
-            case .success: self.createUser(emailAddress: emailAddress, fullName: fullName, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
+    func signUp(emailAddress: String, password: String, fullName: String) async throws {
+        try await emailAuthService.signUp(emailAddress: emailAddress, password: password)
 
-    func createUser(emailAddress: String, fullName: String, completion: @escaping (Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
+            throw SessionError.notLoggedIn
+        }
+
+        guard try await userRepository.getUserById(currentUserId) == nil else {
             return
         }
-        
+
         var user = User(id: currentUserId, emailAddress: emailAddress)
         user.fullName = fullName
-        
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let existingUser): self.handleGetUserSuccess(newUser: user, existingUser: existingUser, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
+        try await userRepository.add(user: user)
     }
-    
-    func handleGetUserSuccess(newUser: User, existingUser: User?, completion: @escaping (Result<User, Error>) -> ()) {
-        if let existingUser = existingUser {
-            completion(.success(existingUser))
-        } else {
-            saveNewUser(user: newUser) { result in
-                switch result {
-                case .success: completion(.success(newUser))
-                case .failure(let error): completion(.failure(error))
-                }
-            }
-        }
-    }
-    
-    func saveNewUser(user: User, completion: @escaping (Result<Void, Error>) -> ()) {
-        userRepository.add(user: user) { result in
-            switch result {
-            case .success: completion(.success(()))
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }    
 }

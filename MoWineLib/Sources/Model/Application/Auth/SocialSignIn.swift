@@ -29,15 +29,18 @@ public enum SocialProviderType {
 public protocol SocialToken {}
 
 public protocol SocialSignInProvider {
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ())
+    func getNewUserInfo() async throws -> NewUserInfo
     func getProfilePictureUrl(_ urlString: String) -> String
 }
 
 public protocol SocialSignInMethod {
+    @available(*, deprecated, message: "Prefer async alternative instead")
     func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void)
+
+    func signIn() async throws -> SocialToken
 }
 
 public protocol SocialAuthService {
-    func signIn(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ())
+    func signIn(with token: SocialToken) async throws
     func reauthenticate(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ())
 }

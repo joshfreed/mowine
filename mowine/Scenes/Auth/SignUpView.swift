@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    var onSignUp: () -> Void
+    @Environment(\.dismiss) var dismiss
     
     @State var isLoading: Bool = false
     
@@ -17,14 +17,14 @@ struct SignUpView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 32) {
-                    EmailSignUpView(onSignUp: onSignUp)
+                    EmailSignUpView()
                     FancyDivider(text: "OR")
-                    SocialAuthView(isSigningIn: $isLoading, onLogIn: onSignUp)
+                    SocialAuthView(isSigningIn: $isLoading)
                     Spacer()
                 }
                 .padding()
                 .navigationTitle("Sign Up")
-                .navigationBarItems(leading: Button("Cancel") { onSignUp() })
+                .navigationBarItems(leading: Button("Cancel") { dismiss() })
             }
         }
         .accentColor(Color("Primary Light"))
@@ -34,7 +34,7 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView() { }
+        SignUpView()
             .environmentObject(EmailSignUpViewModel(worker: SignUpWorker(emailAuthService: FakeEmailAuth(), userRepository: FakeUserRepository(), session: FakeSession())))
         .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }

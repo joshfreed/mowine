@@ -9,28 +9,6 @@
 import UIKit
 import Model
 
-extension MyAccountViewModel {
-    static func make(fullName: String, email: String) -> MyAccountViewModel {
-        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
-        let profilePictureWorker = FakeProfilePictureWorker()
-        let signOutCommand = SignOutCommand(session: FakeSession())
-        let vm = MyAccountViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, signOutCommand: signOutCommand)
-        vm.fullName = fullName
-        vm.emailAddress = email
-        return vm
-    }
-    
-    static func make() -> MyAccountViewModel {
-        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
-        let profilePictureWorker = FakeProfilePictureWorker()
-        let signOutCommand = SignOutCommand(session: FakeSession())
-        let vm = MyAccountViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, signOutCommand: signOutCommand)
-        vm.fullName = "Barry Jones"
-        vm.emailAddress = "bjones@gmail.com"
-        return vm
-    }
-}
-
 extension EditProfileViewModel {
     static func make() -> EditProfileViewModel {
         .make(emailAddress: "", fullName: "Barry Jones")

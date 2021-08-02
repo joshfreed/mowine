@@ -10,8 +10,8 @@ import SwiftUI
 
 struct EditProfileView: View {
     @StateObject var vm = EditProfileViewModel()
-    var onDismiss: () -> Void
-    
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         NavigationView {
             EditProfileFormView(
@@ -23,9 +23,9 @@ struct EditProfileView: View {
             }
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
-                onDismiss()
+                dismiss()
             }, trailing: Button("Save") {
-                vm.saveProfile(completion: onDismiss)
+                vm.saveProfile { dismiss() }
             })
         }
         .accentColor(.mwSecondary)
@@ -44,9 +44,9 @@ struct EditProfileView: View {
                 }
             } else if vm.isReauthenticating {
                 ReauthenticationView(vm: ReauthenticationViewModel {
-                    vm.reauthenticationSuccess(completion: onDismiss)
+                    vm.reauthenticationSuccess { dismiss() }
                 } onCancel: {
-                    onDismiss()
+                    dismiss()
                 })
             } else {
                 EmptyView()
@@ -121,6 +121,6 @@ struct ProfilePictureOverlayView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView() {}
+        EditProfileView()
     }
 }

@@ -160,20 +160,18 @@ struct FakeMoWineAuth: MoWineAuth {
 }
 
 class FakeEmailAuth: EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func signIn(emailAddress: String, password: String) async throws {
         if let user = usersDB.first(where: { $0.emailAddress == emailAddress }) {
             (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
-            completion(.success(()))
         } else {
-            completion(.failure(EmailAuthenticationErrors.userNotFound))
+            throw EmailAuthenticationErrors.userNotFound
         }
-    }
+    }    
     
-    func signUp(emailAddress: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func signUp(emailAddress: String, password: String) async throws {
         let user = User(id: UserId(), emailAddress: emailAddress)
         (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
         usersDB.append(user)
-        completion(.success(()))
     }
 }
 
@@ -194,12 +192,22 @@ class FakeUserRepository: UserRepository {
         usersDB.append(user)
         completion(.success(user))
     }
+
+    func add(user: User) async throws {
+        usersDB.append(user)
+    }
     
     func save(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
         if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
             usersDB[index] = user
         }
         completion(.success(user))
+    }
+
+    func save(user: User) async throws {
+        if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
+            usersDB[index] = user
+        }
     }
 
     func getFriendsOf(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
@@ -252,7 +260,15 @@ class FakeUserRepository: UserRepository {
         let user = usersDB.first(where: { $0.id == id })
         completion(.success(user))
     }
-    
+
+    func getUserById(_ id: UserId) async throws -> User? {
+        return try await withCheckedThrowingContinuation { cont in
+            getUserById(id)  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
+
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
         
     }

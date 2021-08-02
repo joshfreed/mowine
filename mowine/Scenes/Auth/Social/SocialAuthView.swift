@@ -10,13 +10,16 @@ import SwiftUI
 import Model
 
 struct SocialAuthView: View {
+    @Environment(\.dismiss) var dismiss
     @Binding var isSigningIn: Bool
-    var onLogIn: () -> Void
     @StateObject var vm = SocialAuthViewModel()
     
     var body: some View {
         SocialLoginProviderView() { type in
-            vm.socialSignIn(type: type, onLogIn: onLogIn)
+            Task {
+                await vm.socialSignIn(type: type)
+                dismiss()
+            }
         }        
         .alert(isPresented: $vm.isSignInError) {
             Alert(title: Text("Login Error"), message: Text(vm.signInError))
@@ -27,7 +30,7 @@ struct SocialAuthView: View {
 
 struct SocialAuthView_Previews: PreviewProvider {
     static var previews: some View {
-        SocialAuthView(isSigningIn: .constant(false)) { }
+        SocialAuthView(isSigningIn: .constant(false))
             .padding()
     }
 }

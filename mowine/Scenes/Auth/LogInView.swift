@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct LogInView: View {
-    var onLogIn: () -> Void
+    @Environment(\.dismiss) var dismiss
     
     @State var isLoading: Bool = false
     
@@ -17,18 +17,18 @@ struct LogInView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 32) {
-                    EmailLogInView(onLogIn: onLogIn)
+                    EmailLogInView()
                     NavigationLink(destination: ForgotPasswordView()) {
                         Text("Forgot your password?")
                             .foregroundColor(Color("Primary Light"))
                     }
                     FancyDivider(text: "OR")
-                    SocialAuthView(isSigningIn: $isLoading, onLogIn: onLogIn)
+                    SocialAuthView(isSigningIn: $isLoading)
                     Spacer()
                 }
                 .padding()
                 .navigationTitle("Log In")
-                .navigationBarItems(leading: Button("Cancel") { onLogIn() })
+                .navigationBarItems(leading: Button("Cancel") { dismiss() })
             }
         }
         .accentColor(.mwSecondary)
@@ -38,6 +38,6 @@ struct LogInView: View {
 
 struct LogInView_Previews: PreviewProvider {
     static var previews: some View {
-        LogInView() { }
+        LogInView()
     }
 }

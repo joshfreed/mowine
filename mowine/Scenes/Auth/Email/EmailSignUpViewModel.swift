@@ -9,6 +9,8 @@
 import Foundation
 import Combine
 import Model
+import FirebaseCrashlytics
+import SwiftyBeaver
 
 class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false
@@ -23,8 +25,9 @@ class EmailSignUpViewModel: ObservableObject {
     init(worker: SignUpWorker) {
         self.worker = worker
     }
-    
-    func signUp(fullName: String, emailAddress: String, password: String, onSignUp: @escaping () -> Void) {
+
+    @MainActor
+    func signUp(fullName: String, emailAddress: String, password: String) async {
         errorMessage = ""
         
         guard !fullName.isEmpty, !emailAddress.isEmpty, !password.isEmpty else {
@@ -32,18 +35,21 @@ class EmailSignUpViewModel: ObservableObject {
         }
 
         isLoading = true        
-        
-        worker.signUp(emailAddress: emailAddress, password: password, fullName: fullName) { [weak self] result in
-            self?.isLoading = false
-            
-            switch result {
-            case .success:
-                onSignUp()
-                // Need this b/c firebase session handler doesn't fire when linking anonymous to full account
-                // Also we shouldn't have current user id listeners fire until the user account object was created
-                NotificationCenter.default.post(name: .signedIn, object: nil)
-            case .failure(let error): self?.displaySignUpError(error)
-            }
+
+        defer {
+            isLoading = false
+        }
+
+        do {
+            try await worker.signUp(emailAddress: emailAddress, password: password, fullName: fullName)
+
+            // Need this b/c firebase session handler doesn't fire when linking anonymous to full account
+            // Also we shouldn't have current user id listeners fire until the user account object was created
+            NotificationCenter.default.post(name: .signedIn, object: nil)
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
+            displaySignUpError(error)
         }
     }
     

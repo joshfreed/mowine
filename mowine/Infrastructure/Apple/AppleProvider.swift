@@ -12,13 +12,13 @@ import SwiftyBeaver
 import Model
 
 class AppleProvider: SocialSignInProvider {
-    func getNewUserInfo(completion: @escaping (Result<NewUserInfo, Error>) -> ()) {
+    func getNewUserInfo() async throws -> NewUserInfo {
         if let currentUser = Auth.auth().currentUser, let email = currentUser.email {
             let newUserInfo = NewUserInfo(email: email, firstName: currentUser.displayName ?? "")
-            completion(.success(newUserInfo))
+            return newUserInfo
         } else {
             SwiftyBeaver.warning("No current user or email address")
-            completion(.failure(MoWineError.error(message: "No current user or email address")))
+            throw MoWineError.error(message: "No current user or email address")
         }
     }
     

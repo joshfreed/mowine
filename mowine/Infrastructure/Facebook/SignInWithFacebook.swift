@@ -29,4 +29,13 @@ class SignInWithFacebook: SocialSignInMethod {
             }
         }
     }
+
+    func signIn() async throws -> SocialToken {
+        return try await withCheckedThrowingContinuation { cont in
+            signIn()  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
+
 }

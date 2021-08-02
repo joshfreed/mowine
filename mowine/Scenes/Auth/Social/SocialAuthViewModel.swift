@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import Model
+import FirebaseCrashlytics
 
 class SocialAuthViewModel: ObservableObject {
     @Published var isSigningIn: Bool = false
@@ -28,41 +29,26 @@ class SocialAuthViewModel: ObservableObject {
         self.worker = firstTimeWorker
         self.socialSignInMethods = socialSignInMethods
     }
-    
-    func socialSignIn(type: SocialProviderType, onLogIn: @escaping () -> Void) {
+
+    func socialSignIn(type: SocialProviderType) async {
         guard let method = socialSignInMethods[type] else {
             fatalError("No sign in method registered for provider: \(type)")
         }
-        
-        method.signIn { result in
-            switch result {
-            case .success(let token): self.linkToSession(type: type, token: token, onLogIn: onLogIn)
-            case .failure(let error): self.showError(error)
-            }
-        }
-    }
-    
-    private func linkToSession(type: SocialProviderType, token: SocialToken, onLogIn: @escaping () -> Void) {
+
         isSigningIn = true
-        
-        worker.login(type: type, token: token) { result in
-            self.isSigningIn = false
-            
-            switch result {
-            case .success:
-                onLogIn()
-//                NotificationCenter.default.post(name: .signedIn, object: nil)
-            case .failure(let error):
-                self.showError(error)
-            }
+
+        do {
+            let token = try await method.signIn()
+            try await worker.login(type: type, token: token)
+        } catch let error {
+            showError(error)
         }
+
+        isSigningIn = false
     }
-    
-    private func onSocialSignInSuccess() {
-        
-    }
-    
+
     private func showError(_ error: Error) {
+        Crashlytics.crashlytics().record(error: error)
         SwiftyBeaver.error("\(error)")
         isSignInError = true
         signInError = error.localizedDescription

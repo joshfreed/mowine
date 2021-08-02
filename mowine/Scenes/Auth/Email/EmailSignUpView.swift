@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EmailSignUpView: View {
-    var onSignUp: () -> Void
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm = EmailSignUpViewModel()
     @State var emailAddress: String = ""
     @State var fullName: String = ""
@@ -37,7 +37,10 @@ struct EmailSignUpView: View {
             ErrorLabel(vm.errorMessage)
             
             PrimaryButton(action: {
-                vm.signUp(fullName: fullName, emailAddress: emailAddress, password: password, onSignUp: onSignUp)
+                Task {
+                    await vm.signUp(fullName: fullName, emailAddress: emailAddress, password: password)
+                    dismiss()
+                }
             }, title: "Sign Up", isLoading: $vm.isLoading)
                 .accessibility(identifier: "signUp")
         }
@@ -46,7 +49,7 @@ struct EmailSignUpView: View {
 
 struct EmailSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailSignUpView() { }
+        EmailSignUpView()
             .padding()
     }
 }

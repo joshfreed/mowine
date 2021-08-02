@@ -16,7 +16,7 @@ class FirestoreUserRepository: UserRepository {
         
     func add(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         let data = user.toFirestore()
-        
+
         db.collection("users").document(user.id.asString).setData(data) { err in
             if let err = err {
                 SwiftyBeaver.error("Error adding document: \(err)")
@@ -26,11 +26,23 @@ class FirestoreUserRepository: UserRepository {
             }
         }
     }
+
+    func add(user: User) async throws {
+        try await db
+            .collection("users")
+            .document(user.id.asString)
+            .setData(user.toFirestore())
+    }
     
     func save(user: User, completion: @escaping (Result<User, Error>) -> ()) {
         let data = user.toFirestore()
         db.collection("users").document(user.id.asString).setData(data, merge: true)
         completion(.success(user))
+    }
+
+    func save(user: User) async throws {
+        let data = user.toFirestore()
+        try await db.collection("users").document(user.id.asString).setData(data, merge: true)
     }
     
     func getUserById(_ id: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
@@ -58,7 +70,15 @@ class FirestoreUserRepository: UserRepository {
             completion(.success(user))
         }
     }
-    
+
+    func getUserById(_ id: UserId) async throws -> User? {
+        return try await withCheckedThrowingContinuation { cont in
+            getUserById(id)  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
+
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         let listener = db.collection("users").document(id.asString).addSnapshotListener { documentSnapshot, error in
             if let error = error {

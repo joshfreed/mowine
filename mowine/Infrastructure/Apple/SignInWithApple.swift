@@ -33,6 +33,14 @@ class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDe
         controller.delegate = self
         controller.performRequests()
     }
+
+    func signIn() async throws -> SocialToken {
+        return try await withCheckedThrowingContinuation { cont in
+            signIn()  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
     
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
