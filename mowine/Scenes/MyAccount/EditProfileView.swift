@@ -25,7 +25,10 @@ struct EditProfileView: View {
             .navigationBarItems(leading: Button("Cancel") {
                 dismiss()
             }, trailing: Button("Save") {
-                vm.saveProfile { dismiss() }
+                Task {
+                    await vm.saveProfile()
+                    dismiss()
+                }
             })
         }
         .accentColor(.mwSecondary)
@@ -43,11 +46,12 @@ struct EditProfileView: View {
                     vm.cancelSelectProfilePicture()
                 }
             } else if vm.isReauthenticating {
-                ReauthenticationView(vm: ReauthenticationViewModel {
-                    vm.reauthenticationSuccess { dismiss() }
-                } onCancel: {
-                    dismiss()
-                })
+                ReauthenticationView {
+                    Task {
+                        await vm.reauthenticationSuccess()
+                        dismiss()
+                    }
+                }
             } else {
                 EmptyView()
             }

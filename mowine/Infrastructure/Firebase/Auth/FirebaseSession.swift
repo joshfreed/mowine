@@ -61,16 +61,9 @@ class FirebaseSession: Session {
 
     func getCurrentAuth() -> MoWineAuth? { Auth.auth().currentUser }
 
-    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func reauthenticate(withEmail email: String, password: String) async throws {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-
-        Auth.auth().currentUser?.reauthenticate(with: credential) { (result, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        }
+        try await Auth.auth().currentUser?.reauthenticate(with: credential)
     }
     
     func end() {

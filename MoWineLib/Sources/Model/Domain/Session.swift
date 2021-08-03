@@ -45,7 +45,7 @@ public protocol Session {
     func getPhotoUrl() -> URL?
     
     /// Reauthenticates by email & password so that the auth information can be updated.
-    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ())
+    func reauthenticate(withEmail email: String, password: String) async throws
     
     /// Changes the user's login email address.
     func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error>

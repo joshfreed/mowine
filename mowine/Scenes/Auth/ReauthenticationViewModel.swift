@@ -12,64 +12,36 @@ import SwiftyBeaver
 import FirebaseAuth
 import GoogleSignIn
 import Model
+import FirebaseCrashlytics
 
 class ReauthenticationViewModel: ObservableObject {
     @Published var showErrorAlert = false
     @Published var errorMessage: String = ""
     
-    var onSuccess: () -> Void
-    var onCancel: () -> Void
+    private let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
+    private let socialAuthService: SocialAuthService
 
-    let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
-    private(set) var socialAuthService: SocialAuthService!
-
-    init(onSuccess: @escaping () -> Void, onCancel: @escaping () -> Void) {
-        self.onSuccess = onSuccess
-        self.onCancel = onCancel
+    init() {
         self.socialAuthService = try! JFContainer.shared.container.resolve()
         self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
     }
-    
-    func cancel() {
-        onCancel()
-    }
 
-    func continueWith(_ type: SocialProviderType) {
-        socialSignIn(type: type)
-    }
-
-    private func socialSignIn(type: SocialProviderType) {
+    func continueWith(_ type: SocialProviderType) async {
         guard let method = socialSignInMethods[type] else {
             fatalError("No sign in method registered for provider: \(type)")
         }
 
-        method.signIn { result in
-            switch result {
-            case .success(let token): self.reauth(with: token)
-            case .failure(let error): self.showError(error)
-            }
+        do {
+            let token = try await method.signIn()
+            try await socialAuthService.reauthenticate(with: token)
+        } catch {
+            showError(error)
         }
     }
-
-    private func reauth(with token: SocialToken) {
-        socialAuthService.reauthenticate(with: token) { result in
-            switch result {
-            case .success: self.onSuccess()
-            case .failure(let error): self.showError(error)
-            }
-        }
-    }
-
-    // MARK: View Model Factories
-    
-    func makeEmailReauthViewModel() -> EmailReauthViewModel {
-        EmailReauthViewModel(session: JFContainer.shared.session, onSuccess: onSuccess)
-    }
-
-    // MARK: Utilities
 
     private func showError(_ error: Error) {
         SwiftyBeaver.error("\(error)")
+        Crashlytics.crashlytics().record(error: error)
         errorMessage = error.localizedDescription
         showErrorAlert = true
     }

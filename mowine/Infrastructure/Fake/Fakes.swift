@@ -135,10 +135,7 @@ class FakeSession: Session {
         return FakeMoWineAuth(email: "boobs@butts.com")
     }
 
-    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        completion(.success(()))
-//        completion(.failure(MoWineError.error(message: "Just a test error")))
-    }
+    func reauthenticate(withEmail email: String, password: String) async throws {}
 
     func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         _photoUrl = url

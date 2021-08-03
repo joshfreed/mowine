@@ -12,16 +12,14 @@ import Model
 
 class EmailReauthViewModel: ObservableObject {
     let session: Session
-    let onSuccess: () -> Void
     
     @Published var emailAddress: String = ""
     @Published var password: String = ""
     @Published var error: String = ""
     @Published var isReauthenticating = false
     
-    init(session: Session, onSuccess: @escaping () -> Void) {
-        self.session = session
-        self.onSuccess = onSuccess
+    init() {
+        self.session = try! JFContainer.shared.container.resolve()
     }
     
     func loadEmail() {
@@ -31,20 +29,18 @@ class EmailReauthViewModel: ObservableObject {
             // Not logged in
         }
     }
-    
-    func reauthenticate() {
+
+    @MainActor
+    func reauthenticate() async {
         isReauthenticating = true
         error = ""
-        
-        session.reauthenticate(withEmail: emailAddress, password: password) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isReauthenticating = false
 
-                switch result {
-                case .success: self?.onSuccess()
-                case .failure(let error): self?.error = error.localizedDescription
-                }
-            }
+        do {
+            try await session.reauthenticate(withEmail: emailAddress, password: password)
+        } catch {
+            self.error = error.localizedDescription
         }
+
+        isReauthenticating = false
     }
 }

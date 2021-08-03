@@ -27,33 +27,18 @@ class EditProfileService {
         self.userRepository = userRepository
     }
     
-    func fetchProfile(completion: @escaping (Swift.Result<ProfileViewModel, Error>) -> ()) {
-        getCurrentUser { result in
-            switch result {
-            case .success(let user): self.presentUserProfile(user, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
-    
-    func presentUserProfile(_ user: User, completion: @escaping (Swift.Result<ProfileViewModel, Error>) -> ()) {
-        let viewModel = ProfileViewModel(fullName: user.fullName, emailAddress: user.emailAddress)
-        completion(.success(viewModel))
-    }
-    
-    func getProfilePicture(completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
-        getCurrentUser { result in
-            switch result {
-            case .success(let user): self.profilePictureWorker.getProfilePicture(user: user, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
-    
     func updateProfilePicture(_ image: UIImage) {
         newProfilePicture = image
     }
-    
+
+    func saveProfile(email: String, fullName: String) async throws {
+        return try await withCheckedThrowingContinuation { cont in
+            saveProfile(email: email, fullName: fullName)  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
+
     func saveProfile(email: String, fullName: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         cancellable = userProfileService
             .updateProfilePicture(newProfilePicture)
@@ -71,7 +56,7 @@ class EditProfileService {
 
             }
     }
-    
+
     private func getCurrentUser(completion: @escaping (Swift.Result<User, Error>) -> ()) {
         guard let currentUserId = session.currentUserId else {
             completion(.failure(SessionError.notLoggedIn))

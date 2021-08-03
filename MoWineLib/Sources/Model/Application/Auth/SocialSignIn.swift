@@ -34,13 +34,10 @@ public protocol SocialSignInProvider {
 }
 
 public protocol SocialSignInMethod {
-    @available(*, deprecated, message: "Prefer async alternative instead")
-    func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void)
-
     func signIn() async throws -> SocialToken
 }
 
 public protocol SocialAuthService {
     func signIn(with token: SocialToken) async throws
-    func reauthenticate(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ())
+    func reauthenticate(with token: SocialToken) async throws
 }

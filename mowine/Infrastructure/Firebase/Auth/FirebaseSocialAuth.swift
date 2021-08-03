@@ -63,15 +63,8 @@ class FirebaseSocialAuth: SocialAuthService {
         try await signIn(with: _credential)
     }
     
-    func reauthenticate(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {
+    func reauthenticate(with token: SocialToken) async throws {
         let credential = credentialFactory.makeCredential(from: token)
-
-        Auth.auth().currentUser?.reauthenticate(with: credential) { (result, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(()))
-            }
-        }
+        try await Auth.auth().currentUser?.reauthenticate(with: credential)
     }
 }

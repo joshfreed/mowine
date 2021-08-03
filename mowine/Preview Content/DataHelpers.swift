@@ -47,7 +47,7 @@ class FakeProfilePictureWorker: ProfilePictureWorkerProtocol {
 
 extension EmailReauthViewModel {
     static func make(password: String? = nil, error: String? = nil) -> EmailReauthViewModel {
-        let vm = EmailReauthViewModel(session: FakeSession()) {}
+        let vm = EmailReauthViewModel()
         if let password = password {
             vm.password = password
         }

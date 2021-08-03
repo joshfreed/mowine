@@ -12,7 +12,5 @@ import Model
 class FakeSocialAuth: SocialAuthService {
     func signIn(with token: SocialToken) async throws {}
     
-    func reauthenticate(with token: SocialToken, completion: @escaping (Result<Void, Error>) -> ()) {
-        completion(.success(()))
-    }
+    func reauthenticate(with token: SocialToken) async throws {}
 }

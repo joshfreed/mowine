@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct EmailReauthView: View {
-    @ObservedObject var vm: EmailReauthViewModel
+    @StateObject var vm = EmailReauthViewModel()
+    var onSuccess: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -19,7 +20,16 @@ struct EmailReauthView: View {
 
             ErrorLabel(vm.error)
             
-            PrimaryButton(action: { vm.reauthenticate() }, title: "Sign In", isLoading: $vm.isReauthenticating)
+            PrimaryButton(
+                action: {
+                    Task {
+                        await vm.reauthenticate()
+                        onSuccess()
+                    }
+                },
+                title: "Sign In",
+                isLoading: $vm.isReauthenticating
+            )
             
             Spacer()
         }
@@ -45,6 +55,6 @@ struct ReadOnlyEmailView: View {
 
 struct EmailReauthView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailReauthView(vm: .make(password: "testing123", error: "Something went wrong!"))
+        EmailReauthView(vm: .make(password: "testing123", error: "Something went wrong!"), onSuccess: {})
     }
 }

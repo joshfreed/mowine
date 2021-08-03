@@ -100,44 +100,38 @@ class EditProfileViewModel: ObservableObject {
         hasChanges = true
     }
     
-    func saveProfile(completion: @escaping () -> Void) {
+    func saveProfile() async {
         if !hasChanges {
-            completion()
             return
         }
-        
+
         isSaving = true
 
-        editProfileService.saveProfile(email: emailAddress, fullName: fullName) { [weak self] result in
-            self?.isSaving = false
-            self?.saveProfileCallback(result: result, completion: completion)
-        }
-    }
-
-    private func saveProfileCallback(result: Result<Void, Error>, completion: () -> Void) {
-        switch result {
-        case .success:
-            completion()
-        case .failure(let error):
+        do {
+            try await editProfileService.saveProfile(email: emailAddress, fullName: fullName)
+            isSaving = false
+        } catch {
+            isSaving = false
             if case SessionError.requiresRecentLogin = error {
                 reauthenticate()
             } else {
                 SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
                 showErrorAlert = true
                 saveErrorMessage = error.localizedDescription
             }
         }
     }
-    
+
     func reauthenticate() {
         isReauthenticating = true
         isShowingSheet = true
     }
     
-    func reauthenticationSuccess(completion: @escaping () -> Void) {
+    func reauthenticationSuccess() async {
         isReauthenticating = false
         isShowingSheet = false
-        saveProfile(completion: completion)
+        await saveProfile()
     }
     
     func selectProfilePicture(from sourceType: ImagePickerView.SourceType) {

@@ -213,9 +213,7 @@ class MockSession: Session {
         return Future { promise in promise(.success(())) }
     }
 
-    func reauthenticate(withEmail email: String, password: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-
-    }
+    func reauthenticate(withEmail email: String, password: String) async throws {}
 }
 
 struct MockAuth: MoWineAuth {
