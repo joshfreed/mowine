@@ -165,7 +165,6 @@
 		53EAFA0F225E8EA0002BCAB0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA0E225E8EA0002BCAB0 /* DataService.swift */; };
 		53EAFA13225E930F002BCAB0 /* DataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */; };
 		53EFF5F726324BB2005A38C6 /* NSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFF5F626324BB2005A38C6 /* NSError.swift */; };
-		53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F100F52045E08F00B29FAF /* SignInWorker.swift */; };
 		53F24867206D40370046B031 /* GraphApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24866206D40370046B031 /* GraphApi.swift */; };
 		53F24872206D4A760046B031 /* MoreDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24871206D4A760046B031 /* MoreDoubles.swift */; };
 		53F24874206D4ADA0046B031 /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24873206D4ADA0046B031 /* Facebook.swift */; };
@@ -367,7 +366,6 @@
 		53EAFA0E225E8EA0002BCAB0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceTests.swift; sourceTree = "<group>"; };
 		53EFF5F626324BB2005A38C6 /* NSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSError.swift; path = mowine/Extensions/NSError.swift; sourceTree = SOURCE_ROOT; };
-		53F100F52045E08F00B29FAF /* SignInWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWorker.swift; sourceTree = "<group>"; };
 		53F24866206D40370046B031 /* GraphApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApi.swift; sourceTree = "<group>"; };
 		53F24871206D4A760046B031 /* MoreDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreDoubles.swift; sourceTree = "<group>"; };
 		53F24873206D4ADA0046B031 /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
@@ -949,14 +947,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		53F100F32045E04700B29FAF /* SignIn */ = {
-			isa = PBXGroup;
-			children = (
-				53F100F52045E08F00B29FAF /* SignInWorker.swift */,
-			);
-			path = SignIn;
-			sourceTree = "<group>";
-		};
 		53F24865206D3F5E0046B031 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
@@ -1041,7 +1031,6 @@
 				532A345522F8FB08005E447D /* Auth */,
 				53958A9020617B4900BA4B6C /* FirstTime */,
 				535F66892062FECE0006B26A /* SignUp */,
-				53F100F32045E04700B29FAF /* SignIn */,
 				53F5AC2B1E2187F90067AB62 /* AddWine */,
 				5398F519252A6B6F00BF61C0 /* My Cellar */,
 				537614C01E591867005AABF0 /* EditWine */,
@@ -1339,7 +1328,6 @@
 				53B35F9725ACCA3500D36133 /* FakeSocialAuth.swift in Sources */,
 				535CC81525F0451F00D49D57 /* TopWinesView.swift in Sources */,
 				536E301F25A2616E00608A29 /* TabbedRootView.swift in Sources */,
-				53F100FB2045E08F00B29FAF /* SignInWorker.swift in Sources */,
 				5381EFEF25C5E4F4004D2DF9 /* EditPairingsView.swift in Sources */,
 				536AEBF22540BBBB009EA107 /* MyCellarContentView.swift in Sources */,
 				533F102D259FD63900DAA4B6 /* EmailLogInView.swift in Sources */,
