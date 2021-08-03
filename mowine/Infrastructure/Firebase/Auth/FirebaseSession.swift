@@ -100,27 +100,22 @@ class FirebaseSession: Session {
         return authUser.photoURL
     }
 
-    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error> {
-        Future { promise in
-            guard let authUser = Auth.auth().currentUser else {
-                promise(.failure(SessionError.notLoggedIn))
-                return
-            }
-            
-            SwiftyBeaver.debug("User info: \(authUser.providerData)")
-            SwiftyBeaver.debug("Provider ID: \(authUser.providerID)")
+    func updateEmailAddress(_ emailAddress: String) async throws {
+        guard let authUser = Auth.auth().currentUser else {
+            throw SessionError.notLoggedIn
+        }
 
-            authUser.updateEmail(to: emailAddress) { error in
-                if let error = error {
-                    let nserror = error as NSError
-                    if nserror.code == AuthErrorCode.requiresRecentLogin.rawValue {
-                        promise(.failure(SessionError.requiresRecentLogin))
-                    } else {
-                        promise(.failure(error))
-                    }
-                } else {
-                    promise(.success(()))
-                }
+        SwiftyBeaver.debug("User info: \(authUser.providerData)")
+        SwiftyBeaver.debug("Provider ID: \(authUser.providerID)")
+
+        do {
+            try await authUser.updateEmail(to: emailAddress)
+        } catch {
+            let nserror = error as NSError
+            if nserror.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                throw SessionError.requiresRecentLogin
+            } else {
+                throw error
             }
         }
     }

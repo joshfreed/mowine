@@ -146,10 +146,7 @@ class FakeSession: Session {
         return _photoUrl
     }
     
-    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error> {
-//        return Promise(error: SessionError.requiresRecentLogin)
-        return Future { promise in promise(.success(())) }
-    }
+    func updateEmailAddress(_ emailAddress: String) async throws {}
 }
 
 struct FakeMoWineAuth: MoWineAuth {

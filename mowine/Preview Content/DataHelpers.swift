@@ -32,6 +32,8 @@ extension EditProfileViewModel {
 }
 
 class FakeProfilePictureWorker: ProfilePictureWorkerProtocol {
+    func setProfilePicture(image: UIImage) async throws {}
+
     func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ()) {
         
     }
@@ -40,9 +42,7 @@ class FakeProfilePictureWorker: ProfilePictureWorkerProtocol {
         
     }
     
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?, Error>) -> ()) {
-        
-    }
+    func getProfilePicture(url: URL) async throws -> Data? { nil }
 }
 
 extension EmailReauthViewModel {

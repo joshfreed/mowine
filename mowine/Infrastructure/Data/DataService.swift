@@ -38,8 +38,16 @@ protocol DataWriteService {
 protocol DataServiceProtocol {
     associatedtype GetDataUrl: DataUrl
     associatedtype PutDataUrl: DataUrl
+
+    @available(*, deprecated, message: "Prefer async alternative instead")
     func getData(url: GetDataUrl, completion: @escaping (Result<Data?, Error>) -> ())
+
+    func getData(url: GetDataUrl) async throws -> Data?
+
+    @available(*, deprecated, message: "Prefer async alternative instead")
     func putData(_ data: Data, url: PutDataUrl, completion: @escaping (Result<URL, Error>) -> ())
+
+    func putData(_ data: Data, url: PutDataUrl) async throws -> URL
 }
 
 //
@@ -74,11 +82,27 @@ class DataService<RemoteRead: DataReadService, RemoteWrite: DataWriteService>: D
             completion(result)
         }
     }
+
+    func getData(url: RemoteRead.Url) async throws -> Data? {
+        return try await withCheckedThrowingContinuation { cont in
+            getData(url: url)  { res in
+                cont.resume(with: res)
+            }
+        }
+    }
     
     func putData(_ data: Data, url: RemoteWrite.Url, completion: @escaping (Result<URL, Error>) -> ()) {
         SwiftyBeaver.debug("Storing data. [\(url.cacheKey)]")
         dataCache.setObject(data as NSData, forKey: url.cacheKey)
         remoteWrite.putData(data, url: url, completion: completion)
     }
+
+    func putData(_ data: Data, url: RemoteWrite.Url) async throws -> URL {
+        return try await withCheckedThrowingContinuation { cont in
+            putData(data, url: url)  { res in
+                cont.resume(with: res)
+            }
+        }
+    }    
 }
 

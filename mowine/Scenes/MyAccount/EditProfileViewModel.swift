@@ -60,17 +60,15 @@ class EditProfileViewModel: ObservableObject {
         SwiftyBeaver.debug("deinit")
     }
 
-    func loadProfile() {
-        getMyAccountQuery.getMyAccount { [weak self] result in
-            switch result {
-            case .success(let profile):
-                self?.setProfile(profile)
-                self?.fetchProfilePicture(url: profile.profilePictureUrl)
-                self?.hasChanges = false
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-            }
+    func loadProfile() async {
+        do {
+            let profile = try await getMyAccountQuery.getMyAccount()!
+            setProfile(profile)
+            try await fetchProfilePicture(url: profile.profilePictureUrl)
+            hasChanges = false
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
         }
     }
     
@@ -79,23 +77,14 @@ class EditProfileViewModel: ObservableObject {
         emailAddress = profile.emailAddress
     }
 
-    private func fetchProfilePicture(url: URL?) {
-        if let url = url {
-            profilePictureWorker.getProfilePicture(url: url) { [weak self] result in
-                switch result {
-                case .success(let data):
-                    if let data = data {
-                        self?.profilePicture = UIImage(data: data)
-                    }
-                case .failure(let error):
-                    SwiftyBeaver.error("\(error)")
-                    Crashlytics.crashlytics().record(error: error)
-                }
-            }
+    private func fetchProfilePicture(url: URL?) async throws {
+        if let url = url, let data = try await profilePictureWorker.getProfilePicture(url: url) {
+            profilePicture = UIImage(data: data)
         } else {
             profilePicture = nil
         }
     }
+
     private func profileDidChange() {
         hasChanges = true
     }

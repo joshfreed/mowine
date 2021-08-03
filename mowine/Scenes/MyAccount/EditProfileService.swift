@@ -8,7 +8,6 @@
 
 import UIKit
 import Model
-import Combine
 
 class EditProfileService {
     let session: Session
@@ -18,8 +17,6 @@ class EditProfileService {
 
     private(set) var newProfilePicture: UIImage?
 
-    private var cancellable: AnyCancellable?
-    
     init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService, userRepository: UserRepository) {
         self.session = session
         self.profilePictureWorker = profilePictureWorker
@@ -32,49 +29,12 @@ class EditProfileService {
     }
 
     func saveProfile(email: String, fullName: String) async throws {
-        return try await withCheckedThrowingContinuation { cont in
-            saveProfile(email: email, fullName: fullName)  { res in
-                cont.resume(with: res)
-            }
+        if let newProfilePicture = newProfilePicture {
+            try await userProfileService.updateProfilePicture(newProfilePicture)
+            self.newProfilePicture = nil
         }
-    }
-
-    func saveProfile(email: String, fullName: String, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        cancellable = userProfileService
-            .updateProfilePicture(newProfilePicture)
-            .handleEvents(receiveOutput: { [weak self] in self?.newProfilePicture = nil })
-            .compactMap { [weak self] in self?.userProfileService.updateEmailAddress(emailAddress: email) }
-            .switchToLatest()
-            .compactMap { [weak self] in self?.userProfileService.updateUserProfile(.init(fullName: fullName)) }
-            .switchToLatest()
-            .sink { compl in
-                switch compl {
-                case .finished: completion(.success(()))
-                case .failure(let error): completion(.failure(error))
-                }
-            } receiveValue: {
-
-            }
-    }
-
-    private func getCurrentUser(completion: @escaping (Swift.Result<User, Error>) -> ()) {
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
-
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    completion(.success(user))
-                } else {
-                    completion(.failure(UserRepositoryError.userNotFound))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }        
+        try await userProfileService.updateEmailAddress(emailAddress: email)
+        try await userProfileService.updateUserProfile(.init(fullName: fullName))
     }
 }
 

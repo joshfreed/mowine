@@ -209,9 +209,7 @@ class MockSession: Session {
         return photoUrl
     }
     
-    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error> {
-        return Future { promise in promise(.success(())) }
-    }
+    func updateEmailAddress(_ emailAddress: String) async throws {}
 
     func reauthenticate(withEmail email: String, password: String) async throws {}
 }
@@ -265,15 +263,14 @@ class MockEmailAuthService: EmailAuthenticationService {
 }
 
 class MockProfilePictureWorker: ProfilePictureWorkerProtocol {
-    func setProfilePicture(image: UIImage, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        
+    func setProfilePicture(image: UIImage) async throws {
     }
-    
+
+    func getProfilePicture(url: URL) async throws -> Data? {
+        nil
+    }
+
     func getProfilePicture(user: User, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
-        
-    }
-    
-    func getProfilePicture(url: URL, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
         
     }
 }
@@ -286,30 +283,26 @@ class MockUserProfileService: UserProfileService {
     var updateProfilePictureWasCalled = false
     var updateProfilePicture_image: UIImage?
     var updateProfilePicture_rejection: Error?
-    override func updateProfilePicture(_ image: UIImage?) -> AnyPublisher<Void, Error> {
+    override func updateProfilePicture(_ image: UIImage) async throws {
         updateProfilePictureWasCalled = true
         updateProfilePicture_image = image
 
         if let error = updateProfilePicture_rejection {
-            return Fail(error: error).eraseToAnyPublisher()
-        } else {
-            return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
+            throw error
         }
     }
 
     var updateEmailAddressWasCalled = false
     var updateEmailAddress_emailAddress: String?
-    override func updateEmailAddress(emailAddress: String) -> AnyPublisher<Void, Error> {
+    override func updateEmailAddress(emailAddress: String) async throws {
         updateEmailAddressWasCalled = true
         updateEmailAddress_emailAddress = emailAddress
-        return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 
     var updateUserProfileWasCalled = false
     var updateUserProfile_request: UpdateUserProfileRequest?
-    override func updateUserProfile(_ request: UpdateUserProfileRequest) -> AnyPublisher<Void, Error> {
+    override func updateUserProfile(_ request: UpdateUserProfileRequest) async throws {
         updateUserProfileWasCalled = true
         updateUserProfile_request = request
-        return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }

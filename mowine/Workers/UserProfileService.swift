@@ -9,7 +9,6 @@
 import UIKit
 import SwiftyBeaver
 import Model
-import Combine
 
 class UserProfileService {
     let session: Session
@@ -22,104 +21,45 @@ class UserProfileService {
         self.profilePictureWorker = profilePictureWorker
     }
 
-    func updateProfilePicture(_ image: UIImage?) -> AnyPublisher<Void, Error> {
-        Deferred {
-            Future { promise in
-                SwiftyBeaver.info("updateProfilePicture")
-
-                if let newProfilePicture = image {
-                    self.profilePictureWorker.setProfilePicture(image: newProfilePicture) { result in
-                        switch result {
-                        case .success: promise(.success(()))
-                        case .failure(let error): promise(.failure(error))
-                        }
-                    }
-                } else {
-                    promise(.success(()))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
+    func updateProfilePicture(_ image: UIImage) async throws {
+        SwiftyBeaver.info("updateProfilePicture")
+        try await profilePictureWorker.setProfilePicture(image: image)
     }
 
-    func updateEmailAddress(emailAddress: String) -> AnyPublisher<Void, Error> {
-        SwiftyBeaver.info("updateEmailAddress (1)")
+    func updateEmailAddress(emailAddress: String) async throws {
+        SwiftyBeaver.info("updateEmailAddress")
 
         guard let userId = self.session.currentUserId else {
-            return Fail(error: SessionError.notLoggedIn).eraseToAnyPublisher()
+            throw SessionError.notLoggedIn
         }
 
-        return session
-            .updateEmailAddress(emailAddress)
-            .compactMap { [weak self] in self?.getUserById(userId) }
-            .switchToLatest()
-            .compactMap { [weak self] in self?.updateEmailAddress(user: $0, emailAddress: emailAddress) }
-            .switchToLatest()
-            .eraseToAnyPublisher()
-    }
+        guard let user = try await userRepository.getUserById(userId) else {
+            throw UserRepositoryError.userNotFound
+        }
 
-    private func updateEmailAddress(user: User, emailAddress: String) -> AnyPublisher<Void, Error> {
-        SwiftyBeaver.info("updateEmailAddress (2)")
-        
-        if user.emailAddress == emailAddress {
-            return Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
-        } else {
+        try await session.updateEmailAddress(emailAddress)
+
+        if user.emailAddress != emailAddress {
             var _user = user
             _user.emailAddress = emailAddress
-            return save(user: _user)
+            try await userRepository.save(user: _user)
         }
     }
-    
-    func updateUserProfile(_ request: UpdateUserProfileRequest) -> AnyPublisher<Void, Error> {
+
+    func updateUserProfile(_ request: UpdateUserProfileRequest) async throws {
         SwiftyBeaver.info("updateUserProfile")
-        
+
         guard let userId = session.currentUserId else {
-            return Fail(error: SessionError.notLoggedIn).eraseToAnyPublisher()
+            throw SessionError.notLoggedIn
         }
-        
-        return getUserById(userId)
-            .compactMap { [weak self] user in self?.updateUserProfile(user: user, request: request) }
-            .switchToLatest()
-            .eraseToAnyPublisher()
-    }
-    
-    private func updateUserProfile(user: User, request: UpdateUserProfileRequest) -> AnyPublisher<Void, Error> {
+
+        guard let user = try await userRepository.getUserById(userId) else {
+            throw UserRepositoryError.userNotFound
+        }
+
         var _user = user
         _user.fullName = request.fullName
-        return save(user: _user)
-    }
-    
-    private func save(user: User) -> AnyPublisher<Void, Error> {
-        Deferred {
-            Future { [weak self] promise in
-                self?.userRepository.save(user: user) { result in
-                    switch result {
-                    case .success: promise(.success(()))
-                    case .failure(let error): promise(.failure(error))
-                    }
-                }
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    private func getUserById(_ userId: UserId) -> AnyPublisher<User, Error> {
-        Deferred {
-            Future { [weak self] promise in
-                self?.userRepository.getUserById(userId) { result in
-                    switch result {
-                    case .success(let user):
-                        if let user = user {
-                            promise(.success(user))
-                        } else {
-                            promise(.failure(UserRepositoryError.userNotFound))
-                        }
-                    case .failure(let error): promise(.failure(error))
-                    }
-                }
-            }
-        }
-        .eraseToAnyPublisher()
+        try await userRepository.save(user: _user)
     }
 }
 

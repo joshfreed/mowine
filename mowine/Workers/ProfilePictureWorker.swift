@@ -8,9 +8,8 @@ import SwiftyBeaver
 import Model
 
 protocol ProfilePictureWorkerProtocol {
-    func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ())
-    func getProfilePicture(user: User, completion: @escaping (Result<Data?, Error>) -> ())
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?, Error>) -> ())
+    func setProfilePicture(image: UIImage) async throws
+    func getProfilePicture(url: URL) async throws -> Data?
 }
 
 class ProfilePictureWorker<DataServiceType: DataServiceProtocol>: ProfilePictureWorkerProtocol
@@ -28,62 +27,30 @@ where
         self.userRepository = userRepository
     }
 
-    func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ()) {
+    func setProfilePicture(image: UIImage) async throws {
         guard
             let downsizedImage = image.resize(to: CGSize(width: 400, height: 400)),
             let imageData = downsizedImage.pngData()
         else {
             return
         }
-        
+
         guard let userId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
+            throw SessionError.notLoggedIn
         }
 
-        userRepository.getUserById(userId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    self.uploadImage(imageData, user: user, completion: completion)
-                } else {
-                    completion(.failure(UserRepositoryError.userNotFound))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
+        guard let user = try await userRepository.getUserById(userId) else {
+            throw UserRepositoryError.userNotFound
         }
-    }
-    
-    private func uploadImage(_ imageData: Data, user: User, completion: @escaping (Result<Void, Error>) -> ()) {
-        profilePictureService.putData(imageData, url: "\(user.id)/profile.png") { result in
-            switch result {
-            case .success(let url): self.setUserProfilePictureUrl(user: user, url: url, completion: completion)
-            case .failure(let error): completion(.failure(error))
-            }
-        }
-    }
 
-    private func setUserProfilePictureUrl(user: User, url: URL, completion: @escaping (Result<Void, Error>) -> ()) {
+        let url = try await profilePictureService.putData(imageData, url: "\(user.id)/profile.png")
+
         var _user = user
         _user.profilePictureUrl = url
-        userRepository.save(user: _user) { result in
-            switch result {
-            case .success: completion(.success(()))
-            case .failure(let error): completion(.failure(error))
-            }
-        }
+        try await userRepository.save(user: _user)
     }
     
-    func getProfilePicture(user: User, completion: @escaping (Result<Data?, Error>) -> ()) {
-        guard let url = user.profilePictureUrl else {
-            completion(.success(nil))
-            return
-        }
-        profilePictureService.getData(url: url, completion: completion)
-    }
-    
-    func getProfilePicture(url: URL, completion: @escaping (Result<Data?, Error>) -> ()) {
-        profilePictureService.getData(url: url, completion: completion)
+    func getProfilePicture(url: URL) async throws -> Data? {
+        try await profilePictureService.getData(url: url)
     }
 }

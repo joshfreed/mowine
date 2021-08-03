@@ -12,10 +12,6 @@ import SwiftyBeaver
 
 public protocol GetMyAccountQuery {
     func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse?, Error>
-
-    func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void)
-
-    @available(iOSApplicationExtension 15.0, *)
     func getMyAccount() async throws -> GetMyAccountQueryResponse?
 }
 
@@ -51,7 +47,7 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
 
         return subject.eraseToAnyPublisher()
     }
-    
+/*
     public func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void) {
         SwiftyBeaver.info("getMyAccount w/ completion")
         
@@ -74,27 +70,17 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
             }
         }
     }
-
-    @available(iOSApplicationExtension 15.0, *)
+*/
     public func getMyAccount() async throws -> GetMyAccountQueryResponse? {
         SwiftyBeaver.info("getMyAccount async")
 
         guard let currentUserId = session.currentUserId else { return nil }
         guard !session.isAnonymous else { return nil }
 
-        return try await withCheckedThrowingContinuation { continuation in
-            userRepository.getUserById(currentUserId) { result in
-                switch result {
-                case .success(let user):
-                    if let user = user {
-                        continuation.resume(returning: .mapResponse(user))
-                    } else {
-                        continuation.resume(returning: nil)
-                    }
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
+        if let user = try await userRepository.getUserById(currentUserId) {
+            return .mapResponse(user)
+        } else {
+            return nil
         }
     }
 }

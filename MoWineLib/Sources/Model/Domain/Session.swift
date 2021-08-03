@@ -48,7 +48,7 @@ public protocol Session {
     func reauthenticate(withEmail email: String, password: String) async throws
     
     /// Changes the user's login email address.
-    func updateEmailAddress(_ emailAddress: String) -> Future<Void, Error>
+    func updateEmailAddress(_ emailAddress: String) async throws
 }
 
 public struct AuthState: Equatable {

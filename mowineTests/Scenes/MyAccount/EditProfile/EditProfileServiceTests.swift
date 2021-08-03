@@ -44,17 +44,16 @@ class EditProfileServiceTests: XCTestCase {
     // Save profile
     //
 
-    func test_saveProfile() {
-        let async = expectation(description: "async")
+    func test_saveProfile() async {
         let newPicture = UIImage(color: .black)!
         sut.updateProfilePicture(newPicture)
 
-        sut.saveProfile(email: "test@test.com", fullName: "Jeff Jones") { result in
-            expect(result).to(self.beSuccess())
-            async.fulfill()
+        do {
+            try await sut.saveProfile(email: "test@test.com", fullName: "Jeff Jones")
+        } catch {
+            fail("Should not throw")
         }
-        
-        wait(for: [async], timeout: 5)
+
         expect(self.userProfileService.updateProfilePictureWasCalled).to(beTrue())
         expect(self.userProfileService.updateProfilePicture_image).to(be(newPicture))
         expect(self.sut.newProfilePicture).to(beNil())
@@ -66,18 +65,18 @@ class EditProfileServiceTests: XCTestCase {
         expect(request?.fullName).to(equal("Jeff Jones"))
     }
 
-    func test_saveProfile_updatingProfilePictureThrowsAnError() {
-        let async = expectation(description: "async")
+    func test_saveProfile_updatingProfilePictureThrowsAnError() async {
         let newPicture = UIImage(color: .black)!
         sut.updateProfilePicture(newPicture)
         userProfileService.updateProfilePicture_rejection = TestError.someError
 
-        sut.saveProfile(email: "test@test.com", fullName: "Jeff Jones") { result in
-            expect(result).to(self.beFailure { expect($0).to(matchError(TestError.someError)) })
-            async.fulfill()
+        do {
+            try await sut.saveProfile(email: "test@test.com", fullName: "Jeff Jones")
+            XCTFail("Should throw")
+        } catch let error {
+            expect(error).to(matchError(TestError.someError))
         }
-        
-        wait(for: [async], timeout: 5)
+
         expect(self.userProfileService.updateProfilePictureWasCalled).to(beTrue())
         expect(self.userProfileService.updateProfilePicture_image).to(be(newPicture))
         expect(self.sut.newProfilePicture).toNot(beNil())

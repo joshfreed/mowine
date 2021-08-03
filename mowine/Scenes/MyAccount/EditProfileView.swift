@@ -32,8 +32,8 @@ struct EditProfileView: View {
             })
         }
         .accentColor(.mwSecondary)
-        .onAppear {
-            vm.loadProfile()
+        .task {
+            await vm.loadProfile()
         }
         .alert(isPresented: $vm.showErrorAlert) {
             Alert(title: Text("Error"), message: Text(vm.saveErrorMessage))
