@@ -47,30 +47,7 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
 
         return subject.eraseToAnyPublisher()
     }
-/*
-    public func getMyAccount(completion: @escaping (Result<GetMyAccountQueryResponse, Error>) -> Void) {
-        SwiftyBeaver.info("getMyAccount w/ completion")
-        
-        guard let currentUserId = session.currentUserId else {
-            completion(.failure(SessionError.notLoggedIn))
-            return
-        }
 
-        userRepository.getUserById(currentUserId) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    let dto: GetMyAccountQueryResponse = .mapResponse(user)
-                    completion(.success(dto))
-                } else {
-                    completion(.failure(UserRepositoryError.userNotFound))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-*/
     public func getMyAccount() async throws -> GetMyAccountQueryResponse? {
         SwiftyBeaver.info("getMyAccount async")
 

@@ -65,10 +65,6 @@ class MockUserRepository: UserRepository {
         return FakeRegistration()
     }
     
-    func add(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
-        
-    }
-
     func add(user: User) async throws {
     }
     
@@ -76,10 +72,6 @@ class MockUserRepository: UserRepository {
         
     }
     
-    func save(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
-        
-    }
-
     func save(user: User) async throws {}
     
     var getFriendsOfResult: Swift.Result<[User], Error>?
@@ -124,20 +116,16 @@ class MockUserRepository: UserRepository {
     var getUserByIdResult: Swift.Result<User?, Error>?
     var getUserByIdCalled = false
     var getUserById_id: UserId?
-    func getUserById(_ id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) {
+    func getUserById(_ id: UserId) async throws -> User? {
         getUserByIdCalled = true
         getUserById_id = id
-        if let result = getUserByIdResult {
-            completion(result)
+        if let result = getUserByIdResult, case let .success(user) = result {
+            return user
         }
-    }
-
-    func getUserById(_ id: UserId) async throws -> User? {
-        return try await withCheckedThrowingContinuation { cont in
-            getUserById(id)  { res in
-                cont.resume(with: res)
-            }
+        if let result = getUserByIdResult, case let .failure(error) = result {
+            throw error
         }
+        fatalError("Test not configured")
     }
 }
 

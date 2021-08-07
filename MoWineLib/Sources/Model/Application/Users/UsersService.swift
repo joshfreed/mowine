@@ -31,22 +31,12 @@ open class UsersService: ObservableObject {
         return publisher.eraseToAnyPublisher()
     }
     
-    public func getUserById(_ id: String) -> AnyPublisher<User, Error> {
-        let publisher = PassthroughSubject<User, Error>()
-        userRepository.getUserById(UserId(string: id)) { result in
-            switch result {
-            case .success(let user):
-                if let user = user {
-                    publisher.send(user)
-                    publisher.send(completion: .finished)
-                } else {
-                    publisher.send(completion: .failure(UserRepositoryError.userNotFound))
-                }
-            case .failure(let error):
-                publisher.send(completion: .failure(error))
-            }
+    public func getUserById(_ id: String) async throws -> User {
+        if let user = try await userRepository.getUserById(UserId(string: id)) {
+            return user
+        } else {
+            throw UserRepositoryError.userNotFound
         }
-        return publisher.eraseToAnyPublisher()
     }
 }
 

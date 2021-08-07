@@ -182,22 +182,10 @@ class FakeUserRepository: UserRepository {
         return FakeRegistration()
     }
     
-    func add(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
-        usersDB.append(user)
-        completion(.success(user))
-    }
-
     func add(user: User) async throws {
         usersDB.append(user)
     }
     
-    func save(user: User, completion: @escaping (Swift.Result<User, Error>) -> ()) {
-        if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
-            usersDB[index] = user
-        }
-        completion(.success(user))
-    }
-
     func save(user: User) async throws {
         if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
             usersDB[index] = user
@@ -250,17 +238,8 @@ class FakeUserRepository: UserRepository {
         completion(.success(()))
     }
     
-    func getUserById(_ id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) {
-        let user = usersDB.first(where: { $0.id == id })
-        completion(.success(user))
-    }
-
     func getUserById(_ id: UserId) async throws -> User? {
-        return try await withCheckedThrowingContinuation { cont in
-            getUserById(id)  { res in
-                cont.resume(with: res)
-            }
-        }
+        usersDB.first(where: { $0.id == id })
     }
 
     func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {

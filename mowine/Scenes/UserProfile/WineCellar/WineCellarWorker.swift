@@ -25,7 +25,14 @@ class WineCellarWorker {
     }
     
     func getUser(by userId: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
-        userRepository.getUserById(userId, completion: completion)
+        Task {
+            do {
+                let result = try await userRepository.getUserById(userId)
+                completion(.success(result))
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
     
     func getWineTypes(for userId: UserId, completion: @escaping (Result<[WineType], Error>) -> ()) {

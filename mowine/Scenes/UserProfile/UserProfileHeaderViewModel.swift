@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import Model
+import FirebaseCrashlytics
 
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""
@@ -24,16 +25,14 @@ class UserProfileHeaderViewModel: ObservableObject {
         self.users = users
     }
     
-    func load() {
-        users
-            .getUserById(userId)
-            .catch { error -> Empty<User, Never> in
-                return Empty<User, Never>()
-            }
-            .sink { [weak self] user in
-                self?.fullName = user.fullName
-                self?.profilePictureUrl = user.profilePictureUrl?.absoluteString ?? ""
-            }
-            .store(in: &cancellables)
+    func load() async {
+        do {
+            let user = try await users.getUserById(userId)
+            fullName = user.fullName
+            profilePictureUrl = user.profilePictureUrl?.absoluteString ?? ""
+        } catch {
+            Crashlytics.crashlytics().record(error: error)
+            SwiftyBeaver.error("\(error)")
+        }
     }
 }

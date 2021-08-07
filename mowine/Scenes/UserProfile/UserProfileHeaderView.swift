@@ -22,8 +22,8 @@ struct UserProfileHeaderView: View {
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding(.vertical, 8)
         .background(Color("Primary"))
-        .onAppear {
-            vm.load()
+        .task {
+            await vm.load()
         }
     }
 }
