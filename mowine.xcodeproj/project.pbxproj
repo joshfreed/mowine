@@ -1810,8 +1810,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.1.0;
+				kind = revision;
+				revision = 0e1d8774db783d85bd8fc3b53ec96444c048ae42;
 			};
 		};
 		53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */ = {
