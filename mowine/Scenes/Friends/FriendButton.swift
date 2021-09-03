@@ -8,6 +8,8 @@
 
 import SwiftUI
 import Model
+import FirebaseCrashlytics
+import SwiftyBeaver
 
 struct FriendButton: View {
     @EnvironmentObject var friends: FriendsService
@@ -26,17 +28,39 @@ struct FriendButton: View {
                     .cornerRadius(5)
             }.actionSheet(isPresented: $showUnfriendConfirmation, content: {
                 ActionSheet(title: Text("You are currently friends."), buttons: [
-                    .destructive(Text("Remove Friend")) { friends.removeFriend(userId) },
+                    .destructive(Text("Remove Friend")) { removeFriend(userId) },
                     .cancel()
                 ])
             })
         } else {
-            Button(action: { friends.addFriend(userId) }) {
+            Button(action: { addFriend(userId) }) {
                 Text("Add Friend")
                     .font(.system(size: 12))
                     .foregroundColor(Color("Primary Light"))
                     .frame(width: 80, height: 22)
                     .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color("Primary Light")))
+            }
+        }
+    }
+
+    func addFriend(_ userId: String) {
+        Task {
+            do {
+                try await friends.addFriend(userId)
+            } catch {
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
+            }
+        }
+    }
+
+    func removeFriend(_ userId: String) {
+        Task {
+            do {
+                try await friends.removeFriend(userId)
+            } catch {
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
             }
         }
     }

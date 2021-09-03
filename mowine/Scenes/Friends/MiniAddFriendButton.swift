@@ -8,6 +8,8 @@
 
 import SwiftUI
 import Model
+import FirebaseCrashlytics
+import SwiftyBeaver
 
 struct MiniAddFriendButton: View {
     @EnvironmentObject var friends: FriendsService
@@ -15,13 +17,24 @@ struct MiniAddFriendButton: View {
     
     var body: some View {
         if !friends.isFriends(with: userId) {
-            Button(action: { friends.addFriend(userId) }) {
+            Button(action: { addFriend() }) {
                 Image(systemName: "plus.circle")
                     .resizable()
                     .frame(width: 25, height: 25)
                     .foregroundColor(Color("Primary Light"))
             }
             .buttonStyle(PlainButtonStyle())
+        }
+    }
+
+    func addFriend() {
+        Task {
+            do {
+                try await friends.addFriend(userId)
+            } catch {
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
+            }
         }
     }
 }

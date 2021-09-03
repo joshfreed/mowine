@@ -192,24 +192,10 @@ class FakeUserRepository: UserRepository {
         }
     }
 
-    func getFriendsOf(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
-        let friendIds = friendsDB[userId] ?? []
-        var friends: [User] = []
-        for friendId in friendIds {
-            if let friend = usersDB.first(where: { $0.id == friendId }) {
-                friends.append(friend)
-            }
-        }
-
-        randomDelay {
-            completion(.success(friends))
-        }
-    }
-    
-    func searchUsers(searchString: String, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
+    func searchUsers(searchString: String) async throws -> [User] {
         let words = searchString.split(separator: " ")
         var matches: [User] = []
-        
+
         for word in words {
             let m = usersDB.filter {
                 $0.fullName.lowercased().starts(with: word)
@@ -217,33 +203,30 @@ class FakeUserRepository: UserRepository {
             matches.append(contentsOf: m)
         }
 
-        randomDelay {
-            completion(.success(matches))
+        return try await withCheckedThrowingContinuation { continuation in
+            randomDelay {
+                continuation.resume(with: .success(matches))
+            }
         }
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<User, Error>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
         if friendsDB[owningUserId] == nil {
             friendsDB[owningUserId] = []
         }
-        friendsDB[owningUserId]!.append(friendId)
+        friendsDB[owningUserId]?.append(friendId)
         let newFriend = usersDB.first(where: { $0.id == friendId })!
-        completion(.success(newFriend))
+        return newFriend
     }
     
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
         if let index = friendsDB[owningUserId]?.firstIndex(of: friendId) {
             friendsDB[owningUserId]?.remove(at: index)
-        }        
-        completion(.success(()))
+        }
     }
     
     func getUserById(_ id: UserId) async throws -> User? {
         usersDB.first(where: { $0.id == id })
-    }
-
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
-        
     }
     
     func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) -> MoWineListenerRegistration {

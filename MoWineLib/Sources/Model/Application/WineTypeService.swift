@@ -24,11 +24,11 @@ public class WineTypeService: ObservableObject {
     }
 
     public func fetchWineTypes() async {
-        wineTypeRepository.getAll { result in
-            switch result {
-            case .success(let types): self.wineTypes = types
-            case .failure(let error): SwiftyBeaver.error("\(error)")
-            }
+        do {
+            let types = try await wineTypeRepository.getAll()
+            self.wineTypes = types
+        } catch {
+            SwiftyBeaver.error("\(error)")
         }
     }
 }

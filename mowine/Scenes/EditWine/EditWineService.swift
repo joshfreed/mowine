@@ -30,12 +30,12 @@ class EditWineService: ObservableObject {
     }
     
     func getWineTypes(completion: @escaping (Swift.Result<[WineType], Error>) -> Void) {
-        wineTypeRepository.getAll { result in
-            switch result {
-            case .success(let wineTypes):
+        Task {
+            do {
+                let wineTypes = try await wineTypeRepository.getAll()
                 self.wineTypes = wineTypes
                 completion(.success(wineTypes))
-            case .failure(let error):
+            } catch let error {
                 completion(.failure(error))
             }
         }

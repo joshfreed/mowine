@@ -54,6 +54,14 @@ class MockWineTypeRepository: WineTypeRepository {
         let type = types.first(where: { $0.name == name })
         completion(.success(type))        
     }
+
+    func getAll() async throws -> [WineType] {
+        types
+    }
+
+    func getWineType(named name: String) async throws -> WineType? {
+        types.first { $0.name == name }
+    }
 }
 
 class MockUserRepository: UserRepository {
@@ -67,32 +75,18 @@ class MockUserRepository: UserRepository {
     
     func add(user: User) async throws {
     }
-    
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Swift.Result<Bool, Error>) -> ()) {
-        
-    }
-    
+
     func save(user: User) async throws {}
-    
-    var getFriendsOfResult: Swift.Result<[User], Error>?
-    var getFriendsOf_userId: UserId?
-    var getFriendsOfWasCalled = false
-    func getFriendsOf(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
-        getFriendsOfWasCalled = true
-        getFriendsOf_userId = userId
-        if let result = getFriendsOfResult {
-            completion(result)
-        }
-    }
-    
-    var searchUsersResult: Swift.Result<[User], Error>?
+
+    var searchUsersResult: Result<[User], Error> = .success([])
     var searchUsers_searchString: String?
     var searchUsersWasCalled = false
-    func searchUsers(searchString: String, completion: @escaping (Swift.Result<[User], Error>) -> ()) {
+    func searchUsers(searchString: String) async throws -> [User] {
         searchUsersWasCalled = true
         searchUsers_searchString = searchString
-        if let result = searchUsersResult {
-            completion(result)
+        switch searchUsersResult {
+        case .success(let users): return users
+        case.failure(let error): throw error
         }
     }
     
@@ -100,16 +94,18 @@ class MockUserRepository: UserRepository {
     var addFriend_owningUserId: UserId?
     var addFriend_friendId: UserId?
     var addFriendResult: Swift.Result<User, Error>?
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<User, Error>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
         addFriendCalled = true
         addFriend_owningUserId = owningUserId
         addFriend_friendId = friendId
-        if let result = addFriendResult {
-            completion(result)
+        guard let result = addFriendResult else { fatalError() }
+        switch result {
+        case .success(let user): return user
+        case .failure(let error): throw error
         }
     }
 
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
 
     }
 

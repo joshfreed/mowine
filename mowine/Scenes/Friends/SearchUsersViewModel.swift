@@ -10,11 +10,13 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import Model
+import FirebaseCrashlytics
 
 class SearchUsersViewModel: ObservableObject {
     @Published var hasSearched = false
     @Published var searchResults: [UsersService.UserSearchResult] = []
-    
+
+    private var cancellable: AnyCancellable?
     private let users: UsersService
     private var searchTextSubject = PassthroughSubject<String, Never>()
 
@@ -29,36 +31,34 @@ class SearchUsersViewModel: ObservableObject {
     }
     
     private func registerListeners() {
-        searchTextSubject
+        cancellable = searchTextSubject
             .print()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .removeDuplicates()
-            .tryMap { self.searchUsers($0) }
-            .switchToLatest()
-            .catch { error -> Empty<[UsersService.UserSearchResult], Never> in
-                SwiftyBeaver.error("\(error)")
-                return Empty<[UsersService.UserSearchResult], Never>()
+            .sink { [weak self] searchText in
+                Task { [weak self] in
+                    await self?.searchUsers(searchText)
+                }
             }
-            .assign(to: &$searchResults)
     }
     
-    func searchTextDidChange(to searchText: String) {
+    func searchUsers(matching searchText: String) {
         searchTextSubject.send(searchText)
     }
-    
-    private func searchUsers(_ searchText: String) -> AnyPublisher<[UsersService.UserSearchResult], Error> {
+
+    private func searchUsers(_ searchText: String) async {
         if searchText.isEmpty {
             hasSearched = false
-            return Empty<[UsersService.UserSearchResult], Error>().eraseToAnyPublisher()
+            searchResults = []
         } else {
-            return users.searchUsers(for: searchText)
-                .map { self.mapUserResults($0) }
-                .handleEvents(receiveOutput: { _ in self.hasSearched = true })
-                .eraseToAnyPublisher()
+            do {
+                let users = try await users.searchUsers(for: searchText)
+                searchResults = users.map { .fromUser($0) }
+                hasSearched = true
+            } catch {
+                SwiftyBeaver.error("\(error)")
+                Crashlytics.crashlytics().record(error: error)
+            }
         }
-    }
-
-    private func mapUserResults(_ users: [User]) -> [UsersService.UserSearchResult] {
-        users.map { .fromUser($0) }
     }
 }

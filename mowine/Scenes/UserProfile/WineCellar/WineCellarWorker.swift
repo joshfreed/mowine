@@ -45,12 +45,13 @@ class WineCellarWorker {
     }
     
     private func convertToWineTypes(_ wineTypeNames: [String], completion: @escaping (Result<[WineType], Error>) -> ()) {
-        wineTypeRepository.getAll { result in
-            switch result {
-            case .success(let allWineTypes):
+        Task {
+            do {
+                let allWineTypes = try await wineTypeRepository.getAll()
                 let userWineTypes = allWineTypes.filter { wineTypeNames.contains($0.name) }
                 completion(.success(userWineTypes))
-            case .failure(let error): completion(.failure(error))
+            } catch let error {
+                completion(.failure(error))
             }
         }
     }

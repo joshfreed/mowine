@@ -9,6 +9,6 @@
 import Foundation
 
 public protocol WineTypeRepository {
-    func getAll(completion: @escaping (Result<[WineType], Error>) -> ())
-    func getWineType(named name: String, completion: @escaping (Result<WineType?, Error>) -> ())
+    func getAll() async throws -> [WineType]
+    func getWineType(named name: String) async throws -> WineType?
 }

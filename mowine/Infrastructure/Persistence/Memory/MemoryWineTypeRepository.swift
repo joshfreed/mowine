@@ -45,7 +45,15 @@ class MemoryWineTypeRepository: WineTypeRepository {
     }()
     
     // MARK: WineTypeRepository
-    
+
+    func getAll() async throws -> [WineType] {
+        types
+    }
+
+    func getWineType(named name: String) async throws -> WineType? {
+        types.first { $0.name == name }
+    }
+
     func getAll(completion: @escaping (Result<[WineType], Error>) -> ()) {
         completion(.success(types))
     }

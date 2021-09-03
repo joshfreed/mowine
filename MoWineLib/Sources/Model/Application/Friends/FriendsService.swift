@@ -57,24 +57,20 @@ public class FriendsService: ObservableObject {
         friends.contains { $0.id == userId }
     }
 
-    public func addFriend(_ userId: String) {
+    public func addFriend(_ userId: String) async throws {
         guard let currentUserId = session.currentUserId else { return }
 
         let newFriendId = UserId(string: userId)
 
-        userRepository.addFriend(owningUserId: currentUserId, friendId: newFriendId) { result in
-
-        }
+        _ = try await userRepository.addFriend(owningUserId: currentUserId, friendId: newFriendId)
     }
     
-    public func removeFriend(_ userId: String) {
+    public func removeFriend(_ userId: String) async throws {
         guard let currentUserId = session.currentUserId else { return }
 
         let friendId = UserId(string: userId)
 
-        userRepository.removeFriend(owningUserId: currentUserId, friendId: friendId) { result in
-
-        }
+        try await userRepository.removeFriend(owningUserId: currentUserId, friendId: friendId)
     }
 }
 

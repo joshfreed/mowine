@@ -13,19 +13,6 @@ import Model
 
 class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()
-        
-    func add(user: User, completion: @escaping (Result<User, Error>) -> ()) {
-        let data = user.toFirestore()
-
-        db.collection("users").document(user.id.asString).setData(data) { err in
-            if let err = err {
-                SwiftyBeaver.error("Error adding document: \(err)")
-                completion(.failure(err))
-            } else {
-                completion(.success(user))
-            }
-        }
-    }
 
     func add(user: User) async throws {
         try await db
@@ -44,39 +31,23 @@ class FirestoreUserRepository: UserRepository {
         let data = user.toFirestore()
         try await db.collection("users").document(user.id.asString).setData(data, merge: true)
     }
-    
-    func getUserById(_ id: UserId, completion: @escaping (Result<User?, Error>) -> ()) {
-        let query = db.collection("users").document(id.asString)
-
-        query.getDocument { (document, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-                return
-            }
-
-            guard let document = document, document.exists else {
-                SwiftyBeaver.warning("Document does not exist")
-                completion(.success(nil))
-                return
-            }
-
-            guard let user = User.fromFirestore(document) else {
-                SwiftyBeaver.warning("Couldn't build user from document")
-                completion(.success(nil))
-                return
-            }
-
-            completion(.success(user))
-        }
-    }
 
     func getUserById(_ id: UserId) async throws -> User? {
-        return try await withCheckedThrowingContinuation { cont in
-            getUserById(id)  { res in
-                cont.resume(with: res)
-            }
+        let query = db.collection("users").document(id.asString)
+
+        let document = try await query.getDocument()
+
+        guard document.exists else {
+            SwiftyBeaver.warning("Document does not exist")
+            return nil
         }
+
+        guard let user = User.fromFirestore(document) else {
+            SwiftyBeaver.warning("Couldn't build user from document")
+            return nil
+        }
+
+        return user
     }
 
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
@@ -111,28 +82,6 @@ class FirestoreUserRepository: UserRepository {
         }
         
         return MyFirebaseListenerRegistration(wrapped: listener)
-    }
-    
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) {
-        let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
-        
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-            } else {
-                if let documents = querySnapshot?.documents {
-                    let friendIds: [UserId] = documents.compactMap {
-                        let data = $0.data()
-                        guard let friendIdStr = data["friendId"] as? String else { return nil }
-                        return UserId(string: friendIdStr)
-                    }
-                    self.getUsers(by: friendIds, completion: completion)
-                } else {
-                    completion(.success([]))
-                }
-            }
-        }
     }
     
     func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
@@ -190,24 +139,10 @@ class FirestoreUserRepository: UserRepository {
         }
     }
 
-    func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ()) {
-        let query = db.collection("users")
-        
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-                return
-            }
-            
-            if let documents = querySnapshot?.documents {
-                let users = documents.compactMap { User.fromFirestore($0) }
-                let matches = self.filterUsers(searchString: searchString, allUsers: users)
-                completion(.success(matches))
-            } else {
-                completion(.success([]))
-            }
-        }
+    func searchUsers(searchString: String) async throws -> [User] {
+        let documents = try await db.collection("users").getDocuments().documents
+        let users = documents.compactMap { User.fromFirestore($0) }
+        return filterUsers(searchString: searchString, allUsers: users)
     }
     
     private func filterUsers(searchString: String, allUsers: [User]) -> [User] {
@@ -227,67 +162,34 @@ class FirestoreUserRepository: UserRepository {
         return Array(Set(matches))
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
+    func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
         let docId = "\(owningUserId)_\(friendId)"
-        db.collection("friends").document(docId).setData([
+
+        try await db.collection("friends").document(docId).setData([
             "userId": owningUserId.asString,
             "friendId": friendId.asString
-        ]) { err in
-            if let err = err {
-                SwiftyBeaver.error("Error writing document: \(err)")
-                completion(.failure(err))
-            } else {
-                self.getUserFromCache(userId: friendId, completion: completion)
-            }
-        }
+        ])
+
+        return try await getUserFromCache(userId: friendId)
     }
     
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<Void, Error>) -> ()) {
+    func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
         let docId = "\(owningUserId)_\(friendId)"
-        db.collection("friends").document(docId).delete() { err in
-            if let err = err {
-                SwiftyBeaver.error("Error writing document: \(err)")
-                completion(.failure(err))
-            } else {
-                completion(.success(()))
-            }
-        }
-    }
-
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool, Error>) -> ()) {
-        let docId = "\(userId)_\(otherUserId)"
-        db.collection("friends").document(docId).getDocument { (document, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-                return
-            }
-            
-            if let document = document, document.exists {
-                completion(.success(true))
-            } else {
-                completion(.success(false))
-            }
-        }
+        try await db.collection("friends").document(docId).delete()
     }
     
     //
     // Privates
     //
     
-    private func getUserFromCache(userId: UserId, completion: @escaping (Result<User, Error>) -> ()) {
+    private func getUserFromCache(userId: UserId) async throws -> User {
         let query = db.collection("users").document(userId.asString)
-        query.getDocument(source: .cache) { (document, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-                return
-            }
-            
-            if let document = document, document.exists, let user = User.fromFirestore(document) {
-                completion(.success(user))
+        do {
+            let document = try await query.getDocument(source: .cache)
+            if document.exists, let user = User.fromFirestore(document) {
+                return user
             } else {
-                completion(.failure(UserRepositoryError.userNotFound))
+                throw UserRepositoryError.userNotFound
             }
         }
     }

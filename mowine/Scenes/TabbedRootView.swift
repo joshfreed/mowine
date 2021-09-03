@@ -29,7 +29,7 @@ struct TabbedRootView: View {
                 }
                 .tag(2)
             
-            FriendsContainerView()
+            FriendsPage()
                 .tabItem {
                     Image("Friends Tab").renderingMode(.template)
                     Text("Friends")

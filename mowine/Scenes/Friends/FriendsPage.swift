@@ -10,26 +10,30 @@ import SwiftUI
 import Model
 
 struct FriendsPage: View {
+    @EnvironmentObject var session: ObservableSession
     @StateObject var vm = SearchUsersViewModel()
     @State private var searchText: String = ""
 
     var body: some View {
-        NavigationView {
-            InnerFriendsPage(vm: vm, searchText: $searchText)
-                .navigationBarTitle("Friends")
-                .searchable(text: $searchText)
-                .onChange(of: searchText) {
-                    vm.searchTextDidChange(to: $0)
-                }
+        if session.isAnonymous {
+            AnonymousUserView()
+        } else {
+            NavigationView {
+                SearchableFriendsPage(vm: vm)
+                    .navigationBarTitle("Friends")
+                    .searchable(text: $searchText)
+                    .onChange(of: searchText) {
+                        vm.searchUsers(matching: $0)
+                    }
+            }
+            .accentColor(.mwSecondary)
         }
-        .accentColor(.mwSecondary)
     }
 }
 
-struct InnerFriendsPage: View {
+struct SearchableFriendsPage: View {
     @Environment(\.isSearching) var isSearching
     @ObservedObject var vm: SearchUsersViewModel
-    @Binding var searchText: String
 
     var body: some View {
         if isSearching {

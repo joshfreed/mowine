@@ -15,20 +15,10 @@ open class UsersService: ObservableObject {
         self.userRepository = userRepository
     }
 
-    public func searchUsers(for searchString: String) -> AnyPublisher<[User], Error> {
-        let currentUserId = session.currentUserId
-        let publisher = PassthroughSubject<[User], Error>()
-        userRepository.searchUsers(searchString: searchString) { result in
-            switch result {
-            case .success(let users):
-                let usersWithoutCurrent = users.filter({ $0.id != currentUserId })
-                publisher.send(usersWithoutCurrent)
-                publisher.send(completion: .finished)
-            case .failure(let error):
-                publisher.send(completion: .failure(error))
-            }
-        }
-        return publisher.eraseToAnyPublisher()
+    public func searchUsers(for searchString: String) async throws -> [User] {
+        var users = try await userRepository.searchUsers(searchString: searchString)
+        users = users.filter { $0.id != session.currentUserId }
+        return users
     }
     
     public func getUserById(_ id: String) async throws -> User {

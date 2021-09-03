@@ -12,12 +12,10 @@ import Combine
 public protocol UserRepository {
     func add(user: User) async throws
     func save(user: User) async throws
-    func getFriendsOf(userId: UserId, completion: @escaping (Result<[User], Error>) -> ())
-    func searchUsers(searchString: String, completion: @escaping (Result<[User], Error>) -> ())
-    func addFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<User, Error>) -> ())
-    func removeFriend(owningUserId: UserId, friendId: UserId, completion: @escaping (Result<Void, Error>) -> ())
+    func searchUsers(searchString: String) async throws -> [User]
+    func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User
+    func removeFriend(owningUserId: UserId, friendId: UserId) async throws
     func getUserById(_ id: UserId) async throws -> User?
-    func isFriendOf(userId: UserId, otherUserId: UserId, completion: @escaping (Result<Bool, Error>) -> ())
     func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration
     func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration
 }
