@@ -11,7 +11,7 @@ import Combine
 import SwiftyBeaver
 
 public protocol GetMyAccountQuery {
-    func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse?, Error>
+    func getMyAccountAndListen() -> AnyPublisher<GetMyAccountQueryResponse?, Error>
     func getMyAccount() async throws -> GetMyAccountQueryResponse?
 }
 
@@ -40,7 +40,7 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
         sessionCancellable = nil
     }
     
-    public func getMyAccount() -> AnyPublisher<GetMyAccountQueryResponse?, Error> {
+    public func getMyAccountAndListen() -> AnyPublisher<GetMyAccountQueryResponse?, Error> {
         if listener == nil {
             startListening()
         }

@@ -13,6 +13,7 @@ import FirebaseCrashlytics
 import Model
 import UIKit.UIImage
 
+@MainActor
 class MyAccountViewModel: ObservableObject {
     @Published var isLoaded = false
     @Published var fullName: String = ""
@@ -45,7 +46,7 @@ class MyAccountViewModel: ObservableObject {
     }
     
     func loadMyAccount() {
-        cancellable = getMyAccountQuery.getMyAccount()
+        cancellable = getMyAccountQuery.getMyAccountAndListen()
             .compactMap { $0 }
             .sink { completion in
                 SwiftyBeaver.info("\(completion)")

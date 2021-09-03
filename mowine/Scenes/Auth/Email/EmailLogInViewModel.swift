@@ -11,6 +11,7 @@ import SwiftyBeaver
 import Model
 import FirebaseCrashlytics
 
+@MainActor
 class EmailLogInViewModel: ObservableObject {
     @Published var isLoggingIn = false
     @Published var error: String = ""
