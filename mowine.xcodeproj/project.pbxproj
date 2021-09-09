@@ -91,12 +91,10 @@
 		5381EFF325C5E830004D2DF9 /* EditWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF225C5E830004D2DF9 /* EditWineViewModel.swift */; };
 		5381EFF925C7267E004D2DF9 /* EditWineFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */; };
 		5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */; };
-		5381F00125C74E7D004D2DF9 /* EditWineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381F00025C74E7D004D2DF9 /* EditWineService.swift */; };
 		5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCD25BE2B9600B8A8F5 /* storage.rules */; };
 		5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCE25BE2B9600B8A8F5 /* firebase.json */; };
 		5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */; };
 		5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABD025BE2B9600B8A8F5 /* firestore.rules */; };
-		538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */; };
 		538995B51EE476A100CF1330 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538995B41EE476A100CF1330 /* TestDoubles.swift */; };
 		538B239D21BB22BD002F278A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 538B239C21BB22BD002F278A /* GoogleService-Info.plist */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
@@ -295,12 +293,10 @@
 		5381EFF225C5E830004D2DF9 /* EditWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineViewModel.swift; sourceTree = "<group>"; };
 		5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormView.swift; sourceTree = "<group>"; };
 		5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormModel.swift; sourceTree = "<group>"; };
-		5381F00025C74E7D004D2DF9 /* EditWineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineService.swift; sourceTree = "<group>"; };
 		5386ABCD25BE2B9600B8A8F5 /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = storage.rules; sourceTree = SOURCE_ROOT; };
 		5386ABCE25BE2B9600B8A8F5 /* firebase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase.json; sourceTree = SOURCE_ROOT; };
 		5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firestore.indexes.json; sourceTree = SOURCE_ROOT; };
 		5386ABD025BE2B9600B8A8F5 /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = firestore.rules; sourceTree = SOURCE_ROOT; };
-		538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWineWorkerTests.swift; sourceTree = "<group>"; };
 		538995B41EE476A100CF1330 /* TestDoubles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
 		538B239C21BB22BD002F278A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
@@ -672,7 +668,6 @@
 		537614C01E591867005AABF0 /* EditWine */ = {
 			isa = PBXGroup;
 			children = (
-				5381F00025C74E7D004D2DF9 /* EditWineService.swift */,
 				5381EFF225C5E830004D2DF9 /* EditWineViewModel.swift */,
 				5381EFEA25C5C8B6004D2DF9 /* EditWineView.swift */,
 				5381EFEE25C5E4F4004D2DF9 /* EditPairingsView.swift */,
@@ -718,17 +713,8 @@
 			isa = PBXGroup;
 			children = (
 				53D91FC722C124EB004F94B0 /* MyAccount */,
-				538995AB1EE475C200CF1330 /* EditWine */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		538995AB1EE475C200CF1330 /* EditWine */ = {
-			isa = PBXGroup;
-			children = (
-				538995AF1EE475EF00CF1330 /* EditWineWorkerTests.swift */,
-			);
-			path = EditWine;
 			sourceTree = "<group>";
 		};
 		53958A9020617B4900BA4B6C /* FirstTime */ = {
@@ -1339,7 +1325,6 @@
 				53FAED0025EAF7B40099B2E1 /* UserProfileView.swift in Sources */,
 				53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */,
 				536E3ADF258F9E6300D84F10 /* SignInWithApple.swift in Sources */,
-				5381F00125C74E7D004D2DF9 /* EditWineService.swift in Sources */,
 				533D8B3E2533601600CE297E /* MyCellarViewModel.swift in Sources */,
 				53DD1E1A257D84DC008C1DA7 /* FancySecureField.swift in Sources */,
 				536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */,
@@ -1436,7 +1421,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				53EAFA13225E930F002BCAB0 /* DataServiceTests.swift in Sources */,
-				538995B31EE475EF00CF1330 /* EditWineWorkerTests.swift in Sources */,
 				535D74402569BBF60027BC27 /* Utilities.swift in Sources */,
 				53F24874206D4ADA0046B031 /* Facebook.swift in Sources */,
 				537A18D421961CFB00011C63 /* NimbleMatchers.swift in Sources */,

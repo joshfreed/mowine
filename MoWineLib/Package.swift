@@ -13,10 +13,14 @@ let package = Package(
         .library(
             name: "mowineLib",
             targets: ["Model"]),
+        .library(
+            name: "ModelTestHelpers",
+            targets: ["ModelTestHelpers"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
          .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
+         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -24,8 +28,11 @@ let package = Package(
         .target(
             name: "Model",
             dependencies: ["SwiftyBeaver"]),
+        .target(
+            name: "ModelTestHelpers",
+            dependencies: ["Model", "Nimble"]),
         .testTarget(
             name: "ModelTests",
-            dependencies: ["Model"]),
+            dependencies: ["Model", "ModelTestHelpers"]),
     ]
 )

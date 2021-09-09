@@ -20,47 +20,45 @@ class FirestoreWineRepository: WineRepository {
         try await db.collection("wines").document(wine.id.asString).setData(data)
     }
     
-    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
+    func save(_ wine: Wine) async throws {
         let data = wine.toFirestore()
-        db.collection("wines").document(wine.id.asString).setData(data as [String: Any], merge: true)
-        completion(.success(wine))
+        try await db.collection("wines").document(wine.id.asString).setData(data as [String: Any], merge: true)
+    }
+
+    func delete(_ wineId: WineId) async throws {
+        try await db.collection("wines").document(wineId.asString).delete()
     }
     
-    func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ()) {
-        db.collection("wines").document(wine.id.asString).delete() { err in
-            if let err = err {
-                SwiftyBeaver.error("Error deleting wine document: \(err)")
-                Crashlytics.crashlytics().record(error: err)
-                completion(.failure(err))
-            } else {
-                completion(.success(()))
+    @available(*, deprecated, message: "Prefer async alternative instead")
+    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
+        Task {
+            do {
+                if let result = try await getWine(by: id) {
+                    completion(.success(result))
+                } else {
+                    completion(.failure(WineRepositoryError.notFound))
+                }
+            } catch {
+                completion(.failure(error))
             }
         }
     }
-    
-    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
+
+    func getWine(by id: WineId) async throws -> Wine? {
         SwiftyBeaver.info("getWine \(id)")
 
         let docRef = db.collection("wines").document(id.asString)
 
-        docRef.getDocument(source: .cache) { (document, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-                completion(.failure(error))
-                return
-            }
-            
-            if let document = document,
-                document.exists,
-                let data = document.data(),
-                let wine = Wine.fromFirestore(documentId: document.documentID, data: data)
-            {
-                completion(.success(wine))
-            } else {
-                completion(.failure(WineRepositoryError.notFound))
-            }
+        let document = try await docRef.getDocument(source: .cache)
+
+        guard
+            let data = document.data(),
+            let wine = Wine.fromFirestore(documentId: document.documentID, data: data)
+        else {
+            return nil
         }
+
+        return wine
     }
     
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {

@@ -10,8 +10,9 @@ import Foundation
 
 public protocol WineRepository {
     func add(_ wine: Wine) async throws
-    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ())
-    func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ())
+    func save(_ wine: Wine) async throws
+    func delete(_ wineId: WineId) async throws
+    func getWine(by id: WineId) async throws -> Wine?
     func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ())
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration

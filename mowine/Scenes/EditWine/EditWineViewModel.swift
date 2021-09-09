@@ -12,78 +12,104 @@ import SwiftyBeaver
 import FirebaseCrashlytics
 import Model
 import UIKit.UIImage
+import UIKit
 
+@MainActor
 class EditWineViewModel: ObservableObject {
     @Published var isSaving = false
     @Published var isShowingSheet = false
     @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     
     let form = EditWineFormModel()
-    private var wineId: String?
+    private var wineId: String
+    private let getWineTypesQuery: GetWineTypesQueryHandler
+    private let getWineQuery: GetWineByIdQueryHandler
+    private let getWineImageQuery: GetWineImageQueryHandler
+    private let updateWineCommandHandler: UpdateWineCommandHandler
+    private let deleteWineCommandHandler: DeleteWineCommandHandler
     
-    init() {
+    init(wineId: String) {
         SwiftyBeaver.debug("init")
+        self.wineId = wineId
+        updateWineCommandHandler = try! JFContainer.shared.container.resolve()
+        deleteWineCommandHandler = try! JFContainer.shared.container.resolve()
+        getWineTypesQuery = try! JFContainer.shared.container.resolve()
+        getWineQuery = try! JFContainer.shared.container.resolve()
+        getWineImageQuery = try! JFContainer.shared.container.resolve()
     }
     
     deinit {
         SwiftyBeaver.debug("deinit")
     }
-    
-    func load(wineId: String, editWineService: EditWineService) {
-        self.wineId = wineId
-        
-        editWineService.getWineTypes() { [weak self] result in
-            switch result {
-            case .success(let types): self?.form.setTypes(types)
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-            }
+
+    func load() async {
+        async let wineTypes = getWineTypesQuery.handle()
+        async let wine = getWineQuery.handle(wineId: wineId)
+        async let wineImage = getWineImageQuery.handle(wineId: wineId)
+
+        do {
+            form.setTypes(try await wineTypes)
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
         }
-        
-        editWineService.getWine(wineId: wineId) { [weak self] result in
-            switch result {
-            case .success(let wine): self?.form.setWine(wine)
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+
+        do {
+            if let wine = try await wine {
+                form.setWine(wine)
+            } else {
+                // Wine was not found. What to do?
+                SwiftyBeaver.error("Wine \(wineId) was not found")
             }
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
         }
-        
-        editWineService.getWinePhoto(wineId: wineId) { [weak self] result in
-            switch result {
-            case .success(let photo): self?.form.image = photo
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-            }
+
+        do {
+            form.image = try await wineImage as? UIImage
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
         }
     }
-    
-    func save(editWineService: EditWineService, completion: @escaping () -> Void) {
+
+    func save() async throws {
         guard let type = form.type else {
+            // Validation failure. Wines require a type to be selected.
             return
         }
-        
+
         isSaving = true
-        
-        var request = SaveWineRequest(name: form.name, rating: Double(form.rating), type: type.name)
-        request.variety = form.variety?.name
-        request.location = form.location
-        request.price = form.price
-        request.notes = form.notes
-        request.pairings = form.pairings
-        request.image = form.image
-        
-        editWineService.saveWine(wineId: wineId!, request: request) { [weak self] result in
-            self?.isSaving = false
-            
-            switch result {
-            case .success: completion()
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-            }
+
+        var command = UpdateWineCommand(wineId: wineId, name: form.name, rating: Double(form.rating), type: type.name)
+        command.variety = form.variety?.name
+        command.location = form.location
+        command.price = form.price
+        command.notes = form.notes
+        command.pairings = form.pairings
+        command.image = form.image
+
+        defer {
+            isSaving = false
+        }
+
+        do {
+            try await updateWineCommandHandler.handle(command)
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
+            throw error
+        }
+    }
+
+    func deleteWine() async throws {
+        do {
+            try await deleteWineCommandHandler.handle(wineId)
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
+            throw error
         }
     }
 

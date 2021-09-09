@@ -179,6 +179,15 @@ extension DependencyContainer {
     
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
     static func configureCommonServices(container: DependencyContainer) {
+        // Application Layer
+        // Wines
+        container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, imageWorker: $1, wineTypeRepository: $2) }
+        container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }
+        container.register(.unique) { GetWineImageQueryHandler(imageWorker: $0) }
+        container.register(.unique) { GetWineByIdQueryHandler(wineRepository: $0) }
+        container.register(.unique) { GetWineTypesQueryHandler(wineTypeRepository: $0) }
+
+        // Domain Layer
         container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
 
         // Auth
@@ -198,7 +207,6 @@ extension DependencyContainer {
         // Scenes
         container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
         container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
-        container.register(.singleton) { EditWineService(wineRepository: $0, wineTypeRepository: $1, imageWorker: $2) }
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
         container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }

@@ -81,7 +81,6 @@ extension View {
             .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetWineDetailsQuery)
             .environmentObject(wineWorker)
-            .environmentObject(try! container.resolve() as EditWineService)
             .environmentObject(try! container.resolve() as MyWinesService)
     }
 }

@@ -16,11 +16,14 @@ class MemoryWineRepository: WineRepository {
         wines.append(wine)
     }
     
-    func delete(_ wine: Wine, completion: @escaping (Result<Void, Error>) -> ()) {
-        if let index = wines.firstIndex(of: wine) {
+    func delete(_ wineId: WineId) async throws {
+        if let index = wines.firstIndex(where: { $0.id == wineId }) {
             wines.remove(at: index)
         }
-        completion(.success(()))
+    }
+
+    func getWine(by id: WineId) async throws -> Wine? {
+        wines.first { $0.id == id }
     }
     
     func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
@@ -31,16 +34,15 @@ class MemoryWineRepository: WineRepository {
         }
     }
 
-    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> ()) {
+    func save(_ wine: Wine) async throws {
         guard let index = wines.firstIndex(of: wine) else {
             return
         }
         
-        // maybe not necessary since it's a class and thus by reference?!?!?!?
         wines[index] = wine
-        
-        completion(.success(wine))
     }
+
+    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> Void) {}
     
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         completion(.success(wines.filter { $0.userId == userId }))

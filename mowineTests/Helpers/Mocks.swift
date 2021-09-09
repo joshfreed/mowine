@@ -10,59 +10,7 @@ import UIKit
 @testable import mowine
 import Combine
 import Model
-
-class MockWineRepository: WineRepository {
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Swift.Result<[String], Error>) -> ()) {
-        
-    }
-    
-    func getWine(by id: WineId, completion: @escaping (Swift.Result<Wine, Error>) -> ()) {
-        
-    }
-    
-    func add(_ wine: Wine) async throws {}
-    
-    func getWines(userId: UserId, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        return FakeRegistration()
-    }
-    
-    func save(_ wine: Wine, completion: @escaping (Swift.Result<Wine, Error>) -> ()) {
-        completion(.success(wine))
-    }
-    
-    func delete(_ wine: Wine, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
-        completion(.success(()))
-    }
-    
-    func getTopWines(userId: UserId, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) {
-        
-    }
-    
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        return FakeRegistration()
-    }
-}
-
-class MockWineTypeRepository: WineTypeRepository {
-    var types: [WineType] = []
-    
-    func getAll(completion: @escaping (Swift.Result<[WineType], Error>) -> ()) {
-        completion(.success(types))
-    }
-    
-    func getWineType(named name: String, completion: @escaping (Swift.Result<WineType?, Error>) -> ()) {
-        let type = types.first(where: { $0.name == name })
-        completion(.success(type))        
-    }
-
-    func getAll() async throws -> [WineType] {
-        types
-    }
-
-    func getWineType(named name: String) async throws -> WineType? {
-        types.first { $0.name == name }
-    }
-}
+import XCTest
 
 class MockUserRepository: UserRepository {
     func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) -> MoWineListenerRegistration {

@@ -11,10 +11,8 @@ import SwiftyBeaver
 import FirebaseCrashlytics
 
 struct EditWineView: View {
-    let wineId: String
-    @EnvironmentObject var editWineService: EditWineService
-    @Environment(\.presentationMode) var presentationMode
-    @StateObject private var vm = EditWineViewModel()
+    @StateObject var vm: EditWineViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationView {
@@ -25,17 +23,15 @@ struct EditWineView: View {
             }
             .navigationBarTitle("Edit Wine", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }, trailing: Button("Save") {
-                vm.save(editWineService: editWineService) {
-                    presentationMode.wrappedValue.dismiss()
-                }
+                saveWine()
             })
         }
         .loading(isShowing: vm.isSaving, text: "Saving...")
         .accentColor(.mwSecondary)
-        .onAppear {
-            vm.load(wineId: wineId, editWineService: editWineService)
+        .task {
+            await vm.load()
         }
         .sheet(isPresented: $vm.isShowingSheet) {
             ImagePickerView(sourceType: vm.pickerSourceType) { image in
@@ -46,13 +42,24 @@ struct EditWineView: View {
         }
     }
 
+    func saveWine() {
+        Task {
+            do {
+                try await vm.save()
+                dismiss()
+            } catch {
+                // Don't dismiss
+            }
+        }
+    }
+
     func deleteWine() {
-        editWineService.deleteWine(wineId: wineId) { result in
-            switch result {
-            case .success: presentationMode.wrappedValue.dismiss()
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+        Task {
+            do {
+                try await vm.deleteWine()
+                dismiss()
+            } catch {
+                // Don't dismiss
             }
         }
     }
@@ -60,7 +67,7 @@ struct EditWineView: View {
 
 struct EditWineView_Previews: PreviewProvider {
     static var previews: some View {
-        EditWineView(wineId: "")
+        EditWineView(vm: .init(wineId: ""))
             .addPreviewEnvironment()
     }
 }

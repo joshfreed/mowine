@@ -24,7 +24,7 @@ struct MyCellarView: View {
         .accentColor(.mwSecondary)
         .sheet(isPresented: $viewModel.isEditingWine) {
             viewModel.selectedWineId.map {
-                EditWineView(wineId: $0)
+                EditWineView(vm: .init(wineId: $0))
             }
         }
     }
