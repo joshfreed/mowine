@@ -67,6 +67,7 @@ struct EditWineFormView: View {
             
             Section(header: Text("Notes")) {
                 TextEditor(text: $vm.notes)
+                    .accessibilityLabel("Notes")
             }
             
             Section(header: Text("")) {

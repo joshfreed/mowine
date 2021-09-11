@@ -23,7 +23,7 @@ class MyAccountPage {
     }
 
     func tapSignOut() {
-        app/*@START_MENU_TOKEN@*/.buttons["signOutButton"]/*[[".buttons[\"Sign Out\"]",".buttons[\"signOutButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["signOutButton"].tap()
         XCTAssertTrue(app.sheets["Are you sure?"].waitForExistence(timeout: 5))
     }
 

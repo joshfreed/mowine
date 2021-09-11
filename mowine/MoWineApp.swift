@@ -28,6 +28,7 @@ struct WoWineApp: App {
     var body: some Scene {
         WindowGroup {
             AppView()
+                .task { await setupUITestingData() }
                 .addAppEnvironment()
                 .environmentObject(session)
                 .environmentObject(wineTypeService)
@@ -60,6 +61,12 @@ struct WoWineApp: App {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+
+    private func setupUITestingData() async {
+        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
+        let uiTestingHelper = UITestHelper()
+        await uiTestingHelper.logInExistingUser()
     }
 }
 

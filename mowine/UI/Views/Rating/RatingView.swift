@@ -74,11 +74,11 @@ struct RatingStar: View {
     var showIfEmpty = true
     
     var body: some View {
-        if value <= rating {
-            Star().fill(Color("Rating"))
-        } else if showIfEmpty {
-            Star().stroke(Color("Rating"))
+        ZStack {
+            Star().fill(value <= rating ? Color("Rating") : Color.clear)
+            Star().stroke(value > rating && showIfEmpty ? Color("Rating") : Color.clear)
         }
+        .accessibility(identifier: "Rating_\(value)")
     }
 }
 

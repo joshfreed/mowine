@@ -1,6 +1,6 @@
 //
-//  mowineUITests.swift
-//  mowineUITests
+//  AddWineTests.swift
+//  AddWineTests
 //
 //  Created by Josh Freed on 1/7/17.
 //  Copyright © 2017 BleepSmazz. All rights reserved.
@@ -8,14 +8,7 @@
 
 import XCTest
 
-extension XCTestCase {
-    func toString(_ object: [[String: Any]]) -> String {
-        let data = try! JSONSerialization.data(withJSONObject: object, options: [])
-        return String(data: data, encoding: .utf8)!
-    }
-}
-
-class mowineUITests: XCTestCase {
+class AddWineTests: XCTestCase {
 
     override func setUpWithError() throws {
         // In UI tests it is usually best to stop immediately when a failure occurs.
