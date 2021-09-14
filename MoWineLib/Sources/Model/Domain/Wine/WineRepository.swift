@@ -13,11 +13,10 @@ public protocol WineRepository {
     func save(_ wine: Wine) async throws
     func delete(_ wineId: WineId) async throws
     func getWine(by id: WineId) async throws -> Wine?
-    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ())
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ())
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String], Error>) -> ())
+    func getTopWines(userId: UserId) async throws -> [Wine]
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String]
 }
 
 public enum WineRepositoryError: Error {

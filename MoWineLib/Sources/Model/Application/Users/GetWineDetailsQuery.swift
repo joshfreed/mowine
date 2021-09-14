@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyBeaver
 
 public class GetWineDetailsQuery: ObservableObject {
     @Published public var wine: WineDetails?
@@ -18,24 +17,22 @@ public class GetWineDetailsQuery: ObservableObject {
         self.wineRepository = wineRepository
     }
 
-    public func execute(wineId: String) {
-        wineRepository.getWine(by: WineId(string: wineId)) { result in
-            switch result {
-            case .success(let wine):
-                self.wine = .init(
-                    id: wine.id.asString,
-                    name: wine.name,
-                    rating: Int(wine.rating),
-                    varietyName: wine.varietyName,
-                    typeName: wine.type.name,
-                    price: wine.price ?? "",
-                    location: wine.location ?? "",
-                    thumbnailPath: "\(wine.userId)/\(wine.id).png"
-                )
-            case .failure(let error):
-                SwiftyBeaver.error("\(error)")
-            }
+    @MainActor
+    public func execute(wineId: String) async throws {
+        guard let wine = try await wineRepository.getWine(by: WineId(string: wineId)) else {
+            throw Errors.wineNotFound
         }
+
+        self.wine = .init(
+            id: wine.id.asString,
+            name: wine.name,
+            rating: Int(wine.rating),
+            varietyName: wine.varietyName,
+            typeName: wine.type.name,
+            price: wine.price ?? "",
+            location: wine.location ?? "",
+            thumbnailPath: "\(wine.userId)/\(wine.id).png"
+        )
     }
 }
 
@@ -60,5 +57,9 @@ extension GetWineDetailsQuery {
             self.location = location
             self.thumbnailPath = thumbnailPath
         }
+    }
+
+    public enum Errors: Error {
+        case wineNotFound
     }
 }

@@ -19,8 +19,8 @@ struct TopWinesView: View {
             showWineDetails = true
             selectedWineId = wineId
         }
-        .onAppear {
-            vm.loadTopWines()
+        .task {
+            await vm.loadTopWines()
         }
 
         NavigationLink(destination: WineDetailsView(wineId: selectedWineId), isActive: $showWineDetails) {

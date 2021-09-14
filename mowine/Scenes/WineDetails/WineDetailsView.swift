@@ -8,10 +8,14 @@
 
 import SwiftUI
 import Model
+import SwiftyBeaver
+import FirebaseCrashlytics
 
 struct WineDetailsView: View {
     @EnvironmentObject var query: GetWineDetailsQuery
+    @Environment(\.dismiss) var dismiss
     let wineId: String
+    @State private var wineNotFound = false
 
     var body: some View {
         Group {
@@ -24,8 +28,24 @@ struct WineDetailsView: View {
                 Text("Loading...")
             }
         }
-        .onAppear {
-            query.execute(wineId: wineId)
+        .task {
+            await loadWineDetails()
+        }
+        .alert("Wine not found", isPresented: $wineNotFound) {
+            Button("OK", role: .cancel) {
+                dismiss()
+            }
+        }
+    }
+
+    func loadWineDetails() async {
+        do {
+            try await query.execute(wineId: wineId)
+        } catch GetWineDetailsQuery.Errors.wineNotFound {
+            wineNotFound = true
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
         }
     }
 }
@@ -82,24 +102,31 @@ struct WineDetailsFormView: View {
     }
 }
 
+fileprivate var wineId = WineId()
+
 struct WineDetailsView_Previews: PreviewProvider {
     static var query: GetWineDetailsQuery = {
-        let q = GetWineDetailsQuery(wineRepository: MemoryWineRepository())
-        q.wine = .init(
-            id: "A",
+        let repo = MemoryWineRepository()
+
+        var wine = Wine(
+            id: wineId,
+            userId: UserId(),
+            type: WineType(name: "Red", varieties: [.init(name: "Merlot")]),
             name: "Test Wine",
-            rating: 3,
-            varietyName: "Merlot",
-            typeName: "Red",
-            price: "",
-            location: "",
-            thumbnailPath: "Wine1"
+            rating: 3
         )
-        return q
+        wine.variety = WineVariety(name: "Merlot")
+        wine.price = "Fifty bucks"
+        wine.location = "The Wegman's on 13th st"
+        repo.wines.append(wine)
+
+        // thumbnailPath: "Wine1"
+
+        return GetWineDetailsQuery(wineRepository: repo)
     }()
 
     static var previews: some View {
-        WineDetailsView(wineId: "ABC")
+        WineDetailsView(wineId: wineId.asString)
             .environmentObject(query)
             .addPreviewEnvironment()
     }

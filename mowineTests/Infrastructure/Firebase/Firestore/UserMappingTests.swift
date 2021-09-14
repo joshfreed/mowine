@@ -10,8 +10,9 @@ import XCTest
 @testable import mowine
 import Nimble
 import Model
+import Nimble
 
-class UserTests: XCTestCase {
+class UserMappingTests: XCTestCase {
     var user = User(id: UserId(string: "111"), emailAddress: "test@test.com")
 
     override func setUp() {

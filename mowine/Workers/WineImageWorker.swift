@@ -71,10 +71,15 @@ where
 
 extension WineImageWorker: WineListThumbnailFetcher {
     func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ()) {
-        wineRepository.getWine(by: WineId(string: wineId)) { result in
-            switch result {
-            case .success(let wine): self.fetchThumbnail(for: wine, completion: completion)
-            case .failure(let error): completion(.failure(error))
+        Task {
+            do {
+                guard let wine = try await wineRepository.getWine(by: WineId(string: wineId)) else {
+                    throw WineRepositoryError.notFound
+                }
+                
+                fetchThumbnail(for: wine, completion: completion)
+            } catch {
+                completion(.failure(error))
             }
         }
     }

@@ -36,10 +36,12 @@ class WineCellarWorker {
     }
     
     func getWineTypes(for userId: UserId, completion: @escaping (Result<[WineType], Error>) -> ()) {
-        wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: userId) { result in
-            switch result {
-            case .success(let wineTypeNames): self.convertToWineTypes(wineTypeNames, completion: completion)
-            case .failure(let error): completion(.failure(error))
+        Task {
+            do {
+                let wineTypeNames = try await wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: userId)
+                self.convertToWineTypes(wineTypeNames, completion: completion)
+            } catch {
+                completion(.failure(error))
             }
         }
     }

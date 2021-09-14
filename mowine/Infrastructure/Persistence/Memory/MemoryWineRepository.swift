@@ -25,14 +25,6 @@ class MemoryWineRepository: WineRepository {
     func getWine(by id: WineId) async throws -> Wine? {
         wines.first { $0.id == id }
     }
-    
-    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
-        if let wine = wines.first(where: { $0.id == id }) {
-            completion(.success(wine))
-        } else {
-            completion(.failure(WineRepositoryError.notFound))
-        }
-    }
 
     func save(_ wine: Wine) async throws {
         guard let index = wines.firstIndex(of: wine) else {
@@ -42,8 +34,6 @@ class MemoryWineRepository: WineRepository {
         wines[index] = wine
     }
 
-    func save(_ wine: Wine, completion: @escaping (Result<Wine, Error>) -> Void) {}
-    
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         completion(.success(wines.filter { $0.userId == userId }))
         return FakeRegistration()
@@ -56,12 +46,12 @@ class MemoryWineRepository: WineRepository {
         }
         return FakeRegistration()
     }
-    
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) {
-        
+
+    func getTopWines(userId: UserId) async throws -> [Wine] {
+        []
     }
     
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String], Error>) -> ()) {
-        
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String] {
+        []
     }
 }

@@ -28,21 +28,6 @@ class FirestoreWineRepository: WineRepository {
     func delete(_ wineId: WineId) async throws {
         try await db.collection("wines").document(wineId.asString).delete()
     }
-    
-    @available(*, deprecated, message: "Prefer async alternative instead")
-    func getWine(by id: WineId, completion: @escaping (Result<Wine, Error>) -> ()) {
-        Task {
-            do {
-                if let result = try await getWine(by: id) {
-                    completion(.success(result))
-                } else {
-                    completion(.failure(WineRepositoryError.notFound))
-                }
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
 
     func getWine(by id: WineId) async throws -> Wine? {
         SwiftyBeaver.info("getWine \(id)")
@@ -105,8 +90,8 @@ class FirestoreWineRepository: WineRepository {
 
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
-    
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) {
+
+    func getTopWines(userId: UserId) async throws -> [Wine] {
         SwiftyBeaver.info("getTopWines \(userId)")
 
         let query = db
@@ -114,41 +99,23 @@ class FirestoreWineRepository: WineRepository {
             .whereField("userId", isEqualTo: userId.asString)
             .order(by: "rating", descending: true)
             .limit(to: 3)
-        
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-                completion(.failure(error))
-            } else if let documents = querySnapshot?.documents {
-                let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
-                completion(.success(wines))
-            } else {
-                fatalError("unknown error with query")
-            }
-        }
+
+        let querySnapshot = try await query.getDocuments()
+        let wines: [Wine] = querySnapshot.documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
+        return wines
     }
     
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Result<[String], Error>) -> ()) {
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String] {
         let query = db.collection("wines").whereField("userId", isEqualTo: userId.asString)
-        
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-                completion(.failure(error))
-            } else {
-                if let documents = querySnapshot?.documents {
-                    let wineTypeNames: [String] = documents.compactMap {
-                        let data = $0.data()
-                        return data["type"] as? String
-                    }
-                    completion(.success(wineTypeNames))
-                } else {
-                    completion(.success([]))
-                }
-            }
+
+        let querySnapshot = try await query.getDocuments()
+
+        let wineTypeNames: [String] = querySnapshot.documents.compactMap {
+            let data = $0.data()
+            return data["type"] as? String
         }
+
+        return wineTypeNames
     }
 }
 

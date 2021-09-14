@@ -10,7 +10,9 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import Model
+import FirebaseCrashlytics
 
+@MainActor
 class TopWinesViewModel: ObservableObject {
     @Published var topWines: [WineItemViewModel] = []
     @Published var errorLoadingWines = false
@@ -18,25 +20,22 @@ class TopWinesViewModel: ObservableObject {
     private let userId: String
     private let getTopWines: GetTopWinesQuery
     
-    init(userId: String, getTopWines: GetTopWinesQuery) {
+    init(userId: String, getTopWines: GetTopWinesQuery = try! JFContainer.shared.resolve()) {
         self.userId = userId
         self.getTopWines = getTopWines
-
-        getTopWines.result
-            .handleEvents(receiveOutput: { [weak self] _ in
-                self?.errorLoadingWines = false
-            })
-            .map { $0.topWines.map { .fromTopWine($0) } }
-            .catch { [weak self] error -> Empty<[WineItemViewModel], Never> in
-                SwiftyBeaver.error("\(error)")
-                self?.errorLoadingWines = true
-                return Empty<[WineItemViewModel], Never>()
-            }
-            .assign(to: &$topWines)
     }
 
-    func loadTopWines() {
-        getTopWines.execute(userId: userId)
+    func loadTopWines() async {
+        errorLoadingWines = false
+
+        do {
+            let topWines = try await getTopWines.execute(userId: userId)
+            self.topWines = topWines.map { .fromTopWine($0) }
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
+            errorLoadingWines = true
+        }
     }
 }
 
