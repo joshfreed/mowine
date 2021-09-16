@@ -180,6 +180,8 @@ extension DependencyContainer {
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
     static func configureCommonServices(container: DependencyContainer) {
         // Application Layer
+        // Users
+        container.register(.unique) { GetUserCellarQuery(wineTypeRepository: $0, wineRepository: $1) }
         // Wines
         container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, imageWorker: $1, wineTypeRepository: $2) }
         container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }

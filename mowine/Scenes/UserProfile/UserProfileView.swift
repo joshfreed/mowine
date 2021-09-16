@@ -11,7 +11,6 @@ import Model
 
 struct UserProfileView: View {
     @EnvironmentObject var users: UsersService
-    @EnvironmentObject var services: JFContainer
     let userId: String
     
     @State private var selectedView = 1
@@ -31,9 +30,9 @@ struct UserProfileView: View {
             .padding(.vertical, 8)
             
             if selectedView == 1 {
-                TopWinesView(vm: .init(userId: userId, getTopWines: try! services.container.resolve()))
+                TopWinesView(vm: .init(userId: userId))
             } else {
-                WineCellarView(userId: userId)
+                WineCellarView(vm: .init(userId: userId))
             }
             
             Spacer()

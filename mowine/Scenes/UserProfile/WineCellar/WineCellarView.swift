@@ -9,44 +9,8 @@
 import SwiftUI
 import Model
 
-class WineCellarViewModel: ObservableObject, WineCellarDisplayLogic {
-    @Published var types: [String] = []
-
-    private var interactor: WineCellarBusinessLogic?
-
-    func setup(services: JFContainer, userId: String) {
-        let viewController = self
-        let interactor = WineCellarInteractor()
-        let presenter = WineCellarPresenter()
-        viewController.interactor = interactor
-        interactor.presenter = presenter
-        interactor.worker = WineCellarWorker(
-            wineTypeRepository: services.wineTypeRepository,
-            userRepository: services.userRepository,
-            wineRepository: services.wineRepository
-        )
-        interactor.userId = UserId(string: userId)
-        presenter.viewController = viewController
-    }
-
-    func load() {
-        let request = WineCellar.GetWineTypes.Request()
-        interactor?.getWineTypes(request: request)
-    }
-
-    func displayWineTypes(viewModel: WineCellar.GetWineTypes.ViewModel) {
-        self.types = viewModel.types
-    }
-
-    func displaySelectedType(viewModel: WineCellar.SelectType.ViewModel) {
-
-    }
-}
-
 struct WineCellarView: View {
-    var userId: String
-    @EnvironmentObject var services: JFContainer
-    @StateObject var vm = WineCellarViewModel()
+    @StateObject var vm: WineCellarViewModel
 
     var body: some View {
         Group {
@@ -57,7 +21,7 @@ struct WineCellarView: View {
             } else {
                 VStack(spacing: 4) {
                     ForEach(vm.types, id: \.self) { type in
-                        NavigationLink(destination: WineTypeListView(userId: userId, typeName: type)) {
+                        NavigationLink(destination: WineTypeListView(userId: vm.userId, typeName: type)) {
                             PrimaryButtonLabel(title: type, height: 80, fontSize: 37)
                         }
                     }
@@ -65,17 +29,15 @@ struct WineCellarView: View {
             }
         }
         .padding(.horizontal)
-        .onAppear {
-            vm.setup(services: services, userId: userId)
-            vm.load()
-//            vm.types = ["Red", "White"]
+        .task {
+            await vm.load()
         }
     }
 }
 
 struct WineCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        WineCellarView(userId: "A")
+        WineCellarView(vm: .init(userId: "A"))
             .addPreviewEnvironment()
     }
 }
