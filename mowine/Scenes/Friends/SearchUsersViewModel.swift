@@ -12,6 +12,7 @@ import SwiftyBeaver
 import Model
 import FirebaseCrashlytics
 
+@MainActor
 class SearchUsersViewModel: ObservableObject {
     @Published var hasSearched = false
     @Published var searchResults: [UsersService.UserSearchResult] = []

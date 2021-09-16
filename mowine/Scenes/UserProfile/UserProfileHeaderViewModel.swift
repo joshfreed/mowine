@@ -12,6 +12,7 @@ import SwiftyBeaver
 import Model
 import FirebaseCrashlytics
 
+@MainActor
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""
     @Published var profilePictureUrl: String = ""
