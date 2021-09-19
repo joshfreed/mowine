@@ -13,15 +13,20 @@ import SwiftyBeaver
 import Model
 import UIKit.UIImage
 
+@MainActor
 class EditProfileViewModel: ObservableObject {
     @Published var fullName: String = "" {
         didSet {
-            profileDidChange()
+            if oldValue != fullName {
+                profileDidChange()
+            }
         }
     }
     @Published var emailAddress: String = "" {
         didSet {
-            profileDidChange()
+            if oldValue != emailAddress {
+                profileDidChange()
+            }
         }
     }
     @Published var profilePicture: UIImage?
@@ -90,7 +95,7 @@ class EditProfileViewModel: ObservableObject {
     }
     
     func saveProfile() async {
-        if !hasChanges {
+        guard hasChanges else {
             return
         }
 
