@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 struct EditProfileView: View {
     @StateObject var vm = EditProfileViewModel()
@@ -60,72 +61,27 @@ struct EditProfileView: View {
     }
 }
 
-struct EditProfileFormView: View {
-    @Binding var fullName: String
-    @Binding var emailAddress: String
-    @Binding var profilePicture: UIImage?
-    var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
+@MainActor
+fileprivate func viewModel() -> EditProfileViewModel {
+    let session: FakeSession = try! JFContainer.shared.resolve()
+    let userRepo: FakeUserRepository = try! JFContainer.shared.resolve()
 
-    var body: some View {
-        VStack(spacing: 6) {
-            Color.clear.frame(height: 26)
+    var user = User(id: UserId(), emailAddress: "test@test.com")
+    user.fullName = "Testy McTestguy"
 
-            ProfilePictureOverlayView(profilePicture: $profilePicture, changeProfilePicture: changeProfilePicture)
+    userRepo.addUser(user)
+    session.setUser(user: user)
 
-            Color.clear.frame(height: 20)
-
-            TextField("", text: $fullName)
-                .fancyField(title: "Full Name", text: $fullName)
-                .padding(.bottom, 4)
-            
-            TextField("", text: $emailAddress)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .fancyField(title: "Email Address", text: $emailAddress)
-                .padding(.bottom, 4)            
-
-            Spacer()
-        }.padding([.leading, .trailing], 16)
-    }
-}
-
-struct ProfilePictureOverlayView: View {
-    @Binding
-    var profilePicture: UIImage?
-    
-    var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
-    
-    @State
-    private var isShowingActionSheet: Bool = false
-
-    var body: some View {
-        ZStack {
-            ProfilePictureView2(image: profilePicture)
-                .frame(width: 128, height: 128)
-            Image("Profile Picture Overlay")
-                .resizable()
-                .frame(width: 128, height: 128)
-        }
-        .onTapGesture {
-            isShowingActionSheet = true
-        }
-        .actionSheet(isPresented: $isShowingActionSheet, content: {
-            ActionSheet(title: Text("Change Profile Picture"), message: nil, buttons: [
-                .default(Text("Camera"), action: {
-                    changeProfilePicture(.camera)
-                }),
-                .default(Text("Photo Library"), action: {
-                    changeProfilePicture(.photoLibrary)
-                }),
-                .cancel()
-            ])
-        })
-    }
+    return EditProfileViewModel(
+        getMyAccountQuery: try! JFContainer.shared.resolve(),
+        profilePictureWorker: try! JFContainer.shared.resolve(),
+        editProfileService: try! JFContainer.shared.resolve()
+    )
 }
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
+        EditProfileView(vm: viewModel())
             .addPreviewEnvironment()
     }
 }

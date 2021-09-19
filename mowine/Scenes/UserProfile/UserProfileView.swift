@@ -9,6 +9,7 @@
 import SwiftUI
 import Model
 
+@MainActor
 struct UserProfileView: View {
     let userId: String
     
@@ -38,20 +39,6 @@ struct UserProfileView: View {
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: FriendButton(userId: userId))
-    }
-}
-
-struct NavigationConfigurator: UIViewControllerRepresentable {
-    var configure: (UINavigationController) -> Void = { _ in }
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
-        UIViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
-        if let nc = uiViewController.navigationController {
-            self.configure(nc)
-        }
     }
 }
 

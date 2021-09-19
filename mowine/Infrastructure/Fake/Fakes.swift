@@ -170,6 +170,10 @@ class FakeEmailAuth: EmailAuthenticationService {
 }
 
 class FakeUserRepository: UserRepository {
+    func addUser(_ user: User) {
+        usersDB.append(user)
+    }
+
     func setUsers(_ users: [User]) {
         usersDB = users
     }

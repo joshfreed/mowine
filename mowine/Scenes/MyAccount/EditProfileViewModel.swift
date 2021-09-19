@@ -67,7 +67,9 @@ class EditProfileViewModel: ObservableObject {
 
     func loadProfile() async {
         do {
-            let profile = try await getMyAccountQuery.getMyAccount()!
+            guard let profile = try await getMyAccountQuery.getMyAccount() else {
+                return
+            }
             setProfile(profile)
             try await fetchProfilePicture(url: profile.profilePictureUrl)
             hasChanges = false

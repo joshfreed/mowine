@@ -14,6 +14,8 @@
 		53047E2D25DC09C0005CC14D /* PickImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53047E2C25DC09C0005CC14D /* PickImageButton.swift */; };
 		5306CC662607A1800061C413 /* WineCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC652607A1800061C413 /* WineCellarView.swift */; };
 		5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC692607BCC80061C413 /* WineTypeListView.swift */; };
+		530A987126F7B2B7008CE2C5 /* EditProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */; };
+		530A987326F7B308008CE2C5 /* ProfilePictureOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */; };
 		530ABC3C234A9B7E0078FB3B /* UINavigationBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */; };
 		531265111F75B04E006353CB /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531265101F75B04E006353CB /* UIViewController.swift */; };
 		531277A52678393300C5E717 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A42678393300C5E717 /* FirebaseAnalytics */; };
@@ -221,6 +223,8 @@
 		53047E2C25DC09C0005CC14D /* PickImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickImageButton.swift; sourceTree = "<group>"; };
 		5306CC652607A1800061C413 /* WineCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarView.swift; sourceTree = "<group>"; };
 		5306CC692607BCC80061C413 /* WineTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeListView.swift; sourceTree = "<group>"; };
+		530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormView.swift; sourceTree = "<group>"; };
+		530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureOverlayView.swift; sourceTree = "<group>"; };
 		530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarAppearance.swift; sourceTree = "<group>"; };
 		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		531865D125E46B7600474738 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
@@ -762,7 +766,9 @@
 				532DB3C82569C2EF009A4740 /* MyAccountView.swift */,
 				53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */,
 				53FFECA8256F0D3100321944 /* EditProfileView.swift */,
+				530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */,
 				539717CB22B6C6A300EFA97F /* EditProfileService.swift */,
+				530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -1352,6 +1358,7 @@
 				533F1039259FE42100DAA4B6 /* SocialAuthViewModel.swift in Sources */,
 				536AEBF62540BBDB009EA107 /* WineTypeMenuButton.swift in Sources */,
 				5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */,
+				530A987126F7B2B7008CE2C5 /* EditProfileFormView.swift in Sources */,
 				532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */,
 				533F1035259FE2F300DAA4B6 /* EmailSignUpView.swift in Sources */,
 				53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */,
@@ -1421,6 +1428,7 @@
 				E9AFCC58AF392BD97A67CB71 /* RemoteImageModel.swift in Sources */,
 				E9AFCAF63D4806E48205119C /* RemoteImageView.swift in Sources */,
 				E9AFC205F2938618BA3B2E8F /* FirebaseStorageLoader.swift in Sources */,
+				530A987326F7B308008CE2C5 /* ProfilePictureOverlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
