@@ -74,37 +74,9 @@ extension View {
     func addAppEnvironment() -> some View {
         let container = JFContainer.shared.container
 
-        let wineWorker = WineWorker(
-            wineRepository: try! container.resolve(),
-            imageWorker: try! container.resolve(),
-            session: try! container.resolve()
-        )
-
         return self
-            .environmentObject(JFContainer.shared)
-            .environmentObject(makeMyCellarViewModel())
             .environmentObject(try! JFContainer.shared.container.resolve() as FriendsService)
-            .environmentObject(try! JFContainer.shared.container.resolve() as UsersService)
             .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
-            .environmentObject(try! JFContainer.shared.container.resolve() as GetWineDetailsQuery)
-            .environmentObject(wineWorker)
             .environmentObject(try! container.resolve() as MyWinesService)
     }
-}
-
-fileprivate func makeMyCellarViewModel() -> MyCellarViewModel {
-    let searchMyCellarQuery = SearchMyCellarQuery(
-        wineRepository: JFContainer.shared.wineRepository,
-        session: JFContainer.shared.session
-    )
-    let getWinesByTypeQuery = GetWinesByTypeQuery(
-        wineRepository: JFContainer.shared.wineRepository,
-        session: JFContainer.shared.session
-    )
-    return MyCellarViewModel(
-        wineTypeRepository: JFContainer.shared.wineTypeRepository,
-        thumbnailFetcher: try! JFContainer.shared.container.resolve(),
-        searchMyCellarQuery: searchMyCellarQuery,
-        getWinesByTypeQuery: getWinesByTypeQuery
-    )
 }

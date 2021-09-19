@@ -17,12 +17,12 @@ class MyCellarViewModel: ObservableObject {
 
     private let searchMyCellarQuery: SearchMyCellarQuery
 
-    init(
-        wineTypeRepository: WineTypeRepository,
-        thumbnailFetcher: WineListThumbnailFetcher,
-        searchMyCellarQuery: SearchMyCellarQuery,
-        getWinesByTypeQuery: GetWinesByTypeQuery
-    ) {
+    init() {
+        SwiftyBeaver.debug("init")
+        self.searchMyCellarQuery = try! JFContainer.shared.resolve()
+    }
+
+    init(searchMyCellarQuery: SearchMyCellarQuery) {
         SwiftyBeaver.debug("init")
         self.searchMyCellarQuery = searchMyCellarQuery
     }

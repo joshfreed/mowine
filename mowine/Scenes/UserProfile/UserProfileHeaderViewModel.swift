@@ -25,6 +25,10 @@ class UserProfileHeaderViewModel: ObservableObject {
         self.userId = userId
         self.users = users
     }
+
+    convenience init(userId: String) {
+        self.init(userId: userId, users: try! JFContainer.shared.resolve())
+    }
     
     func load() async {
         do {

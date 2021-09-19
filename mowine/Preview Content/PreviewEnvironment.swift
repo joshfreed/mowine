@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Model
 
 extension View {
     func addPreviewEnvironment() -> some View {
@@ -16,7 +17,9 @@ extension View {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
                 
         JFContainer.configureForPreviews()
-        
+
         return addAppEnvironment()
+            .environmentObject(ObservableSession(session: try! JFContainer.shared.resolve()))
+            .environmentObject(WineTypeService(wineTypeRepository: try! JFContainer.shared.container.resolve()))
     }
 }

@@ -12,7 +12,7 @@ import SwiftyBeaver
 import FirebaseCrashlytics
 
 struct WineDetailsView: View {
-    @EnvironmentObject var query: GetWineDetailsQuery
+    @StateObject var query: GetWineDetailsQuery = try! JFContainer.shared.resolve()
     @Environment(\.dismiss) var dismiss
     let wineId: String
     @State private var wineNotFound = false

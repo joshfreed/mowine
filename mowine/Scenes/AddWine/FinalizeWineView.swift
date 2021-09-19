@@ -13,7 +13,7 @@ import FirebaseCrashlytics
 
 struct FinalizeWineView: View {
     @EnvironmentObject var vm: AddWineViewModel
-    @EnvironmentObject var wineWorker: WineWorker
+    @StateObject var wineWorker: WineWorker = try! JFContainer.shared.resolve()
     @ObservedObject var model: NewWineModel
     
     @State private var isSaving = false

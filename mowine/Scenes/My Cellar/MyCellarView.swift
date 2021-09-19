@@ -11,13 +11,14 @@ import SwiftyBeaver
 import Model
 
 struct MyCellarView: View {
-    @EnvironmentObject var viewModel: MyCellarViewModel
+    @StateObject var viewModel: MyCellarViewModel = MyCellarViewModel()
     @State private var searchText: String = ""
 
     var body: some View {
         NavigationView {
             InnerCellarView(searchText: $searchText)
                 .navigationBarTitle("My Cellar")
+                .environmentObject(viewModel)
         }
         .searchable(text: $searchText)
         .navigationViewStyle(StackNavigationViewStyle())

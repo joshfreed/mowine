@@ -9,14 +9,13 @@
 import SwiftUI
 
 struct WineThumbnail: View {
-    @EnvironmentObject var container: JFContainer
     let thumbnailPath: String
     var size: CGFloat = 80
 
     var body: some View {
         RemoteImageView(
             url: thumbnailPath,
-            remoteImageModel: RemoteImageModel(imageLoader: container.wineImageLoader),
+            remoteImageModel: RemoteImageModel(),
             noImage: { Image("Default Wine Image").resizable().frame(width: size, height: size) },
             loading: { Image("Default Wine Image").resizable().frame(width: size, height: size) },
             error: { Image("Default Wine Image").resizable().frame(width: size, height: size) },

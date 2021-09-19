@@ -25,6 +25,11 @@ class RemoteImageModel: ObservableObject {
         self.imageLoader = CachingImageLoader(otherLoader: imageLoader)
     }
 
+    init() {
+        let imageLoader: ImageLoader = try! JFContainer.shared.resolve()
+        self.imageLoader = CachingImageLoader(otherLoader: imageLoader)
+    }
+
     func load(urlString: String) {
         SwiftyBeaver.verbose("RemoteImageLoader is fetching: \(urlString)")
 

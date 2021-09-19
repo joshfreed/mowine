@@ -46,6 +46,7 @@ class FirebaseSession: Session {
         }
 
         handler = auth.addStateDidChangeListener { [weak self] (auth, user) in
+            SwiftyBeaver.verbose("addStateDidChangeListener \(auth), \(user)")
             self?.updateAuthState(from: user)
         }
 

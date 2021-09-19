@@ -126,5 +126,6 @@ struct ProfilePictureOverlayView: View {
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
         EditProfileView()
+            .addPreviewEnvironment()
     }
 }

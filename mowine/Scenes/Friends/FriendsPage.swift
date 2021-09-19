@@ -48,5 +48,6 @@ struct FriendsPage_Previews: PreviewProvider {
     static var previews: some View {
         FriendsPage(vm: SearchUsersViewModel(users: .make()))
             .environmentObject(FriendsService.make())
+            .addPreviewEnvironment()
     }
 }

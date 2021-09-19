@@ -179,41 +179,41 @@ extension DependencyContainer {
     
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
     static func configureCommonServices(container: DependencyContainer) {
+        // Infrastructure Layer
+        container.register(.singleton) { GraphApi() }
+        container.register(.singleton) { UrlSessionService() }
+
+
+        // UI Layer
+        container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
+
+
         // Application Layer
         // Users
         container.register(.unique) { GetUserCellarQuery(wineTypeRepository: $0, wineRepository: $1) }
+        container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
+        container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         // Wines
         container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, imageWorker: $1, wineTypeRepository: $2) }
         container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }
         container.register(.unique) { GetWineImageQueryHandler(imageWorker: $0) }
         container.register(.unique) { GetWineByIdQueryHandler(wineRepository: $0) }
         container.register(.unique) { GetWineTypesQueryHandler(wineTypeRepository: $0) }
-
-        // Domain Layer
-        container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
-
-        // Auth
-        container.register(.unique) { SignOutCommand(session: $0) }
-        container.register(.unique) { SignUpWorker(emailAuthService: $0, userRepository: $1, session: $2) }
-
-        // Social
-        container.register(.singleton) { GraphApi() }
-        
-        // Images
-        container.register(.singleton) { UrlSessionService() }
-
-        // Domain Services
-        container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }
-        container.register(.singleton) { WineWorker(wineRepository: $0, imageWorker: $1, session: $2) }
-        
-        // Scenes
-        container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
-        container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
-        container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
-        container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
         container.register(.singleton) { GetUserWinesByTypeQuery(wineRepository: $0) }
         container.register(.singleton) { GetWineDetailsQuery(wineRepository: $0) }
         container.register(.singleton) { MyWinesService(session: $0, wineTypeRepository: $1, wineRepository: $2) }
+        container.register(.singleton) { WineWorker(wineRepository: $0, imageWorker: $1, session: $2) }
+        container.register(.unique) { SearchMyCellarQuery(wineRepository: $0, session: $1) }
+        // Friends
+        container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
+        // Auth
+        container.register(.unique) { SignOutCommand(session: $0) }
+        container.register(.unique) { SignUpWorker(emailAuthService: $0, userRepository: $1, session: $2) }
+
+
+        // Domain Layer
+        container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }
+        container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
     }
 }

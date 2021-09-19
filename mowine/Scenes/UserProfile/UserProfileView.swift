@@ -10,14 +10,13 @@ import SwiftUI
 import Model
 
 struct UserProfileView: View {
-    @EnvironmentObject var users: UsersService
     let userId: String
     
     @State private var selectedView = 1
     
     var body: some View {
         VStack(spacing: 0) {
-            UserProfileHeaderView(vm: .init(userId: userId, users: users))
+            UserProfileHeaderView(vm: .init(userId: userId))
             
             Group {
                 Picker(selection: $selectedView, label: EmptyView(), content: {
