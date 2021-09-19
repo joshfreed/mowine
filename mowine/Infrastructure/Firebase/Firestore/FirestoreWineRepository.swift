@@ -34,7 +34,7 @@ class FirestoreWineRepository: WineRepository {
 
         let docRef = db.collection("wines").document(id.asString)
 
-        let document = try await docRef.getDocument(source: .cache)
+        let document = try await docRef.getDocument()
 
         guard
             let data = document.data(),
