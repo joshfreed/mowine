@@ -15,26 +15,20 @@ import GoogleSignIn
 /// Responsible for bootstrapping Firebase services at app launch.
 class FirebaseConfigurator: Configurator {
     let useEmulator: Bool
-    let clearPersistence: Bool
-    
-    init(useEmulator: Bool, clearPersistence: Bool = false) {
+
+    init(useEmulator: Bool = false) {
         self.useEmulator = useEmulator
-        self.clearPersistence = clearPersistence
     }
     
     func configure() {
 
         FirebaseApp.configure()
 
-        #if DEBUG
-        Analytics.setAnalyticsCollectionEnabled(false)
-        #else
         Analytics.setAnalyticsCollectionEnabled(true)
-        #endif
-        
+
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 
-        // Use local emulator for development or testing
+        // Use local emulator for UI testing
         if useEmulator {
             let settings = Firestore.firestore().settings
             settings.host = "localhost:8080"
@@ -43,10 +37,8 @@ class FirebaseConfigurator: Configurator {
             Firestore.firestore().settings = settings
 
             Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-        }
 
-        if clearPersistence {
-            Firestore.firestore().clearPersistence()
+            // Make sure every test starts signed out
             try! Auth.auth().signOut()
         }
     }

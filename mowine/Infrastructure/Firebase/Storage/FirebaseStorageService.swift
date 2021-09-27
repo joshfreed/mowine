@@ -9,9 +9,11 @@ import SwiftyBeaver
 
 class FirebaseStorageService {
     private let basePath: String?
+    private let useEmulator: Bool
 
-    init(basePath: String? = nil) {
+    init(basePath: String? = nil, useEmulator: Bool = false) {
         self.basePath = basePath
+        self.useEmulator = useEmulator
     }
 
     private func reference() -> StorageReference {

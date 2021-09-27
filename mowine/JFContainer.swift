@@ -11,12 +11,6 @@ import Dip
 import Combine
 import Model
 
-#if DEBUG
-let useEmulator = true
-#else
-let useEmulator = false
-#endif
-
 class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!
     
@@ -40,7 +34,7 @@ class JFContainer: ObservableObject {
         let container = DependencyContainer.configure()
         DependencyContainer.uiContainers = [container]
         let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: useEmulator)
+            FirebaseConfigurator()
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
@@ -48,7 +42,7 @@ class JFContainer: ObservableObject {
     static func configureForUITesting() {
         let container = DependencyContainer.configureForUITesting()
         let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: true, clearPersistence: true)
+            FirebaseConfigurator(useEmulator: true)
         ]
         shared = JFContainer(container: container, configurators: configurators)
     }
@@ -99,20 +93,16 @@ class JFContainer: ObservableObject {
 // MARK: DIP
 
 extension DependencyContainer {
-    static func configure() -> DependencyContainer {
+    static func configure(useEmulator: Bool = false) -> DependencyContainer {
         DependencyContainer { container in
             addFirebaseServices(container: container)
-            addImageServices(container: container)
+            addImageServices(container: container, useEmulator: useEmulator)
             configureCommonServices(container: container)
         }
     }
     
     static func configureForUITesting() -> DependencyContainer {
-        DependencyContainer { container in
-            addFirebaseServices(container: container)
-            addFakeImageServices(container: container)
-            configureCommonServices(container: container)
-        }
+        Self.configure(useEmulator: true)
     }
     
     static func configureForPreviews() -> DependencyContainer {
@@ -140,8 +130,8 @@ extension DependencyContainer {
         container.register(.singleton) { FirestoreWineRepository() as WineRepository }
     }
 
-    static func addImageServices(container: DependencyContainer) {
-        container.register(.singleton) { FirebaseStorageService() }
+    static func addImageServices(container: DependencyContainer, useEmulator: Bool) {
+        container.register(.singleton) { FirebaseStorageService(useEmulator: useEmulator) }
 
         container.register(.singleton) { FirebaseStorageLoader(storage: $0) }
             .implements(ImageLoader.self)
