@@ -26,7 +26,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             return handled
         }
         
-        handled = GIDSignIn.sharedInstance().handle(url)
+        handled = GIDSignIn.sharedInstance.handle(url)
         
         return handled
     }

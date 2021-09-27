@@ -41,3 +41,8 @@ public protocol SocialAuthService {
     func signIn(with token: SocialToken) async throws
     func reauthenticate(with token: SocialToken) async throws
 }
+
+public enum SocialSignInErrors: Error {
+    case googleUserNotFound
+    case missingIdToken
+}

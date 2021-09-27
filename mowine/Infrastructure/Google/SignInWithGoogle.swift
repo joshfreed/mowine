@@ -7,23 +7,52 @@
 //
 
 import Foundation
+import Firebase
 import GoogleSignIn
 import SwiftyBeaver
 import Model
+import FirebaseCrashlytics
 
 struct GoogleToken: SocialToken {
     let idToken: String
     let accessToken: String
 }
 
-class SignInWithGoogle: NSObject, SocialSignInMethod, GIDSignInDelegate {
-    private var completion: ((Result<SocialToken, Error>) -> Void)?
-    
+class SignInWithGoogle: SocialSignInMethod {
     func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
-        self.completion = completion
-        GIDSignIn.sharedInstance().presentingViewController = UIApplication.shared.windows.first?.rootViewController
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().signIn()
+        guard let app = FirebaseApp.app() else {
+            fatalError("No FirebaseApp configured")
+        }
+        guard let clientId = app.options.clientID else {
+            fatalError("FirebaseApp does not have a Google Client ID set")
+        }
+
+        let signInConfig = GIDConfiguration.init(clientID: clientId)
+
+        guard let presentingViewController = UIApplication.shared.windows.first?.rootViewController else {
+            fatalError("No rootViewController")
+        }
+
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: presentingViewController) { user, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let user = user else {
+                completion(.failure(SocialSignInErrors.googleUserNotFound))
+                return
+            }
+            
+            guard let idToken = user.authentication.idToken else {
+                completion(.failure(SocialSignInErrors.missingIdToken))
+                return
+            }
+
+            let token = GoogleToken(idToken: idToken, accessToken: user.authentication.accessToken)
+
+            completion(.success(token))
+        }
     }
 
     func signIn() async throws -> SocialToken {
@@ -32,21 +61,5 @@ class SignInWithGoogle: NSObject, SocialSignInMethod, GIDSignInDelegate {
                 cont.resume(with: res)
             }
         }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error as NSError? {
-            SwiftyBeaver.error(error)
-            guard error.code != -5 else {
-                return
-            }
-            fatalError(error.localizedDescription)
-        } else {
-            let token = GoogleToken(idToken: user.authentication.idToken, accessToken: user.authentication.accessToken)
-            completion?(.success(token))
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
     }
 }

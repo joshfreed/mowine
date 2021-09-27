@@ -8,27 +8,21 @@
 
 import Foundation
 import SwiftyBeaver
-import Model
 
-class SocialSignInWorker {
+public class SocialUserCreator {
     let userRepository: UserRepository
     let session: Session
     let provider: SocialSignInProvider
     let socialAuthService: SocialAuthService
     
-    init(userRepository: UserRepository, session: Session, provider: SocialSignInProvider, socialAuthService: SocialAuthService) {
+    public init(userRepository: UserRepository, session: Session, provider: SocialSignInProvider) {
         self.userRepository = userRepository
         self.session = session
         self.provider = provider
         self.socialAuthService = socialAuthService
     }
 
-    func login(token: SocialToken) async throws {
-        try await socialAuthService.signIn(with: token)
-        try await findOrCreateUserObjectForCurrentSession()
-    }
-    
-    private func findOrCreateUserObjectForCurrentSession() async throws {
+    func findOrCreateUserObjectForCurrentSession() async throws {
         guard let currentUserId = session.currentUserId else {
             throw SessionError.notLoggedIn
         }

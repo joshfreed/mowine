@@ -17,11 +17,11 @@ enum CreateUserFromGoogleInfoError: Error {
 
 class GoogleProvider: SocialSignInProvider {
     func getNewUserInfo() async throws -> NewUserInfo {
-        guard let profile = GIDSignIn.sharedInstance()?.currentUser.profile else {
+        guard let profile = GIDSignIn.sharedInstance.currentUser?.profile else {
             throw CreateUserFromGoogleInfoError.failedToFetchProfile
         }
 
-        let newUserInfo = NewUserInfo(email: profile.email, firstName: profile.givenName, lastName: profile.familyName)
+        let newUserInfo = NewUserInfo(email: profile.email, firstName: profile.givenName ?? "", lastName: profile.familyName)
 
         return newUserInfo
     }

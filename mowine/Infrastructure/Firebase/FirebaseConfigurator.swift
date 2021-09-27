@@ -29,8 +29,6 @@ class FirebaseConfigurator: Configurator {
         Analytics.setAnalyticsCollectionEnabled(true)
         Analytics.logEvent("app_configred", parameters: [:])
 
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-
         // Use local emulator for UI testing
         if useEmulator {
             let settings = Firestore.firestore().settings
