@@ -23,7 +23,7 @@ class ReauthenticationViewModel: ObservableObject {
 
     init() {
         self.socialAuthService = try! JFContainer.shared.container.resolve()
-        self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
+        self.socialSignInMethods = JFContainer.socialSignInMethods()
     }
 
     func continueWith(_ type: SocialProviderType) async {

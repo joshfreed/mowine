@@ -12,17 +12,13 @@ import SwiftyBeaver
 public class SocialUserCreator {
     let userRepository: UserRepository
     let session: Session
-    let provider: SocialSignInProvider
-    let socialAuthService: SocialAuthService
-    
-    public init(userRepository: UserRepository, session: Session, provider: SocialSignInProvider) {
+
+    public init(userRepository: UserRepository, session: Session) {
         self.userRepository = userRepository
         self.session = session
-        self.provider = provider
-        self.socialAuthService = socialAuthService
     }
 
-    func findOrCreateUserObjectForCurrentSession() async throws {
+    func findOrCreateUserObjectForCurrentSession(from provider: SocialSignInProvider) async throws {
         guard let currentUserId = session.currentUserId else {
             throw SessionError.notLoggedIn
         }
@@ -31,15 +27,15 @@ public class SocialUserCreator {
             return
         }
 
-        try await fetchProfileAndCreateUser()
+        try await fetchProfileAndCreateUser(provider: provider)
     }
     
-    private func fetchProfileAndCreateUser() async throws {
+    private func fetchProfileAndCreateUser(provider: SocialSignInProvider) async throws {
         let newUserInfo = try await provider.getNewUserInfo()
-        try await createUser(newUserInfo)
+        try await createUser(newUserInfo, provider: provider)
     }
     
-    private func createUser(_ newUserInfo: NewUserInfo) async throws {
+    private func createUser(_ newUserInfo: NewUserInfo, provider: SocialSignInProvider) async throws {
         guard let currentUserId = session.currentUserId else {
             throw SessionError.notLoggedIn
         }
@@ -52,10 +48,10 @@ public class SocialUserCreator {
 
         try await userRepository.add(user: user)
 
-        try await setHigherResProfilePicture(user)
+        try await setHigherResProfilePicture(user, provider: provider)
     }
     
-    private func setHigherResProfilePicture(_ user: User) async throws {
+    private func setHigherResProfilePicture(_ user: User, provider: SocialSignInProvider) async throws {
         guard let photoUrl = session.getPhotoUrl() else {
             return
         }

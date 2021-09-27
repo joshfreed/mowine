@@ -16,30 +16,22 @@ class SocialAuthViewModel: ObservableObject {
     @Published var isSigningIn: Bool = false
     @Published var isSignInError: Bool = false
     @Published var signInError: String = ""
-    
-    let worker: FirstTimeWorker
-    let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
+
+    let socialAuthService: SocialAuthApplicationService
 
     init() {
-        self.worker = JFContainer.shared.firstTimeWorker()
-        self.socialSignInMethods = JFContainer.shared.socialSignInMethods()
+        self.socialAuthService = try! JFContainer.shared.resolve()
     }
 
-    init(firstTimeWorker: FirstTimeWorker, socialSignInMethods: [SocialProviderType: SocialSignInMethod]) {
-        self.worker = firstTimeWorker
-        self.socialSignInMethods = socialSignInMethods
+    init(socialAuthService: SocialAuthApplicationService) {
+        self.socialAuthService = socialAuthService
     }
 
     func socialSignIn(type: SocialProviderType) async {
-        guard let method = socialSignInMethods[type] else {
-            fatalError("No sign in method registered for provider: \(type)")
-        }
-
         isSigningIn = true
 
         do {
-            let token = try await method.signIn()
-            try await worker.login(type: type, token: token)
+            try await socialAuthService.signIn(using: type)
         } catch let error {
             showError(error)
         }

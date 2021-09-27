@@ -56,36 +56,20 @@ class JFContainer: ObservableObject {
     func resolve<T>() throws -> T {
         try container.resolve()
     }
-    
-    func firstTimeWorker() -> FirstTimeWorker {
-        let userRepository: UserRepository = try! JFContainer.shared.container.resolve()
-        let session: Session = try! JFContainer.shared.container.resolve()
-        let socialAuthService: SocialAuthService = try! JFContainer.shared.container.resolve()
 
-        let fbGraphApi: GraphApi = try! JFContainer.shared.container.resolve()
-        let facebookProvider = FacebookProvider(fbGraphApi: fbGraphApi)
-        let facebookSignInWorker = SocialSignInWorker(userRepository: userRepository, session: session, provider: facebookProvider, socialAuthService: socialAuthService)
-
-        let googleProvider = GoogleProvider()
-        let googleSignInWorker = SocialSignInWorker(userRepository: userRepository, session: session, provider: googleProvider, socialAuthService: socialAuthService)
-
-        let appleProvider = AppleProvider()
-        let appleSignInWorker = SocialSignInWorker(userRepository: userRepository, session: session, provider: appleProvider, socialAuthService: socialAuthService)
-
-        let workers: [SocialProviderType: SocialSignInWorker] = [
-            .apple: appleSignInWorker,
-            .facebook: facebookSignInWorker,
-            .google: googleSignInWorker
-        ]
-
-        return FirstTimeWorker(workers: workers)
-    }
-
-    func socialSignInMethods() -> [SocialProviderType: SocialSignInMethod] {
+    static func socialSignInMethods() -> [SocialProviderType: SocialSignInMethod] {
         [
             .apple: SignInWithApple(),
             .facebook: SignInWithFacebook(),
             .google: SignInWithGoogle()
+        ]
+    }
+
+    static func socialSignInProviders() -> [SocialProviderType: SocialSignInProvider] {
+        [
+            .apple: AppleProvider(),
+            .facebook: FacebookProvider(fbGraphApi: GraphApi()),
+            .google: GoogleProvider()
         ]
     }
 }
@@ -170,7 +154,6 @@ extension DependencyContainer {
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
     static func configureCommonServices(container: DependencyContainer) {
         // Infrastructure Layer
-        container.register(.singleton) { GraphApi() }
         container.register(.singleton) { UrlSessionService() }
 
 
@@ -179,6 +162,11 @@ extension DependencyContainer {
 
 
         // Application Layer
+        // Auth
+        container.register { SocialUserCreator(userRepository: $0, session: $1) }
+        container.register(.unique) {
+            SocialAuthApplicationService(auth: $0, userFactory: $1, methods: JFContainer.socialSignInMethods(), providers: JFContainer.socialSignInProviders())
+        }
         // Users
         container.register(.unique) { GetUserCellarQuery(wineTypeRepository: $0, wineRepository: $1) }
         container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)

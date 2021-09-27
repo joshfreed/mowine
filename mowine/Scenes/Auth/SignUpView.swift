@@ -35,7 +35,5 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView()
-            .environmentObject(EmailSignUpViewModel(worker: SignUpWorker(emailAuthService: FakeEmailAuth(), userRepository: FakeUserRepository(), session: FakeSession())))
-        .environmentObject(SocialAuthViewModel(firstTimeWorker: FirstTimeWorker(workers: [:]), socialSignInMethods: [:]))
     }
 }

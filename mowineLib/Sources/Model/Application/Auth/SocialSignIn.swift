@@ -28,15 +28,18 @@ public enum SocialProviderType {
 
 public protocol SocialToken {}
 
+/// Retrieves user data from a social platform
 public protocol SocialSignInProvider {
     func getNewUserInfo() async throws -> NewUserInfo
     func getProfilePictureUrl(_ urlString: String) -> String
 }
 
+/// Generates an auth token from a 3rd party social sign in services
 public protocol SocialSignInMethod {
     func signIn() async throws -> SocialToken
 }
 
+/// Performs authentication related actions for a specific social sign in platform
 public protocol SocialAuthService {
     func signIn(with token: SocialToken) async throws
     func reauthenticate(with token: SocialToken) async throws
