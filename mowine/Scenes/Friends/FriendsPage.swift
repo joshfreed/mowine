@@ -27,6 +27,7 @@ struct FriendsPage: View {
                     }
             }
             .accentColor(.mwSecondary)
+            .analyticsScreen(name: "My Friends", class: "FriendsPage")
         }
     }
 }

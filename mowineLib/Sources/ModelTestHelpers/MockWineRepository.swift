@@ -9,9 +9,6 @@ import XCTest
 import Model
 
 class MockWineRepository: WineRepository {
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId, completion: @escaping (Swift.Result<[String], Error>) -> ()) {
-
-    }
 
     // MARK: getWine(by:)
 
@@ -69,5 +66,13 @@ class MockWineRepository: WineRepository {
 
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
+    }
+
+    func getTopWines(userId: UserId) async throws -> [Wine] {
+        []
+    }
+
+    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String] {
+        []
     }
 }

@@ -9,6 +9,7 @@
 import SwiftUI
 import Model
 import SwiftyBeaver
+import FirebaseAnalytics
 
 @MainActor
 struct AppView: View {
@@ -35,6 +36,7 @@ struct AppView: View {
         SwiftyBeaver.debug("loadUserData \(String(describing: session.userId))")
         await wineTypeService.fetchWineTypes()
         isPreparing = false
+        Analytics.logEvent("app_appeared", parameters: [:])
         SwiftyBeaver.info("loadUserData complete")
     }
 }

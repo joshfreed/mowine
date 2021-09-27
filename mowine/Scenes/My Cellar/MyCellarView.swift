@@ -28,6 +28,7 @@ struct MyCellarView: View {
                 EditWineView(vm: .init(wineId: $0))
             }
         }
+        .analyticsScreen(name: "My Cellar", class: "MyCellarView")
     }
 }
 

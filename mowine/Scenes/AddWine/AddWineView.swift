@@ -30,7 +30,8 @@ struct AddWineView: View {
                 presentationMode.wrappedValue.dismiss()
             }
         })
-        .environmentObject(vm)        
+        .environmentObject(vm)
+        .analyticsScreen(name: "Add Wine", class: "AddWineView")
     }
 }
 

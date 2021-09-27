@@ -92,6 +92,7 @@ struct MyAccountView: View {
         }.onAppear {
             viewModel.loadMyAccount()
         }
+        .analyticsScreen(name: "My Account", class: "MyAccountView")
     }
 }
 

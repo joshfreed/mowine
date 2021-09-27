@@ -10,6 +10,8 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseAnalytics
+import FirebaseAnalyticsSwift
 import GoogleSignIn
 
 /// Responsible for bootstrapping Firebase services at app launch.
@@ -25,6 +27,7 @@ class FirebaseConfigurator: Configurator {
         FirebaseApp.configure()
 
         Analytics.setAnalyticsCollectionEnabled(true)
+        Analytics.logEvent("app_configred", parameters: [:])
 
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 

@@ -71,6 +71,8 @@
 		535CC81125F0404B00D49D57 /* UserProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81025F0404B00D49D57 /* UserProfileHeaderViewModel.swift */; };
 		535CC81525F0451F00D49D57 /* TopWinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81425F0451F00D49D57 /* TopWinesView.swift */; };
 		535CC81925F0453400D49D57 /* TopWinesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81825F0453400D49D57 /* TopWinesViewModel.swift */; };
+		535D726C27023A7200821FD8 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 535D726B27023A7200821FD8 /* FirebaseAnalyticsSwift-Beta */; };
+		535D726E27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 535D726D27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta */; };
 		535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 535D73FE2569A7160027BC27 /* Preview Assets.xcassets */; };
 		535D74402569BBF60027BC27 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D743F2569BBF60027BC27 /* Utilities.swift */; };
 		535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */; };
@@ -596,6 +598,7 @@
 				53CC0F7527020848000B882F /* FacebookCore in Frameworks */,
 				53CC0F7627020848000B882F /* GoogleSignIn.framework in Frameworks */,
 				53CC0F7727020848000B882F /* FirebaseFirestore in Frameworks */,
+				535D726C27023A7200821FD8 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				53CC0F7827020848000B882F /* LocalAuthentication.framework in Frameworks */,
 				53CC0F7927020848000B882F /* FacebookLogin in Frameworks */,
 				53CC0F7A27020848000B882F /* SafariServices.framework in Frameworks */,
@@ -619,6 +622,7 @@
 				53A69818261A17FE004BCE43 /* FacebookCore in Frameworks */,
 				53278A0126797C5A00649624 /* GoogleSignIn.framework in Frameworks */,
 				531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */,
+				535D726E27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				53A6981A261A17FE004BCE43 /* FacebookLogin in Frameworks */,
 				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
@@ -1336,6 +1340,7 @@
 				53CC0EE327020848000B882F /* FirebaseCrashlytics */,
 				53CC0EE427020848000B882F /* FirebaseFirestore */,
 				53CC0EE527020848000B882F /* FirebaseStorage */,
+				535D726B27023A7200821FD8 /* FirebaseAnalyticsSwift-Beta */,
 			);
 			productName = mowine;
 			productReference = 53CC0F8F27020848000B882F /* mowineDev.app */;
@@ -1366,6 +1371,7 @@
 				531277A82678393300C5E717 /* FirebaseCrashlytics */,
 				531277AA2678393300C5E717 /* FirebaseFirestore */,
 				531277AC2678393300C5E717 /* FirebaseStorage */,
+				535D726D27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta */,
 			);
 			productName = mowine;
 			productReference = 53F5ABF01E2176080067AB62 /* mowine.app */;
@@ -1549,6 +1555,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -2367,6 +2375,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		535D726B27023A7200821FD8 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		535D726D27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
 		};
 		53A697B9261A1645004BCE43 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
