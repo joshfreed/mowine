@@ -26,21 +26,24 @@ class FirebaseConfigurator: Configurator {
 
         FirebaseApp.configure()
 
-        Analytics.setAnalyticsCollectionEnabled(true)
         Analytics.logEvent("app_configred", parameters: [:])
 
         // Use local emulator for UI testing
         if useEmulator {
+            Analytics.logEvent("ui_testing", parameters: [:])
+
+            Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+
+            // Make sure every test starts signed out
+            try! Auth.auth().signOut()
+
             let settings = Firestore.firestore().settings
             settings.host = "localhost:8080"
             settings.isPersistenceEnabled = false
             settings.isSSLEnabled = false
             Firestore.firestore().settings = settings
 
-            Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-
-            // Make sure every test starts signed out
-            try! Auth.auth().signOut()
+            Storage.storage().useEmulator(withHost: "localhost", port: 9199)
         }
     }
 }

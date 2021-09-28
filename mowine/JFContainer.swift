@@ -40,7 +40,7 @@ class JFContainer: ObservableObject {
     }
     
     static func configureForUITesting() {
-        let container = DependencyContainer.configureForUITesting()
+        let container = DependencyContainer.configure()
         let configurators: [Configurator] = [
             FirebaseConfigurator(useEmulator: true)
         ]
@@ -77,18 +77,14 @@ class JFContainer: ObservableObject {
 // MARK: DIP
 
 extension DependencyContainer {
-    static func configure(useEmulator: Bool = false) -> DependencyContainer {
+    static func configure() -> DependencyContainer {
         DependencyContainer { container in
             addFirebaseServices(container: container)
-            addImageServices(container: container, useEmulator: useEmulator)
+            addImageServices(container: container)
             configureCommonServices(container: container)
         }
     }
-    
-    static func configureForUITesting() -> DependencyContainer {
-        Self.configure(useEmulator: true)
-    }
-    
+
     static func configureForPreviews() -> DependencyContainer {
         DependencyContainer { container in
             container.register(.singleton) { FakeSession() }.implements(Session.self)
@@ -114,8 +110,8 @@ extension DependencyContainer {
         container.register(.singleton) { FirestoreWineRepository() as WineRepository }
     }
 
-    static func addImageServices(container: DependencyContainer, useEmulator: Bool) {
-        container.register(.singleton) { FirebaseStorageService(useEmulator: useEmulator) }
+    static func addImageServices(container: DependencyContainer) {
+        container.register(.singleton) { FirebaseStorageService() }
 
         container.register(.singleton) { FirebaseStorageLoader(storage: $0) }
             .implements(ImageLoader.self)

@@ -9,19 +9,13 @@ import SwiftyBeaver
 
 class FirebaseStorageService {
     private let basePath: String?
-    private let useEmulator: Bool
 
-    init(basePath: String? = nil, useEmulator: Bool = false) {
+    init(basePath: String? = nil) {
         self.basePath = basePath
-        self.useEmulator = useEmulator
     }
 
     private func reference() -> StorageReference {
-        let storage = Storage.storage()
-        if useEmulator {
-            storage.useEmulator(withHost: "localhost", port: 9199)
-        }
-        var storageRef = storage.reference()
+        var storageRef = Storage.storage().reference()
         if let basePath = basePath {
             storageRef = storageRef.child(basePath)
         }
