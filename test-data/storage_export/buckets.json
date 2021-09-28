@@ -2,6 +2,9 @@
   "buckets": [
     {
       "id": "default-bucket"
+    },
+    {
+      "id": "mo-wine-dev.appspot.com"
     }
   ]
 }
