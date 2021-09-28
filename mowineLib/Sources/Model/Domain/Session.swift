@@ -89,6 +89,7 @@ public class ObservableSession: ObservableObject {
 
     private func observe() {
         cancellable = session.authStateDidChange
+            .receive(on: RunLoop.main)
             .sink { [weak self] authState in
                 self?.userId = authState.userId
                 self?.isAnonymous = authState.isAnonymous
