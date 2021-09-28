@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "0D17A980-8B00-4582-B6D0-549A377FD248",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:mowine.xcodeproj",
+        "identifier" : "53F5AC061E2176090067AB62",
+        "name" : "mowineTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:mowineLib",
+        "identifier" : "ModelTests",
+        "name" : "ModelTests"
+      }
+    }
+  ],
+  "version" : 1
+}

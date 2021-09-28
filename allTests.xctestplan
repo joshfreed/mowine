@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "E788E3D1-39D1-437E-8283-87D3E3A6D40D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:mowineLib",
+        "identifier" : "ModelTests",
+        "name" : "ModelTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:mowine.xcodeproj",
+        "identifier" : "53F5AC061E2176090067AB62",
+        "name" : "mowineTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:mowine.xcodeproj",
+        "identifier" : "53F5AC111E2176090067AB62",
+        "name" : "mowineUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

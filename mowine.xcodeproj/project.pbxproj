@@ -524,6 +524,8 @@
 		53D3B44425A0FB7F00F15974 /* EmailSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpViewModel.swift; sourceTree = "<group>"; };
 		53D3B44A25A2304D00F15974 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		53D3B45025A2337400F15974 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
+		53D3E8B32703720F00D4FFEC /* unitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = unitTests.xctestplan; sourceTree = "<group>"; };
+		53D3E8B42703726500D4FFEC /* allTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = allTests.xctestplan; sourceTree = "<group>"; };
 		53D4F21E25EEED68007A15F9 /* SearchUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModel.swift; sourceTree = "<group>"; };
 		53D91FC522BED429004F94B0 /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		53D91FC922C12537004F94B0 /* EditProfileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileServiceTests.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,8 @@
 				53CA99CF262FA817009C0F87 /* mowineLib */,
 				53F5ABF11E2176080067AB62 /* Products */,
 				8E45E83822A4C492508A446C /* Frameworks */,
+				53D3E8B32703720F00D4FFEC /* unitTests.xctestplan */,
+				53D3E8B42703726500D4FFEC /* allTests.xctestplan */,
 				53CC0F93270208A5000B882F /* GoogleService-Info.plist */,
 				53CC0F9127020895000B882F /* GoogleService-Info.plist */,
 			);
