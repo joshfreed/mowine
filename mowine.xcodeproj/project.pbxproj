@@ -31,7 +31,6 @@
 		532789F8267979D400649624 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F7267979D400649624 /* SafariServices.framework */; };
 		532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F9267979E100649624 /* AuthenticationServices.framework */; };
 		532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789FB267979E900649624 /* SystemConfiguration.framework */; };
-		53278A0026797C5A00649624 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 532789FD26797C5900649624 /* GoogleSignIn.bundle */; };
 		532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3C82569C2EF009A4740 /* MyAccountView.swift */; };
 		532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */; };
 		532DB3D3256AC763009A4740 /* DataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3D2256AC763009A4740 /* DataHelpers.swift */; };
@@ -297,7 +296,6 @@
 		53CC0F8527020848000B882F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53CC0F8627020848000B882F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53CC0F8727020848000B882F /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCE25BE2B9600B8A8F5 /* firebase.json */; };
-		53CC0F8827020848000B882F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 532789FD26797C5900649624 /* GoogleSignIn.bundle */; };
 		53CC0F8927020848000B882F /* storage.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCD25BE2B9600B8A8F5 /* storage.rules */; };
 		53CC0F8A27020848000B882F /* firestore.indexes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */; };
 		53CC0F9227020895000B882F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53CC0F9127020895000B882F /* GoogleService-Info.plist */; };
@@ -1476,7 +1474,6 @@
 				53CC0F8527020848000B882F /* Assets.xcassets in Resources */,
 				53CC0F8627020848000B882F /* Main.storyboard in Resources */,
 				53CC0F8727020848000B882F /* firebase.json in Resources */,
-				53CC0F8827020848000B882F /* GoogleSignIn.bundle in Resources */,
 				53CC0F94270208A5000B882F /* GoogleService-Info.plist in Resources */,
 				53CC0F8927020848000B882F /* storage.rules in Resources */,
 				53CC0F8A27020848000B882F /* firestore.indexes.json in Resources */,
@@ -1493,7 +1490,6 @@
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
 				5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */,
-				53278A0026797C5A00649624 /* GoogleSignIn.bundle in Resources */,
 				53CC0F9227020895000B882F /* GoogleService-Info.plist in Resources */,
 				5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */,
 				5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */,
