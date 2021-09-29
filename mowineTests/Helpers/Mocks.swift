@@ -192,6 +192,8 @@ class MockEmailAuthService: EmailAuthenticationService {
             }
         }
     }
+
+    func forgotPassword(emailAddress: String) async throws {}
 }
 
 class MockProfilePictureWorker: ProfilePictureWorkerProtocol {

@@ -167,6 +167,8 @@ class FakeEmailAuth: EmailAuthenticationService {
         (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
         usersDB.append(user)
     }
+
+    func forgotPassword(emailAddress: String) async throws {}
 }
 
 class FakeUserRepository: UserRepository {

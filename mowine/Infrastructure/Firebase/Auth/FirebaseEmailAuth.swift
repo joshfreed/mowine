@@ -82,4 +82,8 @@ class FirebaseEmailAuth: EmailAuthenticationService {
             return error
         }
     }
+
+    public func forgotPassword(emailAddress: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: emailAddress)
+    }
 }

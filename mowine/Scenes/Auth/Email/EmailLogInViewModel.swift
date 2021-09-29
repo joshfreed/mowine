@@ -16,13 +16,13 @@ class EmailLogInViewModel: ObservableObject {
     @Published var isLoggingIn = false
     @Published var error: String = ""
     
-    let emailAuth: EmailAuthenticationService
+    let emailAuth: EmailAuthApplicationService
 
     init() {
         self.emailAuth = try! JFContainer.shared.container.resolve()
     }
 
-    init(emailAuth: EmailAuthenticationService) {
+    init(emailAuth: EmailAuthApplicationService) {
         self.emailAuth = emailAuth
     }
 

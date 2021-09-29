@@ -16,14 +16,14 @@ class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String = ""
     
-    private let worker: SignUpWorker
+    private let emailAuthService: EmailAuthApplicationService
 
     init() {
-        self.worker = try! JFContainer.shared.container.resolve()
+        self.emailAuthService = try! JFContainer.shared.container.resolve()
     }
 
-    init(worker: SignUpWorker) {
-        self.worker = worker
+    init(worker: EmailAuthApplicationService) {
+        self.emailAuthService = worker
     }
 
     @MainActor
@@ -41,7 +41,7 @@ class EmailSignUpViewModel: ObservableObject {
         }
 
         do {
-            try await worker.signUp(emailAddress: emailAddress, password: password, fullName: fullName)
+            try await emailAuthService.signUp(emailAddress: emailAddress, password: password, fullName: fullName)
 
             // Need this b/c firebase session handler doesn't fire when linking anonymous to full account
             // Also we shouldn't have current user id listeners fire until the user account object was created

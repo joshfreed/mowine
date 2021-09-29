@@ -7,8 +7,9 @@
 //
 
 import SwiftUI
-import FirebaseAuth
 import SwiftyBeaver
+import Model
+import FirebaseCrashlytics
 
 enum ForgotPasswordAlert: Identifiable {
     case success
@@ -21,6 +22,7 @@ enum ForgotPasswordAlert: Identifiable {
 
 struct ForgotPasswordView: View {
     @Environment(\.presentationMode) var presentationMode
+    private var emailAuth: EmailAuthApplicationService = try! JFContainer.shared.resolve()
     @State private var emailAddress: String = ""
     @State private var isSending = false
     @State private var activeAlert: ForgotPasswordAlert?
@@ -38,7 +40,11 @@ struct ForgotPasswordView: View {
                 .fancyField(title: "Email Address", text: $emailAddress)
                 .padding(.bottom, 4)
             
-            PrimaryButton(action: sendInstructions, title: "Send Instructions", isLoading: $isSending)
+            PrimaryButton(action: {
+                Task {
+                    await sendInstructions()
+                }
+            }, title: "Send Instructions", isLoading: $isSending)
             
             Spacer()
         }
@@ -63,21 +69,20 @@ struct ForgotPasswordView: View {
         }
     }
     
-    private func sendInstructions() {
+    private func sendInstructions() async {
         guard !emailAddress.isEmpty else { return }
         
         isSending = true
-        
-        Auth.auth().sendPasswordReset(withEmail: emailAddress) { error in
-            self.isSending = false
-            
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                self.activeAlert = .failure
-            } else {
-                self.activeAlert = .success
-            }
+
+        do {
+            try await emailAuth.forgotPassword(emailAddress: emailAddress)
+            activeAlert = .success
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            activeAlert = .failure
         }
+
+        isSending = false
     }
 }
 

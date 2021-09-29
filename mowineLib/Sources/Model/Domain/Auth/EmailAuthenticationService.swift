@@ -11,6 +11,7 @@ import Foundation
 public protocol EmailAuthenticationService {
     func signIn(emailAddress: String, password: String) async throws
     func signUp(emailAddress: String, password: String) async throws
+    func forgotPassword(emailAddress: String) async throws
 }
 
 /// Errors that can be raised when signing in or signing up by email address and password.

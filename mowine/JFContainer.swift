@@ -163,6 +163,8 @@ extension DependencyContainer {
         container.register(.unique) {
             SocialAuthApplicationService(auth: $0, userFactory: $1, methods: JFContainer.socialSignInMethods(), providers: JFContainer.socialSignInProviders())
         }
+        container.register(.unique) { SignOutCommand(session: $0) }
+        container.register(.unique) { EmailAuthApplicationService(emailAuthService: $0, userRepository: $1, session: $2) }
         // Users
         container.register(.unique) { GetUserCellarQuery(wineTypeRepository: $0, wineRepository: $1) }
         container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
@@ -181,9 +183,6 @@ extension DependencyContainer {
         container.register(.unique) { SearchMyCellarQuery(wineRepository: $0, session: $1) }
         // Friends
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
-        // Auth
-        container.register(.unique) { SignOutCommand(session: $0) }
-        container.register(.unique) { SignUpWorker(emailAuthService: $0, userRepository: $1, session: $2) }
 
 
         // Domain Layer
