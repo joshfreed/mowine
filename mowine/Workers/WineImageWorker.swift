@@ -26,7 +26,7 @@ where
         self.wineRepository = wineRepository
     }
     
-    func createImages(wineId: WineId, photo: WineImage?) -> Data? {
+    func createImages(wineId: WineId, photo: WineImage?) async throws -> Data? {
         guard let image = photo else {
             return nil
         }
@@ -44,28 +44,22 @@ where
 
         let imageName = "\(userId)/\(wineId).png"
         let thumbnailName = "\(userId)/\(wineId)-thumb.png"
-        imageService.putData(imageData, url: imageName, completion: putDataCompletion)
-        imageService.putData(thumbnailData, url: thumbnailName, completion: putDataCompletion)
+        _ = try await imageService.putData(imageData, url: imageName)
+        _ = try await imageService.putData(thumbnailData, url: thumbnailName)
         return thumbnailData
     }
-    
-    private func putDataCompletion(_ result: Result<URL, Error>) {
-        if case let .failure(error) = result {
-            SwiftyBeaver.error("\(error)")
-        }
-    }
 
-    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ()) {
-        guard let userId = session.currentUserId else { return }
+    func fetchPhoto(wineId: WineId) async throws -> Data? {
+        guard let userId = session.currentUserId else { return nil }
         let name = "\(userId)/\(wineId).png"
         SwiftyBeaver.info("Requested full res wine image. WineId: \(wineId)")
-        imageService.getData(url: name, completion: completion)
+        return try await imageService.getData(url: name)
     }
-    
-    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?, Error>) -> ()) {
+
+    func fetchPhoto(wine: Wine) async throws -> Data? {
         let name = "\(wine.userId)/\(wine.id).png"
         SwiftyBeaver.info("Requested full res wine image. WineId: \(wine.id)")
-        imageService.getData(url: name, completion: completion)
+        return try await imageService.getData(url: name)
     }
 }
 
@@ -87,6 +81,13 @@ extension WineImageWorker: WineListThumbnailFetcher {
     func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?, Error>) -> ()) {
         let name = "\(wine.userId)/\(wine.id)-thumb.png"
         SwiftyBeaver.info("Requested wine image thumbnail. WineId: \(wine.id)")
-        imageService.getData(url: name, completion: completion)
+        Task {
+            do {
+                let data = try await imageService.getData(url: name)
+                completion(.success(data))
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
 }

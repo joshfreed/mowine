@@ -19,9 +19,9 @@ class FirebaseStorageLoader: ImageLoader {
 
     func load(urlString: String) -> AnyPublisher<UIImage, Error> {
         Future { [weak self] promise in
-            self?.storage.getData(path: urlString) { result in
-                switch result {
-                case .success(let data):
+            Task { [weak self] in
+                do {
+                    let data = try await self?.storage.getData(path: urlString)
                     guard let data = data else {
                         promise(.failure(ImageLoadingError.notFound))
                         return
@@ -31,7 +31,7 @@ class FirebaseStorageLoader: ImageLoader {
                     } else {
                         promise(.failure(ImageLoadingError.invalidImage))
                     }
-                case .failure(let error):
+                } catch {
                     promise(.failure(error))
                 }
             }

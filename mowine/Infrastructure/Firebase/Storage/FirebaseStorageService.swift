@@ -22,62 +22,66 @@ class FirebaseStorageService {
         return storageRef
     }
 
-    func putData(_ data: Data, path: String, completion: @escaping (Result<URL, Error>) -> ()) {
+    func putData(_ data: Data, path: String) async throws -> URL {
         let storageRef = reference()
         let uploadRef = storageRef.child(path)
 
-        uploadRef.putData(data, metadata: nil) { (metadata, error) in
-            if let err = error {
-                completion(.failure(err))
-                return
-            }
+        return try await withCheckedThrowingContinuation { continuation in
+            uploadRef.putData(data, metadata: nil) { (metadata, error) in
+                if let err = error {
+                    continuation.resume(with: .failure(err))
+                    return
+                }
 
-            uploadRef.downloadURL { url, error in
-                if let error = error {
-                    completion(.failure(error))
-                } else if let url = url {
-                    completion(.success(url))
-                } else {
-                    fatalError("Firebase downloadURL did not contain an error or url")
+                uploadRef.downloadURL { url, error1 in
+                    if let error = error1 {
+                        continuation.resume(with: .failure(error))
+                    } else if let url = url {
+                        continuation.resume(with: .success(url))
+                    } else {
+                        fatalError("Firebase downloadURL did not contain an error or url")
+                    }
                 }
             }
         }
     }
 
-    func getData(path: String, completion: @escaping (Result<Data?, Error>) -> ()) {
+    func getData(path: String) async throws -> Data? {
         let maxSize: Int64 = 1 * 1024 * 1024
         let storageRef = reference()
         let pathReference = storageRef.child(path)
 
-        pathReference.getData(maxSize: maxSize) { data, error in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                let errorCode = (error as NSError).code
-                guard let storageError = StorageErrorCode(rawValue: errorCode) else {
-                    completion(.failure(error))
-                    return
+        return try await withCheckedThrowingContinuation { continuation in
+            pathReference.getData(maxSize: maxSize) { data, error1 in
+                if let error = error1 {
+                    SwiftyBeaver.error("\(error)")
+                    let errorCode = (error as NSError).code
+                    guard let storageError = StorageErrorCode(rawValue: errorCode) else {
+                        continuation.resume(with: .failure(error))
+                        return
+                    }
+                    switch storageError {
+                    case .objectNotFound: continuation.resume(with: .success(nil))
+                    default: continuation.resume(with: .failure(error))
+                    }
+                } else {
+                    continuation.resume(with: .success(data))
                 }
-                switch storageError {
-                case .objectNotFound: completion(.success(nil))
-                default: completion(.failure(error))
-                }
-            } else {
-                completion(.success(data))
             }
         }
     }
 }
 
 extension FirebaseStorageService: DataReadService {
-    func getData(url: String, completion: @escaping (Result<Data?, Error>) -> ()) {
+    func getData(url: String) async throws -> Data? {
         SwiftyBeaver.debug("Getting data from firebase \(url)")
-        getData(path: url, completion: completion)
+        return try await getData(path: url)
     }
 }
 
 extension FirebaseStorageService: DataWriteService {
-    func putData(_ data: Data, url: String, completion: @escaping (Result<URL, Error>) -> ()) {
+    func putData(_ data: Data, url: String) async throws -> URL {
         SwiftyBeaver.debug("Putting data to firebase \(url)")
-        putData(data, path: url, completion: completion)
+        return try await putData(data, path: url)
     }
 }

@@ -41,7 +41,7 @@ public class UpdateWineCommandHandler {
     public func handle(_ command: UpdateWineCommand) async throws {
         let wineId = WineId(string: command.wineId)
 
-        if let thumbnail = imageWorker.createImages(wineId: wineId, photo: command.image) {
+        if let thumbnail = try await imageWorker.createImages(wineId: wineId, photo: command.image) {
             NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wineId": wineId.asString, "thumbnail": thumbnail])
         }
 

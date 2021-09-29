@@ -16,20 +16,15 @@ public class GetWineImageQueryHandler {
     }
 
     public func handle(wineId: String) async throws -> WineImage? {
-        try await withCheckedThrowingContinuation { continuation in
-            imageWorker.fetchPhoto(wineId: WineId(string: wineId)) { result in
-                switch result {
-                case .success(let data):
-                    // TODO convert to WineImage, remove UIKit reference
-                    var photo: UIImage? = nil
-                    if let data = data {
-                        photo = UIImage(data: data)
-                    }
-                    continuation.resume(returning: photo as? WineImage)
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
+        let data = try await imageWorker.fetchPhoto(wineId: WineId(string: wineId))
+
+        // TODO convert to WineImage, remove UIKit reference
+        var photo: UIImage? = nil
+
+        if let data = data {
+            photo = UIImage(data: data)
         }
+
+        return photo as? WineImage
     }
 }

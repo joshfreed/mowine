@@ -53,7 +53,7 @@ open class CreateWineCommandHandler {
         let wine = Wine(userId: userId, type: command.wineType, name: command.name, rating: Double(command.rating))
         wine.variety = command.wineVariety
 
-        _ = imageWorker.createImages(wineId: wine.id, photo: command.image)
+        _ = try await imageWorker.createImages(wineId: wine.id, photo: command.image)
 
         try await wineRepository.add(wine)
     }

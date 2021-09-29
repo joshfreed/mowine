@@ -241,13 +241,15 @@ class FakeUserRepository: UserRepository {
 }
 
 class FakeDataReadService: DataReadService {
-    func getData(url: String, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
+    func getData(url: String) async throws -> Data? {
+        nil
     }
 }
 
 
 class FakeDataWriteService: DataWriteService {
-    func putData(_ data: Data, url: String, completion: @escaping (Swift.Result<URL, Error>) -> ()) {
+    func putData(_ data: Data, url: String) async throws -> URL {
+        URL(string: "https://google.com")!
     }
 }
 
@@ -283,16 +285,16 @@ class FakeWineWorker: CreateWineCommandHandler {
 }
 
 class FakeWineImageWorker: WineImageWorkerProtocol {
-    func createImages(wineId: WineId, photo: WineImage?) -> Data? {
+    func createImages(wineId: WineId, photo: WineImage?) async throws -> Data? {
         nil
     }
     
-    func fetchPhoto(wineId: WineId, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
-        
+    func fetchPhoto(wineId: WineId) async throws -> Data? {
+        nil
     }
     
-    func fetchPhoto(wine: Wine, completion: @escaping (Swift.Result<Data?, Error>) -> ()) {
-        
+    func fetchPhoto(wine: Wine) async throws -> Data? {
+        nil
     }
 }
 

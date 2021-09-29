@@ -27,26 +27,19 @@ extension URL: DataUrl {
 
 protocol DataReadService {
     associatedtype Url: DataUrl
-    func getData(url: Url, completion: @escaping (Result<Data?, Error>) -> ())
+    func getData(url: Url) async throws -> Data?
 }
 
 protocol DataWriteService {
     associatedtype Url: DataUrl
-    func putData(_ data: Data, url: Url, completion: @escaping (Result<URL, Error>) -> ())
+    func putData(_ data: Data, url: Url) async throws -> URL
 }
 
 protocol DataServiceProtocol {
     associatedtype GetDataUrl: DataUrl
     associatedtype PutDataUrl: DataUrl
 
-    @available(*, deprecated, message: "Prefer async alternative instead")
-    func getData(url: GetDataUrl, completion: @escaping (Result<Data?, Error>) -> ())
-
     func getData(url: GetDataUrl) async throws -> Data?
-
-    @available(*, deprecated, message: "Prefer async alternative instead")
-    func putData(_ data: Data, url: PutDataUrl, completion: @escaping (Result<URL, Error>) -> ())
-
     func putData(_ data: Data, url: PutDataUrl) async throws -> URL
 }
 
@@ -62,47 +55,32 @@ class DataService<RemoteRead: DataReadService, RemoteWrite: DataWriteService>: D
         self.remoteRead = remoteRead
         self.remoteWrite = remoteWrite
     }
-    
-    func getData(url: RemoteRead.Url, completion: @escaping (Result<Data?, Error>) -> ()) {
+
+    func getData(url: RemoteRead.Url) async throws -> Data? {
         SwiftyBeaver.verbose("Getting data... [\(url.cacheKey)]")
 
         if let cachedImage = dataCache.object(forKey: url.cacheKey) {
             SwiftyBeaver.debug("Found data in NSCache [\(url.cacheKey)]")
-            completion(.success(cachedImage as Data))
-            return
+            return cachedImage as Data
         }
 
         SwiftyBeaver.debug("Data not found in caches; fetching from remote. [\(url.cacheKey)]")
 
-        remoteRead.getData(url: url) { result in
-            if case let .success(data) = result, let nsdata = data as NSData? {
-                self.dataCache.setObject(nsdata, forKey: url.cacheKey)
-            }
-            SwiftyBeaver.debug("Data fetch complete. [\(url.cacheKey)]")
-            completion(result)
-        }
-    }
+        let data = try await remoteRead.getData(url: url)
 
-    func getData(url: RemoteRead.Url) async throws -> Data? {
-        return try await withCheckedThrowingContinuation { cont in
-            getData(url: url)  { res in
-                cont.resume(with: res)
-            }
+        if let nsdata = data as NSData? {
+            dataCache.setObject(nsdata, forKey: url.cacheKey)
         }
+
+        SwiftyBeaver.debug("Data fetch complete. [\(url.cacheKey)]")
+
+        return data
     }
     
-    func putData(_ data: Data, url: RemoteWrite.Url, completion: @escaping (Result<URL, Error>) -> ()) {
+    func putData(_ data: Data, url: RemoteWrite.Url) async throws -> URL {
         SwiftyBeaver.debug("Storing data. [\(url.cacheKey)]")
         dataCache.setObject(data as NSData, forKey: url.cacheKey)
-        remoteWrite.putData(data, url: url, completion: completion)
+        return try await remoteWrite.putData(data, url: url)
     }
-
-    func putData(_ data: Data, url: RemoteWrite.Url) async throws -> URL {
-        return try await withCheckedThrowingContinuation { cont in
-            putData(data, url: url)  { res in
-                cont.resume(with: res)
-            }
-        }
-    }    
 }
 

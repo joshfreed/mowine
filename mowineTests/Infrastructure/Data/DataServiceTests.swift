@@ -14,9 +14,8 @@ class DataServiceTests: XCTestCase {
     var sut: DataService<MockRead, MockWrite>!
     let mockRead = MockRead()
     let mockWrite = MockWrite()
-    var completionWasCalled = false
-    var result: Result<Data?, Error>?
-    var putResult: Result<URL, Error>?
+    var result: Data?
+    var putResult: URL?
     var data: Data!
     
     override func setUp() {
@@ -31,13 +30,16 @@ class DataServiceTests: XCTestCase {
     // MARK: - Mocks
     
     class MockRead: DataReadService {
-        var nextResult: Result<Data?, Error>? = .success(nil)
+        var nextResult: Result<Data?, Error> = .success(nil)
         var getDataWasCalled = false
         var getData_url: String?
-        func getData(url: String, completion: @escaping (Result<Data?, Error>) -> ()) {
+        func getData(url: String) async throws -> Data? {
             getDataWasCalled = true
             getData_url = url
-            completion(nextResult!)
+            switch nextResult {
+            case .success(let data): return data
+            case .failure(let error): throw error
+            }
         }
         
         func verifyGetDataWasCalled(with url: String) {
@@ -51,16 +53,19 @@ class DataServiceTests: XCTestCase {
     }
     
     class MockWrite: DataWriteService {
-        var nextResult: Result<URL, Error>? = .success(URL(fileURLWithPath: "/"))
+        var nextResult: Result<URL, Error> = .success(URL(fileURLWithPath: "/"))
         var putDataWasCalled = false
         var putData_data: Data?
         var putData_url: String?
         
-        func putData(_ data: Data, url: String, completion: @escaping (Result<URL, Error>) -> ()) {
+        func putData(_ data: Data, url: String) async throws -> URL {
             putDataWasCalled = true
             putData_data = data
             putData_url = url
-            completion(nextResult!)
+            switch nextResult {
+            case .success(let url): return url
+            case .failure(let error): throw error
+            }
         }
         
         func verifyPutDataWasCalled(data: Data, url: String) {
@@ -74,69 +79,58 @@ class DataServiceTests: XCTestCase {
     
     // MARK: getData
     
-    func test_getData_notCached_remoteReturnsNil() {
+    func test_getData_notCached_remoteReturnsNil() async throws {
         mockRead.nextResult = .success(nil)
         
-        getData(url: "image1")
+        let data = try await getData(url: "image1")
         
         mockRead.verifyGetDataWasCalled(with: "image1")
-        expect(self.completionWasCalled).to(beTrue())
-        expect(self.result).to(beSuccess(test: { data in
-            expect(data).to(beNil())
-        }))
+        expect(data).to(beNil())
     }
     
-    func test_getData_notCached_fetchDataFromRemote() {
+    func test_getData_notCached_fetchDataFromRemote()async throws  {
         mockRead.nextResult = .success(data)
         
-        getData(url: "image1")
+        let actual = try await getData(url: "image1")
         
         mockRead.verifyGetDataWasCalled(with: "image1")
-        expect(self.completionWasCalled).to(beTrue())
-        expect(self.result).to(beSuccess(test: { actual in
-            expect(actual).to(equal(self.data))
-        }))
+        expect(actual).to(equal(self.data))
     }
     
-    func test_getData_cachesDataAfterFetching() {
+    func test_getData_cachesDataAfterFetching() async throws {
         mockRead.nextResult = .success(data)
         
-        getData(url: "image1")
+        _ = try await getData(url: "image1")
         
         expectCacheToContain(data: data, forKey: "image1")        
     }
     
-    func test_getData_returns_data_from_cache_if_present() {
+    func test_getData_returns_data_from_cache_if_present() async throws {
         let url = "image1"
         sut.dataCache.setObject(data as NSData, forKey: url as NSString)
         
-        getData(url: url)
+        let actual = try await getData(url: url)
         
-        expect(self.completionWasCalled).to(beTrue())
-        expect(self.result).to(beSuccess(test: { actual in
-            expect(actual).to(equal(self.data))
-        }))
+        expect(actual).to(equal(self.data))
         mockRead.verifyGetDataWasNeverCalled()
     }
     
     // MARK: putData
     
-    func test_putData_adds_data_to_cache() {
+    func test_putData_adds_data_to_cache() async throws {
         let url = "image1"
         
-        putData(data, url: "image1")
+        _ = try await putData(data, url: "image1")
         
         expectCacheToContain(data: data, forKey: url)
     }
     
-    func test_putData_sends_the_data_to_the_remote_storage() {
+    func test_putData_sends_the_data_to_the_remote_storage() async throws {
         let url = "image1"
         
-        putData(data, url: "image1")
+        _ = try await putData(data, url: "image1")
         
         mockWrite.verifyPutDataWasCalled(data: data, url: url)
-        expect(self.completionWasCalled).to(beTrue())
-        expect(self.putResult).to(beSuccess())
     }
     
     // MARK: - Helpers
@@ -145,18 +139,12 @@ class DataServiceTests: XCTestCase {
         return Data(repeating: 1, count: 100)
     }
     
-    private func getData(url: String) {
-        sut.getData(url: "image1") { r in
-            self.completionWasCalled = true
-            self.result = r
-        }
+    private func getData(url: String) async throws -> Data? {
+        try await sut.getData(url: url)
     }
     
-    private func putData(_ data: Data, url: String) {
-        sut.putData(data, url: url) { r in
-            self.completionWasCalled = true
-            self.putResult = r
-        }
+    private func putData(_ data: Data, url: String) async throws -> URL {
+        try await sut.putData(data, url: url)
     }
     
     private func expectCacheToContain(data: Data, forKey key: String) {

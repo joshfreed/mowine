@@ -6,25 +6,10 @@
 import Foundation
 import SwiftyBeaver
 
-class UrlSessionService {
-    //
-    // Helper method wrapping URLSession.shared.dataTask that returns a Result object with optional Data
-    //
-    func dataTask(with url: URL, completion: @escaping (Result<Data?, Error>) -> ()) {
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(data))
-            }
-        }
-        task.resume()
-    }
-}
-
-extension UrlSessionService: DataReadService {
-    func getData(url: URL, completion: @escaping (Result<Data?, Error>) -> ()) {
+class UrlSessionService: DataReadService {
+    func getData(url: URL) async throws -> Data? {
         SwiftyBeaver.debug("Getting data from URL session \(url)")
-        dataTask(with: url, completion: completion)
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
     }
 }

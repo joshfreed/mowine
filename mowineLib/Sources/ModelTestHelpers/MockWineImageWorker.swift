@@ -9,23 +9,15 @@ import Foundation
 import Model
 
 class MockWineImageWorker: WineImageWorkerProtocol {
-    func fetchPhoto(wine: Wine, completion: @escaping (Result<Data?, Error>) -> ()) {
-
+    func createImages(wineId: WineId, photo: WineImage?) async throws -> Data? {
+        nil
     }
 
-    func createImages(wineId: WineId, photo: WineImage?) -> Data? {
-        return nil
+    func fetchPhoto(wineId: WineId) async throws -> Data? {
+        nil
     }
 
-    func fetchPhoto(wineId: WineId, completion: @escaping (Result<Data?, Error>) -> ()) {
-
-    }
-
-    func fetchThumbnail(for wine: Wine, completion: @escaping (Result<Data?, Error>) -> ()) {
-
-    }
-
-    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ()) {
-
+    func fetchPhoto(wine: Wine) async throws -> Data? {
+        nil
     }
 }
