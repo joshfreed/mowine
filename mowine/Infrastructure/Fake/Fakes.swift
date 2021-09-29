@@ -272,7 +272,7 @@ class FakeRemoteWineDataStore: RemoteWineDataStore {
 }
 */
 
-class FakeWineWorker: WineWorker {
+class FakeWineWorker: CreateWineCommandHandler {
     init() {
         super.init(
             wineRepository: MemoryWineRepository(),

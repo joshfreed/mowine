@@ -13,7 +13,7 @@ import FirebaseCrashlytics
 
 struct FinalizeWineView: View {
     @EnvironmentObject var vm: AddWineViewModel
-    @StateObject var wineWorker: WineWorker = try! JFContainer.shared.resolve()
+    let createWineCommandHandler: CreateWineCommandHandler = try! JFContainer.shared.resolve()
     @ObservedObject var model: NewWineModel
     
     @State private var isSaving = false
@@ -48,8 +48,23 @@ struct FinalizeWineView: View {
     func addWine() async {
         isSaving = true
 
+        guard model.isComplete else {
+            fatalError("Called addWine but the model is not complete")
+        }
+
+        guard let wineType = model.wineType else {
+            fatalError("model.wineType must not be nil")
+        }
+
         do {
-            try await wineWorker.createWine(from: model)
+            let command = CreateWineCommand(
+                name: model.name,
+                rating: model.rating,
+                wineType: wineType,
+                wineVariety: model.wineVariety,
+                image: model.image
+            )
+            try await createWineCommandHandler.createWine(command)
             vm.closeModal = true
         } catch {
             isSaving = false

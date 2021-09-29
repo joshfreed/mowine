@@ -179,7 +179,7 @@ extension DependencyContainer {
         container.register(.singleton) { GetUserWinesByTypeQuery(wineRepository: $0) }
         container.register(.singleton) { GetWineDetailsQuery(wineRepository: $0) }
         container.register(.singleton) { MyWinesService(session: $0, wineTypeRepository: $1, wineRepository: $2) }
-        container.register(.singleton) { WineWorker(wineRepository: $0, imageWorker: $1, session: $2) }
+        container.register(.singleton) { CreateWineCommandHandler(wineRepository: $0, imageWorker: $1, session: $2) }
         container.register(.unique) { SearchMyCellarQuery(wineRepository: $0, session: $1) }
         // Friends
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }

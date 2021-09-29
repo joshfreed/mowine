@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Model
 
 public class NewWineModel: ObservableObject {
     @Published public var wineType: WineType?
