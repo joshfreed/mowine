@@ -9,6 +9,4 @@ import Foundation
 
 public protocol WineImageWorkerProtocol {
     func createImages(wineId: WineId, photo: WineImage?) async throws -> Data?
-    func fetchPhoto(wineId: WineId) async throws -> Data?
-    func fetchPhoto(wine: Wine) async throws -> Data?
 }

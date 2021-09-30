@@ -48,17 +48,4 @@ where
         _ = try await imageService.putData(thumbnailData, url: thumbnailName)
         return thumbnailData
     }
-
-    func fetchPhoto(wineId: WineId) async throws -> Data? {
-        guard let userId = session.currentUserId else { return nil }
-        let name = "\(userId)/\(wineId).png"
-        SwiftyBeaver.info("Requested full res wine image. WineId: \(wineId)")
-        return try await imageService.getData(url: name)
-    }
-
-    func fetchPhoto(wine: Wine) async throws -> Data? {
-        let name = "\(wine.userId)/\(wine.id).png"
-        SwiftyBeaver.info("Requested full res wine image. WineId: \(wine.id)")
-        return try await imageService.getData(url: name)
-    }
 }

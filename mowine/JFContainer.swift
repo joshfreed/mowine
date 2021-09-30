@@ -117,6 +117,10 @@ extension DependencyContainer {
             .implements(ImageLoader.self)
 
         container.register(.singleton) {
+            UIImageWineImageService<DataService<FirebaseStorageService, FirebaseStorageService>>(dataService: $0)
+        }
+            .implements(WineImageService.self)
+        container.register(.singleton) {
             WineImageWorker<DataService<FirebaseStorageService, FirebaseStorageService>>(session: $0, wineRepository: $1, imageService: $2)
         }
             .implements(WineImageWorkerProtocol.self)
@@ -132,6 +136,10 @@ extension DependencyContainer {
     static func addFakeImageServices(container: DependencyContainer) {
         container.register(.singleton) { FakeDataReadService() }
         container.register(.singleton) { FakeDataWriteService() }
+        container.register(.singleton) {
+            UIImageWineImageService<DataService<FakeDataReadService, FakeDataWriteService>>(dataService: $0)
+        }
+            .implements(WineImageService.self)
         container.register(.singleton) {
             WineImageWorker<DataService<FakeDataReadService, FakeDataWriteService>>(session: $0, wineRepository: $1, imageService: $2)
         }
@@ -172,7 +180,7 @@ extension DependencyContainer {
         // Wines
         container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, imageWorker: $1, wineTypeRepository: $2) }
         container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }
-        container.register(.unique) { GetWineImageQueryHandler(imageWorker: $0) }
+        container.register(.unique) { GetWineImageQueryHandler(session: $0, wineImageService: $1) }
         container.register(.unique) { GetWineByIdQueryHandler(wineRepository: $0) }
         container.register(.unique) { GetWineTypesQueryHandler(wineTypeRepository: $0) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }

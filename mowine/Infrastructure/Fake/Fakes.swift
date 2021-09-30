@@ -292,10 +292,6 @@ class FakeWineImageWorker: WineImageWorkerProtocol {
     func fetchPhoto(wineId: WineId) async throws -> Data? {
         nil
     }
-    
-    func fetchPhoto(wine: Wine) async throws -> Data? {
-        nil
-    }
 }
 
 class FakeUsersService: UsersService {

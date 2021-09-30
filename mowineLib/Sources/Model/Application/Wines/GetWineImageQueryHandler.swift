@@ -6,25 +6,20 @@
 //
 
 import Foundation
-import UIKit.UIImage
 
 public class GetWineImageQueryHandler {
-    let imageWorker: WineImageWorkerProtocol
+    let session: Session
+    let wineImageService: WineImageService
 
-    public init(imageWorker: WineImageWorkerProtocol) {
-        self.imageWorker = imageWorker
+    public init(session: Session, wineImageService: WineImageService) {
+        self.session = session
+        self.wineImageService = wineImageService
     }
 
     public func handle(wineId: String) async throws -> WineImage? {
-        let data = try await imageWorker.fetchPhoto(wineId: WineId(string: wineId))
-
-        // TODO convert to WineImage, remove UIKit reference
-        var photo: UIImage? = nil
-
-        if let data = data {
-            photo = UIImage(data: data)
-        }
-
-        return photo as? WineImage
+        guard let userId = session.currentUserId else { throw SessionError.notLoggedIn }
+        let wineId = WineId(string: wineId)
+        let imageName = WineImageName(userId: userId, wineId: wineId)
+        return try await wineImageService.fetchImage(named: imageName)
     }
 }
