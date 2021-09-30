@@ -9,10 +9,20 @@
     }
   ],
   "defaultOptions" : {
-
+    "addressSanitizer" : {
+      "enabled" : true
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:mowine.xcodeproj",
+      "identifier" : "53CC0ED727020848000B882F",
+      "name" : "mowineDev"
+    },
+    "testExecutionOrdering" : "random",
+    "undefinedBehaviorSanitizerEnabled" : true
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:mowine.xcodeproj",
         "identifier" : "53F5AC061E2176090067AB62",
@@ -20,10 +30,19 @@
       }
     },
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:mowineLib",
         "identifier" : "ModelTests",
         "name" : "ModelTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:mowine.xcodeproj",
+        "identifier" : "53F5AC111E2176090067AB62",
+        "name" : "mowineUITests"
       }
     }
   ],

@@ -2,14 +2,28 @@
   "configurations" : [
     {
       "id" : "E788E3D1-39D1-437E-8283-87D3E3A6D40D",
-      "name" : "Configuration 1",
+      "name" : "ASAN",
       "options" : {
-
+        "threadSanitizerEnabled" : true
+      }
+    },
+    {
+      "id" : "2D5093B0-AEA8-46A4-84B5-4EB8F9DE37FE",
+      "name" : "TSAN",
+      "options" : {
+        "threadSanitizerEnabled" : true
       }
     }
   ],
   "defaultOptions" : {
-    "testTimeoutsEnabled" : true
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:mowine.xcodeproj",
+      "identifier" : "53CC0ED727020848000B882F",
+      "name" : "mowineDev"
+    },
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true,
+    "undefinedBehaviorSanitizerEnabled" : true
   },
   "testTargets" : [
     {
