@@ -6,10 +6,10 @@
 //  Copyright © 2019 Josh Freed. All rights reserved.
 //
 
-import UIKit
-import Model
+import Foundation
+import UIKit.UIImage
 
-class EditProfileService {
+public class EditProfileService {
     let session: Session
     let profilePictureWorker: ProfilePictureWorkerProtocol
     let userProfileService: UserProfileService
@@ -17,18 +17,18 @@ class EditProfileService {
 
     private(set) var newProfilePicture: UIImage?
 
-    init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService, userRepository: UserRepository) {
+    public init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService, userRepository: UserRepository) {
         self.session = session
         self.profilePictureWorker = profilePictureWorker
         self.userProfileService = userProfileService
         self.userRepository = userRepository
     }
     
-    func updateProfilePicture(_ image: UIImage) {
+    public func updateProfilePicture(_ image: UIImage) {
         newProfilePicture = image
     }
 
-    func saveProfile(email: String, fullName: String) async throws {
+    public func saveProfile(email: String, fullName: String) async throws {
         if let newProfilePicture = newProfilePicture {
             try await userProfileService.updateProfilePicture(newProfilePicture)
             self.newProfilePicture = nil
@@ -36,9 +36,4 @@ class EditProfileService {
         try await userProfileService.updateEmailAddress(emailAddress: email)
         try await userProfileService.updateUserProfile(.init(fullName: fullName))
     }
-}
-
-struct ProfileViewModel {
-    var fullName: String
-    var emailAddress: String
 }

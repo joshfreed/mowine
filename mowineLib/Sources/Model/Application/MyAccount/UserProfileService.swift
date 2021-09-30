@@ -8,25 +8,24 @@
 
 import UIKit
 import SwiftyBeaver
-import Model
 
-class UserProfileService {
+public class UserProfileService {
     let session: Session
     let userRepository: UserRepository
     let profilePictureWorker: ProfilePictureWorkerProtocol
     
-    init(session: Session, userRepository: UserRepository, profilePictureWorker: ProfilePictureWorkerProtocol) {
+    public init(session: Session, userRepository: UserRepository, profilePictureWorker: ProfilePictureWorkerProtocol) {
         self.session = session
         self.userRepository = userRepository
         self.profilePictureWorker = profilePictureWorker
     }
 
-    func updateProfilePicture(_ image: UIImage) async throws {
+    public func updateProfilePicture(_ image: UIImage) async throws {
         SwiftyBeaver.info("updateProfilePicture")
         try await profilePictureWorker.setProfilePicture(image: image)
     }
 
-    func updateEmailAddress(emailAddress: String) async throws {
+    public func updateEmailAddress(emailAddress: String) async throws {
         SwiftyBeaver.info("updateEmailAddress")
 
         guard let userId = self.session.currentUserId else {
@@ -46,7 +45,7 @@ class UserProfileService {
         }
     }
 
-    func updateUserProfile(_ request: UpdateUserProfileRequest) async throws {
+    public func updateUserProfile(_ request: UpdateUserProfileRequest) async throws {
         SwiftyBeaver.info("updateUserProfile")
 
         guard let userId = session.currentUserId else {
@@ -63,6 +62,10 @@ class UserProfileService {
     }
 }
 
-struct UpdateUserProfileRequest {
-    let fullName: String
+public struct UpdateUserProfileRequest {
+    public let fullName: String
+
+    public init(fullName: String) {
+        self.fullName = fullName
+    }
 }

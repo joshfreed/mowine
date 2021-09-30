@@ -15,7 +15,5 @@ public protocol MoWineListenerRegistration {
 public class FakeRegistration: MoWineListenerRegistration {
     public init() {}
 
-    public func remove() {
-        
-    }
+    public func remove() {}
 }

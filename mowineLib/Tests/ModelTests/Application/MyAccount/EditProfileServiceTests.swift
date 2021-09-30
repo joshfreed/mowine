@@ -7,8 +7,10 @@
 //
 
 import XCTest
-@testable import mowine
+@testable import Model
+@testable import ModelTestHelpers
 import Nimble
+import UIKit.UIImage
 
 class EditProfileServiceTests: XCTestCase {
     var sut: EditProfileService!
