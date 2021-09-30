@@ -119,7 +119,7 @@ extension DependencyContainer {
         container.register(.singleton) {
             WineImageWorker<DataService<FirebaseStorageService, FirebaseStorageService>>(session: $0, wineRepository: $1, imageService: $2)
         }
-            .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
+            .implements(WineImageWorkerProtocol.self)
 
         container.register(.singleton) { DataService<UrlSessionService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
         container.register(.singleton) { DataService<FirebaseStorageService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
@@ -135,7 +135,7 @@ extension DependencyContainer {
         container.register(.singleton) {
             WineImageWorker<DataService<FakeDataReadService, FakeDataWriteService>>(session: $0, wineRepository: $1, imageService: $2)
         }
-            .implements(WineImageWorkerProtocol.self, WineListThumbnailFetcher.self)
+            .implements(WineImageWorkerProtocol.self)
 
         container.register(.singleton) { DataService<UrlSessionService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
         container.register(.singleton) { DataService<FakeDataReadService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }

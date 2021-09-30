@@ -62,32 +62,3 @@ where
         return try await imageService.getData(url: name)
     }
 }
-
-extension WineImageWorker: WineListThumbnailFetcher {
-    func fetchThumbnail(for wineId: String, completion: @escaping (Result<Data?, Error>) -> ()) {
-        Task {
-            do {
-                guard let wine = try await wineRepository.getWine(by: WineId(string: wineId)) else {
-                    throw WineRepositoryError.notFound
-                }
-                
-                fetchThumbnail(for: wine, completion: completion)
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-
-    func fetchThumbnail(for wine: Wine,  completion: @escaping (Result<Data?, Error>) -> ()) {
-        let name = "\(wine.userId)/\(wine.id)-thumb.png"
-        SwiftyBeaver.info("Requested wine image thumbnail. WineId: \(wine.id)")
-        Task {
-            do {
-                let data = try await imageService.getData(url: name)
-                completion(.success(data))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-}
