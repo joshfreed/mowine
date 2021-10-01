@@ -117,7 +117,7 @@ extension DependencyContainer {
             .implements(ImageLoader.self)
 
         container.register(.singleton) {
-            UIImageWineImageService<DataService<FirebaseStorageService, FirebaseStorageService>>(dataService: $0)
+            WineImageServiceImpl<DataService<FirebaseStorageService, FirebaseStorageService>>(dataService: $0, wineImageFactory: $1)
         }
             .implements(WineImageService.self)
         container.register(.singleton) {
@@ -137,7 +137,7 @@ extension DependencyContainer {
         container.register(.singleton) { FakeDataReadService() }
         container.register(.singleton) { FakeDataWriteService() }
         container.register(.singleton) {
-            UIImageWineImageService<DataService<FakeDataReadService, FakeDataWriteService>>(dataService: $0)
+            WineImageServiceImpl<DataService<FakeDataReadService, FakeDataWriteService>>(dataService: $0, wineImageFactory: $1)
         }
             .implements(WineImageService.self)
         container.register(.singleton) {
@@ -159,6 +159,7 @@ extension DependencyContainer {
     static func configureCommonServices(container: DependencyContainer) {
         // Infrastructure Layer
         container.register(.singleton) { UrlSessionService() }
+        container.register { UIImageWineImageFactory() }
 
 
         // UI Layer

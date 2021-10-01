@@ -27,7 +27,11 @@ extension URL: DataUrl {
 
 protocol DataReadService {
     associatedtype Url: DataUrl
-    func getData(url: Url) async throws -> Data?
+    func getData(url: Url) async throws -> Data
+}
+
+enum DataReadServiceErrors: Error {
+    case objectNotFound
 }
 
 protocol DataWriteService {
@@ -39,7 +43,7 @@ protocol DataServiceProtocol {
     associatedtype GetDataUrl: DataUrl
     associatedtype PutDataUrl: DataUrl
 
-    func getData(url: GetDataUrl) async throws -> Data?
+    func getData(url: GetDataUrl) async throws -> Data
     func putData(_ data: Data, url: PutDataUrl) async throws -> URL
 }
 
@@ -56,7 +60,7 @@ class DataService<RemoteRead: DataReadService, RemoteWrite: DataWriteService>: D
         self.remoteWrite = remoteWrite
     }
 
-    func getData(url: RemoteRead.Url) async throws -> Data? {
+    func getData(url: RemoteRead.Url) async throws -> Data {
         SwiftyBeaver.verbose("Getting data... [\(url.cacheKey)]")
 
         if let cachedImage = dataCache.object(forKey: url.cacheKey) {

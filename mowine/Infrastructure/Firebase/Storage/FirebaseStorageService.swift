@@ -5,6 +5,7 @@
 
 import Foundation
 import FirebaseStorage
+import FirebaseStorageSwift
 import SwiftyBeaver
 
 class FirebaseStorageService {
@@ -23,59 +24,32 @@ class FirebaseStorageService {
     }
 
     func putData(_ data: Data, path: String) async throws -> URL {
-        let storageRef = reference()
-        let uploadRef = storageRef.child(path)
-
-        return try await withCheckedThrowingContinuation { continuation in
-            uploadRef.putData(data, metadata: nil) { (metadata, error) in
-                if let err = error {
-                    continuation.resume(with: .failure(err))
-                    return
-                }
-
-                uploadRef.downloadURL { url, error1 in
-                    if let error = error1 {
-                        continuation.resume(with: .failure(error))
-                    } else if let url = url {
-                        continuation.resume(with: .success(url))
-                    } else {
-                        fatalError("Firebase downloadURL did not contain an error or url")
-                    }
-                }
-            }
-        }
+        let uploadRef = reference().child(path)
+        _ = try await uploadRef.putDataAsync(data, metadata: nil)
+        let url = try await uploadRef.downloadURL()
+        return url
     }
 
-    func getData(path: String) async throws -> Data? {
+    func getData(path: String) async throws -> Data {
         let maxSize: Int64 = 1 * 1024 * 1024
-        let storageRef = reference()
-        let pathReference = storageRef.child(path)
-
-        return try await withCheckedThrowingContinuation { continuation in
-            pathReference.getData(maxSize: maxSize) { data, error1 in
-                if let error = error1 {
-                    SwiftyBeaver.error("\(error)")
-                    let errorCode = (error as NSError).code
-                    guard let storageError = StorageErrorCode(rawValue: errorCode) else {
-                        continuation.resume(with: .failure(error))
-                        return
-                    }
-                    switch storageError {
-                    case .objectNotFound: continuation.resume(with: .success(nil))
-                    default: continuation.resume(with: .failure(error))
-                    }
-                } else {
-                    continuation.resume(with: .success(data))
-                }
-            }
-        }
+        let pathReference = reference().child(path)
+        return try await pathReference.data(maxSize: maxSize)
     }
 }
 
 extension FirebaseStorageService: DataReadService {
-    func getData(url: String) async throws -> Data? {
+    func getData(url: String) async throws -> Data {
         SwiftyBeaver.debug("Getting data from firebase \(url)")
-        return try await getData(path: url)
+
+        do {
+            return try await getData(path: url)
+        } catch {
+            let errorCode = (error as NSError).code
+            if StorageErrorCode(rawValue: errorCode) == .objectNotFound {
+                throw DataReadServiceErrors.objectNotFound
+            }
+            throw error
+        }
     }
 }
 

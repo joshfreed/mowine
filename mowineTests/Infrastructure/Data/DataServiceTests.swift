@@ -30,13 +30,13 @@ class DataServiceTests: XCTestCase {
     // MARK: - Mocks
     
     class MockRead: DataReadService {
-        var nextResult: Result<Data?, Error> = .success(nil)
+        var nextResult: Result<Data, Error>?
         var getDataWasCalled = false
         var getData_url: String?
-        func getData(url: String) async throws -> Data? {
+        func getData(url: String) async throws -> Data {
             getDataWasCalled = true
             getData_url = url
-            switch nextResult {
+            switch nextResult! {
             case .success(let data): return data
             case .failure(let error): throw error
             }
@@ -79,13 +79,19 @@ class DataServiceTests: XCTestCase {
     
     // MARK: getData
     
-    func test_getData_notCached_remoteReturnsNil() async throws {
-        mockRead.nextResult = .success(nil)
-        
-        let data = try await getData(url: "image1")
+    func test_getData_notCached_remoteThrowsObjectNotFound() async throws {
+        mockRead.nextResult = .failure(DataReadServiceErrors.objectNotFound)
+
+        do {
+            _ = try await getData(url: "image1")
+            XCTFail("Expected an exception to be thrown")
+        } catch DataReadServiceErrors.objectNotFound {
+            // All good
+        } catch {
+            XCTFail("Incorrect exception thrown")
+        }
         
         mockRead.verifyGetDataWasCalled(with: "image1")
-        expect(data).to(beNil())
     }
     
     func test_getData_notCached_fetchDataFromRemote()async throws  {

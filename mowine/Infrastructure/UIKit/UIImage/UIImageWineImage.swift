@@ -1,5 +1,5 @@
 //
-//  UIImageWineImageService.swift
+//  UIImageWineImage.swift
 //  mowine
 //
 //  Created by Josh Freed on 9/30/21.
@@ -9,31 +9,13 @@
 import Foundation
 import UIKit.UIImage
 import Model
-import SwiftyBeaver
 
-class UIImageWineImageService<DataServiceType: DataServiceProtocol>: WineImageService
-where
-    DataServiceType.GetDataUrl == String,
-    DataServiceType.PutDataUrl == String
-{
-    private let dataService: DataServiceType
-    
-    init(dataService: DataServiceType) {
-        self.dataService = dataService
-    }
-
-    func fetchImage(named wineImageName: WineImageName) async throws -> WineImage? {
-        SwiftyBeaver.info("Requested full res wine image. WineId: \(wineImageName.wineId)")
-
-        let data = try await dataService.getData(url: wineImageName.name)
-
-        var photo: UIImage? = nil
-
-        if let data = data {
-            photo = UIImage(data: data)
+class UIImageWineImageFactory: WineImageFactory {
+    func createImage(from data: Data) throws -> WineImage {
+        guard let image = UIImage(data: data) else {
+            throw WineImageFactoryErrors.invalidImageData
         }
-
-        return photo
+        return image
     }
 }
 

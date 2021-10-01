@@ -241,8 +241,8 @@ class FakeUserRepository: UserRepository {
 }
 
 class FakeDataReadService: DataReadService {
-    func getData(url: String) async throws -> Data? {
-        nil
+    func getData(url: String) async throws -> Data {
+        Data(repeating: 5, count: 100)
     }
 }
 

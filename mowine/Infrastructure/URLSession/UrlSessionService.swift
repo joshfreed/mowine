@@ -7,7 +7,7 @@ import Foundation
 import SwiftyBeaver
 
 class UrlSessionService: DataReadService {
-    func getData(url: URL) async throws -> Data? {
+    func getData(url: URL) async throws -> Data {
         SwiftyBeaver.debug("Getting data from URL session \(url)")
         let (data, _) = try await URLSession.shared.data(from: url)
         return data

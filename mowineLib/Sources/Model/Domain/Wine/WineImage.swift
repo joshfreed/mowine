@@ -25,3 +25,11 @@ public struct WineImageName: Equatable {
 public protocol WineImageService {
     func fetchImage(named wineImageName: WineImageName) async throws -> WineImage?
 }
+
+public protocol WineImageFactory {
+    func createImage(from data: Data) throws -> WineImage
+}
+
+public enum WineImageFactoryErrors: Error {
+    case invalidImageData
+}
