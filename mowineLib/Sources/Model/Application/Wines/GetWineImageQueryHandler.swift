@@ -19,7 +19,7 @@ public class GetWineImageQueryHandler {
     public func handle(wineId: String) async throws -> WineImage? {
         guard let userId = session.currentUserId else { throw SessionError.notLoggedIn }
         let wineId = WineId(string: wineId)
-        let imageName = WineImageName(userId: userId, wineId: wineId)
+        let imageName = WineFullImageName(userId: userId, wineId: wineId)
         return try await wineImageService.fetchImage(named: imageName)
     }
 }

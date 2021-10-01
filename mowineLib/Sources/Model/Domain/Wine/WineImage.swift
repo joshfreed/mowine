@@ -10,11 +10,27 @@ public protocol WineImage {
     func pngData() -> Data?
 }
 
-public struct WineImageName: Equatable {
+public protocol WineImageName {
+    var name: String { get }
+}
+
+public struct WineFullImageName: WineImageName, Equatable {
     public let userId: UserId
     public let wineId: WineId
 
     public var name: String { "\(userId)/\(wineId).png" }
+
+    public init(userId: UserId, wineId: WineId) {
+        self.userId = userId
+        self.wineId = wineId
+    }
+}
+
+public struct WineThumbnailName: WineImageName, Equatable {
+    public let userId: UserId
+    public let wineId: WineId
+
+    public var name: String { "\(userId)/\(wineId)-thumb.png" }
 
     public init(userId: UserId, wineId: WineId) {
         self.userId = userId

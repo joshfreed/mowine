@@ -28,7 +28,7 @@ class GetWineImageQueryHandlerTests: XCTestCase {
     }
 
     func test_getWineImage_returns_the_image() async throws {
-        let expectedName = WineImageName(userId: userId, wineId: wineId)
+        let expectedName = WineFullImageName(userId: userId, wineId: wineId)
         let expectedImage = TestWineImage()
         mockSession.login(userId: userId)
         mockWineImageService.imageToReturn = expectedImage
@@ -36,7 +36,7 @@ class GetWineImageQueryHandlerTests: XCTestCase {
         let image = try await sut.handle(wineId: wineId.asString)
 
         XCTAssertEqual(expectedImage, image as? TestWineImage)
-        XCTAssertEqual(expectedName, mockWineImageService.wineImageName)
+        XCTAssertEqual(expectedName, mockWineImageService.wineImageName as? WineFullImageName)
     }
 
     func test_getWineImage_throws_exception_if_not_logged_in() async {

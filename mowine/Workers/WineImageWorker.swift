@@ -30,22 +30,28 @@ where
         guard let image = photo else {
             return nil
         }
+
         guard let userId = session.currentUserId else {
             return nil
         }
+
+        _ = try await generateImage(named: WineFullImageName(userId: userId, wineId: wineId), size: .init(width: 400, height: 400), from: image)
+
+        let thumbnailData = try await generateImage(named: WineThumbnailName(userId: userId, wineId: wineId), size: .init(width: 150, height: 150), from: image)
+
+        return thumbnailData
+    }
+
+    private func generateImage(named imageName: WineImageName, size: CGSize, from wineImage: WineImage) async throws -> Data? {
         guard
-            let downsizedImage = image.resize(to: CGSize(width: 400, height: 400)),
-            let imageData = downsizedImage.pngData(),
-            let thumbnailImage = image.resize(to: CGSize(width: 150, height: 150)),
-            let thumbnailData = thumbnailImage.pngData()
+            let downsizedImage = wineImage.resize(to: size),
+            let imageData = downsizedImage.pngData()
         else {
             return nil
         }
 
-        let imageName = "\(userId)/\(wineId).png"
-        let thumbnailName = "\(userId)/\(wineId)-thumb.png"
-        _ = try await imageService.putData(imageData, url: imageName)
-        _ = try await imageService.putData(thumbnailData, url: thumbnailName)
-        return thumbnailData
+        _ = try await imageService.putData(imageData, url: imageName.name)
+
+        return imageData
     }
 }
