@@ -276,3 +276,9 @@ class FakeWineImageStorage: WineImageStorage {
         Data()
     }
 }
+
+class FakeUserImageStorage: UserImageStorage {
+    func putImage(userId: UserId, data: Data) async throws -> URL {
+        URL(string: "https://google.com")!
+    }
+}

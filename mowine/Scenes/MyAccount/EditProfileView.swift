@@ -72,10 +72,7 @@ fileprivate func viewModel() -> EditProfileViewModel {
     userRepo.addUser(user)
     session.setUser(user: user)
 
-    return EditProfileViewModel(
-        getMyAccountQuery: try! JFContainer.shared.resolve(),
-        editProfileService: try! JFContainer.shared.resolve()
-    )
+    return EditProfileViewModel()
 }
 
 struct EditProfileView_Previews: PreviewProvider {

@@ -102,3 +102,16 @@ class FirebaseWineImageStorage: WineImageStorage {
         }
     }
 }
+
+class FirebaseUserImageStorage: UserImageStorage {
+    private let storage: FirebaseStorageService
+
+    init(storage: FirebaseStorageService) {
+        self.storage = storage
+    }
+
+    func putImage(userId: UserId, data: Data) async throws -> URL {
+        let path = "\(userId)/profile.png"
+        return try await storage.putData(data, path: path)
+    }
+}

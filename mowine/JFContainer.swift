@@ -84,7 +84,6 @@ extension DependencyContainer {
 
 
         // UI Layer
-        container.register(.singleton) { EditProfileService(session: $0, userProfileService: $1, userRepository: $2) }
 
 
         // Application Layer
@@ -99,6 +98,8 @@ extension DependencyContainer {
         container.register(.unique) { GetUserCellarQuery(wineTypeRepository: $0, wineRepository: $1) }
         container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
         container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
+        container.register { UpdateProfileCommandHandler(session: $0, userRepository: $1, createProfilePicture: $2) }
+        container.register { CreateProfilePictureCommandHandler(userImageStorage: $0, imageResizer: $1, userRepository: $2) }
         // Wines
         container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, wineTypeRepository: $1, createWineImages: $2) }
         container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }
@@ -117,7 +118,6 @@ extension DependencyContainer {
 
 
         // Domain Layer
-        container.register(.singleton) { UserProfileService(session: $0, userRepository: $1, profilePictureWorker: $2) }
         container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
     }
 }
@@ -139,19 +139,9 @@ extension DependencyContainer {
 
     static func addImageServices(container: DependencyContainer) {
         container.register(.singleton) { FirebaseStorageService() }
-
-        container.register(.singleton) { FirebaseWineImageStorage(storage: $0, session: $1) }
-        .implements(WineImageStorage.self)
-
-        container.register(.singleton) { FirebaseStorageLoader(storage: $0) }
-        .implements(ImageLoader.self)
-
-        container.register(.singleton) { DataService<UrlSessionService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
-        container.register(.singleton) { DataService<FirebaseStorageService, FirebaseStorageService>(remoteRead: $0, remoteWrite: $1) }
-        container.register(.singleton) {
-            ProfilePictureWorker<DataService<UrlSessionService, FirebaseStorageService>>(session: $0, profilePictureService: $1, userRepository: $2)
-        }
-        .implements(ProfilePictureWorkerProtocol.self)
+        container.register { FirebaseWineImageStorage(storage: $0, session: $1) }.implements(WineImageStorage.self)
+        container.register { FirebaseUserImageStorage(storage: $0) }.implements(UserImageStorage.self)
+        container.register { FirebaseStorageLoader(storage: $0) }.implements(ImageLoader.self)
     }
 }
 
@@ -194,19 +184,8 @@ extension DependencyContainer {
     }
 
     static func addFakeImageServices(container: DependencyContainer) {
-        container.register(.singleton) { FakeDataReadService() }
-        container.register(.singleton) { FakeDataWriteService() }
-
-        container.register(.singleton) { DataService<UrlSessionService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
-        container.register(.singleton) { DataService<FakeDataReadService, FakeDataWriteService>(remoteRead: $0, remoteWrite: $1) }
-        container.register(.singleton) {
-            ProfilePictureWorker<DataService<UrlSessionService, FakeDataWriteService>>(session: $0, profilePictureService: $1, userRepository: $2)
-        }
-            .implements(ProfilePictureWorkerProtocol.self)
-        container.register(.singleton) { AssetImageLoader() }
-            .implements(ImageLoader.self)
-
-        container.register(.singleton) { FakeWineImageStorage() }
-            .implements(WineImageStorage.self)
+        container.register { AssetImageLoader() }.implements(ImageLoader.self)
+        container.register { FakeWineImageStorage() }.implements(WineImageStorage.self)
+        container.register { FakeUserImageStorage() }.implements(UserImageStorage.self)
     }
 }

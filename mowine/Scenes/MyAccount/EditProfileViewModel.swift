@@ -39,24 +39,23 @@ class EditProfileViewModel: ObservableObject {
     @Published var isReauthenticating = false
 
     private let getMyAccountQuery: GetMyAccountQuery
-    private let editProfileService: EditProfileService
+    private let updateProfileCommandHandler: UpdateProfileCommandHandler
     private var hasChanges = false
+
+    private var newProfilePicture: UIImage? {
+        if case let .uiImage(image) = profilePicture {
+            return image
+        } else {
+            return nil
+        }
+    }
 
     init() {
         SwiftyBeaver.debug("init")
         self.getMyAccountQuery = try! JFContainer.shared.container.resolve()
-        self.editProfileService = try! JFContainer.shared.container.resolve()
+        self.updateProfileCommandHandler = try! JFContainer.shared.container.resolve()
     }
 
-    init(
-        getMyAccountQuery: GetMyAccountQuery,
-        editProfileService: EditProfileService
-    ) {
-        SwiftyBeaver.debug("init")
-        self.getMyAccountQuery = getMyAccountQuery
-        self.editProfileService = editProfileService
-    }
-    
     deinit {
         SwiftyBeaver.debug("deinit")
     }
@@ -92,7 +91,8 @@ class EditProfileViewModel: ObservableObject {
         isSaving = true
 
         do {
-            try await editProfileService.saveProfile(email: emailAddress, fullName: fullName)
+            let command = UpdateProfileCommand(email: emailAddress, fullName: fullName, image: newProfilePicture?.pngData())
+            try await updateProfileCommandHandler.handle(command)
             isSaving = false
         } catch {
             isSaving = false
@@ -125,7 +125,6 @@ class EditProfileViewModel: ObservableObject {
     }
     
     func changeProfilePicture(to image: UIImage) {
-        editProfileService.updateProfilePicture(image)
         profilePicture = .uiImage(image)
         isShowingSheet = false
         profileDidChange()

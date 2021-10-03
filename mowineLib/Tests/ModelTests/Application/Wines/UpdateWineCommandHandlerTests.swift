@@ -21,7 +21,7 @@ class UpdateWineCommandHandlerTests: XCTestCase {
     var other: WineType!
 
     override func setUpWithError() throws {
-        createWineImages = CreateWineImagesCommandHandler(wineImageStorage: MockWineImageStorage(), imageResizer: FakeImageResizer())
+        createWineImages = CreateWineImagesCommandHandler(wineImageStorage: MockWineImageStorage(), imageResizer: MockImageResizer())
         sut = UpdateWineCommandHandler(
             wineRepository: mockWineRepository,
             wineTypeRepository: mockWineTypeRepository,
@@ -130,11 +130,5 @@ class UpdateWineCommandHandlerTests: XCTestCase {
 
         // Then
         expect(error).to(matchError(UpdateWineError.invalidWineType))
-    }
-}
-
-fileprivate class FakeImageResizer: ImageResizer {
-    func resize(data: Data, to newSize: CGSize) throws -> Data {
-        fatalError("Do not call")
     }
 }

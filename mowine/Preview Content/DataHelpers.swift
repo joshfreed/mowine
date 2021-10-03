@@ -9,31 +9,6 @@
 import UIKit
 import Model
 
-extension EditProfileViewModel {
-    static func make() -> EditProfileViewModel {
-        .make(emailAddress: "", fullName: "Barry Jones")
-    }
-    
-    static func make(emailAddress: String, fullName: String) -> EditProfileViewModel {
-        let getMyAccountQuery = GetMyAccountQueryHandler(userRepository: FakeUserRepository(), session: FakeSession())
-        let profilePictureWorker = FakeProfilePictureWorker()
-        let userProfileService = UserProfileService(session: FakeSession(), userRepository: FakeUserRepository(), profilePictureWorker: profilePictureWorker)
-        let editProfileService = EditProfileService(
-            session: FakeSession(),
-            userProfileService: userProfileService,
-            userRepository: FakeUserRepository()
-        )
-        let vm = EditProfileViewModel(getMyAccountQuery: getMyAccountQuery, editProfileService: editProfileService)
-        vm.fullName = fullName
-        vm.emailAddress = emailAddress
-        return vm
-    }
-}
-
-class FakeProfilePictureWorker: ProfilePictureWorkerProtocol {
-    func setProfilePicture(image: UIImage) async throws {}
-}
-
 extension EmailReauthViewModel {
     static func make(password: String? = nil, error: String? = nil) -> EmailReauthViewModel {
         let vm = EmailReauthViewModel()
