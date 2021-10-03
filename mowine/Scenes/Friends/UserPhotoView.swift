@@ -8,28 +8,44 @@
 
 import SwiftUI
 
+enum UserPhoto {
+    case url(URL?)
+    case uiImage(UIImage)
+}
+
 struct UserPhotoView: View {
-    let photoUrl: String
+    let photo: UserPhoto
     var size: CGFloat = 44
     
     var body: some View {
-        RemoteImageView(
-            url: photoUrl,
-            noImage: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
-            loading: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
-            error: { Image("No Profile Picture").resizable().frame(width: size, height: size) },
-            loaded: {
-                $0.resizable()
+        Group {
+            switch photo {
+            case .url(let url):
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Image("No Profile Picture").resizable()
+                }
+            case .uiImage(let uiImage):
+                Image(uiImage: uiImage)
+                    .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: size, height: size)
-                    .clipShape(Circle())
+
             }
-        )
+        }
+        .frame(width: size, height: size)
+        .clipShape(Circle())
     }
 }
 
 struct UserPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        UserPhotoView(photoUrl: "")
+        VStack {
+            UserPhotoView(photo: .url(URL(string: "https://picsum.photos/150")), size: 128)
+            UserPhotoView(photo: .url(URL(string: "")), size: 128)
+            UserPhotoView(photo: .uiImage(UIImage(named: "JoshCats")!), size: 128)
+        }
     }
 }

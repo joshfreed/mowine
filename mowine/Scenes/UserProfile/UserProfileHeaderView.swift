@@ -13,7 +13,7 @@ struct UserProfileHeaderView: View {
     
     var body: some View {
         VStack(spacing: 8) {
-            UserPhotoView(photoUrl: vm.profilePictureUrl, size: 64)
+            UserPhotoView(photo: .url(vm.profilePicture), size: 64)
             Text(vm.fullName)
                 .font(.system(size: 28))
                 .fontWeight(.black)

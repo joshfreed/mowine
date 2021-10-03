@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct ProfilePictureOverlayView: View {
-    @Binding
-    var profilePicture: UIImage?
+    @Binding var profilePicture: UserPhoto
 
     var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
 
@@ -19,8 +18,7 @@ struct ProfilePictureOverlayView: View {
 
     var body: some View {
         ZStack {
-            ProfilePictureView2(image: profilePicture)
-                .frame(width: 128, height: 128)
+            UserPhotoView(photo: profilePicture, size: 128)
             Image("Profile Picture Overlay")
                 .resizable()
                 .frame(width: 128, height: 128)
@@ -43,8 +41,9 @@ struct ProfilePictureOverlayView: View {
 }
 
 struct ProfilePictureOverlayView_Previews: PreviewProvider {
+    static var photo: UserPhoto = .uiImage(UIImage(named: "JoshCats")!)
+
     static var previews: some View {
-        ProfilePictureOverlayView(profilePicture: .constant(nil)).previewLayout(.sizeThatFits)
-        ProfilePictureOverlayView(profilePicture: .constant(UIImage(named: "JoshCats"))).previewLayout(.sizeThatFits)
+        ProfilePictureOverlayView(profilePicture: .constant(photo)).previewLayout(.sizeThatFits)
     }
 }

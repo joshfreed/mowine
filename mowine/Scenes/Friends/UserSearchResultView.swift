@@ -14,7 +14,7 @@ struct UserSearchResultView: View {
     
     var body: some View {
         HStack(spacing: 8) {
-            UserPhotoView(photoUrl: user.profilePictureUrl)
+            UserPhotoView(photo: .url(user.profilePictureUrl))
             
             Text(user.fullName)
                 .font(.system(size: 21))
@@ -29,7 +29,7 @@ struct UserSearchResultView: View {
 struct UserSearchResultView_Previews: PreviewProvider {
     static var previews: some View {
         UserSearchResultView(
-            user: .init(id: "1", email: "test@test.com", fullName: "Test Guy", profilePictureUrl: "")
+            user: .init(id: "1", email: "test@test.com", fullName: "Test Guy", profilePictureUrl: nil)
         )
             .environmentObject(FriendsService.make())
     }

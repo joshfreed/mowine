@@ -10,11 +10,11 @@ import SwiftUI
 
 struct FriendListItemView: View {
     let name: String
-    let thumbnail: String
+    let thumbnail: URL?
     
     var body: some View {
         HStack(spacing: 8) {
-            UserPhotoView(photoUrl: thumbnail)
+            UserPhotoView(photo: .url(thumbnail))
             
             Text(name)
                 .font(.system(size: 21))
@@ -26,6 +26,6 @@ struct FriendListItemView: View {
 
 struct FriendListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        FriendListItemView(name: "Test Person", thumbnail: "")
+        FriendListItemView(name: "Test Person", thumbnail: nil)
     }
 }

@@ -84,7 +84,7 @@ extension DependencyContainer {
 
 
         // UI Layer
-        container.register(.singleton) { EditProfileService(session: $0, profilePictureWorker: $1, userProfileService: $2, userRepository: $3) }
+        container.register(.singleton) { EditProfileService(session: $0, userProfileService: $1, userRepository: $2) }
 
 
         // Application Layer

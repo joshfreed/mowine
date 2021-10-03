@@ -11,7 +11,7 @@ import SwiftUI
 struct EditProfileFormView: View {
     @Binding var fullName: String
     @Binding var emailAddress: String
-    @Binding var profilePicture: UIImage?
+    @Binding var profilePicture: UserPhoto
     var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
 
     var body: some View {
@@ -41,7 +41,7 @@ struct EditProfileFormView_Previews: PreviewProvider {
     struct ShimView: View {
         @State var fullName = "Testy Testguy"
         @State var emailAddress = "test@test.com"
-        @State var profilePicture: UIImage? = UIImage(named: "JoshCats")
+        @State var profilePicture: UserPhoto = .uiImage(UIImage(named: "JoshCats")!)
 
         var body: some View {
             EditProfileFormView(fullName: $fullName, emailAddress: $emailAddress, profilePicture: $profilePicture)

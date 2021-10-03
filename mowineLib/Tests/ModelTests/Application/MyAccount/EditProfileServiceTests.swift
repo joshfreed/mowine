@@ -15,14 +15,12 @@ import UIKit.UIImage
 class EditProfileServiceTests: XCTestCase {
     var sut: EditProfileService!
     let session = MockSession()
-    let profilePictureWorker = MockProfilePictureWorker()
     let userProfileService = MockUserProfileService()
     let userRepository = MockUserRepository()
 
     override func setUp() {
         sut = EditProfileService(
             session: session,
-            profilePictureWorker: profilePictureWorker,
             userProfileService: userProfileService,
             userRepository: userRepository
         )

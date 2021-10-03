@@ -35,18 +35,18 @@ public extension UsersService {
         public var id: String
         public var email: String
         public var fullName: String
-        public var profilePictureUrl: String
+        public var profilePictureUrl: URL?
 
         public static func fromUser(_ user: User) -> UserSearchResult {
             UserSearchResult(
                 id: user.id.asString,
                 email: user.emailAddress,
                 fullName: user.fullName,
-                profilePictureUrl: user.profilePictureUrl?.absoluteString ?? ""
+                profilePictureUrl: user.profilePictureUrl
             )
         }
 
-        public init(id: String, email: String, fullName: String, profilePictureUrl: String) {
+        public init(id: String, email: String, fullName: String, profilePictureUrl: URL?) {
             self.id = id
             self.email = email
             self.fullName = fullName

@@ -45,7 +45,7 @@ public class FriendsService: ObservableObject {
             switch result {
             case .success(let friends):
                 self.friends = friends.map {
-                    Friend(id: $0.id.asString, name: $0.fullName, profilePictureUrl: $0.profilePictureUrl?.absoluteString ?? "")
+                    Friend(id: $0.id.asString, name: $0.fullName, profilePictureUrl: $0.profilePictureUrl)
                 }
             case .failure(let error):
                 SwiftyBeaver.error("\(error)")
@@ -78,9 +78,9 @@ extension FriendsService {
     public struct Friend: Identifiable {
         public var id: String
         public var name: String
-        public var profilePictureUrl: String
+        public var profilePictureUrl: URL?
 
-        public init(id: String, name: String, profilePictureUrl: String) {
+        public init(id: String, name: String, profilePictureUrl: URL?) {
             self.id = id
             self.name = name
             self.profilePictureUrl = profilePictureUrl

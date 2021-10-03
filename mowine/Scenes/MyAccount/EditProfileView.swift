@@ -74,7 +74,6 @@ fileprivate func viewModel() -> EditProfileViewModel {
 
     return EditProfileViewModel(
         getMyAccountQuery: try! JFContainer.shared.resolve(),
-        profilePictureWorker: try! JFContainer.shared.resolve(),
         editProfileService: try! JFContainer.shared.resolve()
     )
 }

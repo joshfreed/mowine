@@ -15,7 +15,7 @@ import FirebaseCrashlytics
 @MainActor
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""
-    @Published var profilePictureUrl: String = ""
+    @Published var profilePicture: URL?
     
     private let userId: String
     private let users: UsersService
@@ -34,7 +34,7 @@ class UserProfileHeaderViewModel: ObservableObject {
         do {
             let user = try await users.getUserById(userId)
             fullName = user.fullName
-            profilePictureUrl = user.profilePictureUrl?.absoluteString ?? ""
+            profilePicture = user.profilePictureUrl
         } catch {
             Crashlytics.crashlytics().record(error: error)
             SwiftyBeaver.error("\(error)")

@@ -20,11 +20,10 @@ extension EditProfileViewModel {
         let userProfileService = UserProfileService(session: FakeSession(), userRepository: FakeUserRepository(), profilePictureWorker: profilePictureWorker)
         let editProfileService = EditProfileService(
             session: FakeSession(),
-            profilePictureWorker: profilePictureWorker,
             userProfileService: userProfileService,
             userRepository: FakeUserRepository()
         )
-        let vm = EditProfileViewModel(getMyAccountQuery: getMyAccountQuery, profilePictureWorker: profilePictureWorker, editProfileService: editProfileService)
+        let vm = EditProfileViewModel(getMyAccountQuery: getMyAccountQuery, editProfileService: editProfileService)
         vm.fullName = fullName
         vm.emailAddress = emailAddress
         return vm
@@ -33,16 +32,6 @@ extension EditProfileViewModel {
 
 class FakeProfilePictureWorker: ProfilePictureWorkerProtocol {
     func setProfilePicture(image: UIImage) async throws {}
-
-    func setProfilePicture(image: UIImage, completion: @escaping (Result<Void, Error>) -> ()) {
-        
-    }
-    
-    func getProfilePicture(user: User, completion: @escaping (Result<Data?, Error>) -> ()) {
-        
-    }
-    
-    func getProfilePicture(url: URL) async throws -> Data? { nil }
 }
 
 extension EmailReauthViewModel {
@@ -62,9 +51,9 @@ extension FriendsService {
     static func make() -> FriendsService {
         let service = FriendsService(session: FakeSession(), userRepository: FakeUserRepository())
         service.friends = [
-            .init(id: "1", name: "Barry Jones", profilePictureUrl: ""),
-            .init(id: "2", name: "Mark Buffalo", profilePictureUrl: ""),
-            .init(id: "3", name: "Hanky Panky", profilePictureUrl: ""),
+            .init(id: "1", name: "Barry Jones", profilePictureUrl: nil),
+            .init(id: "2", name: "Mark Buffalo", profilePictureUrl: nil),
+            .init(id: "3", name: "Hanky Panky", profilePictureUrl: nil),
         ]
         return service
     }

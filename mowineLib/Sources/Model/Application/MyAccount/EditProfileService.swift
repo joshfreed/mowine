@@ -11,15 +11,13 @@ import UIKit.UIImage
 
 public class EditProfileService {
     let session: Session
-    let profilePictureWorker: ProfilePictureWorkerProtocol
     let userProfileService: UserProfileService
     let userRepository: UserRepository
 
     private(set) var newProfilePicture: UIImage?
 
-    public init(session: Session, profilePictureWorker: ProfilePictureWorkerProtocol, userProfileService: UserProfileService, userRepository: UserRepository) {
+    public init(session: Session, userProfileService: UserProfileService, userRepository: UserRepository) {
         self.session = session
-        self.profilePictureWorker = profilePictureWorker
         self.userProfileService = userProfileService
         self.userRepository = userRepository
     }

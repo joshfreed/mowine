@@ -44,8 +44,4 @@ where
         _user.profilePictureUrl = url
         try await userRepository.save(user: _user)
     }
-    
-    func getProfilePicture(url: URL) async throws -> Data? {
-        try await profilePictureService.getData(url: url)
-    }
 }

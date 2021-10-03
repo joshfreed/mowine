@@ -29,7 +29,7 @@ class EditProfileViewModel: ObservableObject {
             }
         }
     }
-    @Published var profilePicture: UIImage?
+    @Published var profilePicture: UserPhoto = .url(nil)
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
@@ -39,25 +39,21 @@ class EditProfileViewModel: ObservableObject {
     @Published var isReauthenticating = false
 
     private let getMyAccountQuery: GetMyAccountQuery
-    private let profilePictureWorker: ProfilePictureWorkerProtocol
     private let editProfileService: EditProfileService
     private var hasChanges = false
 
     init() {
         SwiftyBeaver.debug("init")
         self.getMyAccountQuery = try! JFContainer.shared.container.resolve()
-        self.profilePictureWorker = try! JFContainer.shared.container.resolve()
         self.editProfileService = try! JFContainer.shared.container.resolve()
     }
 
     init(
         getMyAccountQuery: GetMyAccountQuery,
-        profilePictureWorker: ProfilePictureWorkerProtocol,
         editProfileService: EditProfileService
     ) {
         SwiftyBeaver.debug("init")
         self.getMyAccountQuery = getMyAccountQuery
-        self.profilePictureWorker = profilePictureWorker
         self.editProfileService = editProfileService
     }
     
@@ -71,7 +67,6 @@ class EditProfileViewModel: ObservableObject {
                 return
             }
             setProfile(profile)
-            try await fetchProfilePicture(url: profile.profilePictureUrl)
             hasChanges = false
         } catch {
             SwiftyBeaver.error("\(error)")
@@ -82,14 +77,7 @@ class EditProfileViewModel: ObservableObject {
     private func setProfile(_ profile: GetMyAccountQueryResponse) {
         fullName = profile.fullName
         emailAddress = profile.emailAddress
-    }
-
-    private func fetchProfilePicture(url: URL?) async throws {
-        if let url = url, let data = try await profilePictureWorker.getProfilePicture(url: url) {
-            profilePicture = UIImage(data: data)
-        } else {
-            profilePicture = nil
-        }
+        profilePicture = .url(profile.profilePictureUrl)
     }
 
     private func profileDidChange() {
@@ -138,7 +126,7 @@ class EditProfileViewModel: ObservableObject {
     
     func changeProfilePicture(to image: UIImage) {
         editProfileService.updateProfilePicture(image)
-        profilePicture = image
+        profilePicture = .uiImage(image)
         isShowingSheet = false
         profileDidChange()
     }

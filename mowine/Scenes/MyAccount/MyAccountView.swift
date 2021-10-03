@@ -30,8 +30,7 @@ struct MyAccountView: View {
     var body: some View {
         VStack(spacing: 8) {
             
-            ProfilePictureView2(image: viewModel.profilePicture)
-                .frame(width: 128, height: 128)
+            UserPhotoView(photo: viewModel.profilePicture, size: 128)
             
             Color.clear.frame(height: 0)
             
@@ -96,26 +95,12 @@ struct MyAccountView: View {
     }
 }
 
-struct ProfilePictureView2: View {
-    let image: UIImage?
-    
-    var body: some View {
-        if let uiImage = image {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .clipShape(Circle())
-        } else {
-            Image("No Profile Picture").resizable()
-        }
-    }
-}
-
 struct MyAccountView_Previews: PreviewProvider {
     static var viewModel: MyAccountViewModel = {
         let vm = MyAccountViewModel()
         vm.fullName = "Barry Jones"
         vm.emailAddress = "jonesy@barryjones.com"
+        vm.profilePicture = .url(URL(string: "https://picsum.photos/150"))
         return vm
     }()
 

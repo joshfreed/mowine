@@ -10,5 +10,4 @@ import UIKit.UIImage
 
 public protocol ProfilePictureWorkerProtocol {
     func setProfilePicture(image: UIImage) async throws
-    func getProfilePicture(url: URL) async throws -> Data?
 }
