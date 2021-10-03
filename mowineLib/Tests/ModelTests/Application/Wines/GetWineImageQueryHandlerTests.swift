@@ -12,46 +12,28 @@ import Nimble
 
 class GetWineImageQueryHandlerTests: XCTestCase {
     var sut: GetWineImageQueryHandler!
-    let mockSession = MockSession()
-    let mockWineImageService = MockWineImageService()
+    let mockWineImageStorage = MockWineImageStorage()
     let wineId = WineId()
-    let userId = UserId()
 
     override func setUpWithError() throws {
-        sut = .init(session: mockSession, wineImageService: mockWineImageService)
+        sut = .init(wineImageStorage: mockWineImageStorage)
     }
 
     func test_getWineImage_image_not_found() async throws {
-        mockSession.login(userId: userId)
+        mockWineImageStorage.configure_getImage_toThrow(WineImageStorageErrors.imageNotFound)
+
         let image = try await sut.handle(wineId: wineId.asString)
+
         XCTAssertNil(image)
     }
 
     func test_getWineImage_returns_the_image() async throws {
-        let expectedName = WineFullImageName(userId: userId, wineId: wineId)
-        let expectedImage = TestWineImage()
-        mockSession.login(userId: userId)
-        mockWineImageService.imageToReturn = expectedImage
+        let data = Data(repeating: 1, count: 100)
+        mockWineImageStorage.configure_getImage_toReturn(data)
 
-        let image = try await sut.handle(wineId: wineId.asString)
+        let actual = try await sut.handle(wineId: wineId.asString)
 
-        XCTAssertEqual(expectedImage, image as? TestWineImage)
-        XCTAssertEqual(expectedName, mockWineImageService.wineImageName as? WineFullImageName)
+        XCTAssertEqual(data, actual)
+        mockWineImageStorage.verify_getImage_wasCalled(withWineId: wineId, andSize: .full)
     }
-
-    func test_getWineImage_throws_exception_if_not_logged_in() async {
-        do {
-            _ = try await sut.handle(wineId: wineId.asString)
-            XCTFail("Expected to throw error, but succeeded")
-        } catch {
-            XCTAssertEqual(error as? SessionError, .notLoggedIn)
-        }
-    }
-}
-
-struct TestWineImage: WineImage, Equatable {
-    let rando = UUID().uuidString
-
-    func resize(to desiredSize: CGSize) -> WineImage? { nil }
-    func pngData() -> Data? { nil }
 }

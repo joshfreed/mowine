@@ -253,49 +253,26 @@ class FakeDataWriteService: DataWriteService {
     }
 }
 
-/*
-class FakeRemoteWineDataStore: RemoteWineDataStore {
-    init() {
-        winesDB[maureen.id]?[1].location = "This is a long string that is a long string that should wrap around and go to the next liiiiiiine?"
-    }
-    
-    func getTopWines(userId: UserId, completion: @escaping (Result<[Wine]>) -> ()) {
-        var wines = winesDB[userId] ?? []
-        wines = wines.sorted(by: { $0.rating > $1.rating })
-        wines = Array(wines.prefix(3))
-        completion(.success(wines))
-    }
-    
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine]>) -> ()) {
-        var wines = winesDB[userId] ?? []
-        wines = wines.filter { $0.type == wineType }
-        completion(.success(wines))
-    }
-}
-*/
-
 class FakeWineWorker: CreateWineCommandHandler {
     init() {
         super.init(
             wineRepository: MemoryWineRepository(),
-            imageWorker: FakeWineImageWorker(),
-            session: FakeSession()
+            session: FakeSession(),
+            createWineImages: CreateWineImagesCommandHandler(wineImageStorage: FakeWineImageStorage(), imageResizer: UIImageResizer())
         )
-    }
-}
-
-class FakeWineImageWorker: WineImageWorkerProtocol {
-    func createImages(wineId: WineId, photo: WineImage?) async throws -> Data? {
-        nil
-    }
-    
-    func fetchPhoto(wineId: WineId) async throws -> Data? {
-        nil
     }
 }
 
 class FakeUsersService: UsersService {
     init() {
         super.init(session: FakeSession(), userRepository: FakeUserRepository())
+    }
+}
+
+class FakeWineImageStorage: WineImageStorage {
+    func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {}
+
+    func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
+        Data()
     }
 }

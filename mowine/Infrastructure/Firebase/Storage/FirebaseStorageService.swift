@@ -7,6 +7,7 @@ import Foundation
 import FirebaseStorage
 import FirebaseStorageSwift
 import SwiftyBeaver
+import Model
 
 class FirebaseStorageService {
     private let basePath: String?
@@ -57,5 +58,47 @@ extension FirebaseStorageService: DataWriteService {
     func putData(_ data: Data, url: String) async throws -> URL {
         SwiftyBeaver.debug("Putting data to firebase \(url)")
         return try await putData(data, path: url)
+    }
+}
+
+class FirebaseWineImageStorage: WineImageStorage {
+    private let storage: FirebaseStorageService
+    private let session: Session
+
+    init(storage: FirebaseStorageService, session: Session) {
+        self.storage = storage
+        self.session = session
+    }
+
+    func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {
+        guard let userId = session.currentUserId else { fatalError("No user logged in") }
+
+        let path: String
+        switch size {
+        case .thumbnail: path = "\(userId)/\(wineId)-thumb.png"
+        case .full: path = "\(userId)/\(wineId).png"
+        }
+
+        _ = try await storage.putData(data, path: path)
+    }
+
+    func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
+        guard let userId = session.currentUserId else { fatalError("No user logged in") }
+
+        let path: String
+        switch size {
+        case .thumbnail: path = "\(userId)/\(wineId)-thumb.png"
+        case .full: path = "\(userId)/\(wineId).png"
+        }
+
+        do {
+            return try await storage.getData(path: path)
+        } catch {
+            let errorCode = (error as NSError).code
+            if StorageErrorCode(rawValue: errorCode) == .objectNotFound {
+                throw WineImageStorageErrors.imageNotFound
+            }
+            throw error
+        }
     }
 }

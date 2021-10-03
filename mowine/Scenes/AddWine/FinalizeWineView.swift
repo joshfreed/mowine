@@ -62,7 +62,7 @@ struct FinalizeWineView: View {
                 rating: model.rating,
                 wineType: wineType,
                 wineVariety: model.wineVariety,
-                image: model.image
+                image: model.image?.pngData()
             )
             try await createWineCommandHandler.createWine(command)
             vm.closeModal = true

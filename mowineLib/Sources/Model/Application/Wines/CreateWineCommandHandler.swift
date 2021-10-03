@@ -12,11 +12,11 @@ import SwiftyBeaver
 public struct CreateWineCommand {
     public var wineType: WineType
     public var wineVariety: WineVariety?
-    public var image: WineImage?
+    public var image: Data?
     public var name: String
     public var rating: Int
 
-    public init(name: String, rating: Int, wineType: WineType, wineVariety: WineVariety? = nil, image: WineImage? = nil) {
+    public init(name: String, rating: Int, wineType: WineType, wineVariety: WineVariety? = nil, image: Data? = nil) {
         self.name = name
         self.rating = rating
         self.wineType = wineType
@@ -27,14 +27,14 @@ public struct CreateWineCommand {
 
 open class CreateWineCommandHandler {
     let wineRepository: WineRepository
-    let imageWorker: WineImageWorkerProtocol
     let session: Session
+    let createWineImages: CreateWineImagesCommandHandler
     
-    public init(wineRepository: WineRepository, imageWorker: WineImageWorkerProtocol, session: Session) {
+    public init(wineRepository: WineRepository, session: Session, createWineImages: CreateWineImagesCommandHandler) {
         SwiftyBeaver.verbose("CreateWineCommandHandler::init")
         self.wineRepository = wineRepository
-        self.imageWorker = imageWorker
         self.session = session
+        self.createWineImages = createWineImages
     }
 
     deinit {
@@ -53,8 +53,10 @@ open class CreateWineCommandHandler {
         let wine = Wine(userId: userId, type: command.wineType, name: command.name, rating: Double(command.rating))
         wine.variety = command.wineVariety
 
-        _ = try await imageWorker.createImages(wineId: wine.id, photo: command.image)
-
         try await wineRepository.add(wine)
+
+        if let imageData = command.image {
+            _ = try await createWineImages.handle(.init(wineId: wine.id.asString, data: imageData))
+        }
     }
 }

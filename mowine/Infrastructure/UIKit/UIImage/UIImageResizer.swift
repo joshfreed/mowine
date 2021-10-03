@@ -1,26 +1,34 @@
 //
-//  UIImageWineImage.swift
+//  UIImageResizer.swift
 //  mowine
 //
-//  Created by Josh Freed on 9/30/21.
+//  Created by Josh Freed on 10/1/21.
 //  Copyright © 2021 Josh Freed. All rights reserved.
 //
 
-import Foundation
-import UIKit.UIImage
+import UIKit
 import Model
 
-class UIImageWineImageFactory: WineImageFactory {
-    func createImage(from data: Data) throws -> WineImage {
+class UIImageResizer: ImageResizer {
+    func resize(data: Data, to newSize: CGSize) throws -> Data {
         guard let image = UIImage(data: data) else {
-            throw WineImageFactoryErrors.invalidImageData
+            fatalError("Not an image")
         }
-        return image
+
+        guard let resizedImage = image.resize(to: newSize) else {
+            fatalError("resize failed")
+        }
+
+        guard let pngData = resizedImage.pngData() else {
+            fatalError("UNable to convert")
+        }
+
+        return pngData
     }
 }
 
-extension UIImage: WineImage {
-    public func resize(to desiredSize: CGSize) -> WineImage? {
+extension UIImage {
+    public func resize(to desiredSize: CGSize) -> UIImage? {
         let scale = min(desiredSize.width / size.width, desiredSize.height / size.height)
         let newSize = CGSize(width: size.width * scale, height: size.height * scale)
 

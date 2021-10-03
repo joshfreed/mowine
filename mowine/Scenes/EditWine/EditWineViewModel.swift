@@ -67,7 +67,9 @@ class EditWineViewModel: ObservableObject {
         }
 
         do {
-            form.image = try await wineImage as? UIImage
+            if let imageData = try await wineImage {
+                form.image = UIImage(data: imageData)
+            }
         } catch {
             SwiftyBeaver.error("\(error)")
             Crashlytics.crashlytics().record(error: error)
@@ -88,7 +90,7 @@ class EditWineViewModel: ObservableObject {
         command.price = form.price
         command.notes = form.notes
         command.pairings = form.pairings
-        command.image = form.image
+        command.image = form.image?.pngData()
 
         defer {
             isSaving = false

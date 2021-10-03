@@ -16,7 +16,7 @@ public struct UpdateWineCommand {
     public var location: String?
     public var price: String?
     public var notes: String?
-    public var image: WineImage?
+    public var image: Data?
     public var pairings: [String] = []
 
     public init(wineId: String, name: String, rating: Double, type: String) {
@@ -29,21 +29,17 @@ public struct UpdateWineCommand {
 
 public class UpdateWineCommandHandler {
     let wineRepository: WineRepository
-    let imageWorker: WineImageWorkerProtocol
     let wineTypeRepository: WineTypeRepository
+    let createWineImages: CreateWineImagesCommandHandler
 
-    public init(wineRepository: WineRepository, imageWorker: WineImageWorkerProtocol, wineTypeRepository: WineTypeRepository) {
+    public init(wineRepository: WineRepository, wineTypeRepository: WineTypeRepository, createWineImages: CreateWineImagesCommandHandler) {
         self.wineRepository = wineRepository
-        self.imageWorker = imageWorker
         self.wineTypeRepository = wineTypeRepository
+        self.createWineImages = createWineImages
     }
 
     public func handle(_ command: UpdateWineCommand) async throws {
         let wineId = WineId(string: command.wineId)
-
-        if let thumbnail = try await imageWorker.createImages(wineId: wineId, photo: command.image) {
-            NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wineId": wineId.asString, "thumbnail": thumbnail])
-        }
 
         guard let wine = try await wineRepository.getWine(by: wineId) else {
             throw UpdateWineError.wineNotFound
@@ -69,6 +65,11 @@ public class UpdateWineCommandHandler {
         }
 
         try await wineRepository.save(wine)
+
+        if let imageData = command.image {
+            _ = try await createWineImages.handle(.init(wineId: wine.id.asString, data: imageData))
+            // NotificationCenter.default.post(name: .wineUpdated, object: nil, userInfo: ["wineId": wineId.asString, "thumbnail": thumbnail])
+        }
     }
 }
 

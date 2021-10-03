@@ -8,18 +8,19 @@
 import Foundation
 
 public class GetWineImageQueryHandler {
-    let session: Session
-    let wineImageService: WineImageService
+    let wineImageStorage: WineImageStorage
 
-    public init(session: Session, wineImageService: WineImageService) {
-        self.session = session
-        self.wineImageService = wineImageService
+    public init(wineImageStorage: WineImageStorage) {
+        self.wineImageStorage = wineImageStorage
     }
 
-    public func handle(wineId: String) async throws -> WineImage? {
-        guard let userId = session.currentUserId else { throw SessionError.notLoggedIn }
+    public func handle(wineId: String) async throws -> Data? {
         let wineId = WineId(string: wineId)
-        let imageName = WineFullImageName(userId: userId, wineId: wineId)
-        return try await wineImageService.fetchImage(named: imageName)
+
+        do {
+            return try await wineImageStorage.getImage(wineId: wineId, size: .full)
+        } catch WineImageStorageErrors.imageNotFound {
+            return nil
+        }
     }
 }
