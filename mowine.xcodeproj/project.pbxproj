@@ -212,7 +212,6 @@
 		53CC0F2E27020848000B882F /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECA8256F0D3100321944 /* EditProfileView.swift */; };
 		53CC0F3027020848000B882F /* MemoryWineTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53489615203DE5A100B7547A /* MemoryWineTypeRepository.swift */; };
 		53CC0F3127020848000B882F /* EmailReauthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD1E21257DBADC008C1DA7 /* EmailReauthViewModel.swift */; };
-		53CC0F3227020848000B882F /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA0E225E8EA0002BCAB0 /* DataService.swift */; };
 		53CC0F3327020848000B882F /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D8B872533B85000CE297E /* RatingView.swift */; };
 		53CC0F3527020848000B882F /* UserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330C20925E5B39F0063E7C4 /* UserPhotoView.swift */; };
 		53CC0F3627020848000B882F /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAED0325EAF9C30099B2E1 /* UserProfileHeaderView.swift */; };
@@ -256,7 +255,6 @@
 		53CC0F6127020848000B882F /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */; };
 		53CC0F6327020848000B882F /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECB2256F0E9D00321944 /* FancyTextField.swift */; };
 		53CC0F6427020848000B882F /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */; };
-		53CC0F6527020848000B882F /* UrlSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */; };
 		53CC0F6627020848000B882F /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E301A25A2615500608A29 /* AppView.swift */; };
 		53CC0F6727020848000B882F /* FriendListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA5225DECFB900658637 /* FriendListItemView.swift */; };
 		53CC0F6827020848000B882F /* AppleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCA86776975810090DFF0 /* AppleProvider.swift */; };
@@ -308,8 +306,6 @@
 		53E2FA4225DDB87300658637 /* MyFriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA4125DDB87300658637 /* MyFriendsListView.swift */; };
 		53E2FA4625DDB87C00658637 /* SearchUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA4525DDB87C00658637 /* SearchUsersView.swift */; };
 		53E2FA5325DECFB900658637 /* FriendListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA5225DECFB900658637 /* FriendListItemView.swift */; };
-		53EAFA0F225E8EA0002BCAB0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA0E225E8EA0002BCAB0 /* DataService.swift */; };
-		53EAFA13225E930F002BCAB0 /* DataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */; };
 		53F24867206D40370046B031 /* GraphApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24866206D40370046B031 /* GraphApi.swift */; };
 		53F24874206D4ADA0046B031 /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F24873206D4ADA0046B031 /* Facebook.swift */; };
 		53F44CC02591066200FF319E /* FirebaseCredentialFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCF19F02DACC217402068 /* FirebaseCredentialFactory.swift */; };
@@ -329,7 +325,6 @@
 		53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FFECB2256F0E9D00321944 /* FancyTextField.swift */; };
 		E9AFC0EEF0DDE04612FD7B5F /* AppleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCA86776975810090DFF0 /* AppleProvider.swift */; };
 		E9AFC1B22362621B1AE56842 /* FacebookProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCF59AC2D5931D15DAF4D /* FacebookProvider.swift */; };
-		E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */; };
 		E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC155637A1055FB4B3909 /* FirebaseStorageService.swift */; };
 		E9AFCAF63D4806E48205119C /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC816F729F2505C02F653 /* RemoteImageView.swift */; };
 		E9AFCC58AF392BD97A67CB71 /* RemoteImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AFC34117FE7BDB48648C0F /* RemoteImageModel.swift */; };
@@ -512,8 +507,6 @@
 		53E2FA4125DDB87300658637 /* MyFriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsListView.swift; sourceTree = "<group>"; };
 		53E2FA4525DDB87C00658637 /* SearchUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersView.swift; sourceTree = "<group>"; };
 		53E2FA5225DECFB900658637 /* FriendListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItemView.swift; sourceTree = "<group>"; };
-		53EAFA0E225E8EA0002BCAB0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServiceTests.swift; sourceTree = "<group>"; };
 		53F24866206D40370046B031 /* GraphApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphApi.swift; sourceTree = "<group>"; };
 		53F24873206D4ADA0046B031 /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		53F47F0A25853F1600910BDC /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
@@ -540,7 +533,6 @@
 		E9AFC34117FE7BDB48648C0F /* RemoteImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageModel.swift; sourceTree = "<group>"; };
 		E9AFC816F729F2505C02F653 /* RemoteImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		E9AFCA86776975810090DFF0 /* AppleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleProvider.swift; sourceTree = "<group>"; };
-		E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlSessionService.swift; sourceTree = "<group>"; };
 		E9AFCF19F02DACC217402068 /* FirebaseCredentialFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseCredentialFactory.swift; sourceTree = "<group>"; };
 		E9AFCF59AC2D5931D15DAF4D /* FacebookProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -750,13 +742,11 @@
 			children = (
 				5393F0212706627A000E9029 /* UIKit */,
 				536E3ADD258F9E5A00D84F10 /* Apple */,
-				53EAFA0D225E8E8D002BCAB0 /* Data */,
 				533597AC21BC3ED600CEFD45 /* Firebase */,
 				53F24865206D3F5E0046B031 /* Facebook */,
 				536E85A2204F506E004D5426 /* Fake */,
 				536E3AD4258F9CD500D84F10 /* Google */,
 				5348960C203DE44C00B7547A /* Persistence */,
-				E9AFC254CE7854D45CAB35BA /* URLSession */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -1021,29 +1011,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		53EAFA0D225E8E8D002BCAB0 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				53EAFA0E225E8EA0002BCAB0 /* DataService.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		53EAFA10225E92EF002BCAB0 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
 				53AC3FFE25D705E40041AED9 /* Firebase */,
-				53EAFA11225E92F9002BCAB0 /* Data */,
 			);
 			path = Infrastructure;
-			sourceTree = "<group>";
-		};
-		53EAFA11225E92F9002BCAB0 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				53EAFA12225E930F002BCAB0 /* DataServiceTests.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		53ED1F7D204F2D2F00C129BC /* Friends */ = {
@@ -1199,14 +1172,6 @@
 				532789F5267979C700649624 /* LocalAuthentication.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E9AFC254CE7854D45CAB35BA /* URLSession */ = {
-			isa = PBXGroup;
-			children = (
-				E9AFCD1F770ADAD67F96432D /* UrlSessionService.swift */,
-			);
-			path = URLSession;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1546,7 +1511,6 @@
 				5362FF482704BF100079677B /* NewWineModel.swift in Sources */,
 				53CC0F3027020848000B882F /* MemoryWineTypeRepository.swift in Sources */,
 				53CC0F3127020848000B882F /* EmailReauthViewModel.swift in Sources */,
-				53CC0F3227020848000B882F /* DataService.swift in Sources */,
 				53CC0F3327020848000B882F /* RatingView.swift in Sources */,
 				53CC0F3527020848000B882F /* UserPhotoView.swift in Sources */,
 				53CC0F3627020848000B882F /* UserProfileHeaderView.swift in Sources */,
@@ -1590,7 +1554,6 @@
 				53CC0F6127020848000B882F /* SignInWithGoogle.swift in Sources */,
 				53CC0F6327020848000B882F /* FancyTextField.swift in Sources */,
 				53CC0F6427020848000B882F /* FirebaseStorageService.swift in Sources */,
-				53CC0F6527020848000B882F /* UrlSessionService.swift in Sources */,
 				53CC0F6627020848000B882F /* AppView.swift in Sources */,
 				53CC0F6727020848000B882F /* FriendListItemView.swift in Sources */,
 				53CC0F6827020848000B882F /* AppleProvider.swift in Sources */,
@@ -1682,7 +1645,6 @@
 				5362FF472704BF100079677B /* NewWineModel.swift in Sources */,
 				53489616203DE5A100B7547A /* MemoryWineTypeRepository.swift in Sources */,
 				53DD1E22257DBADC008C1DA7 /* EmailReauthViewModel.swift in Sources */,
-				53EAFA0F225E8EA0002BCAB0 /* DataService.swift in Sources */,
 				533D8B882533B85000CE297E /* RatingView.swift in Sources */,
 				5330C20A25E5B39F0063E7C4 /* UserPhotoView.swift in Sources */,
 				53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */,
@@ -1726,7 +1688,6 @@
 				536E3AD6258F9CE500D84F10 /* SignInWithGoogle.swift in Sources */,
 				53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */,
 				E9AFC85C9AF28804C64070C7 /* FirebaseStorageService.swift in Sources */,
-				E9AFC31FD4F06C466357DA69 /* UrlSessionService.swift in Sources */,
 				536E301B25A2615500608A29 /* AppView.swift in Sources */,
 				53E2FA5325DECFB900658637 /* FriendListItemView.swift in Sources */,
 				E9AFC0EEF0DDE04612FD7B5F /* AppleProvider.swift in Sources */,
@@ -1743,7 +1704,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EAFA13225E930F002BCAB0 /* DataServiceTests.swift in Sources */,
 				53F24874206D4ADA0046B031 /* Facebook.swift in Sources */,
 				5393F0202706561D000E9029 /* UserBuilder.swift in Sources */,
 				53AC400125D706050041AED9 /* WineMappingTests.swift in Sources */,

@@ -67,7 +67,6 @@ extension DependencyContainer {
     static func configure() -> DependencyContainer {
         DependencyContainer { container in
             addFirebaseServices(container: container)
-            addImageServices(container: container)
             configureCommonServices(container: container)
         }
     }
@@ -79,7 +78,6 @@ extension DependencyContainer {
     /// Configures services who don't require fakes while UI testing. These service definitions are the same for both dev, prod, and UI testing.
     static func configureCommonServices(container: DependencyContainer) {
         // Infrastructure Layer
-        container.register(.singleton) { UrlSessionService() }
         container.register { UIImageResizer() }.implements(ImageResizer.self)
 
 
@@ -135,9 +133,8 @@ extension DependencyContainer {
         // Firebase Firestore
         container.register(.singleton) { FirestoreUserRepository() as UserRepository }
         container.register(.singleton) { FirestoreWineRepository() as WineRepository }
-    }
 
-    static func addImageServices(container: DependencyContainer) {
+        // Firebase Storage
         container.register(.singleton) { FirebaseStorageService() }
         container.register { FirebaseWineImageStorage(storage: $0, session: $1) }.implements(WineImageStorage.self)
         container.register { FirebaseUserImageStorage(storage: $0) }.implements(UserImageStorage.self)
@@ -177,15 +174,11 @@ extension DependencyContainer {
             container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
             container.register(.singleton) { MemoryWineRepository() as WineRepository }
             container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
+            container.register { AssetImageLoader() }.implements(ImageLoader.self)
+            container.register { FakeWineImageStorage() }.implements(WineImageStorage.self)
+            container.register { FakeUserImageStorage() }.implements(UserImageStorage.self)
 
-            addFakeImageServices(container: container)
             configureCommonServices(container: container)
         }
-    }
-
-    static func addFakeImageServices(container: DependencyContainer) {
-        container.register { AssetImageLoader() }.implements(ImageLoader.self)
-        container.register { FakeWineImageStorage() }.implements(WineImageStorage.self)
-        container.register { FakeUserImageStorage() }.implements(UserImageStorage.self)
     }
 }

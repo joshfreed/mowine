@@ -38,29 +38,6 @@ class FirebaseStorageService {
     }
 }
 
-extension FirebaseStorageService: DataReadService {
-    func getData(url: String) async throws -> Data {
-        SwiftyBeaver.debug("Getting data from firebase \(url)")
-
-        do {
-            return try await getData(path: url)
-        } catch {
-            let errorCode = (error as NSError).code
-            if StorageErrorCode(rawValue: errorCode) == .objectNotFound {
-                throw DataReadServiceErrors.objectNotFound
-            }
-            throw error
-        }
-    }
-}
-
-extension FirebaseStorageService: DataWriteService {
-    func putData(_ data: Data, url: String) async throws -> URL {
-        SwiftyBeaver.debug("Putting data to firebase \(url)")
-        return try await putData(data, path: url)
-    }
-}
-
 class FirebaseWineImageStorage: WineImageStorage {
     private let storage: FirebaseStorageService
     private let session: Session

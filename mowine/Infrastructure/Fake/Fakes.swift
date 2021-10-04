@@ -240,19 +240,6 @@ class FakeUserRepository: UserRepository {
     }
 }
 
-class FakeDataReadService: DataReadService {
-    func getData(url: String) async throws -> Data {
-        Data(repeating: 5, count: 100)
-    }
-}
-
-
-class FakeDataWriteService: DataWriteService {
-    func putData(_ data: Data, url: String) async throws -> URL {
-        URL(string: "https://google.com")!
-    }
-}
-
 class FakeWineWorker: CreateWineCommandHandler {
     init() {
         super.init(
