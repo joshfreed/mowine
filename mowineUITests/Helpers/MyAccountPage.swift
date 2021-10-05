@@ -11,7 +11,10 @@ import XCTest
 class MyAccountPage {
     let app: XCUIApplication
 
-    var fullName: String { app.staticTexts["fullName"].label }
+    var fullName: String {
+        XCTAssertTrue(app.staticTexts["fullName"].waitForExistence(timeout: .default))
+        return app.staticTexts["fullName"].label
+    }
     var emailAddress: String { app.staticTexts["emailAddress"].label }
 
     init(app: XCUIApplication) {
@@ -19,12 +22,12 @@ class MyAccountPage {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.buttons["signOutButton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["signOutButton"].waitForExistence(timeout: .default))
     }
 
     func tapSignOut() {
         app.buttons["signOutButton"].tap()
-        XCTAssertTrue(app.sheets["Are you sure?"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.sheets["Are you sure?"].waitForExistence(timeout: .default))
     }
 
     func confirmSignOut() {

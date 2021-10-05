@@ -18,11 +18,17 @@ struct WoWineApp: App {
     @StateObject var wineTypeService = WineTypeService(wineTypeRepository: try! JFContainer.shared.container.resolve())
 
     init() {
+        #if MOWINE
+        fatalError("MOWINE should not be defined")
+        #endif
+
         JFContainer.configure()
         setupSwiftyBeaverLogging()
         setupUITestingEnvironment()
         configureUIKit()
         configureStuff()
+
+        SwiftyBeaver.info("MoWineApp::init")
     }
 
     var body: some Scene {

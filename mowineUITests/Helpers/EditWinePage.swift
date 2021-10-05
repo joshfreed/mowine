@@ -16,7 +16,7 @@ class EditWinePage {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["Edit Wine"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Edit Wine"].waitForExistence(timeout: .default))
     }
 
     func setWineName(_ newName: String) {
@@ -30,14 +30,14 @@ class EditWinePage {
 
     func changeType(to typeName: String) {
         app.tables.cells["Type"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
-        XCTAssertTrue(app.tables.switches[typeName].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.tables.switches[typeName].waitForExistence(timeout: .default))
         app.tables.switches[typeName].tap()
         waitForExistence()
     }
 
     func changeVariety(to varietyName: String) {
         app.tables.cells["Variety"].children(matching: .other).element(boundBy: 0).tap()
-        XCTAssertTrue(app.tables.switches[varietyName].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.tables.switches[varietyName].waitForExistence(timeout: .default))
         app.tables.switches[varietyName].tap()
         waitForExistence()
     }
@@ -56,7 +56,7 @@ class EditWinePage {
         app.tables.cells["Add Pairing"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
 
         let newTextField = app.tables.textFields.matching(.init(format: "placeholderValue = %@", "e.g. Sushi, Cheese, etc")).allElementsBoundByIndex.last!
-        XCTAssertTrue(newTextField.waitForExistence(timeout: 5))
+        XCTAssertTrue(newTextField.waitForExistence(timeout: .default))
 
         newTextField.tap()
         newTextField.typeText(pairing)

@@ -16,7 +16,7 @@ class MyCellarPage {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: .default))
     }
 
     func showMyRedWines() {

@@ -16,7 +16,7 @@ class LogInPage {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["Log In"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Log In"].waitForExistence(timeout: .default))
     }
 
     func typeEmailAddress(_ text: String) {

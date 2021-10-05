@@ -16,7 +16,7 @@ class SignUpPage {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["Sign Up"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Sign Up"].waitForExistence(timeout: .default))
     }
 
     func typeFullName(_ text: String) {

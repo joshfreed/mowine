@@ -26,11 +26,11 @@ class AddWineTests: XCTestCase {
     func testAddWine() {
         let app = XCUIApplication()
         
-        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: .default))
         
         app.tabBars["Tab Bar"].buttons["Add Wine"].tap()
         
-        XCTAssertTrue(app.buttons["Red"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["Red"].waitForExistence(timeout: .default))
         app.buttons["Red"].tap()
         
         app.buttons["Malbec"].tap()
@@ -39,25 +39,25 @@ class AddWineTests: XCTestCase {
         app.buttons["Take Later"].tap()
         
         // Type a name
-        XCTAssertTrue(app.textFields["wineName"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.textFields["wineName"].waitForExistence(timeout: .default))
         app.textFields["wineName"].tap()
         app.textFields["wineName"].typeText("My Test Wine")
         
         // Rate it
-        XCTAssertTrue(app.buttons["Star3"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["Star3"].waitForExistence(timeout: .default))
         app.buttons["Star3"].tap()
         
         // Save it!
-        XCTAssertTrue(app.buttons["createWineButton"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["createWineButton"].waitForExistence(timeout: .default))
         app.buttons["createWineButton"].tap()
 
         // Modal should close
         // blah this always returns true because the navigation bar is *behind* the modal
-        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: .default))
         
         // Make sure the new wine is in there
         app.buttons["Show My Red Wines"].tap()
-        XCTAssertTrue(app.navigationBars["Red Wines"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Red Wines"].waitForExistence(timeout: .default))
         XCTAssertTrue(app.tables.staticTexts["My Test Wine"].exists)
     }
 }

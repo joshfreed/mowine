@@ -16,7 +16,7 @@ class MyCellarWineListPage {
     }
 
     func waitForExistence(wineTypes: String) {
-        XCTAssertTrue(app.navigationBars[wineTypes].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars[wineTypes].waitForExistence(timeout: .default))
     }
 
     func selectWine(at index: Int) {

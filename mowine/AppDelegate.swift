@@ -11,8 +11,6 @@ import SwiftyBeaver
 import FBSDKCoreKit
 import GoogleSignIn
 
-let NSAppErrorDomain = "com.joshfreed.mowine"
-
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         SwiftyBeaver.info("application didFinishLaunchingWithOptions")

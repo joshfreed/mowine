@@ -8,6 +8,10 @@
 
 import XCTest
 
+enum Timeout: Double {
+    case `default` = 10
+}
+
 class MoWineApp {
     let app: XCUIApplication
 
@@ -16,7 +20,7 @@ class MoWineApp {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.tabBars["Tab Bar"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.tabBars["Tab Bar"].waitForExistence(timeout: .default))
     }
 
     func myAccountTab() {

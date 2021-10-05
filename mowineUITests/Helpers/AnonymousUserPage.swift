@@ -16,7 +16,7 @@ class AnonymousUserPage {
     }
 
     func waitForExistence() {
-        XCTAssertTrue(app.staticTexts["Get mo' out of mo' wine with a free account"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Get mo' out of mo' wine with a free account"].waitForExistence(timeout: .default))
     }
 
     func signUp() {

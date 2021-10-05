@@ -8,6 +8,7 @@
       }
     },
     {
+      "enabled" : false,
       "id" : "2D5093B0-AEA8-46A4-84B5-4EB8F9DE37FE",
       "name" : "TSAN",
       "options" : {
@@ -22,7 +23,6 @@
       "name" : "mowineDev"
     },
     "testExecutionOrdering" : "random",
-    "testTimeoutsEnabled" : true,
     "undefinedBehaviorSanitizerEnabled" : true
   },
   "testTargets" : [

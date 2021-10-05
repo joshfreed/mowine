@@ -40,4 +40,8 @@ extension XCUIElement {
 
         self.typeText(text)
     }
+
+    func waitForExistence(timeout: Timeout) -> Bool {
+        waitForExistence(timeout: timeout.rawValue)
+    }
 }
