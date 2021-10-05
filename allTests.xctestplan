@@ -19,8 +19,8 @@
   "defaultOptions" : {
     "targetForVariableExpansion" : {
       "containerPath" : "container:mowine.xcodeproj",
-      "identifier" : "53CC0ED727020848000B882F",
-      "name" : "mowineDev"
+      "identifier" : "53F5ABEF1E2176080067AB62",
+      "name" : "mowine"
     },
     "testExecutionOrdering" : "random",
     "undefinedBehaviorSanitizerEnabled" : true
