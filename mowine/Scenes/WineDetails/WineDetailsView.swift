@@ -55,7 +55,7 @@ struct WineDetailsHeaderView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            WineThumbnail(thumbnailPath: wine.thumbnailPath, size: 172)
+            WineThumbnail(wineId: wine.id, size: 172)
             Text(wine.name)
                 .foregroundColor(.white)
                 .fontWeight(.black)

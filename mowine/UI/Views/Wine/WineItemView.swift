@@ -15,7 +15,7 @@ struct WineItemView: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            WineThumbnail(thumbnailPath: viewModel.thumbnailPath)
+            WineThumbnail(wineId: viewModel.id)
             VStack(alignment: .leading) {
                 Text(viewModel.name)
                     .font(.system(size: 21, weight: .bold))

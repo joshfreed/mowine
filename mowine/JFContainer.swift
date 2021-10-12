@@ -22,7 +22,6 @@ class JFContainer: ObservableObject {
     lazy var wineTypeRepository: WineTypeRepository = try! container.resolve()
     lazy var wineRepository: WineRepository = try! container.resolve()
     lazy var userRepository: UserRepository = try! container.resolve()
-    lazy var wineImageLoader: ImageLoader = try! container.resolve()
     
     private init(container: DependencyContainer, configurators: [Configurator]) {
         self.container = container
@@ -102,6 +101,7 @@ extension DependencyContainer {
         container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, wineTypeRepository: $1, createWineImages: $2) }
         container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }
         container.register(.unique) { GetWineImageQueryHandler(wineImageStorage: $0) }
+        container.register(.unique) { GetWineThumbnailQueryHandler(wineImageStorage: $0) }
         container.register(.unique) { GetWineByIdQueryHandler(wineRepository: $0) }
         container.register(.unique) { GetWineTypesQueryHandler(wineTypeRepository: $0) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
@@ -138,7 +138,6 @@ extension DependencyContainer {
         container.register(.singleton) { FirebaseStorageService() }
         container.register { FirebaseWineImageStorage(storage: $0, session: $1) }.implements(WineImageStorage.self)
         container.register { FirebaseUserImageStorage(storage: $0) }.implements(UserImageStorage.self)
-        container.register { FirebaseStorageLoader(storage: $0) }.implements(ImageLoader.self)
     }
 }
 
@@ -174,8 +173,7 @@ extension DependencyContainer {
             container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
             container.register(.singleton) { MemoryWineRepository() as WineRepository }
             container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
-            container.register { AssetImageLoader() }.implements(ImageLoader.self)
-            container.register { FakeWineImageStorage() }.implements(WineImageStorage.self)
+            container.register { AssetWineImageStorage(wineRepository: $0) }.implements(WineImageStorage.self)
             container.register { FakeUserImageStorage() }.implements(UserImageStorage.self)
 
             configureCommonServices(container: container)

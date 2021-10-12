@@ -50,26 +50,6 @@ var friendsDB: [UserId: [UserId]] = [
     ]
 ]
 
-var merlot = WineVariety(name: "Merlot")
-var prosecco = WineVariety(name: "Prosecco")
-var red = WineType(name: "Red", varieties: [merlot])
-var bubbly = WineType(name: "Bubbly", varieties: [prosecco])
-var winesDB: [UserId: [Wine]] = [
-    josh.id: [
-        Wine(userId: josh.id, type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5),
-        Wine(userId: josh.id, type: red, variety: merlot, name: "Wine 1", rating: 1),
-        Wine(userId: josh.id, type: red, variety: merlot, name: "Wine 2", rating: 5)
-    ],
-    maureen.id: [
-        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 1", rating: 1),
-        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 2", rating: 5),
-        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 3", rating: 3),
-        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 4", rating: 4),
-        Wine(userId: maureen.id, type: red, variety: merlot, name: "Wine 5", rating: 5),
-        Wine(userId: maureen.id, type: bubbly, variety: prosecco, name: "Bubbletown", rating: 5)
-    ]
-]
-
 func randomDelay(action: @escaping () -> ()) {
     let wait = Int(arc4random_uniform(4) + 1)
     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(wait)) {
@@ -237,30 +217,6 @@ class FakeUserRepository: UserRepository {
     
     func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
         return FakeRegistration()
-    }
-}
-
-class FakeWineWorker: CreateWineCommandHandler {
-    init() {
-        super.init(
-            wineRepository: MemoryWineRepository(),
-            session: FakeSession(),
-            createWineImages: CreateWineImagesCommandHandler(wineImageStorage: FakeWineImageStorage(), imageResizer: UIImageResizer())
-        )
-    }
-}
-
-class FakeUsersService: UsersService {
-    init() {
-        super.init(session: FakeSession(), userRepository: FakeUserRepository())
-    }
-}
-
-class FakeWineImageStorage: WineImageStorage {
-    func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {}
-
-    func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
-        Data()
     }
 }
 

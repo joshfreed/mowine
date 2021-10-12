@@ -15,7 +15,6 @@ public struct WineItemViewModel: Identifiable {
     public var name: String
     public var rating: Int
     public var type: String
-    public var thumbnail: Data?
     public var thumbnailPath: String
 
     public init(id: String, name: String, rating: Int, type: String, userId: String = "", thumbnail: Data? = nil) {
@@ -23,7 +22,6 @@ public struct WineItemViewModel: Identifiable {
         self.name = name
         self.rating = rating
         self.type = type
-        self.thumbnail = thumbnail
         self.thumbnailPath = "\(userId)/\(id)-thumb.png"
     }
 
