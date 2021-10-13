@@ -14,8 +14,8 @@ import Model
 struct WoWineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-    @StateObject var session = ObservableSession(session: try! JFContainer.shared.container.resolve())
-    @StateObject var wineTypeService = WineTypeService(wineTypeRepository: try! JFContainer.shared.container.resolve())
+    @StateObject var session = ObservableSession(session: try! JFContainer.shared.resolve())
+    @StateObject var wineTypeService = WineTypeService(wineTypeRepository: try! JFContainer.shared.resolve())
 
     init() {
         JFContainer.configure()
@@ -74,11 +74,9 @@ struct WoWineApp: App {
 
 extension View {
     func addAppEnvironment() -> some View {
-        let container = JFContainer.shared.container
-
-        return self
-            .environmentObject(try! JFContainer.shared.container.resolve() as FriendsService)
-            .environmentObject(try! JFContainer.shared.container.resolve() as GetUserWinesByTypeQuery)
-            .environmentObject(try! container.resolve() as MyWinesService)
+        self
+            .environmentObject(try! JFContainer.shared.resolve() as FriendsService)
+            .environmentObject(try! JFContainer.shared.resolve() as GetUserWinesByTypeQuery)
+            .environmentObject(try! JFContainer.shared.resolve() as MyWinesService)
     }
 }

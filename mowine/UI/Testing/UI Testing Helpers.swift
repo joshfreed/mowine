@@ -14,14 +14,14 @@ class UITestHelper {
         if let loggedInUserJson = ProcessInfo.processInfo.environment["loggedInUser"] {
             do {
                 let login = try JSONDecoder().decode(UITesting.UserLogin.self, from: Data(loggedInUserJson.utf8))
-                let emailAuth: EmailAuthenticationService = try JFContainer.shared.container.resolve()
+                let emailAuth: EmailAuthenticationService = try JFContainer.shared.resolve()
                 try await emailAuth.signIn(emailAddress: login.emailAddress, password: login.password)
             } catch {
                 fatalError("Unable to log in user")
             }
         } else {
             do {
-                let signOutCommand: SignOutCommand = try JFContainer.shared.container.resolve()
+                let signOutCommand: SignOutCommand = try JFContainer.shared.resolve()
                 signOutCommand.signOut()
             } catch {
                 fatalError("Unable to log out user")

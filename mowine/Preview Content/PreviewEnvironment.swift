@@ -20,6 +20,6 @@ extension View {
 
         return addAppEnvironment()
             .environmentObject(ObservableSession(session: try! JFContainer.shared.resolve()))
-            .environmentObject(WineTypeService(wineTypeRepository: try! JFContainer.shared.container.resolve()))
+            .environmentObject(WineTypeService(wineTypeRepository: try! JFContainer.shared.resolve()))
     }
 }

@@ -27,7 +27,7 @@ class SearchUsersViewModel: ObservableObject {
     }
     
     init() {
-        self.users = try! JFContainer.shared.container.resolve()
+        self.users = try! JFContainer.shared.resolve()
         registerListeners()
     }
     

@@ -27,8 +27,8 @@ class MyAccountViewModel: ObservableObject {
 
     init() {
         SwiftyBeaver.debug("init")
-        self.getMyAccountQuery = try! JFContainer.shared.container.resolve()
-        self.signOutCommand = try! JFContainer.shared.container.resolve()
+        self.getMyAccountQuery = try! JFContainer.shared.resolve()
+        self.signOutCommand = try! JFContainer.shared.resolve()
     }
 
     init(getMyAccountQuery: GetMyAccountQuery, signOutCommand: SignOutCommand) {

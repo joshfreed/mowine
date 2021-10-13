@@ -19,7 +19,7 @@ class EmailLogInViewModel: ObservableObject {
     let emailAuth: EmailAuthApplicationService
 
     init() {
-        self.emailAuth = try! JFContainer.shared.container.resolve()
+        self.emailAuth = try! JFContainer.shared.resolve()
     }
 
     init(emailAuth: EmailAuthApplicationService) {

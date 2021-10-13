@@ -14,7 +14,7 @@ import Model
 class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!
     
-    let container: DependencyContainer
+    private let container: DependencyContainer
     let configurators: [Configurator]
     
     lazy var session: Session = try! container.resolve()

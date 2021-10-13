@@ -31,11 +31,11 @@ class EditWineViewModel: ObservableObject {
     init(wineId: String) {
         SwiftyBeaver.debug("init")
         self.wineId = wineId
-        updateWineCommandHandler = try! JFContainer.shared.container.resolve()
-        deleteWineCommandHandler = try! JFContainer.shared.container.resolve()
-        getWineTypesQuery = try! JFContainer.shared.container.resolve()
-        getWineQuery = try! JFContainer.shared.container.resolve()
-        getWineImageQuery = try! JFContainer.shared.container.resolve()
+        updateWineCommandHandler = try! JFContainer.shared.resolve()
+        deleteWineCommandHandler = try! JFContainer.shared.resolve()
+        getWineTypesQuery = try! JFContainer.shared.resolve()
+        getWineQuery = try! JFContainer.shared.resolve()
+        getWineImageQuery = try! JFContainer.shared.resolve()
     }
     
     deinit {

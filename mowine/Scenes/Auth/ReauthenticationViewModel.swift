@@ -22,7 +22,7 @@ class ReauthenticationViewModel: ObservableObject {
     private let socialAuthService: SocialAuthService
 
     init() {
-        self.socialAuthService = try! JFContainer.shared.container.resolve()
+        self.socialAuthService = try! JFContainer.shared.resolve()
         self.socialSignInMethods = JFContainer.socialSignInMethods()
     }
 

@@ -19,7 +19,7 @@ class EmailReauthViewModel: ObservableObject {
     @Published var isReauthenticating = false
     
     init() {
-        self.session = try! JFContainer.shared.container.resolve()
+        self.session = try! JFContainer.shared.resolve()
     }
     
     func loadEmail() {

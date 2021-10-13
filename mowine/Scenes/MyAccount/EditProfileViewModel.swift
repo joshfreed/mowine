@@ -52,8 +52,8 @@ class EditProfileViewModel: ObservableObject {
 
     init() {
         SwiftyBeaver.debug("init")
-        self.getMyAccountQuery = try! JFContainer.shared.container.resolve()
-        self.updateProfileCommandHandler = try! JFContainer.shared.container.resolve()
+        self.getMyAccountQuery = try! JFContainer.shared.resolve()
+        self.updateProfileCommandHandler = try! JFContainer.shared.resolve()
     }
 
     deinit {
