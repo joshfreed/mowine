@@ -21,7 +21,7 @@ struct ConfirmPhotoView: View {
                     .font(.system(size: 37))
                     .fontWeight(.black)
                 
-                WineImageView(image: model.image as? UIImage)
+                WineImageView(image: model.image)
                     .frame(minWidth: geometry.size.width * 0.25, maxWidth: geometry.size.width * 0.6)
 
                 NavigationLink(destination: FinalizeWineView(model: model)) {

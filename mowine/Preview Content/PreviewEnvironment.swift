@@ -11,14 +11,7 @@ import Model
 
 extension View {
     func addPreviewEnvironment() -> some View {
-        let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-                
-        JFContainer.configureForPreviews()
-
-        return addAppEnvironment()
+        addAppEnvironment()
             .environmentObject(ObservableSession(session: try! JFContainer.shared.resolve()))
             .environmentObject(WineTypeService(wineTypeRepository: try! JFContainer.shared.resolve()))
     }

@@ -86,18 +86,10 @@ class FakeSession: Session {
     var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
         _currentUserId.eraseToAnyPublisher()
     }
-    
-    func notLoggedIn() {
-        _isLoggedIn = false
-    }
-    
-    func loggedIn() {
-        _isLoggedIn = true
-    }
-    
+
     func setUser(user: User) {
         _currentUser = user
-        loggedIn()
+        _isLoggedIn = true
     }
     
     func start() {
@@ -136,7 +128,8 @@ struct FakeMoWineAuth: MoWineAuth {
 class FakeEmailAuth: EmailAuthenticationService {
     func signIn(emailAddress: String, password: String) async throws {
         if let user = usersDB.first(where: { $0.emailAddress == emailAddress }) {
-            (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
+            let fakeSession: FakeSession? = try JFContainer.shared.resolve()
+            fakeSession?.setUser(user: user)
         } else {
             throw EmailAuthenticationErrors.userNotFound
         }
@@ -144,7 +137,8 @@ class FakeEmailAuth: EmailAuthenticationService {
     
     func signUp(emailAddress: String, password: String) async throws {
         let user = User(id: UserId(), emailAddress: emailAddress)
-        (JFContainer.shared.session as? FakeSession)?.setUser(user: user)
+        let fakeSession: FakeSession? = try JFContainer.shared.resolve()
+        fakeSession?.setUser(user: user)
         usersDB.append(user)
     }
 

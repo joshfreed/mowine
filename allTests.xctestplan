@@ -1,14 +1,16 @@
 {
   "configurations" : [
     {
+      "enabled" : false,
       "id" : "E788E3D1-39D1-437E-8283-87D3E3A6D40D",
       "name" : "ASAN",
       "options" : {
-        "threadSanitizerEnabled" : true
+        "addressSanitizer" : {
+          "enabled" : true
+        }
       }
     },
     {
-      "enabled" : false,
       "id" : "2D5093B0-AEA8-46A4-84B5-4EB8F9DE37FE",
       "name" : "TSAN",
       "options" : {

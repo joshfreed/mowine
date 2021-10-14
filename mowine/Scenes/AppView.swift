@@ -25,19 +25,26 @@ struct AppView: View {
                 TabbedRootView()
             }
         }
-        .onAppear {
-            Task {
-                await loadUserData()
-            }
+        .task {
+            await loadApp()
         }
     }
 
-    private func loadUserData() async {
-        SwiftyBeaver.debug("loadUserData \(String(describing: session.userId))")
+    private func loadApp() async {
+        SwiftyBeaver.debug("loadApp \(String(describing: session.userId))")
+
+        await setupUITestingData()
         await wineTypeService.fetchWineTypes()
-        isPreparing = false
+
         Analytics.logEvent("app_appeared", parameters: [:])
-        SwiftyBeaver.info("loadUserData complete")
+        SwiftyBeaver.info("loadApp complete")
+        isPreparing = false
+    }
+
+    private func setupUITestingData() async {
+        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
+        let uiTestingHelper = UITestHelper()
+        await uiTestingHelper.logInExistingUser()
     }
 }
 

@@ -15,17 +15,9 @@ class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!
     
     private let container: DependencyContainer
-    let configurators: [Configurator]
-    
-    lazy var session: Session = try! container.resolve()
-    lazy var emailAuthService: EmailAuthenticationService = try! container.resolve()
-    lazy var wineTypeRepository: WineTypeRepository = try! container.resolve()
-    lazy var wineRepository: WineRepository = try! container.resolve()
-    lazy var userRepository: UserRepository = try! container.resolve()
-    
-    private init(container: DependencyContainer, configurators: [Configurator]) {
+
+    private init(container: DependencyContainer) {
         self.container = container
-        self.configurators = configurators
     }
     
     func resolve<T>() throws -> T {
@@ -54,11 +46,7 @@ class JFContainer: ObservableObject {
 extension JFContainer {
     static func configure() {
         let container = DependencyContainer.configure()
-        DependencyContainer.uiContainers = [container]
-        let configurators: [Configurator] = [
-            FirebaseConfigurator()
-        ]
-        shared = JFContainer(container: container, configurators: configurators)
+        shared = JFContainer(container: container)
     }
 }
 
@@ -147,10 +135,7 @@ extension DependencyContainer {
 extension JFContainer {
     static func configureForUITesting() {
         let container = DependencyContainer.configure()
-        let configurators: [Configurator] = [
-            FirebaseConfigurator(useEmulator: true)
-        ]
-        shared = JFContainer(container: container, configurators: configurators)
+        shared = JFContainer(container: container)
     }
 }
 
@@ -160,8 +145,7 @@ extension JFContainer {
 extension JFContainer {
     static func configureForPreviews() {
         let container = DependencyContainer.configureForPreviews()
-        let configurators: [Configurator] = []
-        shared = JFContainer(container: container, configurators: configurators)
+        shared = JFContainer(container: container)
     }
 }
 

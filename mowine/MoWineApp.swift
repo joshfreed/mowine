@@ -18,19 +18,15 @@ struct WoWineApp: App {
     @StateObject var wineTypeService = WineTypeService(wineTypeRepository: try! JFContainer.shared.resolve())
 
     init() {
-        JFContainer.configure()
         setupSwiftyBeaverLogging()
-        setupUITestingEnvironment()
         configureUIKit()
-        configureStuff()
-
+        setupDependencyInjection()
         SwiftyBeaver.info("MoWineApp::init")
     }
 
     var body: some Scene {
         WindowGroup {
             AppView()
-                .task { await setupUITestingData() }
                 .addAppEnvironment()
                 .environmentObject(session)
                 .environmentObject(wineTypeService)
@@ -47,17 +43,6 @@ struct WoWineApp: App {
         SwiftyBeaver.addDestination(console)
     }
 
-    private func setupUITestingEnvironment() {
-        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
-        JFContainer.configureForUITesting()
-    }
-
-    private func configureStuff() {
-        JFContainer.shared.configurators.forEach {
-            $0.configure()
-        }
-    }
-
     private func configureUIKit() {
         let appearance = UINavigationBarAppearance.mwPrimaryAppearance()
         UINavigationBar.appearance().standardAppearance = appearance
@@ -65,10 +50,14 @@ struct WoWineApp: App {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
 
-    private func setupUITestingData() async {
-        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
-        let uiTestingHelper = UITestHelper()
-        await uiTestingHelper.logInExistingUser()
+    private func setupDependencyInjection() {
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            JFContainer.configureForPreviews()
+        } else {
+            let useEmulator = ProcessInfo.processInfo.arguments.contains("UI_TESTING")
+            FirebaseConfigurator().configure(useEmulator: useEmulator)
+            JFContainer.configure()
+        }
     }
 }
 

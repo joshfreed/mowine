@@ -24,7 +24,6 @@
 		531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 531277AA2678393300C5E717 /* FirebaseFirestore */; };
 		531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 531277AC2678393300C5E717 /* FirebaseStorage */; };
 		531865D225E46B7600474738 /* FirestoreUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531865D125E46B7600474738 /* FirestoreUser.swift */; };
-		5318863F2586777C00ED9CF8 /* Configurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5318863E2586777C00ED9CF8 /* Configurator.swift */; };
 		53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */; };
 		531FB93A26F0C484006A22F0 /* WineCellarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */; };
 		532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F5267979C700649624 /* LocalAuthentication.framework */; };
@@ -204,7 +203,6 @@
 		530ABC3B234A9B7E0078FB3B /* UINavigationBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarAppearance.swift; sourceTree = "<group>"; };
 		531265101F75B04E006353CB /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		531865D125E46B7600474738 /* FirestoreUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUser.swift; sourceTree = "<group>"; };
-		5318863E2586777C00ED9CF8 /* Configurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurator.swift; sourceTree = "<group>"; };
 		53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfigurator.swift; sourceTree = "<group>"; };
 		5318C0A1270CA66C00F2C60D /* Firebase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Firebase; sourceTree = "<group>"; };
 		5318C0A3270CA76200F2C60D /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
@@ -412,14 +410,6 @@
 				53047E2C25DC09C0005CC14D /* PickImageButton.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		5318863D2586776400ED9CF8 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				5318863E2586777C00ED9CF8 /* Configurator.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		5318C0A2270CA74E00F2C60D /* Scripts */ = {
@@ -870,7 +860,6 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
-				5318863D2586776400ED9CF8 /* Config */,
 				5318C0A1270CA66C00F2C60D /* Firebase */,
 				5348960F203DE4A300B7547A /* Infrastructure */,
 				53E36490252A77C900BA1CD2 /* Preview Content */,
@@ -1230,7 +1219,6 @@
 				53DD1E1A257D84DC008C1DA7 /* FancySecureField.swift in Sources */,
 				536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */,
 				53F47F0B25853F1600910BDC /* PrimaryButton.swift in Sources */,
-				5318863F2586777C00ED9CF8 /* Configurator.swift in Sources */,
 				53AC405225D74AD90041AED9 /* ConfirmPhotoView.swift in Sources */,
 				5367A3D3254B0A42002A02A5 /* WineListView.swift in Sources */,
 				53F4C76E2716212400CCBA7F /* WineThumbnailViewModel.swift in Sources */,
