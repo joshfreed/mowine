@@ -108,6 +108,7 @@
 		5393F01F2706561D000E9029 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393F01D2706561D000E9029 /* WineBuilder.swift */; };
 		5393F0202706561D000E9029 /* UserBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393F01E2706561D000E9029 /* UserBuilder.swift */; };
 		5393F02C27074A20000E9029 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 5393F02B27074A20000E9029 /* FirebaseStorageSwift-Beta */; };
+		5395AC98271E0A8F001BB10B /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC97271E0A8F001BB10B /* Injected.swift */; };
 		5395AC9A271E1BA0001BB10B /* MemoryUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC99271E1BA0001BB10B /* MemoryUserRepository.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
@@ -294,6 +295,7 @@
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5393F01D2706561D000E9029 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
 		5393F01E2706561D000E9029 /* UserBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBuilder.swift; sourceTree = "<group>"; };
+		5395AC97271E0A8F001BB10B /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		5395AC99271E1BA0001BB10B /* MemoryUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUserRepository.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 		5348960F203DE4A300B7547A /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				5395AC96271E0A32001BB10B /* Dependency Injection */,
 				5393F0212706627A000E9029 /* UIKit */,
 				536E3ADD258F9E5A00D84F10 /* Apple */,
 				533597AC21BC3ED600CEFD45 /* Firebase */,
@@ -722,6 +725,14 @@
 				53F4C76B27161C1800CCBA7F /* AssetWineImageStorage.swift */,
 			);
 			path = UIImage;
+			sourceTree = "<group>";
+		};
+		5395AC96271E0A32001BB10B /* Dependency Injection */ = {
+			isa = PBXGroup;
+			children = (
+				5395AC97271E0A8F001BB10B /* Injected.swift */,
+			);
+			path = "Dependency Injection";
 			sourceTree = "<group>";
 		};
 		5398F519252A6B6F00BF61C0 /* My Cellar */ = {
@@ -1292,6 +1303,7 @@
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
 				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
 				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
+				5395AC98271E0A8F001BB10B /* Injected.swift in Sources */,
 				53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */,
 				536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */,
 				533597B121BC43A900CEFD45 /* FirebaseSession.swift in Sources */,
