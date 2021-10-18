@@ -22,14 +22,14 @@ struct MyCellarContentView: View {
                 NavigationLink(destination: makeView(title: "Red Wines", wineType: wineTypes.red)) {
                     WineTypeMenuButton(name: "Reds", icon: "Red Wine Button")
                 }
-                .accessibility(identifier: "Show My Red Wines")
+                .accessibilityIdentifier("Show My Red Wines")
                 
                 Spacer()
                 
                 NavigationLink(destination: makeView(title: "White Wines", wineType: wineTypes.white)) {
                     WineTypeMenuButton(name: "Whites", icon: "White Wine Button")
                 }
-                .accessibility(identifier: "Show My White Wines")
+                .accessibilityIdentifier("Show My White Wines")
                 
                 Spacer()
             }
@@ -40,14 +40,14 @@ struct MyCellarContentView: View {
                 NavigationLink(destination: makeView(title: "Rose", wineType: wineTypes.rose)) {
                     WineTypeMenuButton(name: "Rosè", icon: "Rose Button")
                 }
-                .accessibility(identifier: "Show My Rosès")
+                .accessibilityIdentifier("Show My Rosès")
                 
                 Spacer()
                 
                 NavigationLink(destination: makeView(title: "Bubbly", wineType: wineTypes.bubbly)) {
                     WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
                 }
-                .accessibility(identifier: "Show My Bubblies")
+                .accessibilityIdentifier("Show My Bubblies")
                 
                 Spacer()
             }
@@ -57,7 +57,7 @@ struct MyCellarContentView: View {
                     .font(.system(size: 37))
                     .foregroundColor(Color(UIColor.mwSecondary))
                     .padding(.bottom, 32)
-                    .accessibility(identifier: "Show My Other Wines")
+                    .accessibilityIdentifier("Show My Other Wines")
             }
         }
     }
