@@ -36,12 +36,14 @@ struct FinalizeWineView: View {
                     height: 64,
                     fontSize: 28
                 )
-                    .accessibility(identifier: "createWineButton")
+                    .accessibilityIdentifier("createWineButton")
             }
             Spacer()
         }
         .navigationTitle("Add Wine")
         .padding(16)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("Finalize Wine View")
     }
 
     @MainActor

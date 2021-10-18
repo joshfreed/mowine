@@ -28,11 +28,12 @@ struct SelectTypeView: View {
                 }
             }
             .padding(16)
-            
+
             NavigationLink(destination: makeDestinationView(), isActive: $showNextScreen) {
                 EmptyView()
             }
         }
+        .accessibilityIdentifier("SelectType")
     }
     
     private func makeDestinationView() -> AnyView {

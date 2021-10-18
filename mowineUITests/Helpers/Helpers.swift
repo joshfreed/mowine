@@ -15,4 +15,5 @@ enum Timeout: Double {
 enum PageErrors: Error {
     case wrongPage
     case illegalState
+    case invalidArgument
 }

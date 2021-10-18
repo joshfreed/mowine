@@ -71,6 +71,12 @@
 		535D7276270245EA00821FD8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 535D7275270245EA00821FD8 /* GoogleSignIn */; };
 		535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 535D73FE2569A7160027BC27 /* Preview Assets.xcassets */; };
 		535D84A8271DCBF6002FD679 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84A7271DCBF6002FD679 /* Helpers.swift */; };
+		535D84AB271DD053002FD679 /* SelectWineTypePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84AA271DD053002FD679 /* SelectWineTypePage.swift */; };
+		535D84AD271DD64F002FD679 /* FinalizeWinePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84AC271DD64F002FD679 /* FinalizeWinePage.swift */; };
+		535D84AF271DD6BE002FD679 /* SnapPhotoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84AE271DD6BE002FD679 /* SnapPhotoPage.swift */; };
+		535D84B2271DDA8E002FD679 /* RatingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84B1271DDA8E002FD679 /* RatingLabel.swift */; };
+		535D84B4271DDA94002FD679 /* RatingPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84B3271DDA94002FD679 /* RatingPicker.swift */; };
+		535D84B6271DDDD3002FD679 /* MyWineListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84B5271DDDD3002FD679 /* MyWineListItem.swift */; };
 		535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */; };
 		535DE8CF25BCACB900C6CB7B /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DE8CE25BCACB900C6CB7B /* SplashScreen.swift */; };
 		5362FF472704BF100079677B /* NewWineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5362FF462704BF0F0079677B /* NewWineModel.swift */; };
@@ -253,6 +259,12 @@
 		535CC81825F0453400D49D57 /* TopWinesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWinesViewModel.swift; sourceTree = "<group>"; };
 		535D73FE2569A7160027BC27 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		535D84A7271DCBF6002FD679 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		535D84AA271DD053002FD679 /* SelectWineTypePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWineTypePage.swift; sourceTree = "<group>"; };
+		535D84AC271DD64F002FD679 /* FinalizeWinePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeWinePage.swift; sourceTree = "<group>"; };
+		535D84AE271DD6BE002FD679 /* SnapPhotoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapPhotoPage.swift; sourceTree = "<group>"; };
+		535D84B1271DDA8E002FD679 /* RatingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingLabel.swift; sourceTree = "<group>"; };
+		535D84B3271DDA94002FD679 /* RatingPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingPicker.swift; sourceTree = "<group>"; };
+		535D84B5271DDDD3002FD679 /* MyWineListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWineListItem.swift; sourceTree = "<group>"; };
 		535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewEnvironment.swift; sourceTree = "<group>"; };
 		535DE8CE25BCACB900C6CB7B /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		5362FF462704BF0F0079677B /* NewWineModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWineModel.swift; sourceTree = "<group>"; };
@@ -564,6 +576,8 @@
 		53504148271CB67900D85820 /* Page Objects */ = {
 			isa = PBXGroup;
 			children = (
+				535D84B0271DDA80002FD679 /* Wines */,
+				535D84A9271DCF5C002FD679 /* Add Wine */,
 				53B0FF4426A9A27200D784A4 /* AnonymousUserPage.swift */,
 				5355BC5E26ECF22400F0F824 /* EditWinePage.swift */,
 				53DCF48F26A9C03F00160391 /* LogInPage.swift */,
@@ -603,6 +617,26 @@
 				536AEBE72540B306009EA107 /* ViewControllerResolver.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		535D84A9271DCF5C002FD679 /* Add Wine */ = {
+			isa = PBXGroup;
+			children = (
+				535D84AA271DD053002FD679 /* SelectWineTypePage.swift */,
+				535D84AE271DD6BE002FD679 /* SnapPhotoPage.swift */,
+				535D84AC271DD64F002FD679 /* FinalizeWinePage.swift */,
+			);
+			path = "Add Wine";
+			sourceTree = "<group>";
+		};
+		535D84B0271DDA80002FD679 /* Wines */ = {
+			isa = PBXGroup;
+			children = (
+				535D84B1271DDA8E002FD679 /* RatingLabel.swift */,
+				535D84B3271DDA94002FD679 /* RatingPicker.swift */,
+				535D84B5271DDDD3002FD679 /* MyWineListItem.swift */,
+			);
+			path = Wines;
 			sourceTree = "<group>";
 		};
 		536E3AD4258F9CD500D84F10 /* Google */ = {
@@ -1324,12 +1358,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				53B0FF4026A99ED000D784A4 /* EmailSignUpTests.swift in Sources */,
+				535D84B6271DDDD3002FD679 /* MyWineListItem.swift in Sources */,
 				53F5AC171E2176090067AB62 /* AddWineTests.swift in Sources */,
 				5355BC5926ECEDE700F0F824 /* EditWineTests.swift in Sources */,
+				535D84AB271DD053002FD679 /* SelectWineTypePage.swift in Sources */,
 				53DCF48C26A9A7DD00160391 /* SignUpPage.swift in Sources */,
+				535D84B2271DDA8E002FD679 /* RatingLabel.swift in Sources */,
 				53B0FF4326A9A16D00D784A4 /* MyAccountPage.swift in Sources */,
 				5355BC5B26ECEF5900F0F824 /* MyCellarPage.swift in Sources */,
+				535D84B4271DDA94002FD679 /* RatingPicker.swift in Sources */,
+				535D84AF271DD6BE002FD679 /* SnapPhotoPage.swift in Sources */,
 				53DCF49026A9C03F00160391 /* LogInPage.swift in Sources */,
+				535D84AD271DD64F002FD679 /* FinalizeWinePage.swift in Sources */,
 				5355BC6426ECF94700F0F824 /* Extensions.swift in Sources */,
 				53DCF48E26A9AD6500160391 /* TabBar.swift in Sources */,
 				5355BC5D26ECF16D00F0F824 /* MyCellarWineListPage.swift in Sources */,

@@ -31,13 +31,14 @@ class EditWineTests: XCTestCase {
         XCTAssertEqual("Red Wines", wineListPage.title)
         XCTAssertEqual(1, wineListPage.numberOfWines)
 
-        let existingWineItem = wineListPage.getWine(at: 0)
+        let existingWineItem = try wineListPage.getWine(at: 0)
         XCTAssertEqual("My Original Name", existingWineItem.name)
+        XCTAssertEqual(5, existingWineItem.rating)
 
         let editWinePage = try existingWineItem.tap()
 
         editWinePage.setWineName("My Updated Name")
-        editWinePage.updateRating(to: 1)
+        try editWinePage.updateRating(to: 1)
         try editWinePage.changeType(to: "White")
         try editWinePage.changeVariety(to: "Pinot Blanc")
         editWinePage.setLocation("Wegman's")
@@ -56,7 +57,8 @@ class EditWineTests: XCTestCase {
         XCTAssertEqual("White Wines", wineListPage.title)
         XCTAssertEqual(1, wineListPage.numberOfWines)
 
-        let updatedWineItem = wineListPage.getWine(at: 0)
+        let updatedWineItem = try wineListPage.getWine(at: 0)
         XCTAssertEqual("My Updated Name", updatedWineItem.name)
+        XCTAssertEqual(1, existingWineItem.rating)
     }
 }

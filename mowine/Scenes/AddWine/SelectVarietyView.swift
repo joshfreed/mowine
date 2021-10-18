@@ -28,11 +28,12 @@ struct SelectVarietyView: View {
                 }
             }
             .padding(16)
-            
+
             NavigationLink(destination: SnapPhotoView(model: model), isActive: $showNextScreen) {
                 EmptyView()
             }
         }
+        .accessibilityIdentifier("SelectVariety")
     }
 }
 

@@ -11,7 +11,7 @@ import SwiftyBeaver
 import Model
 
 struct AddWineView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var wineTypeService: WineTypeService    
     @StateObject var vm = AddWineViewModel()
     @StateObject var newWineModel = NewWineModel()
@@ -21,13 +21,13 @@ struct AddWineView: View {
             SelectTypeView(model: newWineModel, wineTypes: wineTypeService.wineTypes)
                 .navigationBarTitle("Add a Wine", displayMode: .inline)
                 .navigationBarItems(leading: Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 })
         }
         .accentColor(.mwSecondary)
         .onChange(of: vm.closeModal, perform: { value in
             if value {
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         })
         .environmentObject(vm)

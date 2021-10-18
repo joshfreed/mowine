@@ -19,10 +19,12 @@ struct WineItemView: View {
             VStack(alignment: .leading) {
                 Text(viewModel.name)
                     .font(.system(size: 21, weight: .bold))
+                    .accessibilityIdentifier("Wine Name")
 
                 Text(viewModel.type)
                     .font(.system(size: 16))
                     .foregroundColor(Color("Dark Gray"))
+                    .accessibilityIdentifier("Wine Type")
 
                 RatingLabel(rating: viewModel.rating)
             }
@@ -31,7 +33,6 @@ struct WineItemView: View {
         .padding([.top, .bottom], 8)
         .contentShape(Rectangle())
         .onTapGesture { onTap(viewModel.id) }
-        .accessibility(identifier: "WineItemView")
     }
 }
 

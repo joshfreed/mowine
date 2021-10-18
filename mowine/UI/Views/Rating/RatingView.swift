@@ -40,9 +40,11 @@ struct RatingPicker: View {
                     RatingStar(rating: rating, value: index)
                         .frame(width: starSize, height: starSize)
                 }
-                .accessibility(identifier: "Star\(index)")
+                .accessibilityIdentifier("Rating_\(index)")
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("Rating Picker")
     }
 }
 
@@ -60,8 +62,12 @@ struct FormRatingPicker: View {
                 RatingStar(rating: rating, value: index)
                     .frame(width: starSize, height: starSize)
                     .onTapGesture { rating = index }
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityIdentifier("Rating_\(index)")
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("Rating Picker")
     }
 }
 
@@ -76,12 +82,15 @@ struct RatingStar: View {
     var body: some View {
         Group {
             if value <= rating {
-                Star().fill(Color("Rating"))
+                Star()
+                    .fill(Color("Rating"))
+                    .accessibilityIdentifier("Star_Filled")
             } else if showIfEmpty {
-                Star().stroke(Color("Rating"))
+                Star()
+                    .stroke(Color("Rating"))
+                    .accessibilityIdentifier("Star_Empty")
             }
         }
-        .accessibility(identifier: "Rating_\(value)")
     }
 }
 

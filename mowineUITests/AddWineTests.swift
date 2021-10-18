@@ -9,6 +9,7 @@
 import XCTest
 
 class AddWineTests: XCTestCase {
+    var wineName: String!
 
     override func setUpWithError() throws {
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -17,47 +18,37 @@ class AddWineTests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments.append("UI_TESTING")
         app.launch()
+
+        let num = Int.random(in: 1..<1000)
+        wineName = "My Test Wine \(num)"
     }
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testAddWine() {
+    func testAddWine() throws {
         let app = XCUIApplication()
-        
-        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: .default))
-        
-        app.tabBars["Tab Bar"].buttons["Add Wine"].tap()
-        
-        XCTAssertTrue(app.buttons["Red"].waitForExistence(timeout: .default))
-        app.buttons["Red"].tap()
-        
-        app.buttons["Malbec"].tap()
-        
-        // Photo - take it later
-        app.buttons["Take Later"].tap()
-        
-        // Type a name
-        XCTAssertTrue(app.textFields["wineName"].waitForExistence(timeout: .default))
-        app.textFields["wineName"].tap()
-        app.textFields["wineName"].typeText("My Test Wine")
-        
-        // Rate it
-        XCTAssertTrue(app.buttons["Star3"].waitForExistence(timeout: .default))
-        app.buttons["Star3"].tap()
-        
-        // Save it!
-        XCTAssertTrue(app.buttons["createWineButton"].waitForExistence(timeout: .default))
-        app.buttons["createWineButton"].tap()
+        let tabBar = try TabBar(app: app)
 
-        // Modal should close
-        // blah this always returns true because the navigation bar is *behind* the modal
-        XCTAssertTrue(app.navigationBars["My Cellar"].waitForExistence(timeout: .default))
-        
-        // Make sure the new wine is in there
-        app.buttons["Show My Red Wines"].tap()
-        XCTAssertTrue(app.navigationBars["Red Wines"].waitForExistence(timeout: .default))
-        XCTAssertTrue(app.tables.staticTexts["My Test Wine"].exists)
+        let finalizePage = try tabBar.openAddWine()
+            .selectType("Red")
+            .selectVariety("Malbec")
+            .takeLater()
+
+        let myCellar = try finalizePage
+            .typeName(wineName)
+            .rateWine(3)
+            .submitCreateWine()
+
+        let redWinesList = try myCellar.showMyRedWines()
+
+        XCTAssertEqual(1, redWinesList.numberOfWines)
+
+        let wineItem = try redWinesList.getWine(at: 0)
+
+        XCTAssertEqual(wineName, wineItem.name)
+        XCTAssertEqual("Red", wineItem.wineType)
+        XCTAssertEqual(3, wineItem.rating)
     }
 }

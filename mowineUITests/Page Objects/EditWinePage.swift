@@ -25,8 +25,9 @@ class EditWinePage {
         app.tables.textFields["Fancy Wine Name"].clearAndEnterText(text: newName)
     }
 
-    func updateRating(to value: Int) {
-        app.tables.cells["Rating"].otherElements["Rating_\(value)"].tap()
+    func updateRating(to value: Int) throws {
+        let ratingPicker = try RatingPicker(el: app.tables.cells["Rating"])
+        try ratingPicker.rate(value)
     }
 
     func changeType(to typeName: String) throws {
