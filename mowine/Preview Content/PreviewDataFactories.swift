@@ -9,6 +9,8 @@
 import UIKit
 import Model
 
+#if DEBUG
+
 extension EmailReauthViewModel {
     static func make(password: String? = nil, error: String? = nil) -> EmailReauthViewModel {
         let vm = EmailReauthViewModel()
@@ -24,7 +26,7 @@ extension EmailReauthViewModel {
 
 extension FriendsService {
     static func make() -> FriendsService {
-        let service = FriendsService(session: FakeSession(), userRepository: FakeUserRepository())
+        let service = FriendsService(session: FakeSession(), userRepository: MemoryUserRepository())
         service.friends = [
             .init(id: "1", name: "Barry Jones", profilePictureUrl: nil),
             .init(id: "2", name: "Mark Buffalo", profilePictureUrl: nil),
@@ -36,13 +38,8 @@ extension FriendsService {
 
 extension UsersService {
     static func make() -> UsersService {
-        let service = UsersService(session: FakeSession(), userRepository: FakeUserRepository())
-        return service
+        UsersService(session: FakeSession(), userRepository: MemoryUserRepository())
     }
 }
 
-extension GetTopWinesQuery {
-    static func make() -> GetTopWinesQuery {
-        GetTopWinesQuery(wineRepository: MemoryWineRepository())
-    }
-}
+#endif

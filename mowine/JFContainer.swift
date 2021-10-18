@@ -154,7 +154,7 @@ extension DependencyContainer {
         DependencyContainer { container in
             container.register(.singleton) { FakeSession() }.implements(Session.self)
             container.register(.singleton) { FakeEmailAuth() as EmailAuthenticationService }
-            container.register(.singleton) { FakeUserRepository() }.implements(UserRepository.self)
+            container.register(.singleton) { MemoryUserRepository() }.implements(UserRepository.self)
             container.register(.singleton) { MemoryWineRepository() as WineRepository }
             container.register(.singleton) { FakeSocialAuth() as SocialAuthService }
             container.register { AssetWineImageStorage(wineRepository: $0) }.implements(WineImageStorage.self)

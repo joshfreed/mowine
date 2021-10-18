@@ -13,6 +13,7 @@ class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []
     
     func add(_ wine: Wine) async throws {
+        guard !wines.contains(where: { $0.id == wine.id }) else { return }
         wines.append(wine)
     }
     
@@ -48,7 +49,11 @@ class MemoryWineRepository: WineRepository {
     }
 
     func getTopWines(userId: UserId) async throws -> [Wine] {
-        []
+        let topWines = wines
+            .filter { $0.userId == userId }
+            .sorted { $0.rating > $1.rating }
+            .prefix(3)
+        return Array(topWines)
     }
     
     func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String] {

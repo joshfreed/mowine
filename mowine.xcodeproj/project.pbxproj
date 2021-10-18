@@ -30,7 +30,7 @@
 		532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789FB267979E900649624 /* SystemConfiguration.framework */; };
 		532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3C82569C2EF009A4740 /* MyAccountView.swift */; };
 		532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */; };
-		532DB3D3256AC763009A4740 /* DataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3D2256AC763009A4740 /* DataHelpers.swift */; };
+		532DB3D3256AC763009A4740 /* PreviewDataFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */; };
 		5330C20A25E5B39F0063E7C4 /* UserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330C20925E5B39F0063E7C4 /* UserPhotoView.swift */; };
 		5330C20E25E5B5710063E7C4 /* UserSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330C20D25E5B5710063E7C4 /* UserSearchResultView.swift */; };
 		533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */; };
@@ -108,6 +108,7 @@
 		5393F01F2706561D000E9029 /* WineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393F01D2706561D000E9029 /* WineBuilder.swift */; };
 		5393F0202706561D000E9029 /* UserBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5393F01E2706561D000E9029 /* UserBuilder.swift */; };
 		5393F02C27074A20000E9029 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 5393F02B27074A20000E9029 /* FirebaseStorageSwift-Beta */; };
+		5395AC9A271E1BA0001BB10B /* MemoryUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC99271E1BA0001BB10B /* MemoryUserRepository.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
 		539B186526EE47F10049A5A6 /* UserMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B186426EE47F10049A5A6 /* UserMappingTests.swift */; };
@@ -219,7 +220,7 @@
 		532789FF26797C5900649624 /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignInDependencies.framework; path = GoogleSignIn/GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		532DB3C82569C2EF009A4740 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
 		532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
-		532DB3D2256AC763009A4740 /* DataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelpers.swift; sourceTree = "<group>"; };
+		532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDataFactories.swift; sourceTree = "<group>"; };
 		5330C20925E5B39F0063E7C4 /* UserPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoView.swift; sourceTree = "<group>"; };
 		5330C20D25E5B5710063E7C4 /* UserSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultView.swift; sourceTree = "<group>"; };
 		533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseEmailAuth.swift; sourceTree = "<group>"; };
@@ -293,6 +294,7 @@
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5393F01D2706561D000E9029 /* WineBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineBuilder.swift; sourceTree = "<group>"; };
 		5393F01E2706561D000E9029 /* UserBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBuilder.swift; sourceTree = "<group>"; };
+		5395AC99271E1BA0001BB10B /* MemoryUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUserRepository.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
 		539B186426EE47F10049A5A6 /* UserMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMappingTests.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			children = (
 				53489615203DE5A100B7547A /* MemoryWineTypeRepository.swift */,
 				53489619203DE5C000B7547A /* MemoryWineRepository.swift */,
+				5395AC99271E1BA0001BB10B /* MemoryUserRepository.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -829,9 +832,9 @@
 			isa = PBXGroup;
 			children = (
 				535D73FE2569A7160027BC27 /* Preview Assets.xcassets */,
-				532DB3D2256AC763009A4740 /* DataHelpers.swift */,
 				535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */,
 				53F4C76927161B5F00CCBA7F /* PreviewData.swift */,
+				532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -1229,6 +1232,7 @@
 				5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */,
 				533597AE21BC3EE300CEFD45 /* FirebaseEmailAuth.swift in Sources */,
 				53047E2D25DC09C0005CC14D /* PickImageButton.swift in Sources */,
+				5395AC9A271E1BA0001BB10B /* MemoryUserRepository.swift in Sources */,
 				53D3B45125A2337400F15974 /* TextStyles.swift in Sources */,
 				53F47F0F2585440E00910BDC /* ErrorLabel.swift in Sources */,
 				53873A302707A9D600654CB7 /* UIImageResizer.swift in Sources */,
@@ -1281,7 +1285,7 @@
 				533D8B882533B85000CE297E /* RatingView.swift in Sources */,
 				5330C20A25E5B39F0063E7C4 /* UserPhotoView.swift in Sources */,
 				53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */,
-				532DB3D3256AC763009A4740 /* DataHelpers.swift in Sources */,
+				532DB3D3256AC763009A4740 /* PreviewDataFactories.swift in Sources */,
 				536E85A4204F507D004D5426 /* Fakes.swift in Sources */,
 				53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */,
 				533D8B802533691500CE297E /* WineCellarListView.swift in Sources */,

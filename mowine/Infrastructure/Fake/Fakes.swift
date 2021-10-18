@@ -10,62 +10,6 @@ import UIKit
 import Combine
 import Model
 
-var josh = User.make(emailAddress: "josh@jpfreed.com", firstName: "Josh", lastName: "Freed")
-var maureen = User.make(emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
-
-var usersDB: [User] = [
-    josh,
-    User.make(emailAddress: "bjones@test.com", firstName: "Barry", lastName: "Jones"),
-    maureen,
-    User.make(emailAddress: "mbananas@gmail.com", firstName: "Maurice", lastName: "Bananas"),
-    User.make(emailAddress: "test1@test.com", firstName: "Test", lastName: "User1"),
-    User.make(emailAddress: "test2@test.com", firstName: "Test", lastName: "User2"),
-    User.make(emailAddress: "test3@test.com", firstName: "Test", lastName: "User3"),
-    User.make(emailAddress: "test4@test.com", firstName: "Test", lastName: "User4"),
-    User.make(emailAddress: "test5@test.com", firstName: "Test", lastName: "User5"),
-    User.make(emailAddress: "test6@test.com", firstName: "Test", lastName: "User6"),
-    User.make(emailAddress: "test7@test.com", firstName: "Test", lastName: "User7"),
-    User.make(emailAddress: "test8@test.com", firstName: "Test", lastName: "User8"),
-    User.make(emailAddress: "test9@test.com", firstName: "Test", lastName: "User9"),
-    User.make(emailAddress: "test10@test.com", firstName: "Test", lastName: "User10"),
-    User.make(emailAddress: "test11@test.com", firstName: "Test", lastName: "User12"),
-    User.make(emailAddress: "test12@test.com", firstName: "Test", lastName: "User13"),
-    User.make(emailAddress: "test13@test.com", firstName: "Test", lastName: "User14"),
-    User.make(emailAddress: "test14@test.com", firstName: "Test", lastName: "User15"),
-    User.make(emailAddress: "test15@test.com", firstName: "Test", lastName: "User16"),
-    User.make(emailAddress: "test16@test.com", firstName: "Test", lastName: "User17"),
-    User.make(emailAddress: "test17@test.com", firstName: "Test", lastName: "User18"),
-    User.make(emailAddress: "test18@test.com", firstName: "Test", lastName: "User19"),
-    User.make(emailAddress: "test19@test.com", firstName: "Test", lastName: "User19"),
-    User.make(emailAddress: "test20@test.com", firstName: "Test", lastName: "User20"),
-]
-
-var friendsDB: [UserId: [UserId]] = [
-    josh.id: [
-        usersDB[1].id,
-        maureen.id
-    ],
-    maureen.id: [
-        josh.id
-    ]
-]
-
-func randomDelay(action: @escaping () -> ()) {
-    let wait = Int(arc4random_uniform(4) + 1)
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(wait)) {
-        action()
-    }
-//    action()
-}
-
-extension User {
-    static func make(emailAddress: String, firstName: String, lastName: String) -> User {
-        var user = User(id: UserId(), emailAddress: emailAddress)
-        user.fullName = firstName + " " + lastName
-        return user
-    }
-}
-
 class FakeSession: Session {
     private var _isLoggedIn = false
     private var _photoUrl: URL?    
@@ -126,92 +70,11 @@ struct FakeMoWineAuth: MoWineAuth {
 }
 
 class FakeEmailAuth: EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String) async throws {
-        if let user = usersDB.first(where: { $0.emailAddress == emailAddress }) {
-            let fakeSession: FakeSession? = try JFContainer.shared.resolve()
-            fakeSession?.setUser(user: user)
-        } else {
-            throw EmailAuthenticationErrors.userNotFound
-        }
-    }    
+    func signIn(emailAddress: String, password: String) async throws {}
     
-    func signUp(emailAddress: String, password: String) async throws {
-        let user = User(id: UserId(), emailAddress: emailAddress)
-        let fakeSession: FakeSession? = try JFContainer.shared.resolve()
-        fakeSession?.setUser(user: user)
-        usersDB.append(user)
-    }
+    func signUp(emailAddress: String, password: String) async throws {}
 
     func forgotPassword(emailAddress: String) async throws {}
-}
-
-class FakeUserRepository: UserRepository {
-    func addUser(_ user: User) {
-        usersDB.append(user)
-    }
-
-    func setUsers(_ users: [User]) {
-        usersDB = users
-    }
-    
-    func getById(_ id: UserId) -> User? {
-        usersDB.first(where: { $0.id == id })        
-    }
-    
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Swift.Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
-        return FakeRegistration()
-    }
-    
-    func add(user: User) async throws {
-        usersDB.append(user)
-    }
-    
-    func save(user: User) async throws {
-        if let index = usersDB.firstIndex(where: { $0.emailAddress == user.emailAddress }) {
-            usersDB[index] = user
-        }
-    }
-
-    func searchUsers(searchString: String) async throws -> [User] {
-        let words = searchString.split(separator: " ")
-        var matches: [User] = []
-
-        for word in words {
-            let m = usersDB.filter {
-                $0.fullName.lowercased().starts(with: word)
-            }
-            matches.append(contentsOf: m)
-        }
-
-        return try await withCheckedThrowingContinuation { continuation in
-            randomDelay {
-                continuation.resume(with: .success(matches))
-            }
-        }
-    }
-    
-    func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
-        if friendsDB[owningUserId] == nil {
-            friendsDB[owningUserId] = []
-        }
-        friendsDB[owningUserId]?.append(friendId)
-        let newFriend = usersDB.first(where: { $0.id == friendId })!
-        return newFriend
-    }
-    
-    func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
-        if let index = friendsDB[owningUserId]?.firstIndex(of: friendId) {
-            friendsDB[owningUserId]?.remove(at: index)
-        }
-    }
-    
-    func getUserById(_ id: UserId) async throws -> User? {
-        usersDB.first(where: { $0.id == id })
-    }
-    
-    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Swift.Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
-        return FakeRegistration()
-    }
 }
 
 class FakeUserImageStorage: UserImageStorage {

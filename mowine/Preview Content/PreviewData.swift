@@ -9,6 +9,13 @@
 import SwiftUI
 import Model
 
+#if DEBUG
+
+struct PreviewData {
+    static let userId1: String = "U1"
+    static let userId2: String = "U2"
+}
+
 extension View {
     func addPreviewData() -> some View {
         Task {
@@ -26,9 +33,10 @@ fileprivate func configurePreviewData() async throws {
     let wineRepository: WineRepository = try! JFContainer.shared.resolve()
 
     // Users
-    var josh = User(id: UserId(string: "U1"), emailAddress: "josh@jpfreed.com")
+    var josh = User(id: UserId(string: PreviewData.userId1), emailAddress: "josh@jpfreed.com")
     josh.fullName = "Josh Freed"
-    let maureen = User.make(emailAddress: "mshockley13@gmail.com", firstName: "Maureen", lastName: "Shockley")
+    var maureen = User(id: UserId(string: PreviewData.userId2), emailAddress: "mshockley13@gmail.com")
+    maureen.fullName = "Maureen Shockley"
     try await userRepository.add(user: josh)
     try await userRepository.add(user: maureen)
 
@@ -40,3 +48,4 @@ fileprivate func configurePreviewData() async throws {
     try await wineRepository.add(wine1)
 }
 
+#endif

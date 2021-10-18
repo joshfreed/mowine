@@ -64,12 +64,12 @@ struct EditProfileView: View {
 @MainActor
 fileprivate func viewModel() -> EditProfileViewModel {
     let session: FakeSession = try! JFContainer.shared.resolve()
-    let userRepo: FakeUserRepository = try! JFContainer.shared.resolve()
+    let userRepo: MemoryUserRepository = try! JFContainer.shared.resolve()
 
     var user = User(id: UserId(), emailAddress: "test@test.com")
     user.fullName = "Testy McTestguy"
 
-    userRepo.addUser(user)
+    userRepo.addUserSync(user)
     session.setUser(user: user)
 
     return EditProfileViewModel()
