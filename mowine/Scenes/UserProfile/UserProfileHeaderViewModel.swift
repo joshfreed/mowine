@@ -16,21 +16,12 @@ import FirebaseCrashlytics
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""
     @Published var profilePicture: URL?
-    
-    private let userId: String
-    private let users: UsersService
+
+    @Injected private var users: UsersService
+
     private var cancellables = Set<AnyCancellable>()
 
-    init(userId: String, users: UsersService) {
-        self.userId = userId
-        self.users = users
-    }
-
-    convenience init(userId: String) {
-        self.init(userId: userId, users: try! JFContainer.shared.resolve())
-    }
-    
-    func load() async {
+    func load(userId: String) async {
         do {
             let user = try await users.getUserById(userId)
             fullName = user.fullName

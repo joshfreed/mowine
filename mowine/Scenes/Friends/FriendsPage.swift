@@ -47,7 +47,7 @@ struct SearchableFriendsPage: View {
 
 struct FriendsPage_Previews: PreviewProvider {
     static var previews: some View {
-        FriendsPage(vm: SearchUsersViewModel(users: .make()))
+        FriendsPage(vm: SearchUsersViewModel())
             .environmentObject(FriendsService.make())
             .addPreviewEnvironment()
     }

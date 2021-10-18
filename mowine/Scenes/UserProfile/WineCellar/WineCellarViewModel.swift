@@ -15,15 +15,9 @@ import FirebaseCrashlytics
 class WineCellarViewModel: ObservableObject {
     @Published var types: [String] = []
 
-    let userId: String
-    private let getUserCellarQuery: GetUserCellarQuery
+    @Injected private var getUserCellarQuery: GetUserCellarQuery
 
-    init(userId: String) {
-        self.userId = userId
-        getUserCellarQuery = try! JFContainer.shared.resolve()
-    }
-
-    func load() async {
+    func load(userId: String) async {
         do {
             types = try await getUserCellarQuery.execute(userId: userId)
         } catch {

@@ -10,7 +10,8 @@ import SwiftUI
 import Model
 
 struct TopWinesView: View {
-    @StateObject var vm: TopWinesViewModel
+    let userId: String
+    @StateObject var vm = TopWinesViewModel()
     @State private var showWineDetails = false
     @State private var selectedWineId: String = ""
 
@@ -20,7 +21,7 @@ struct TopWinesView: View {
             selectedWineId = wineId
         }
         .task {
-            await vm.loadTopWines()
+            await vm.loadTopWines(userId: userId)
         }
 
         NavigationLink(destination: WineDetailsView(wineId: selectedWineId), isActive: $showWineDetails) {
@@ -31,6 +32,8 @@ struct TopWinesView: View {
 
 struct TopWinesView_Previews: PreviewProvider {
     static var previews: some View {
-        TopWinesView(vm: .init(userId: "1", getTopWines: .make()))
+        TopWinesView(userId: "U1")
+            .addPreviewEnvironment()
+            .addPreviewData()
     }
 }

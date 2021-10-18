@@ -17,15 +17,9 @@ class TopWinesViewModel: ObservableObject {
     @Published var topWines: [WineItemViewModel] = []
     @Published var errorLoadingWines = false
 
-    private let userId: String
-    private let getTopWines: GetTopWinesQuery
+    @Injected private var getTopWines: GetTopWinesQuery
     
-    init(userId: String, getTopWines: GetTopWinesQuery = try! JFContainer.shared.resolve()) {
-        self.userId = userId
-        self.getTopWines = getTopWines
-    }
-
-    func loadTopWines() async {
+    func loadTopWines(userId: String) async {
         errorLoadingWines = false
 
         do {

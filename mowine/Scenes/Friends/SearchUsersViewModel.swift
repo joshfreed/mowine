@@ -17,17 +17,12 @@ class SearchUsersViewModel: ObservableObject {
     @Published var hasSearched = false
     @Published var searchResults: [UsersService.UserSearchResult] = []
 
+    @Injected private var users: UsersService
+
     private var cancellable: AnyCancellable?
-    private let users: UsersService
     private var searchTextSubject = PassthroughSubject<String, Never>()
 
-    init(users: UsersService) {
-        self.users = users
-        registerListeners()
-    }
-    
     init() {
-        self.users = try! JFContainer.shared.resolve()
         registerListeners()
     }
     

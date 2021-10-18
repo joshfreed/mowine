@@ -10,7 +10,8 @@ import SwiftUI
 import Model
 
 struct WineCellarView: View {
-    @StateObject var vm: WineCellarViewModel
+    let userId: String
+    @StateObject var vm = WineCellarViewModel()
 
     var body: some View {
         Group {
@@ -21,7 +22,7 @@ struct WineCellarView: View {
             } else {
                 VStack(spacing: 4) {
                     ForEach(vm.types, id: \.self) { type in
-                        NavigationLink(destination: WineTypeListView(userId: vm.userId, typeName: type)) {
+                        NavigationLink(destination: WineTypeListView(userId: userId, typeName: type)) {
                             PrimaryButtonLabel(title: type, height: 80, fontSize: 37)
                         }
                     }
@@ -30,14 +31,15 @@ struct WineCellarView: View {
         }
         .padding(.horizontal)
         .task {
-            await vm.load()
+            await vm.load(userId: userId)
         }
     }
 }
 
 struct WineCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        WineCellarView(vm: .init(userId: "A"))
+        WineCellarView(userId: "U1")
             .addPreviewEnvironment()
+            .addPreviewData()
     }
 }

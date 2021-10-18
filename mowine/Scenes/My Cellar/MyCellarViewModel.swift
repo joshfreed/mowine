@@ -15,16 +15,8 @@ class MyCellarViewModel: ObservableObject {
     @Published var isEditingWine: Bool = false
     @Published var selectedWineId: String?
 
-    private let searchMyCellarQuery: SearchMyCellarQuery
-
     init() {
         SwiftyBeaver.debug("init")
-        self.searchMyCellarQuery = try! JFContainer.shared.resolve()
-    }
-
-    init(searchMyCellarQuery: SearchMyCellarQuery) {
-        SwiftyBeaver.debug("init")
-        self.searchMyCellarQuery = searchMyCellarQuery
     }
 
     deinit {

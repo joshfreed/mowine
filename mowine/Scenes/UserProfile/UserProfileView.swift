@@ -17,7 +17,7 @@ struct UserProfileView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            UserProfileHeaderView(vm: .init(userId: userId))
+            UserProfileHeaderView(userId: userId)
             
             Group {
                 Picker(selection: $selectedView, label: EmptyView(), content: {
@@ -30,9 +30,9 @@ struct UserProfileView: View {
             .padding(.vertical, 8)
             
             if selectedView == 1 {
-                TopWinesView(vm: .init(userId: userId))
+                TopWinesView(userId: userId)
             } else {
-                WineCellarView(vm: .init(userId: userId))
+                WineCellarView(userId: userId)
             }
             
             Spacer()
@@ -45,8 +45,9 @@ struct UserProfileView: View {
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            UserProfileView(userId: "1")
+            UserProfileView(userId: "U1")
         }
         .addPreviewEnvironment()
+        .addPreviewData()
     }
 }
