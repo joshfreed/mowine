@@ -18,11 +18,11 @@ class ReauthenticationViewModel: ObservableObject {
     @Published var showErrorAlert = false
     @Published var errorMessage: String = ""
     
+    @Injected private var socialAuthService: SocialAuthService
+
     private let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
-    private let socialAuthService: SocialAuthService
 
     init() {
-        self.socialAuthService = try! JFContainer.shared.resolve()
         self.socialSignInMethods = JFContainer.socialSignInMethods()
     }
 

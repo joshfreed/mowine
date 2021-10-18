@@ -10,11 +10,15 @@ import SwiftUI
 import Model
 import SwiftyBeaver
 import FirebaseCrashlytics
+import Dip
 
 struct WineDetailsView: View {
-    @StateObject var query: GetWineDetailsQuery = try! JFContainer.shared.resolve()
-    @Environment(\.dismiss) var dismiss
     let wineId: String
+
+    @Injected private var query: GetWineDetailsQuery
+
+    @Environment(\.dismiss) private var dismiss
+
     @State private var wineNotFound = false
 
     var body: some View {
@@ -126,8 +130,8 @@ struct WineDetailsView_Previews: PreviewProvider {
     }()
 
     static var previews: some View {
-        WineDetailsView(wineId: wineId.asString)
-            .environmentObject(query)
+        WineDetailsView(wineId: "W1")
             .addPreviewEnvironment()
+            .addPreviewData()
     }
 }

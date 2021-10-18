@@ -22,20 +22,15 @@ class EditWineViewModel: ObservableObject {
     
     let form = EditWineFormModel()
     private var wineId: String
-    private let getWineTypesQuery: GetWineTypesQueryHandler
-    private let getWineQuery: GetWineByIdQueryHandler
-    private let getWineImageQuery: GetWineImageQueryHandler
-    private let updateWineCommandHandler: UpdateWineCommandHandler
-    private let deleteWineCommandHandler: DeleteWineCommandHandler
+    @Injected private var getWineTypesQuery: GetWineTypesQueryHandler
+    @Injected private var getWineQuery: GetWineByIdQueryHandler
+    @Injected private var getWineImageQuery: GetWineImageQueryHandler
+    @Injected private var updateWineCommandHandler: UpdateWineCommandHandler
+    @Injected private var deleteWineCommandHandler: DeleteWineCommandHandler
     
     init(wineId: String) {
         SwiftyBeaver.debug("init")
         self.wineId = wineId
-        updateWineCommandHandler = try! JFContainer.shared.resolve()
-        deleteWineCommandHandler = try! JFContainer.shared.resolve()
-        getWineTypesQuery = try! JFContainer.shared.resolve()
-        getWineQuery = try! JFContainer.shared.resolve()
-        getWineImageQuery = try! JFContainer.shared.resolve()
     }
     
     deinit {

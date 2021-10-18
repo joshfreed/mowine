@@ -38,8 +38,9 @@ class EditProfileViewModel: ObservableObject {
     @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     @Published var isReauthenticating = false
 
-    private let getMyAccountQuery: GetMyAccountQuery
-    private let updateProfileCommandHandler: UpdateProfileCommandHandler
+    @Injected private var getMyAccountQuery: GetMyAccountQuery
+    @Injected private var updateProfileCommandHandler: UpdateProfileCommandHandler
+
     private var hasChanges = false
 
     private var newProfilePicture: UIImage? {
@@ -52,8 +53,6 @@ class EditProfileViewModel: ObservableObject {
 
     init() {
         SwiftyBeaver.debug("init")
-        self.getMyAccountQuery = try! JFContainer.shared.resolve()
-        self.updateProfileCommandHandler = try! JFContainer.shared.resolve()
     }
 
     deinit {

@@ -16,15 +16,7 @@ class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String = ""
     
-    private let emailAuthService: EmailAuthApplicationService
-
-    init() {
-        self.emailAuthService = try! JFContainer.shared.resolve()
-    }
-
-    init(worker: EmailAuthApplicationService) {
-        self.emailAuthService = worker
-    }
+    @Injected private var emailAuthService: EmailAuthApplicationService
 
     @MainActor
     func signUp(fullName: String, emailAddress: String, password: String) async {

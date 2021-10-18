@@ -17,15 +17,7 @@ class SocialAuthViewModel: ObservableObject {
     @Published var isSignInError: Bool = false
     @Published var signInError: String = ""
 
-    let socialAuthService: SocialAuthApplicationService
-
-    init() {
-        self.socialAuthService = try! JFContainer.shared.resolve()
-    }
-
-    init(socialAuthService: SocialAuthApplicationService) {
-        self.socialAuthService = socialAuthService
-    }
+    @Injected private var socialAuthService: SocialAuthApplicationService
 
     func socialSignIn(type: SocialProviderType) async {
         isSigningIn = true

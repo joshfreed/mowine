@@ -20,23 +20,16 @@ class MyAccountViewModel: ObservableObject {
     @Published var emailAddress: String = ""
     @Published var profilePicture: UserPhoto = .url(nil)
 
-    private let getMyAccountQuery: GetMyAccountQuery
-    private let signOutCommand: SignOutCommand
+    @Injected private var getMyAccountQuery: GetMyAccountQuery
+    @Injected private var signOutCommand: SignOutCommand
+
     private var cancellable: AnyCancellable?
     private var editProfileViewModel: EditProfileViewModel?
 
     init() {
         SwiftyBeaver.debug("init")
-        self.getMyAccountQuery = try! JFContainer.shared.resolve()
-        self.signOutCommand = try! JFContainer.shared.resolve()
     }
 
-    init(getMyAccountQuery: GetMyAccountQuery, signOutCommand: SignOutCommand) {
-        SwiftyBeaver.debug("init")
-        self.getMyAccountQuery = getMyAccountQuery
-        self.signOutCommand = signOutCommand
-    }
-    
     deinit {
         SwiftyBeaver.debug("deinit")
         cancellable = nil

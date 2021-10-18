@@ -14,11 +14,7 @@ import SwiftyBeaver
 class WineThumbnailViewModel: ObservableObject {
     @Published var uiImage: UIImage?
 
-    private let query: GetWineThumbnailQueryHandler
-
-    init() {
-        self.query = try! JFContainer.shared.resolve()
-    }
+    @Injected private var query: GetWineThumbnailQueryHandler
 
     @MainActor
     func fetchThumbnail(wineId: String) async {

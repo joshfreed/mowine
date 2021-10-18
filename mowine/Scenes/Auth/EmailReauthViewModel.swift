@@ -11,17 +11,13 @@ import Combine
 import Model
 
 class EmailReauthViewModel: ObservableObject {
-    let session: Session
-    
     @Published var emailAddress: String = ""
     @Published var password: String = ""
     @Published var error: String = ""
     @Published var isReauthenticating = false
-    
-    init() {
-        self.session = try! JFContainer.shared.resolve()
-    }
-    
+
+    @Injected private var session: Session
+
     func loadEmail() {
         if let auth = session.getCurrentAuth(), let email = auth.email {
             emailAddress = email

@@ -16,15 +16,7 @@ class EmailLogInViewModel: ObservableObject {
     @Published var isLoggingIn = false
     @Published var error: String = ""
     
-    let emailAuth: EmailAuthApplicationService
-
-    init() {
-        self.emailAuth = try! JFContainer.shared.resolve()
-    }
-
-    init(emailAuth: EmailAuthApplicationService) {
-        self.emailAuth = emailAuth
-    }
+    @Injected private var emailAuth: EmailAuthApplicationService
 
     func logIn(emailAddress: String, password: String) async {
         error = ""

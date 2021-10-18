@@ -22,7 +22,7 @@ enum ForgotPasswordAlert: Identifiable {
 
 struct ForgotPasswordView: View {
     @Environment(\.presentationMode) var presentationMode
-    private var emailAuth: EmailAuthApplicationService = try! JFContainer.shared.resolve()
+    @Injected var emailAuth: EmailAuthApplicationService
     @State private var emailAddress: String = ""
     @State private var isSending = false
     @State private var activeAlert: ForgotPasswordAlert?

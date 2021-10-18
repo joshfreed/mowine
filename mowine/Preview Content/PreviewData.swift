@@ -45,6 +45,9 @@ fileprivate func configurePreviewData() async throws {
 
     // Wines
     let wine1 = Wine(id: WineId(string: "W1"), userId: josh.id, type: red, name: "First Wine", rating: 5)
+    wine1.variety = red.varieties.first
+    wine1.price = "Fifty bucks"
+    wine1.location = "The Wegman's on 13th st"
     try await wineRepository.add(wine1)
 }
 
