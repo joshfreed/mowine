@@ -9,14 +9,15 @@
 import XCTest
 
 class EditWinePage {
-    let app: XCUIApplication
+    private let app: XCUIApplication
 
-    init(app: XCUIApplication) {
+    init(app: XCUIApplication) throws {
         self.app = app
+        guard waitForExistence() else { throw PageErrors.wrongPage }
     }
 
-    func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["Edit Wine"].waitForExistence(timeout: .default))
+    private func waitForExistence() -> Bool {
+        app.navigationBars["Edit Wine"].waitForExistence(timeout: .default)
     }
 
     func setWineName(_ newName: String) {
@@ -28,18 +29,22 @@ class EditWinePage {
         app.tables.cells["Rating"].otherElements["Rating_\(value)"].tap()
     }
 
-    func changeType(to typeName: String) {
-        app.tables.cells["Type"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
-        XCTAssertTrue(app.tables.switches[typeName].waitForExistence(timeout: .default))
-        app.tables.switches[typeName].tap()
-        waitForExistence()
+    func changeType(to typeName: String) throws {
+        _ = try tapType().selectType(typeName)
     }
 
-    func changeVariety(to varietyName: String) {
+    func changeVariety(to varietyName: String) throws {
+        _ = try tapVariety().selectVariety(varietyName)
+    }
+
+    func tapType() throws -> SelectTypePage {
+        app.tables.cells["Type"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
+        return try SelectTypePage(app: app)
+    }
+
+    func tapVariety() throws -> SelectVarietyPage {
         app.tables.cells["Variety"].children(matching: .other).element(boundBy: 0).tap()
-        XCTAssertTrue(app.tables.switches[varietyName].waitForExistence(timeout: .default))
-        app.tables.switches[varietyName].tap()
-        waitForExistence()
+        return try SelectVarietyPage(app: app)
     }
 
     func setLocation(_ location: String) {
@@ -64,16 +69,44 @@ class EditWinePage {
     }
 
     func setNote(_ note: String) {
-        let notesField = app.textViews["Notes"] // app.tables.children(matching: .cell).element(boundBy: 8).children(matching: .other).element(boundBy: 2).children(matching: .other).element.children(matching: .textView).element
+        let notesField = app.textViews["Notes"]
         notesField.tap()
         notesField.typeText(note)
     }
 
-    func saveWine() {
+    func saveWine() throws -> MyCellarWineListPage {
         app.navigationBars["Edit Wine"].buttons["Save"].tap()
+        return try MyCellarWineListPage(app: app)
     }
 
-    func cancel() {
+    func cancel() throws -> MyCellarWineListPage {
         app.navigationBars["Edit Wine"].buttons["Cancel"].tap()
+        return try MyCellarWineListPage(app: app)
+    }
+}
+
+struct SelectTypePage {
+    private let app: XCUIApplication
+
+    init(app: XCUIApplication) throws {
+        self.app = app
+    }
+
+    func selectType(_ typeName: String) throws -> EditWinePage {
+        app.tables.switches[typeName].tap()
+        return try EditWinePage(app: app)
+    }
+}
+
+struct SelectVarietyPage {
+    private let app: XCUIApplication
+
+    init(app: XCUIApplication) throws {
+        self.app = app
+    }
+
+    func selectVariety(_ varietyName: String) throws -> EditWinePage {
+        app.tables.switches[varietyName].tap()
+        return try EditWinePage(app: app)
     }
 }

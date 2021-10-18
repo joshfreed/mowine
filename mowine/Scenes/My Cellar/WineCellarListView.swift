@@ -36,6 +36,7 @@ struct WineCellarListView: View {
         WineListView(wines: searchResults, onTapWine: onEditWine)
             .navigationBarTitle(navigationBarTitle)
             .searchable(text: $searchText)
+            .accessibility(identifier: "WineCellarListView")
     }
 }
 

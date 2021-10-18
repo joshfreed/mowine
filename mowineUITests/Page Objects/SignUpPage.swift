@@ -11,36 +11,38 @@ import XCTest
 class SignUpPage {
     let app: XCUIApplication
 
-    init(app: XCUIApplication) {
+    init(app: XCUIApplication) throws {
         self.app = app
+        guard waitForExistence() else { throw PageErrors.wrongPage }
     }
 
-    func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["Sign Up"].waitForExistence(timeout: .default))
+    private func waitForExistence() -> Bool {
+        app.navigationBars["Sign Up"].waitForExistence(timeout: .default)
     }
 
-    func typeFullName(_ text: String) {
+    func typeFullName(_ text: String) throws -> SignUpPage {
         let textField = app.textFields["fullName"]
-        XCTAssertTrue(textField.exists)
         textField.tap()
         textField.typeText(text)
+        return try SignUpPage(app: app)
     }
 
-    func typeEmailAddress(_ text: String) {
+    func typeEmailAddress(_ text: String) throws -> SignUpPage {
         let textField = app.textFields["email"]
-        XCTAssertTrue(textField.exists)
         textField.tap()
         textField.typeText(text)
+        return try SignUpPage(app: app)
     }
 
-    func typePassword(_ text: String) {
+    func typePassword(_ text: String) throws -> SignUpPage {
         let textField = app.secureTextFields["password"]
-        XCTAssertTrue(textField.exists)
         textField.tap()
         textField.typeText(text)
+        return try SignUpPage(app: app)
     }
 
-    func signUp() {
+    func submitSignUp() throws -> MyAccountPage {
         app.otherElements.buttons["signUp"].tap()
+        return try MyAccountPage(app: app)
     }
 }

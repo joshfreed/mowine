@@ -11,29 +11,31 @@ import XCTest
 class LogInPage {
     let app: XCUIApplication
 
-    init(app: XCUIApplication) {
+    init(app: XCUIApplication) throws {
         self.app = app
+        guard waitForExistence() else { throw PageErrors.wrongPage }
     }
 
-    func waitForExistence() {
-        XCTAssertTrue(app.navigationBars["Log In"].waitForExistence(timeout: .default))
+    private func waitForExistence() -> Bool {
+        app.navigationBars["Log In"].waitForExistence(timeout: .default)
     }
 
-    func typeEmailAddress(_ text: String) {
+    func typeEmailAddress(_ text: String) throws -> LogInPage {
         let textField = app.textFields["emailAddress"]
-        XCTAssertTrue(textField.exists)
         textField.tap()
         textField.typeText(text)
+        return try LogInPage(app: app)
     }
 
-    func typePassword(_ text: String) {
+    func typePassword(_ text: String) throws -> LogInPage {
         let textField = app.secureTextFields["password"]
-        XCTAssertTrue(textField.exists)
         textField.tap()
         textField.typeText(text)
+        return try LogInPage(app: app)
     }
 
-    func logIn() {
+    func submitLogIn() throws -> MyAccountPage {
         app.otherElements.buttons["logIn"].tap()
+        return try MyAccountPage(app: app)
     }
 }

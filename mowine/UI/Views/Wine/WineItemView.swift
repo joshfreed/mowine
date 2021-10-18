@@ -31,6 +31,7 @@ struct WineItemView: View {
         .padding([.top, .bottom], 8)
         .contentShape(Rectangle())
         .onTapGesture { onTap(viewModel.id) }
+        .accessibility(identifier: "WineItemView")
     }
 }
 

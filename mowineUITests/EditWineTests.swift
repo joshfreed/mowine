@@ -9,11 +9,6 @@
 import XCTest
 
 class EditWineTests: XCTestCase {
-    var mowine: MoWineApp!
-    var myCellarPage: MyCellarPage!
-    var wineListPage: MyCellarWineListPage!
-    var editWinePage: EditWinePage!
-    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -25,44 +20,43 @@ class EditWineTests: XCTestCase {
         app.launchArguments.append("UI_TESTING")
         app.launchEnvironment["loggedInUser"] = ["emailAddress": "editwine@jpfreed.com", "password": "Testing123!"].toJsonString()
         app.launch()
-
-        mowine = MoWineApp(app: app)
-        myCellarPage = MyCellarPage(app: app)
-        wineListPage = MyCellarWineListPage(app: app)
-        editWinePage = EditWinePage(app: app)
     }
 
     func testEditWine() throws {
-        mowine.waitForExistence()
+        let app = XCUIApplication()
+        var myCellarPage = try MyCellarPage(app: app)
+        var wineListPage: MyCellarWineListPage!
 
-        myCellarPage.showMyRedWines()
-        wineListPage.waitForExistence(wineTypes: "Red Wines")
-        wineListPage.assertContainsWine(named: "My Original Name")
+        wineListPage = try myCellarPage.showMyRedWines()
+        XCTAssertEqual("Red Wines", wineListPage.title)
+        XCTAssertEqual(1, wineListPage.numberOfWines)
 
-        wineListPage.selectWine(at: 0)
+        let existingWineItem = wineListPage.getWine(at: 0)
+        XCTAssertEqual("My Original Name", existingWineItem.name)
 
-        editWinePage.waitForExistence()
+        let editWinePage = try existingWineItem.tap()
+
         editWinePage.setWineName("My Updated Name")
         editWinePage.updateRating(to: 1)
-        editWinePage.changeType(to: "White")
-        editWinePage.changeVariety(to: "Pinot Blanc")
+        try editWinePage.changeType(to: "White")
+        try editWinePage.changeVariety(to: "Pinot Blanc")
         editWinePage.setLocation("Wegman's")
         editWinePage.setPrice("$50")
         editWinePage.addPairing("Sushi")
         editWinePage.addPairing("Cheese")
         editWinePage.setNote("This is my note")
 
-        editWinePage.saveWine()
+        wineListPage = try editWinePage.saveWine()
+        
+        XCTAssertEqual(0, wineListPage.numberOfWines)
 
-        wineListPage.waitForExistence(wineTypes: "Red Wines")
-        wineListPage.assertDoesNotContainWine(named: "My Original Name")
+        myCellarPage = try wineListPage.goBack()
 
-        wineListPage.goBack()
+        wineListPage = try myCellarPage.showMyWhiteWines()
+        XCTAssertEqual("White Wines", wineListPage.title)
+        XCTAssertEqual(1, wineListPage.numberOfWines)
 
-        myCellarPage.waitForExistence()
-        myCellarPage.showMyWhiteWines()
-
-        wineListPage.waitForExistence(wineTypes: "White Wines")
-        wineListPage.assertContainsWine(named: "My Updated Name")
+        let updatedWineItem = wineListPage.getWine(at: 0)
+        XCTAssertEqual("My Updated Name", updatedWineItem.name)
     }
 }
