@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Model
+import MoWine_Domain
 
 struct SocialLoginProviderView: View {
     let onSelect: (SocialProviderType) -> Void

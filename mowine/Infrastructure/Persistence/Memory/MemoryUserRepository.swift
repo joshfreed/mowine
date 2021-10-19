@@ -8,6 +8,7 @@
 
 import Foundation
 import Model
+import MoWine_Domain
 
 class MemoryUserRepository: UserRepository {
     var users: [User] = []

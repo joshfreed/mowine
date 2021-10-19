@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
+import MoWine_Domain
 
 public struct CreateWineCommand {
     public var wineType: WineType

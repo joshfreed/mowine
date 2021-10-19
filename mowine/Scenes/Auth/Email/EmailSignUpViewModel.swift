@@ -11,6 +11,7 @@ import Combine
 import Model
 import FirebaseCrashlytics
 import SwiftyBeaver
+import MoWine_Domain
 
 class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false

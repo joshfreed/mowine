@@ -1,4 +1,5 @@
 import Foundation
+import MoWine_Domain
 
 public class SocialAuthApplicationService {
     let auth: SocialAuthService

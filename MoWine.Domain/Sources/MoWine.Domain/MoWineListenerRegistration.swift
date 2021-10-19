@@ -11,9 +11,3 @@ import Foundation
 public protocol MoWineListenerRegistration {
     func remove()
 }
-
-public class FakeRegistration: MoWineListenerRegistration {
-    public init() {}
-
-    public func remove() {}
-}

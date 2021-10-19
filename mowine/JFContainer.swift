@@ -10,6 +10,7 @@ import Foundation
 import Dip
 import Combine
 import Model
+import MoWine_Domain
 
 class JFContainer: ObservableObject {
     static private(set) var shared: JFContainer!

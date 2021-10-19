@@ -10,6 +10,7 @@ import Foundation
 import GoogleSignIn
 import SwiftyBeaver
 import Model
+import MoWine_Domain
 
 enum CreateUserFromGoogleInfoError: Error {
     case failedToFetchProfile

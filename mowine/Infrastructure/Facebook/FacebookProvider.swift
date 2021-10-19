@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyBeaver
 import Model
+import MoWine_Domain
 
 enum CreateUserFromFacebookInfoError: Error {
     case missingEmail

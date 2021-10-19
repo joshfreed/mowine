@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import Model
+import MoWine_Domain
 
 class FirebaseSocialAuth: SocialAuthService {
     let credentialFactory: FirebaseCredentialMegaFactory

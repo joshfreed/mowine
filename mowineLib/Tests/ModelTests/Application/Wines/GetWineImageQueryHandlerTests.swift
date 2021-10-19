@@ -9,6 +9,7 @@ import XCTest
 @testable import Model
 @testable import ModelTestHelpers
 import Nimble
+import MoWine_Domain
 
 class GetWineImageQueryHandlerTests: XCTestCase {
     var sut: GetWineImageQueryHandler!

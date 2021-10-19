@@ -9,6 +9,7 @@
 import Foundation
 import FBSDKLoginKit
 import Model
+import MoWine_Domain
 
 struct FacebookToken: SocialToken {
     let token: String

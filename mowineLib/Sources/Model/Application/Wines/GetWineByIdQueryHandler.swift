@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MoWine_Domain
 
 public class GetWineByIdQueryHandler {
     let wineRepository: WineRepository

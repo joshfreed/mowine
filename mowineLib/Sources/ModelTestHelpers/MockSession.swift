@@ -8,6 +8,7 @@
 import Foundation
 import Model
 import Combine
+import MoWine_Domain
 
 class MockSession: Session {
     var isAnonymous: Bool = false

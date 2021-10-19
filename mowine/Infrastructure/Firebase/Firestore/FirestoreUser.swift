@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import Model
+import MoWine_Domain
 
 extension User {
     static func fromFirestore(_ document: DocumentSnapshot) -> User? {

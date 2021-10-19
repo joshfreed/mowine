@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreGraphics
+import MoWine_Domain
 
 public struct CreateProfilePictureCommand {
     let userId: String

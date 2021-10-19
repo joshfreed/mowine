@@ -8,6 +8,7 @@
 
 import Foundation
 import Model
+import MoWine_Domain
 
 class MemoryWineTypeRepository: WineTypeRepository {
     private(set) lazy var types: [WineType] = {

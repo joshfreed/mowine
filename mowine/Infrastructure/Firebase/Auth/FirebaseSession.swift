@@ -12,6 +12,7 @@ import SwiftyBeaver
 import Combine
 import Model
 import FirebaseCrashlytics
+import MoWine_Domain
 
 class FirebaseSession: Session {
     var currentUserId: UserId? { authState.userId }

@@ -9,6 +9,7 @@ import XCTest
 @testable import Model
 @testable import ModelTestHelpers
 import Nimble
+import MoWine_Domain
 
 class UpdateWineCommandHandlerTests: XCTestCase {
     var sut: UpdateWineCommandHandler!

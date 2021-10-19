@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftyBeaver
+import MoWine_Domain
 
 public class WineTypeService: ObservableObject {
     @Published public private(set) var wineTypes: [WineType] = []

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MoWine_Domain
 
 public class GetWineDetailsQuery: ObservableObject {
     @Published public var wine: WineDetails?

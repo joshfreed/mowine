@@ -44,6 +44,13 @@
     },
     {
       "target" : {
+        "containerPath" : "container:MoWine.Domain",
+        "identifier" : "MoWine.DomainTests",
+        "name" : "MoWine.DomainTests"
+      }
+    },
+    {
+      "target" : {
         "containerPath" : "container:mowine.xcodeproj",
         "identifier" : "53F5AC111E2176090067AB62",
         "name" : "mowineUITests"

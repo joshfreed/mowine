@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftyBeaver
+import MoWine_Domain
 
 public protocol GetMyAccountQuery {
     func getMyAccountAndListen() -> AnyPublisher<GetMyAccountQueryResponse?, Error>

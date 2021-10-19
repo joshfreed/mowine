@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MoWine_Domain
 
 struct ReauthenticationView: View {
     @StateObject var vm = ReauthenticationViewModel()

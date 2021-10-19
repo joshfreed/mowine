@@ -9,6 +9,7 @@
 import UIKit
 import Combine
 import Model
+import MoWine_Domain
 
 public class NewWineModel: ObservableObject {
     @Published public var wineType: WineType?

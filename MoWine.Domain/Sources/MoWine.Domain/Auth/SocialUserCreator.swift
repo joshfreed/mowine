@@ -18,7 +18,7 @@ public class SocialUserCreator {
         self.session = session
     }
 
-    func findOrCreateUserObjectForCurrentSession(from provider: SocialSignInProvider) async throws {
+    public func findOrCreateUserObjectForCurrentSession(from provider: SocialSignInProvider) async throws {
         guard let currentUserId = session.currentUserId else {
             throw SessionError.notLoggedIn
         }

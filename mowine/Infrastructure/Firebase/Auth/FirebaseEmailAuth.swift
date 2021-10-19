@@ -10,6 +10,7 @@ import Foundation
 import FirebaseAuth
 import SwiftyBeaver
 import Model
+import MoWine_Domain
 
 class FirebaseEmailAuth: EmailAuthenticationService {
     func signIn(emailAddress: String, password: String) async throws {

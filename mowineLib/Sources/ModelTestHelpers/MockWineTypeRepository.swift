@@ -7,6 +7,7 @@
 
 import XCTest
 import Model
+import MoWine_Domain
 
 class MockWineTypeRepository: WineTypeRepository {
     var types: [WineType] = []

@@ -8,6 +8,7 @@
 
 import UIKit
 import Model
+import MoWine_Domain
 
 class AssetWineImageStorage: WineImageStorage {
     private let wineRepository: WineRepository

@@ -9,6 +9,7 @@
 import Foundation
 import Model
 import FirebaseCrashlytics
+import MoWine_Domain
 
 class UITestHelper {
     func logInExistingUser() async {

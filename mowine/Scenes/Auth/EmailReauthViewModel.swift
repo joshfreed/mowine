@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import Model
+import MoWine_Domain
 
 class EmailReauthViewModel: ObservableObject {
     @Published var emailAddress: String = ""

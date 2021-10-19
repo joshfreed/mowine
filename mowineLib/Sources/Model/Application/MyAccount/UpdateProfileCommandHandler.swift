@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MoWine_Domain
 
 public struct UpdateProfileCommand {
     public let email: String

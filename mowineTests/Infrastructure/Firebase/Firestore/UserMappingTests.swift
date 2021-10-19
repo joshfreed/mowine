@@ -11,6 +11,7 @@ import XCTest
 import Nimble
 import Model
 import Nimble
+import MoWine_Domain
 
 class UserMappingTests: XCTestCase {
     var user = User(id: UserId(string: "111"), emailAddress: "test@test.com")

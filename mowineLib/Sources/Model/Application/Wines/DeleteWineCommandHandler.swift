@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MoWine_Domain
 
 public class DeleteWineCommandHandler {
     let wineRepository: WineRepository

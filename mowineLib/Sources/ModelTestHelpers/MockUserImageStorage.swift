@@ -7,6 +7,7 @@
 
 import Foundation
 import Model
+import MoWine_Domain
 
 class MockUserImageStorage: UserImageStorage {
     func putImage(userId: UserId, data: Data) async throws -> URL {

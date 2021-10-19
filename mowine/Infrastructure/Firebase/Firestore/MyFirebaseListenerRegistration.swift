@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import Model
+import MoWine_Domain
 
 class MyFirebaseListenerRegistration: MoWineListenerRegistration {
     let wrapped: ListenerRegistration

@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import UIKit.UIImage
 import Model
+import MoWine_Domain
 
 class EditWineFormModel: ObservableObject {
     @Published var image: UIImage? = nil

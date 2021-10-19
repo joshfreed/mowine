@@ -9,6 +9,7 @@
 import UIKit
 import Combine
 import Model
+import MoWine_Domain
 
 class FakeSession: Session {
     private var userId: UserId?

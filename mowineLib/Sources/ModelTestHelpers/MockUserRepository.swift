@@ -7,6 +7,7 @@
 
 import Foundation
 import Model
+import MoWine_Domain
 
 class MockUserRepository: UserRepository {
     func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {

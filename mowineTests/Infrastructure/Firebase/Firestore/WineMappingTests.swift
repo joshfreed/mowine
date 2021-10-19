@@ -11,6 +11,7 @@ import XCTest
 import Nimble
 import Model
 @testable import ModelTestHelpers
+import MoWine_Domain
 
 class WineMappingTests: XCTestCase {
 

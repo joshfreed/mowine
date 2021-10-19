@@ -10,6 +10,7 @@ import Foundation
 import FirebaseFirestore
 import SwiftyBeaver
 import Model
+import MoWine_Domain
 
 class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()

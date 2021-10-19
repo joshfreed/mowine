@@ -8,6 +8,7 @@
 import Foundation
 import Model
 import CoreGraphics
+import MoWine_Domain
 
 class MockImageResizer: ImageResizer {
     func resize(data: Data, to newSize: CGSize) throws -> Data {

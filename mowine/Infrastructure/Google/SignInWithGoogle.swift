@@ -12,6 +12,7 @@ import GoogleSignIn
 import SwiftyBeaver
 import Model
 import FirebaseCrashlytics
+import MoWine_Domain
 
 struct GoogleToken: SocialToken {
     let idToken: String

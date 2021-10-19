@@ -8,6 +8,7 @@
 
 import Foundation
 import Model
+import MoWine_Domain
 
 class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []

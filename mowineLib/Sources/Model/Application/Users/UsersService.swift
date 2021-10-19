@@ -5,6 +5,7 @@
 
 import Foundation
 import Combine
+import MoWine_Domain
 
 open class UsersService: ObservableObject {
     private let session: Session

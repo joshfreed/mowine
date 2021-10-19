@@ -8,6 +8,7 @@
 
 import UIKit
 import Model
+import MoWine_Domain
 
 class UIImageResizer: ImageResizer {
     func resize(data: Data, to newSize: CGSize) throws -> Data {

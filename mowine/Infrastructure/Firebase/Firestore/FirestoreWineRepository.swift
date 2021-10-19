@@ -11,6 +11,7 @@ import FirebaseFirestore
 import SwiftyBeaver
 import FirebaseCrashlytics
 import Model
+import MoWine_Domain
 
 class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()

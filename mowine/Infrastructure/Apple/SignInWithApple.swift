@@ -11,6 +11,7 @@ import AuthenticationServices
 import CryptoKit
 import SwiftyBeaver
 import Model
+import MoWine_Domain
 
 struct AppleToken: SocialToken {
     let idTokenString: String

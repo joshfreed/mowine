@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import Model
+import MoWine_Domain
 
 class FirebaseCredentialMegaFactory {
     func makeCredential(from token: SocialToken) -> AuthCredential {

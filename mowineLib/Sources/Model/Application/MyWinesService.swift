@@ -8,6 +8,7 @@
 import Foundation
 import SwiftyBeaver
 import Combine
+import MoWine_Domain
 
 public class MyWinesService: ObservableObject {
     @Published public var wines: [Int: [WineItemViewModel]] = [:]

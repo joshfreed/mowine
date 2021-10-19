@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Model
+import MoWine_Domain
 
 #if DEBUG
 

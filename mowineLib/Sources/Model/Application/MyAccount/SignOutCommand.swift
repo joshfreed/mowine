@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MoWine_Domain
 
 public extension Notification.Name {
     static let signedIn = Notification.Name("signedIn")

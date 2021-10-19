@@ -38,6 +38,14 @@
       }
     },
     {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MoWine.Domain",
+        "identifier" : "MoWine.DomainTests",
+        "name" : "MoWine.DomainTests"
+      }
+    },
+    {
       "enabled" : false,
       "target" : {
         "containerPath" : "container:mowine.xcodeproj",

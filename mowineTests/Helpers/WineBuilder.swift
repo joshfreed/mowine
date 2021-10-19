@@ -9,6 +9,7 @@
 import Foundation
 @testable import mowine
 import Model
+import MoWine_Domain
 
 class WineBuilder {
     private var id: WineId?

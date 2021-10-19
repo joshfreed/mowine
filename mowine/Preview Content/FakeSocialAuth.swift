@@ -8,6 +8,7 @@
 
 import Foundation
 import Model
+import MoWine_Domain
 
 class FakeSocialAuth: SocialAuthService {
     func signIn(with token: SocialToken) async throws {}
