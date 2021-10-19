@@ -71,8 +71,8 @@ public protocol MoWineAuth {
 }
 
 public class ObservableSession: ObservableObject {
-    @Published public var userId: UserId? = nil
-    @Published public var isAnonymous: Bool = false
+    @Published public private(set) var userId: UserId? = nil
+    @Published public private(set) var isAnonymous: Bool = false
     
     private let session: Session
     private var cancellable: AnyCancellable?

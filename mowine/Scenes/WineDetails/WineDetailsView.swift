@@ -106,29 +106,7 @@ struct WineDetailsFormView: View {
     }
 }
 
-fileprivate var wineId = WineId()
-
 struct WineDetailsView_Previews: PreviewProvider {
-    static var query: GetWineDetailsQuery = {
-        let repo = MemoryWineRepository()
-
-        var wine = Wine(
-            id: wineId,
-            userId: UserId(),
-            type: WineType(name: "Red", varieties: [.init(name: "Merlot")]),
-            name: "Test Wine",
-            rating: 3
-        )
-        wine.variety = WineVariety(name: "Merlot")
-        wine.price = "Fifty bucks"
-        wine.location = "The Wegman's on 13th st"
-        repo.wines.append(wine)
-
-        // thumbnailPath: "Wine1"
-
-        return GetWineDetailsQuery(wineRepository: repo)
-    }()
-
     static var previews: some View {
         WineDetailsView(wineId: "W1")
             .addPreviewEnvironment()

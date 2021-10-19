@@ -61,23 +61,10 @@ struct EditProfileView: View {
     }
 }
 
-@MainActor
-fileprivate func viewModel() -> EditProfileViewModel {
-    let session: FakeSession = try! JFContainer.shared.resolve()
-    let userRepo: MemoryUserRepository = try! JFContainer.shared.resolve()
-
-    var user = User(id: UserId(), emailAddress: "test@test.com")
-    user.fullName = "Testy McTestguy"
-
-    userRepo.addUserSync(user)
-    session.setUser(user: user)
-
-    return EditProfileViewModel()
-}
-
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(vm: viewModel())
+        EditProfileView()
             .addPreviewEnvironment()
+            .addPreviewData()
     }
 }

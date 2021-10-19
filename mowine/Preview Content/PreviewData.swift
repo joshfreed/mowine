@@ -17,9 +17,10 @@ struct PreviewData {
 }
 
 extension View {
-    func addPreviewData() -> some View {
+    func addPreviewData(userId: String? = PreviewData.userId1) -> some View {
         Task {
             try! await configurePreviewData()
+            try! await logInAs(userId: userId)
         }
         
         return self
@@ -28,9 +29,9 @@ extension View {
 
 fileprivate func configurePreviewData() async throws {
     // Dependencies
-    let userRepository: UserRepository = try! JFContainer.shared.resolve()
-    let wineTypeRepository: MemoryWineTypeRepository = try! JFContainer.shared.resolve()
-    let wineRepository: WineRepository = try! JFContainer.shared.resolve()
+    let userRepository: UserRepository = try JFContainer.shared.resolve()
+    let wineTypeRepository: MemoryWineTypeRepository = try JFContainer.shared.resolve()
+    let wineRepository: WineRepository = try JFContainer.shared.resolve()
 
     // Users
     var josh = User(id: UserId(string: PreviewData.userId1), emailAddress: "josh@jpfreed.com")
@@ -49,6 +50,21 @@ fileprivate func configurePreviewData() async throws {
     wine1.price = "Fifty bucks"
     wine1.location = "The Wegman's on 13th st"
     try await wineRepository.add(wine1)
+}
+
+fileprivate func logInAs(userId: String?) async throws {
+    let fakeSession: FakeSession = try JFContainer.shared.resolve()
+    let userRepository: UserRepository = try JFContainer.shared.resolve()
+
+    if let userId = userId {
+        let userId = UserId(string: userId)
+        guard let user = try await userRepository.getUserById(userId) else {
+            throw UserRepositoryError.userNotFound
+        }
+        fakeSession.setUser(userId: userId, email: user.emailAddress)
+    } else {
+        fakeSession.end()
+    }
 }
 
 #endif

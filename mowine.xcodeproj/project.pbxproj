@@ -90,7 +90,7 @@
 		536E3AD1258F9CBD00D84F10 /* SignInWithFacebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */; };
 		536E3AD6258F9CE500D84F10 /* SignInWithGoogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */; };
 		536E3ADF258F9E6300D84F10 /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E3ADE258F9E6300D84F10 /* SignInWithApple.swift */; };
-		536E85A4204F507D004D5426 /* Fakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85A3204F507D004D5426 /* Fakes.swift */; };
+		536E85A4204F507D004D5426 /* FakeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536E85A3204F507D004D5426 /* FakeSession.swift */; };
 		537D8A5921C1C17D00A110FF /* FirestoreWineRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537D8A5821C1C17D00A110FF /* FirestoreWineRepository.swift */; };
 		5380F35521BC49F800221219 /* FirestoreUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35421BC49F700221219 /* FirestoreUserRepository.swift */; };
 		5380F35721BC759300221219 /* FirebaseSocialAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5380F35621BC759300221219 /* FirebaseSocialAuth.swift */; };
@@ -278,7 +278,7 @@
 		536E3AD0258F9CBD00D84F10 /* SignInWithFacebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithFacebook.swift; sourceTree = "<group>"; };
 		536E3AD5258F9CE500D84F10 /* SignInWithGoogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithGoogle.swift; sourceTree = "<group>"; };
 		536E3ADE258F9E6300D84F10 /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
-		536E85A3204F507D004D5426 /* Fakes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fakes.swift; sourceTree = "<group>"; };
+		536E85A3204F507D004D5426 /* FakeSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSession.swift; sourceTree = "<group>"; };
 		537D8A5821C1C17D00A110FF /* FirestoreWineRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreWineRepository.swift; sourceTree = "<group>"; };
 		5380F35421BC49F700221219 /* FirestoreUserRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserRepository.swift; sourceTree = "<group>"; };
 		5380F35621BC759300221219 /* FirebaseSocialAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSocialAuth.swift; sourceTree = "<group>"; };
@@ -556,7 +556,6 @@
 				536E3ADD258F9E5A00D84F10 /* Apple */,
 				533597AC21BC3ED600CEFD45 /* Firebase */,
 				53F24865206D3F5E0046B031 /* Facebook */,
-				536E85A2204F506E004D5426 /* Fake */,
 				536E3AD4258F9CD500D84F10 /* Google */,
 				5348960C203DE44C00B7547A /* Persistence */,
 			);
@@ -655,15 +654,6 @@
 				E9AFCA86776975810090DFF0 /* AppleProvider.swift */,
 			);
 			path = Apple;
-			sourceTree = "<group>";
-		};
-		536E85A2204F506E004D5426 /* Fake */ = {
-			isa = PBXGroup;
-			children = (
-				536E85A3204F507D004D5426 /* Fakes.swift */,
-				53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */,
-			);
-			path = Fake;
 			sourceTree = "<group>";
 		};
 		537614C01E591867005AABF0 /* EditWine */ = {
@@ -846,6 +836,8 @@
 				535DE8CA25BCAB7700C6CB7B /* PreviewEnvironment.swift */,
 				53F4C76927161B5F00CCBA7F /* PreviewData.swift */,
 				532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */,
+				536E85A3204F507D004D5426 /* FakeSession.swift */,
+				53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -1297,7 +1289,7 @@
 				5330C20A25E5B39F0063E7C4 /* UserPhotoView.swift in Sources */,
 				53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */,
 				532DB3D3256AC763009A4740 /* PreviewDataFactories.swift in Sources */,
-				536E85A4204F507D004D5426 /* Fakes.swift in Sources */,
+				536E85A4204F507D004D5426 /* FakeSession.swift in Sources */,
 				53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */,
 				533D8B802533691500CE297E /* WineCellarListView.swift in Sources */,
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
