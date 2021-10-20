@@ -8,11 +8,10 @@
 
 import SwiftUI
 import Model
-import MoWine_Domain
 
 struct SelectVarietyView: View {
     @ObservedObject var model: NewWineModel
-    let varieties: [WineVariety]
+    let varieties: [AddWine.WineVariety]
     @State private var showNextScreen = false
     
     var body: some View {
@@ -39,7 +38,15 @@ struct SelectVarietyView: View {
 }
 
 struct SelectVarietyView_Previews: PreviewProvider {
+    static let varieties: [AddWine.WineVariety] = [
+        .init(name: "Variety 1"),
+        .init(name: "Variety 2"),
+        .init(name: "Variety 3"),
+        .init(name: "Variety 4"),
+        .init(name: "Variety 5"),
+    ]
+
     static var previews: some View {
-        SelectVarietyView(model: NewWineModel(), varieties: MemoryWineTypeRepository().types.first!.varieties)
+        SelectVarietyView(model: NewWineModel(), varieties: varieties)
     }
 }

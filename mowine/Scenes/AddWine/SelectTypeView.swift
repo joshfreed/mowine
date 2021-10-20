@@ -8,19 +8,39 @@
 
 import SwiftUI
 import Model
-import MoWine_Domain
+import SwiftyBeaver
+import FirebaseCrashlytics
+
+class SelectTypeViewModel: ObservableObject {
+    @Published var types: [AddWine.WineType] = []
+
+    @Injected private var getWineTypesQueryHandler: GetWineTypesQueryHandler
+
+    func load() async {
+        do {
+            let response = try await getWineTypesQueryHandler.handle2()
+            types = response.wineTypes.map { typeModel in
+                let varieties = typeModel.varieties.map { varietyModel in AddWine.WineVariety(name: varietyModel.name) }
+                return AddWine.WineType(name: typeModel.name, varieties: varieties)
+            }
+        } catch {
+            SwiftyBeaver.error("\(error)")
+            Crashlytics.crashlytics().record(error: error)
+        }
+    }
+}
 
 struct SelectTypeView: View {
     @ObservedObject var model: NewWineModel
-    let wineTypes: [WineType]
     @State private var showNextScreen = false
-    
+    @State private var vm = SelectTypeViewModel()
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
                 AddWineHeaderView()
                 VStack(spacing: 4) {
-                    ForEach(wineTypes) { type in
+                    ForEach(vm.types) { type in
                         PrimaryButton(action: {
                             model.wineType = type
                             showNextScreen = true
@@ -35,6 +55,9 @@ struct SelectTypeView: View {
             }
         }
         .accessibilityIdentifier("SelectType")
+        .task {
+            await vm.load()
+        }
     }
     
     private func makeDestinationView() -> AnyView {
@@ -48,6 +71,6 @@ struct SelectTypeView: View {
 
 struct SelectTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectTypeView(model: NewWineModel(), wineTypes: MemoryWineTypeRepository().types)
+        SelectTypeView(model: NewWineModel())
     }
 }

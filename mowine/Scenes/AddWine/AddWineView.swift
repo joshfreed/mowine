@@ -8,17 +8,15 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Model
 
 struct AddWineView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var wineTypeService: WineTypeService    
     @StateObject var vm = AddWineViewModel()
     @StateObject var newWineModel = NewWineModel()
     
     var body: some View {
         NavigationView {
-            SelectTypeView(model: newWineModel, wineTypes: wineTypeService.wineTypes)
+            SelectTypeView(model: newWineModel)
                 .navigationBarTitle("Add a Wine", displayMode: .inline)
                 .navigationBarItems(leading: Button("Cancel") {
                     dismiss()

@@ -8,19 +8,15 @@
 
 import UIKit
 import Combine
-import Model
-import MoWine_Domain
 
-public class NewWineModel: ObservableObject {
-    @Published public var wineType: WineType?
-    @Published public var wineVariety: WineVariety?
-    @Published public var image: UIImage?
-    @Published public var name: String = ""
-    @Published public var rating: Int = 0
+class NewWineModel: ObservableObject {
+    @Published var wineType: AddWine.WineType?
+    @Published var wineVariety: AddWine.WineVariety?
+    @Published var image: UIImage?
+    @Published var name: String = ""
+    @Published var rating: Int = 0
 
-    public var isComplete: Bool {
+    var isComplete: Bool {
         wineType != nil && !name.isEmpty && rating > 0
     }
-
-    public init() {}
 }
