@@ -7,8 +7,8 @@
 
 import XCTest
 @testable import MoWine_Application
-@testable import MoWine_Application_Mocks
-@testable import MoWine_Domain_Mocks
+@testable import MoWine_Application_TestKit
+@testable import MoWine_Domain_TestKit
 import Nimble
 
 class UpdateProfileCommandHandlerTests: XCTestCase {

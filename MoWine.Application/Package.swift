@@ -14,8 +14,8 @@ let package = Package(
             name: "MoWine.Application",
             targets: ["MoWine.Application"]),
         .library(
-            name: "MoWine.Application.Mocks",
-            targets: ["MoWine.Application.Mocks"]),
+            name: "MoWine.Application.TestKit",
+            targets: ["MoWine.Application.TestKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -31,14 +31,14 @@ let package = Package(
             name: "MoWine.Application",
             dependencies: ["SwiftyBeaver", "MoWine.Domain"]),
         .target(
-            name: "MoWine.Application.Mocks",
+            name: "MoWine.Application.TestKit",
             dependencies: ["MoWine.Application", "Nimble"]),
         .testTarget(
             name: "MoWine.ApplicationTests",
             dependencies: [
                 "MoWine.Application",
-                "MoWine.Application.Mocks",
-                .product(name: "MoWine.Domain.Mocks", package: "MoWine.Domain"),
+                "MoWine.Application.TestKit",
+                .product(name: "MoWine.Domain.TestKit", package: "MoWine.Domain"),
                 "Nimble"
             ]),
     ]
