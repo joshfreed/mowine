@@ -8,11 +8,10 @@
 
 import Foundation
 import FirebaseFirestore
-import MoWine_Application
 import MoWine_Domain
 
 extension User {
-    static func fromFirestore(_ document: DocumentSnapshot) -> User? {
+    public static func fromFirestore(_ document: DocumentSnapshot) -> User? {
         guard
             let dataDict = document.data(),
             let emailAddress = dataDict["email"] as? String
@@ -46,7 +45,7 @@ extension User {
         return _fullName
     }
     
-    func toFirestore() -> [String: Any] {
+    public func toFirestore() -> [String: Any] {
         var data: [String: Any] = [
             "email": emailAddress,
             "fullName": fullName

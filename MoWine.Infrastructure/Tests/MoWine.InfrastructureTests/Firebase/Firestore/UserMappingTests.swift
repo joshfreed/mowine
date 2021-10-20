@@ -8,7 +8,7 @@
 
 import XCTest
 import Nimble
-@testable import mowine
+@testable import MoWine_Infrastructure
 @testable import MoWine_Domain
 @testable import MoWine_Domain_TestKit
 

@@ -46,6 +46,14 @@
       }
     },
     {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MoWine.Infrastructure",
+        "identifier" : "MoWine.InfrastructureTests",
+        "name" : "MoWine.InfrastructureTests"
+      }
+    },
+    {
       "enabled" : false,
       "target" : {
         "containerPath" : "container:mowine.xcodeproj",
