@@ -11,30 +11,25 @@ import FirebaseFirestore
 import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
-import MoWine_Infrastructure
 
-class FirestoreUserRepository: UserRepository {
+public class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()
 
-    func add(user: User) async throws {
+    public init() {}
+
+    public func add(user: User) async throws {
         try await db
             .collection("users")
             .document(user.id.asString)
             .setData(user.toFirestore())
     }
     
-    func save(user: User, completion: @escaping (Result<User, Error>) -> ()) {
-        let data = user.toFirestore()
-        db.collection("users").document(user.id.asString).setData(data, merge: true)
-        completion(.success(user))
-    }
-
-    func save(user: User) async throws {
+    public func save(user: User) async throws {
         let data = user.toFirestore()
         try await db.collection("users").document(user.id.asString).setData(data, merge: true)
     }
 
-    func getUserById(_ id: UserId) async throws -> User? {
+    public func getUserById(_ id: UserId) async throws -> User? {
         let query = db.collection("users").document(id.asString)
 
         let document = try await query.getDocument()
@@ -52,7 +47,7 @@ class FirestoreUserRepository: UserRepository {
         return user
     }
 
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
+    public func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
         let listener = db.collection("users").document(id.asString).addSnapshotListener { documentSnapshot, error in
             if let error = error {
                 SwiftyBeaver.error("\(error)")
@@ -86,7 +81,7 @@ class FirestoreUserRepository: UserRepository {
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
-    func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
+    public func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
         let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
         
         let listener = query.addSnapshotListener { (querySnapshot, error) in
@@ -141,7 +136,7 @@ class FirestoreUserRepository: UserRepository {
         }
     }
 
-    func searchUsers(searchString: String) async throws -> [User] {
+    public func searchUsers(searchString: String) async throws -> [User] {
         let documents = try await db.collection("users").getDocuments().documents
         let users = documents.compactMap { User.fromFirestore($0) }
         return filterUsers(searchString: searchString, allUsers: users)
@@ -164,7 +159,7 @@ class FirestoreUserRepository: UserRepository {
         return Array(Set(matches))
     }
     
-    func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
+    public func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
         let docId = "\(owningUserId)_\(friendId)"
 
         try await db.collection("friends").document(docId).setData([
@@ -175,7 +170,7 @@ class FirestoreUserRepository: UserRepository {
         return try await getUserFromCache(userId: friendId)
     }
     
-    func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
+    public func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
         let docId = "\(owningUserId)_\(friendId)"
         try await db.collection("friends").document(docId).delete()
     }

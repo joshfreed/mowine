@@ -33,6 +33,7 @@ let package = Package(
                 "MoWine.Domain",
                 "SwiftyBeaver",
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
             ]),
         .testTarget(
             name: "MoWine.InfrastructureTests",
