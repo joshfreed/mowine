@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
+import MoWine_Domain
 
 public class SocialUserCreator {
     let userRepository: UserRepository

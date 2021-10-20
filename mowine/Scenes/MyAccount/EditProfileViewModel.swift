@@ -12,7 +12,6 @@ import FirebaseCrashlytics
 import SwiftyBeaver
 import Model
 import UIKit.UIImage
-import MoWine_Domain
 
 @MainActor
 class EditProfileViewModel: ObservableObject {

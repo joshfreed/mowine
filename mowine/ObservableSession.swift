@@ -8,11 +8,11 @@
 
 import Foundation
 import Combine
-import MoWine_Domain
+import Model
 import SwiftyBeaver
 
 public class ObservableSession: ObservableObject {
-    @Published public private(set) var userId: UserId? = nil
+    @Published public private(set) var userId: String? = nil
     @Published public private(set) var isAnonymous: Bool = false
 
     private let session: Session
@@ -32,7 +32,7 @@ public class ObservableSession: ObservableObject {
         cancellable = session.authStateDidChange
             .receive(on: RunLoop.main)
             .sink { [weak self] authState in
-                self?.userId = authState.userId
+                self?.userId = authState.userId?.asString
                 self?.isAnonymous = authState.isAnonymous
             }
 
