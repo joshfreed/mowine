@@ -10,7 +10,6 @@ import Foundation
 import Combine
 import UIKit.UIImage
 import Model
-import MoWine_Domain
 
 class EditWineFormModel: ObservableObject {
     @Published var image: UIImage? = nil
@@ -23,32 +22,32 @@ class EditWineFormModel: ObservableObject {
     @Published var notes: String = ""
     @Published var pairings: [String] = []    
     
-    var type: WineType? {
+    var type: EditWine.WineType? {
         types.first { $0.id == selectedTypeId }
     }
     
-    var variety: WineVariety? {
+    var variety: EditWine.WineVariety? {
         type?.varieties.first { $0.id == selectedVarietyId }
     }
     
-    private(set) var types: [WineType] = []
+    private(set) var types: [EditWine.WineType] = []
     
-    var varieties: [WineVariety] {
+    var varieties: [EditWine.WineVariety] {
         type?.varieties ?? []
     }
     
-    func setTypes(_ types: [WineType]) {
+    func setTypes(_ types: [EditWine.WineType]) {
         self.types = types
     }
     
-    func setWine(_ wine: Wine) {
+    func setWine(_ wine: EditWine.Wine) {
         name = wine.name
-        rating = Int(wine.rating)
-        selectedTypeId = types.first(where: { $0.id == wine.type.id })?.id ?? -1
-        selectedVarietyId = type?.varieties.first(where: { $0.id == wine.variety?.id })?.id ?? -1
-        location = wine.location ?? ""
-        price = wine.price ?? ""
-        notes = wine.notes ?? ""
+        rating = wine.rating
+        selectedTypeId = types.first(where: { $0.id == wine.typeId })?.id ?? -1
+        selectedVarietyId = type?.varieties.first(where: { $0.id == wine.varietyId })?.id ?? -1
+        location = wine.location
+        price = wine.price
+        notes = wine.notes
         pairings = wine.pairings
     }
 }

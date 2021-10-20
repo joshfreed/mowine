@@ -38,19 +38,21 @@ class EditWineViewModel: ObservableObject {
     }
 
     func load() async {
-        async let wineTypes = getWineTypesQuery.handle()
-        async let wine = getWineQuery.handle(wineId: wineId)
+        async let getWineTypesResponse = getWineTypesQuery.handle()
+        async let getWineResponse = getWineQuery.handle(wineId: wineId)
         async let wineImage = getWineImageQuery.handle(wineId: wineId)
 
         do {
-            form.setTypes(try await wineTypes)
+            let wineTypes = EditWine.mapTypes(from: try await getWineTypesResponse)
+            form.setTypes(wineTypes)
         } catch {
             SwiftyBeaver.error("\(error)")
             Crashlytics.crashlytics().record(error: error)
         }
 
         do {
-            if let wine = try await wine {
+            if let response = try await getWineResponse {
+                let wine = EditWine.mapWine(from: response)
                 form.setWine(wine)
             } else {
                 // Wine was not found. What to do?
@@ -122,5 +124,51 @@ class EditWineViewModel: ObservableObject {
     
     func cancelSelectWinePhoto() {
         isShowingSheet = false
+    }
+}
+
+struct EditWine {
+    struct Wine: Equatable, Identifiable {
+        let id: String
+        let name: String
+        let rating: Int
+        let typeId: Int
+        let varietyId: Int?
+        let location: String
+        let price: String
+        let notes: String
+        let pairings: [String]
+    }
+
+    static func mapWine(from response: GetWineByIdQueryResponse) -> Wine {
+        Wine(
+            id: response.id,
+            name: response.name,
+            rating: response.rating,
+            typeId: response.typeId,
+            varietyId: response.varietyId,
+            location: response.location,
+            price: response.price,
+            notes: response.notes,
+            pairings: response.pairings
+        )
+    }
+
+    struct WineType: Equatable, Identifiable {
+        let id: Int
+        let name: String
+        let varieties: [WineVariety]
+    }
+
+    struct WineVariety: Equatable, Identifiable {
+        let id: Int
+        let name: String
+    }
+
+    static func mapTypes(from response: GetWineTypesQueryResponse) -> [WineType] {
+        response.wineTypes.map { typeModel in
+            let varieties = typeModel.varieties.map { EditWine.WineVariety(id: $0.id, name: $0.name) }
+            return WineType(id: typeModel.id, name: typeModel.name, varieties: varieties)
+        }
     }
 }

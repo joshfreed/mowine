@@ -18,7 +18,7 @@ class SelectTypeViewModel: ObservableObject {
 
     func load() async {
         do {
-            let response = try await getWineTypesQueryHandler.handle2()
+            let response = try await getWineTypesQueryHandler.handle()
             types = response.wineTypes.map { typeModel in
                 let varieties = typeModel.varieties.map { varietyModel in AddWine.WineVariety(name: varietyModel.name) }
                 return AddWine.WineType(name: typeModel.name, varieties: varieties)

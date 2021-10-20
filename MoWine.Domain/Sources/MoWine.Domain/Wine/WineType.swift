@@ -27,6 +27,6 @@ public struct WineType: Equatable, Hashable, Identifiable {
     }
     
     public func getVariety(named name: String) -> WineVariety? {
-        return varieties.first(where: { $0.name == name })
+        varieties.first(where: { $0.name == name })
     }
 }

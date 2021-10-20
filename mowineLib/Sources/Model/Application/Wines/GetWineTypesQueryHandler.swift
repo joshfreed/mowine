@@ -15,21 +15,17 @@ public class GetWineTypesQueryHandler {
         self.wineTypeRepository = wineTypeRepository
     }
 
-    public func handle() async throws -> [WineType] {
-        try await wineTypeRepository.getAll()
-    }
-
-    public func handle2() async throws -> GetWineTypesQueryResponse {
+    public func handle() async throws -> GetWineTypesQueryResponse {
         let wineTypes = try await wineTypeRepository.getAll()
         return GetWineTypesQueryResponse(wineTypes: wineTypes.map(toResponseType))
     }
 
     private func toResponseType(_ type: WineType) -> GetWineTypesQueryResponse.WineType {
-        .init(name: type.name, varieties: type.varieties.map(toResponseVariety))
+        .init(id: type.id, name: type.name, varieties: type.varieties.map(toResponseVariety))
     }
 
     private func toResponseVariety(_ variety: WineVariety) -> GetWineTypesQueryResponse.WineVariety {
-        .init(name: variety.name)
+        .init(id: variety.id, name: variety.name)
     }
 }
 
@@ -37,11 +33,13 @@ public struct GetWineTypesQueryResponse {
     public let wineTypes: [WineType]
 
     public struct WineType {
+        public let id: Int
         public let name: String
         public let varieties: [WineVariety]
     }
 
     public struct WineVariety {
+        public let id: Int
         public let name: String
     }
 }

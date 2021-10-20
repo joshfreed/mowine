@@ -13,8 +13,6 @@ class AddWineViewModel: ObservableObject {
 }
 
 struct AddWine {
-    let types: [WineType]
-
     struct WineType: Equatable, Identifiable {
         var id: String { name }
         let name: String

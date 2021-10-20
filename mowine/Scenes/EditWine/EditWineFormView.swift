@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Model
-import MoWine_Domain
 
 struct EditWineFormView: View {
     @ObservedObject var vm: EditWineFormModel
