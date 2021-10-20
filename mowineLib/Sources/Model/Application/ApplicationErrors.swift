@@ -9,4 +9,5 @@ import Foundation
 
 enum ApplicationErrors: Error {
     case userNotFound
+    case wineTypeNotFound
 }

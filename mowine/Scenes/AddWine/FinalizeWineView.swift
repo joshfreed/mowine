@@ -62,8 +62,8 @@ struct FinalizeWineView: View {
             let command = CreateWineCommand(
                 name: model.name,
                 rating: model.rating,
-                wineType: wineType,
-                wineVariety: model.wineVariety,
+                wineType: wineType.name,
+                wineVariety: model.wineVariety?.name,
                 image: model.image?.pngData()
             )
             try await createWineCommandHandler.createWine(command)

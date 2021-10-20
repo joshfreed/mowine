@@ -11,13 +11,13 @@ import SwiftyBeaver
 import MoWine_Domain
 
 public struct CreateWineCommand {
-    public var wineType: WineType
-    public var wineVariety: WineVariety?
+    public var wineType: String
+    public var wineVariety: String?
     public var image: Data?
     public var name: String
     public var rating: Int
 
-    public init(name: String, rating: Int, wineType: WineType, wineVariety: WineVariety? = nil, image: Data? = nil) {
+    public init(name: String, rating: Int, wineType: String, wineVariety: String? = nil, image: Data? = nil) {
         self.name = name
         self.rating = rating
         self.wineType = wineType
@@ -30,12 +30,19 @@ open class CreateWineCommandHandler {
     let wineRepository: WineRepository
     let session: Session
     let createWineImages: CreateWineImagesCommandHandler
-    
-    public init(wineRepository: WineRepository, session: Session, createWineImages: CreateWineImagesCommandHandler) {
+    let wineTypeRepository: WineTypeRepository
+
+    public init(
+        wineRepository: WineRepository,
+        session: Session,
+        createWineImages: CreateWineImagesCommandHandler,
+        wineTypeRepository: WineTypeRepository
+    ) {
         SwiftyBeaver.verbose("CreateWineCommandHandler::init")
         self.wineRepository = wineRepository
         self.session = session
         self.createWineImages = createWineImages
+        self.wineTypeRepository = wineTypeRepository
     }
 
     deinit {
@@ -43,6 +50,10 @@ open class CreateWineCommandHandler {
     }
 
     public func createWine(_ command: CreateWineCommand) async throws {
+        guard let wineType = try await wineTypeRepository.getWineType(named: command.wineType) else {
+            throw ApplicationErrors.wineTypeNotFound
+        }
+
         if session.currentUserId == nil {
             try await session.startAnonymous()
         }
@@ -51,8 +62,11 @@ open class CreateWineCommandHandler {
             throw SessionError.notLoggedIn
         }
 
-        let wine = Wine(userId: userId, type: command.wineType, name: command.name, rating: Double(command.rating))
-        wine.variety = command.wineVariety
+        let wine = Wine(userId: userId, type: wineType, name: command.name, rating: Double(command.rating))
+
+        if let wineVariety = command.wineVariety {
+            wine.variety = wineType.getVariety(named: wineVariety)
+        }
 
         try await wineRepository.add(wine)
 
