@@ -7,10 +7,10 @@
 //
 
 import XCTest
-@testable import mowine
 import Nimble
-import MoWine_Application
-import MoWine_Domain
+@testable import mowine
+@testable import MoWine_Domain
+@testable import MoWine_Domain_TestKit
 
 class WineMappingTests: XCTestCase {
 

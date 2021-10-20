@@ -7,9 +7,7 @@
 //
 
 import Foundation
-@testable import mowine
-import MoWine_Application
-import MoWine_Domain
+@testable import MoWine_Domain
 
 class WineBuilder {
     private var id: WineId?

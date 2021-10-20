@@ -7,11 +7,10 @@
 //
 
 import XCTest
+import Nimble
 @testable import mowine
-import Nimble
-import MoWine_Application
-import Nimble
-import MoWine_Domain
+@testable import MoWine_Domain
+@testable import MoWine_Domain_TestKit
 
 class UserMappingTests: XCTestCase {
     var user = User(id: UserId(string: "111"), emailAddress: "test@test.com")
