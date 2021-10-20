@@ -32,9 +32,9 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:mowineLib",
-        "identifier" : "ModelTests",
-        "name" : "ModelTests"
+        "containerPath" : "container:MoWine.Application",
+        "identifier" : "MoWine.ApplicationTests",
+        "name" : "MoWine.ApplicationTests"
       }
     },
     {

@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct SelectVarietyView: View {
     @ObservedObject var model: NewWineModel

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class MockUserRepository: UserRepository {

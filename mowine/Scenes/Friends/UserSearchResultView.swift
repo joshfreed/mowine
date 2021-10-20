@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct UserSearchResultView: View {
     let user: UsersService.UserSearchResult

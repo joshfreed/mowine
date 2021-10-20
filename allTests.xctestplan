@@ -30,16 +30,16 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:mowineLib",
-        "identifier" : "ModelTests",
-        "name" : "ModelTests"
+        "containerPath" : "container:mowine.xcodeproj",
+        "identifier" : "53F5AC061E2176090067AB62",
+        "name" : "mowineTests"
       }
     },
     {
       "target" : {
-        "containerPath" : "container:mowine.xcodeproj",
-        "identifier" : "53F5AC061E2176090067AB62",
-        "name" : "mowineTests"
+        "containerPath" : "container:MoWine.Application",
+        "identifier" : "MoWine.ApplicationTests",
+        "name" : "MoWine.ApplicationTests"
       }
     },
     {

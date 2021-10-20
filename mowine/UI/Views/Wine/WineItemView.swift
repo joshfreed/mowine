@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct WineItemView: View {
     let viewModel: WineItemViewModel

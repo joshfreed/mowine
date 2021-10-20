@@ -9,7 +9,7 @@
 import XCTest
 @testable import mowine
 import Nimble
-import Model
+import MoWine_Application
 import Nimble
 import MoWine_Domain
 

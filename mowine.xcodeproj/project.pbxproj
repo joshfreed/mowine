@@ -125,6 +125,7 @@
 		53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC404925D738B90041AED9 /* SnapPhotoView.swift */; };
 		53AC404E25D73BCD0041AED9 /* FinalizeWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC404D25D73BCD0041AED9 /* FinalizeWineView.swift */; };
 		53AC405225D74AD90041AED9 /* ConfirmPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC405125D74AD90041AED9 /* ConfirmPhotoView.swift */; };
+		53ADDF782720BE4F00945B2D /* MoWine.Application in Frameworks */ = {isa = PBXBuildFile; productRef = 53ADDF772720BE4F00945B2D /* MoWine.Application */; };
 		53B0FF4026A99ED000D784A4 /* EmailSignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B0FF3F26A99ED000D784A4 /* EmailSignUpTests.swift */; };
 		53B0FF4326A9A16D00D784A4 /* MyAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B0FF4226A9A16D00D784A4 /* MyAccountPage.swift */; };
 		53B0FF4526A9A27200D784A4 /* AnonymousUserPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B0FF4426A9A27200D784A4 /* AnonymousUserPage.swift */; };
@@ -136,7 +137,6 @@
 		53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */; };
 		53C91F5725740E780065E778 /* GoogleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5625740E780065E778 /* GoogleLoginButton.swift */; };
 		53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5E257414150065E778 /* SocialLoginProviderView.swift */; };
-		53CA99D726305E5C009C0F87 /* mowineLib in Frameworks */ = {isa = PBXBuildFile; productRef = 53CA99D626305E5C009C0F87 /* mowineLib */; };
 		53CFCA6025E9470B003EADB3 /* MiniAddFriendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFCA5F25E9470B003EADB3 /* MiniAddFriendButton.swift */; };
 		53D3B43A25A0F25F00F15974 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D3B43925A0F25F00F15974 /* ForgotPasswordView.swift */; };
 		53D3B44025A0FB3400F15974 /* EmailLogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D3B43F25A0FB3400F15974 /* EmailLogInViewModel.swift */; };
@@ -228,6 +228,7 @@
 		5330C20D25E5B5710063E7C4 /* UserSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultView.swift; sourceTree = "<group>"; };
 		5332B68A271F4F8700FBF135 /* MoWine.Domain */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MoWine.Domain; sourceTree = "<group>"; };
 		5332B68D271F54E000FBF135 /* ObservableSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableSession.swift; sourceTree = "<group>"; };
+		5332B68F2720BBCC00FBF135 /* MoWine.Application */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MoWine.Application; sourceTree = "<group>"; };
 		533597AD21BC3EE300CEFD45 /* FirebaseEmailAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseEmailAuth.swift; sourceTree = "<group>"; };
 		533597B021BC43A900CEFD45 /* FirebaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSession.swift; sourceTree = "<group>"; };
 		533C2E9C25DDB43700795CCE /* FriendsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
@@ -323,7 +324,6 @@
 		53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginButton.swift; sourceTree = "<group>"; };
 		53C91F5625740E780065E778 /* GoogleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginButton.swift; sourceTree = "<group>"; };
 		53C91F5E257414150065E778 /* SocialLoginProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginProviderView.swift; sourceTree = "<group>"; };
-		53CA99CF262FA817009C0F87 /* mowineLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = mowineLib; sourceTree = "<group>"; };
 		53CFCA5F25E9470B003EADB3 /* MiniAddFriendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniAddFriendButton.swift; sourceTree = "<group>"; };
 		53D3B43925A0F25F00F15974 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		53D3B43F25A0FB3400F15974 /* EmailLogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogInViewModel.swift; sourceTree = "<group>"; };
@@ -391,9 +391,9 @@
 				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
 				5332B68C271F548900FBF135 /* MoWine.Domain in Frameworks */,
-				53CA99D726305E5C009C0F87 /* mowineLib in Frameworks */,
 				532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */,
 				531277A92678393300C5E717 /* FirebaseCrashlytics in Frameworks */,
+				53ADDF782720BE4F00945B2D /* MoWine.Application in Frameworks */,
 				531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */,
 				53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */,
 				531277A72678393300C5E717 /* FirebaseAuth in Frameworks */,
@@ -887,7 +887,7 @@
 				53F5ABF21E2176080067AB62 /* mowine */,
 				53F5AC0A1E2176090067AB62 /* mowineTests */,
 				53F5AC151E2176090067AB62 /* mowineUITests */,
-				53CA99CF262FA817009C0F87 /* mowineLib */,
+				5332B68F2720BBCC00FBF135 /* MoWine.Application */,
 				5332B68A271F4F8700FBF135 /* MoWine.Domain */,
 				53F5ABF11E2176080067AB62 /* Products */,
 				8E45E83822A4C492508A446C /* Frameworks */,
@@ -1028,7 +1028,6 @@
 			packageProductDependencies = (
 				53A697B9261A1645004BCE43 /* SwiftyBeaver */,
 				53A697E6261A16C5004BCE43 /* Dip */,
-				53CA99D626305E5C009C0F87 /* mowineLib */,
 				531277A42678393300C5E717 /* FirebaseAnalytics */,
 				531277A62678393300C5E717 /* FirebaseAuth */,
 				531277A82678393300C5E717 /* FirebaseCrashlytics */,
@@ -1040,6 +1039,7 @@
 				535D7275270245EA00821FD8 /* GoogleSignIn */,
 				5393F02B27074A20000E9029 /* FirebaseStorageSwift-Beta */,
 				5332B68B271F548900FBF135 /* MoWine.Domain */,
+				53ADDF772720BE4F00945B2D /* MoWine.Application */,
 			);
 			productName = mowine;
 			productReference = 53F5ABF01E2176080067AB62 /* mowine.app */;
@@ -1809,9 +1809,9 @@
 			package = 53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
 		};
-		53CA99D626305E5C009C0F87 /* mowineLib */ = {
+		53ADDF772720BE4F00945B2D /* MoWine.Application */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = mowineLib;
+			productName = MoWine.Application;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

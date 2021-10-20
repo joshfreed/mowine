@@ -8,7 +8,7 @@
 
 import Foundation
 import FirebaseFirestore
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class MyFirebaseListenerRegistration: MoWineListenerRegistration {

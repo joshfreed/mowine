@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Model
+@testable import MoWine_Application
 import MoWine_Domain
 
 class MockWineImageStorage: WineImageStorage {

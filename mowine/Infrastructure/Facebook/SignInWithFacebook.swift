@@ -8,7 +8,7 @@
 
 import Foundation
 import FBSDKLoginKit
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 struct FacebookToken: SocialToken {

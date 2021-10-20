@@ -9,8 +9,7 @@
 import XCTest
 @testable import mowine
 import Nimble
-import Model
-@testable import ModelTestHelpers
+import MoWine_Application
 import MoWine_Domain
 
 class WineMappingTests: XCTestCase {

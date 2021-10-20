@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct MyAccountViewContainer: View {
     @EnvironmentObject var session: ObservableSession

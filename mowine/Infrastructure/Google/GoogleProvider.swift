@@ -9,7 +9,7 @@
 import Foundation
 import GoogleSignIn
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 enum CreateUserFromGoogleInfoError: Error {

@@ -8,7 +8,7 @@
 
 import UIKit
 import Combine
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class FakeSession: Session {

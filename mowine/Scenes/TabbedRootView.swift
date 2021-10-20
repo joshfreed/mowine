@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import Model
+import MoWine_Application
 
 struct TabbedRootView: View {
     @StateObject var model = MainTabBarData(customItemIndex: 2)

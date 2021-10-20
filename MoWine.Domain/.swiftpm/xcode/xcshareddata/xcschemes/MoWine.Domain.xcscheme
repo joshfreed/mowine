@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "mowineLib"
-               BuildableName = "mowineLib"
-               BlueprintName = "mowineLib"
+               BlueprintIdentifier = "MoWine.Domain"
+               BuildableName = "MoWine.Domain"
+               BlueprintName = "MoWine.Domain"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,19 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ModelTests"
-               BuildableName = "ModelTests"
-               BlueprintName = "ModelTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -61,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "mowineLib"
-            BuildableName = "mowineLib"
-            BlueprintName = "mowineLib"
+            BlueprintIdentifier = "MoWine.Domain"
+            BuildableName = "MoWine.Domain"
+            BlueprintName = "MoWine.Domain"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

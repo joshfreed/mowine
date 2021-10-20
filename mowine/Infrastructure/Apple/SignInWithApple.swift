@@ -10,7 +10,7 @@ import Foundation
 import AuthenticationServices
 import CryptoKit
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 struct AppleToken: SocialToken {

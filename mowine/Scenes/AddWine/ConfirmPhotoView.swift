@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct ConfirmPhotoView: View {
     @ObservedObject var model: NewWineModel

@@ -8,7 +8,7 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 
 struct FinalizeWineView: View {

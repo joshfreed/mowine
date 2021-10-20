@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import SwiftyBeaver
 import FirebaseCrashlytics
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class FirestoreWineRepository: WineRepository {

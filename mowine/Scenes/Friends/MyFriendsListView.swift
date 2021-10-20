@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct MyFriendsListView: View {
     @EnvironmentObject var friends: FriendsService

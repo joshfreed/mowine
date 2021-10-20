@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 enum CreateUserFromFacebookInfoError: Error {

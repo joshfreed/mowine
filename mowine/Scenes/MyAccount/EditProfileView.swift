@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct EditProfileView: View {
     @StateObject var vm = EditProfileViewModel()

@@ -7,7 +7,7 @@ import Foundation
 import FirebaseStorage
 import FirebaseStorageSwift
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class FirebaseStorageService {

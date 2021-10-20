@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAuth
 import SwiftyBeaver
 import Combine
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 import MoWine_Domain
 

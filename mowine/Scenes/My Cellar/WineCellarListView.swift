@@ -8,7 +8,7 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Model
+import MoWine_Application
 
 struct WineCellarListView: View {
     @EnvironmentObject var myWines: MyWinesService

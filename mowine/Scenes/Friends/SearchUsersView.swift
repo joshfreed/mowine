@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct SearchUsersView: View {
     let hasSearched: Bool

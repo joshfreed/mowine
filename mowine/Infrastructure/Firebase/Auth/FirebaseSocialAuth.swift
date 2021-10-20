@@ -8,7 +8,7 @@
 
 import Foundation
 import FirebaseAuth
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class FirebaseSocialAuth: SocialAuthService {

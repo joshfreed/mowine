@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 import SwiftyBeaver
 

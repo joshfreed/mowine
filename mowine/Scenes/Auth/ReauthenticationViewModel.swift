@@ -11,7 +11,7 @@ import Combine
 import SwiftyBeaver
 import FirebaseAuth
 import GoogleSignIn
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 
 class ReauthenticationViewModel: ObservableObject {

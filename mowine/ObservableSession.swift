@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import Model
+import MoWine_Application
 import SwiftyBeaver
 
 public class ObservableSession: ObservableObject {

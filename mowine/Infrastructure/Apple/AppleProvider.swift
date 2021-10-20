@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseAuth
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class AppleProvider: SocialSignInProvider {

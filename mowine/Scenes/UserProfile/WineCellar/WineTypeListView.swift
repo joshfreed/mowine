@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct WineTypeListView: View {
     @EnvironmentObject var query: GetUserWinesByTypeQuery

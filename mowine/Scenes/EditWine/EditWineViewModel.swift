@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import FirebaseCrashlytics
-import Model
+import MoWine_Application
 import UIKit.UIImage
 import UIKit
 

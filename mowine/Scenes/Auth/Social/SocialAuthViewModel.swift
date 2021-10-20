@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 
 class SocialAuthViewModel: ObservableObject {

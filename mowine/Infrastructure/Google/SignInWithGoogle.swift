@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import GoogleSignIn
 import SwiftyBeaver
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 import MoWine_Domain
 

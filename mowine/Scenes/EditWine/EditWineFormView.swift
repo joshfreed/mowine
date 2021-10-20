@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct EditWineFormView: View {
     @ObservedObject var vm: EditWineFormModel

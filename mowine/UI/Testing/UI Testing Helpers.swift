@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Model
+import MoWine_Application
 import FirebaseCrashlytics
 
 class UITestHelper {

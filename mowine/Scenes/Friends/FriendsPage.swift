@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 struct FriendsPage: View {
     @EnvironmentObject var session: ObservableSession

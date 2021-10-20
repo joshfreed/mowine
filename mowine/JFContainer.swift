@@ -9,7 +9,7 @@
 import Foundation
 import Dip
 import Combine
-import Model
+import MoWine_Application
 import MoWine_Domain
 
 class JFContainer: ObservableObject {

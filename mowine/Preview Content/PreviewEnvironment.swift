@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 
 extension View {
     func addPreviewEnvironment() -> some View {

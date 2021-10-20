@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Model
+import MoWine_Application
 import SwiftyBeaver
 import FirebaseCrashlytics
 
