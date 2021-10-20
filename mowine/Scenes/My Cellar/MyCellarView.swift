@@ -8,7 +8,6 @@
 
 import SwiftUI
 import SwiftyBeaver
-import Model
 
 struct MyCellarView: View {
     @StateObject var viewModel: MyCellarViewModel = MyCellarViewModel()
@@ -29,6 +28,9 @@ struct MyCellarView: View {
             }
         }
         .analyticsScreen(name: "My Cellar", class: "MyCellarView")
+        .task {
+            await viewModel.load()
+        }
     }
 }
 

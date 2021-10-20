@@ -14,7 +14,6 @@ import FirebaseAnalytics
 @MainActor
 struct AppView: View {
     @EnvironmentObject var session: ObservableSession
-    @EnvironmentObject var wineTypeService: WineTypeService
     @State private var isPreparing: Bool = true
     
     var body: some View {
@@ -34,7 +33,6 @@ struct AppView: View {
         SwiftyBeaver.debug("loadApp \(String(describing: session.userId))")
 
         await setupUITestingData()
-        await wineTypeService.fetchWineTypes()
 
         Analytics.logEvent("app_appeared", parameters: [:])
         SwiftyBeaver.info("loadApp complete")

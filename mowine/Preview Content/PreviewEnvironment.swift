@@ -13,6 +13,5 @@ extension View {
     func addPreviewEnvironment() -> some View {
         addAppEnvironment()
             .environmentObject(ObservableSession(session: try! JFContainer.shared.resolve()))
-            .environmentObject(WineTypeService(wineTypeRepository: try! JFContainer.shared.resolve()))
     }
 }

@@ -7,11 +7,9 @@
 //
 
 import SwiftUI
-import Model
-import MoWine_Domain
 
 struct MyCellarContentView: View {
-    @EnvironmentObject var wineTypes: WineTypeService
+    @EnvironmentObject var vm: MyCellarViewModel
     let onEditWine: (String) -> Void
 
     var body: some View {
@@ -20,14 +18,14 @@ struct MyCellarContentView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: makeView(title: "Red Wines", wineType: wineTypes.red)) {
+                NavigationLink(destination: makeView(title: "Red Wines", wineTypeId: vm.redId)) {
                     WineTypeMenuButton(name: "Reds", icon: "Red Wine Button")
                 }
                 .accessibilityIdentifier("Show My Red Wines")
                 
                 Spacer()
                 
-                NavigationLink(destination: makeView(title: "White Wines", wineType: wineTypes.white)) {
+                NavigationLink(destination: makeView(title: "White Wines", wineTypeId: vm.whiteId)) {
                     WineTypeMenuButton(name: "Whites", icon: "White Wine Button")
                 }
                 .accessibilityIdentifier("Show My White Wines")
@@ -38,14 +36,14 @@ struct MyCellarContentView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: makeView(title: "Rose", wineType: wineTypes.rose)) {
+                NavigationLink(destination: makeView(title: "Rose", wineTypeId: vm.roseId)) {
                     WineTypeMenuButton(name: "Rosè", icon: "Rose Button")
                 }
                 .accessibilityIdentifier("Show My Rosès")
                 
                 Spacer()
                 
-                NavigationLink(destination: makeView(title: "Bubbly", wineType: wineTypes.bubbly)) {
+                NavigationLink(destination: makeView(title: "Bubbly", wineTypeId: vm.bubblyId)) {
                     WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
                 }
                 .accessibilityIdentifier("Show My Bubblies")
@@ -53,7 +51,7 @@ struct MyCellarContentView: View {
                 Spacer()
             }
             Spacer()
-            NavigationLink(destination: makeView(title: "Other Wines", wineType: wineTypes.other)) {
+            NavigationLink(destination: makeView(title: "Other Wines", wineTypeId: vm.otherId)) {
                 Text("Others")
                     .font(.system(size: 37))
                     .foregroundColor(Color(UIColor.mwSecondary))
@@ -63,13 +61,14 @@ struct MyCellarContentView: View {
         }
     }
 
-    private func makeView(title: String, wineType: WineType) -> WineCellarListView {
-        WineCellarListView(wineTypeId: wineType.id, navigationBarTitle: title, onEditWine: onEditWine)
+    private func makeView(title: String, wineTypeId: Int) -> WineCellarListView {
+        WineCellarListView(wineTypeId: wineTypeId, navigationBarTitle: title, onEditWine: onEditWine)
     }
 }
 
 struct MyCellarContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarContentView(onEditWine: { _ in }).addPreviewEnvironment()
+        MyCellarContentView(onEditWine: { _ in })
+            .addPreviewEnvironment()
     }
 }

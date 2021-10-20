@@ -15,7 +15,6 @@ struct WoWineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     @StateObject var session = ObservableSession(session: try! JFContainer.shared.resolve())
-    @StateObject var wineTypeService = WineTypeService(wineTypeRepository: try! JFContainer.shared.resolve())
 
     init() {
         setupSwiftyBeaverLogging()
@@ -29,7 +28,6 @@ struct WoWineApp: App {
             AppView()
                 .addAppEnvironment()
                 .environmentObject(session)
-                .environmentObject(wineTypeService)
         }
     }
 
