@@ -6,10 +6,10 @@
 //
 
 import XCTest
-@testable import MoWine_Application
-@testable import MoWine_Application_Mocks
 import Nimble
-import MoWine_Domain
+@testable import MoWine_Application
+@testable import MoWine_Domain
+@testable import MoWine_Domain_Mocks
 
 class GetWineImageQueryHandlerTests: XCTestCase {
     var sut: GetWineImageQueryHandler!

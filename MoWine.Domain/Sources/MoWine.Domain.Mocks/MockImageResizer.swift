@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import MoWine_Application
 import CoreGraphics
 import MoWine_Domain
 

@@ -35,6 +35,11 @@ let package = Package(
             dependencies: ["MoWine.Application", "Nimble"]),
         .testTarget(
             name: "MoWine.ApplicationTests",
-            dependencies: ["MoWine.Application", "MoWine.Application.Mocks", "Nimble"]),
+            dependencies: [
+                "MoWine.Application",
+                "MoWine.Application.Mocks",
+                .product(name: "MoWine.Domain.Mocks", package: "MoWine.Domain"),
+                "Nimble"
+            ]),
     ]
 )

@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import Nimble
 @testable import MoWine_Application
 @testable import MoWine_Application_Mocks
-import Nimble
-import MoWine_Domain
+@testable import MoWine_Domain
+@testable import MoWine_Domain_Mocks
 
 class UpdateWineCommandHandlerTests: XCTestCase {
     var sut: UpdateWineCommandHandler!

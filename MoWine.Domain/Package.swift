@@ -13,11 +13,15 @@ let package = Package(
         .library(
             name: "MoWine.Domain",
             targets: ["MoWine.Domain"]),
+        .library(
+            name: "MoWine.Domain.Mocks",
+            targets: ["MoWine.Domain.Mocks"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
+        .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,8 +29,11 @@ let package = Package(
         .target(
             name: "MoWine.Domain",
             dependencies: ["SwiftyBeaver"]),
+        .target(
+            name: "MoWine.Domain.Mocks",
+            dependencies: ["MoWine.Domain", "Nimble"]),
         .testTarget(
             name: "MoWine.DomainTests",
-            dependencies: ["MoWine.Domain"]),
+            dependencies: ["MoWine.Domain", "MoWine.Domain.Mocks"]),
     ]
 )
