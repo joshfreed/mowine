@@ -11,7 +11,6 @@ import Combine
 import SwiftyBeaver
 import Model
 import FirebaseCrashlytics
-import MoWine_Domain
 
 class SocialAuthViewModel: ObservableObject {
     @Published var isSigningIn: Bool = false

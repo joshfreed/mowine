@@ -10,7 +10,6 @@ import Foundation
 import SwiftyBeaver
 import Model
 import FirebaseCrashlytics
-import MoWine_Domain
 
 @MainActor
 class EmailLogInViewModel: ObservableObject {

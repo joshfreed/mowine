@@ -13,7 +13,6 @@ import FirebaseAuth
 import GoogleSignIn
 import Model
 import FirebaseCrashlytics
-import MoWine_Domain
 
 class ReauthenticationViewModel: ObservableObject {
     @Published var showErrorAlert = false
