@@ -40,7 +40,7 @@
 		533F1039259FE42100DAA4B6 /* SocialAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F1038259FE42100DAA4B6 /* SocialAuthViewModel.swift */; };
 		533F103D259FE42900DAA4B6 /* SocialAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F103C259FE42900DAA4B6 /* SocialAuthView.swift */; };
 		5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5345BABD257C286F00AD68D3 /* ImagePicker.swift */; };
-		534895FD203CBFB900B7547A /* JFContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* JFContainer.swift */; };
+		534895FD203CBFB900B7547A /* JFServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* JFServices.swift */; };
 		534F3405259E3C2D00C03E47 /* AnonymousUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F3404259E3C2D00C03E47 /* AnonymousUserView.swift */; };
 		5352404F25CF5516002CB2A5 /* EditWineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352404E25CF5516002CB2A5 /* EditWineImageView.swift */; };
 		5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352405325CF5E5E002CB2A5 /* WineImageView.swift */; };
@@ -196,7 +196,7 @@
 		533F1038259FE42100DAA4B6 /* SocialAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthViewModel.swift; sourceTree = "<group>"; };
 		533F103C259FE42900DAA4B6 /* SocialAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthView.swift; sourceTree = "<group>"; };
 		5345BABD257C286F00AD68D3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		534895FC203CBFB900B7547A /* JFContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFContainer.swift; sourceTree = "<group>"; };
+		534895FC203CBFB900B7547A /* JFServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFServices.swift; sourceTree = "<group>"; };
 		534F3404259E3C2D00C03E47 /* AnonymousUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousUserView.swift; sourceTree = "<group>"; };
 		5352404E25CF5516002CB2A5 /* EditWineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineImageView.swift; sourceTree = "<group>"; };
 		5352405325CF5E5E002CB2A5 /* WineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageView.swift; sourceTree = "<group>"; };
@@ -581,7 +581,7 @@
 		5395AC96271E0A32001BB10B /* Dependency Injection */ = {
 			isa = PBXGroup;
 			children = (
-				534895FC203CBFB900B7547A /* JFContainer.swift */,
+				534895FC203CBFB900B7547A /* JFServices.swift */,
 				5395AC97271E0A8F001BB10B /* Injected.swift */,
 			);
 			path = "Dependency Injection";
@@ -1106,7 +1106,7 @@
 				53AC404225D71DBE0041AED9 /* SelectTypeView.swift in Sources */,
 				535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */,
 				538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */,
-				534895FD203CBFB900B7547A /* JFContainer.swift in Sources */,
+				534895FD203CBFB900B7547A /* JFServices.swift in Sources */,
 				5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */,
 				53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */,
 				53047E2325DC080B005CC14D /* AddWineHeaderView.swift in Sources */,

@@ -18,7 +18,7 @@ class UITestHelper {
 
         do {
             let login = try JSONDecoder().decode(UITesting.UserLogin.self, from: Data(loggedInUserJson.utf8))
-            let emailAuth: EmailAuthenticationService = try JFContainer.shared.resolve()
+            let emailAuth: EmailAuthenticationService = try JFServices.resolve()
             try await emailAuth.signIn(emailAddress: login.emailAddress, password: login.password)
         } catch {
             Crashlytics.crashlytics().record(error: error)

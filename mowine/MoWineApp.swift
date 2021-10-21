@@ -10,12 +10,13 @@ import SwiftUI
 import SwiftyBeaver
 import MoWine_Application
 import MoWine_Infrastructure
+import Dip
 
 @main
 struct WoWineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-    @StateObject var session = ObservableSession(session: try! JFContainer.shared.resolve())
+    @StateObject var session = ObservableSession(session: try! JFServices.resolve())
 
     init() {
         setupSwiftyBeaverLogging()
@@ -58,11 +59,11 @@ struct WoWineApp: App {
 
     private func setupDependencyInjection() {
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-            JFContainer.configureForPreviews()
+            JFServices.configureForPreviews()
         } else {
             let useEmulator = ProcessInfo.processInfo.arguments.contains("UI_TESTING")
             FirebaseConfigurator().configure(useEmulator: useEmulator)
-            JFContainer.configure()
+            JFServices.configure()
         }
     }
 }
@@ -70,8 +71,35 @@ struct WoWineApp: App {
 extension View {
     func addAppEnvironment() -> some View {
         self
-            .environmentObject(try! JFContainer.shared.resolve() as FriendsService)
-            .environmentObject(try! JFContainer.shared.resolve() as GetUserWinesByTypeQuery)
-            .environmentObject(try! JFContainer.shared.resolve() as MyWinesService)
+            .environmentObject(try! JFServices.resolve() as FriendsService)
+            .environmentObject(try! JFServices.resolve() as GetUserWinesByTypeQuery)
+            .environmentObject(try! JFServices.resolve() as MyWinesService)
+    }
+}
+
+
+extension JFServices {
+    static func configure() {
+        let container = DependencyContainer { container in
+            MoWine_Application.DependencyInjection.registerServices(container: container)
+            MoWine_Infrastructure.DependencyInjection.registerServices(container: container)
+            MoWine_Infrastructure.DependencyInjection.registerFirebaseServices(container: container)
+        }
+
+        let resolver = DipServiceResolver(container: container)
+
+        JFServices.initialize(resolver: resolver)
+    }
+
+    static func configureForPreviews() {
+        let container = DependencyContainer { container in
+            PreviewServices.registerServices(container: container)
+            MoWine_Application.DependencyInjection.registerServices(container: container)
+            MoWine_Infrastructure.DependencyInjection.registerServices(container: container)
+        }
+
+        let resolver = DipServiceResolver(container: container)
+
+        JFServices.initialize(resolver: resolver)
     }
 }

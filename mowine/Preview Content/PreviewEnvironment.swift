@@ -12,6 +12,6 @@ import MoWine_Application
 extension View {
     func addPreviewEnvironment() -> some View {
         addAppEnvironment()
-            .environmentObject(ObservableSession(session: try! JFContainer.shared.resolve()))
+            .environmentObject(ObservableSession(session: try! JFServices.resolve()))
     }
 }

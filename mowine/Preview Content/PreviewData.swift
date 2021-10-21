@@ -31,9 +31,9 @@ extension View {
 
 fileprivate func configurePreviewData() async throws {
     // Dependencies
-    let userRepository: UserRepository = try JFContainer.shared.resolve()
-    let wineTypeRepository: MemoryWineTypeRepository = try JFContainer.shared.resolve()
-    let wineRepository: WineRepository = try JFContainer.shared.resolve()
+    let userRepository: UserRepository = try JFServices.resolve()
+    let wineTypeRepository: MemoryWineTypeRepository = try JFServices.resolve()
+    let wineRepository: WineRepository = try JFServices.resolve()
 
     // Users
     var josh = User(id: UserId(string: PreviewData.userId1), emailAddress: "josh@jpfreed.com")
@@ -55,8 +55,8 @@ fileprivate func configurePreviewData() async throws {
 }
 
 fileprivate func logInAs(userId: String?) async throws {
-    let fakeSession: FakeSession = try JFContainer.shared.resolve()
-    let userRepository: UserRepository = try JFContainer.shared.resolve()
+    let fakeSession: FakeSession = try JFServices.resolve()
+    let userRepository: UserRepository = try JFServices.resolve()
 
     if let userId = userId {
         let userId = UserId(string: userId)

@@ -10,7 +10,5 @@ import Foundation
 
 @propertyWrapper
 struct Injected<T> {
-    var wrappedValue: T {
-        try! JFContainer.shared.resolve()
-    }
+    var wrappedValue: T { try! JFServices.resolve() }
 }
