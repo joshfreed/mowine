@@ -21,6 +21,7 @@ let package = Package(
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "8.0.0"),
         .package(url: "https://github.com/facebook/facebook-ios-sdk", from: "11.0.0"),
         .package(url: "https://github.com/google/GoogleSignIn-iOS", from: "6.0.0"),
+        .package(name: "Dip", url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
     ],
     targets: [
         .target(
@@ -29,6 +30,7 @@ let package = Package(
                 "MoWine.Application",
                 "MoWine.Domain",
                 "SwiftyBeaver",
+                .product(name: "Dip", package: "Dip"),
 
                 .product(name: "FacebookCore", package: "facebook-ios-sdk"),
                 .product(name: "FacebookLogin", package: "facebook-ios-sdk"),

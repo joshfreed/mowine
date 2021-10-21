@@ -80,11 +80,11 @@
 		5381EFF325C5E830004D2DF9 /* EditWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF225C5E830004D2DF9 /* EditWineViewModel.swift */; };
 		5381EFF925C7267E004D2DF9 /* EditWineFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */; };
 		5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */; };
+		5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C7032721E5D3000E625F /* DependencyInjection.swift */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
 		5395AC98271E0A8F001BB10B /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC97271E0A8F001BB10B /* Injected.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
-		53A697E7261A16C5004BCE43 /* Dip in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697E6261A16C5004BCE43 /* Dip */; };
 		53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A69841261A1DE4004BCE43 /* MoWineApp.swift */; };
 		53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC403D25D71DB20041AED9 /* AddWineView.swift */; };
 		53AC404225D71DBE0041AED9 /* SelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC404125D71DBE0041AED9 /* SelectTypeView.swift */; };
@@ -243,6 +243,7 @@
 		5383C6FC2721A81D000E625F /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = firestore.rules; sourceTree = SOURCE_ROOT; };
 		5383C6FF2721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5383C7012721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5383C7032721E5D3000E625F /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5395AC97271E0A8F001BB10B /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
@@ -315,7 +316,6 @@
 			files = (
 				53FABEDF2720C99700C3C838 /* MoWine.Infrastructure in Frameworks */,
 				532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */,
-				53A697E7261A16C5004BCE43 /* Dip in Frameworks */,
 				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
 				5332B68C271F548900FBF135 /* MoWine.Domain in Frameworks */,
@@ -683,6 +683,7 @@
 				532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */,
 				536E85A3204F507D004D5426 /* FakeSession.swift */,
 				53B35F9625ACCA3500D36133 /* FakeSocialAuth.swift */,
+				5383C7032721E5D3000E625F /* DependencyInjection.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -845,7 +846,6 @@
 			);
 			name = mowine;
 			packageProductDependencies = (
-				53A697E6261A16C5004BCE43 /* Dip */,
 				5332B68B271F548900FBF135 /* MoWine.Domain */,
 				53ADDF772720BE4F00945B2D /* MoWine.Application */,
 				53FABEDE2720C99700C3C838 /* MoWine.Infrastructure */,
@@ -934,7 +934,6 @@
 			);
 			mainGroup = 53F5ABE71E2176080067AB62;
 			packageReferences = (
-				53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */,
 			);
 			productRefGroup = 53F5ABF11E2176080067AB62 /* Products */;
 			projectDirPath = "";
@@ -1047,6 +1046,7 @@
 				53B35F9725ACCA3500D36133 /* FakeSocialAuth.swift in Sources */,
 				535CC81525F0451F00D49D57 /* TopWinesView.swift in Sources */,
 				536E301F25A2616E00608A29 /* TabbedRootView.swift in Sources */,
+				5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */,
 				5381EFEF25C5E4F4004D2DF9 /* EditPairingsView.swift in Sources */,
 				536AEBF22540BBBB009EA107 /* MyCellarContentView.swift in Sources */,
 				533F102D259FD63900DAA4B6 /* EmailLogInView.swift in Sources */,
@@ -1460,26 +1460,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AliSoftware/Dip";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.1.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		5332B68B271F548900FBF135 /* MoWine.Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoWine.Domain;
-		};
-		53A697E6261A16C5004BCE43 /* Dip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */;
-			productName = Dip;
 		};
 		53ADDF772720BE4F00945B2D /* MoWine.Application */ = {
 			isa = XCSwiftPackageProductDependency;
