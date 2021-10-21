@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftyBeaver
 import MoWine_Application
+import MoWine_Infrastructure
 
 @main
 struct WoWineApp: App {

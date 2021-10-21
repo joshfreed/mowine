@@ -15,8 +15,10 @@ import FirebaseAnalyticsSwift
 import GoogleSignIn
 
 /// Responsible for bootstrapping Firebase services at app launch.
-class FirebaseConfigurator {
-    func configure(useEmulator: Bool) {
+public class FirebaseConfigurator {
+    public init() {}
+
+    public func configure(useEmulator: Bool) {
         FirebaseApp.configure()
 
         Analytics.logEvent("app_configred", parameters: [:])

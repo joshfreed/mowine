@@ -16,12 +16,6 @@
 		5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC692607BCC80061C413 /* WineTypeListView.swift */; };
 		530A987126F7B2B7008CE2C5 /* EditProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */; };
 		530A987326F7B308008CE2C5 /* ProfilePictureOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */; };
-		531277A52678393300C5E717 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A42678393300C5E717 /* FirebaseAnalytics */; };
-		531277A72678393300C5E717 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A62678393300C5E717 /* FirebaseAuth */; };
-		531277A92678393300C5E717 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 531277A82678393300C5E717 /* FirebaseCrashlytics */; };
-		531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 531277AA2678393300C5E717 /* FirebaseFirestore */; };
-		531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 531277AC2678393300C5E717 /* FirebaseStorage */; };
-		53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */; };
 		531FB93A26F0C484006A22F0 /* WineCellarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */; };
 		532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F5267979C700649624 /* LocalAuthentication.framework */; };
 		532789F8267979D400649624 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F7267979D400649624 /* SafariServices.framework */; };
@@ -62,10 +56,6 @@
 		535CC81125F0404B00D49D57 /* UserProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81025F0404B00D49D57 /* UserProfileHeaderViewModel.swift */; };
 		535CC81525F0451F00D49D57 /* TopWinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81425F0451F00D49D57 /* TopWinesView.swift */; };
 		535CC81925F0453400D49D57 /* TopWinesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535CC81825F0453400D49D57 /* TopWinesViewModel.swift */; };
-		535D726E27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 535D726D27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta */; };
-		535D7271270245A700821FD8 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 535D7270270245A700821FD8 /* FacebookCore */; };
-		535D7273270245A700821FD8 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 535D7272270245A700821FD8 /* FacebookLogin */; };
-		535D7276270245EA00821FD8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 535D7275270245EA00821FD8 /* GoogleSignIn */; };
 		535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 535D73FE2569A7160027BC27 /* Preview Assets.xcassets */; };
 		535D84A8271DCBF6002FD679 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84A7271DCBF6002FD679 /* Helpers.swift */; };
 		535D84AB271DD053002FD679 /* SelectWineTypePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535D84AA271DD053002FD679 /* SelectWineTypePage.swift */; };
@@ -98,12 +88,10 @@
 		5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABD025BE2B9600B8A8F5 /* firestore.rules */; };
 		53873A302707A9D600654CB7 /* UIImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53873A2F2707A9D600654CB7 /* UIImageResizer.swift */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
-		5393F02C27074A20000E9029 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 5393F02B27074A20000E9029 /* FirebaseStorageSwift-Beta */; };
 		5395AC98271E0A8F001BB10B /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC97271E0A8F001BB10B /* Injected.swift */; };
 		5395AC9A271E1BA0001BB10B /* MemoryUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC99271E1BA0001BB10B /* MemoryUserRepository.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
-		53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697B9261A1645004BCE43 /* SwiftyBeaver */; };
 		53A697E7261A16C5004BCE43 /* Dip in Frameworks */ = {isa = PBXBuildFile; productRef = 53A697E6261A16C5004BCE43 /* Dip */; };
 		53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A69841261A1DE4004BCE43 /* MoWineApp.swift */; };
 		53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC403D25D71DB20041AED9 /* AddWineView.swift */; };
@@ -152,7 +140,6 @@
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
 		53F5AC171E2176090067AB62 /* AddWineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* AddWineTests.swift */; };
 		53FABEDF2720C99700C3C838 /* MoWine.Infrastructure in Frameworks */ = {isa = PBXBuildFile; productRef = 53FABEDE2720C99700C3C838 /* MoWine.Infrastructure */; };
-		53FAECFE25EAF2480099B2E1 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 53AC400725D7075F0041AED9 /* Nimble */; };
 		53FAED0025EAF7B40099B2E1 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAECFF25EAF7B40099B2E1 /* UserProfileView.swift */; };
 		53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAED0325EAF9C30099B2E1 /* UserProfileHeaderView.swift */; };
 		53FAED0825EAFBF00099B2E1 /* FriendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAED0725EAFBF00099B2E1 /* FriendButton.swift */; };
@@ -188,7 +175,6 @@
 		5306CC692607BCC80061C413 /* WineTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeListView.swift; sourceTree = "<group>"; };
 		530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormView.swift; sourceTree = "<group>"; };
 		530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureOverlayView.swift; sourceTree = "<group>"; };
-		53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfigurator.swift; sourceTree = "<group>"; };
 		5318C0A1270CA66C00F2C60D /* Firebase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Firebase; sourceTree = "<group>"; };
 		5318C0A3270CA76200F2C60D /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
 		5318C0A4270CA77000F2C60D /* fbe.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = fbe.sh; path = scripts/fbe.sh; sourceTree = "<group>"; };
@@ -340,25 +326,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				531277A52678393300C5E717 /* FirebaseAnalytics in Frameworks */,
-				535D7276270245EA00821FD8 /* GoogleSignIn in Frameworks */,
-				5393F02C27074A20000E9029 /* FirebaseStorageSwift-Beta in Frameworks */,
-				535D7273270245A700821FD8 /* FacebookLogin in Frameworks */,
 				53FABEDF2720C99700C3C838 /* MoWine.Infrastructure in Frameworks */,
 				532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */,
 				53A697E7261A16C5004BCE43 /* Dip in Frameworks */,
-				531277AB2678393300C5E717 /* FirebaseFirestore in Frameworks */,
-				535D726E27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
 				5332B68C271F548900FBF135 /* MoWine.Domain in Frameworks */,
 				532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */,
-				531277A92678393300C5E717 /* FirebaseCrashlytics in Frameworks */,
 				53ADDF782720BE4F00945B2D /* MoWine.Application in Frameworks */,
-				531277AD2678393300C5E717 /* FirebaseStorage in Frameworks */,
-				53A697BA261A1645004BCE43 /* SwiftyBeaver in Frameworks */,
-				531277A72678393300C5E717 /* FirebaseAuth in Frameworks */,
-				535D7271270245A700821FD8 /* FacebookCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +341,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53FAECFE25EAF2480099B2E1 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +432,6 @@
 			isa = PBXGroup;
 			children = (
 				5386ABCC25BE2B5600B8A8F5 /* Config */,
-				53188644258677A600ED9CF8 /* FirebaseConfigurator.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -887,18 +860,7 @@
 			);
 			name = mowine;
 			packageProductDependencies = (
-				53A697B9261A1645004BCE43 /* SwiftyBeaver */,
 				53A697E6261A16C5004BCE43 /* Dip */,
-				531277A42678393300C5E717 /* FirebaseAnalytics */,
-				531277A62678393300C5E717 /* FirebaseAuth */,
-				531277A82678393300C5E717 /* FirebaseCrashlytics */,
-				531277AA2678393300C5E717 /* FirebaseFirestore */,
-				531277AC2678393300C5E717 /* FirebaseStorage */,
-				535D726D27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta */,
-				535D7270270245A700821FD8 /* FacebookCore */,
-				535D7272270245A700821FD8 /* FacebookLogin */,
-				535D7275270245EA00821FD8 /* GoogleSignIn */,
-				5393F02B27074A20000E9029 /* FirebaseStorageSwift-Beta */,
 				5332B68B271F548900FBF135 /* MoWine.Domain */,
 				53ADDF772720BE4F00945B2D /* MoWine.Application */,
 				53FABEDE2720C99700C3C838 /* MoWine.Infrastructure */,
@@ -922,7 +884,6 @@
 			);
 			name = mowineTests;
 			packageProductDependencies = (
-				53AC400725D7075F0041AED9 /* Nimble */,
 			);
 			productName = mowineTests;
 			productReference = 53F5AC071E2176090067AB62 /* mowineTests.xctest */;
@@ -988,12 +949,7 @@
 			);
 			mainGroup = 53F5ABE71E2176080067AB62;
 			packageReferences = (
-				53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */,
-				53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */,
-				531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				535D726F270245A700821FD8 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				535D7274270245EA00821FD8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 53F5ABF11E2176080067AB62 /* Products */;
 			projectDirPath = "";
@@ -1121,7 +1077,6 @@
 				533C2E9D25DDB43700795CCE /* FriendsPage.swift in Sources */,
 				5381EFEB25C5C8B6004D2DF9 /* EditWineView.swift in Sources */,
 				53FAED0025EAF7B40099B2E1 /* UserProfileView.swift in Sources */,
-				53188645258677A600ED9CF8 /* FirebaseConfigurator.swift in Sources */,
 				533D8B3E2533601600CE297E /* MyCellarViewModel.swift in Sources */,
 				53DD1E1A257D84DC008C1DA7 /* FancySecureField.swift in Sources */,
 				536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */,
@@ -1530,38 +1485,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		535D726F270245A700821FD8 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.0.0;
-			};
-		};
-		535D7274270245EA00821FD8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-		53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.3;
-			};
-		};
 		53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AliSoftware/Dip";
@@ -1570,85 +1493,17 @@
 				minimumVersion = 7.1.1;
 			};
 		};
-		53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Quick/Nimble";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		531277A42678393300C5E717 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		531277A62678393300C5E717 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		531277A82678393300C5E717 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		531277AA2678393300C5E717 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		531277AC2678393300C5E717 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
 		5332B68B271F548900FBF135 /* MoWine.Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoWine.Domain;
-		};
-		535D726D27023DFB00821FD8 /* FirebaseAnalyticsSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAnalyticsSwift-Beta";
-		};
-		535D7270270245A700821FD8 /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 535D726F270245A700821FD8 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		535D7272270245A700821FD8 /* FacebookLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 535D726F270245A700821FD8 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookLogin;
-		};
-		535D7275270245EA00821FD8 /* GoogleSignIn */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 535D7274270245EA00821FD8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignIn;
-		};
-		5393F02B27074A20000E9029 /* FirebaseStorageSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 531277A32678393300C5E717 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseStorageSwift-Beta";
-		};
-		53A697B9261A1645004BCE43 /* SwiftyBeaver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 53A697B8261A1645004BCE43 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
-			productName = SwiftyBeaver;
 		};
 		53A697E6261A16C5004BCE43 /* Dip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 53A697E5261A16C5004BCE43 /* XCRemoteSwiftPackageReference "Dip" */;
 			productName = Dip;
-		};
-		53AC400725D7075F0041AED9 /* Nimble */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 53AC400625D7075F0041AED9 /* XCRemoteSwiftPackageReference "Nimble" */;
-			productName = Nimble;
 		};
 		53ADDF772720BE4F00945B2D /* MoWine.Application */ = {
 			isa = XCSwiftPackageProductDependency;
