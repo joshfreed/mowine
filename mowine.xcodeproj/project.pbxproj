@@ -426,14 +426,6 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		5348960F203DE4A300B7547A /* Infrastructure */ = {
-			isa = PBXGroup;
-			children = (
-				5395AC96271E0A32001BB10B /* Dependency Injection */,
-			);
-			path = Infrastructure;
-			sourceTree = "<group>";
-		};
 		53504148271CB67900D85820 /* Page Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,6 +581,7 @@
 		5395AC96271E0A32001BB10B /* Dependency Injection */ = {
 			isa = PBXGroup;
 			children = (
+				534895FC203CBFB900B7547A /* JFContainer.swift */,
 				5395AC97271E0A8F001BB10B /* Injected.swift */,
 			);
 			path = "Dependency Injection";
@@ -740,14 +733,13 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
-				5348960F203DE4A300B7547A /* Infrastructure */,
+				5395AC96271E0A32001BB10B /* Dependency Injection */,
 				53E36490252A77C900BA1CD2 /* Preview Content */,
 				53F5AC241E217E210067AB62 /* Scenes */,
 				5348960E203DE49F00B7547A /* UI */,
 				53F5ABF31E2176080067AB62 /* AppDelegate.swift */,
 				53F5ABFD1E2176080067AB62 /* Assets.xcassets */,
 				53F5AC021E2176080067AB62 /* Info.plist */,
-				534895FC203CBFB900B7547A /* JFContainer.swift */,
 				53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */,
 				53F5ABF71E2176080067AB62 /* Main.storyboard */,
 				536E3AC2258EA3AA00D84F10 /* mowine.entitlements */,
