@@ -10,7 +10,6 @@ import SwiftUI
 import MoWine_Application
 import SwiftyBeaver
 import FirebaseCrashlytics
-import Dip
 
 struct WineDetailsView: View {
     let wineId: String

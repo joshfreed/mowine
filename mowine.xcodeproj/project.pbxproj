@@ -40,7 +40,6 @@
 		533F1039259FE42100DAA4B6 /* SocialAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F1038259FE42100DAA4B6 /* SocialAuthViewModel.swift */; };
 		533F103D259FE42900DAA4B6 /* SocialAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F103C259FE42900DAA4B6 /* SocialAuthView.swift */; };
 		5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5345BABD257C286F00AD68D3 /* ImagePicker.swift */; };
-		534895FD203CBFB900B7547A /* JFServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534895FC203CBFB900B7547A /* JFServices.swift */; };
 		534F3405259E3C2D00C03E47 /* AnonymousUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534F3404259E3C2D00C03E47 /* AnonymousUserView.swift */; };
 		5352404F25CF5516002CB2A5 /* EditWineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352404E25CF5516002CB2A5 /* EditWineImageView.swift */; };
 		5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5352405325CF5E5E002CB2A5 /* WineImageView.swift */; };
@@ -81,8 +80,8 @@
 		5381EFF925C7267E004D2DF9 /* EditWineFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */; };
 		5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */; };
 		5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C7032721E5D3000E625F /* DependencyInjection.swift */; };
+		5383C7072721F413000E625F /* JFLib.DI in Frameworks */ = {isa = PBXBuildFile; productRef = 5383C7062721F413000E625F /* JFLib.DI */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
-		5395AC98271E0A8F001BB10B /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC97271E0A8F001BB10B /* Injected.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
 		53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A69841261A1DE4004BCE43 /* MoWineApp.swift */; };
@@ -196,7 +195,6 @@
 		533F1038259FE42100DAA4B6 /* SocialAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthViewModel.swift; sourceTree = "<group>"; };
 		533F103C259FE42900DAA4B6 /* SocialAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAuthView.swift; sourceTree = "<group>"; };
 		5345BABD257C286F00AD68D3 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		534895FC203CBFB900B7547A /* JFServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFServices.swift; sourceTree = "<group>"; };
 		534F3404259E3C2D00C03E47 /* AnonymousUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousUserView.swift; sourceTree = "<group>"; };
 		5352404E25CF5516002CB2A5 /* EditWineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineImageView.swift; sourceTree = "<group>"; };
 		5352405325CF5E5E002CB2A5 /* WineImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineImageView.swift; sourceTree = "<group>"; };
@@ -238,14 +236,14 @@
 		5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormView.swift; sourceTree = "<group>"; };
 		5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormModel.swift; sourceTree = "<group>"; };
 		5383C6F92721A81D000E625F /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = SOURCE_ROOT; };
-		5383C6FA2721A81D000E625F /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = storage.rules; sourceTree = SOURCE_ROOT; };
+		5383C6FA2721A81D000E625F /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = storage.rules; sourceTree = SOURCE_ROOT; };
 		5383C6FB2721A81D000E625F /* firestore.indexes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firestore.indexes.json; sourceTree = SOURCE_ROOT; };
-		5383C6FC2721A81D000E625F /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = firestore.rules; sourceTree = SOURCE_ROOT; };
+		5383C6FC2721A81D000E625F /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = firestore.rules; sourceTree = SOURCE_ROOT; };
 		5383C6FF2721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5383C7012721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5383C7032721E5D3000E625F /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
+		5383C7052721F349000E625F /* JFLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JFLib; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
-		5395AC97271E0A8F001BB10B /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
 		53A69841261A1DE4004BCE43 /* MoWineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoWineApp.swift; sourceTree = "<group>"; };
@@ -316,6 +314,7 @@
 			files = (
 				53FABEDF2720C99700C3C838 /* MoWine.Infrastructure in Frameworks */,
 				532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */,
+				5383C7072721F413000E625F /* JFLib.DI in Frameworks */,
 				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
 				5332B68C271F548900FBF135 /* MoWine.Domain in Frameworks */,
@@ -578,15 +577,6 @@
 			name = "Test Plans";
 			sourceTree = "<group>";
 		};
-		5395AC96271E0A32001BB10B /* Dependency Injection */ = {
-			isa = PBXGroup;
-			children = (
-				534895FC203CBFB900B7547A /* JFServices.swift */,
-				5395AC97271E0A8F001BB10B /* Injected.swift */,
-			);
-			path = "Dependency Injection";
-			sourceTree = "<group>";
-		};
 		5398F519252A6B6F00BF61C0 /* My Cellar */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,6 +703,7 @@
 				5332B68F2720BBCC00FBF135 /* MoWine.Application */,
 				5332B68A271F4F8700FBF135 /* MoWine.Domain */,
 				53FABEDD2720C80200C3C838 /* MoWine.Infrastructure */,
+				5383C7052721F349000E625F /* JFLib */,
 				5383C7022721A904000E625F /* Test Plans */,
 				5383C6F52721A783000E625F /* Third Party Files */,
 				5318C0A2270CA74E00F2C60D /* Scripts */,
@@ -734,7 +725,6 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
-				5395AC96271E0A32001BB10B /* Dependency Injection */,
 				53E36490252A77C900BA1CD2 /* Preview Content */,
 				53F5AC241E217E210067AB62 /* Scenes */,
 				5348960E203DE49F00B7547A /* UI */,
@@ -849,6 +839,7 @@
 				5332B68B271F548900FBF135 /* MoWine.Domain */,
 				53ADDF772720BE4F00945B2D /* MoWine.Application */,
 				53FABEDE2720C99700C3C838 /* MoWine.Infrastructure */,
+				5383C7062721F413000E625F /* JFLib.DI */,
 			);
 			productName = mowine;
 			productReference = 53F5ABF01E2176080067AB62 /* mowine.app */;
@@ -1091,7 +1082,6 @@
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
 				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
 				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
-				5395AC98271E0A8F001BB10B /* Injected.swift in Sources */,
 				53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */,
 				536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */,
 				53DD1E1E257D84FF008C1DA7 /* FancyFieldViewModifier.swift in Sources */,
@@ -1106,7 +1096,6 @@
 				53AC404225D71DBE0041AED9 /* SelectTypeView.swift in Sources */,
 				535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */,
 				538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */,
-				534895FD203CBFB900B7547A /* JFServices.swift in Sources */,
 				5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */,
 				53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */,
 				53047E2325DC080B005CC14D /* AddWineHeaderView.swift in Sources */,
@@ -1464,6 +1453,10 @@
 		5332B68B271F548900FBF135 /* MoWine.Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoWine.Domain;
+		};
+		5383C7062721F413000E625F /* JFLib.DI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JFLib.DI;
 		};
 		53ADDF772720BE4F00945B2D /* MoWine.Application */ = {
 			isa = XCSwiftPackageProductDependency;

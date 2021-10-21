@@ -11,6 +11,7 @@ import SwiftyBeaver
 import MoWine_Application
 import MoWine_Infrastructure
 import Dip
+@_exported import JFLib_DI
 
 @main
 struct WoWineApp: App {

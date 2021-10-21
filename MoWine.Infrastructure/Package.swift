@@ -14,6 +14,7 @@ let package = Package(
             targets: ["MoWine.Infrastructure"]),
     ],
     dependencies: [
+        .package(name: "JFLib", path: "../JFLib"),
         .package(path: "../MoWine.Application"),
         .package(path: "../MoWine.Domain"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
@@ -30,6 +31,9 @@ let package = Package(
                 "MoWine.Application",
                 "MoWine.Domain",
                 "SwiftyBeaver",
+
+                .product(name: "JFLib.DI", package: "JFLib"),
+
                 .product(name: "Dip", package: "Dip"),
 
                 .product(name: "FacebookCore", package: "facebook-ios-sdk"),
