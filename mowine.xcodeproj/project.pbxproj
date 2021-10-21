@@ -82,10 +82,6 @@
 		5381EFF325C5E830004D2DF9 /* EditWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF225C5E830004D2DF9 /* EditWineViewModel.swift */; };
 		5381EFF925C7267E004D2DF9 /* EditWineFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */; };
 		5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */; };
-		5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCD25BE2B9600B8A8F5 /* storage.rules */; };
-		5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCE25BE2B9600B8A8F5 /* firebase.json */; };
-		5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */; };
-		5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */ = {isa = PBXBuildFile; fileRef = 5386ABD025BE2B9600B8A8F5 /* firestore.rules */; };
 		53873A302707A9D600654CB7 /* UIImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53873A2F2707A9D600654CB7 /* UIImageResizer.swift */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
 		5395AC98271E0A8F001BB10B /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5395AC97271E0A8F001BB10B /* Injected.swift */; };
@@ -175,7 +171,6 @@
 		5306CC692607BCC80061C413 /* WineTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeListView.swift; sourceTree = "<group>"; };
 		530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormView.swift; sourceTree = "<group>"; };
 		530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureOverlayView.swift; sourceTree = "<group>"; };
-		5318C0A1270CA66C00F2C60D /* Firebase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Firebase; sourceTree = "<group>"; };
 		5318C0A3270CA76200F2C60D /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
 		5318C0A4270CA77000F2C60D /* fbe.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = fbe.sh; path = scripts/fbe.sh; sourceTree = "<group>"; };
 		531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarViewModel.swift; sourceTree = "<group>"; };
@@ -249,10 +244,12 @@
 		5381EFF225C5E830004D2DF9 /* EditWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineViewModel.swift; sourceTree = "<group>"; };
 		5381EFF825C7267D004D2DF9 /* EditWineFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormView.swift; sourceTree = "<group>"; };
 		5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWineFormModel.swift; sourceTree = "<group>"; };
-		5386ABCD25BE2B9600B8A8F5 /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = storage.rules; sourceTree = SOURCE_ROOT; };
-		5386ABCE25BE2B9600B8A8F5 /* firebase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firebase.json; sourceTree = SOURCE_ROOT; };
-		5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firestore.indexes.json; sourceTree = SOURCE_ROOT; };
-		5386ABD025BE2B9600B8A8F5 /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = text; path = firestore.rules; sourceTree = SOURCE_ROOT; };
+		5383C6F92721A81D000E625F /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = SOURCE_ROOT; };
+		5383C6FA2721A81D000E625F /* storage.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = storage.rules; sourceTree = SOURCE_ROOT; };
+		5383C6FB2721A81D000E625F /* firestore.indexes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firestore.indexes.json; sourceTree = SOURCE_ROOT; };
+		5383C6FC2721A81D000E625F /* firestore.rules */ = {isa = PBXFileReference; lastKnownFileType = file; path = firestore.rules; sourceTree = SOURCE_ROOT; };
+		5383C6FF2721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5383C7012721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		53873A2F2707A9D600654CB7 /* UIImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageResizer.swift; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5395AC97271E0A8F001BB10B /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
@@ -428,14 +425,6 @@
 			path = WineCellar;
 			sourceTree = "<group>";
 		};
-		533597AC21BC3ED600CEFD45 /* Firebase */ = {
-			isa = PBXGroup;
-			children = (
-				5386ABCC25BE2B5600B8A8F5 /* Config */,
-			);
-			path = Firebase;
-			sourceTree = "<group>";
-		};
 		5348960C203DE44C00B7547A /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,7 +459,6 @@
 			children = (
 				5395AC96271E0A32001BB10B /* Dependency Injection */,
 				5393F0212706627A000E9029 /* UIKit */,
-				533597AC21BC3ED600CEFD45 /* Firebase */,
 				5348960C203DE44C00B7547A /* Persistence */,
 			);
 			path = Infrastructure;
@@ -564,15 +552,68 @@
 			path = Rating;
 			sourceTree = "<group>";
 		};
-		5386ABCC25BE2B5600B8A8F5 /* Config */ = {
+		5383C6F52721A783000E625F /* Third Party Files */ = {
 			isa = PBXGroup;
 			children = (
-				5386ABCE25BE2B9600B8A8F5 /* firebase.json */,
-				5386ABCF25BE2B9600B8A8F5 /* firestore.indexes.json */,
-				5386ABD025BE2B9600B8A8F5 /* firestore.rules */,
-				5386ABCD25BE2B9600B8A8F5 /* storage.rules */,
+				5383C6F62721A7BD000E625F /* Firebase */,
 			);
-			path = Config;
+			name = "Third Party Files";
+			sourceTree = "<group>";
+		};
+		5383C6F62721A7BD000E625F /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5383C6FD2721A843000E625F /* Config Files */,
+				5383C6F82721A7DF000E625F /* Local */,
+			);
+			name = Firebase;
+			sourceTree = "<group>";
+		};
+		5383C6F82721A7DF000E625F /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				5383C6F92721A81D000E625F /* firebase.json */,
+				5383C6FB2721A81D000E625F /* firestore.indexes.json */,
+				5383C6FC2721A81D000E625F /* firestore.rules */,
+				5383C6FA2721A81D000E625F /* storage.rules */,
+			);
+			name = Local;
+			sourceTree = "<group>";
+		};
+		5383C6FD2721A843000E625F /* Config Files */ = {
+			isa = PBXGroup;
+			children = (
+				5383C6FE2721A87A000E625F /* Dev */,
+				5383C7002721A87A000E625F /* Prod */,
+			);
+			name = "Config Files";
+			sourceTree = "<group>";
+		};
+		5383C6FE2721A87A000E625F /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				5383C6FF2721A87A000E625F /* GoogleService-Info.plist */,
+			);
+			name = Dev;
+			path = mowine/Firebase/Dev;
+			sourceTree = "<group>";
+		};
+		5383C7002721A87A000E625F /* Prod */ = {
+			isa = PBXGroup;
+			children = (
+				5383C7012721A87A000E625F /* GoogleService-Info.plist */,
+			);
+			name = Prod;
+			path = mowine/Firebase/Prod;
+			sourceTree = "<group>";
+		};
+		5383C7022721A904000E625F /* Test Plans */ = {
+			isa = PBXGroup;
+			children = (
+				53D3E8B32703720F00D4FFEC /* unitTests.xctestplan */,
+				53D3E8B42703726500D4FFEC /* allTests.xctestplan */,
+			);
+			name = "Test Plans";
 			sourceTree = "<group>";
 		};
 		5393F0212706627A000E9029 /* UIKit */ = {
@@ -725,11 +766,11 @@
 				5332B68F2720BBCC00FBF135 /* MoWine.Application */,
 				5332B68A271F4F8700FBF135 /* MoWine.Domain */,
 				53FABEDD2720C80200C3C838 /* MoWine.Infrastructure */,
+				5383C7022721A904000E625F /* Test Plans */,
+				5383C6F52721A783000E625F /* Third Party Files */,
+				5318C0A2270CA74E00F2C60D /* Scripts */,
 				53F5ABF11E2176080067AB62 /* Products */,
 				8E45E83822A4C492508A446C /* Frameworks */,
-				5318C0A2270CA74E00F2C60D /* Scripts */,
-				53D3E8B32703720F00D4FFEC /* unitTests.xctestplan */,
-				53D3E8B42703726500D4FFEC /* allTests.xctestplan */,
 			);
 			sourceTree = "<group>";
 		};
@@ -746,7 +787,6 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
-				5318C0A1270CA66C00F2C60D /* Firebase */,
 				5348960F203DE4A300B7547A /* Infrastructure */,
 				53E36490252A77C900BA1CD2 /* Preview Content */,
 				53F5AC241E217E210067AB62 /* Scenes */,
@@ -967,14 +1007,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5386ABD425BE2B9600B8A8F5 /* firestore.rules in Resources */,
 				53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */,
 				535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
-				5386ABD225BE2B9600B8A8F5 /* firebase.json in Resources */,
-				5386ABD125BE2B9600B8A8F5 /* storage.rules in Resources */,
-				5386ABD325BE2B9600B8A8F5 /* firestore.indexes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
