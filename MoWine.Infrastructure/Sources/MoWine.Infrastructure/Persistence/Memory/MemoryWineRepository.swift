@@ -10,25 +10,27 @@ import Foundation
 import MoWine_Application
 import MoWine_Domain
 
-class MemoryWineRepository: WineRepository {
+public class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []
-    
-    func add(_ wine: Wine) async throws {
+
+    public init() {}
+
+    public func add(_ wine: Wine) async throws {
         guard !wines.contains(where: { $0.id == wine.id }) else { return }
         wines.append(wine)
     }
     
-    func delete(_ wineId: WineId) async throws {
+    public func delete(_ wineId: WineId) async throws {
         if let index = wines.firstIndex(where: { $0.id == wineId }) {
             wines.remove(at: index)
         }
     }
 
-    func getWine(by id: WineId) async throws -> Wine? {
+    public func getWine(by id: WineId) async throws -> Wine? {
         wines.first { $0.id == id }
     }
 
-    func save(_ wine: Wine) async throws {
+    public func save(_ wine: Wine) async throws {
         guard let index = wines.firstIndex(of: wine) else {
             return
         }
@@ -36,12 +38,12 @@ class MemoryWineRepository: WineRepository {
         wines[index] = wine
     }
 
-    func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
+    public func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         completion(.success(wines.filter { $0.userId == userId }))
         return FakeRegistration()
     }
 
-    func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {        
+    public func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let matched = self.wines.filter { $0.userId == userId && $0.type == wineType }
             completion(.success(matched))
@@ -49,7 +51,7 @@ class MemoryWineRepository: WineRepository {
         return FakeRegistration()
     }
 
-    func getTopWines(userId: UserId) async throws -> [Wine] {
+    public func getTopWines(userId: UserId) async throws -> [Wine] {
         let topWines = wines
             .filter { $0.userId == userId }
             .sorted { $0.rating > $1.rating }
@@ -57,7 +59,7 @@ class MemoryWineRepository: WineRepository {
         return Array(topWines)
     }
     
-    func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String] {
+    public func getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId) async throws -> [String] {
         []
     }
 }

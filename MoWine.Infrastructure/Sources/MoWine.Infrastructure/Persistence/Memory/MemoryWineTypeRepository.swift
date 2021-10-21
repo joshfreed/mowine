@@ -10,8 +10,8 @@ import Foundation
 import MoWine_Application
 import MoWine_Domain
 
-class MemoryWineTypeRepository: WineTypeRepository {
-    private(set) lazy var types: [WineType] = {
+public class MemoryWineTypeRepository: WineTypeRepository {
+    public private(set) lazy var types: [WineType] = {
         let red = WineType(name: "Red", varieties: [
             WineVariety(name: "Cabernet Sauvignon"),
             WineVariety(name: "Chianti"),
@@ -44,14 +44,16 @@ class MemoryWineTypeRepository: WineTypeRepository {
         
         return [red, white, rose, bubbly, other]
     }()
+
+    public init() {}
     
     // MARK: WineTypeRepository
 
-    func getAll() async throws -> [WineType] {
+    public func getAll() async throws -> [WineType] {
         types
     }
 
-    func getWineType(named name: String) async throws -> WineType? {
+    public func getWineType(named name: String) async throws -> WineType? {
         types.first { $0.name == name }
     }
 

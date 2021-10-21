@@ -10,8 +10,10 @@ import UIKit
 import MoWine_Application
 import MoWine_Domain
 
-class UIImageResizer: ImageResizer {
-    func resize(data: Data, to newSize: CGSize) throws -> Data {
+public class UIImageResizer: ImageResizer {
+    public init() {}
+
+    public func resize(data: Data, to newSize: CGSize) throws -> Data {
         guard let image = UIImage(data: data) else {
             fatalError("Not an image")
         }

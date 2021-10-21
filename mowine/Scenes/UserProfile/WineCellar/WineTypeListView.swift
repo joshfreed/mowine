@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MoWine_Application
+import MoWine_Infrastructure
 
 struct WineTypeListView: View {
     @EnvironmentObject var query: GetUserWinesByTypeQuery

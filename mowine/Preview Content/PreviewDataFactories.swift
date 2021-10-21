@@ -9,6 +9,7 @@
 import UIKit
 import MoWine_Application
 import MoWine_Domain
+import MoWine_Infrastructure
 
 #if DEBUG
 

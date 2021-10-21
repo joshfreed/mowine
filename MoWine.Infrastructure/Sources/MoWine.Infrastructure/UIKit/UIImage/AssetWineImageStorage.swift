@@ -10,18 +10,18 @@ import UIKit
 import MoWine_Application
 import MoWine_Domain
 
-class AssetWineImageStorage: WineImageStorage {
+public class AssetWineImageStorage: WineImageStorage {
     private let wineRepository: WineRepository
 
-    init(wineRepository: WineRepository) {
+    public init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {
+    public func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {
         fatalError("Cannot store to asset catalog")
     }
 
-    func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
+    public func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
         guard let wine = try await wineRepository.getWine(by: wineId) else {
             throw WineImageStorageErrors.imageNotFound
         }
