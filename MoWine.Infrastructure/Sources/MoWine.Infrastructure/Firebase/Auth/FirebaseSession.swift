@@ -14,18 +14,18 @@ import MoWine_Application
 import FirebaseCrashlytics
 import MoWine_Domain
 
-class FirebaseSession: Session {
-    var currentUserId: UserId? { authState.userId }
+public class FirebaseSession: Session {
+    public var currentUserId: UserId? { authState.userId }
     
-    var isAnonymous: Bool { authState.isAnonymous }
+    public var isAnonymous: Bool { authState.isAnonymous }
     
-    var authStateDidChange: AnyPublisher<AuthState, Never> {
+    public var authStateDidChange: AnyPublisher<AuthState, Never> {
         authStateSubject
             .print("AuthStateDidChange")
             .eraseToAnyPublisher()
     }
     
-    var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
+    public var currentUserIdPublisher: AnyPublisher<UserId?, Never> {
         authStateDidChange
             .map { $0.userId }
             .print("CurrentUserId")
@@ -37,7 +37,9 @@ class FirebaseSession: Session {
     private var handler: AuthStateDidChangeListenerHandle?
     private var cancellables = Set<AnyCancellable>()
 
-    func start() {
+    public init() {}
+
+    public func start() {
         SwiftyBeaver.info("Starting session...")
 
         let auth = Auth.auth()
@@ -56,19 +58,19 @@ class FirebaseSession: Session {
             .store(in: &cancellables)
     }
 
-    func startAnonymous() async throws {
+    public func startAnonymous() async throws {
         let result = try await Auth.auth().signInAnonymously()
         updateAuthState(from: result.user)
     }
 
-    func getCurrentAuth() -> MoWineAuth? { Auth.auth().currentUser }
+    public func getCurrentAuth() -> MoWineAuth? { Auth.auth().currentUser }
 
-    func reauthenticate(withEmail email: String, password: String) async throws {
+    public func reauthenticate(withEmail email: String, password: String) async throws {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         try await Auth.auth().currentUser?.reauthenticate(with: credential)
     }
     
-    func end() {
+    public func end() {
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
@@ -77,7 +79,7 @@ class FirebaseSession: Session {
         }
     }
 
-    func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
+    public func setPhotoUrl(_ url: URL, completion: @escaping (Swift.Result<Void, Error>) -> ()) {
         guard let authUser = Auth.auth().currentUser else {
             completion(.failure(SessionError.notLoggedIn))
             return
@@ -94,7 +96,7 @@ class FirebaseSession: Session {
         }
     }
 
-    func getPhotoUrl() -> URL? {
+    public func getPhotoUrl() -> URL? {
         guard let authUser = Auth.auth().currentUser else {
             return nil
         }
@@ -102,7 +104,7 @@ class FirebaseSession: Session {
         return authUser.photoURL
     }
 
-    func updateEmailAddress(_ emailAddress: String) async throws {
+    public func updateEmailAddress(_ emailAddress: String) async throws {
         guard let authUser = Auth.auth().currentUser else {
             throw SessionError.notLoggedIn
         }

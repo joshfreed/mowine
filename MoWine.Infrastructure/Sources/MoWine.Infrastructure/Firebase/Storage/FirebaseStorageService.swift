@@ -10,10 +10,10 @@ import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
 
-class FirebaseStorageService {
+public class FirebaseStorageService {
     private let basePath: String?
 
-    init(basePath: String? = nil) {
+    public init(basePath: String? = nil) {
         self.basePath = basePath
     }
 
@@ -39,16 +39,16 @@ class FirebaseStorageService {
     }
 }
 
-class FirebaseWineImageStorage: WineImageStorage {
+public class FirebaseWineImageStorage: WineImageStorage {
     private let storage: FirebaseStorageService
     private let session: Session
 
-    init(storage: FirebaseStorageService, session: Session) {
+    public init(storage: FirebaseStorageService, session: Session) {
         self.storage = storage
         self.session = session
     }
 
-    func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {
+    public func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {
         guard let userId = session.currentUserId else { fatalError("No user logged in") }
 
         let path: String
@@ -60,7 +60,7 @@ class FirebaseWineImageStorage: WineImageStorage {
         _ = try await storage.putData(data, path: path)
     }
 
-    func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
+    public func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
         guard let userId = session.currentUserId else { fatalError("No user logged in") }
 
         let path: String
@@ -81,14 +81,14 @@ class FirebaseWineImageStorage: WineImageStorage {
     }
 }
 
-class FirebaseUserImageStorage: UserImageStorage {
+public class FirebaseUserImageStorage: UserImageStorage {
     private let storage: FirebaseStorageService
 
-    init(storage: FirebaseStorageService) {
+    public init(storage: FirebaseStorageService) {
         self.storage = storage
     }
 
-    func putImage(userId: UserId, data: Data) async throws -> URL {
+    public func putImage(userId: UserId, data: Data) async throws -> URL {
         let path = "\(userId)/profile.png"
         return try await storage.putData(data, path: path)
     }

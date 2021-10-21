@@ -19,8 +19,10 @@ struct GoogleToken: SocialToken {
     let accessToken: String
 }
 
-class SignInWithGoogle: SocialSignInMethod {
-    func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
+public class SignInWithGoogle: SocialSignInMethod {
+    public init() {}
+
+    private func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
         guard let app = FirebaseApp.app() else {
             fatalError("No FirebaseApp configured")
         }
@@ -56,7 +58,7 @@ class SignInWithGoogle: SocialSignInMethod {
         }
     }
 
-    func signIn() async throws -> SocialToken {
+    public func signIn() async throws -> SocialToken {
         return try await withCheckedThrowingContinuation { cont in
             signIn()  { res in
                 cont.resume(with: res)

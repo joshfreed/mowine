@@ -16,8 +16,10 @@ enum CreateUserFromGoogleInfoError: Error {
     case failedToFetchProfile
 }
 
-class GoogleProvider: SocialSignInProvider {
-    func getNewUserInfo() async throws -> NewUserInfo {
+public class GoogleProvider: SocialSignInProvider {
+    public init() {}
+
+    public func getNewUserInfo() async throws -> NewUserInfo {
         guard let profile = GIDSignIn.sharedInstance.currentUser?.profile else {
             throw CreateUserFromGoogleInfoError.failedToFetchProfile
         }
@@ -27,7 +29,7 @@ class GoogleProvider: SocialSignInProvider {
         return newUserInfo
     }
     
-    func getProfilePictureUrl(_ urlString: String) -> String {
+    public func getProfilePictureUrl(_ urlString: String) -> String {
         urlString
     }
 }

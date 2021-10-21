@@ -15,10 +15,12 @@ struct FacebookToken: SocialToken {
     let token: String
 }
 
-class SignInWithFacebook: SocialSignInMethod {
+public class SignInWithFacebook: SocialSignInMethod {
     let login = LoginManager()
-    
-    func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
+
+    public init() {}
+
+    private func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
         login.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in
             if let error = error {
                 completion(.failure(error))
@@ -31,7 +33,7 @@ class SignInWithFacebook: SocialSignInMethod {
         }
     }
 
-    func signIn() async throws -> SocialToken {
+    public func signIn() async throws -> SocialToken {
         return try await withCheckedThrowingContinuation { cont in
             signIn()  { res in
                 cont.resume(with: res)

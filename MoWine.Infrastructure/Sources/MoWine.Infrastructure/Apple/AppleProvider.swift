@@ -12,8 +12,10 @@ import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
 
-class AppleProvider: SocialSignInProvider {
-    func getNewUserInfo() async throws -> NewUserInfo {
+public class AppleProvider: SocialSignInProvider {
+    public init() {}
+
+    public func getNewUserInfo() async throws -> NewUserInfo {
         if let currentUser = Auth.auth().currentUser, let email = currentUser.email {
             let newUserInfo = NewUserInfo(email: email, firstName: currentUser.displayName ?? "")
             return newUserInfo
@@ -23,7 +25,7 @@ class AppleProvider: SocialSignInProvider {
         }
     }
     
-    func getProfilePictureUrl(_ urlString: String) -> String {
+    public func getProfilePictureUrl(_ urlString: String) -> String {
         urlString
     }
 }

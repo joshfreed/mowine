@@ -16,14 +16,14 @@ enum CreateUserFromFacebookInfoError: Error {
     case missingFirstName
 }
 
-class FacebookProvider: SocialSignInProvider {
+public class FacebookProvider: SocialSignInProvider {
     let fbGraphApi: GraphApi
     
-    init(fbGraphApi: GraphApi) {
+    public init(fbGraphApi: GraphApi) {
         self.fbGraphApi = fbGraphApi
     }
 
-    func getNewUserInfo() async throws -> NewUserInfo {
+    public func getNewUserInfo() async throws -> NewUserInfo {
         return try await withCheckedThrowingContinuation { cont in
             getNewUserInfo()  { res in
                 cont.resume(with: res)
@@ -54,7 +54,7 @@ class FacebookProvider: SocialSignInProvider {
         completion(.success(newUserInfo))
     }
     
-    func getProfilePictureUrl(_ urlString: String) -> String {
+    public func getProfilePictureUrl(_ urlString: String) -> String {
         urlString + "?width=400"
     }
 }

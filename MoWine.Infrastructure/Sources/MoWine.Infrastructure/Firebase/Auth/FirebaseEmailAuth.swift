@@ -12,8 +12,10 @@ import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
 
-class FirebaseEmailAuth: EmailAuthenticationService {
-    func signIn(emailAddress: String, password: String) async throws {
+public class FirebaseEmailAuth: EmailAuthenticationService {
+    public init() {}
+    
+    public func signIn(emailAddress: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().signIn(withEmail: emailAddress, password: password)
             SwiftyBeaver.info("User signed in with firebase")
@@ -32,7 +34,7 @@ class FirebaseEmailAuth: EmailAuthenticationService {
         }
     }
     
-    func signUp(emailAddress: String, password: String) async throws {
+    public func signUp(emailAddress: String, password: String) async throws {
         if let user = Auth.auth().currentUser, user.isAnonymous {
             // Link the current anonymous user with a username and password.
             try await doLink(user: user, emailAddress: emailAddress, password: password)

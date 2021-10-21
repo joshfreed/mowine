@@ -20,10 +20,10 @@ struct AppleToken: SocialToken {
 
 fileprivate var currentNonce: String?
 
-class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDelegate {
+public class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDelegate {
     private var completion: ((Result<SocialToken, Error>) -> Void)!
-    
-    func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
+
+    private func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
         self.completion = completion
         let nonce = randomNonceString()
         currentNonce = nonce
@@ -35,7 +35,7 @@ class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDe
         controller.performRequests()
     }
 
-    func signIn() async throws -> SocialToken {
+    public func signIn() async throws -> SocialToken {
         return try await withCheckedThrowingContinuation { cont in
             signIn()  { res in
                 cont.resume(with: res)
@@ -50,7 +50,7 @@ class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDe
         return hashString
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -72,7 +72,7 @@ class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDe
         }
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         SwiftyBeaver.error("Sign in with Apple errored: \(error)")
         completion(.failure(error))
     }

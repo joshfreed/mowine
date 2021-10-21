@@ -1,5 +1,5 @@
 //
-//  Facebook.swift
+//  MockGraphApi.swift
 //  mowineTests
 //
 //  Created by Josh Freed on 3/29/18.
@@ -7,8 +7,7 @@
 //
 
 import Foundation
-@testable import mowine
-import Nimble
+@testable import MoWine_Infrastructure
 
 class MockFacebookGraphApi: GraphApi {
     var emailAddress: String?

@@ -11,7 +11,9 @@ import FirebaseAuth
 import MoWine_Application
 import MoWine_Domain
 
-class FirebaseCredentialMegaFactory {
+public class FirebaseCredentialMegaFactory {
+    public init() {}
+
     func makeCredential(from token: SocialToken) -> AuthCredential {
         if let token = token as? AppleToken {
             return AppleCredentialFactory().makeCredential(from: token)

@@ -33,10 +33,3 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 }
-
-enum MoWineError: Error {
-    case error(message: String)
-    case unknownError
-    case notLoggedIn
-    case dictionaryError(message: String)
-}

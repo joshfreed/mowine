@@ -11,14 +11,14 @@ import FirebaseAuth
 import MoWine_Application
 import MoWine_Domain
 
-class FirebaseSocialAuth: SocialAuthService {
+public class FirebaseSocialAuth: SocialAuthService {
     let credentialFactory: FirebaseCredentialMegaFactory
 
-    init(credentialFactory: FirebaseCredentialMegaFactory) {
+    public init(credentialFactory: FirebaseCredentialMegaFactory) {
         self.credentialFactory = credentialFactory
     }
 
-    func signIn(with token: SocialToken) async throws {
+    public func signIn(with token: SocialToken) async throws {
         let credential = credentialFactory.makeCredential(from: token)
 
         if let user = Auth.auth().currentUser, user.isAnonymous {
@@ -64,7 +64,7 @@ class FirebaseSocialAuth: SocialAuthService {
         try await signIn(with: _credential)
     }
     
-    func reauthenticate(with token: SocialToken) async throws {
+    public func reauthenticate(with token: SocialToken) async throws {
         let credential = credentialFactory.makeCredential(from: token)
         try await Auth.auth().currentUser?.reauthenticate(with: credential)
     }

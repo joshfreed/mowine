@@ -7,7 +7,14 @@
 
 import Foundation
 
-enum ApplicationErrors: Error {
+public enum MoWineError: Error {
+    case error(message: String)
+    case unknownError
+    case notLoggedIn
+    case dictionaryError(message: String)
+}
+
+public enum ApplicationErrors: Error {
     case userNotFound
     case wineTypeNotFound
 }

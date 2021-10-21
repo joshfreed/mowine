@@ -13,7 +13,9 @@ enum GraphApiError: Error {
     case unknownError
 }
 
-class GraphApi {
+public class GraphApi {
+    public init() {}
+
     func me(params: [String: String], completion: @escaping (Result<[String: Any], Error>) -> ()) {
         let request = GraphRequest(graphPath: "me", parameters: params)
         _ = request.start { connection, result, error in
