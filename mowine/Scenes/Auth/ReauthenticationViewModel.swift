@@ -19,15 +19,10 @@ class ReauthenticationViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     @Injected private var socialAuthService: SocialAuthService
-
-    private let socialSignInMethods: [SocialProviderType: SocialSignInMethod]
-
-    init() {
-        self.socialSignInMethods = JFContainer.socialSignInMethods()
-    }
+    @Injected private var socialSignInRegistry: SocialSignInRegistry
 
     func continueWith(_ type: SocialProviderType) async {
-        guard let method = socialSignInMethods[type] else {
+        guard let method = socialSignInRegistry.getSignInMethod(for: type) else {
             fatalError("No sign in method registered for provider: \(type)")
         }
 

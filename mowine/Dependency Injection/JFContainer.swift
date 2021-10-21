@@ -25,22 +25,6 @@ class JFContainer: ObservableObject {
     func resolve<T>() throws -> T {
         try container.resolve()
     }
-
-    static func socialSignInMethods() -> [SocialProviderType: SocialSignInMethod] {
-        [
-            .apple: SignInWithApple(),
-            .facebook: SignInWithFacebook(),
-            .google: SignInWithGoogle()
-        ]
-    }
-
-    static func socialSignInProviders() -> [SocialProviderType: SocialSignInProvider] {
-        [
-            .apple: AppleProvider(),
-            .facebook: FacebookProvider(fbGraphApi: GraphApi()),
-            .google: GoogleProvider()
-        ]
-    }
 }
 
 // MARK: - Prod/Dev
@@ -75,10 +59,9 @@ extension DependencyContainer {
 
         // Application Layer
         // Auth
+        container.register(.singleton) { SocialSignInRegistryImpl() }.implements(SocialSignInRegistry.self)
         container.register { SocialUserCreator(userRepository: $0, session: $1) }
-        container.register(.unique) {
-            SocialAuthApplicationService(auth: $0, userFactory: $1, methods: JFContainer.socialSignInMethods(), providers: JFContainer.socialSignInProviders())
-        }
+        container.register(.unique) { SocialAuthApplicationService(auth: $0, userFactory: $1, socialSignIn: $2) }
         container.register(.unique) { SignOutCommand(session: $0) }
         container.register(.unique) { EmailAuthApplicationService(emailAuthService: $0, userRepository: $1, session: $2) }
         // Users

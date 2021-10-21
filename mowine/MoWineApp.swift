@@ -21,6 +21,7 @@ struct WoWineApp: App {
         setupSwiftyBeaverLogging()
         configureUIKit()
         setupDependencyInjection()
+        registerSocialSignInProviders()
         SwiftyBeaver.info("MoWineApp::init")
     }
 
@@ -64,6 +65,16 @@ struct WoWineApp: App {
             FirebaseConfigurator().configure(useEmulator: useEmulator)
             JFContainer.configure()
         }
+    }
+
+    private func registerSocialSignInProviders() {
+        let registry: SocialSignInRegistryImpl = try! JFContainer.shared.resolve()
+        registry.registerMethod(SignInWithApple(), for: .apple)
+        registry.registerMethod(SignInWithFacebook(), for: .facebook)
+        registry.registerMethod(SignInWithGoogle(), for: .google)
+        registry.registerProvider(AppleProvider(), for: .apple)
+        registry.registerProvider(FacebookProvider(fbGraphApi: GraphApi()), for: .facebook)
+        registry.registerProvider(GoogleProvider(), for: .google)
     }
 }
 

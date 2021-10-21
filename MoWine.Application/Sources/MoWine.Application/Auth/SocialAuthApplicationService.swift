@@ -4,23 +4,20 @@ import MoWine_Domain
 public class SocialAuthApplicationService {
     let auth: SocialAuthService
     let userFactory: SocialUserCreator
-    let methods: [SocialProviderType: SocialSignInMethod]
-    let providers: [SocialProviderType: SocialSignInProvider]
+    let socialSignIn: SocialSignInRegistry
 
     public init(
         auth: SocialAuthService,
         userFactory: SocialUserCreator,
-        methods: [SocialProviderType: SocialSignInMethod],
-        providers: [SocialProviderType: SocialSignInProvider]
+        socialSignIn: SocialSignInRegistry
     ) {
         self.auth = auth
         self.userFactory = userFactory
-        self.methods = methods
-        self.providers = providers
+        self.socialSignIn = socialSignIn
     }
 
     public func signIn(using type: SocialProviderType) async throws {
-        guard let method = methods[type] else {
+        guard let method =  socialSignIn.getSignInMethod(for: type) else {
             fatalError("No sign in method registered for provider: \(type)")
         }
 
@@ -28,7 +25,7 @@ public class SocialAuthApplicationService {
 
         try await auth.signIn(with: token)
 
-        guard let provider = providers[type] else {
+        guard let provider = socialSignIn.getSignInProvider(for: type) else {
             fatalError("No sign in provider registered for provider: \(type)")
         }
 
