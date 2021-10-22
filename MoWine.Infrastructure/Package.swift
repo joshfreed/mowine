@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MoWine.Infrastructure",
     platforms: [
-        .iOS("15.0"), .macOS(.v10_15)
+        .iOS("15.0"), .macOS("12.0.0")
     ],
     products: [
         .library(
