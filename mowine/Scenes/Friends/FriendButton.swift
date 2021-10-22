@@ -8,8 +8,6 @@
 
 import SwiftUI
 import MoWine_Application
-import FirebaseCrashlytics
-import SwiftyBeaver
 
 struct FriendButton: View {
     @EnvironmentObject var friends: FriendsService
@@ -48,8 +46,7 @@ struct FriendButton: View {
             do {
                 try await friends.addFriend(userId)
             } catch {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+                CrashReporter.shared.record(error: error)
             }
         }
     }
@@ -59,8 +56,7 @@ struct FriendButton: View {
             do {
                 try await friends.removeFriend(userId)
             } catch {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+                CrashReporter.shared.record(error: error)
             }
         }
     }

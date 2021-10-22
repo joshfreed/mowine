@@ -7,9 +7,7 @@
 //
 
 import SwiftUI
-import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 enum ForgotPasswordAlert: Identifiable {
     case success
@@ -78,7 +76,7 @@ struct ForgotPasswordView: View {
             try await emailAuth.forgotPassword(emailAddress: emailAddress)
             activeAlert = .success
         } catch {
-            SwiftyBeaver.error("\(error)")
+            CrashReporter.shared.record(error: error)
             activeAlert = .failure
         }
 

@@ -8,9 +8,7 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 @MainActor
 class UserProfileHeaderViewModel: ObservableObject {
@@ -27,8 +25,7 @@ class UserProfileHeaderViewModel: ObservableObject {
             fullName = user.fullName
             profilePicture = user.profilePictureUrl
         } catch {
-            Crashlytics.crashlytics().record(error: error)
-            SwiftyBeaver.error("\(error)")
+            CrashReporter.shared.record(error: error)
         }
     }
 }

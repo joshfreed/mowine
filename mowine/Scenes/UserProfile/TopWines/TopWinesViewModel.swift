@@ -8,9 +8,7 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 @MainActor
 class TopWinesViewModel: ObservableObject {
@@ -26,8 +24,7 @@ class TopWinesViewModel: ObservableObject {
             let topWines = try await getTopWines.execute(userId: userId)
             self.topWines = topWines.map { .fromTopWine($0) }
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
             errorLoadingWines = true
         }
     }

@@ -10,7 +10,6 @@ import Foundation
 import Combine
 import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 @MainActor
 class SearchUsersViewModel: ObservableObject {
@@ -52,8 +51,7 @@ class SearchUsersViewModel: ObservableObject {
                 searchResults = users.map { .fromUser($0) }
                 hasSearched = true
             } catch {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+                CrashReporter.shared.record(error: error)
             }
         }
     }

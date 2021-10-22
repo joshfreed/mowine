@@ -8,8 +8,6 @@
 
 import SwiftUI
 import MoWine_Application
-import SwiftyBeaver
-import FirebaseCrashlytics
 
 struct WineDetailsView: View {
     let wineId: String
@@ -47,8 +45,7 @@ struct WineDetailsView: View {
         } catch GetWineDetailsQuery.Errors.wineNotFound {
             wineNotFound = true
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
     }
 }

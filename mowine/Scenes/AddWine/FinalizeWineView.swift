@@ -7,9 +7,7 @@
 //
 
 import SwiftUI
-import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 struct FinalizeWineView: View {
     @EnvironmentObject var vm: AddWineViewModel
@@ -70,8 +68,7 @@ struct FinalizeWineView: View {
             vm.closeModal = true
         } catch {
             isSaving = false
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
             isErrorSaving = true
             errorMessage = error.localizedDescription
         }

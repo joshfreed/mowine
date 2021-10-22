@@ -7,9 +7,7 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 @MainActor
 class EmailLogInViewModel: ObservableObject {
@@ -36,8 +34,7 @@ class EmailLogInViewModel: ObservableObject {
                 EmailAuthenticationErrors.notAuthorized:
                 self.error = "Login failed. Please check your email and password and try again."
             default:
-                Crashlytics.crashlytics().record(error: error)
-                SwiftyBeaver.error("\(error)")
+                CrashReporter.shared.record(error: error)
                 self.error = "An error occurred while trying to log you in. Please try again in a few minutes."
             }
         }

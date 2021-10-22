@@ -10,7 +10,6 @@ import Foundation
 import SwiftyBeaver
 import Combine
 import MoWine_Application
-import FirebaseCrashlytics
 
 class MyCellarViewModel: ObservableObject {
     @Published var isEditingWine: Bool = false
@@ -41,8 +40,7 @@ class MyCellarViewModel: ObservableObject {
             bubblyId = response.wineTypes.first { $0.name == "Bubbly" }!.id
             otherId = response.wineTypes.first { $0.name == "Other" }!.id
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
     }
 

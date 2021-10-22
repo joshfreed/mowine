@@ -8,8 +8,6 @@
 
 import SwiftUI
 import MoWine_Application
-import FirebaseCrashlytics
-import SwiftyBeaver
 
 struct MiniAddFriendButton: View {
     @EnvironmentObject var friends: FriendsService
@@ -32,8 +30,7 @@ struct MiniAddFriendButton: View {
             do {
                 try await friends.addFriend(userId)
             } catch {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+                CrashReporter.shared.record(error: error)
             }
         }
     }

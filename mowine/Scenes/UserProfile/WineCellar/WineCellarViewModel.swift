@@ -8,8 +8,6 @@
 
 import Foundation
 import MoWine_Application
-import SwiftyBeaver
-import FirebaseCrashlytics
 
 @MainActor
 class WineCellarViewModel: ObservableObject {
@@ -21,8 +19,7 @@ class WineCellarViewModel: ObservableObject {
         do {
             types = try await getUserCellarQuery.execute(userId: userId)
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
     }
 }

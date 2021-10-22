@@ -8,9 +8,7 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
 import MoWine_Application
-import FirebaseCrashlytics
 
 class SocialAuthViewModel: ObservableObject {
     @Published var isSigningIn: Bool = false
@@ -32,8 +30,7 @@ class SocialAuthViewModel: ObservableObject {
     }
 
     private func showError(_ error: Error) {
-        Crashlytics.crashlytics().record(error: error)
-        SwiftyBeaver.error("\(error)")
+        CrashReporter.shared.record(error: error)
         isSignInError = true
         signInError = error.localizedDescription
     }

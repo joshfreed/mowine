@@ -7,12 +7,7 @@
 //
 
 import Foundation
-import Combine
-import SwiftyBeaver
-import FirebaseAuth
-import GoogleSignIn
 import MoWine_Application
-import FirebaseCrashlytics
 
 class ReauthenticationViewModel: ObservableObject {
     @Published var showErrorAlert = false
@@ -35,8 +30,7 @@ class ReauthenticationViewModel: ObservableObject {
     }
 
     private func showError(_ error: Error) {
-        SwiftyBeaver.error("\(error)")
-        Crashlytics.crashlytics().record(error: error)
+        CrashReporter.shared.record(error: error)
         errorMessage = error.localizedDescription
         showErrorAlert = true
     }

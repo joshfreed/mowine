@@ -83,6 +83,7 @@
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
+		539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539E166B27233D16001A2CC3 /* CrashReporter.swift */; };
 		53A69842261A1DE4004BCE43 /* MoWineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A69841261A1DE4004BCE43 /* MoWineApp.swift */; };
 		53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC403D25D71DB20041AED9 /* AddWineView.swift */; };
 		53AC404225D71DBE0041AED9 /* SelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AC404125D71DBE0041AED9 /* SelectTypeView.swift */; };
@@ -244,6 +245,7 @@
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
+		539E166B27233D16001A2CC3 /* CrashReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
 		53A69841261A1DE4004BCE43 /* MoWineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoWineApp.swift; sourceTree = "<group>"; };
 		53AC403D25D71DB20041AED9 /* AddWineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineView.swift; sourceTree = "<group>"; };
 		53AC404125D71DBE0041AED9 /* SelectTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeView.swift; sourceTree = "<group>"; };
@@ -587,6 +589,15 @@
 			path = "My Cellar";
 			sourceTree = "<group>";
 		};
+		539E166A27233CFA001A2CC3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5332B68D271F54E000FBF135 /* ObservableSession.swift */,
+				539E166B27233D16001A2CC3 /* CrashReporter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		53A8D5EF20461181000AD7A3 /* MyAccount */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,6 +736,7 @@
 				53E36490252A77C900BA1CD2 /* Preview Content */,
 				53F5AC241E217E210067AB62 /* Scenes */,
 				5348960E203DE49F00B7547A /* UI */,
+				539E166A27233CFA001A2CC3 /* Services */,
 				53F5ABF31E2176080067AB62 /* AppDelegate.swift */,
 				53F5ABFD1E2176080067AB62 /* Assets.xcassets */,
 				53F5AC021E2176080067AB62 /* Info.plist */,
@@ -732,7 +744,6 @@
 				53F5ABF71E2176080067AB62 /* Main.storyboard */,
 				536E3AC2258EA3AA00D84F10 /* mowine.entitlements */,
 				53A69841261A1DE4004BCE43 /* MoWineApp.swift */,
-				5332B68D271F54E000FBF135 /* ObservableSession.swift */,
 			);
 			path = mowine;
 			sourceTree = "<group>";
@@ -1074,6 +1085,7 @@
 				532DB3D3256AC763009A4740 /* PreviewDataFactories.swift in Sources */,
 				536E85A4204F507D004D5426 /* FakeSession.swift in Sources */,
 				53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */,
+				539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */,
 				533D8B802533691500CE297E /* WineCellarListView.swift in Sources */,
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
 				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,

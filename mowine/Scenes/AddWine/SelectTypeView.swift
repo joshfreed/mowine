@@ -8,8 +8,6 @@
 
 import SwiftUI
 import MoWine_Application
-import SwiftyBeaver
-import FirebaseCrashlytics
 
 class SelectTypeViewModel: ObservableObject {
     @Published var types: [AddWine.WineType] = []
@@ -24,8 +22,7 @@ class SelectTypeViewModel: ObservableObject {
                 return AddWine.WineType(name: typeModel.name, varieties: varieties)
             }
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
     }
 }

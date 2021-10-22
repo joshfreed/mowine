@@ -8,7 +8,6 @@
 
 import Foundation
 import Combine
-import FirebaseCrashlytics
 import SwiftyBeaver
 import MoWine_Application
 import UIKit.UIImage
@@ -67,8 +66,7 @@ class EditProfileViewModel: ObservableObject {
             setProfile(profile)
             hasChanges = false
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
     }
     
@@ -98,8 +96,7 @@ class EditProfileViewModel: ObservableObject {
             if case SessionError.requiresRecentLogin = error {
                 reauthenticate()
             } else {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
+                CrashReporter.shared.record(error: error)
                 showErrorAlert = true
                 saveErrorMessage = error.localizedDescription
             }

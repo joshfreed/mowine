@@ -8,8 +8,6 @@
 
 import UIKit
 import MoWine_Application
-import FirebaseCrashlytics
-import SwiftyBeaver
 
 class WineThumbnailViewModel: ObservableObject {
     @Published var uiImage: UIImage?
@@ -25,8 +23,7 @@ class WineThumbnailViewModel: ObservableObject {
                 uiImage = nil
             }
         } catch {
-            Crashlytics.crashlytics().record(error: error)
-            SwiftyBeaver.error("\(error)")
+            CrashReporter.shared.record(error: error)
         }
     }
 }

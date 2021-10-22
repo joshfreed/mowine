@@ -9,7 +9,6 @@
 import Foundation
 import SwiftyBeaver
 import Combine
-import FirebaseCrashlytics
 import MoWine_Application
 import UIKit.UIImage
 
@@ -41,8 +40,7 @@ class MyAccountViewModel: ObservableObject {
             .sink { completion in
                 SwiftyBeaver.info("\(completion)")
                 if case let .failure(error) = completion {
-                    SwiftyBeaver.error("\(error)")
-                    Crashlytics.crashlytics().record(error: error)
+                    CrashReporter.shared.record(error: error)
                 }
             } receiveValue: { [weak self] value in
                 self?.isLoaded = true

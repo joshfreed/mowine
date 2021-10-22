@@ -9,8 +9,6 @@
 import Foundation
 import Combine
 import MoWine_Application
-import FirebaseCrashlytics
-import SwiftyBeaver
 
 class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false
@@ -39,8 +37,7 @@ class EmailSignUpViewModel: ObservableObject {
             // Also we shouldn't have current user id listeners fire until the user account object was created
             NotificationCenter.default.post(name: .signedIn, object: nil)
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
             displaySignUpError(error)
         }
     }

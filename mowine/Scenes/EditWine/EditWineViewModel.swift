@@ -9,7 +9,6 @@
 import Foundation
 import Combine
 import SwiftyBeaver
-import FirebaseCrashlytics
 import MoWine_Application
 import UIKit.UIImage
 import UIKit
@@ -43,8 +42,7 @@ class EditWineViewModel: ObservableObject {
             let wineTypes = EditWine.mapTypes(from: try await getWineTypesResponse)
             form.setTypes(wineTypes)
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
 
         do {
@@ -56,8 +54,7 @@ class EditWineViewModel: ObservableObject {
                 SwiftyBeaver.error("Wine \(wineId) was not found")
             }
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
 
         do {
@@ -65,8 +62,7 @@ class EditWineViewModel: ObservableObject {
                 form.image = UIImage(data: imageData)
             }
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
         }
     }
 
@@ -93,8 +89,7 @@ class EditWineViewModel: ObservableObject {
         do {
             try await mediator.send(command)
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
             throw error
         }
     }
@@ -103,8 +98,7 @@ class EditWineViewModel: ObservableObject {
         do {
             try await mediator.send(DeleteWineCommand(wineId: wineId))
         } catch {
-            SwiftyBeaver.error("\(error)")
-            Crashlytics.crashlytics().record(error: error)
+            CrashReporter.shared.record(error: error)
             throw error
         }
     }

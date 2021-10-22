@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import SwiftyBeaver
-import FirebaseCrashlytics
 
 struct EditWineView: View {
     @StateObject var vm: EditWineViewModel
