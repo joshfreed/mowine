@@ -23,7 +23,7 @@ public struct HandlerNotFound: Error {}
 
 extension Mediator {
     public func registerHandler<CommandType: JFMCommand>(
-        _ handlerFactory: @escaping CommandHandlerFactory,
+        _ handlerFactory: @autoclosure @escaping CommandHandlerFactory,
         for commandType: CommandType.Type
     ) {
         let commandName = String(describing: CommandType.self)
@@ -44,7 +44,7 @@ extension Mediator {
 
 extension Mediator {
     public func registerHandler<QueryType: JFMQuery>(
-        _ handlerFactory: @escaping QueryHandlerFactory,
+        _ handlerFactory: @autoclosure @escaping QueryHandlerFactory,
         for queryType: QueryType.Type
     ) {
         let queryName = String(describing: QueryType.self)

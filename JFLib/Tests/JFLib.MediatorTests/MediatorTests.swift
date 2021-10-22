@@ -13,8 +13,8 @@ class MediatorTests: XCTestCase {
     let commandOutput = CommandOutput()
 
     override func setUpWithError() throws {
-        mediator.registerHandler({ SampleCommandHandler(output: self.commandOutput) }, for: SampleCommand1.self)
-        mediator.registerHandler({ SampleQueryHandler() }, for: SampleQuery1.self)
+        mediator.registerHandler(SampleCommandHandler(output: self.commandOutput), for: SampleCommand1.self)
+        mediator.registerHandler(SampleQueryHandler(), for: SampleQuery1.self)
     }
 
     func test_command() async throws {
