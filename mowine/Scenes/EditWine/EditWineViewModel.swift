@@ -13,6 +13,7 @@ import FirebaseCrashlytics
 import MoWine_Application
 import UIKit.UIImage
 import UIKit
+import JFLib_Mediator
 
 @MainActor
 class EditWineViewModel: ObservableObject {
@@ -22,12 +23,8 @@ class EditWineViewModel: ObservableObject {
     
     let form = EditWineFormModel()
     private var wineId: String
-    @Injected private var getWineTypesQuery: GetWineTypesQueryHandler
-    @Injected private var getWineQuery: GetWineByIdQueryHandler
-    @Injected private var getWineImageQuery: GetWineImageQueryHandler
-    @Injected private var updateWineCommandHandler: UpdateWineCommandHandler
-    @Injected private var deleteWineCommandHandler: DeleteWineCommandHandler
-    
+    @Injected private var mediator: Mediator
+
     init(wineId: String) {
         SwiftyBeaver.debug("init")
         self.wineId = wineId
@@ -38,9 +35,9 @@ class EditWineViewModel: ObservableObject {
     }
 
     func load() async {
-        async let getWineTypesResponse = getWineTypesQuery.handle()
-        async let getWineResponse = getWineQuery.handle(wineId: wineId)
-        async let wineImage = getWineImageQuery.handle(wineId: wineId)
+        async let getWineTypesResponse: GetWineTypesQueryResponse = mediator.send(GetWineTypesQuery())
+        async let getWineResponse: GetWineByIdQueryResponse? = mediator.send(GetWineByIdQuery(wineId: wineId))
+        async let wineImage: Data? = mediator.send(GetWineImageQuery(wineId: wineId))
 
         do {
             let wineTypes = EditWine.mapTypes(from: try await getWineTypesResponse)
@@ -94,7 +91,7 @@ class EditWineViewModel: ObservableObject {
         }
 
         do {
-            try await updateWineCommandHandler.handle(command)
+            try await mediator.send(command)
         } catch {
             SwiftyBeaver.error("\(error)")
             Crashlytics.crashlytics().record(error: error)
@@ -104,7 +101,7 @@ class EditWineViewModel: ObservableObject {
 
     func deleteWine() async throws {
         do {
-            try await deleteWineCommandHandler.handle(wineId)
+            try await mediator.send(DeleteWineCommand(wineId: wineId))
         } catch {
             SwiftyBeaver.error("\(error)")
             Crashlytics.crashlytics().record(error: error)

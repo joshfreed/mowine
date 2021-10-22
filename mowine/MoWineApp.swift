@@ -12,6 +12,7 @@ import MoWine_Application
 import MoWine_Infrastructure
 import Dip
 @_exported import JFLib_DI
+import JFLib_Mediator
 
 @main
 struct WoWineApp: App {
@@ -66,6 +67,10 @@ struct WoWineApp: App {
             FirebaseConfigurator().configure(useEmulator: useEmulator)
             JFServices.configure()
         }
+
+        let mediator: Mediator = try! JFServices.resolve()
+        MoWine_Application.DependencyInjection.registerCommands(mediator: mediator)
+        MoWine_Application.DependencyInjection.registerQueries(mediator: mediator)
     }
 }
 

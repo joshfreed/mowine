@@ -7,16 +7,25 @@
 
 import Foundation
 import MoWine_Domain
+import JFLib_Mediator
 
-public class DeleteWineCommandHandler {
+public struct DeleteWineCommand: JFMCommand {
+    public let wineId: String
+
+    public init(wineId: String) {
+        self.wineId = wineId
+    }
+}
+
+public class DeleteWineCommandHandler: BaseCommandHandler<DeleteWineCommand> {
     let wineRepository: WineRepository
 
     public init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public func handle(_ wineId: String) async throws {
-        let wineId = WineId(string: wineId)
+    public override func handle(command: DeleteWineCommand) async throws {
+        let wineId = WineId(string: command.wineId)
         try await wineRepository.delete(wineId)
     }
 }

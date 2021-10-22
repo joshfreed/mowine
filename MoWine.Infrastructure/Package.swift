@@ -33,6 +33,7 @@ let package = Package(
                 "SwiftyBeaver",
 
                 .product(name: "JFLib.DI", package: "JFLib"),
+                .product(name: "JFLib.Mediator", package: "JFLib"),
 
                 .product(name: "Dip", package: "Dip"),
 

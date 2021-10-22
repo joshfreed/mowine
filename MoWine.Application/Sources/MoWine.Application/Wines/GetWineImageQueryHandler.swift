@@ -7,16 +7,25 @@
 
 import Foundation
 import MoWine_Domain
+import JFLib_Mediator
 
-public class GetWineImageQueryHandler {
+public struct GetWineImageQuery: JFMQuery {
+    public let wineId: String
+
+    public init(wineId: String) {
+        self.wineId = wineId
+    }
+}
+
+public class GetWineImageQueryHandler: BaseQueryHandler<GetWineImageQuery, Data?> {
     let wineImageStorage: WineImageStorage
 
     public init(wineImageStorage: WineImageStorage) {
         self.wineImageStorage = wineImageStorage
     }
 
-    public func handle(wineId: String) async throws -> Data? {
-        let wineId = WineId(string: wineId)
+    public override func handle(query: GetWineImageQuery) async throws -> Data? {
+        let wineId = WineId(string: query.wineId)
 
         do {
             return try await wineImageStorage.getImage(wineId: wineId, size: .full)

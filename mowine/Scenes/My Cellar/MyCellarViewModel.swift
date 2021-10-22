@@ -34,7 +34,7 @@ class MyCellarViewModel: ObservableObject {
 
     func load() async {
         do {
-            let response = try await getWineTypesQuery.handle()
+            let response = try await getWineTypesQuery.handle(query: .init())
             redId = response.wineTypes.first { $0.name == "Red" }!.id
             whiteId = response.wineTypes.first { $0.name == "White" }!.id
             roseId = response.wineTypes.first { $0.name == "Rosé" }!.id

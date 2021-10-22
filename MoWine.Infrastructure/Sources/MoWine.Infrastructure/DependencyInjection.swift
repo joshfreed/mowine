@@ -7,6 +7,7 @@
 
 import Foundation
 import Dip
+import JFLib_Mediator
 import MoWine_Application
 import MoWine_Domain
 
@@ -14,6 +15,7 @@ public class DependencyInjection {
     public static func registerServices(container: DependencyContainer) {
         container.register { UIImageResizer() }.implements(ImageResizer.self)
         container.register(.singleton) { MemoryWineTypeRepository() }.implements(WineTypeRepository.self)
+        container.register(.singleton) { Mediator() }
 
         registerSocialSignInProviders(container: container)
     }

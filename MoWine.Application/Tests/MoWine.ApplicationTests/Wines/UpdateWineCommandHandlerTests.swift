@@ -59,7 +59,7 @@ class UpdateWineCommandHandlerTests: XCTestCase {
         command.pairings = ["Tacos", "Sushi"]
 
         // When
-        try await sut.handle(command)
+        try await sut.handle(command: command)
 
         // Then
         mockWineRepository.verify_save_wasCalled(with: wine)
@@ -80,7 +80,7 @@ class UpdateWineCommandHandlerTests: XCTestCase {
         command.variety = "Other Variety"
 
         // When
-        try await sut.handle(command)
+        try await sut.handle(command: command)
 
         // Then
         expect(self.wine.type.name).to(equal("Other"))
@@ -94,7 +94,7 @@ class UpdateWineCommandHandlerTests: XCTestCase {
         command.variety = nil
 
         // When
-        try await sut.handle(command)
+        try await sut.handle(command: command)
 
         // Then
         expect(self.wine.variety).to(beNil())
@@ -108,7 +108,7 @@ class UpdateWineCommandHandlerTests: XCTestCase {
 
         // When
         do {
-            try await sut.handle(command)
+            try await sut.handle(command: command)
         } catch let err {
             error = err
         }
@@ -125,7 +125,7 @@ class UpdateWineCommandHandlerTests: XCTestCase {
 
         // When
         do {
-            try await sut.handle(command)
+            try await sut.handle(command: command)
         } catch let err {
             error = err
         }

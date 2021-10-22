@@ -7,8 +7,9 @@
 
 import Foundation
 import MoWine_Domain
+import JFLib_Mediator
 
-public struct UpdateWineCommand {
+public struct UpdateWineCommand: JFMCommand {
     public let wineId: String
     public let name: String
     public let rating: Double
@@ -28,7 +29,7 @@ public struct UpdateWineCommand {
     }
 }
 
-public class UpdateWineCommandHandler {
+public class UpdateWineCommandHandler: BaseCommandHandler<UpdateWineCommand> {
     let wineRepository: WineRepository
     let wineTypeRepository: WineTypeRepository
     let createWineImages: CreateWineImagesCommandHandler
@@ -39,7 +40,7 @@ public class UpdateWineCommandHandler {
         self.createWineImages = createWineImages
     }
 
-    public func handle(_ command: UpdateWineCommand) async throws {
+    public override func handle(command: UpdateWineCommand) async throws {
         let wineId = WineId(string: command.wineId)
 
         guard let wine = try await wineRepository.getWine(by: wineId) else {

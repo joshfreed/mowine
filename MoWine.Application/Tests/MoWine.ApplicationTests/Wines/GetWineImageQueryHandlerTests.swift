@@ -23,7 +23,7 @@ class GetWineImageQueryHandlerTests: XCTestCase {
     func test_getWineImage_image_not_found() async throws {
         mockWineImageStorage.configure_getImage_toThrow(WineImageStorageErrors.imageNotFound)
 
-        let image = try await sut.handle(wineId: wineId.asString)
+        let image = try await sut.handle(query: .init(wineId: wineId.asString))
 
         XCTAssertNil(image)
     }
@@ -32,7 +32,7 @@ class GetWineImageQueryHandlerTests: XCTestCase {
         let data = Data(repeating: 1, count: 100)
         mockWineImageStorage.configure_getImage_toReturn(data)
 
-        let actual = try await sut.handle(wineId: wineId.asString)
+        let actual = try await sut.handle(query: .init(wineId: wineId.asString))
 
         XCTAssertEqual(data, actual)
         mockWineImageStorage.verify_getImage_wasCalled(withWineId: wineId, andSize: .full)

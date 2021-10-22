@@ -7,6 +7,8 @@
 
 import Foundation
 import Dip
+import JFLib_Mediator
+import JFLib_DI
 
 public class DependencyInjection {
     public static func registerServices(container: DependencyContainer) {
@@ -41,5 +43,16 @@ public class DependencyInjection {
 
         // Friends
         container.register(.singleton) { FriendsService(session: $0, userRepository: $1) }
+    }
+
+    public static func registerCommands(mediator: Mediator) {
+        mediator.registerHandler(UpdateWineCommandHandler.self, for: UpdateWineCommand.self)
+        mediator.registerHandler(DeleteWineCommandHandler.self, for: DeleteWineCommand.self)
+    }
+
+    public static func registerQueries(mediator: Mediator) {
+        mediator.registerHandler(GetWineImageQueryHandler.self, for: GetWineImageQuery.self)
+        mediator.registerHandler(GetWineByIdQueryHandler.self, for: GetWineByIdQuery.self)
+        mediator.registerHandler(GetWineTypesQueryHandler.self, for: GetWineTypesQuery.self)
     }
 }
