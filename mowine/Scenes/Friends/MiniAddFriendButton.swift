@@ -22,6 +22,7 @@ struct MiniAddFriendButton: View {
                     .foregroundColor(Color("Primary Light"))
             }
             .buttonStyle(PlainButtonStyle())
+            .accessibilityIdentifier("MiniAddFriendButton")
         }
     }
 

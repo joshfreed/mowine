@@ -11,16 +11,27 @@ import MoWine_Application
 
 struct MyFriendsListView: View {
     @EnvironmentObject var friends: FriendsService
+    @State private var showUserProfile = false
+    @State private var selectedUserId: String = ""
 
     var body: some View {
-        List(friends.friends) { friend in
-            NavigationLink(destination: UserProfileView(userId: friend.id)) {                
+        VStack {
+            List(friends.friends) { friend in
                 FriendListItemView(name: friend.name, thumbnail: friend.profilePictureUrl)
+                    .onTapGesture {
+                        selectedUserId = friend.id
+                        showUserProfile = true
+                    }
             }
-        }
-        .listStyle(.plain)
-        .onAppear {
-            friends.getMyFriends()
+            .listStyle(.plain)
+            .accessibilityIdentifier("My Friends List")
+            .onAppear {
+                friends.getMyFriends()
+            }
+
+            NavigationLink(destination: UserProfileView(userId: selectedUserId), isActive: $showUserProfile) {
+                EmptyView()
+            }
         }
     }
 }

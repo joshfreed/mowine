@@ -26,6 +26,8 @@ struct UserProfileHeaderView: View {
         .task {
             await vm.load(userId: userId)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("User Profile Header")
     }
 }
 

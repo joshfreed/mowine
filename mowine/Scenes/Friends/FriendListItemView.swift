@@ -27,5 +27,6 @@ struct FriendListItemView: View {
 struct FriendListItemView_Previews: PreviewProvider {
     static var previews: some View {
         FriendListItemView(name: "Test Person", thumbnail: nil)
+            .previewLayout(.sizeThatFits)
     }
 }

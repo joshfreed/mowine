@@ -9,7 +9,6 @@
 import SwiftUI
 import MoWine_Application
 
-@MainActor
 struct UserProfileView: View {
     let userId: String
     

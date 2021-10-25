@@ -21,9 +21,13 @@ struct SearchUsersView: View {
                 List(searchResults) { result in
                     NavigationLink(destination: UserProfileView(userId: result.id)) {
                         UserSearchResultView(user: result)
+                            .accessibilityElement(children: .contain)
+                            .accessibilityIdentifier("SearchResult - \(result.fullName)")
                     }
                 }
                 .listStyle(.plain)
+                .accessibilityElement(children: .contain)
+                .accessibilityIdentifier("SearchResults")
             }
         } else {
             SearchUsersMessage(message: "Try searching for people you know")
@@ -46,6 +50,9 @@ struct SearchUsersMessage: View {
 
 struct SearchFriendsView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchUsersView(hasSearched: false, searchResults: [])
+        SearchUsersView(hasSearched: true, searchResults: [
+            .init(id: "", email: "", fullName: "Franky Twofingers", profilePictureUrl: nil)
+        ])
+            .environmentObject(FriendsService.make())
     }
 }

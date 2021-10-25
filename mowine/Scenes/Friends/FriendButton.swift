@@ -30,6 +30,7 @@ struct FriendButton: View {
                     .cancel()
                 ])
             })
+                .accessibilityIdentifier("FriendButton")
         } else {
             Button(action: { addFriend(userId) }) {
                 Text("Add Friend")
@@ -38,6 +39,7 @@ struct FriendButton: View {
                     .frame(width: 80, height: 22)
                     .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color("Primary Light")))
             }
+            .accessibilityIdentifier("FriendButton")
         }
     }
 

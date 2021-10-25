@@ -22,6 +22,11 @@ class TabBar {
         return try MyCellarPage(app: app)
     }
 
+    func selectFriendsTab() throws -> FriendsPage {
+        tabBar.buttons["Friends"].tap()
+        return try FriendsPage(app: app)
+    }
+
     func selectMyAccountTab() throws -> MyAccountPage {
         tabBar.buttons["My Account"].tap()
         return try MyAccountPage(app: app)
