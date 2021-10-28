@@ -11,16 +11,15 @@ import Combine
 import MoWine_Application
 import SwiftyBeaver
 
-public class ObservableSession: ObservableObject {
-    @Published public private(set) var userId: String? = nil
-    @Published public private(set) var isAnonymous: Bool = false
+class ObservableSession: ObservableObject {
+    @Published private(set) var userId: String? = nil
+    @Published private(set) var isAnonymous: Bool = false
 
-    private let session: Session
+    @Injected private var session: Session
     private var cancellable: AnyCancellable?
 
-    public init(session: Session) {
+    init() {
         SwiftyBeaver.debug("ObservableSession::init")
-        self.session = session
         observe()
     }
 
@@ -32,6 +31,7 @@ public class ObservableSession: ObservableObject {
         cancellable = session.authStateDidChange
             .receive(on: RunLoop.main)
             .sink { [weak self] authState in
+                SwiftyBeaver.debug("The session finished initializing")
                 self?.userId = authState.userId?.asString
                 self?.isAnonymous = authState.isAnonymous
             }

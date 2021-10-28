@@ -36,8 +36,7 @@ extension WineItemViewModel {
             id: topWine.id,
             name: topWine.name,
             rating: topWine.rating,
-            type: topWine.type,
-            userId: topWine.userId
+            type: topWine.type
         )
     }
 }

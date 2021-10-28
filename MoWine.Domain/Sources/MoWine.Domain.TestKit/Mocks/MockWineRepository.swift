@@ -40,6 +40,10 @@ class MockWineRepository: WineRepository {
         return FakeRegistration()
     }
 
+    func getWines(userId: UserId) async throws -> [Wine] {
+        []
+    }
+
     // MARK: save
 
     private var save_wasCalled = false

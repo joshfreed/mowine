@@ -7,43 +7,40 @@
 //
 
 import SwiftUI
-import SwiftyBeaver
 
 struct MyCellarView: View {
-    @StateObject var viewModel: MyCellarViewModel = MyCellarViewModel()
-    @State private var searchText: String = ""
+    @EnvironmentObject var myCellar: MyCellar
 
+    @State private var searchText: String = ""
+    @State private var searchResults: [MyCellar.Wine] = []
+    
     var body: some View {
         NavigationView {
-            InnerCellarView(searchText: $searchText)
+            InnerCellarView(hasSearched: !searchText.isEmpty, searchResults:searchResults)
                 .navigationBarTitle("My Cellar")
-                .environmentObject(viewModel)
         }
-        .searchable(text: $searchText)
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
-        .sheet(isPresented: $viewModel.isEditingWine) {
-            viewModel.selectedWineId.map {
-                EditWineView(vm: .init(wineId: $0))
-            }
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { newText in
+            searchResults = myCellar.search(searchText: newText)
         }
         .analyticsScreen(name: "My Cellar", class: "MyCellarView")
-        .task {
-            await viewModel.load()
-        }
     }
 }
 
 struct InnerCellarView: View {
-    @EnvironmentObject var viewModel: MyCellarViewModel
     @Environment(\.isSearching) var isSearching
-    @Binding var searchText: String
+
+    let hasSearched: Bool
+    let searchResults: [MyCellar.Wine]
 
     var body: some View {
         if isSearching {
-            MyCellarSearchView(searchText: $searchText, onEditWine: { viewModel.onEditWine($0) })
+            MyCellarSearchView(hasSearched: hasSearched, searchResults: searchResults)
         } else {
-            MyCellarContentView(onEditWine: { viewModel.onEditWine($0) })
+            MyCellarTypesView()
+                .padding(20)
         }
     }
 }

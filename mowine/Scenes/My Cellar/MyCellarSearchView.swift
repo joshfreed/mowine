@@ -7,34 +7,50 @@
 //
 
 import SwiftUI
-import Combine
-import SwiftyBeaver
-import MoWine_Application
 
 struct MyCellarSearchView: View {
-    @EnvironmentObject var myWines: MyWinesService
-    @Binding var searchText: String
-    let onEditWine: (String) -> Void
+    let hasSearched: Bool
+    let searchResults: [MyCellar.Wine]
 
     var body: some View {
-        Group {
-            if searchText.isEmpty {
-                Text("Search for your favorite wines!")
-            } else if myWines.searchResults.isEmpty {
-                Text("No wines match your search terms.")
-            } else {
-                WineListView(wines: myWines.searchResults, onTapWine: onEditWine)
-            }
+        if hasSearched {
+            MyCellarSearchResults(searchResults: searchResults)
+        } else {
+            MyCellarSearchPlaceholder()
         }
-        .onChange(of: searchText) { searchBarText in
-            myWines.filter(by: searchBarText)
+    }
+}
+
+struct MyCellarSearchPlaceholder: View {
+    var body: some View {
+        Text("Search for your favorite wines!")
+    }
+}
+
+struct MyCellarSearchResults: View {
+    let searchResults: [MyCellar.Wine]
+
+    @State private var selectedWine: MyCellar.Wine? = nil
+
+    var body: some View {
+        if searchResults.isEmpty {
+            Text("No wines match your search terms.")
+        } else {
+            List(searchResults) { wine in
+                WineItemView(wine: wine)
+                    .onTapGesture { selectedWine = wine }
+            }
+            .listStyle(.plain)
+            .sheet(item: $selectedWine) { wine in
+                EditWineView(vm: .init(wineId: wine.id))
+            }
         }
     }
 }
 
 struct MyCellarSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarSearchView(searchText: .constant(""), onEditWine: { _ in })
+        MyCellarSearchView(hasSearched: false, searchResults: [])
             .addPreviewEnvironment()
     }
 }

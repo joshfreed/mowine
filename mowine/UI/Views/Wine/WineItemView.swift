@@ -10,35 +10,46 @@ import SwiftUI
 import MoWine_Application
 
 struct WineItemView: View {
-    let viewModel: WineItemViewModel
-    var onTap: (String) -> Void = { _ in }
+    let wineId: String
+    let name: String
+    let type: StringLiteralType
+    let rating: Int
 
     var body: some View {
         HStack(spacing: 16) {
-            WineThumbnail(wineId: viewModel.id)
+            WineThumbnail(wineId: wineId)
             VStack(alignment: .leading) {
-                Text(viewModel.name)
+                Text(name)
                     .font(.system(size: 21, weight: .bold))
                     .accessibilityIdentifier("Wine Name")
 
-                Text(viewModel.type)
+                Text(type)
                     .font(.system(size: 16))
                     .foregroundColor(Color("Dark Gray"))
                     .accessibilityIdentifier("Wine Type")
 
-                RatingLabel(rating: viewModel.rating)
+                RatingLabel(rating: rating)
             }
             Spacer()
         }
         .padding([.top, .bottom], 8)
         .contentShape(Rectangle())
-        .onTapGesture { onTap(viewModel.id) }
+    }
+}
+
+extension WineItemView {
+    init(wine: MyCellar.Wine) {
+        self.init(wineId: wine.id, name: wine.name, type: wine.variety, rating: wine.rating)
+    }
+
+    init(viewModel: WineItemViewModel, onTap: (String) -> Void = { _ in }) {
+        self.init(wineId: viewModel.id, name: viewModel.name, type: viewModel.type, rating: viewModel.rating)
     }
 }
 
 struct WineItemView_Previews: PreviewProvider {
     static var previews: some View {
-        WineItemView(viewModel: WineItemViewModel(id: "A", name: "2019 Fancypants", rating: 3, type: "Merlot", thumbnail: nil))
+        WineItemView(viewModel: WineItemViewModel(id: "A", name: "2019 Fancypants", rating: 3, type: "Merlot"))
             .addPreviewEnvironment()
     }
 }

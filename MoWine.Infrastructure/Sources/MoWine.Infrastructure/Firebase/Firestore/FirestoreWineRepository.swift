@@ -94,6 +94,17 @@ public class FirestoreWineRepository: WineRepository {
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
 
+    public func getWines(userId: UserId) async throws -> [Wine] {
+        SwiftyBeaver.info("getWines \(userId)")
+
+        let query = db
+            .collection("wines")
+            .whereField("userId", isEqualTo: userId.asString)
+        let querySnapshot = try await query.getDocuments()
+        let wines: [Wine] = querySnapshot.documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
+        return wines
+    }
+
     public func getTopWines(userId: UserId) async throws -> [Wine] {
         SwiftyBeaver.info("getTopWines \(userId)")
 

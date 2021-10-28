@@ -14,11 +14,13 @@ struct WineTypeMenuButton: View {
 
     var body: some View {
         VStack {
-            Image(icon)
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(Color(UIColor.mwSecondary))
-                .frame(width: 60, height: 90)
+            if !icon.isEmpty {
+                Image(icon)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(Color(UIColor.mwSecondary))
+                    .frame(width: 60, height: 90)
+            }
 
             Text(name)
                 .font(.system(size: 37))
@@ -27,9 +29,12 @@ struct WineTypeMenuButton: View {
     }
 }
 
-
 struct WineTypeMenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        WineTypeMenuButton(name: "Red", icon: "Red Wine Button")
+        WineTypeMenuButton(name: "Reds", icon: "Red Wine Button").previewLayout(.sizeThatFits)
+        WineTypeMenuButton(name: "Reds", icon: "").previewLayout(.sizeThatFits)
+        WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
+            .frame(width: 160, height: 160)
+            .previewLayout(.sizeThatFits)
     }
 }

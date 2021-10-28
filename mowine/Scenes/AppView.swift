@@ -7,48 +7,22 @@
 //
 
 import SwiftUI
-import MoWine_Application
-import SwiftyBeaver
-import FirebaseAnalytics
 
-@MainActor
 struct AppView: View {
-    @EnvironmentObject var session: ObservableSession
-    @State private var isPreparing: Bool = true
+    let isPreparing: Bool
     
     var body: some View {
-        Group {
-            if isPreparing {
-                SplashScreen()
-            } else {
-                TabbedRootView()
-            }
+        if isPreparing {
+            SplashScreen()
+        } else {
+            TabbedRootView()
         }
-        .task {
-            await loadApp()
-        }
-    }
-
-    private func loadApp() async {
-        SwiftyBeaver.debug("loadApp \(String(describing: session.userId))")
-
-        await setupUITestingData()
-
-        Analytics.logEvent("app_appeared", parameters: [:])
-        SwiftyBeaver.info("loadApp complete")
-        isPreparing = false
-    }
-
-    private func setupUITestingData() async {
-        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
-        let uiTestingHelper = UITestHelper()
-        await uiTestingHelper.logInExistingUser()
     }
 }
 
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
-        AppView()
+        AppView(isPreparing: false)
             .addPreviewEnvironment()
     }
 }

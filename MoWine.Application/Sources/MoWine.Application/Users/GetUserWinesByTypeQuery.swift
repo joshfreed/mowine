@@ -16,18 +16,16 @@ public struct WineItemViewModel: Identifiable {
     public var name: String
     public var rating: Int
     public var type: String
-    public var thumbnailPath: String
 
-    public init(id: String, name: String, rating: Int, type: String, userId: String = "", thumbnail: Data? = nil) {
+    public init(id: String, name: String, rating: Int, type: String) {
         self.id = id
         self.name = name
         self.rating = rating
         self.type = type
-        self.thumbnailPath = "\(userId)/\(id)-thumb.png"
     }
 
     public static func toDto(_ wine: Wine) -> WineItemViewModel {
-        .init(id: wine.id.asString, name: wine.name, rating: Int(wine.rating), type: wine.type.name, userId: wine.userId.asString)
+        .init(id: wine.id.asString, name: wine.name, rating: Int(wine.rating), type: wine.type.name)
     }
 }
 

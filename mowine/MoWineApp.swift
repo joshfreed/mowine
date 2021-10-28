@@ -13,12 +13,15 @@ import MoWine_Infrastructure
 import Dip
 @_exported import JFLib_DI
 import JFLib_Mediator
+import FirebaseAnalytics
 
 @main
 struct WoWineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-    @StateObject var session = ObservableSession(session: try! JFServices.resolve())
+    @State private var isPreparing: Bool = false
+    @StateObject private var session = ObservableSession()
+    @StateObject private var myCellar = MyCellar()
 
     init() {
         setupSwiftyBeaverLogging()
@@ -29,9 +32,22 @@ struct WoWineApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView()
+            AppView(isPreparing: isPreparing)
                 .addAppEnvironment()
                 .environmentObject(session)
+                .environmentObject(myCellar)
+                .task {
+                    SwiftyBeaver.verbose("Task on appear fired")
+                    await setupUITestingData()
+                }
+                .task(id: session.userId) {
+                    SwiftyBeaver.verbose("Session userId changed")
+                    let mediator: Mediator = try! JFServices.resolve()
+                    let response: GetMyWinesResponse = try! await mediator.send(GetMyWines())
+                    myCellar.present(response)
+                    Analytics.logEvent("app_appeared", parameters: [:])
+                    isPreparing = false
+                }
         }
     }
 
@@ -72,6 +88,12 @@ struct WoWineApp: App {
         MoWine_Application.DependencyInjection.registerCommands(mediator: mediator)
         MoWine_Application.DependencyInjection.registerQueries(mediator: mediator)
     }
+
+    private func setupUITestingData() async {
+        guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
+        let uiTestingHelper = UITestHelper()
+        await uiTestingHelper.logInExistingUser()
+    }
 }
 
 extension View {
@@ -79,10 +101,8 @@ extension View {
         self
             .environmentObject(try! JFServices.resolve() as FriendsService)
             .environmentObject(try! JFServices.resolve() as GetUserWinesByTypeQuery)
-            .environmentObject(try! JFServices.resolve() as MyWinesService)
     }
 }
-
 
 extension JFServices {
     static func configure() {

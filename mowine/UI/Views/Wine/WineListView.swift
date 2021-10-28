@@ -24,9 +24,9 @@ struct WineListView: View {
 struct WineListView_Previews: PreviewProvider {
     static var previews: some View {
         WineListView(wines: [
-            .init(id: "A", name: "Merlot 1", rating: 1, type: "Red", thumbnail: nil),
-            .init(id: "B", name: "Merlot 2", rating: 2, type: "Red", thumbnail: nil),
-            .init(id: "C", name: "Merlot 3", rating: 3, type: "Red", thumbnail: nil),
+            .init(id: "A", name: "Merlot 1", rating: 1, type: "Red"),
+            .init(id: "B", name: "Merlot 2", rating: 2, type: "Red"),
+            .init(id: "C", name: "Merlot 3", rating: 3, type: "Red"),
         ])
             .addPreviewEnvironment()
     }

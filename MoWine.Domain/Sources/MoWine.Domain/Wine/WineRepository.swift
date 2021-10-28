@@ -13,6 +13,7 @@ public protocol WineRepository {
     func save(_ wine: Wine) async throws
     func delete(_ wineId: WineId) async throws
     func getWine(by id: WineId) async throws -> Wine?
+    func getWines(userId: UserId) async throws -> [Wine]
     func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration
     func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration
     func getTopWines(userId: UserId) async throws -> [Wine]

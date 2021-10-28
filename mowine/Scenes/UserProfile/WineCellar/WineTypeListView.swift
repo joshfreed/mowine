@@ -37,7 +37,7 @@ struct WineTypeListView_Previews: PreviewProvider {
     static var query: GetUserWinesByTypeQuery = {
         let q = GetUserWinesByTypeQuery(wineRepository: MemoryWineRepository())
         q.wines = [
-            .init(id: "A", name: "My Cool Wine", rating: 4, type: "Red", thumbnail: nil)
+            .init(id: "A", name: "My Cool Wine", rating: 4, type: "Red")
         ]
         return q
     }()

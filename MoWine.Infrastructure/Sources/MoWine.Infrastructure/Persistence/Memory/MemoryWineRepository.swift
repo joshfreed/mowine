@@ -51,6 +51,10 @@ public class MemoryWineRepository: WineRepository {
         return FakeRegistration()
     }
 
+    public func getWines(userId: UserId) async throws -> [Wine] {
+        wines.filter { $0.userId == userId }
+    }
+
     public func getTopWines(userId: UserId) async throws -> [Wine] {
         let topWines = wines
             .filter { $0.userId == userId }
