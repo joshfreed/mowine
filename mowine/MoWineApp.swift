@@ -14,6 +14,9 @@ import Dip
 @_exported import JFLib_DI
 import JFLib_Mediator
 import FirebaseAnalytics
+import Combine
+
+var sessionCancellables = Set<AnyCancellable>()
 
 @main
 struct WoWineApp: App {
@@ -41,11 +44,24 @@ struct WoWineApp: App {
                     await setupUITestingData()
                 }
                 .task(id: session.userId) {
-                    SwiftyBeaver.verbose("Session userId changed")
-                    let mediator: Mediator = try! JFServices.resolve()
-                    let response: GetMyWinesResponse = try! await mediator.send(GetMyWines())
-                    myCellar.present(response)
+                    SwiftyBeaver.verbose("Session userId changed: \(String(describing: session.userId))")
+
+                    sessionCancellables.forEach { $0.cancel() }
+                    sessionCancellables.removeAll()
+
+                    let getMyWines: GetMyWinesHandler = try! JFServices.resolve()
+
+                    getMyWines
+                        .subscribe()
+                        .replaceError(with: GetMyWinesResponse(wines: []))
+                        .receive(on: RunLoop.main)
+                        .sink { response in
+                            myCellar.present(response)
+                        }
+                        .store(in: &sessionCancellables)
+
                     Analytics.logEvent("app_appeared", parameters: [:])
+
                     isPreparing = false
                 }
         }

@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SwiftyBeaver
 import MoWine_Application
 
 class WineThumbnailViewModel: ObservableObject {
     @Published var uiImage: UIImage?
 
     @Injected private var query: GetWineThumbnailQueryHandler
+
+    deinit {
+        SwiftyBeaver.verbose("deinit")
+    }
 
     @MainActor
     func fetchThumbnail(wineId: String) async {

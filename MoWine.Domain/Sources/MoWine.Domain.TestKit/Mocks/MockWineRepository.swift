@@ -7,6 +7,7 @@
 
 import XCTest
 import MoWine_Domain
+import Combine
 
 class MockWineRepository: WineRepository {
 
@@ -36,12 +37,12 @@ class MockWineRepository: WineRepository {
 
     // MARK: getWines
 
-    func getWines(userId: UserId, completion: @escaping (Swift.Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        return FakeRegistration()
-    }
-
     func getWines(userId: UserId) async throws -> [Wine] {
         []
+    }
+
+    func getWines(userId: UserId) -> AnyPublisher<[Wine], Error> {
+        Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 
     // MARK: save

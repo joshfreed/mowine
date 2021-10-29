@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 import MoWine_Application
 import MoWine_Domain
 
@@ -43,16 +44,20 @@ public class MemoryWineRepository: WineRepository {
         return FakeRegistration()
     }
 
+    public func getWines(userId: UserId) -> AnyPublisher<[Wine], Error> {
+        Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
+    }
+
+    public func getWines(userId: UserId) async throws -> [Wine] {
+        wines.filter { $0.userId == userId }
+    }
+
     public func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let matched = self.wines.filter { $0.userId == userId && $0.type == wineType }
             completion(.success(matched))
         }
         return FakeRegistration()
-    }
-
-    public func getWines(userId: UserId) async throws -> [Wine] {
-        wines.filter { $0.userId == userId }
     }
 
     public func getTopWines(userId: UserId) async throws -> [Wine] {

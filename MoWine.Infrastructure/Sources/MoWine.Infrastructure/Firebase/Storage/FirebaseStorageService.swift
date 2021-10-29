@@ -49,7 +49,7 @@ public class FirebaseWineImageStorage: WineImageStorage {
     }
 
     public func putImage(wineId: WineId, size: WineImageSize, data: Data) async throws {
-        guard let userId = session.currentUserId else { fatalError("No user logged in") }
+        guard let userId = session.currentUserId else { throw SessionError.notLoggedIn }
 
         let path: String
         switch size {
@@ -61,7 +61,7 @@ public class FirebaseWineImageStorage: WineImageStorage {
     }
 
     public func getImage(wineId: WineId, size: WineImageSize) async throws -> Data {
-        guard let userId = session.currentUserId else { fatalError("No user logged in") }
+        guard let userId = session.currentUserId else { throw SessionError.notLoggedIn }
 
         let path: String
         switch size {

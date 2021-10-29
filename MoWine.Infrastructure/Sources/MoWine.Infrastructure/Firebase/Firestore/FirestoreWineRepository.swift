@@ -8,15 +8,23 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreCombineSwift
 import SwiftyBeaver
 import FirebaseCrashlytics
 import MoWine_Application
 import MoWine_Domain
+import Combine
 
 public class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()
 
-    public init() {}
+    public init() {
+        SwiftyBeaver.verbose("init")
+    }
+
+    deinit {
+        SwiftyBeaver.verbose("deinit")
+    }
 
     public func add(_ wine: Wine) async throws {
         let data = wine.toFirestore() as [String: Any]
@@ -48,28 +56,19 @@ public class FirestoreWineRepository: WineRepository {
 
         return wine
     }
-    
-    public func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
+
+    public func getWines(userId: UserId) -> AnyPublisher<[Wine], Error> {
         let query = db
             .collection("wines")
             .whereField("userId", isEqualTo: userId.asString)
-        
-        let listener = query.addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                Crashlytics.crashlytics().record(error: error)
-                completion(.failure(error))
-            } else if let documents = querySnapshot?.documents {
-                let wines: [Wine] = documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) }
-                completion(.success(wines))
-            } else {
-                fatalError("unknown error with query")
-            }
-        }
 
-        return MyFirebaseListenerRegistration(wrapped: listener)
+        return query
+            .snapshotPublisher()
+            .map { snapshot in snapshot.documents }
+            .map { documents in documents.compactMap { Wine.fromFirestore(documentId: $0.documentID, data: $0.data()) } }
+            .eraseToAnyPublisher()
     }
-    
+
     public func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         SwiftyBeaver.info("getWines \(userId) \(wineType.name)")
 

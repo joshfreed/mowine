@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Combine
+import SwiftyBeaver
 import JFLib_Mediator
 import MoWine_Domain
 
@@ -15,6 +17,10 @@ public struct GetMyWines: JFMQuery {
 
 public struct GetMyWinesResponse {
     public let wines: [Wine]
+
+    public init(wines: [Wine]) {
+        self.wines = wines
+    }
 
     public struct Wine {
         public let id: String
@@ -46,5 +52,25 @@ public class GetMyWinesHandler: BaseQueryHandler<GetMyWines, GetMyWinesResponse>
         }
 
         return .init(wines: responseWines)
+    }
+
+    public func subscribe() -> AnyPublisher<GetMyWinesResponse, Error> {
+        SwiftyBeaver.verbose("subscribe: \(String(describing: session.currentUserId))")
+
+        guard let userId = session.currentUserId else {
+            return Just(GetMyWinesResponse(wines: [])).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+
+        return repository
+            .getWines(userId: userId)
+            .map { wines -> [GetMyWinesResponse.Wine] in
+                wines.map {
+                    .init(id: $0.id.asString, name: $0.name, rating: Int($0.rating), typeName: $0.type.name, varietyName: $0.variety?.name)
+                }
+            }
+            .map { wines in
+                GetMyWinesResponse(wines: wines)
+            }
+            .eraseToAnyPublisher()
     }
 }

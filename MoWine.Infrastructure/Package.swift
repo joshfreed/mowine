@@ -49,6 +49,7 @@ let package = Package(
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseStorage", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseStorageSwift-Beta", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseFirestoreCombine-Community", package: "firebase-ios-sdk"),
             ]),
         .testTarget(
             name: "MoWine.InfrastructureTests",

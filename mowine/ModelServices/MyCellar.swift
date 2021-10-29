@@ -66,6 +66,7 @@ extension MyCellar {
 
 extension MyCellar {
     func present(_ response: GetMyWinesResponse) {
+        SwiftyBeaver.verbose("presenting \(response)")
         myWines = response.wines
             .sorted(by: { $0.rating > $1.rating })
             .map { Wine.from($0) }
