@@ -13,7 +13,6 @@ import MoWine_Infrastructure
 import Dip
 @_exported import JFLib_DI
 import JFLib_Mediator
-import FirebaseAnalytics
 import Combine
 
 var sessionCancellables = Set<AnyCancellable>()
@@ -22,7 +21,6 @@ var sessionCancellables = Set<AnyCancellable>()
 struct WoWineApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-    @State private var isPreparing: Bool = false
     @StateObject private var session = ObservableSession()
     @StateObject private var myCellar = MyCellar()
 
@@ -35,7 +33,7 @@ struct WoWineApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView(isPreparing: isPreparing)
+            TabbedRootView()
                 .addAppEnvironment()
                 .environmentObject(session)
                 .environmentObject(myCellar)
@@ -43,8 +41,8 @@ struct WoWineApp: App {
                     SwiftyBeaver.verbose("Task on appear fired")
                     await setupUITestingData()
                 }
-                .task(id: session.userId) {
-                    SwiftyBeaver.verbose("Session userId changed: \(String(describing: session.userId))")
+                .onChange(of: session.userId) { newValue in
+                    SwiftyBeaver.verbose("Session userId changed: \(String(describing: newValue))")
 
                     sessionCancellables.forEach { $0.cancel() }
                     sessionCancellables.removeAll()
@@ -59,10 +57,6 @@ struct WoWineApp: App {
                             myCellar.present(response)
                         }
                         .store(in: &sessionCancellables)
-
-                    Analytics.logEvent("app_appeared", parameters: [:])
-
-                    isPreparing = false
                 }
         }
     }
