@@ -48,7 +48,7 @@ class AddWineTests: XCTestCase {
         let wineItem = try redWinesList.getWine(at: 0)
 
         XCTAssertEqual(wineName, wineItem.name)
-        XCTAssertEqual("Red", wineItem.wineType)
+        XCTAssertEqual("Malbec", wineItem.wineType)
         XCTAssertEqual(3, wineItem.rating)
     }
 }

@@ -12,7 +12,7 @@ import MoWine_Application
 struct WineItemView: View {
     let wineId: String
     let name: String
-    let type: StringLiteralType
+    let type: String
     let rating: Int
 
     var body: some View {
@@ -51,5 +51,6 @@ struct WineItemView_Previews: PreviewProvider {
     static var previews: some View {
         WineItemView(viewModel: WineItemViewModel(id: "A", name: "2019 Fancypants", rating: 3, type: "Merlot"))
             .addPreviewEnvironment()
+            .previewLayout(.sizeThatFits)
     }
 }
