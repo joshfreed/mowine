@@ -26,6 +26,11 @@ public class DependencyInjection {
         container.register { UpdateProfileCommandHandler(session: $0, userRepository: $1, createProfilePicture: $2) }
         container.register { CreateProfilePictureCommandHandler(userImageStorage: $0, imageResizer: $1, userRepository: $2) }
 
+        // Friends
+        container.register(.unique) { GetMyFriendsQueryHandler(session: $0, userRepository: $1) }
+        container.register(.unique) { AddFriendCommandHandler(session: $0, userRepository: $1) }
+        container.register(.unique) { RemoveFriendCommandHandler(session: $0, userRepository: $1) }
+
         // Wines
         container.register(.unique) { UpdateWineCommandHandler(wineRepository: $0, wineTypeRepository: $1, createWineImages: $2) }
         container.register(.unique) { DeleteWineCommandHandler(wineRepository: $0) }
@@ -47,6 +52,8 @@ public class DependencyInjection {
     public static func registerCommands(mediator: Mediator) {
         mediator.registerHandler(UpdateWineCommandHandler.self, for: UpdateWineCommand.self)
         mediator.registerHandler(DeleteWineCommandHandler.self, for: DeleteWineCommand.self)
+        mediator.registerHandler(AddFriendCommandHandler.self, for: AddFriendCommand.self)
+        mediator.registerHandler(RemoveFriendCommandHandler.self, for: RemoveFriendCommand.self)
     }
 
     public static func registerQueries(mediator: Mediator) {
