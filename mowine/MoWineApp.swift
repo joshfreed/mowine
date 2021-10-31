@@ -23,6 +23,7 @@ struct WoWineApp: App {
 
     @StateObject private var session = ObservableSession()
     @StateObject private var myCellar = MyCellar()
+    @StateObject private var myFriends = MyFriends()
 
     init() {
         setupSwiftyBeaverLogging()
@@ -37,6 +38,7 @@ struct WoWineApp: App {
                 .addAppEnvironment()
                 .environmentObject(session)
                 .environmentObject(myCellar)
+                .environmentObject(myFriends)
                 .task {
                     SwiftyBeaver.verbose("Task on appear fired")
                     await setupUITestingData()
@@ -48,14 +50,19 @@ struct WoWineApp: App {
                     sessionCancellables.removeAll()
 
                     let getMyWines: GetMyWinesHandler = try! JFServices.resolve()
-
                     getMyWines
                         .subscribe()
                         .replaceError(with: GetMyWinesResponse(wines: []))
                         .receive(on: RunLoop.main)
-                        .sink { response in
-                            myCellar.present(response)
-                        }
+                        .sink { response in myCellar.present(response) }
+                        .store(in: &sessionCancellables)
+
+                    let getMyFriends: GetMyFriendsQueryHandler = try! JFServices.resolve()
+                    getMyFriends
+                        .subscribe()
+                        .replaceError(with: GetMyFriendsQueryResponse(friends: []))
+                        .receive(on: RunLoop.main)
+                        .sink { response in myFriends.present(response) }
                         .store(in: &sessionCancellables)
                 }
         }
@@ -109,7 +116,6 @@ struct WoWineApp: App {
 extension View {
     func addAppEnvironment() -> some View {
         self
-            .environmentObject(try! JFServices.resolve() as FriendsService)
             .environmentObject(try! JFServices.resolve() as GetUserWinesByTypeQuery)
     }
 }

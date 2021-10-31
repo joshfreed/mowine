@@ -10,7 +10,7 @@ import SwiftUI
 import MoWine_Application
 
 struct FriendButton: View {
-    @EnvironmentObject var friends: FriendsService
+    @EnvironmentObject var friends: MyFriends
     let userId: String
     
     @State private var showUnfriendConfirmation = false
@@ -69,6 +69,7 @@ struct FriendButton_Previews: PreviewProvider {
         Group {
             FriendButton(userId: "4").previewLayout(.sizeThatFits)
             FriendButton(userId: "1").previewLayout(.sizeThatFits)
-        }.environmentObject(FriendsService.make())
+        }
+        .environmentObject(MyFriends.fake())
     }
 }

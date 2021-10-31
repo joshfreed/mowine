@@ -49,10 +49,14 @@ struct SearchUsersMessage: View {
 }
 
 struct SearchFriendsView_Previews: PreviewProvider {
+    static var searchResults: [UsersService.UserSearchResult] = [
+        .init(id: "", email: "", fullName: "Franky Twofingers", profilePictureUrl: nil)
+    ]
+
     static var previews: some View {
-        SearchUsersView(hasSearched: true, searchResults: [
-            .init(id: "", email: "", fullName: "Franky Twofingers", profilePictureUrl: nil)
-        ])
-            .environmentObject(FriendsService.make())
+        NavigationView {
+            SearchUsersView(hasSearched: true, searchResults: searchResults)
+        }
+        .environmentObject(MyFriends.fake())
     }
 }

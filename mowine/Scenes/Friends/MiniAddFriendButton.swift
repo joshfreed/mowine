@@ -10,7 +10,7 @@ import SwiftUI
 import MoWine_Application
 
 struct MiniAddFriendButton: View {
-    @EnvironmentObject var friends: FriendsService
+    @EnvironmentObject var friends: MyFriends
     let userId: String
     
     var body: some View {
@@ -40,6 +40,7 @@ struct MiniAddFriendButton: View {
 struct MiniAddFriendButton_Previews: PreviewProvider {
     static var previews: some View {
         MiniAddFriendButton(userId: "ABC")
-            .environmentObject(FriendsService.make())
+            .previewLayout(.sizeThatFits)
+            .environmentObject(MyFriends.fake())
     }
 }

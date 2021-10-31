@@ -27,10 +27,16 @@ struct UserSearchResultView: View {
 }
 
 struct UserSearchResultView_Previews: PreviewProvider {
+    static var user1 = UsersService.UserSearchResult(id: "1", email: "test@test.com", fullName: "Test Guy", profilePictureUrl: nil)
+    static var user4 = UsersService.UserSearchResult(id: "4", email: "test@test.com", fullName: "Friendly Friend", profilePictureUrl: nil)
+
     static var previews: some View {
-        UserSearchResultView(
-            user: .init(id: "1", email: "test@test.com", fullName: "Test Guy", profilePictureUrl: nil)
-        )
-            .environmentObject(FriendsService.make())
+        UserSearchResultView(user: user1)
+            .previewLayout(.sizeThatFits)
+            .environmentObject(MyFriends.fake())
+
+        UserSearchResultView(user: user4)
+            .previewLayout(.sizeThatFits)
+            .environmentObject(MyFriends.fake())
     }
 }

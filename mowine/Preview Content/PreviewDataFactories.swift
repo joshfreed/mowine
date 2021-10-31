@@ -26,18 +26,6 @@ extension EmailReauthViewModel {
     }
 }
 
-extension FriendsService {
-    static func make() -> FriendsService {
-        let service = FriendsService(session: FakeSession(), userRepository: MemoryUserRepository())
-        service.friends = [
-            .init(id: "1", name: "Barry Jones", profilePictureUrl: nil),
-            .init(id: "2", name: "Mark Buffalo", profilePictureUrl: nil),
-            .init(id: "3", name: "Hanky Panky", profilePictureUrl: nil),
-        ]
-        return service
-    }
-}
-
 extension UsersService {
     static func make() -> UsersService {
         UsersService(session: FakeSession(), userRepository: MemoryUserRepository())

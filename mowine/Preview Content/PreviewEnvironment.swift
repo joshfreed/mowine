@@ -14,5 +14,6 @@ extension View {
         addAppEnvironment()
             .environmentObject(ObservableSession())
             .environmentObject(MyCellar.fake())
+            .environmentObject(MyFriends.fake())
     }
 }

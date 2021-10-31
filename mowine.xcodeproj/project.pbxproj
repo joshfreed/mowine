@@ -82,6 +82,7 @@
 		5383C7072721F413000E625F /* JFLib.DI in Frameworks */ = {isa = PBXBuildFile; productRef = 5383C7062721F413000E625F /* JFLib.DI */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
 		53942896272EF96F00D03C4A /* Publisher+asyncMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53942895272EF96F00D03C4A /* Publisher+asyncMap.swift */; };
+		5394BB24272DBD2800B61F00 /* MyFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394BB23272DBD2800B61F00 /* MyFriends.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
 		539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539E166B27233D16001A2CC3 /* CrashReporter.swift */; };
@@ -248,6 +249,7 @@
 		5383C7052721F349000E625F /* JFLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JFLib; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		53942895272EF96F00D03C4A /* Publisher+asyncMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+asyncMap.swift"; sourceTree = "<group>"; };
+		5394BB23272DBD2800B61F00 /* MyFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriends.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
 		539E166B27233D16001A2CC3 /* CrashReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				535EE9D2272756F00011ECC1 /* MyCellar.swift */,
+				5394BB23272DBD2800B61F00 /* MyFriends.swift */,
 			);
 			path = ModelServices;
 			sourceTree = "<group>";
@@ -1153,6 +1156,7 @@
 				53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */,
 				53047E2325DC080B005CC14D /* AddWineHeaderView.swift in Sources */,
 				53D4F21F25EEED68007A15F9 /* SearchUsersViewModel.swift in Sources */,
+				5394BB24272DBD2800B61F00 /* MyFriends.swift in Sources */,
 				53047E2925DC0904005CC14D /* RedoButton.swift in Sources */,
 				53AC404625D737800041AED9 /* SelectVarietyView.swift in Sources */,
 				53FAED0825EAFBF00099B2E1 /* FriendButton.swift in Sources */,
