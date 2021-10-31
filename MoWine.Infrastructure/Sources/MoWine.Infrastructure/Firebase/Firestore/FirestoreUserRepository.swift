@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import Combine
 import FirebaseFirestore
+import FirebaseFirestoreCombineSwift
 import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
@@ -81,61 +83,6 @@ public class FirestoreUserRepository: UserRepository {
         return MyFirebaseListenerRegistration(wrapped: listener)
     }
     
-    public func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
-        let query = db.collection("friends").whereField("userId", isEqualTo: userId.asString)
-        
-        let listener = query.addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-            } else {
-                if let documents = querySnapshot?.documents {
-                    let friendIds: [UserId] = documents.compactMap {
-                        let data = $0.data()
-                        guard let friendIdStr = data["friendId"] as? String else { return nil }
-                        return UserId(string: friendIdStr)
-                    }
-                    self.getUsers(by: friendIds, completion: completion)
-                } else {
-                    completion(.success([]))
-                }
-            }
-        }
-        
-        return MyFirebaseListenerRegistration(wrapped: listener)
-    }
-
-    private func getUsers(by ids: [UserId], completion: @escaping (Result<[User], Error>) -> ()) {
-        guard ids.count > 0 else {
-            completion(.success([]))
-            return
-        }
-        
-        let group = DispatchGroup()
-        var friends: [User] = []
-        for userId in ids {
-            group.enter()
-            let query = db.collection("users").document(userId.asString)
-            query.getDocument { (document, error) in
-                if let error = error {
-                    SwiftyBeaver.error("\(error)")
-                    completion(.failure(error))
-                    return
-                }
-                
-                if let document = document, document.exists, let friend = User.fromFirestore(document) {
-                    friends.append(friend)
-                }
-                
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) {
-            completion(.success(friends))
-        }
-    }
-
     public func searchUsers(searchString: String) async throws -> [User] {
         let documents = try await db.collection("users").getDocuments().documents
         let users = documents.compactMap { User.fromFirestore($0) }
@@ -158,16 +105,61 @@ public class FirestoreUserRepository: UserRepository {
         
         return Array(Set(matches))
     }
+
+    public func getFriends(userId: UserId) -> AnyPublisher<[User], Error> {
+        let query = db
+            .collection("friends")
+            .whereField("userId", isEqualTo: userId.asString)
+
+        func extractFriendId(_ document: QueryDocumentSnapshot) -> UserId? {
+            let data = document.data()
+            guard let friendIdStr = data["friendId"] as? String else { return nil }
+            return UserId(string: friendIdStr)
+        }
+
+        return query
+            .snapshotPublisher()
+            .map { snapshot in snapshot.documents }
+            .map { documents in documents.compactMap { extractFriendId($0) } }
+            .asyncMap { [weak self] userIds in
+                guard let self = self else { return [] }
+                return try await self.getUsers(by: userIds)
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private func getUsers(by ids: [UserId]) async throws -> [User] {
+        guard ids.count > 0 else {
+            return []
+        }
+
+        var users: [User] = []
+
+        try await withThrowingTaskGroup(of: DocumentSnapshot.self) { group in
+            for userId in ids {
+                group.addTask {
+                    let query = self.db.collection("users").document(userId.asString)
+                    return try await query.getDocument()
+                }
+            }
+
+            for try await document in group {
+                if document.exists, let user = User.fromFirestore(document) {
+                    users.append(user)
+                }
+            }
+        }
+
+        return users
+    }
     
-    public func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
+    public func addFriend(owningUserId: UserId, friendId: UserId) async throws {
         let docId = "\(owningUserId)_\(friendId)"
 
         try await db.collection("friends").document(docId).setData([
             "userId": owningUserId.asString,
             "friendId": friendId.asString
         ])
-
-        return try await getUserFromCache(userId: friendId)
     }
     
     public func removeFriend(owningUserId: UserId, friendId: UserId) async throws {

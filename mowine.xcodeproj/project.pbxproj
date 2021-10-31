@@ -81,6 +81,7 @@
 		5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C7032721E5D3000E625F /* DependencyInjection.swift */; };
 		5383C7072721F413000E625F /* JFLib.DI in Frameworks */ = {isa = PBXBuildFile; productRef = 5383C7062721F413000E625F /* JFLib.DI */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
+		53942896272EF96F00D03C4A /* Publisher+asyncMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53942895272EF96F00D03C4A /* Publisher+asyncMap.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
 		539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539E166B27233D16001A2CC3 /* CrashReporter.swift */; };
@@ -246,6 +247,7 @@
 		5383C7032721E5D3000E625F /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
 		5383C7052721F349000E625F /* JFLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JFLib; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
+		53942895272EF96F00D03C4A /* Publisher+asyncMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+asyncMap.swift"; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
 		539E166B27233D16001A2CC3 /* CrashReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
@@ -600,6 +602,14 @@
 			name = "Test Plans";
 			sourceTree = "<group>";
 		};
+		53942894272EF95700D03C4A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				53942895272EF96F00D03C4A /* Publisher+asyncMap.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5398F519252A6B6F00BF61C0 /* My Cellar */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +775,7 @@
 		53F5ABF21E2176080067AB62 /* mowine */ = {
 			isa = PBXGroup;
 			children = (
+				53942894272EF95700D03C4A /* Extensions */,
 				53E36490252A77C900BA1CD2 /* Preview Content */,
 				53F5AC241E217E210067AB62 /* Scenes */,
 				5348960E203DE49F00B7547A /* UI */,
@@ -1081,6 +1092,7 @@
 				5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */,
 				5381EFEF25C5E4F4004D2DF9 /* EditPairingsView.swift in Sources */,
 				536AEBF22540BBBB009EA107 /* MyCellarTypesView.swift in Sources */,
+				53942896272EF96F00D03C4A /* Publisher+asyncMap.swift in Sources */,
 				533F102D259FD63900DAA4B6 /* EmailLogInView.swift in Sources */,
 				533D8B8C2533B8DB00CE297E /* StarView.swift in Sources */,
 				53DD1E16257D7DED008C1DA7 /* EmailReauthView.swift in Sources */,

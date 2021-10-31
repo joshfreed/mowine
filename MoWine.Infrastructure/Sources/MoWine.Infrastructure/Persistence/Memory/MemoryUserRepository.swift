@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 import MoWine_Application
 import MoWine_Domain
 
@@ -46,23 +47,19 @@ public class MemoryUserRepository: UserRepository {
         }
     }
 
-    public func addFriend(owningUserId: UserId, friendId: UserId) async throws -> User {
+    public func getFriends(userId: UserId) -> AnyPublisher<[User], Error> {
         fatalError("Not implemented")
     }
 
-    public func removeFriend(owningUserId: UserId, friendId: UserId) async throws {
+    public func addFriend(owningUserId: UserId, friendId: UserId) async throws {}
 
-    }
+    public func removeFriend(owningUserId: UserId, friendId: UserId) async throws {}
 
     public func getUserById(_ id: UserId) async throws -> User? {
         users.first { $0.id == id }
     }
 
     public func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
-        fatalError("Not implemented")
-    }
-
-    public func getFriendsOfAndListenForUpdates(userId: UserId, completion: @escaping (Result<[User], Error>) -> ()) -> MoWineListenerRegistration {
         fatalError("Not implemented")
     }
 }
