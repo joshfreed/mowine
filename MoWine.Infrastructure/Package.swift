@@ -32,6 +32,7 @@ let package = Package(
                 "MoWine.Domain",
                 "SwiftyBeaver",
 
+                .product(name: "JFLib.Combine", package: "JFLib"),
                 .product(name: "JFLib.DI", package: "JFLib"),
                 .product(name: "JFLib.Mediator", package: "JFLib"),
 

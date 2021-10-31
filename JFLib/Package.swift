@@ -9,7 +9,9 @@ let package = Package(
         .iOS("15.0"), .macOS("12.0.0")
     ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
+        .library(
+            name: "JFLib.Combine",
+            targets: ["JFLib.Combine"]),
         .library(
             name: "JFLib.DI",
             targets: ["JFLib.DI"]),
@@ -19,6 +21,9 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
+        .target(
+            name: "JFLib.Combine",
+            dependencies: []),
         .target(
             name: "JFLib.DI",
             dependencies: []),

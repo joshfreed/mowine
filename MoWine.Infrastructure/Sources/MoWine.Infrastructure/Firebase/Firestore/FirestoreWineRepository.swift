@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import SwiftyBeaver
+import Combine
 import FirebaseFirestore
 import FirebaseFirestoreCombineSwift
-import SwiftyBeaver
 import FirebaseCrashlytics
+import JFLib_Combine
 import MoWine_Application
 import MoWine_Domain
-import Combine
 
 public class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()
