@@ -28,12 +28,7 @@ struct TopWinesList: View {
 
     var body: some View {
         List(topWines) { wine in
-            ZStack {
-                WineItemView(wine: wine)
-                NavigationLink(destination: WineDetailsView(wineId: wine.id)) {
-                    EmptyView()
-                }.hidden()
-            }
+            WineDetailsNavigationLink(wine: wine)
         }
         .listStyle(.plain)
     }

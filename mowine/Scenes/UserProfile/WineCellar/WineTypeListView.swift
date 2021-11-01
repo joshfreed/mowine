@@ -20,12 +20,7 @@ struct WineTypeListView: View {
 
     var body: some View {
         List(wines) { wine in
-            ZStack {
-                WineItemView(wine: wine)
-                NavigationLink(destination: WineDetailsView(wineId: wine.id)) {
-                    EmptyView()
-                }.hidden()
-            }
+            WineDetailsNavigationLink(wine: wine)
         }
         .listStyle(.plain)
         .task { await load() }
