@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct UserProfileHeaderView: View {
-    let userId: String
-    @StateObject var vm = UserProfileHeaderViewModel()
+    @ObservedObject var vm: UserProfileHeaderViewModel
     
     var body: some View {
         VStack(spacing: 8) {
@@ -23,18 +22,22 @@ struct UserProfileHeaderView: View {
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding(.vertical, 8)
         .background(Color("Primary"))
-        .task {
-            await vm.load(userId: userId)
-        }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("User Profile Header")
     }
 }
 
 struct UserProfileHeaderView_Previews: PreviewProvider {
+    static var vm: UserProfileHeaderViewModel = {
+        var vm = UserProfileHeaderViewModel()
+        vm.fullName = "Barry Jones"
+        return vm
+    }()
+
     static var previews: some View {
-        UserProfileHeaderView(userId: "U1")
+        UserProfileHeaderView(vm: vm)
             .addPreviewEnvironment()
             .addPreviewData()
+            .previewLayout(.sizeThatFits)
     }
 }

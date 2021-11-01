@@ -11,7 +11,6 @@ import Combine
 import JFLib_Mediator
 import MoWine_Application
 
-@MainActor
 class TopWinesViewModel: ObservableObject {
     @Published var topWines: [GetTopWinesQueryResponse.TopWine] = []
     @Published var errorLoadingWines = false
@@ -19,8 +18,9 @@ class TopWinesViewModel: ObservableObject {
     @Published var selectedWineId: String = ""
 
     @Injected private var mediator: Mediator
-    
-    func loadTopWines(userId: String) async {
+
+    @MainActor
+    func load(userId: String) async {
         errorLoadingWines = false
 
         do {

@@ -11,12 +11,14 @@ import MoWine_Application
 
 struct UserProfileView: View {
     let userId: String
-    
+
+    @StateObject private var profile = UserProfileHeaderViewModel()
+    @StateObject private var topWines = TopWinesViewModel()
     @State private var selectedView = 1
     
     var body: some View {
         VStack(spacing: 0) {
-            UserProfileHeaderView(userId: userId)
+            UserProfileHeaderView(vm: profile)
             
             Group {
                 Picker(selection: $selectedView, label: EmptyView(), content: {
@@ -29,7 +31,7 @@ struct UserProfileView: View {
             .padding(.vertical, 8)
             
             if selectedView == 1 {
-                TopWinesView(userId: userId)
+                TopWinesView(vm: topWines)
             } else {
                 WineCellarView(userId: userId)
             }
@@ -38,6 +40,8 @@ struct UserProfileView: View {
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(trailing: FriendButton(userId: userId))
+        .task { await profile.load(userId: userId) }
+        .task { await topWines.load(userId: userId) }
     }
 }
 

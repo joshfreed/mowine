@@ -25,6 +25,7 @@ public class DependencyInjection {
         container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         container.register { UpdateProfileCommandHandler(session: $0, userRepository: $1, createProfilePicture: $2) }
         container.register { CreateProfilePictureCommandHandler(userImageStorage: $0, imageResizer: $1, userRepository: $2) }
+        container.register(.unique) { GetPublicProfileQueryHandler(userRepository: $0) }
 
         // Friends
         container.register(.unique) { GetMyFriendsQueryHandler(session: $0, userRepository: $1) }
@@ -60,5 +61,6 @@ public class DependencyInjection {
         mediator.registerHandler(GetMyWinesHandler.self, for: GetMyWines.self)
         mediator.registerHandler(GetWinesByTypeQueryHandler.self, for: GetWinesByTypeQuery.self)
         mediator.registerHandler(GetTopWinesQueryHandler.self, for: GetTopWinesQuery.self)
+        mediator.registerHandler(GetPublicProfileQueryHandler.self, for: GetPublicProfileQuery.self)
     }
 }

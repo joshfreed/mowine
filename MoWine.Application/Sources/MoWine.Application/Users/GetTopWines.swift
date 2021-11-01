@@ -30,7 +30,13 @@ public struct GetTopWinesQueryResponse {
         public let name: String
         public let rating: Int
         public let type: String
-        public let userId: String
+
+        public init(id: String, name: String, rating: Int, type: String) {
+            self.id = id
+            self.name = name
+            self.rating = rating
+            self.type = type
+        }
     }
 }
 
@@ -45,7 +51,7 @@ public class GetTopWinesQueryHandler: BaseQueryHandler<GetTopWinesQuery, GetTopW
         let userId = UserId(string: query.userId)
         let topWines = try await wineRepository.getTopWines(userId: userId)
         let mappedWines = topWines.map {
-            GetTopWinesQueryResponse.TopWine(id: $0.id.asString, name: $0.name, rating: Int($0.rating), type: $0.type.name, userId: $0.userId.asString)
+            GetTopWinesQueryResponse.TopWine(id: $0.id.asString, name: $0.name, rating: Int($0.rating), type: $0.type.name)
         }
         return GetTopWinesQueryResponse(topWines: mappedWines)
     }

@@ -10,21 +10,15 @@ import SwiftUI
 import MoWine_Application
 
 struct TopWinesView: View {
-    let userId: String
-    @StateObject var vm = TopWinesViewModel()
+    @ObservedObject var vm: TopWinesViewModel
 
     var body: some View {
-        Group {
-            if vm.errorLoadingWines {
-                Text("There was an error loading these wines :(")
-            } else if vm.topWines.count == 0 {
-                Text("This user has not rated any wines yet")
-            } else {
-                TopWinesList(topWines: vm.topWines)
-            }
-        }
-        .task {
-            await vm.loadTopWines(userId: userId)
+        if vm.errorLoadingWines {
+            Text("There was an error loading these wines :(")
+        } else if vm.topWines.count == 0 {
+            Text("This user has not rated any wines yet")
+        } else {
+            TopWinesList(topWines: vm.topWines)
         }
     }
 }
@@ -46,6 +40,14 @@ struct TopWinesList: View {
 }
 
 struct TopWinesView_Previews: PreviewProvider {
+    static var vm: TopWinesViewModel = {
+        let vm = TopWinesViewModel()
+        vm.topWines = [
+            .init(id: "1", name: "First Wine", rating: 5, type: "Red")
+        ]
+        return vm
+    }()
+
     static var errorVm: TopWinesViewModel = {
         let vm = TopWinesViewModel()
         vm.errorLoadingWines = true
@@ -53,7 +55,7 @@ struct TopWinesView_Previews: PreviewProvider {
     }()
 
     static var previews: some View {
-        TopWinesView(userId: "U1")
+        TopWinesView(vm: vm)
             .addPreviewEnvironment()
             .addPreviewData()
     }

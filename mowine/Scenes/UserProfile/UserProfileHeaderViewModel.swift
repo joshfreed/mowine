@@ -7,23 +7,21 @@
 //
 
 import Foundation
-import Combine
+import JFLib_Mediator
 import MoWine_Application
 
-@MainActor
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""
     @Published var profilePicture: URL?
 
-    @Injected private var users: UsersService
+    @Injected private var mediator: Mediator
 
-    private var cancellables = Set<AnyCancellable>()
-
+    @MainActor
     func load(userId: String) async {
         do {
-            let user = try await users.getUserById(userId)
-            fullName = user.fullName
-            profilePicture = user.profilePictureUrl
+            let profile: GetPublicProfileResponse = try await mediator.send(GetPublicProfileQuery(userId: userId))
+            fullName = profile.fullName
+            profilePicture = profile.profilePictureUrl
         } catch {
             CrashReporter.shared.record(error: error)
         }
