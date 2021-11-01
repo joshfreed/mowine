@@ -35,7 +35,6 @@ struct WoWineApp: App {
     var body: some Scene {
         WindowGroup {
             TabbedRootView()
-                .addAppEnvironment()
                 .environmentObject(session)
                 .environmentObject(myCellar)
                 .environmentObject(myFriends)
@@ -110,13 +109,6 @@ struct WoWineApp: App {
         guard ProcessInfo.processInfo.arguments.contains("UI_TESTING") else { return }
         let uiTestingHelper = UITestHelper()
         await uiTestingHelper.logInExistingUser()
-    }
-}
-
-extension View {
-    func addAppEnvironment() -> some View {
-        self
-            .environmentObject(try! JFServices.resolve() as GetUserWinesByTypeQuery)
     }
 }
 

@@ -52,6 +52,10 @@ public class MemoryWineRepository: WineRepository {
         wines.filter { $0.userId == userId }
     }
 
+    public func getWines(userId: UserId, wineType: WineType) async throws -> [Wine] {
+        wines.filter { $0.userId == userId && $0.type == wineType }
+    }
+
     public func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let matched = self.wines.filter { $0.userId == userId && $0.type == wineType }

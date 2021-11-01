@@ -45,6 +45,10 @@ class MockWineRepository: WineRepository {
         Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 
+    func getWines(userId: UserId, wineType: WineType) async throws -> [Wine] {
+        []
+    }
+
     // MARK: save
 
     private var save_wasCalled = false

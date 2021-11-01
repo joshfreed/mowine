@@ -16,10 +16,14 @@ struct TopWinesView: View {
     @State private var selectedWineId: String = ""
 
     var body: some View {
-        WineListView(wines: vm.topWines) { wineId in
-            showWineDetails = true
-            selectedWineId = wineId
+        List(vm.topWines) { wine in
+            WineItemView(viewModel: wine)
+                .onTapGesture {
+                    showWineDetails = true
+                    selectedWineId = wine.id
+                }
         }
+        .listStyle(.plain)
         .task {
             await vm.loadTopWines(userId: userId)
         }

@@ -39,11 +39,11 @@ public class DependencyInjection {
         container.register(.unique) { GetWineByIdQueryHandler(wineRepository: $0) }
         container.register(.unique) { GetWineTypesQueryHandler(wineTypeRepository: $0) }
         container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
-        container.register(.singleton) { GetUserWinesByTypeQuery(wineRepository: $0) }
         container.register(.singleton) { GetWineDetailsQuery(wineRepository: $0) }
         container.register(.singleton) { CreateWineCommandHandler(wineRepository: $0, session: $1, createWineImages: $2, wineTypeRepository: $3) }
         container.register(.unique) { CreateWineImagesCommandHandler(wineImageStorage: $0, imageResizer: $1) }
         container.register(.unique) { GetMyWinesHandler(session: $0, repository: $1) }
+        container.register(.unique) { GetWinesByTypeQueryHandler(wineRepository: $0) }
     }
 
     public static func registerCommands(mediator: Mediator) {
@@ -58,5 +58,6 @@ public class DependencyInjection {
         mediator.registerHandler(GetWineByIdQueryHandler.self, for: GetWineByIdQuery.self)
         mediator.registerHandler(GetWineTypesQueryHandler.self, for: GetWineTypesQuery.self)
         mediator.registerHandler(GetMyWinesHandler.self, for: GetMyWines.self)
+        mediator.registerHandler(GetWinesByTypeQueryHandler.self, for: GetWinesByTypeQuery.self)
     }
 }

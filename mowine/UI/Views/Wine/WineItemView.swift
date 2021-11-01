@@ -42,6 +42,10 @@ extension WineItemView {
         self.init(wineId: wine.id, name: wine.name, type: wine.variety, rating: wine.rating)
     }
 
+    init(wine: GetWinesByTypeResponse.Wine) {
+        self.init(wineId: wine.id, name: wine.name, type: wine.type, rating: wine.rating)
+    }
+
     init(viewModel: WineItemViewModel, onTap: (String) -> Void = { _ in }) {
         self.init(wineId: viewModel.id, name: viewModel.name, type: viewModel.type, rating: viewModel.rating)
     }

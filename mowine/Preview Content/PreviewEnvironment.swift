@@ -11,7 +11,7 @@ import MoWine_Application
 
 extension View {
     func addPreviewEnvironment() -> some View {
-        addAppEnvironment()
+        self
             .environmentObject(ObservableSession())
             .environmentObject(MyCellar.fake())
             .environmentObject(MyFriends.fake())
