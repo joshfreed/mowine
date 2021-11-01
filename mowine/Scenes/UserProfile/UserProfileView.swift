@@ -14,6 +14,7 @@ struct UserProfileView: View {
 
     @StateObject private var profile = UserProfileHeaderViewModel()
     @StateObject private var topWines = TopWinesViewModel()
+    @StateObject private var cellar = WineCellarViewModel()
     @State private var selectedView = 1
     
     var body: some View {
@@ -33,7 +34,7 @@ struct UserProfileView: View {
             if selectedView == 1 {
                 TopWinesView(vm: topWines)
             } else {
-                WineCellarView(userId: userId)
+                WineCellarView(userId: userId, vm: cellar)
             }
             
             Spacer()
@@ -42,6 +43,7 @@ struct UserProfileView: View {
         .navigationBarItems(trailing: FriendButton(userId: userId))
         .task { await profile.load(userId: userId) }
         .task { await topWines.load(userId: userId) }
+        .task { await cellar.load(userId: userId) }
     }
 }
 

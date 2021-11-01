@@ -11,7 +11,7 @@ import MoWine_Application
 
 struct WineCellarView: View {
     let userId: String
-    @StateObject var vm = WineCellarViewModel()
+    @ObservedObject var vm: WineCellarViewModel
 
     var body: some View {
         Group {
@@ -30,15 +30,12 @@ struct WineCellarView: View {
             }
         }
         .padding(.horizontal)
-        .task {
-            await vm.load(userId: userId)
-        }
     }
 }
 
 struct WineCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        WineCellarView(userId: "U1")
+        WineCellarView(userId: "U1", vm: WineCellarViewModel())
             .addPreviewEnvironment()
             .addPreviewData()
     }
