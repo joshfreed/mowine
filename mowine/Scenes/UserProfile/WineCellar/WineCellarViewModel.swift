@@ -7,17 +7,19 @@
 //
 
 import Foundation
+import JFLib_Mediator
 import MoWine_Application
 
 @MainActor
 class WineCellarViewModel: ObservableObject {
     @Published var types: [String] = []
 
-    @Injected private var getUserCellarQuery: GetUserCellarQuery
+    @Injected private var mediator: Mediator
 
     func load(userId: String) async {
         do {
-            types = try await getUserCellarQuery.execute(userId: userId)
+            let response: GetUserCellarResponse = try await mediator.send(GetUserCellar(userId: userId))
+            types = response.types
         } catch {
             CrashReporter.shared.record(error: error)
         }

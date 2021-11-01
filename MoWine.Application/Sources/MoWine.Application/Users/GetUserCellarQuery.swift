@@ -1,25 +1,40 @@
 //
-//  GetUserCellarQuery.swift
+//  GetUserCellary.swift
 //  GetUserCellarQuery
 //
 //  Created by Josh Freed on 9/14/21.
 //
 
 import Foundation
+import JFLib_Mediator
 import MoWine_Domain
 
-public class GetUserCellarQuery {
-    private let wineTypeRepository: WineTypeRepository
+public struct GetUserCellar: JFMQuery {
+    public let userId: String
+    
+    public init(userId: String) {
+        self.userId = userId
+    }
+}
+
+public struct GetUserCellarResponse {
+    public let types: [String]
+
+    public init(types: [String]) {
+        self.types = types
+    }
+}
+
+public class GetUserCellarHandler: BaseQueryHandler<GetUserCellar, GetUserCellarResponse> {
     private let wineRepository: WineRepository
 
-    public init(wineTypeRepository: WineTypeRepository, wineRepository: WineRepository) {
-        self.wineTypeRepository = wineTypeRepository
+    public init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public func execute(userId: String) async throws -> [String] {
-        let wineTypeNames = try await wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: UserId(string: userId))
-        let allWineTypes = try await wineTypeRepository.getAll()
-        return allWineTypes.filter { wineTypeNames.contains($0.name) }.map { $0.name }
+    public override func handle(query: GetUserCellar) async throws -> GetUserCellarResponse {
+        let userId = UserId(string: query.userId)
+        let wineTypeNames = try await wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: userId)
+        return GetUserCellarResponse(types: wineTypeNames)
     }
 }

@@ -17,31 +17,26 @@ struct WineTypeListView: View {
     @Injected private var mediator: Mediator
 
     @State private var wines: [GetWinesByTypeResponse.Wine] = []
-    @State private var showWineDetails = false
-    @State private var selectedWineId: String = ""
 
     var body: some View {
-        VStack {
-            List(wines) { wine in
+        List(wines) { wine in
+            ZStack {
                 WineItemView(wine: wine)
-                    .onTapGesture {
-                        showWineDetails = true
-                        selectedWineId = wine.id
-                    }
+                NavigationLink(destination: WineDetailsView(wineId: wine.id)) {
+                    EmptyView()
+                }.hidden()
             }
-            .listStyle(.plain)
-            .task {
-                do {
-                    let response: GetWinesByTypeResponse = try await mediator.send(GetWinesByTypeQuery(userId: userId, type: typeName))
-                    wines = response.wines
-                } catch {
-                    CrashReporter.shared.record(error: error)
-                }
-            }
+        }
+        .listStyle(.plain)
+        .task { await load() }
+    }
 
-            NavigationLink(destination: WineDetailsView(wineId: selectedWineId), isActive: $showWineDetails) {
-                EmptyView()
-            }
+    private func load() async {
+        do {
+            let response: GetWinesByTypeResponse = try await mediator.send(GetWinesByTypeQuery(userId: userId, type: typeName))
+            wines = response.wines
+        } catch {
+            CrashReporter.shared.record(error: error)
         }
     }
 }
