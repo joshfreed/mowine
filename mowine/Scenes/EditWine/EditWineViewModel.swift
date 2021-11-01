@@ -21,19 +21,20 @@ class EditWineViewModel: ObservableObject {
     @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     
     let form = EditWineFormModel()
-    private var wineId: String
+    private var wineId: String!
     @Injected private var mediator: Mediator
 
-    init(wineId: String) {
+    init() {
         SwiftyBeaver.debug("init")
-        self.wineId = wineId
     }
     
     deinit {
         SwiftyBeaver.debug("deinit")
     }
 
-    func load() async {
+    func load(wineId: String) async {
+        self.wineId = wineId
+
         async let getWineTypesResponse: GetWineTypesQueryResponse = mediator.send(GetWineTypesQuery())
         async let getWineResponse: GetWineByIdQueryResponse? = mediator.send(GetWineByIdQuery(wineId: wineId))
         async let wineImage: Data? = mediator.send(GetWineImageQuery(wineId: wineId))

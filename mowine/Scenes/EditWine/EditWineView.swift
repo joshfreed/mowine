@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct EditWineView: View {
-    @StateObject var vm: EditWineViewModel
-    @Environment(\.dismiss) var dismiss
+    let wineId: String
+    @StateObject private var vm = EditWineViewModel()
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
@@ -29,7 +30,7 @@ struct EditWineView: View {
         .loading(isShowing: vm.isSaving, text: "Saving...")
         .accentColor(.mwSecondary)
         .task {
-            await vm.load()
+            await vm.load(wineId: wineId)
         }
         .sheet(isPresented: $vm.isShowingSheet) {
             ImagePickerView(sourceType: vm.pickerSourceType) { image in
@@ -65,7 +66,8 @@ struct EditWineView: View {
 
 struct EditWineView_Previews: PreviewProvider {
     static var previews: some View {
-        EditWineView(vm: .init(wineId: ""))
+        EditWineView(wineId: "W1")
             .addPreviewEnvironment()
+            .addPreviewData()
     }
 }

@@ -42,7 +42,7 @@ struct MyCellarSearchResults: View {
             }
             .listStyle(.plain)
             .sheet(item: $selectedWine) { wine in
-                EditWineView(vm: .init(wineId: wine.id))
+                EditWineView(wineId: wine.id)
             }
         }
     }

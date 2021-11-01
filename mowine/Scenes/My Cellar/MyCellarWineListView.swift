@@ -35,7 +35,7 @@ struct MyCellarWineListView: View {
         .searchable(text: $searchText)
         .accessibilityIdentifier("WineCellarListView")
         .sheet(item: $selectedWine) { wine in
-            EditWineView(vm: .init(wineId: wine.id))
+            EditWineView(wineId: wine.id)
         }
     }
 }
