@@ -12,29 +12,46 @@ import MoWine_Application
 struct TopWinesView: View {
     let userId: String
     @StateObject var vm = TopWinesViewModel()
-    @State private var showWineDetails = false
-    @State private var selectedWineId: String = ""
 
     var body: some View {
-        List(vm.topWines) { wine in
-            WineItemView(viewModel: wine)
-                .onTapGesture {
-                    showWineDetails = true
-                    selectedWineId = wine.id
-                }
+        Group {
+            if vm.errorLoadingWines {
+                Text("There was an error loading these wines :(")
+            } else if vm.topWines.count == 0 {
+                Text("This user has not rated any wines yet")
+            } else {
+                TopWinesList(topWines: vm.topWines)
+            }
         }
-        .listStyle(.plain)
         .task {
             await vm.loadTopWines(userId: userId)
-        }
-
-        NavigationLink(destination: WineDetailsView(wineId: selectedWineId), isActive: $showWineDetails) {
-            EmptyView()
         }
     }
 }
 
+struct TopWinesList: View {
+    let topWines: [GetTopWinesQueryResponse.TopWine]
+
+    var body: some View {
+        List(topWines) { wine in
+            ZStack {
+                WineItemView(wine: wine)
+                NavigationLink(destination: WineDetailsView(wineId: wine.id)) {
+                    EmptyView()
+                }.hidden()
+            }
+        }
+        .listStyle(.plain)
+    }
+}
+
 struct TopWinesView_Previews: PreviewProvider {
+    static var errorVm: TopWinesViewModel = {
+        let vm = TopWinesViewModel()
+        vm.errorLoadingWines = true
+        return vm
+    }()
+
     static var previews: some View {
         TopWinesView(userId: "U1")
             .addPreviewEnvironment()

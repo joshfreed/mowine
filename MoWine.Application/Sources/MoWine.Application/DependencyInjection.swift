@@ -38,7 +38,7 @@ public class DependencyInjection {
         container.register(.unique) { GetWineThumbnailQueryHandler(wineImageStorage: $0) }
         container.register(.unique) { GetWineByIdQueryHandler(wineRepository: $0) }
         container.register(.unique) { GetWineTypesQueryHandler(wineTypeRepository: $0) }
-        container.register(.singleton) { GetTopWinesQuery(wineRepository: $0) }
+        container.register(.unique) { GetTopWinesQueryHandler(wineRepository: $0) }
         container.register(.singleton) { GetWineDetailsQuery(wineRepository: $0) }
         container.register(.singleton) { CreateWineCommandHandler(wineRepository: $0, session: $1, createWineImages: $2, wineTypeRepository: $3) }
         container.register(.unique) { CreateWineImagesCommandHandler(wineImageStorage: $0, imageResizer: $1) }
@@ -59,5 +59,6 @@ public class DependencyInjection {
         mediator.registerHandler(GetWineTypesQueryHandler.self, for: GetWineTypesQuery.self)
         mediator.registerHandler(GetMyWinesHandler.self, for: GetMyWines.self)
         mediator.registerHandler(GetWinesByTypeQueryHandler.self, for: GetWinesByTypeQuery.self)
+        mediator.registerHandler(GetTopWinesQueryHandler.self, for: GetTopWinesQuery.self)
     }
 }

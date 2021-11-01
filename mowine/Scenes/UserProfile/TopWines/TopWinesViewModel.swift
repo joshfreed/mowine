@@ -8,35 +8,32 @@
 
 import Foundation
 import Combine
+import JFLib_Mediator
 import MoWine_Application
 
 @MainActor
 class TopWinesViewModel: ObservableObject {
-    @Published var topWines: [WineItemViewModel] = []
+    @Published var topWines: [GetTopWinesQueryResponse.TopWine] = []
     @Published var errorLoadingWines = false
+    @Published var showWineDetails = false
+    @Published var selectedWineId: String = ""
 
-    @Injected private var getTopWines: GetTopWinesQuery
+    @Injected private var mediator: Mediator
     
     func loadTopWines(userId: String) async {
         errorLoadingWines = false
 
         do {
-            let topWines = try await getTopWines.execute(userId: userId)
-            self.topWines = topWines.map { .fromTopWine($0) }
+            let response: GetTopWinesQueryResponse = try await mediator.send(GetTopWinesQuery(userId: userId))
+            self.topWines = response.topWines
         } catch {
             CrashReporter.shared.record(error: error)
             errorLoadingWines = true
         }
     }
-}
 
-extension WineItemViewModel {
-    static func fromTopWine(_ topWine: GetTopWinesQuery.TopWine) -> WineItemViewModel {
-        WineItemViewModel(
-            id: topWine.id,
-            name: topWine.name,
-            rating: topWine.rating,
-            type: topWine.type
-        )
+    func select(wine: GetTopWinesQueryResponse.TopWine) {
+        showWineDetails = true
+        selectedWineId = wine.id
     }
 }

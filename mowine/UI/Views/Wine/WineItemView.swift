@@ -46,14 +46,14 @@ extension WineItemView {
         self.init(wineId: wine.id, name: wine.name, type: wine.type, rating: wine.rating)
     }
 
-    init(viewModel: WineItemViewModel, onTap: (String) -> Void = { _ in }) {
-        self.init(wineId: viewModel.id, name: viewModel.name, type: viewModel.type, rating: viewModel.rating)
+    init(wine: GetTopWinesQueryResponse.TopWine) {
+        self.init(wineId: wine.id, name: wine.name, type: wine.type, rating: wine.rating)
     }
 }
 
 struct WineItemView_Previews: PreviewProvider {
     static var previews: some View {
-        WineItemView(viewModel: WineItemViewModel(id: "A", name: "2019 Fancypants", rating: 3, type: "Merlot"))
+        WineItemView(wineId: "A", name: "2019 Fancypants", type: "Merlot", rating: 3)
             .addPreviewEnvironment()
             .previewLayout(.sizeThatFits)
     }
