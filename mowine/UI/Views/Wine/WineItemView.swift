@@ -46,7 +46,7 @@ extension WineItemView {
         self.init(wineId: wine.id, name: wine.name, type: wine.type, rating: wine.rating)
     }
 
-    init(wine: GetTopWinesQueryResponse.TopWine) {
+    init(wine: GetTopWinesResponse.TopWine) {
         self.init(wineId: wine.id, name: wine.name, type: wine.type, rating: wine.rating)
     }
 }

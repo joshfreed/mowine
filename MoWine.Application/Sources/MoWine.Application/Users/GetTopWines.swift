@@ -18,10 +18,10 @@ public struct GetTopWinesQuery: JFMQuery {
     }
 }
 
-public struct GetTopWinesQueryResponse {
+public struct GetTopWinesResponse {
     public let topWines: [TopWine]
 
-    public init(topWines: [GetTopWinesQueryResponse.TopWine]) {
+    public init(topWines: [GetTopWinesResponse.TopWine]) {
         self.topWines = topWines
     }
 
@@ -40,19 +40,19 @@ public struct GetTopWinesQueryResponse {
     }
 }
 
-public class GetTopWinesQueryHandler: BaseQueryHandler<GetTopWinesQuery, GetTopWinesQueryResponse> {
+public class GetTopWinesQueryHandler: BaseQueryHandler<GetTopWinesQuery, GetTopWinesResponse> {
     private let wineRepository: WineRepository
 
     public init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public override func handle(query: GetTopWinesQuery) async throws -> GetTopWinesQueryResponse {
+    public override func handle(query: GetTopWinesQuery) async throws -> GetTopWinesResponse {
         let userId = UserId(string: query.userId)
         let topWines = try await wineRepository.getTopWines(userId: userId)
         let mappedWines = topWines.map {
-            GetTopWinesQueryResponse.TopWine(id: $0.id.asString, name: $0.name, rating: Int($0.rating), type: $0.type.name)
+            GetTopWinesResponse.TopWine(id: $0.id.asString, name: $0.name, rating: Int($0.rating), type: $0.type.name)
         }
-        return GetTopWinesQueryResponse(topWines: mappedWines)
+        return GetTopWinesResponse(topWines: mappedWines)
     }
 }

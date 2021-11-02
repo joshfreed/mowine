@@ -24,7 +24,7 @@ struct TopWinesView: View {
 }
 
 struct TopWinesList: View {
-    let topWines: [GetTopWinesQueryResponse.TopWine]
+    let topWines: [GetTopWinesResponse.TopWine]
 
     var body: some View {
         List(topWines) { wine in

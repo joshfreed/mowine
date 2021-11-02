@@ -12,7 +12,7 @@ import JFLib_Mediator
 import MoWine_Application
 
 class TopWinesViewModel: ObservableObject {
-    @Published var topWines: [GetTopWinesQueryResponse.TopWine] = []
+    @Published var topWines: [GetTopWinesResponse.TopWine] = []
     @Published var errorLoadingWines = false
     @Published var showWineDetails = false
     @Published var selectedWineId: String = ""
@@ -24,7 +24,7 @@ class TopWinesViewModel: ObservableObject {
         errorLoadingWines = false
 
         do {
-            let response: GetTopWinesQueryResponse = try await mediator.send(GetTopWinesQuery(userId: userId))
+            let response: GetTopWinesResponse = try await mediator.send(GetTopWinesQuery(userId: userId))
             self.topWines = response.topWines
         } catch {
             CrashReporter.shared.record(error: error)
@@ -32,7 +32,7 @@ class TopWinesViewModel: ObservableObject {
         }
     }
 
-    func select(wine: GetTopWinesQueryResponse.TopWine) {
+    func select(wine: GetTopWinesResponse.TopWine) {
         showWineDetails = true
         selectedWineId = wine.id
     }

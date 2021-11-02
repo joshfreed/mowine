@@ -1,5 +1,5 @@
 //
-//  GetWineDetailsQuery.swift
+//  GetWineDetails.swift
 //  mowine
 //
 //  Created by Josh Freed on 4/3/21.
