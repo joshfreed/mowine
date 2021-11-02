@@ -11,7 +11,7 @@ import MoWine_Application
 
 struct SearchUsersView: View {
     let hasSearched: Bool
-    let searchResults: [UsersService.UserSearchResult]
+    let searchResults: [SearchUsersResponse.User]
 
     var body: some View {
         if hasSearched {
@@ -49,7 +49,7 @@ struct SearchUsersMessage: View {
 }
 
 struct SearchFriendsView_Previews: PreviewProvider {
-    static var searchResults: [UsersService.UserSearchResult] = [
+    static var searchResults: [SearchUsersResponse.User] = [
         .init(id: "", email: "", fullName: "Franky Twofingers", profilePictureUrl: nil)
     ]
 

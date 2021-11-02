@@ -16,7 +16,7 @@ struct MyCellarView: View {
     
     var body: some View {
         NavigationView {
-            InnerCellarView(hasSearched: !searchText.isEmpty, searchResults:searchResults)
+            InnerCellarView(hasSearched: !searchText.isEmpty, searchResults: searchResults)
                 .navigationBarTitle("My Cellar")
         }
         .navigationViewStyle(StackNavigationViewStyle())

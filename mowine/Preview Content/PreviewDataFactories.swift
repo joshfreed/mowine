@@ -26,10 +26,4 @@ extension EmailReauthViewModel {
     }
 }
 
-extension UsersService {
-    static func make() -> UsersService {
-        UsersService(session: FakeSession(), userRepository: MemoryUserRepository())
-    }
-}
-
 #endif

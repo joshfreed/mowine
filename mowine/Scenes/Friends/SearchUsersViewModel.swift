@@ -9,24 +9,25 @@
 import Foundation
 import Combine
 import SwiftyBeaver
+import JFLib_Mediator
 import MoWine_Application
 
 @MainActor
 class SearchUsersViewModel: ObservableObject {
-    @Published var hasSearched = false
-    @Published var searchResults: [UsersService.UserSearchResult] = []
+    @Published var searchText: String = ""
+    @Published private(set) var hasSearched = false
+    @Published private(set) var searchResults: [SearchUsersResponse.User] = []
 
-    @Injected private var users: UsersService
+    @Injected private var mediator: Mediator
 
     private var cancellable: AnyCancellable?
-    private var searchTextSubject = PassthroughSubject<String, Never>()
 
     init() {
         registerListeners()
     }
     
     private func registerListeners() {
-        cancellable = searchTextSubject
+        cancellable = $searchText
             .print()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .removeDuplicates()
@@ -36,10 +37,6 @@ class SearchUsersViewModel: ObservableObject {
                 }
             }
     }
-    
-    func searchUsers(matching searchText: String) {
-        searchTextSubject.send(searchText)
-    }
 
     private func searchUsers(_ searchText: String) async {
         if searchText.isEmpty {
@@ -47,8 +44,8 @@ class SearchUsersViewModel: ObservableObject {
             searchResults = []
         } else {
             do {
-                let users = try await users.searchUsers(for: searchText)
-                searchResults = users.map { .fromUser($0) }
+                let response: SearchUsersResponse = try await mediator.send(SearchUsersQuery(searchString: searchText))
+                searchResults = response.users
                 hasSearched = true
             } catch {
                 CrashReporter.shared.record(error: error)

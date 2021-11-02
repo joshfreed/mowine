@@ -10,21 +10,17 @@ import SwiftUI
 import MoWine_Application
 
 struct FriendsPage: View {
-    @EnvironmentObject var session: ObservableSession
-    @StateObject var vm = SearchUsersViewModel()
-    @State private var searchText: String = ""
+    @EnvironmentObject private var session: ObservableSession
+    @StateObject private var vm = SearchUsersViewModel()
 
     var body: some View {
         if session.isAnonymous {
             AnonymousUserView()
         } else {
             NavigationView {
-                SearchableFriendsPage(vm: vm)
+                SearchableFriendsPage(hasSearched: vm.hasSearched, searchResults: vm.searchResults)
                     .navigationBarTitle("Friends")
-                    .searchable(text: $searchText)
-                    .onChange(of: searchText) {
-                        vm.searchUsers(matching: $0)
-                    }
+                    .searchable(text: $vm.searchText)
             }
             .accentColor(.mwSecondary)
             .analyticsScreen(name: "My Friends", class: "FriendsPage")
@@ -34,11 +30,13 @@ struct FriendsPage: View {
 
 struct SearchableFriendsPage: View {
     @Environment(\.isSearching) var isSearching
-    @ObservedObject var vm: SearchUsersViewModel
+
+    let hasSearched: Bool
+    let searchResults: [SearchUsersResponse.User]
 
     var body: some View {
         if isSearching {
-            SearchUsersView(hasSearched: vm.hasSearched, searchResults: vm.searchResults)
+            SearchUsersView(hasSearched: hasSearched, searchResults: searchResults)
         } else {
             MyFriendsListView()
         }

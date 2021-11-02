@@ -21,11 +21,11 @@ public class DependencyInjection {
 
         // Users
         container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
-        container.register(.singleton) { UsersService(session: $0, userRepository: $1) }
         container.register { UpdateProfileCommandHandler(session: $0, userRepository: $1, createProfilePicture: $2) }
         container.register { CreateProfilePictureCommandHandler(userImageStorage: $0, imageResizer: $1, userRepository: $2) }
         container.register(.unique) { GetPublicProfileQueryHandler(userRepository: $0) }
         container.register(.unique) { GetUserCellarHandler(wineRepository: $0) }
+        container.register(.unique) { SearchUsersQueryHandler(session: $0, userRepository: $1) }
 
         // Friends
         container.register(.unique) { GetMyFriendsQueryHandler(session: $0, userRepository: $1) }
@@ -63,5 +63,6 @@ public class DependencyInjection {
         mediator.registerHandler(GetTopWinesQueryHandler.self, for: GetTopWinesQuery.self)
         mediator.registerHandler(GetPublicProfileQueryHandler.self, for: GetPublicProfileQuery.self)
         mediator.registerHandler(GetUserCellarHandler.self, for: GetUserCellar.self)
+        mediator.registerHandler(SearchUsersQueryHandler.self, for: SearchUsersQuery.self)
     }
 }

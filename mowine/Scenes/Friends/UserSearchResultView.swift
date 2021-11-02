@@ -10,7 +10,7 @@ import SwiftUI
 import MoWine_Application
 
 struct UserSearchResultView: View {
-    let user: UsersService.UserSearchResult
+    let user: SearchUsersResponse.User
     
     var body: some View {
         HStack(spacing: 8) {
@@ -27,8 +27,8 @@ struct UserSearchResultView: View {
 }
 
 struct UserSearchResultView_Previews: PreviewProvider {
-    static var user1 = UsersService.UserSearchResult(id: "1", email: "test@test.com", fullName: "Test Guy", profilePictureUrl: nil)
-    static var user4 = UsersService.UserSearchResult(id: "4", email: "test@test.com", fullName: "Friendly Friend", profilePictureUrl: nil)
+    static var user1 = SearchUsersResponse.User(id: "1", email: "test@test.com", fullName: "Test Guy", profilePictureUrl: nil)
+    static var user4 = SearchUsersResponse.User(id: "4", email: "test@test.com", fullName: "Friendly Friend", profilePictureUrl: nil)
 
     static var previews: some View {
         UserSearchResultView(user: user1)
