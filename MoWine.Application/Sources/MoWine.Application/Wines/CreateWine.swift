@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import SwiftyBeaver
+import JFLib_Mediator
 import MoWine_Domain
 
-public struct CreateWineCommand {
+public struct CreateWineCommand: JFMCommand {
     public var wineType: String
     public var wineVariety: String?
     public var image: Data?
@@ -26,30 +26,25 @@ public struct CreateWineCommand {
     }
 }
 
-open class CreateWineCommandHandler {
-    let wineRepository: WineRepository
-    let session: Session
-    let createWineImages: CreateWineImagesCommandHandler
-    let wineTypeRepository: WineTypeRepository
+class CreateWineCommandHandler: BaseCommandHandler<CreateWineCommand> {
+    private let wineRepository: WineRepository
+    private let session: Session
+    private let createWineImages: CreateWineImagesCommandHandler
+    private let wineTypeRepository: WineTypeRepository
 
-    public init(
+    init(
         wineRepository: WineRepository,
         session: Session,
         createWineImages: CreateWineImagesCommandHandler,
         wineTypeRepository: WineTypeRepository
     ) {
-        SwiftyBeaver.verbose("CreateWineCommandHandler::init")
         self.wineRepository = wineRepository
         self.session = session
         self.createWineImages = createWineImages
         self.wineTypeRepository = wineTypeRepository
     }
 
-    deinit {
-        SwiftyBeaver.verbose("CreateWineCommandHandler::deinit")
-    }
-
-    public func createWine(_ command: CreateWineCommand) async throws {
+    override func handle(command: CreateWineCommand) async throws {
         guard let wineType = try await wineTypeRepository.getWineType(named: command.wineType) else {
             throw ApplicationErrors.wineTypeNotFound
         }

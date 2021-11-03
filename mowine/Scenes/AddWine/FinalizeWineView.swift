@@ -7,13 +7,15 @@
 //
 
 import SwiftUI
+import JFLib_Mediator
 import MoWine_Application
 
 struct FinalizeWineView: View {
-    @EnvironmentObject var vm: AddWineViewModel
-    @Injected var createWineCommandHandler: CreateWineCommandHandler
     @ObservedObject var model: NewWineModel
-    
+
+    @EnvironmentObject private var vm: AddWineViewModel
+    @Injected private var mediator: Mediator
+
     @State private var isSaving = false
     @State private var isErrorSaving = false
     @State private var errorMessage = ""
@@ -64,7 +66,7 @@ struct FinalizeWineView: View {
                 wineVariety: model.wineVariety?.name,
                 image: model.image?.pngData()
             )
-            try await createWineCommandHandler.createWine(command)
+            try await mediator.send(command)
             vm.closeModal = true
         } catch {
             isSaving = false
