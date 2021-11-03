@@ -7,20 +7,20 @@
 //
 
 import SwiftUI
+import JFLib_Mediator
 import MoWine_Application
 
 struct WineDetailsView: View {
     let wineId: String
 
-    @Injected private var query: GetWineDetailsQuery
-
+    @Injected private var mediator: Mediator
     @Environment(\.dismiss) private var dismiss
-
+    @State private var wine: GetWineDetailsResponse?
     @State private var wineNotFound = false
 
     var body: some View {
         Group {
-            if let wine = query.wine {
+            if let wine = wine {
                 VStack(spacing: 0) {
                     WineDetailsHeaderView(wine: wine)
                     WineDetailsFormView(wine: wine)
@@ -41,63 +41,11 @@ struct WineDetailsView: View {
 
     func loadWineDetails() async {
         do {
-            try await query.execute(wineId: wineId)
-        } catch GetWineDetailsQuery.Errors.wineNotFound {
+            wine = try await mediator.send(GetWineDetails(wineId: wineId))
+        } catch GetWineDetailsErrors.wineNotFound {
             wineNotFound = true
         } catch {
             CrashReporter.shared.record(error: error)
-        }
-    }
-}
-
-struct WineDetailsHeaderView: View {
-    let wine: GetWineDetailsQuery.WineDetails
-
-    var body: some View {
-        VStack(spacing: 16) {
-            WineThumbnail(wineId: wine.id, size: 172)
-            Text(wine.name)
-                .foregroundColor(.white)
-                .fontWeight(.black)
-                .font(.system(size: 28))
-            RatingLabel(rating: wine.rating, starSize: 30, showEmptyStars: false)
-        }
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .padding([.top, .bottom], 24)
-        .background(Color("Primary"))
-    }
-}
-
-struct WineDetailsFormView: View {
-    let wine: GetWineDetailsQuery.WineDetails
-
-    var body: some View {
-        Form {
-            Section(header: Text("")) {
-                HStack {
-                    Text("Variety")
-                    Spacer()
-                    Text(wine.varietyName)
-                }
-
-                HStack {
-                    Text("Type")
-                    Spacer()
-                    Text(wine.typeName)
-                }
-
-                HStack {
-                    Text("Price")
-                    Spacer()
-                    Text(wine.price)
-                }
-            }
-
-            Section(header: Text("Where can I buy this?")) {
-                HStack {
-                    Text(wine.location)
-                }
-            }
         }
     }
 }

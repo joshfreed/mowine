@@ -133,6 +133,8 @@
 		53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
 		53F5AC171E2176090067AB62 /* AddWineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5AC161E2176090067AB62 /* AddWineTests.swift */; };
+		53F96421273327AE0066E2E6 /* WineDetailsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F96420273327AE0066E2E6 /* WineDetailsFormView.swift */; };
+		53F96423273327CE0066E2E6 /* WineDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F96422273327CE0066E2E6 /* WineDetailsHeaderView.swift */; };
 		53FABEDF2720C99700C3C838 /* MoWine.Infrastructure in Frameworks */ = {isa = PBXBuildFile; productRef = 53FABEDE2720C99700C3C838 /* MoWine.Infrastructure */; };
 		53FAED0025EAF7B40099B2E1 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAECFF25EAF7B40099B2E1 /* UserProfileView.swift */; };
 		53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FAED0325EAF9C30099B2E1 /* UserProfileHeaderView.swift */; };
@@ -306,6 +308,8 @@
 		53F5AC121E2176090067AB62 /* mowineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5AC161E2176090067AB62 /* AddWineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineTests.swift; sourceTree = "<group>"; };
 		53F5AC181E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53F96420273327AE0066E2E6 /* WineDetailsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineDetailsFormView.swift; sourceTree = "<group>"; };
+		53F96422273327CE0066E2E6 /* WineDetailsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineDetailsHeaderView.swift; sourceTree = "<group>"; };
 		53FABEDD2720C80200C3C838 /* MoWine.Infrastructure */ = {isa = PBXFileReference; lastKnownFileType = folder; path = MoWine.Infrastructure; sourceTree = "<group>"; };
 		53FAECFF25EAF7B40099B2E1 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		53FAED0325EAF9C30099B2E1 /* UserProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -371,6 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				53BC1C4F2619031B00ECD078 /* WineDetailsView.swift */,
+				53F96420273327AE0066E2E6 /* WineDetailsFormView.swift */,
+				53F96422273327CE0066E2E6 /* WineDetailsHeaderView.swift */,
 			);
 			path = WineDetails;
 			sourceTree = "<group>";
@@ -1092,6 +1098,7 @@
 				533C2E9D25DDB43700795CCE /* FriendsPage.swift in Sources */,
 				5381EFEB25C5C8B6004D2DF9 /* EditWineView.swift in Sources */,
 				53FAED0025EAF7B40099B2E1 /* UserProfileView.swift in Sources */,
+				53F96421273327AE0066E2E6 /* WineDetailsFormView.swift in Sources */,
 				53DD1E1A257D84DC008C1DA7 /* FancySecureField.swift in Sources */,
 				536AEBFA2540BC3F009EA107 /* MyCellarSearchView.swift in Sources */,
 				53F47F0B25853F1600910BDC /* PrimaryButton.swift in Sources */,
@@ -1101,6 +1108,7 @@
 				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				53D3B44025A0FB3400F15974 /* EmailLogInViewModel.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
+				53F96423273327CE0066E2E6 /* WineDetailsHeaderView.swift in Sources */,
 				53C91F5725740E780065E778 /* GoogleLoginButton.swift in Sources */,
 				53018B8E259FC6E0006A7008 /* SignUpView.swift in Sources */,
 				53E2FA4625DDB87C00658637 /* SearchUsersView.swift in Sources */,
