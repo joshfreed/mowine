@@ -25,14 +25,14 @@ public struct GetUserCellarResponse {
     }
 }
 
-public class GetUserCellarHandler: BaseQueryHandler<GetUserCellar, GetUserCellarResponse> {
+class GetUserCellarHandler: BaseQueryHandler<GetUserCellar, GetUserCellarResponse> {
     private let wineRepository: WineRepository
 
-    public init(wineRepository: WineRepository) {
+    init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public override func handle(query: GetUserCellar) async throws -> GetUserCellarResponse {
+    override func handle(query: GetUserCellar) async throws -> GetUserCellarResponse {
         let userId = UserId(string: query.userId)
         let wineTypeNames = try await wineRepository.getWineTypeNamesWithAtLeastOneWineLogged(userId: userId)
         return GetUserCellarResponse(types: wineTypeNames)

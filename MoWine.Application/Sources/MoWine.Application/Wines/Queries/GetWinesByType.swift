@@ -34,14 +34,14 @@ public struct GetWinesByTypeResponse {
     }
 }
 
-public class GetWinesByTypeQueryHandler: BaseQueryHandler<GetWinesByTypeQuery, GetWinesByTypeResponse> {
+class GetWinesByTypeQueryHandler: BaseQueryHandler<GetWinesByTypeQuery, GetWinesByTypeResponse> {
     private let wineRepository: WineRepository
 
-    public init(wineRepository: WineRepository) {
+    init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public override func handle(query: GetWinesByTypeQuery) async throws -> GetWinesByTypeResponse {
+    override func handle(query: GetWinesByTypeQuery) async throws -> GetWinesByTypeResponse {
         let userId = UserId(string: query.userId)
         let wineType = WineType(name: query.type) // Hmm, get from repository?
 

@@ -7,16 +7,17 @@
 //
 
 import SwiftUI
+import JFLib_Mediator
 import MoWine_Application
 
 class SelectTypeViewModel: ObservableObject {
     @Published var types: [AddWine.WineType] = []
 
-    @Injected private var getWineTypesQueryHandler: GetWineTypesQueryHandler
+    @Injected private var mediator: Mediator
 
     func load() async {
         do {
-            let response = try await getWineTypesQueryHandler.handle(query: .init())
+            let response: GetWineTypesQueryResponse = try await mediator.send(GetWineTypesQuery())
             types = response.wineTypes.map { typeModel in
                 let varieties = typeModel.varieties.map { varietyModel in AddWine.WineVariety(name: varietyModel.name) }
                 return AddWine.WineType(name: typeModel.name, varieties: varieties)

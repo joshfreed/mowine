@@ -17,14 +17,14 @@ public struct GetWineImageQuery: JFMQuery {
     }
 }
 
-public class GetWineImageQueryHandler: BaseQueryHandler<GetWineImageQuery, Data?> {
-    let wineImageStorage: WineImageStorage
+class GetWineImageQueryHandler: BaseQueryHandler<GetWineImageQuery, Data?> {
+    private let wineImageStorage: WineImageStorage
 
-    public init(wineImageStorage: WineImageStorage) {
+    init(wineImageStorage: WineImageStorage) {
         self.wineImageStorage = wineImageStorage
     }
 
-    public override func handle(query: GetWineImageQuery) async throws -> Data? {
+    override func handle(query: GetWineImageQuery) async throws -> Data? {
         let wineId = WineId(string: query.wineId)
 
         do {

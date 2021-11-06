@@ -27,14 +27,14 @@ public struct GetPublicProfileResponse {
     }
 }
 
-public class GetPublicProfileQueryHandler: BaseQueryHandler<GetPublicProfileQuery, GetPublicProfileResponse> {
+class GetPublicProfileQueryHandler: BaseQueryHandler<GetPublicProfileQuery, GetPublicProfileResponse> {
     private let userRepository: UserRepository
 
-    public init(userRepository: UserRepository) {
+    init(userRepository: UserRepository) {
         self.userRepository = userRepository
     }
 
-    public override func handle(query: GetPublicProfileQuery) async throws -> GetPublicProfileResponse {
+    override func handle(query: GetPublicProfileQuery) async throws -> GetPublicProfileResponse {
         let userId = UserId(string: query.userId)
 
         guard let user = try await userRepository.getUserById(userId) else { throw ApplicationErrors.userNotFound }

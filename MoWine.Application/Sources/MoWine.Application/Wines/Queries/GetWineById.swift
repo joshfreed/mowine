@@ -17,14 +17,14 @@ public struct GetWineByIdQuery: JFMQuery {
     }
 }
 
-public class GetWineByIdQueryHandler: BaseQueryHandler<GetWineByIdQuery, GetWineByIdQueryResponse?>  {
+class GetWineByIdQueryHandler: BaseQueryHandler<GetWineByIdQuery, GetWineByIdQueryResponse?>  {
     private let wineRepository: WineRepository
 
-    public init(wineRepository: WineRepository) {
+    init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public override func handle(query: GetWineByIdQuery) async throws -> GetWineByIdQueryResponse? {
+    override func handle(query: GetWineByIdQuery) async throws -> GetWineByIdQueryResponse? {
         guard let wine = try await wineRepository.getWine(by: WineId(string: query.wineId)) else {
             return nil
         }

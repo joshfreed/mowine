@@ -17,14 +17,14 @@ public struct DeleteWineCommand: JFMCommand {
     }
 }
 
-public class DeleteWineCommandHandler: BaseCommandHandler<DeleteWineCommand> {
-    let wineRepository: WineRepository
+class DeleteWineCommandHandler: BaseCommandHandler<DeleteWineCommand> {
+    private let wineRepository: WineRepository
 
-    public init(wineRepository: WineRepository) {
+    init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public override func handle(command: DeleteWineCommand) async throws {
+    override func handle(command: DeleteWineCommand) async throws {
         let wineId = WineId(string: command.wineId)
         try await wineRepository.delete(wineId)
     }

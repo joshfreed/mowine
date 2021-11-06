@@ -39,16 +39,16 @@ public struct SearchUsersResponse {
     }
 }
 
-public class SearchUsersQueryHandler: BaseQueryHandler<SearchUsersQuery, SearchUsersResponse> {
+class SearchUsersQueryHandler: BaseQueryHandler<SearchUsersQuery, SearchUsersResponse> {
     private let session: Session
     private let userRepository: UserRepository
 
-    public init(session: Session, userRepository: UserRepository) {
+    init(session: Session, userRepository: UserRepository) {
         self.session = session
         self.userRepository = userRepository
     }
 
-    public override func handle(query: SearchUsersQuery) async throws -> SearchUsersResponse {
+    override func handle(query: SearchUsersQuery) async throws -> SearchUsersResponse {
         let users = try await userRepository
             .searchUsers(searchString: query.searchString)
             .filter { $0.id != session.currentUserId }

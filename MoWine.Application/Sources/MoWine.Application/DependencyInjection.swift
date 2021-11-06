@@ -59,7 +59,6 @@ public class DependencyInjection {
         mediator.registerHandler(GetWineImageQueryHandler.self, for: GetWineImageQuery.self)
         mediator.registerHandler(GetWineByIdQueryHandler.self, for: GetWineByIdQuery.self)
         mediator.registerHandler(GetWineTypesQueryHandler.self, for: GetWineTypesQuery.self)
-        mediator.registerHandler(GetMyWinesHandler.self, for: GetMyWines.self)
         mediator.registerHandler(GetWinesByTypeQueryHandler.self, for: GetWinesByTypeQuery.self)
         mediator.registerHandler(GetTopWinesQueryHandler.self, for: GetTopWinesQuery.self)
         mediator.registerHandler(GetPublicProfileQueryHandler.self, for: GetPublicProfileQuery.self)

@@ -17,16 +17,16 @@ public struct RemoveFriendCommand: JFMCommand {
     }
 }
 
-public class RemoveFriendCommandHandler: BaseCommandHandler<RemoveFriendCommand> {
+class RemoveFriendCommandHandler: BaseCommandHandler<RemoveFriendCommand> {
     private let session: Session
     private let userRepository: UserRepository
 
-    public init(session: Session, userRepository: UserRepository) {
+    init(session: Session, userRepository: UserRepository) {
         self.session = session
         self.userRepository = userRepository
     }
 
-    public override func handle(command: RemoveFriendCommand) async throws {
+    override func handle(command: RemoveFriendCommand) async throws {
         guard let currentUserId = session.currentUserId else { throw SessionError.notLoggedIn }
 
         let friendId = UserId(string: command.userId)

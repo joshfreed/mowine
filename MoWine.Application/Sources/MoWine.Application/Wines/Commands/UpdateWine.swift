@@ -29,18 +29,18 @@ public struct UpdateWineCommand: JFMCommand {
     }
 }
 
-public class UpdateWineCommandHandler: BaseCommandHandler<UpdateWineCommand> {
+class UpdateWineCommandHandler: BaseCommandHandler<UpdateWineCommand> {
     let wineRepository: WineRepository
     let wineTypeRepository: WineTypeRepository
     let createWineImages: CreateWineImagesCommandHandler
 
-    public init(wineRepository: WineRepository, wineTypeRepository: WineTypeRepository, createWineImages: CreateWineImagesCommandHandler) {
+    init(wineRepository: WineRepository, wineTypeRepository: WineTypeRepository, createWineImages: CreateWineImagesCommandHandler) {
         self.wineRepository = wineRepository
         self.wineTypeRepository = wineTypeRepository
         self.createWineImages = createWineImages
     }
 
-    public override func handle(command: UpdateWineCommand) async throws {
+    override func handle(command: UpdateWineCommand) async throws {
         let wineId = WineId(string: command.wineId)
 
         guard let wine = try await wineRepository.getWine(by: wineId) else {

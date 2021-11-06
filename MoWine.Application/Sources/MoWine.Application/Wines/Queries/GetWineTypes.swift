@@ -13,14 +13,14 @@ public struct GetWineTypesQuery: JFMQuery {
     public init() {}
 }
 
-public class GetWineTypesQueryHandler: BaseQueryHandler<GetWineTypesQuery, GetWineTypesQueryResponse>  {
+class GetWineTypesQueryHandler: BaseQueryHandler<GetWineTypesQuery, GetWineTypesQueryResponse>  {
     private let wineTypeRepository: WineTypeRepository
 
-    public init(wineTypeRepository: WineTypeRepository) {
+    init(wineTypeRepository: WineTypeRepository) {
         self.wineTypeRepository = wineTypeRepository
     }
 
-    public override func handle(query: GetWineTypesQuery) async throws -> GetWineTypesQueryResponse {
+    override func handle(query: GetWineTypesQuery) async throws -> GetWineTypesQueryResponse {
         let wineTypes = try await wineTypeRepository.getAll()
         return GetWineTypesQueryResponse(wineTypes: wineTypes.map(toResponseType))
     }

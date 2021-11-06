@@ -40,14 +40,14 @@ public struct GetTopWinesResponse {
     }
 }
 
-public class GetTopWinesQueryHandler: BaseQueryHandler<GetTopWinesQuery, GetTopWinesResponse> {
+class GetTopWinesQueryHandler: BaseQueryHandler<GetTopWinesQuery, GetTopWinesResponse> {
     private let wineRepository: WineRepository
 
-    public init(wineRepository: WineRepository) {
+    init(wineRepository: WineRepository) {
         self.wineRepository = wineRepository
     }
 
-    public override func handle(query: GetTopWinesQuery) async throws -> GetTopWinesResponse {
+    override func handle(query: GetTopWinesQuery) async throws -> GetTopWinesResponse {
         let userId = UserId(string: query.userId)
         let topWines = try await wineRepository.getTopWines(userId: userId)
         let mappedWines = topWines.map {
