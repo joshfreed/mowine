@@ -26,7 +26,9 @@ struct UserPhotoView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 } placeholder: {
-                    Image("No Profile Picture").resizable()
+                    Image("No Profile Picture")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                 }
             case .uiImage(let uiImage):
                 Image(uiImage: uiImage)
@@ -42,10 +44,8 @@ struct UserPhotoView: View {
 
 struct UserPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            UserPhotoView(photo: .url(URL(string: "https://picsum.photos/150")), size: 128)
-            UserPhotoView(photo: .url(URL(string: "")), size: 128)
-            UserPhotoView(photo: .uiImage(UIImage(named: "JoshCats")!), size: 128)
-        }
+        UserPhotoView(photo: .url(URL(string: "https://picsum.photos/150")), size: 128).previewLayout(.sizeThatFits)
+        UserPhotoView(photo: .url(URL(string: "")), size: 128).previewLayout(.sizeThatFits)
+        UserPhotoView(photo: .uiImage(UIImage(named: "JoshCats")!), size: 128).previewLayout(.sizeThatFits)
     }
 }

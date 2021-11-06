@@ -55,8 +55,10 @@ struct ImagePickerView: UIViewControllerRepresentable {
 }
 
 extension ImagePickerView {
-    enum SourceType {
+    enum SourceType: Identifiable {
         case camera
         case photoLibrary
+
+        var id: String { String(describing: self) }
     }
 }

@@ -19,9 +19,7 @@ struct EditProfileView: View {
                 fullName: $vm.fullName,
                 emailAddress: $vm.emailAddress,
                 profilePicture: $vm.profilePicture
-            ) { pickerSourceType in
-                vm.selectProfilePicture(from: pickerSourceType)
-            }
+            )
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
                 dismiss()
@@ -39,24 +37,14 @@ struct EditProfileView: View {
         .alert(isPresented: $vm.showErrorAlert) {
             Alert(title: Text("Error"), message: Text(vm.saveErrorMessage))
         }
-        .sheet(isPresented: $vm.isShowingSheet, content: {
-            if vm.isPickingImage {
-                ImagePickerView(sourceType: vm.pickerSourceType) { image in
-                    vm.changeProfilePicture(to: image)
-                } onCancel: {
-                    vm.cancelSelectProfilePicture()
+        .sheet(isPresented: $vm.isReauthenticating) {
+            ReauthenticationView {
+                Task {
+                    await vm.reauthenticationSuccess()
+                    dismiss()
                 }
-            } else if vm.isReauthenticating {
-                ReauthenticationView {
-                    Task {
-                        await vm.reauthenticationSuccess()
-                        dismiss()
-                    }
-                }
-            } else {
-                EmptyView()
             }
-        })
+        }
         .loading(isShowing: vm.isSaving, text: "Saving...")
     }
 }

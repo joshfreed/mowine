@@ -12,13 +12,12 @@ struct EditProfileFormView: View {
     @Binding var fullName: String
     @Binding var emailAddress: String
     @Binding var profilePicture: UserPhoto
-    var changeProfilePicture: (ImagePickerView.SourceType) -> Void = { _ in }
 
     var body: some View {
         VStack(spacing: 6) {
             Color.clear.frame(height: 26)
 
-            ProfilePictureOverlayView(profilePicture: $profilePicture, changeProfilePicture: changeProfilePicture)
+            ChangeProfilePictureView(profilePicture: $profilePicture)
 
             Color.clear.frame(height: 20)
 

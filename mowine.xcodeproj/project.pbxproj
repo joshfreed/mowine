@@ -15,7 +15,7 @@
 		5306CC662607A1800061C413 /* WineCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC652607A1800061C413 /* WineCellarView.swift */; };
 		5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC692607BCC80061C413 /* WineTypeListView.swift */; };
 		530A987126F7B2B7008CE2C5 /* EditProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */; };
-		530A987326F7B308008CE2C5 /* ProfilePictureOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */; };
+		530A987326F7B308008CE2C5 /* ChangeProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987226F7B308008CE2C5 /* ChangeProfilePictureView.swift */; };
 		531FB93A26F0C484006A22F0 /* WineCellarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */; };
 		532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F5267979C700649624 /* LocalAuthentication.framework */; };
 		532789F8267979D400649624 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F7267979D400649624 /* SafariServices.framework */; };
@@ -170,7 +170,7 @@
 		5306CC652607A1800061C413 /* WineCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarView.swift; sourceTree = "<group>"; };
 		5306CC692607BCC80061C413 /* WineTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineTypeListView.swift; sourceTree = "<group>"; };
 		530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFormView.swift; sourceTree = "<group>"; };
-		530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureOverlayView.swift; sourceTree = "<group>"; };
+		530A987226F7B308008CE2C5 /* ChangeProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfilePictureView.swift; sourceTree = "<group>"; };
 		5318C0A3270CA76200F2C60D /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
 		5318C0A4270CA77000F2C60D /* fbe.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = fbe.sh; path = scripts/fbe.sh; sourceTree = "<group>"; };
 		531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarViewModel.swift; sourceTree = "<group>"; };
@@ -647,7 +647,7 @@
 				53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */,
 				53FFECA8256F0D3100321944 /* EditProfileView.swift */,
 				530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */,
-				530A987226F7B308008CE2C5 /* ProfilePictureOverlayView.swift */,
+				530A987226F7B308008CE2C5 /* ChangeProfilePictureView.swift */,
 			);
 			path = MyAccount;
 			sourceTree = "<group>";
@@ -1160,7 +1160,7 @@
 				53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */,
 				53E2FA5325DECFB900658637 /* FriendListItemView.swift in Sources */,
 				535CC81125F0404B00D49D57 /* UserProfileHeaderViewModel.swift in Sources */,
-				530A987326F7B308008CE2C5 /* ProfilePictureOverlayView.swift in Sources */,
+				530A987326F7B308008CE2C5 /* ChangeProfilePictureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

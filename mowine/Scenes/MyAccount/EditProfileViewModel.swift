@@ -28,13 +28,15 @@ class EditProfileViewModel: ObservableObject {
             }
         }
     }
-    @Published var profilePicture: UserPhoto = .url(nil)
+    @Published var profilePicture: UserPhoto = .url(nil) {
+        didSet {
+            profileDidChange()
+        }
+    }
+
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
-    @Published var isShowingSheet = false
-    @Published var isPickingImage = false
-    @Published var pickerSourceType: ImagePickerView.SourceType = .camera
     @Published var isReauthenticating = false
 
     @Injected private var getMyAccountQuery: GetMyAccountQuery
@@ -105,29 +107,10 @@ class EditProfileViewModel: ObservableObject {
 
     func reauthenticate() {
         isReauthenticating = true
-        isShowingSheet = true
     }
     
     func reauthenticationSuccess() async {
         isReauthenticating = false
-        isShowingSheet = false
         await saveProfile()
-    }
-    
-    func selectProfilePicture(from sourceType: ImagePickerView.SourceType) {
-        isPickingImage = true
-        pickerSourceType = sourceType
-        isShowingSheet = true
-    }
-    
-    func changeProfilePicture(to image: UIImage) {
-        profilePicture = .uiImage(image)
-        isShowingSheet = false
-        profileDidChange()
-    }
-    
-    func cancelSelectProfilePicture() {
-        isPickingImage = false
-        isShowingSheet = false
     }
 }
