@@ -10,6 +10,4 @@ import Foundation
 
 public extension Notification.Name {
     static let wineUpdated = Notification.Name("wineUpdated")
-    static let friendAdded = Notification.Name("friendAdded")
-    static let friendRemoved = Notification.Name("friendRemoved")
 }
