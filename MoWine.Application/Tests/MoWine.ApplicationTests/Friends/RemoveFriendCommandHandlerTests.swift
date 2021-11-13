@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import MoWine_Application
+@testable import MoWine_Application
 import MoWine_Domain
 @testable import MoWine_Application_TestKit
 @testable import MoWine_Domain_TestKit
