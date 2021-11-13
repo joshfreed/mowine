@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Combine
+import SwiftyBeaver
 import JFLib_DI
 import JFLib_Mediator
 import MoWine_Application
@@ -14,7 +16,25 @@ import MoWine_Application
 class MyFriends: ObservableObject {
     @Published public private(set) var friends: [GetMyFriendsQueryResponse.Friend] = []
 
+    @Injected private var session: Session
+    @Injected private var getMyFriends: GetMyFriendsQueryHandler
     @Injected private var mediator: Mediator
+
+    private var cancellable: AnyCancellable?
+
+    func load() {
+        guard cancellable == nil else { return }
+
+        cancellable = session
+            .currentUserIdPublisher
+            .removeDuplicates()
+            .compactMap { [weak self] _ in self?.getMyFriends.subscribe() }
+            .switchToLatest()
+            .replaceError(with: GetMyFriendsQueryResponse(friends: []))
+            .receive(on: RunLoop.main)
+            .print("MyFriends")
+            .sink { [weak self] response in self?.present(response) }
+    }
 
     func isFriends(with userId: String) -> Bool {
         friends.contains { $0.id == userId }

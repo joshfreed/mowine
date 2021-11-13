@@ -7,18 +7,37 @@
 //
 
 import Foundation
+import Combine
 import SwiftyBeaver
 import MoWine_Application
 
 class MyCellar: ObservableObject {
     @Published private(set) var myWines: [Wine] = [] {
         didSet {
-            derive()
+            buildWinesByType()
         }
     }
 
+    @Injected private var session: Session
+    @Injected private var getMyWines: GetMyWinesHandler
+
+    private var cancellable: AnyCancellable?
     private var winesByType: [String: [Wine]] = [:]
     private let wineFilteringService = WineFilteringService()
+
+    func load() {
+        guard cancellable == nil else { return }
+
+        cancellable = session
+            .currentUserIdPublisher
+            .removeDuplicates()
+            .compactMap { [weak self] _ in self?.getMyWines.subscribe() }
+            .switchToLatest()
+            .replaceError(with: GetMyWinesResponse(wines: []))
+            .receive(on: RunLoop.main)
+            .print("MyCellarCombine")
+            .sink { [weak self] response in self?.present(response) }
+    }
 
     func search(searchText: String) -> [Wine] {
         filter(myWines, by: searchText)
@@ -72,7 +91,7 @@ extension MyCellar {
             .map { Wine.from($0) }
     }
 
-    private func derive() {
+    private func buildWinesByType() {
         winesByType = myWines.reduce(into: [:]) { result, wine in
             result[wine.type, default: []].append(wine)
         }
