@@ -16,6 +16,7 @@
 		5306CC6A2607BCC80061C413 /* WineTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306CC692607BCC80061C413 /* WineTypeListView.swift */; };
 		530A987126F7B2B7008CE2C5 /* EditProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */; };
 		530A987326F7B308008CE2C5 /* ChangeProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987226F7B308008CE2C5 /* ChangeProfilePictureView.swift */; };
+		531AE7882740546100CD033D /* WineDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531AE7872740546100CD033D /* WineDetailsViewModel.swift */; };
 		531FB93A26F0C484006A22F0 /* WineCellarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */; };
 		532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F5267979C700649624 /* LocalAuthentication.framework */; };
 		532789F8267979D400649624 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F7267979D400649624 /* SafariServices.framework */; };
@@ -173,6 +174,7 @@
 		530A987226F7B308008CE2C5 /* ChangeProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfilePictureView.swift; sourceTree = "<group>"; };
 		5318C0A3270CA76200F2C60D /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
 		5318C0A4270CA77000F2C60D /* fbe.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = fbe.sh; path = scripts/fbe.sh; sourceTree = "<group>"; };
+		531AE7872740546100CD033D /* WineDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineDetailsViewModel.swift; sourceTree = "<group>"; };
 		531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarViewModel.swift; sourceTree = "<group>"; };
 		532789F5267979C700649624 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		532789F7267979D400649624 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -377,6 +379,7 @@
 				53BC1C4F2619031B00ECD078 /* WineDetailsView.swift */,
 				53F96420273327AE0066E2E6 /* WineDetailsFormView.swift */,
 				53F96422273327CE0066E2E6 /* WineDetailsHeaderView.swift */,
+				531AE7872740546100CD033D /* WineDetailsViewModel.swift */,
 			);
 			path = WineDetails;
 			sourceTree = "<group>";
@@ -1149,6 +1152,7 @@
 				535DE8CB25BCAB7700C6CB7B /* PreviewEnvironment.swift in Sources */,
 				538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */,
 				5352405425CF5E5F002CB2A5 /* WineImageView.swift in Sources */,
+				531AE7882740546100CD033D /* WineDetailsViewModel.swift in Sources */,
 				53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */,
 				53047E2325DC080B005CC14D /* AddWineHeaderView.swift in Sources */,
 				53D4F21F25EEED68007A15F9 /* SearchUsersViewModel.swift in Sources */,

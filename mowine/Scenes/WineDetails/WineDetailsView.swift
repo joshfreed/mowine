@@ -7,20 +7,16 @@
 //
 
 import SwiftUI
-import JFLib_Mediator
-import MoWine_Application
 
 struct WineDetailsView: View {
     let wineId: String
 
-    @Injected private var mediator: Mediator
+    @StateObject private var vm = WineDetailsViewModel()
     @Environment(\.dismiss) private var dismiss
-    @State private var wine: GetWineDetailsResponse?
-    @State private var wineNotFound = false
 
     var body: some View {
         Group {
-            if let wine = wine {
+            if let wine = vm.wine {
                 VStack(spacing: 0) {
                     WineDetailsHeaderView(wine: wine)
                     WineDetailsFormView(wine: wine)
@@ -30,22 +26,12 @@ struct WineDetailsView: View {
             }
         }
         .task {
-            await loadWineDetails()
+            await vm.load(wineId: wineId)
         }
-        .alert("Wine not found", isPresented: $wineNotFound) {
+        .alert("Wine not found", isPresented: $vm.wineNotFound) {
             Button("OK", role: .cancel) {
                 dismiss()
             }
-        }
-    }
-
-    func loadWineDetails() async {
-        do {
-            wine = try await mediator.send(GetWineDetails(wineId: wineId))
-        } catch GetWineDetailsErrors.wineNotFound {
-            wineNotFound = true
-        } catch {
-            CrashReporter.shared.record(error: error)
         }
     }
 }
