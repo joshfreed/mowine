@@ -15,7 +15,7 @@ public protocol UserRepository {
     func save(user: User) async throws
     func searchUsers(searchString: String) async throws -> [User]
     func getUserById(_ id: UserId) async throws -> User?
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration
+    func getUserById(_ id: UserId) -> AnyPublisher<User?, Error>
 
     // Friends
     func getFriends(userId: UserId) -> AnyPublisher<[User], Error>

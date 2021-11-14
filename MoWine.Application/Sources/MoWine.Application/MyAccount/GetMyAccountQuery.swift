@@ -9,11 +9,11 @@
 import Foundation
 import Combine
 import SwiftyBeaver
+import JFLib_Mediator
 import MoWine_Domain
 
-public protocol GetMyAccountQuery {
-    func getMyAccountAndListen() -> AnyPublisher<GetMyAccountQueryResponse?, Error>
-    func getMyAccount() async throws -> GetMyAccountQueryResponse?
+public struct GetMyAccountQuery: JFMQuery {
+    public init() {}
 }
 
 public struct GetMyAccountQueryResponse {
@@ -22,13 +22,10 @@ public struct GetMyAccountQueryResponse {
     public let profilePictureUrl: URL?
 }
 
-public class GetMyAccountQueryHandler: GetMyAccountQuery {
+public class GetMyAccountQueryHandler: BaseQueryHandler<GetMyAccountQuery, GetMyAccountQueryResponse?> {
     private let userRepository: UserRepository
     private let session: Session
-    private var subject = CurrentValueSubject<GetMyAccountQueryResponse?, Error>(nil)
-    private var sessionCancellable: AnyCancellable?
-    private var listener: MoWineListenerRegistration?
-    
+
     public init(userRepository: UserRepository, session: Session) {
         SwiftyBeaver.debug("init")
         self.userRepository = userRepository
@@ -37,62 +34,43 @@ public class GetMyAccountQueryHandler: GetMyAccountQuery {
     
     deinit {
         SwiftyBeaver.debug("deinit")
-        listener?.remove()
-        sessionCancellable = nil
     }
     
-    public func getMyAccountAndListen() -> AnyPublisher<GetMyAccountQueryResponse?, Error> {
-        if listener == nil {
-            startListening()
+    public func subscribe() -> AnyPublisher<GetMyAccountQueryResponse?, Error> {
+        guard let currentUserId = session.currentUserId else {
+            return Just(nil).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+        
+        guard !session.isAnonymous else {
+            return Just(nil).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
 
-        return subject.eraseToAnyPublisher()
+        return userRepository
+            .getUserById(currentUserId)
+            .map { user -> GetMyAccountQueryResponse? in
+                if let user = user {
+                    return .from(user)
+                } else {
+                    return nil
+                }
+            }
+            .eraseToAnyPublisher()
     }
 
-    public func getMyAccount() async throws -> GetMyAccountQueryResponse? {
-        SwiftyBeaver.info("getMyAccount async")
-
+    public override func handle(query: GetMyAccountQuery) async throws -> GetMyAccountQueryResponse? {
         guard let currentUserId = session.currentUserId else { return nil }
         guard !session.isAnonymous else { return nil }
 
         if let user = try await userRepository.getUserById(currentUserId) {
-            return .mapResponse(user)
+            return .from(user)
         } else {
             return nil
         }
     }
 }
 
-// MARK: Listener
-
-extension GetMyAccountQueryHandler {
-    private func startListening() {
-        sessionCancellable = session.currentUserIdPublisher
-            .removeDuplicates()
-            .sink { [weak self] userId in
-                self?.updateSubscription(userId)
-            }
-    }
-
-    private func updateSubscription(_ userId: UserId?) {
-        listener?.remove()
-
-        guard let userId = userId else {
-            return
-        }
-
-        listener = userRepository.getUserByIdAndListenForUpdates(id: userId) { [weak self] result in
-            SwiftyBeaver.info("MyAccountWorker::getCurrentUser received new user data")
-
-            if case let .success(u) = result, let user = u {
-                self?.subject.send(.mapResponse(user))
-            }
-        }
-    }
-}
-
 extension GetMyAccountQueryResponse {
-    static func mapResponse(_ user: User) -> GetMyAccountQueryResponse {
+    static func from(_ user: User) -> GetMyAccountQueryResponse {
         GetMyAccountQueryResponse(
             fullName: user.fullName,
             emailAddress: user.emailAddress,

@@ -49,38 +49,15 @@ public class FirestoreUserRepository: UserRepository {
         return user
     }
 
-    public func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
-        let listener = db.collection("users").document(id.asString).addSnapshotListener { documentSnapshot, error in
-            if let error = error {
-                SwiftyBeaver.error("\(error)")
-                completion(.failure(error))
-                return
-            }
-            
-            guard let document = documentSnapshot, document.exists else {
-                SwiftyBeaver.warning("Document does not exist")
-                completion(.success(nil))
-                return
-            }
-            
-            guard let data = document.data() else {
-                SwiftyBeaver.warning("Document was empty")
-                completion(.success(nil))
-                return
-            }
-            
-            SwiftyBeaver.debug("Received user document snapshot w/ data: \(data)")
-            
-            guard let user = User.fromFirestore(document) else {
-                SwiftyBeaver.warning("Couldn't build user from document")
-                completion(.success(nil))
-                return
-            }
-            
-            completion(.success(user))
-        }
-        
-        return MyFirebaseListenerRegistration(wrapped: listener)
+    public func getUserById(_ id: UserId) -> AnyPublisher<User?, Error> {
+        let query = db
+            .collection("users")
+            .document(id.asString)
+
+        return query
+            .snapshotPublisher()
+            .map { User.fromFirestore($0) }
+            .eraseToAnyPublisher()
     }
     
     public func searchUsers(searchString: String) async throws -> [User] {

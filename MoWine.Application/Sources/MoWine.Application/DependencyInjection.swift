@@ -20,7 +20,7 @@ public class DependencyInjection {
         container.register(.unique) { EmailAuthApplicationService(emailAuthService: $0, userRepository: $1, session: $2) }
 
         // Users
-        container.register(.singleton) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }.implements(GetMyAccountQuery.self)
+        container.register(.unique) { GetMyAccountQueryHandler(userRepository: $0, session: $1) }
         container.register { UpdateProfileCommandHandler(session: $0, userRepository: $1, createProfilePicture: $2) }
         container.register { CreateProfilePictureCommandHandler(userImageStorage: $0, imageResizer: $1, userRepository: $2) }
         container.register(.unique) { GetPublicProfileQueryHandler(userRepository: $0) }
@@ -65,5 +65,6 @@ public class DependencyInjection {
         mediator.registerHandler(GetUserCellarHandler.self, for: GetUserCellar.self)
         mediator.registerHandler(SearchUsersQueryHandler.self, for: SearchUsersQuery.self)
         mediator.registerHandler(GetWineDetailsHandler.self, for: GetWineDetails.self)
+        mediator.registerHandler(GetMyAccountQueryHandler.self, for: GetMyAccountQuery.self)
     }
 }

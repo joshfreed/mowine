@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit.UIImage
 import Combine
 import SwiftyBeaver
+import JFLib_Mediator
 import MoWine_Application
-import UIKit.UIImage
 
 @MainActor
 class EditProfileViewModel: ObservableObject {
@@ -39,7 +40,7 @@ class EditProfileViewModel: ObservableObject {
     @Published var saveErrorMessage: String = ""
     @Published var isReauthenticating = false
 
-    @Injected private var getMyAccountQuery: GetMyAccountQuery
+    @Injected private var mediator: Mediator
     @Injected private var updateProfileCommandHandler: UpdateProfileCommandHandler
 
     private var hasChanges = false
@@ -62,7 +63,7 @@ class EditProfileViewModel: ObservableObject {
 
     func loadProfile() async {
         do {
-            guard let profile = try await getMyAccountQuery.getMyAccount() else {
+            guard let profile: GetMyAccountQueryResponse = try await mediator.send(GetMyAccountQuery()) else {
                 return
             }
             setProfile(profile)

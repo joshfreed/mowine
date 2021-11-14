@@ -22,6 +22,7 @@ struct WoWineApp: App {
     @StateObject private var session = ObservableSession()
     @StateObject private var myCellar = MyCellar()
     @StateObject private var myFriends = MyFriends()
+    @StateObject private var myAccount = MyAccount()
 
     init() {
         setupSwiftyBeaverLogging()
@@ -36,10 +37,12 @@ struct WoWineApp: App {
                 .environmentObject(session)
                 .environmentObject(myCellar)
                 .environmentObject(myFriends)
+                .environmentObject(myAccount)
                 .task {
                     await setupUITestingData()
                     myCellar.load()
                     myFriends.load()
+                    myAccount.load()
                 }
         }
     }

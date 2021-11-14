@@ -36,7 +36,7 @@ struct TabbedRootView: View {
                 }
                 .tag(3)
             
-            MyAccountViewContainer()
+            MyAccountPage()
                 .tabItem {
                     Image("My Account Tab").renderingMode(.template)
                     Text("My Account")

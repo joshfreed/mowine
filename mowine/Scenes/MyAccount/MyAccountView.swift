@@ -9,20 +9,9 @@
 import SwiftUI
 import MoWine_Application
 
-struct MyAccountViewContainer: View {
-    @EnvironmentObject var session: ObservableSession
-
-    var body: some View {
-        if session.isAnonymous {
-            AnonymousUserView()
-        } else {
-            MyAccountView()
-        }
-    }
-}
-
 struct MyAccountView: View {
-    @StateObject var viewModel = MyAccountViewModel()
+    @EnvironmentObject var myAccount: MyAccount
+    @Injected private var signOutCommand: SignOutCommand
 
     @State private var editProfile = false
     @State private var isShowingSignOutConfirmation: Bool = false
@@ -30,15 +19,15 @@ struct MyAccountView: View {
     var body: some View {
         VStack(spacing: 8) {
             
-            UserPhotoView(photo: viewModel.profilePicture, size: 128)
+            UserPhotoView(photo: myAccount.profilePicture, size: 128)
             
             Color.clear.frame(height: 0)
             
-            Text(viewModel.fullName)
+            Text(myAccount.fullName)
                 .font(.system(size: 28))
                 .fontWeight(.black)
                 .accessibility(identifier: "fullName")
-            Text(viewModel.emailAddress)
+            Text(myAccount.emailAddress)
                 .font(.system(size: 17))
                 .accessibility(identifier: "emailAddress")
             
@@ -53,7 +42,6 @@ struct MyAccountView: View {
                     .foregroundColor(Color("Primary Light"))
                     .frame(height: 38)
             }
-            .disabled(!viewModel.isLoaded)
             .sheet(isPresented: $editProfile) {
                 EditProfileView()
             }
@@ -81,30 +69,21 @@ struct MyAccountView: View {
             .actionSheet(isPresented: $isShowingSignOutConfirmation, content: {
                 ActionSheet(title: Text("Are you sure?"), message: nil, buttons: [
                     .destructive(Text("Sign Out"), action: {
-                        viewModel.signOut()
+                        signOutCommand.signOut()
                     }),
                     .cancel()
                 ])
             })
             
             Color.clear.frame(height: 8)
-        }.onAppear {
-            viewModel.loadMyAccount()
         }
         .analyticsScreen(name: "My Account", class: "MyAccountView")
     }
 }
 
 struct MyAccountView_Previews: PreviewProvider {
-    static var viewModel: MyAccountViewModel = {
-        let vm = MyAccountViewModel()
-        vm.fullName = "Barry Jones"
-        vm.emailAddress = "jonesy@barryjones.com"
-        vm.profilePicture = .url(URL(string: "https://picsum.photos/150"))
-        return vm
-    }()
-
     static var previews: some View {
-        MyAccountView(viewModel: viewModel)
+        MyAccountView()
+            .environmentObject(MyAccount.fake())
     }
 }

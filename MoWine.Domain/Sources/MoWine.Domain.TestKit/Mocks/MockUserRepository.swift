@@ -11,8 +11,8 @@ import XCTest
 import Combine
 
 class MockUserRepository: UserRepository {
-    func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
-        FakeRegistration()
+    func getUserById(_ id: UserId) -> AnyPublisher<User?, Error> {
+        fatalError("Not implemented")
     }
 
     func add(user: User) async throws {}

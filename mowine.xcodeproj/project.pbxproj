@@ -17,13 +17,14 @@
 		530A987126F7B2B7008CE2C5 /* EditProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987026F7B2B7008CE2C5 /* EditProfileFormView.swift */; };
 		530A987326F7B308008CE2C5 /* ChangeProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A987226F7B308008CE2C5 /* ChangeProfilePictureView.swift */; };
 		531AE7882740546100CD033D /* WineDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531AE7872740546100CD033D /* WineDetailsViewModel.swift */; };
+		531AE78A27406B0C00CD033D /* MyAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531AE78927406B0C00CD033D /* MyAccountPage.swift */; };
+		531AE78C27406B8100CD033D /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531AE78B27406B8100CD033D /* MyAccount.swift */; };
 		531FB93A26F0C484006A22F0 /* WineCellarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */; };
 		532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F5267979C700649624 /* LocalAuthentication.framework */; };
 		532789F8267979D400649624 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F7267979D400649624 /* SafariServices.framework */; };
 		532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789F9267979E100649624 /* AuthenticationServices.framework */; };
 		532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532789FB267979E900649624 /* SystemConfiguration.framework */; };
 		532DB3C92569C2EF009A4740 /* MyAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3C82569C2EF009A4740 /* MyAccountView.swift */; };
-		532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */; };
 		532DB3D3256AC763009A4740 /* PreviewDataFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */; };
 		5330C20A25E5B39F0063E7C4 /* UserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330C20925E5B39F0063E7C4 /* UserPhotoView.swift */; };
 		5330C20E25E5B5710063E7C4 /* UserSearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5330C20D25E5B5710063E7C4 /* UserSearchResultView.swift */; };
@@ -175,6 +176,8 @@
 		5318C0A3270CA76200F2C60D /* run-tests.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "run-tests.sh"; sourceTree = "<group>"; };
 		5318C0A4270CA77000F2C60D /* fbe.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = fbe.sh; path = scripts/fbe.sh; sourceTree = "<group>"; };
 		531AE7872740546100CD033D /* WineDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineDetailsViewModel.swift; sourceTree = "<group>"; };
+		531AE78927406B0C00CD033D /* MyAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountPage.swift; sourceTree = "<group>"; };
+		531AE78B27406B8100CD033D /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
 		531FB93926F0C484006A22F0 /* WineCellarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineCellarViewModel.swift; sourceTree = "<group>"; };
 		532789F5267979C700649624 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		532789F7267979D400649624 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -184,7 +187,6 @@
 		532789FE26797C5900649624 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = GoogleSignIn/GoogleSignIn.framework; sourceTree = "<group>"; };
 		532789FF26797C5900649624 /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignInDependencies.framework; path = GoogleSignIn/GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		532DB3C82569C2EF009A4740 /* MyAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountView.swift; sourceTree = "<group>"; };
-		532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		532DB3D2256AC763009A4740 /* PreviewDataFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDataFactories.swift; sourceTree = "<group>"; };
 		5330C20925E5B39F0063E7C4 /* UserPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoView.swift; sourceTree = "<group>"; };
 		5330C20D25E5B5710063E7C4 /* UserSearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultView.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 			children = (
 				535EE9D2272756F00011ECC1 /* MyCellar.swift */,
 				5394BB23272DBD2800B61F00 /* MyFriends.swift */,
+				531AE78B27406B8100CD033D /* MyAccount.swift */,
 			);
 			path = ModelServices;
 			sourceTree = "<group>";
@@ -645,7 +648,7 @@
 		53A8D5EF20461181000AD7A3 /* MyAccount */ = {
 			isa = PBXGroup;
 			children = (
-				532DB3CC2569C3B6009A4740 /* MyAccountViewModel.swift */,
+				531AE78927406B0C00CD033D /* MyAccountPage.swift */,
 				532DB3C82569C2EF009A4740 /* MyAccountView.swift */,
 				53FFECAC256F0D4100321944 /* EditProfileViewModel.swift */,
 				53FFECA8256F0D3100321944 /* EditProfileView.swift */,
@@ -1084,6 +1087,7 @@
 				53047E2D25DC09C0005CC14D /* PickImageButton.swift in Sources */,
 				53D3B45125A2337400F15974 /* TextStyles.swift in Sources */,
 				53F47F0F2585440E00910BDC /* ErrorLabel.swift in Sources */,
+				531AE78A27406B0C00CD033D /* MyAccountPage.swift in Sources */,
 				5352404F25CF5516002CB2A5 /* EditWineImageView.swift in Sources */,
 				53BC1C502619031B00ECD078 /* WineDetailsView.swift in Sources */,
 				533F1031259FD8E700DAA4B6 /* FancyDivider.swift in Sources */,
@@ -1140,7 +1144,6 @@
 				53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */,
 				536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */,
 				53DD1E1E257D84FF008C1DA7 /* FancyFieldViewModifier.swift in Sources */,
-				532DB3CD2569C3B6009A4740 /* MyAccountViewModel.swift in Sources */,
 				53F4C76A27161B5F00CCBA7F /* PreviewData.swift in Sources */,
 				535DE8CF25BCACB900C6CB7B /* SplashScreen.swift in Sources */,
 				5355BC6226ECF79500F0F824 /* UI Testing Helpers.swift in Sources */,
@@ -1161,6 +1164,7 @@
 				53AC404625D737800041AED9 /* SelectVarietyView.swift in Sources */,
 				53FAED0825EAFBF00099B2E1 /* FriendButton.swift in Sources */,
 				53D3B44B25A2304D00F15974 /* SignInHeaderView.swift in Sources */,
+				531AE78C27406B8100CD033D /* MyAccount.swift in Sources */,
 				53FFECB3256F0E9D00321944 /* FancyTextField.swift in Sources */,
 				53E2FA5325DECFB900658637 /* FriendListItemView.swift in Sources */,
 				535CC81125F0404B00D49D57 /* UserProfileHeaderViewModel.swift in Sources */,

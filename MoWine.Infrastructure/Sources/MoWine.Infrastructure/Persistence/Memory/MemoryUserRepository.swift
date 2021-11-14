@@ -59,7 +59,7 @@ public class MemoryUserRepository: UserRepository {
         users.first { $0.id == id }
     }
 
-    public func getUserByIdAndListenForUpdates(id: UserId, completion: @escaping (Result<User?, Error>) -> ()) -> MoWineListenerRegistration {
+    public func getUserById(_ id: UserId) -> AnyPublisher<User?, Error> {
         fatalError("Not implemented")
     }
 }
