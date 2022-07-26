@@ -59,7 +59,7 @@ class EditWinePage {
     }
 
     func addPairing(_ pairing: String) {
-        app.tables.cells["Add Pairing"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
+        app.buttons["Add Pairing"].tap()
 
         let newTextField = app.tables.textFields.matching(.init(format: "placeholderValue = %@", "e.g. Sushi, Cheese, etc")).allElementsBoundByIndex.last!
         XCTAssertTrue(newTextField.waitForExistence(timeout: .default))
