@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import SwiftyBeaver
-import JFLib_DI
+import JFLib_Services
 import JFLib_Mediator
 import MoWine_Application
 

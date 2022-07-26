@@ -14,7 +14,7 @@ let package = Package(
             targets: ["MoWine.Infrastructure"]),
     ],
     dependencies: [
-        .package(name: "JFLib", path: "../JFLib"),
+        .package(name: "JFLib", url: "https://github.com/joshfreed/JFLib", from: "1.0.0"),
         .package(path: "../MoWine.Application"),
         .package(path: "../MoWine.Domain"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
@@ -33,7 +33,7 @@ let package = Package(
                 "SwiftyBeaver",
 
                 .product(name: "JFLib.Combine", package: "JFLib"),
-                .product(name: "JFLib.DI", package: "JFLib"),
+                .product(name: "JFLib.Services", package: "JFLib"),
                 .product(name: "JFLib.Mediator", package: "JFLib"),
 
                 .product(name: "Dip", package: "Dip"),

@@ -8,7 +8,7 @@
 import Foundation
 import Dip
 import JFLib_Mediator
-import JFLib_DI
+import JFLib_Services
 
 public class DependencyInjection {
     public static func registerServices(container: DependencyContainer) {

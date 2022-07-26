@@ -11,7 +11,7 @@ import SwiftyBeaver
 import MoWine_Application
 import MoWine_Infrastructure
 import Dip
-@_exported import JFLib_DI
+@_exported import JFLib_Services
 import JFLib_Mediator
 import Combine
 
@@ -94,26 +94,22 @@ struct WoWineApp: App {
 
 extension JFServices {
     static func configure() {
-        let container = DependencyContainer { container in
-            MoWine_Application.DependencyInjection.registerServices(container: container)
-            MoWine_Infrastructure.DependencyInjection.registerServices(container: container)
-            MoWine_Infrastructure.DependencyInjection.registerFirebaseServices(container: container)
-        }
+        let dipContainer = DipContainer()
 
-        let resolver = DipServiceResolver(container: container)
+        MoWine_Application.DependencyInjection.registerServices(container: dipContainer.container)
+        MoWine_Infrastructure.DependencyInjection.registerServices(container: dipContainer.container)
+        MoWine_Infrastructure.DependencyInjection.registerFirebaseServices(container: dipContainer.container)
 
-        JFServices.initialize(resolver: resolver)
+        JFServices.initialize(container: dipContainer)
     }
 
     static func configureForPreviews() {
-        let container = DependencyContainer { container in
-            PreviewServices.registerServices(container: container)
-            MoWine_Application.DependencyInjection.registerServices(container: container)
-            MoWine_Infrastructure.DependencyInjection.registerServices(container: container)
-        }
+        let dipContainer = DipContainer()
 
-        let resolver = DipServiceResolver(container: container)
+        PreviewServices.registerServices(container: dipContainer.container)
+        MoWine_Application.DependencyInjection.registerServices(container: dipContainer.container)
+        MoWine_Infrastructure.DependencyInjection.registerServices(container: dipContainer.container)
 
-        JFServices.initialize(resolver: resolver)
+        JFServices.initialize(container: dipContainer)
     }
 }

@@ -24,7 +24,7 @@ let package = Package(
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
         .package(path: "../MoWine.Domain"),
         .package(name: "Dip", url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
-        .package(name: "JFLib", path: "../JFLib"),
+        .package(name: "JFLib", url: "https://github.com/joshfreed/JFLib", from: "1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

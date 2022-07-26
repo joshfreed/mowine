@@ -80,7 +80,6 @@
 		5381EFFD25C72688004D2DF9 /* EditWineFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5381EFFC25C72688004D2DF9 /* EditWineFormModel.swift */; };
 		5382D5EC27286F3D00E3E86A /* MyCellarWineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5382D5EB27286F3D00E3E86A /* MyCellarWineListView.swift */; };
 		5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C7032721E5D3000E625F /* DependencyInjection.swift */; };
-		5383C7072721F413000E625F /* JFLib.DI in Frameworks */ = {isa = PBXBuildFile; productRef = 5383C7062721F413000E625F /* JFLib.DI */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
 		5394BB24272DBD2800B61F00 /* MyFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394BB23272DBD2800B61F00 /* MyFriends.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
@@ -147,13 +146,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		53F5AC081E2176090067AB62 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 53F5ABE81E2176080067AB62 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 53F5ABEF1E2176080067AB62;
-			remoteInfo = mowine;
-		};
 		53F5AC131E2176090067AB62 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 53F5ABE81E2176080067AB62 /* Project object */;
@@ -250,7 +242,6 @@
 		5383C6FF2721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5383C7012721A87A000E625F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5383C7032721E5D3000E625F /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
-		5383C7052721F349000E625F /* JFLib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JFLib; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5394BB23272DBD2800B61F00 /* MyFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriends.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
@@ -307,8 +298,6 @@
 		53F5ABFD1E2176080067AB62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53F5AC001E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53F5AC021E2176080067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		53F5AC071E2176090067AB62 /* mowineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		53F5AC0D1E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F5AC121E2176090067AB62 /* mowineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mowineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F5AC161E2176090067AB62 /* AddWineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineTests.swift; sourceTree = "<group>"; };
 		53F5AC181E2176090067AB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -330,19 +319,11 @@
 			files = (
 				53FABEDF2720C99700C3C838 /* MoWine.Infrastructure in Frameworks */,
 				532789FC267979E900649624 /* SystemConfiguration.framework in Frameworks */,
-				5383C7072721F413000E625F /* JFLib.DI in Frameworks */,
 				532789F6267979C700649624 /* LocalAuthentication.framework in Frameworks */,
 				532789F8267979D400649624 /* SafariServices.framework in Frameworks */,
 				5332B68C271F548900FBF135 /* MoWine.Domain in Frameworks */,
 				532789FA267979E100649624 /* AuthenticationServices.framework in Frameworks */,
 				53ADDF782720BE4F00945B2D /* MoWine.Application in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53F5AC041E2176090067AB62 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,12 +734,10 @@
 			isa = PBXGroup;
 			children = (
 				53F5ABF21E2176080067AB62 /* mowine */,
-				53F5AC0A1E2176090067AB62 /* mowineTests */,
 				53F5AC151E2176090067AB62 /* mowineUITests */,
 				5332B68F2720BBCC00FBF135 /* MoWine.Application */,
 				5332B68A271F4F8700FBF135 /* MoWine.Domain */,
 				53FABEDD2720C80200C3C838 /* MoWine.Infrastructure */,
-				5383C7052721F349000E625F /* JFLib */,
 				5383C7022721A904000E625F /* Test Plans */,
 				5383C6F52721A783000E625F /* Third Party Files */,
 				5318C0A2270CA74E00F2C60D /* Scripts */,
@@ -771,7 +750,6 @@
 			isa = PBXGroup;
 			children = (
 				53F5ABF01E2176080067AB62 /* mowine.app */,
-				53F5AC071E2176090067AB62 /* mowineTests.xctest */,
 				53F5AC121E2176090067AB62 /* mowineUITests.xctest */,
 			);
 			name = Products;
@@ -794,14 +772,6 @@
 				53A69841261A1DE4004BCE43 /* MoWineApp.swift */,
 			);
 			path = mowine;
-			sourceTree = "<group>";
-		};
-		53F5AC0A1E2176090067AB62 /* mowineTests */ = {
-			isa = PBXGroup;
-			children = (
-				53F5AC0D1E2176090067AB62 /* Info.plist */,
-			);
-			path = mowineTests;
 			sourceTree = "<group>";
 		};
 		53F5AC151E2176090067AB62 /* mowineUITests */ = {
@@ -895,31 +865,10 @@
 				5332B68B271F548900FBF135 /* MoWine.Domain */,
 				53ADDF772720BE4F00945B2D /* MoWine.Application */,
 				53FABEDE2720C99700C3C838 /* MoWine.Infrastructure */,
-				5383C7062721F413000E625F /* JFLib.DI */,
 			);
 			productName = mowine;
 			productReference = 53F5ABF01E2176080067AB62 /* mowine.app */;
 			productType = "com.apple.product-type.application";
-		};
-		53F5AC061E2176090067AB62 /* mowineTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 53F5AC1E1E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineTests" */;
-			buildPhases = (
-				53F5AC031E2176090067AB62 /* Sources */,
-				53F5AC041E2176090067AB62 /* Frameworks */,
-				53F5AC051E2176090067AB62 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				53F5AC091E2176090067AB62 /* PBXTargetDependency */,
-			);
-			name = mowineTests;
-			packageProductDependencies = (
-			);
-			productName = mowineTests;
-			productReference = 53F5AC071E2176090067AB62 /* mowineTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		53F5AC111E2176090067AB62 /* mowineUITests */ = {
 			isa = PBXNativeTarget;
@@ -955,13 +904,6 @@
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
-					53F5AC061E2176090067AB62 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = Q96RZM5NAK;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 53F5ABEF1E2176080067AB62;
-					};
 					53F5AC111E2176090067AB62 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Q96RZM5NAK;
@@ -987,7 +929,6 @@
 			projectRoot = "";
 			targets = (
 				53F5ABEF1E2176080067AB62 /* mowine */,
-				53F5AC061E2176090067AB62 /* mowineTests */,
 				53F5AC111E2176090067AB62 /* mowineUITests */,
 			);
 		};
@@ -1002,13 +943,6 @@
 				535D73FF2569A7160027BC27 /* Preview Assets.xcassets in Resources */,
 				53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */,
 				53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		53F5AC051E2176090067AB62 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,13 +1106,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53F5AC031E2176090067AB62 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		53F5AC0E1E2176090067AB62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1212,11 +1139,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		53F5AC091E2176090067AB62 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 53F5ABEF1E2176080067AB62 /* mowine */;
-			targetProxy = 53F5AC081E2176090067AB62 /* PBXContainerItemProxy */;
-		};
 		53F5AC141E2176090067AB62 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 53F5ABEF1E2176080067AB62 /* mowine */;
@@ -1402,42 +1324,6 @@
 			};
 			name = Release;
 		};
-		53F5AC1F1E2176090067AB62 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = Q96RZM5NAK;
-				INFOPLIST_FILE = mowineTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mowine.app/mowine";
-			};
-			name = Debug;
-		};
-		53F5AC201E2176090067AB62 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = Q96RZM5NAK;
-				INFOPLIST_FILE = mowineTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bleepsmazz.mowineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/mowine.app/mowine";
-			};
-			name = Release;
-		};
 		53F5AC221E2176090067AB62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1493,15 +1379,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		53F5AC1E1E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				53F5AC1F1E2176090067AB62 /* Debug */,
-				53F5AC201E2176090067AB62 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		53F5AC211E2176090067AB62 /* Build configuration list for PBXNativeTarget "mowineUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1517,10 +1394,6 @@
 		5332B68B271F548900FBF135 /* MoWine.Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoWine.Domain;
-		};
-		5383C7062721F413000E625F /* JFLib.DI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = JFLib.DI;
 		};
 		53ADDF772720BE4F00945B2D /* MoWine.Application */ = {
 			isa = XCSwiftPackageProductDependency;
