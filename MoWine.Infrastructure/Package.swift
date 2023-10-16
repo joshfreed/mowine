@@ -19,7 +19,7 @@ let package = Package(
         .package(path: "../MoWine.Domain"),
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "8.0.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
         .package(url: "https://github.com/facebook/facebook-ios-sdk", from: "11.0.0"),
         .package(url: "https://github.com/google/GoogleSignIn-iOS", from: "6.0.0"),
         .package(name: "Dip", url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
@@ -44,12 +44,11 @@ let package = Package(
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
 
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseAnalyticsSwift-Beta", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseAnalyticsSwift", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseStorage", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseStorageSwift-Beta", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseFirestoreCombine-Community", package: "firebase-ios-sdk"),
             ]),
         .testTarget(

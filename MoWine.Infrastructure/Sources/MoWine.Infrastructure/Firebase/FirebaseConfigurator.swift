@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseAnalytics
 import FirebaseAnalyticsSwift
+import FirebaseStorage
 import GoogleSignIn
 
 /// Responsible for bootstrapping Firebase services at app launch.
