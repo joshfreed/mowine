@@ -9,7 +9,6 @@
 import Foundation
 import Firebase
 import GoogleSignIn
-import SwiftyBeaver
 import MoWine_Application
 import FirebaseCrashlytics
 import MoWine_Domain
@@ -22,52 +21,43 @@ struct GoogleToken: SocialToken {
 public class SignInWithGoogle: SocialSignInMethod {
     public init() {}
 
-    private func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
+    @MainActor
+    public func signIn() async throws -> SocialToken {
         guard let app = FirebaseApp.app() else {
             fatalError("No FirebaseApp configured")
         }
+
         guard let clientId = app.options.clientID else {
             fatalError("FirebaseApp does not have a Google Client ID set")
         }
 
-        let signInConfig = GIDConfiguration.init(clientID: clientId)
-
-        guard let presentingViewController = UIApplication.shared.windows.first?.rootViewController else {
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let presentingViewController = windowScene.windows.first?.rootViewController
+        else {
             fatalError("No rootViewController")
         }
 
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: presentingViewController) { user, error in
-            if let error = error {
-                if (error as NSError).code == GIDSignInError.canceled.rawValue {
-                    completion(.failure(SocialSignInErrors.signInCancelled))
-                } else {
-                    completion(.failure(error))
-                }
-                return
+        let signInConfig = GIDConfiguration.init(clientID: clientId)
+        GIDSignIn.sharedInstance.configuration = signInConfig
+
+        do {
+            let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController)
+
+            let user = result.user
+
+            guard let idToken = user.idToken else {
+                throw SocialSignInErrors.missingIdToken
             }
 
-            guard let user = user else {
-                completion(.failure(SocialSignInErrors.googleUserNotFound))
-                return
-            }
-            
-            guard let idToken = user.authentication.idToken else {
-                completion(.failure(SocialSignInErrors.missingIdToken))
-                return
-            }
+            let token = GoogleToken(idToken: idToken.tokenString, accessToken: user.accessToken.tokenString)
 
-            let token = GoogleToken(idToken: idToken, accessToken: user.authentication.accessToken)
-
-            completion(.success(token))
-        }
-    }
-
-    public func signIn() async throws -> SocialToken {
-        return try await withCheckedThrowingContinuation { cont in
-            Task { @MainActor in
-                signIn()  { res in
-                    cont.resume(with: res)
-                }
+            return token
+        } catch {
+            if (error as NSError).code == GIDSignInError.canceled.rawValue {
+                throw SocialSignInErrors.signInCancelled
+            } else {
+                throw error
             }
         }
     }
