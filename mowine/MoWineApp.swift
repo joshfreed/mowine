@@ -14,11 +14,11 @@ import Dip
 @_exported import JFLib_Services
 import JFLib_Mediator
 import Combine
+import FBSDKCoreKit
+import GoogleSignIn
 
 @main
 struct WoWineApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
     @StateObject private var session = ObservableSession()
     @StateObject private var myCellar = MyCellar()
     @StateObject private var myFriends = MyFriends()
@@ -43,6 +43,20 @@ struct WoWineApp: App {
                     myCellar.load()
                     myFriends.load()
                     myAccount.load()
+                }
+                .onOpenURL { url in
+                    if ApplicationDelegate.shared.application(
+                        UIApplication.shared,
+                        open: url,
+                        sourceApplication: nil,
+                        annotation: UIApplication.OpenURLOptionsKey.annotation
+                    ) {
+                        return
+                    }
+
+                    if GIDSignIn.sharedInstance.handle(url) {
+                        return
+                    }
                 }
         }
     }

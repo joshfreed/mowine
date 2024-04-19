@@ -129,7 +129,6 @@
 		53F47F0F2585440E00910BDC /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F47F0E2585440E00910BDC /* ErrorLabel.swift */; };
 		53F4C76A27161B5F00CCBA7F /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F4C76927161B5F00CCBA7F /* PreviewData.swift */; };
 		53F4C76E2716212400CCBA7F /* WineThumbnailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F4C76D2716212400CCBA7F /* WineThumbnailViewModel.swift */; };
-		53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5ABF31E2176080067AB62 /* AppDelegate.swift */; };
 		53F5ABF91E2176080067AB62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABF71E2176080067AB62 /* Main.storyboard */; };
 		53F5ABFE1E2176080067AB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFD1E2176080067AB62 /* Assets.xcassets */; };
 		53F5AC011E2176080067AB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */; };
@@ -293,7 +292,6 @@
 		53F4C76927161B5F00CCBA7F /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		53F4C76D2716212400CCBA7F /* WineThumbnailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnailViewModel.swift; sourceTree = "<group>"; };
 		53F5ABF01E2176080067AB62 /* mowine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mowine.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		53F5ABF31E2176080067AB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F5ABF81E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		53F5ABFD1E2176080067AB62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53F5AC001E2176080067AB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -763,7 +761,6 @@
 				5348960E203DE49F00B7547A /* UI */,
 				539E166A27233CFA001A2CC3 /* Services */,
 				535EE9D1272755E10011ECC1 /* ModelServices */,
-				53F5ABF31E2176080067AB62 /* AppDelegate.swift */,
 				53F5ABFD1E2176080067AB62 /* Assets.xcassets */,
 				53F5AC021E2176080067AB62 /* Info.plist */,
 				53F5ABFF1E2176080067AB62 /* LaunchScreen.storyboard */,
@@ -1046,7 +1043,6 @@
 				53AC405225D74AD90041AED9 /* ConfirmPhotoView.swift in Sources */,
 				53F4C76E2716212400CCBA7F /* WineThumbnailViewModel.swift in Sources */,
 				53DD1E12257D7A25008C1DA7 /* ReauthenticationViewModel.swift in Sources */,
-				53F5ABF41E2176080067AB62 /* AppDelegate.swift in Sources */,
 				53D3B44025A0FB3400F15974 /* EmailLogInViewModel.swift in Sources */,
 				53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */,
 				53F96423273327CE0066E2E6 /* WineDetailsHeaderView.swift in Sources */,
