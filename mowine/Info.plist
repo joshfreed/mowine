@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>mo&apos; wine</string>
+	<string>mo' wine</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -34,13 +34,23 @@
 				<string>com.googleusercontent.apps.887197709861-a8kb44au133gc7p8crimebj788uv1hoh</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.518788623014-t3848p0pp4drivmetvgbdlppggd7u0t7</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>1801267753300792</string>
+    <key>FacebookClientToken</key>
+    <string>7c9c44b7497f2789b6f964033005f404</string>    
 	<key>FacebookDisplayName</key>
-	<string>mo&apos; wine</string>
+	<string>mo' wine</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

@@ -29,6 +29,8 @@ public class SignInWithFacebook: SocialSignInMethod {
             
             if let result = result, !result.isCancelled, let token = result.token {
                 completion(.success(FacebookToken(token: token.tokenString)))
+            } else {
+                completion(.failure(SocialSignInErrors.signInCancelled))
             }
         }
     }

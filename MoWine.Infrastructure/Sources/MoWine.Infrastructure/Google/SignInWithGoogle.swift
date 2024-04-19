@@ -38,7 +38,11 @@ public class SignInWithGoogle: SocialSignInMethod {
 
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: presentingViewController) { user, error in
             if let error = error {
-                completion(.failure(error))
+                if (error as NSError).code == GIDSignInError.canceled.rawValue {
+                    completion(.failure(SocialSignInErrors.signInCancelled))
+                } else {
+                    completion(.failure(error))
+                }
                 return
             }
 
@@ -60,8 +64,10 @@ public class SignInWithGoogle: SocialSignInMethod {
 
     public func signIn() async throws -> SocialToken {
         return try await withCheckedThrowingContinuation { cont in
-            signIn()  { res in
-                cont.resume(with: res)
+            Task { @MainActor in
+                signIn()  { res in
+                    cont.resume(with: res)
+                }
             }
         }
     }

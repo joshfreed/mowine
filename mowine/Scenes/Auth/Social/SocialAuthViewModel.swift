@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import MoWine_Application
 
+@MainActor
 class SocialAuthViewModel: ObservableObject {
     @Published var isSigningIn: Bool = false
     @Published var isSignInError: Bool = false
@@ -30,8 +31,13 @@ class SocialAuthViewModel: ObservableObject {
     }
 
     private func showError(_ error: Error) {
-        CrashReporter.shared.record(error: error)
-        isSignInError = true
-        signInError = error.localizedDescription
+        switch error {
+        case SocialSignInErrors.signInCancelled: break
+        default:
+            CrashReporter.shared.record(error: error)
+            isSignInError = true
+            signInError = error.localizedDescription
+        }
+
     }
 }

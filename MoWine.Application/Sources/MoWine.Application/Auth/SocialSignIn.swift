@@ -48,4 +48,5 @@ public protocol SocialAuthService {
 public enum SocialSignInErrors: Error {
     case googleUserNotFound
     case missingIdToken
+    case signInCancelled
 }
