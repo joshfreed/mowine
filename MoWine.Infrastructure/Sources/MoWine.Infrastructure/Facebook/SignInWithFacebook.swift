@@ -37,8 +37,10 @@ public class SignInWithFacebook: SocialSignInMethod {
 
     public func signIn() async throws -> SocialToken {
         return try await withCheckedThrowingContinuation { cont in
-            signIn()  { res in
-                cont.resume(with: res)
+            Task { @MainActor in
+                signIn()  { res in
+                    cont.resume(with: res)
+                }
             }
         }
     }
