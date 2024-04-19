@@ -17,7 +17,7 @@ public class SocialAuthApplicationService {
     }
 
     public func signIn(using type: SocialProviderType) async throws {
-        guard let method =  socialSignIn.getSignInMethod(for: type) else {
+        guard let method = socialSignIn.getSignInMethod(for: type) else {
             fatalError("No sign in method registered for provider: \(type)")
         }
 
