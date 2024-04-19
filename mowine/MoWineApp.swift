@@ -28,6 +28,7 @@ struct WoWineApp: App {
         setupSwiftyBeaverLogging()
         configureUIKit()
         setupDependencyInjection()
+        ApplicationDelegate.shared.application(UIApplication.shared)
         SwiftyBeaver.info("MoWineApp::init")
     }
 
