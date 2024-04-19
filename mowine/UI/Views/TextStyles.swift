@@ -12,13 +12,13 @@ extension Text {
     func buttonPrimaryOutline() -> some View {
         self.font(.system(size: 21))
             .fontWeight(.light)
-            .foregroundColor(Color("Primary"))
+            .foregroundColor(Color(.mwPrimary))
             .padding()
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(height: 48)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("Primary"), lineWidth: 1)
+                    .stroke(Color(.mwPrimary), lineWidth: 1)
             )
     }
 }

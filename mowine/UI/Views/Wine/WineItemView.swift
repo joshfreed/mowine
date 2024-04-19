@@ -25,7 +25,7 @@ struct WineItemView: View {
 
                 Text(type)
                     .font(.system(size: 16))
-                    .foregroundColor(Color("Dark Gray"))
+                    .foregroundColor(Color(.mwDarkGray))
                     .accessibilityIdentifier("Wine Type")
 
                 RatingLabel(rating: rating)

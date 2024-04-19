@@ -27,7 +27,7 @@ struct SplashScreen: View {
         }
         .padding([.leading, .trailing], 49)
         .frame(minWidth: 0, maxWidth: .infinity)
-        .background(Color("Primary"))
+        .background(Color(.mwPrimary))
         .edgesIgnoringSafeArea(.all)
     }
 }

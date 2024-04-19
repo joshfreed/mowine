@@ -23,7 +23,7 @@ struct WineDetailsHeaderView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding([.top, .bottom], 24)
-        .background(Color("Primary"))
+        .background(Color(.mwPrimary))
     }
 }
 

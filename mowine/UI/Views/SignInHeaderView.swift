@@ -22,7 +22,7 @@ struct SignInHeaderView: View {
         .frame(minWidth: 0, maxWidth: .infinity)
         .padding(.top, 100)
         .padding(.bottom, 64)
-        .background(Color("Primary"))
+        .background(Color(.mwPrimary))
     }
 }
 

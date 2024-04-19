@@ -43,7 +43,7 @@ struct TabbedRootView: View {
                 }
                 .tag(4)
         }
-        .accentColor(Color("Primary"))
+        .accentColor(Color(.mwPrimary))
         .sheet(isPresented: $model.isCustomItemSelected) {
             AddWineView()
         }

@@ -23,7 +23,7 @@ struct AnonymousUserView: View {
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding(.top, 100)
                 .padding(.bottom, 56)
-                .background(Color("Primary"))
+                .background(Color(.mwPrimary))
 
             Spacer()
             
@@ -71,7 +71,7 @@ struct CoolCopyView: View {
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 60, height: 60)
-                .foregroundColor(Color("Dark Gray"))
+                .foregroundColor(Color(.mwDarkGray))
             
             Text(headline)
                 .fixedSize(horizontal: false, vertical: true)
