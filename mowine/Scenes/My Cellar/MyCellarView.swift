@@ -22,8 +22,8 @@ struct MyCellarView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
         .searchable(text: $searchText)
-        .onChange(of: searchText) { newText in
-            searchResults = myCellar.search(searchText: newText)
+        .onChange(of: searchText) {
+            searchResults = myCellar.search(searchText: searchText)
         }
         .analyticsScreen(name: "My Cellar", class: "MyCellarView")
     }

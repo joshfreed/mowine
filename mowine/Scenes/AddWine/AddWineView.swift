@@ -23,11 +23,11 @@ struct AddWineView: View {
                 })
         }
         .accentColor(.mwSecondary)
-        .onChange(of: vm.closeModal, perform: { value in
-            if value {
+        .onChange(of: vm.closeModal) {
+            if vm.closeModal {
                 dismiss()
             }
-        })
+        }
         .environmentObject(vm)
         .analyticsScreen(name: "Add Wine", class: "AddWineView")
     }

@@ -24,7 +24,7 @@ struct SocialAuthView: View {
         .alert(isPresented: $vm.isSignInError) {
             Alert(title: Text("Login Error"), message: Text(vm.signInError))
         }
-        .onChange(of: vm.isSigningIn) { isSigningIn = $0 }
+        .onChange(of: vm.isSigningIn) { isSigningIn = vm.isSigningIn }
     }
 }
 
