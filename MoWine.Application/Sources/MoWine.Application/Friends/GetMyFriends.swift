@@ -7,12 +7,13 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
+import OSLog
 import MoWine_Domain
 
 public class GetMyFriendsQueryHandler {
     private let session: Session
     private let userRepository: UserRepository
+    private let logger = Logger(category: .friends)
 
     public init(session: Session, userRepository: UserRepository) {
         self.session = session
@@ -20,7 +21,7 @@ public class GetMyFriendsQueryHandler {
     }
 
     public func subscribe() -> AnyPublisher<GetMyFriendsQueryResponse, Error> {
-        SwiftyBeaver.verbose("subscribe: \(String(describing: session.currentUserId))")
+        logger.debug("subscribe: \(String(describing: self.session.currentUserId))")
 
         guard let userId = session.currentUserId else {
             return Just(GetMyFriendsQueryResponse(friends: [])).setFailureType(to: Error.self).eraseToAnyPublisher()

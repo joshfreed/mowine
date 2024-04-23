@@ -18,9 +18,6 @@ let package = Package(
             targets: ["MoWine.Application.TestKit"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
         .package(path: "../MoWine.Domain"),
         .package(name: "Dip", url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
@@ -33,7 +30,6 @@ let package = Package(
             name: "MoWine.Application",
             dependencies: [
                 "Dip",
-                "SwiftyBeaver",
                 "MoWine.Domain",
                 .product(name: "JFLib.Mediator", package: "JFLib")
             ]),

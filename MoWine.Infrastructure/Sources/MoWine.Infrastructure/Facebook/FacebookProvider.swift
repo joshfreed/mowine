@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
 

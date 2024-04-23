@@ -7,12 +7,13 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
+import OSLog
 import MoWine_Domain
 
 public class GetMyWinesHandler {
     private let session: Session
     private let repository: WineRepository
+    private let logger = Logger(category: .myCellar)
 
     public init(session: Session, repository: WineRepository) {
         self.session = session
@@ -20,7 +21,7 @@ public class GetMyWinesHandler {
     }
 
     public func subscribe() -> AnyPublisher<GetMyWinesResponse, Error> {
-        SwiftyBeaver.verbose("subscribe: \(String(describing: session.currentUserId))")
+        logger.debug("subscribe: \(String(describing: self.session.currentUserId))")
 
         guard let userId = session.currentUserId else {
             return Just(GetMyWinesResponse(wines: [])).setFailureType(to: Error.self).eraseToAnyPublisher()

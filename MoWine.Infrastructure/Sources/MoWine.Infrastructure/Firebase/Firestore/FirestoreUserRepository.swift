@@ -10,9 +10,11 @@ import Foundation
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreCombineSwift
-import SwiftyBeaver
+import OSLog
 import MoWine_Application
 import MoWine_Domain
+
+private let logger = Logger(category: .firebase)
 
 public class FirestoreUserRepository: UserRepository {
     let db = Firestore.firestore()
@@ -37,12 +39,12 @@ public class FirestoreUserRepository: UserRepository {
         let document = try await query.getDocument()
 
         guard document.exists else {
-            SwiftyBeaver.warning("Document does not exist")
+            logger.warning("Document does not exist")
             return nil
         }
 
         guard let user = User.fromFirestore(document) else {
-            SwiftyBeaver.warning("Couldn't build user from document")
+            logger.warning("Couldn't build user from document")
             return nil
         }
 

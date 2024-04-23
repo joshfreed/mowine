@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import FirebaseCrashlytics
 
 class CrashReporter {
@@ -16,7 +15,6 @@ class CrashReporter {
     private init() {}
 
     func record(error: Error, _ file: String = #file, _ function: String = #function, line: Int = #line) {
-        SwiftyBeaver.error("\(error)", file, function, line: line)
         Crashlytics.crashlytics().record(error: error)
     }
 }

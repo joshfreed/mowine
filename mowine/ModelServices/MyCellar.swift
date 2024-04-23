@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
+import OSLog
 import MoWine_Application
 
 class MyCellar: ObservableObject {
@@ -21,6 +21,7 @@ class MyCellar: ObservableObject {
     @Injected private var session: Session
     @Injected private var getMyWines: GetMyWinesHandler
 
+    private let logger = Logger(category: .ui)
     private var cancellable: AnyCancellable?
     private var winesByType: [String: [Wine]] = [:]
     private let wineFilteringService = WineFilteringService()
@@ -85,7 +86,7 @@ extension MyCellar {
 
 extension MyCellar {
     func present(_ response: GetMyWinesResponse) {
-        SwiftyBeaver.verbose("presenting \(response)")
+        logger.debug("presenting \(String(describing: response))")
         myWines = response.wines
             .sorted(by: { $0.rating > $1.rating })
             .map { Wine.from($0) }

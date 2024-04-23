@@ -9,9 +9,11 @@
 import Foundation
 import AuthenticationServices
 import CryptoKit
-import SwiftyBeaver
+import OSLog
 import MoWine_Application
 import MoWine_Domain
+
+private let logger = Logger(category: .apple)
 
 struct AppleToken: SocialToken {
     let idTokenString: String
@@ -57,12 +59,12 @@ public class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationContr
             }
             
             guard let appleIDToken = appleIDCredential.identityToken else {
-                SwiftyBeaver.warning("Unable to fetch identity token")
+                logger.warning("Unable to fetch identity token")
                 return
             }
             
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-                SwiftyBeaver.warning("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                logger.warning("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 return
             }
             
@@ -73,7 +75,7 @@ public class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationContr
     }
     
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        SwiftyBeaver.error("Sign in with Apple errored: \(error)")
+        logger.error("Sign in with Apple errored: \(error)")
         completion(.failure(error))
     }
 }

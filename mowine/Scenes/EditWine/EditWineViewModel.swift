@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
+import OSLog
 import MoWine_Application
 import UIKit.UIImage
 import UIKit
@@ -23,14 +23,7 @@ class EditWineViewModel: ObservableObject {
     let form = EditWineFormModel()
     private var wineId: String!
     @Injected private var mediator: Mediator
-
-    init() {
-        SwiftyBeaver.debug("init")
-    }
-    
-    deinit {
-        SwiftyBeaver.debug("deinit")
-    }
+    private let logger = Logger(category: .ui)
 
     func load(wineId: String) async {
         self.wineId = wineId
@@ -52,7 +45,7 @@ class EditWineViewModel: ObservableObject {
                 form.setWine(wine)
             } else {
                 // Wine was not found. What to do?
-                SwiftyBeaver.error("Wine \(wineId) was not found")
+                logger.error("Wine \(wineId) was not found")
             }
         } catch {
             CrashReporter.shared.record(error: error)

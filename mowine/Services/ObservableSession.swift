@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import MoWine_Application
-import SwiftyBeaver
+import OSLog
 
 class ObservableSession: ObservableObject {
     @Published private(set) var userId: String? = nil
@@ -17,21 +17,17 @@ class ObservableSession: ObservableObject {
 
     @Injected private var session: Session
     private var cancellable: AnyCancellable?
+    private let logger = Logger(category: .ui)
 
     init() {
-        SwiftyBeaver.debug("ObservableSession::init")
         observe()
-    }
-
-    deinit {
-        SwiftyBeaver.debug("ObservableSession::deinit")
     }
 
     private func observe() {
         cancellable = session.authStateDidChange
             .receive(on: RunLoop.main)
             .sink { [weak self] authState in
-                SwiftyBeaver.debug("The session finished initializing")
+                self?.logger.debug("The session finished initializing")
                 self?.userId = authState.userId?.asString
                 self?.isAnonymous = authState.isAnonymous
             }

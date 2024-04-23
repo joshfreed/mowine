@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SwiftyBeaver
+import OSLog
 import MoWine_Application
 import MoWine_Infrastructure
 import Dip
@@ -24,12 +24,13 @@ struct WoWineApp: App {
     @StateObject private var myFriends = MyFriends()
     @StateObject private var myAccount = MyAccount()
 
+    private let logger = Logger(category: .app)
+
     init() {
-        setupSwiftyBeaverLogging()
         configureUIKit()
         setupDependencyInjection()
         ApplicationDelegate.shared.application(UIApplication.shared)
-        SwiftyBeaver.info("MoWineApp::init")
+        logger.info("MoWineApp::init")
     }
 
     var body: some Scene {
@@ -60,16 +61,6 @@ struct WoWineApp: App {
                     }
                 }
         }
-    }
-
-    private func setupSwiftyBeaverLogging() {
-        let console = ConsoleDestination()
-        #if DEBUG
-        console.minLevel = .verbose
-        #else
-        console.minLevel = .warning
-        #endif
-        SwiftyBeaver.addDestination(console)
     }
 
     private func configureUIKit() {

@@ -8,11 +8,13 @@
 
 import Foundation
 import FirebaseAuth
-import SwiftyBeaver
+import OSLog
 import Combine
 import MoWine_Application
 import FirebaseCrashlytics
 import MoWine_Domain
+
+private let logger = Logger(category: .firebase)
 
 public class FirebaseSession: Session {
     public var currentUserId: UserId? { authState.userId }
@@ -40,7 +42,7 @@ public class FirebaseSession: Session {
     public init() {}
 
     public func start() {
-        SwiftyBeaver.info("Starting session...")
+        logger.info("Starting session...")
 
         let auth = Auth.auth()
 
@@ -49,7 +51,7 @@ public class FirebaseSession: Session {
         }
 
         handler = auth.addStateDidChangeListener { [weak self] (auth, user) in
-            SwiftyBeaver.verbose("addStateDidChangeListener \(auth), \(String(describing: user))")
+            logger.debug("addStateDidChangeListener \(auth), \(String(describing: user))")
             self?.updateAuthState(from: user)
         }
 
@@ -74,7 +76,7 @@ public class FirebaseSession: Session {
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
-            SwiftyBeaver.error("Error signing out: \(signOutError)")
+            logger.error("Error signing out: \(signOutError)")
             Crashlytics.crashlytics().record(error: signOutError)
         }
     }
@@ -109,8 +111,8 @@ public class FirebaseSession: Session {
             throw SessionError.notLoggedIn
         }
 
-        SwiftyBeaver.debug("User info: \(authUser.providerData)")
-        SwiftyBeaver.debug("Provider ID: \(authUser.providerID)")
+        logger.debug("User info: \(authUser.providerData)")
+        logger.debug("Provider ID: \(authUser.providerID)")
 
         do {
             try await authUser.updateEmail(to: emailAddress)
@@ -128,13 +130,13 @@ public class FirebaseSession: Session {
 extension FirebaseSession {
     func updateAuthState(from user: FirebaseAuth.User?) {
         if let user = user {
-            SwiftyBeaver.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
+            logger.info("FireBase Session Info: \(String(describing: user.email)), \(String(describing: user.displayName))")
             let userId = UserId(string: user.uid)
             let isAnonymous = user.isAnonymous
             authState = AuthState(userId: userId, isAnonymous: isAnonymous)
             authStateSubject.send(authState)
         } else {
-            SwiftyBeaver.warning("No user")
+            logger.warning("No user")
             authState = AuthState(userId: nil, isAnonymous: true)
             authStateSubject.send(authState)
         }

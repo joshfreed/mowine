@@ -18,9 +18,6 @@ let package = Package(
             targets: ["MoWine.Domain.TestKit"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
     ],
     targets: [
@@ -28,7 +25,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "MoWine.Domain",
-            dependencies: ["SwiftyBeaver"]),
+            dependencies: []),
         .target(
             name: "MoWine.Domain.TestKit",
             dependencies: ["MoWine.Domain", "Nimble"]),

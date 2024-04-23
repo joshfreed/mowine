@@ -5,7 +5,6 @@
 
 import Foundation
 import FirebaseStorage
-import SwiftyBeaver
 import MoWine_Application
 import MoWine_Domain
 

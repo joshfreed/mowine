@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyBeaver
+import OSLog
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreCombineSwift
@@ -16,15 +16,12 @@ import JFLib_Combine
 import MoWine_Application
 import MoWine_Domain
 
+private let logger = Logger(category: .firebase)
+
 public class FirestoreWineRepository: WineRepository {
     let db = Firestore.firestore()
 
     public init() {
-        SwiftyBeaver.verbose("init")
-    }
-
-    deinit {
-        SwiftyBeaver.verbose("deinit")
     }
 
     public func add(_ wine: Wine) async throws {
@@ -42,7 +39,7 @@ public class FirestoreWineRepository: WineRepository {
     }
 
     public func getWine(by id: WineId) async throws -> Wine? {
-        SwiftyBeaver.info("getWine \(id)")
+        logger.info("getWine \(id)")
 
         let docRef = db.collection("wines").document(id.asString)
 
@@ -59,7 +56,7 @@ public class FirestoreWineRepository: WineRepository {
     }
 
     public func getWines(userId: UserId) async throws -> [Wine] {
-        SwiftyBeaver.info("getWines \(userId)")
+        logger.info("getWines \(userId)")
 
         let query = db
             .collection("wines")
@@ -70,7 +67,7 @@ public class FirestoreWineRepository: WineRepository {
     }
 
     public func getWines(userId: UserId, wineType: WineType) async throws -> [Wine] {
-        SwiftyBeaver.info("getWines \(userId) \(wineType.name)")
+        logger.info("getWines \(userId) \(wineType.name)")
 
         let query = db
             .collection("wines")
@@ -97,7 +94,7 @@ public class FirestoreWineRepository: WineRepository {
     }
 
     public func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        SwiftyBeaver.info("getWines \(userId) \(wineType.name)")
+        logger.info("getWines \(userId) \(wineType.name)")
 
         let query = db
             .collection("wines")
@@ -106,7 +103,7 @@ public class FirestoreWineRepository: WineRepository {
         
         let listener = query.addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                SwiftyBeaver.error("\(error)")
+                logger.error("\(error)")
                 Crashlytics.crashlytics().record(error: error)
                 completion(.failure(error))
             } else if let documents = querySnapshot?.documents {
@@ -121,7 +118,7 @@ public class FirestoreWineRepository: WineRepository {
     }
 
     public func getTopWines(userId: UserId) async throws -> [Wine] {
-        SwiftyBeaver.info("getTopWines \(userId)")
+        logger.info("getTopWines \(userId)")
 
         let query = db
             .collection("wines")

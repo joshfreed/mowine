@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SwiftyBeaver
 
 struct AddWineView: View {
     @Environment(\.dismiss) var dismiss

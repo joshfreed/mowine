@@ -8,7 +8,6 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
 import JFLib_Mediator
 import MoWine_Domain
 
@@ -27,13 +26,8 @@ public class GetMyAccountQueryHandler: BaseQueryHandler<GetMyAccountQuery, GetMy
     private let session: Session
 
     public init(userRepository: UserRepository, session: Session) {
-        SwiftyBeaver.debug("init")
         self.userRepository = userRepository
         self.session = session
-    }
-    
-    deinit {
-        SwiftyBeaver.debug("deinit")
     }
     
     public func subscribe() -> AnyPublisher<GetMyAccountQueryResponse?, Error> {

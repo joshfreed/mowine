@@ -8,7 +8,6 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
 import MoWine_Domain
 
 public enum SessionError: Error {

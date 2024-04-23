@@ -17,7 +17,6 @@ let package = Package(
         .package(name: "JFLib", url: "https://github.com/joshfreed/JFLib", from: "1.0.0"),
         .package(path: "../MoWine.Application"),
         .package(path: "../MoWine.Domain"),
-        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", from: "1.9.3"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
         .package(url: "https://github.com/facebook/facebook-ios-sdk", from: "17.0.0"),
@@ -30,7 +29,6 @@ let package = Package(
             dependencies: [
                 "MoWine.Application",
                 "MoWine.Domain",
-                "SwiftyBeaver",
 
                 .product(name: "JFLib.Combine", package: "JFLib"),
                 .product(name: "JFLib.Services", package: "JFLib"),

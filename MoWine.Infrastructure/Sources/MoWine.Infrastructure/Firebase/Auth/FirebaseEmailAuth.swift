@@ -8,20 +8,22 @@
 
 import Foundation
 import FirebaseAuth
-import SwiftyBeaver
+import OSLog
 import MoWine_Application
 import MoWine_Domain
 
 public class FirebaseEmailAuth: EmailAuthenticationService {
+    private let logger = Logger(category: .firebase)
+
     public init() {}
     
     public func signIn(emailAddress: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().signIn(withEmail: emailAddress, password: password)
-            SwiftyBeaver.info("User signed in with firebase")
-            SwiftyBeaver.debug(authResult.user.uid)
+            logger.info("User signed in with firebase")
+            logger.debug("\(authResult.user.uid)")
         } catch let error {
-            SwiftyBeaver.error("\(error)")
+            logger.error("\(error)")
             switch (error as NSError).code {
             case AuthErrorCode.userNotFound.rawValue:
                 throw EmailAuthenticationErrors.userNotFound
@@ -52,19 +54,19 @@ public class FirebaseEmailAuth: EmailAuthenticationService {
 
         do {
             try await user.link(with: credential)
-            SwiftyBeaver.info("Anonymous user has been converted into a real user /w email and password.")
-            SwiftyBeaver.debug(user.uid)
+            logger.info("Anonymous user has been converted into a real user /w email and password.")
+            logger.debug("\(user.uid)")
         } catch {
             throw  signUpFailure(error)
         }
     }
 
     private func doCreateUser(emailAddress: String, password: String) async throws {
-        SwiftyBeaver.warning("It appears there is no auth user. Falling back to createUser.")
+        logger.warning("It appears there is no auth user. Falling back to createUser.")
 
         do {
             try await Auth.auth().createUser(withEmail: emailAddress, password: password)
-            SwiftyBeaver.info("A fresh user has been created.")
+            logger.info("A fresh user has been created.")
         } catch {
             throw signUpFailure(error)
         }
@@ -80,8 +82,8 @@ public class FirebaseEmailAuth: EmailAuthenticationService {
             let reason = nserror.userInfo[NSLocalizedFailureReasonErrorKey] as? String
             return EmailAuthenticationErrors.invalidPassword(message: reason)
         } else {
-            SwiftyBeaver.error("\(error)")
-            SwiftyBeaver.error(error.localizedDescription)
+            logger.error("\(error)")
+            logger.error("\(error.localizedDescription)")
             return error
         }
     }

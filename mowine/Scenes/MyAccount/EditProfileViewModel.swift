@@ -9,7 +9,6 @@
 import Foundation
 import UIKit.UIImage
 import Combine
-import SwiftyBeaver
 import JFLib_Mediator
 import MoWine_Application
 
@@ -51,14 +50,6 @@ class EditProfileViewModel: ObservableObject {
         } else {
             return nil
         }
-    }
-
-    init() {
-        SwiftyBeaver.debug("init")
-    }
-
-    deinit {
-        SwiftyBeaver.debug("deinit")
     }
 
     func loadProfile() async {

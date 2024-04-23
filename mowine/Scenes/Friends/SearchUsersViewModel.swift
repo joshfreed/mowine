@@ -8,7 +8,6 @@
 
 import Foundation
 import Combine
-import SwiftyBeaver
 import JFLib_Mediator
 import MoWine_Application
 
