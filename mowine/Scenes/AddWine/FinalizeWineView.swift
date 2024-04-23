@@ -9,12 +9,14 @@
 import SwiftUI
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 struct FinalizeWineView: View {
     @ObservedObject var model: NewWineModel
 
     @EnvironmentObject private var vm: AddWineViewModel
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     @State private var isSaving = false
     @State private var isErrorSaving = false
@@ -70,6 +72,7 @@ struct FinalizeWineView: View {
             vm.closeModal = true
         } catch {
             isSaving = false
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             isErrorSaving = true
             errorMessage = error.localizedDescription

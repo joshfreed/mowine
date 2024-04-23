@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 class TopWinesViewModel: ObservableObject {
     @Published var topWines: [GetTopWinesResponse.TopWine] = []
@@ -18,6 +19,7 @@ class TopWinesViewModel: ObservableObject {
     @Published var selectedWineId: String = ""
 
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     @MainActor
     func load(userId: String) async {
@@ -27,6 +29,7 @@ class TopWinesViewModel: ObservableObject {
             let response: GetTopWinesResponse = try await mediator.send(GetTopWinesQuery(userId: userId))
             self.topWines = response.topWines
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             errorLoadingWines = true
         }

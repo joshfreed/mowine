@@ -9,12 +9,14 @@
 import Foundation
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 class UserProfileHeaderViewModel: ObservableObject {
     @Published var fullName: String = ""
     @Published var profilePicture: URL?
 
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     @MainActor
     func load(userId: String) async {
@@ -23,6 +25,7 @@ class UserProfileHeaderViewModel: ObservableObject {
             fullName = profile.fullName
             profilePicture = profile.profilePictureUrl
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }

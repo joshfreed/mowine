@@ -8,11 +8,13 @@
 
 import SwiftUI
 import MoWine_Application
+import OSLog
 
 struct MiniAddFriendButton: View {
     @EnvironmentObject var friends: MyFriends
     let userId: String
-    
+    private let logger = Logger(category: .ui)
+
     var body: some View {
         if !friends.isFriends(with: userId) {
             Button(action: { addFriend() }) {
@@ -31,6 +33,7 @@ struct MiniAddFriendButton: View {
             do {
                 try await friends.addFriend(userId)
             } catch {
+                logger.error("\(error)")
                 CrashReporter.shared.record(error: error)
             }
         }

@@ -9,12 +9,14 @@
 import SwiftUI
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 struct WineTypeListView: View {
     let userId: String
     let typeName: String
 
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     @State private var wines: [GetWinesByTypeResponse.Wine] = []
 
@@ -31,6 +33,7 @@ struct WineTypeListView: View {
             let response: GetWinesByTypeResponse = try await mediator.send(GetWinesByTypeQuery(userId: userId, type: typeName))
             wines = response.wines
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }

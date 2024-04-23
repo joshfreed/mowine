@@ -8,6 +8,7 @@
 
 import SwiftUI
 import MoWine_Application
+import OSLog
 
 enum ForgotPasswordAlert: Identifiable {
     case success
@@ -21,6 +22,7 @@ enum ForgotPasswordAlert: Identifiable {
 struct ForgotPasswordView: View {
     @Environment(\.presentationMode) var presentationMode
     @Injected var emailAuth: EmailAuthApplicationService
+    private let logger = Logger(category: .ui)
     @State private var emailAddress: String = ""
     @State private var isSending = false
     @State private var activeAlert: ForgotPasswordAlert?
@@ -76,6 +78,7 @@ struct ForgotPasswordView: View {
             try await emailAuth.forgotPassword(emailAddress: emailAddress)
             activeAlert = .success
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             activeAlert = .failure
         }

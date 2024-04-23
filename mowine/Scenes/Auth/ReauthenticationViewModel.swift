@@ -8,6 +8,7 @@
 
 import Foundation
 import MoWine_Application
+import OSLog
 
 class ReauthenticationViewModel: ObservableObject {
     @Published var showErrorAlert = false
@@ -15,6 +16,7 @@ class ReauthenticationViewModel: ObservableObject {
     
     @Injected private var socialAuthService: SocialAuthService
     @Injected private var socialSignInRegistry: SocialSignInRegistry
+    private let logger = Logger(category: .ui)
 
     func continueWith(_ type: SocialProviderType) async {
         guard let method = socialSignInRegistry.getSignInMethod(for: type) else {
@@ -30,6 +32,7 @@ class ReauthenticationViewModel: ObservableObject {
     }
 
     private func showError(_ error: Error) {
+        logger.error("\(error)")
         CrashReporter.shared.record(error: error)
         errorMessage = error.localizedDescription
         showErrorAlert = true

@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 @MainActor
 class SearchUsersViewModel: ObservableObject {
@@ -18,6 +19,7 @@ class SearchUsersViewModel: ObservableObject {
     @Published private(set) var searchResults: [SearchUsersResponse.User] = []
 
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     private var cancellable: AnyCancellable?
 
@@ -47,6 +49,7 @@ class SearchUsersViewModel: ObservableObject {
                 searchResults = response.users
                 hasSearched = true
             } catch {
+                logger.error("\(error)")
                 CrashReporter.shared.record(error: error)
             }
         }

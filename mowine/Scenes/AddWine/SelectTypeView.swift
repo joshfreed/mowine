@@ -9,11 +9,13 @@
 import SwiftUI
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 class SelectTypeViewModel: ObservableObject {
     @Published var types: [AddWine.WineType] = []
 
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     func load() async {
         do {
@@ -23,6 +25,7 @@ class SelectTypeViewModel: ObservableObject {
                 return AddWine.WineType(name: typeModel.name, varieties: varieties)
             }
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }

@@ -13,6 +13,7 @@ import MoWine_Application
 import UIKit.UIImage
 import UIKit
 import JFLib_Mediator
+import OSLog
 
 @MainActor
 class EditWineViewModel: ObservableObject {
@@ -36,6 +37,7 @@ class EditWineViewModel: ObservableObject {
             let wineTypes = EditWine.mapTypes(from: try await getWineTypesResponse)
             form.setTypes(wineTypes)
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
 
@@ -48,6 +50,7 @@ class EditWineViewModel: ObservableObject {
                 logger.error("Wine \(wineId) was not found")
             }
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
 
@@ -56,6 +59,7 @@ class EditWineViewModel: ObservableObject {
                 form.image = UIImage(data: imageData)
             }
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }
@@ -83,6 +87,7 @@ class EditWineViewModel: ObservableObject {
         do {
             try await mediator.send(command)
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             throw error
         }
@@ -92,6 +97,7 @@ class EditWineViewModel: ObservableObject {
         do {
             try await mediator.send(DeleteWineCommand(wineId: wineId))
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             throw error
         }

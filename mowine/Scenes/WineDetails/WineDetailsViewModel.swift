@@ -9,12 +9,14 @@
 import Foundation
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 class WineDetailsViewModel: ObservableObject {
     @Published var wine: GetWineDetailsResponse?
     @Published var wineNotFound = false
 
     @Injected private var mediator: Mediator
+    private let logger = Logger(category: .ui)
 
     func load(wineId: String) async {
         do {
@@ -22,6 +24,7 @@ class WineDetailsViewModel: ObservableObject {
         } catch GetWineDetailsErrors.wineNotFound {
             wineNotFound = true
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }

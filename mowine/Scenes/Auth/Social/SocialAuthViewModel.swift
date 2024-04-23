@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import MoWine_Application
+import OSLog
 
 @MainActor
 class SocialAuthViewModel: ObservableObject {
@@ -17,6 +18,7 @@ class SocialAuthViewModel: ObservableObject {
     @Published var signInError: String = ""
 
     @Injected private var socialAuthService: SocialAuthApplicationService
+    private let logger = Logger(category: .ui)
 
     func socialSignIn(type: SocialProviderType) async {
         isSigningIn = true
@@ -34,6 +36,7 @@ class SocialAuthViewModel: ObservableObject {
         switch error {
         case SocialSignInErrors.signInCancelled: break
         default:
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             isSignInError = true
             signInError = error.localizedDescription

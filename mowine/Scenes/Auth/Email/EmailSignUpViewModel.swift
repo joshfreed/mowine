@@ -9,13 +9,15 @@
 import Foundation
 import Combine
 import MoWine_Application
+import OSLog
 
 class EmailSignUpViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String = ""
     
     @Injected private var emailAuthService: EmailAuthApplicationService
-
+    private let logger = Logger(category: .ui)
+    
     @MainActor
     func signUp(fullName: String, emailAddress: String, password: String) async {
         errorMessage = ""
@@ -37,6 +39,7 @@ class EmailSignUpViewModel: ObservableObject {
             // Also we shouldn't have current user id listeners fire until the user account object was created
             NotificationCenter.default.post(name: .signedIn, object: nil)
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
             displaySignUpError(error)
         }

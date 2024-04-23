@@ -8,11 +8,13 @@
 
 import UIKit
 import MoWine_Application
+import OSLog
 
 class WineThumbnailViewModel: ObservableObject {
     @Published var uiImage: UIImage?
 
     @Injected private var query: GetWineThumbnailQueryHandler
+    private let logger = Logger(category: .ui)
 
     @MainActor
     func fetchThumbnail(wineId: String) async {
@@ -23,6 +25,7 @@ class WineThumbnailViewModel: ObservableObject {
                 uiImage = nil
             }
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }

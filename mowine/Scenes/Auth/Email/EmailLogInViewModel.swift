@@ -8,6 +8,7 @@
 
 import Foundation
 import MoWine_Application
+import OSLog
 
 @MainActor
 class EmailLogInViewModel: ObservableObject {
@@ -15,6 +16,7 @@ class EmailLogInViewModel: ObservableObject {
     @Published var error: String = ""
     
     @Injected private var emailAuth: EmailAuthApplicationService
+    private let logger = Logger(category: .ui)
 
     func logIn(emailAddress: String, password: String) async {
         error = ""
@@ -34,6 +36,7 @@ class EmailLogInViewModel: ObservableObject {
                 EmailAuthenticationErrors.notAuthorized:
                 self.error = "Login failed. Please check your email and password and try again."
             default:
+                logger.error("\(error)")
                 CrashReporter.shared.record(error: error)
                 self.error = "An error occurred while trying to log you in. Please try again in a few minutes."
             }

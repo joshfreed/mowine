@@ -11,6 +11,7 @@ import UIKit.UIImage
 import Combine
 import JFLib_Mediator
 import MoWine_Application
+import OSLog
 
 @MainActor
 class EditProfileViewModel: ObservableObject {
@@ -41,7 +42,8 @@ class EditProfileViewModel: ObservableObject {
 
     @Injected private var mediator: Mediator
     @Injected private var updateProfileCommandHandler: UpdateProfileCommandHandler
-
+    private let logger = Logger(category: .ui)
+    
     private var hasChanges = false
 
     private var newProfilePicture: UIImage? {
@@ -60,6 +62,7 @@ class EditProfileViewModel: ObservableObject {
             setProfile(profile)
             hasChanges = false
         } catch {
+            logger.error("\(error)")
             CrashReporter.shared.record(error: error)
         }
     }
@@ -90,6 +93,7 @@ class EditProfileViewModel: ObservableObject {
             if case SessionError.requiresRecentLogin = error {
                 reauthenticate()
             } else {
+                logger.error("\(error)")
                 CrashReporter.shared.record(error: error)
                 showErrorAlert = true
                 saveErrorMessage = error.localizedDescription
