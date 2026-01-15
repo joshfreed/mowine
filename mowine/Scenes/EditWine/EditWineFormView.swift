@@ -76,14 +76,12 @@ struct EditWineFormView: View {
                         .foregroundColor(.red)
                         
                 }
+                .confirmationDialog("Are you sure?", isPresented: $showConfirmDelete, titleVisibility: .visible) {
+                    Button("Delete Wine") { onDelete() }
+                    Button("Cancel", role: .cancel) { }
+                }
             }
         }
-        .actionSheet(isPresented: $showConfirmDelete, content: {
-            ActionSheet(title: Text("Are you sure?"), message: Text("This cannot be undone."), buttons: [
-                .destructive(Text("Delete Wine")) { onDelete() },
-                .cancel()
-            ])
-        })
     }
 }
 
