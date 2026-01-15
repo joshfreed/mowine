@@ -20,6 +20,7 @@ struct FriendsPage: View {
             NavigationView {
                 SearchableFriendsPage(hasSearched: vm.hasSearched, searchResults: vm.searchResults)
                     .navigationBarTitle("Friends")
+                    .toolbarTitleDisplayMode(.inline)
                     .searchable(text: $vm.searchText)
             }
             .accentColor(.mwSecondary)
