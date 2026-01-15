@@ -27,10 +27,10 @@ struct MyCellarTypesView: View {
                 }
                 .accessibilityIdentifier("Show My White Wines")
 
-                NavigationLink(destination: MyCellarWineListView(wineTypeId: "Rosè", title: "Rosè Wines")) {
-                    WineTypeMenuButton(name: "Rosè", icon: "Rose Button")
+                NavigationLink(destination: MyCellarWineListView(wineTypeId: "Rosé", title: "Rosé Wines")) {
+                    WineTypeMenuButton(name: "Rosé", icon: "Rose Button")
                 }
-                .accessibilityIdentifier("Show My Rosès")
+                .accessibilityIdentifier("Show My Rosés")
 
                 NavigationLink(destination: MyCellarWineListView(wineTypeId: "Bubbly", title: "Bubblies")) {
                     WineTypeMenuButton(name: "Bubbly", icon: "Bubbly Button")
