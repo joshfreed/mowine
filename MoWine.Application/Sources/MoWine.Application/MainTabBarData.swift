@@ -15,9 +15,12 @@ public final class MainTabBarData: ObservableObject {
     @Published public var itemSelected: Int {
         didSet {
             if itemSelected == customActionItemIndex {
-                previousItem = oldValue
-                itemSelected = oldValue
                 isCustomItemSelected = true
+                Task.detached {
+                    await MainActor.run {
+                        self.itemSelected = oldValue
+                    }
+                }
             }
         }
     }
@@ -25,11 +28,8 @@ public final class MainTabBarData: ObservableObject {
     /// This is the index of the item that fires a custom action
     let customActionItemIndex: Int
 
-    private var previousItem: Int
-
     public init(customItemIndex: Int, initialIndex: Int = 1) {
         self.customActionItemIndex = customItemIndex
         self.itemSelected = initialIndex
-        self.previousItem = initialIndex
     }
 }
