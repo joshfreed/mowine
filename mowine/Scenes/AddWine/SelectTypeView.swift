@@ -11,6 +11,7 @@ import JFLib_Mediator
 import MoWine_Application
 import OSLog
 
+@MainActor
 class SelectTypeViewModel: ObservableObject {
     @Published var types: [AddWine.WineType] = []
 
@@ -34,7 +35,7 @@ class SelectTypeViewModel: ObservableObject {
 struct SelectTypeView: View {
     @ObservedObject var model: NewWineModel
     @State private var showNextScreen = false
-    @State private var vm = SelectTypeViewModel()
+    @StateObject private var vm = SelectTypeViewModel()
 
     var body: some View {
         ScrollView {
