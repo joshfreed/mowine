@@ -31,6 +31,7 @@ struct MyCellarWineListView: View {
                 .onTapGesture { selectedWine = wine }
         }
         .listStyle(.plain)
+        .toolbarTitleDisplayMode(.inline)
         .navigationBarTitle(title)
         .searchable(text: $searchText)
         .accessibilityIdentifier("WineCellarListView")
@@ -42,7 +43,9 @@ struct MyCellarWineListView: View {
 
 struct MyCellarWineListView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarWineListView(wineTypeId: "Red", title: "Red Wines")
-            .environmentObject(MyCellar.fake())
+        NavigationStack {
+            MyCellarWineListView(wineTypeId: "Red", title: "Red Wines")
+                .environmentObject(MyCellar.fake())
+        }
     }
 }
