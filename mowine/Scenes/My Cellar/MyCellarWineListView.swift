@@ -31,10 +31,10 @@ struct MyCellarWineListView: View {
                 .onTapGesture { selectedWine = wine }
         }
         .listStyle(.plain)
+        .accessibilityIdentifier("WineCellarListView")
         .toolbarTitleDisplayMode(.inline)
         .navigationBarTitle(title)
         .searchable(text: $searchText)
-        .accessibilityIdentifier("WineCellarListView")
         .sheet(item: $selectedWine) { wine in
             EditWineView(wineId: wine.id)
         }

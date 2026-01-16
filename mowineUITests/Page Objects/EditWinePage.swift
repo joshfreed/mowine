@@ -11,6 +11,9 @@ import XCTest
 class EditWinePage {
     private let app: XCUIApplication
 
+    private var editForm: XCUIElementQuery { app.collectionViews }
+    private var wineNameTextField: XCUIElement { editForm.textFields["WineName"] }
+
     init(app: XCUIApplication) throws {
         self.app = app
         guard waitForExistence() else { throw PageErrors.wrongPage }
@@ -20,13 +23,13 @@ class EditWinePage {
         app.navigationBars["Edit Wine"].waitForExistence(timeout: .default)
     }
 
-    func setWineName(_ newName: String) {
-        app.tables.textFields["Fancy Wine Name"].tap()
-        app.tables.textFields["Fancy Wine Name"].clearAndEnterText(text: newName)
+    func setWineName(_ newName: String) {        
+        wineNameTextField.tap()
+        wineNameTextField.clearAndEnterText(text: newName)
     }
 
     func updateRating(to value: Int) throws {
-        let ratingPicker = try RatingPicker(el: app.tables.cells["Rating"])
+        let ratingPicker = try RatingPicker(el: editForm.otherElements["Rating Picker"])
         try ratingPicker.rate(value)
     }
 
@@ -39,29 +42,41 @@ class EditWinePage {
     }
 
     func tapType() throws -> SelectTypePage {
-        app.tables.cells["Type"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
+        //editForm.cells["Type"].children(matching: .other).element(boundBy: 0).children(matching: .other).element.tap()
+        editForm.buttons["TypePicker"].tap()
         return try SelectTypePage(app: app)
     }
 
     func tapVariety() throws -> SelectVarietyPage {
-        app.tables.cells["Variety"].children(matching: .other).element(boundBy: 0).tap()
+        editForm.buttons["VarietyPicker"].tap()
         return try SelectVarietyPage(app: app)
     }
 
     func setLocation(_ location: String) {
-        app.tables.textFields["Where did I find this wine?"].tap()
-        app.tables.textFields["Where did I find this wine?"].typeText(location)
+        editForm.textFields["Where did I find this wine?"].tap()
+        editForm.textFields["Where did I find this wine?"].typeText(location)
     }
 
     func setPrice(_ price: String) {
-        app.tables.textFields["How much was this wine?"].tap()
-        app.tables.textFields["How much was this wine?"].typeText(price)
+        editForm.textFields["How much was this wine?"].tap()
+        editForm.textFields["How much was this wine?"].typeText(price)
     }
 
     func addPairing(_ pairing: String) {
+        guard app.buttons["Add Pairing"].isHittable else {
+            return
+        }
+
         app.buttons["Add Pairing"].tap()
 
-        let newTextField = app.tables.textFields.matching(.init(format: "placeholderValue = %@", "e.g. Sushi, Cheese, etc")).allElementsBoundByIndex.last!
+        // Get last text field matching this placeholder
+        // Can't just use editField.textFields["e.g. Sushi, Cheese, etc"] b/c that will return all, even those with a
+        // value type in already. I just want the new, blank field added after pressing "Add Pairing".
+        let newTextField = editForm.textFields
+            .matching(.init(format: "placeholderValue = %@", "e.g. Sushi, Cheese, etc"))
+            .allElementsBoundByIndex
+            .last!
+        
         XCTAssertTrue(newTextField.waitForExistence(timeout: .default))
 
         newTextField.tap()
@@ -94,7 +109,7 @@ struct SelectTypePage {
     }
 
     func selectType(_ typeName: String) throws -> EditWinePage {
-        app.tables.switches[typeName].tap()
+        app.collectionViews.buttons[typeName].tap()
         return try EditWinePage(app: app)
     }
 }
@@ -107,7 +122,7 @@ struct SelectVarietyPage {
     }
 
     func selectVariety(_ varietyName: String) throws -> EditWinePage {
-        app.tables.switches[varietyName].tap()
+        app.collectionViews.buttons[varietyName].tap()
         return try EditWinePage(app: app)
     }
 }

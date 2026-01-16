@@ -22,7 +22,9 @@ struct EditWineFormView: View {
                 HStack {
                     Text("Name")
                     Spacer()
-                    TextField("Fancy Wine Name", text: $vm.name).multilineTextAlignment(.trailing)
+                    TextField("Fancy Wine Name", text: $vm.name)
+                        .multilineTextAlignment(.trailing)
+                        .accessibilityIdentifier("WineName")
                 }
                 
                 HStack {
@@ -36,14 +38,16 @@ struct EditWineFormView: View {
                         Text($0.name)
                     }
                 }
-                
+                .accessibilityIdentifier("TypePicker")
+
                 Picker("Variety", selection: $vm.selectedVarietyId) {
                     Text("").tag(-1)
                     ForEach(vm.varieties) {
                         Text($0.name)
                     }
                 }
-                
+                .accessibilityIdentifier("VarietyPicker")
+
                 HStack {
                     Text("Location")
                     Spacer()

@@ -10,20 +10,22 @@ import XCTest
 
 class MyCellarWineListPage {
     private let app: XCUIApplication
-    
+
+    private var listView: XCUIElement { app.collectionViews["WineCellarListView"] }
+
     var title: String { app.navigationBars.staticTexts.firstMatch.label }
 
     var numberOfWines: Int {
-        app.tables["WineCellarListView"].cells.count
+        listView.cells.count
     }
 
     init(app: XCUIApplication) throws {
         self.app = app
-        guard app.tables["WineCellarListView"].waitForExistence(timeout: .default) else { throw PageErrors.wrongPage }
+        guard listView.waitForExistence(timeout: .default) else { throw PageErrors.wrongPage }
     }
 
     func getWine(at index: Int) throws -> MyWineListItem {
-        try MyWineListItem(app: app, el: app.tables["WineCellarListView"].cells.element(boundBy: index))
+        try MyWineListItem(app: app, el: listView.cells.element(boundBy: index))
     }
 
     func goBack() throws -> MyCellarPage {

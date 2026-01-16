@@ -43,6 +43,7 @@ class EditWineTests: XCTestCase {
         try editWinePage.changeVariety(to: "Pinot Blanc")
         editWinePage.setLocation("Wegman's")
         editWinePage.setPrice("$50")
+        app.keyboards.buttons["Return"].tap()
         editWinePage.addPairing("Sushi")
         editWinePage.addPairing("Cheese")
         editWinePage.setNote("This is my note")
