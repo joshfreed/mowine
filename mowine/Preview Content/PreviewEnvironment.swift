@@ -13,7 +13,7 @@ extension View {
     func addPreviewEnvironment() -> some View {
         self
             .environmentObject(ObservableSession())
-            .environmentObject(MyCellar.fake())
+            .environment(MyCellar.fake())
             .environmentObject(MyFriends.fake())
             .environmentObject(MyAccount.fake())
     }

@@ -10,16 +10,23 @@ import Foundation
 import Combine
 import OSLog
 import MoWine_Application
+import Observation
 
-class MyCellar: ObservableObject {
-    @Published private(set) var myWines: [Wine] = [] {
+@Observable
+class MyCellar {
+    private(set) var myWines: [Wine] = [] {
         didSet {
             buildWinesByType()
         }
     }
 
-    @Injected private var session: Session
-    @Injected private var getMyWines: GetMyWinesHandler
+    @Injected
+    @ObservationIgnored
+    private var session: Session
+
+    @Injected
+    @ObservationIgnored
+    private var getMyWines: GetMyWinesHandler
 
     private let logger = Logger(category: .ui)
     private var cancellable: AnyCancellable?

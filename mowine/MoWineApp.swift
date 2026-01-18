@@ -20,7 +20,7 @@ import GoogleSignIn
 @main
 struct WoWineApp: App {
     @StateObject private var session = ObservableSession()
-    @StateObject private var myCellar = MyCellar()
+    private let myCellar = MyCellar()
     @StateObject private var myFriends = MyFriends()
     @StateObject private var myAccount = MyAccount()
 
@@ -37,7 +37,7 @@ struct WoWineApp: App {
         WindowGroup {
             TabbedRootView()
                 .environmentObject(session)
-                .environmentObject(myCellar)
+                .environment(myCellar)
                 .environmentObject(myFriends)
                 .environmentObject(myAccount)
                 .task {

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MyCellarWineListView: View {
-    @EnvironmentObject var myCellar: MyCellar
+    @Environment(MyCellar.self) var myCellar
 
     let wineTypeId: String
     let title: String
@@ -45,7 +45,7 @@ struct MyCellarWineListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             MyCellarWineListView(wineTypeId: "Red", title: "Red Wines")
-                .environmentObject(MyCellar.fake())
+                .environment(MyCellar.fake())
         }
     }
 }

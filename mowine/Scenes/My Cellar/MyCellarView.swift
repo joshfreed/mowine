@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MyCellarView: View {
-    @EnvironmentObject var myCellar: MyCellar
+    @Environment(MyCellar.self) var myCellar
 
     @State private var searchText: String = ""
     @State private var searchResults: [MyCellar.Wine] = []
