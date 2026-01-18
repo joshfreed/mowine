@@ -19,7 +19,6 @@ class UserProfilePage {
 
     init(app: XCUIApplication) throws {
         self.app = app
-
         print(app.debugDescription)
         guard header.waitForExistence(timeout: .default) else { throw PageErrors.wrongPage }
     }
@@ -44,8 +43,8 @@ struct RemoveFriendMenu {
     private let app: XCUIApplication
 
     private var sheet: XCUIElement { app.sheets["You are currently friends."] }
-    private var confirmButton: XCUIElement { sheet.scrollViews.otherElements.buttons["Remove Friend"] }
-    private var cancelButton: XCUIElement { sheet.scrollViews.otherElements.buttons["Cancel"] }
+    private var confirmButton: XCUIElement { sheet.buttons["Remove Friend"] }
+    private var cancelButton: XCUIElement { sheet.buttons["Cancel"] }
 
     init(app: XCUIApplication) throws {
         self.app = app

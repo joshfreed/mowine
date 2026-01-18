@@ -11,8 +11,9 @@ import XCTest
 class FriendsPage {
     private let app: XCUIApplication
     private var searchField: XCUIElement { app.navigationBars["Friends"].searchFields["Search"] }
+    private var myFriendsList: XCUIElement { app.collectionViews["My Friends List"] }
 
-    var friendCount: Int { app.tables["My Friends List"].cells.count }
+    var friendCount: Int { myFriendsList.cells.count }
 
     init(app: XCUIApplication) throws {
         self.app = app
@@ -27,7 +28,7 @@ class FriendsPage {
     }
 
     func getFriend(name: String) throws -> MyFriendListItem {
-        let el = app.tables["My Friends List"].cells["No Profile Picture, \(name)"]
+        let el = myFriendsList.buttons["Friend: \(name)"]
         return try MyFriendListItem(el: el, app: app)
     }
 }

@@ -17,11 +17,13 @@ struct MyFriendsListView: View {
     var body: some View {
         VStack {
             List(myFriends.friends) { friend in
-                FriendListItemView(name: friend.name, thumbnail: friend.profilePictureUrl)
-                    .onTapGesture {
-                        selectedUserId = friend.id
-                        showUserProfile = true
-                    }
+                Button {
+                    selectedUserId = friend.id
+                    showUserProfile = true
+                } label: {
+                    FriendListItemView(name: friend.name, thumbnail: friend.profilePictureUrl)
+                }
+                .accessibilityIdentifier("Friend: \(friend.name)")
             }
             .listStyle(.plain)
             .accessibilityIdentifier("My Friends List")

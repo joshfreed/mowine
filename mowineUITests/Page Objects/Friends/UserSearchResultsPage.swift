@@ -13,7 +13,8 @@ class UserSearchResultsPage {
     private let app: XCUIApplication
     private var navigationBar: XCUIElement { app.navigationBars["Friends"] }
     private var searchField: XCUIElement { navigationBar.searchFields["Search"] }
-    private var cancelButton: XCUIElement { navigationBar.buttons["Cancel"] }
+    private var cancelButton: XCUIElement { navigationBar.buttons["Close"] }
+    private var searchResults: XCUIElement { app.collectionViews["SearchResults"] }
 
     init(app: XCUIApplication) throws {
         self.app = app
@@ -22,15 +23,15 @@ class UserSearchResultsPage {
     }
 
     func addFriend(_ name: String) throws -> UserSearchResultsPage {
-        app.tables["SearchResults"].cells.otherElements["SearchResult - \(name)"].buttons["MiniAddFriendButton"].tap()
+        searchResults.cells.otherElements["SearchResult - \(name)"].buttons["MiniAddFriendButton"].tap()
         return try UserSearchResultsPage(app: app)
     }
 
     func addFriendButtonExists(for name: String) -> Bool {
-        app.tables["SearchResults"].cells.otherElements["SearchResult - \(name)"].buttons["MiniAddFriendButton"].exists
+        searchResults.cells.otherElements["SearchResult - \(name)"].buttons["MiniAddFriendButton"].exists
     }
 
-    func cancelSearch() throws -> FriendsPage {
+    func cancelSearch() throws -> FriendsPage {        
         cancelButton.tap()
         return try FriendsPage(app: app)
     }
