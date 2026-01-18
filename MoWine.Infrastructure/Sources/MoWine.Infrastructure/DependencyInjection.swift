@@ -41,11 +41,9 @@ public class DependencyInjection {
         let registry: SocialSignInRegistryImpl = try! container.resolve()
 
         registry.registerMethod(SignInWithApple(), for: .apple)
-        registry.registerMethod(SignInWithFacebook(), for: .facebook)
         registry.registerMethod(SignInWithGoogle(), for: .google)
 
         registry.registerProvider(AppleProvider(), for: .apple)
-        registry.registerProvider(FacebookProvider(fbGraphApi: GraphApi()), for: .facebook)
         registry.registerProvider(GoogleProvider(), for: .google)
     }
 }

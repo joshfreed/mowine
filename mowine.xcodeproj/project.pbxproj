@@ -103,7 +103,6 @@
 		53BC1C502619031B00ECD078 /* WineDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BC1C4F2619031B00ECD078 /* WineDetailsView.swift */; };
 		53C88BF91F084FDB009B7D29 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C88BF81F084FDB009B7D29 /* UIColor.swift */; };
 		53C91F4C25740E2E0065E778 /* ReauthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F4B25740E2E0065E778 /* ReauthenticationView.swift */; };
-		53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */; };
 		53C91F5725740E780065E778 /* GoogleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5625740E780065E778 /* GoogleLoginButton.swift */; };
 		53C91F5F257414150065E778 /* SocialLoginProviderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C91F5E257414150065E778 /* SocialLoginProviderView.swift */; };
 		53CFCA6025E9470B003EADB3 /* MiniAddFriendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFCA5F25E9470B003EADB3 /* MiniAddFriendButton.swift */; };
@@ -264,7 +263,6 @@
 		53BC1C4F2619031B00ECD078 /* WineDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineDetailsView.swift; sourceTree = "<group>"; };
 		53C88BF81F084FDB009B7D29 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		53C91F4B25740E2E0065E778 /* ReauthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReauthenticationView.swift; sourceTree = "<group>"; };
-		53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginButton.swift; sourceTree = "<group>"; };
 		53C91F5625740E780065E778 /* GoogleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginButton.swift; sourceTree = "<group>"; };
 		53C91F5E257414150065E778 /* SocialLoginProviderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginProviderView.swift; sourceTree = "<group>"; };
 		53CFCA5F25E9470B003EADB3 /* MiniAddFriendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniAddFriendButton.swift; sourceTree = "<group>"; };
@@ -672,7 +670,6 @@
 			isa = PBXGroup;
 			children = (
 				53C91F5E257414150065E778 /* SocialLoginProviderView.swift */,
-				53C91F5025740E6F0065E778 /* FacebookLoginButton.swift */,
 				53C91F5625740E780065E778 /* GoogleLoginButton.swift */,
 				536E3AC5258EA4EF00D84F10 /* AppleLoginButton.swift */,
 			);
@@ -1079,7 +1076,6 @@
 				53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */,
 				539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */,
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
-				53C91F5125740E6F0065E778 /* FacebookLoginButton.swift in Sources */,
 				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
 				535EE9D3272756F10011ECC1 /* MyCellar.swift in Sources */,
 				53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */,

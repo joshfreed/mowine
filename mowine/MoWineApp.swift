@@ -14,7 +14,6 @@ import Dip
 @_exported import JFLib_Services
 import JFLib_Mediator
 import Combine
-import FBSDKCoreKit
 import GoogleSignIn
 
 @main
@@ -29,7 +28,6 @@ struct WoWineApp: App {
     init() {
         configureUIKit()
         setupDependencyInjection()
-        ApplicationDelegate.shared.application(UIApplication.shared)
         logger.info("MoWineApp::init")
     }
 
@@ -47,15 +45,6 @@ struct WoWineApp: App {
                     myAccount.load()
                 }
                 .onOpenURL { url in
-                    if ApplicationDelegate.shared.application(
-                        UIApplication.shared,
-                        open: url,
-                        sourceApplication: nil,
-                        annotation: UIApplication.OpenURLOptionsKey.annotation
-                    ) {
-                        return
-                    }
-
                     if GIDSignIn.sharedInstance.handle(url) {
                         return
                     }

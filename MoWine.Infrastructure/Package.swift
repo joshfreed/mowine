@@ -19,7 +19,6 @@ let package = Package(
         .package(path: "../MoWine.Domain"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
-        .package(url: "https://github.com/facebook/facebook-ios-sdk", from: "17.0.0"),
         .package(url: "https://github.com/google/GoogleSignIn-iOS", from: "7.0.0"),
         .package(name: "Dip", url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
     ],
@@ -35,9 +34,6 @@ let package = Package(
                 .product(name: "JFLib.Mediator", package: "JFLib"),
 
                 .product(name: "Dip", package: "Dip"),
-
-                .product(name: "FacebookCore", package: "facebook-ios-sdk"),
-                .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
 
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
 

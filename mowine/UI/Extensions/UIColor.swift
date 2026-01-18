@@ -33,10 +33,6 @@ extension UIColor {
 //        return #colorLiteral(red: 0.5215686274, green: 0.2274509804, blue: 0.7176470588, alpha: 1)
     }
     
-    class var facebook: UIColor {
-        return #colorLiteral(red: 0.2588235294, green: 0.4039215686, blue: 0.6980392157, alpha: 1)
-    }
-    
     class var google: UIColor {
         return #colorLiteral(red: 0.8588235294, green: 0.1960784314, blue: 0.2117647059, alpha: 1)
     }

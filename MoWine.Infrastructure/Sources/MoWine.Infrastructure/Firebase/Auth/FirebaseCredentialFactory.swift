@@ -17,8 +17,6 @@ public class FirebaseCredentialMegaFactory {
     func makeCredential(from token: SocialToken) -> AuthCredential {
         if let token = token as? AppleToken {
             return AppleCredentialFactory().makeCredential(from: token)
-        } else if let token = token as? FacebookToken {
-            return FacebookCredentialFactory().makeCredential(from: token)
         } else if let token = token as? GoogleToken {
             return GoogleCredentialFactory().makeCredential(from: token)
         } else {
@@ -35,12 +33,6 @@ protocol FirebaseCredentialFactory {
 class AppleCredentialFactory: FirebaseCredentialFactory {
     func makeCredential(from token: AppleToken) -> AuthCredential {
         OAuthProvider.credential(withProviderID: "apple.com", idToken: token.idTokenString, rawNonce: token.nonce)
-    }
-}
-
-class FacebookCredentialFactory: FirebaseCredentialFactory {
-    func makeCredential(from token: FacebookToken) -> AuthCredential {
-        FacebookAuthProvider.credential(withAccessToken: token.token)
     }
 }
 

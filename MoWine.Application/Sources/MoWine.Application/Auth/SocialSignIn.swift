@@ -22,7 +22,6 @@ public struct NewUserInfo {
 
 public enum SocialProviderType {
     case apple
-    case facebook
     case google
 }
 
