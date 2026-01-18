@@ -14,11 +14,14 @@ import MoWine_Domain
 public class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []
 
+    private var getWinesByUserSubjects: [UserId: CurrentValueSubject<[Wine], Error>] = [:]
+
     public init() {}
 
     public func add(_ wine: Wine) async throws {
         guard !wines.contains(where: { $0.id == wine.id }) else { return }
         wines.append(wine)
+        getWinesByUserSubjects[wine.userId]?.send(getWinesSync(userId: wine.userId))
     }
     
     public func delete(_ wineId: WineId) async throws {
@@ -45,10 +48,20 @@ public class MemoryWineRepository: WineRepository {
     }
 
     public func getWines(userId: UserId) -> AnyPublisher<[Wine], Error> {
-        Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
+        if let subject = getWinesByUserSubjects[userId] {
+            return subject.eraseToAnyPublisher()
+        } else {
+            let subject = CurrentValueSubject<[Wine], Error>(getWinesSync(userId: userId))
+            getWinesByUserSubjects[userId] = subject
+            return subject.eraseToAnyPublisher()
+        }
     }
 
     public func getWines(userId: UserId) async throws -> [Wine] {
+        wines.filter { $0.userId == userId }
+    }
+
+    func getWinesSync(userId: UserId) -> [Wine] {
         wines.filter { $0.userId == userId }
     }
 
