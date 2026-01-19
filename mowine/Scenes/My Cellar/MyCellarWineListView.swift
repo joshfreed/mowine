@@ -32,7 +32,6 @@ struct MyCellarWineListView: View {
         }
         .listStyle(.plain)
         .accessibilityIdentifier("WineCellarListView")
-        .toolbarTitleDisplayMode(.inline)
         .navigationBarTitle(title)
         .searchable(text: $searchText)
         .sheet(item: $selectedWine) { wine in

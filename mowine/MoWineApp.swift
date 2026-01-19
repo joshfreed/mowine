@@ -26,7 +26,6 @@ struct WoWineApp: App {
     private let logger = Logger(category: .app)
 
     init() {
-        configureUIKit()
         setupDependencyInjection()
         logger.info("MoWineApp::init")
     }
@@ -50,20 +49,6 @@ struct WoWineApp: App {
                     }
                 }
         }
-    }
-
-    private func configureUIKit() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .mwButtonPrimary
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .white
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .darkGray
     }
 
     private func setupDependencyInjection() {
