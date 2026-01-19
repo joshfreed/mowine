@@ -136,11 +136,11 @@ public class FirestoreWineRepository: WineRepository {
 
         let querySnapshot = try await query.getDocuments()
 
-        let wineTypeNames: [String] = querySnapshot.documents.compactMap {
+        let arrayWithDuplicates: [String] = querySnapshot.documents.compactMap {
             let data = $0.data()
             return data["type"] as? String
         }
-
-        return wineTypeNames
+        let uniqueElementsSet = Set(arrayWithDuplicates)
+        return Array(uniqueElementsSet)
     }
 }
