@@ -19,27 +19,19 @@ struct FriendButton: View {
     
     var body: some View {
         if friends.isFriends(with: userId) {
-            Button(action: { showUnfriendConfirmation = true }) {
-                Text("Friends")
-                    .font(.system(size: 12))
-                    .foregroundColor(.white)
-                    .frame(width: 80, height: 22)
-                    .background(Color("Primary Light"))
-                    .cornerRadius(5)
-            }.actionSheet(isPresented: $showUnfriendConfirmation, content: {
+            Button("Friends") {
+                showUnfriendConfirmation = true
+            }
+            .actionSheet(isPresented: $showUnfriendConfirmation, content: {
                 ActionSheet(title: Text("You are currently friends."), buttons: [
                     .destructive(Text("Remove Friend")) { removeFriend(userId) },
                     .cancel()
                 ])
             })
-                .accessibilityIdentifier("FriendButton")
+            .accessibilityIdentifier("FriendButton")
         } else {
-            Button(action: { addFriend(userId) }) {
-                Text("Add Friend")
-                    .font(.system(size: 12))
-                    .foregroundColor(Color("Primary Light"))
-                    .frame(width: 80, height: 22)
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color("Primary Light")))
+            Button("Add Friend") {
+                addFriend(userId)
             }
             .accessibilityIdentifier("FriendButton")
         }
@@ -68,12 +60,12 @@ struct FriendButton: View {
     }
 }
 
-struct FriendButton_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            FriendButton(userId: "4").previewLayout(.sizeThatFits)
-            FriendButton(userId: "1").previewLayout(.sizeThatFits)
-        }
+#Preview("Not Friends", traits: .sizeThatFitsLayout) {
+    FriendButton(userId: "4")
         .environmentObject(MyFriends.fake())
-    }
+}
+
+#Preview("Friends", traits: .sizeThatFitsLayout) {
+    FriendButton(userId: "1")
+        .environmentObject(MyFriends.fake())
 }
