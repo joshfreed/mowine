@@ -29,9 +29,9 @@ class AddWineTests: XCTestCase {
     
     func testAddWine() throws {
         let app = XCUIApplication()
-        let tabBar = try TabBar(app: app)
 
-        let finalizePage = try tabBar.openAddWine()
+        let finalizePage = try MyCellarPage(app: app)
+            .openAddWine()
             .selectType("Red")
             .selectVariety("Malbec")
             .takeLater()

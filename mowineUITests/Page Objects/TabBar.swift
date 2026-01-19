@@ -36,9 +36,4 @@ class TabBar {
         tabBar.buttons["My Account"].tap()
         return try AnonymousUserPage(app: app)
     }
-
-    func openAddWine() throws -> AddWine.SelectWineTypePage {
-        tabBar.buttons["Add Wine"].tap()
-        return try .init(app: app)
-    }
 }

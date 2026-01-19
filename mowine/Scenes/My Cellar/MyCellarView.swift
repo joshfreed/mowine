@@ -12,14 +12,18 @@ struct MyCellarView: View {
     @Environment(MyCellar.self) var myCellar
 
     @State private var searchText: String = ""
-    @State private var searchResults: [MyCellar.Wine] = []
-    
+    @State private var searchResults: [MyCellar.Wine] = []    
+
     var body: some View {
-        NavigationView {
+        NavigationStack {
             InnerCellarView(hasSearched: !searchText.isEmpty, searchResults: searchResults)
                 .navigationBarTitle("My Cellar")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        AddNewWineButton()
+                    }
+                }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.mwSecondary)
         .searchable(text: $searchText)
         .onChange(of: searchText) {

@@ -82,6 +82,7 @@
 		5383C7042721E5D3000E625F /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5383C7032721E5D3000E625F /* DependencyInjection.swift */; };
 		538E1047253BB47700B26619 /* WineThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E1046253BB47700B26619 /* WineThumbnail.swift */; };
 		5394BB24272DBD2800B61F00 /* MyFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394BB23272DBD2800B61F00 /* MyFriends.swift */; };
+		5398D87F2F1D70C800B5D7A1 /* AddNewWineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398D87E2F1D70C800B5D7A1 /* AddNewWineButton.swift */; };
 		5398F521252A6EAC00BF61C0 /* MyCellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5398F520252A6EAC00BF61C0 /* MyCellarView.swift */; };
 		53993DFF25DC49DB0007DFCB /* AddWineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */; };
 		539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539E166B27233D16001A2CC3 /* CrashReporter.swift */; };
@@ -243,6 +244,7 @@
 		5383C7032721E5D3000E625F /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
 		538E1046253BB47700B26619 /* WineThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineThumbnail.swift; sourceTree = "<group>"; };
 		5394BB23272DBD2800B61F00 /* MyFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriends.swift; sourceTree = "<group>"; };
+		5398D87E2F1D70C800B5D7A1 /* AddNewWineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWineButton.swift; sourceTree = "<group>"; };
 		5398F520252A6EAC00BF61C0 /* MyCellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCellarView.swift; sourceTree = "<group>"; };
 		53993DFE25DC49DB0007DFCB /* AddWineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineViewModel.swift; sourceTree = "<group>"; };
 		539E166B27233D16001A2CC3 /* CrashReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				533F1030259FD8E700DAA4B6 /* FancyDivider.swift */,
 				53D3B44A25A2304D00F15974 /* SignInHeaderView.swift */,
 				53D3B45025A2337400F15974 /* TextStyles.swift */,
+				5398D87E2F1D70C800B5D7A1 /* AddNewWineButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				53D3B44525A0FB7F00F15974 /* EmailSignUpViewModel.swift in Sources */,
 				5345BABE257C286F00AD68D3 /* ImagePicker.swift in Sources */,
 				535EE9D3272756F10011ECC1 /* MyCellar.swift in Sources */,
+				5398D87F2F1D70C800B5D7A1 /* AddNewWineButton.swift in Sources */,
 				53AC403E25D71DB20041AED9 /* AddWineView.swift in Sources */,
 				536E3AC6258EA4EF00D84F10 /* AppleLoginButton.swift in Sources */,
 				53DD1E1E257D84FF008C1DA7 /* FancyFieldViewModifier.swift in Sources */,

@@ -34,6 +34,11 @@ struct MyCellarWineListView: View {
         .accessibilityIdentifier("WineCellarListView")
         .navigationBarTitle(title)
         .searchable(text: $searchText)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                AddNewWineButton()
+            }
+        }
         .sheet(item: $selectedWine) { wine in
             EditWineView(wineId: wine.id)
         }

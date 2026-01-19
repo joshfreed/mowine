@@ -20,6 +20,11 @@ class MyCellarPage {
         app.navigationBars["My Cellar"].waitForExistence(timeout: .default)
     }
 
+    func openAddWine() throws -> AddWine.SelectWineTypePage {
+        app.buttons["addWineButton"].tap()
+        return try .init(app: app)
+    }
+
     func showMyRedWines() throws -> MyCellarWineListPage {
         app.buttons["Show My Red Wines"].tap()
         return try MyCellarWineListPage(app: app)
