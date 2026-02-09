@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct ReauthenticationView: View {
+    var reauth: ReauthenticationController
     @StateObject var vm = ReauthenticationViewModel()
-    var onSuccess: () -> Void
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -18,7 +18,9 @@ struct ReauthenticationView: View {
             VStack(alignment: .leading, spacing: 28) {
                 Text("Please reauthenticate in order to continue.")
                 
-                NavigationLink(destination: EmailReauthView(onSuccess: onSuccess)) {
+                NavigationLink(destination: EmailReauthView(onSuccess: {
+                    reauth.completeSuccessfully()
+                })) {
                     Text("Continue with Email")
                         .buttonPrimaryOutline()
                 }
@@ -27,14 +29,19 @@ struct ReauthenticationView: View {
                 
                 SocialLoginProviderView { type in
                     Task {
-                        await vm.continueWith(type)
-                        onSuccess()
+                        let didReauthenticate = await vm.continueWith(type)
+                        if didReauthenticate {
+                            reauth.completeSuccessfully()
+                        }
                     }
                 }                
             }
             .padding()
             .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(leading: Button("Cancel") { dismiss() })
+            .navigationBarItems(leading: Button("Cancel") {
+                reauth.fail(CancellationError())
+                dismiss()
+            })
         }
         .accentColor(.mwSecondary)
         .alert(isPresented: $vm.showErrorAlert) {
@@ -45,6 +52,6 @@ struct ReauthenticationView: View {
 
 struct ReauthenticationView_Previews: PreviewProvider {
     static var previews: some View {
-        ReauthenticationView() {}
+        ReauthenticationView(reauth: ReauthenticationController())
     }
 }

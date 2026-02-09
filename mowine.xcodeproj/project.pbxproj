@@ -122,6 +122,7 @@
 		53DD1E1A257D84DC008C1DA7 /* FancySecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD1E19257D84DC008C1DA7 /* FancySecureField.swift */; };
 		53DD1E1E257D84FF008C1DA7 /* FancyFieldViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD1E1D257D84FF008C1DA7 /* FancyFieldViewModifier.swift */; };
 		53DD1E22257DBADC008C1DA7 /* EmailReauthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD1E21257DBADC008C1DA7 /* EmailReauthViewModel.swift */; };
+		53DE483A2F3A44F600F4CB1E /* ReauthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE48392F3A44F600F4CB1E /* ReauthenticationController.swift */; };
 		53E2FA4225DDB87300658637 /* MyFriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA4125DDB87300658637 /* MyFriendsListView.swift */; };
 		53E2FA4625DDB87C00658637 /* SearchUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA4525DDB87C00658637 /* SearchUsersView.swift */; };
 		53E2FA5325DECFB900658637 /* FriendListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E2FA5225DECFB900658637 /* FriendListItemView.swift */; };
@@ -285,6 +286,7 @@
 		53DD1E19257D84DC008C1DA7 /* FancySecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancySecureField.swift; sourceTree = "<group>"; };
 		53DD1E1D257D84FF008C1DA7 /* FancyFieldViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyFieldViewModifier.swift; sourceTree = "<group>"; };
 		53DD1E21257DBADC008C1DA7 /* EmailReauthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailReauthViewModel.swift; sourceTree = "<group>"; };
+		53DE48392F3A44F600F4CB1E /* ReauthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReauthenticationController.swift; sourceTree = "<group>"; };
 		53E2FA4125DDB87300658637 /* MyFriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsListView.swift; sourceTree = "<group>"; };
 		53E2FA4525DDB87C00658637 /* SearchUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersView.swift; sourceTree = "<group>"; };
 		53E2FA5225DECFB900658637 /* FriendListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItemView.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 			children = (
 				5332B68D271F54E000FBF135 /* ObservableSession.swift */,
 				539E166B27233D16001A2CC3 /* CrashReporter.swift */,
+				53DE48392F3A44F600F4CB1E /* ReauthenticationController.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1075,6 +1078,7 @@
 				5330C20A25E5B39F0063E7C4 /* UserPhotoView.swift in Sources */,
 				53FAED0425EAF9C30099B2E1 /* UserProfileHeaderView.swift in Sources */,
 				532DB3D3256AC763009A4740 /* PreviewDataFactories.swift in Sources */,
+				53DE483A2F3A44F600F4CB1E /* ReauthenticationController.swift in Sources */,
 				536E85A4204F507D004D5426 /* FakeSession.swift in Sources */,
 				53AC404A25D738B90041AED9 /* SnapPhotoView.swift in Sources */,
 				539E166C27233D16001A2CC3 /* CrashReporter.swift in Sources */,

@@ -18,7 +18,7 @@ class ReauthenticationViewModel: ObservableObject {
     @Injected private var socialSignInRegistry: SocialSignInRegistry
     private let logger = Logger(category: .ui)
 
-    func continueWith(_ type: SocialProviderType) async {
+    func continueWith(_ type: SocialProviderType) async -> Bool {
         guard let method = socialSignInRegistry.getSignInMethod(for: type) else {
             fatalError("No sign in method registered for provider: \(type)")
         }
@@ -26,8 +26,10 @@ class ReauthenticationViewModel: ObservableObject {
         do {
             let token = try await method.signIn()
             try await socialAuthService.reauthenticate(with: token)
+            return true
         } catch {
             showError(error)
+            return false
         }
     }
 

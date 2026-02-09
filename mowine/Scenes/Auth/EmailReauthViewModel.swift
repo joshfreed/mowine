@@ -27,16 +27,17 @@ class EmailReauthViewModel: ObservableObject {
     }
 
     @MainActor
-    func reauthenticate() async {
+    func reauthenticate() async -> Bool {
         isReauthenticating = true
+        defer { isReauthenticating = false }
         error = ""
 
         do {
             try await session.reauthenticate(withEmail: emailAddress, password: password)
+            return true
         } catch {
             self.error = error.localizedDescription
+            return false
         }
-
-        isReauthenticating = false
     }
 }

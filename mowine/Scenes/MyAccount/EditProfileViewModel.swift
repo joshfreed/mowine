@@ -38,12 +38,10 @@ class EditProfileViewModel: ObservableObject {
     @Published var isSaving = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
-    @Published var isReauthenticating = false
-
     @Injected private var mediator: Mediator
     @Injected private var updateProfileCommandHandler: UpdateProfileCommandHandler
+
     private let logger = Logger(category: .ui)
-    
     private var hasChanges = false
 
     private var newProfilePicture: UIImage? {
@@ -76,37 +74,27 @@ class EditProfileViewModel: ObservableObject {
     private func profileDidChange() {
         hasChanges = true
     }
-    
-    func saveProfile() async {
-        guard hasChanges else {
-            return
-        }
 
+    func saveProfile(using reauth: ReauthenticationController) async -> Bool {
+        guard hasChanges else { return true }
         isSaving = true
+        defer { isSaving = false }
 
         do {
             let command = UpdateProfileCommand(email: emailAddress, fullName: fullName, image: newProfilePicture?.pngData())
-            try await updateProfileCommandHandler.handle(command)
-            isSaving = false
-        } catch {
-            isSaving = false
-            if case SessionError.requiresRecentLogin = error {
-                reauthenticate()
-            } else {
-                logger.error("\(error)")
-                CrashReporter.shared.record(error: error)
-                showErrorAlert = true
-                saveErrorMessage = error.localizedDescription
+            try await reauth.withReauthenticationRetry {
+                try await self.updateProfileCommandHandler.handle(command)
             }
+            hasChanges = false
+            return true
+        } catch is CancellationError {
+            return false
+        } catch {
+            logger.error("\(error)")
+            CrashReporter.shared.record(error: error)
+            showErrorAlert = true
+            saveErrorMessage = error.localizedDescription
+            return false
         }
-    }
-
-    func reauthenticate() {
-        isReauthenticating = true
-    }
-    
-    func reauthenticationSuccess() async {
-        isReauthenticating = false
-        await saveProfile()
     }
 }

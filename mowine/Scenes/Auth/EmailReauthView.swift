@@ -23,8 +23,10 @@ struct EmailReauthView: View {
             PrimaryButton(
                 action: {
                     Task {
-                        await vm.reauthenticate()
-                        onSuccess()
+                        let didReauthenticate = await vm.reauthenticate()
+                        if didReauthenticate {
+                            onSuccess()
+                        }
                     }
                 },
                 title: "Sign In",

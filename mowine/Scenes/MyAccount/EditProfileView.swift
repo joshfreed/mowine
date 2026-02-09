@@ -10,6 +10,7 @@ import SwiftUI
 import MoWine_Application
 
 struct EditProfileView: View {
+    @State private var reauth = ReauthenticationController()
     @StateObject var vm = EditProfileViewModel()
     @Environment(\.dismiss) var dismiss
 
@@ -25,10 +26,18 @@ struct EditProfileView: View {
                 dismiss()
             }, trailing: Button("Save") {
                 Task {
-                    await vm.saveProfile()
-                    dismiss()
+                    let didSave = await vm.saveProfile(using: reauth)
+                    if didSave {
+                        dismiss()
+                    }
                 }
             })
+            .sheet(isPresented: $reauth.isPresenting, onDismiss: {
+                // If the user dismisses interactively, treat it as a cancel.
+                reauth.fail(CancellationError())
+            }) {
+                ReauthenticationView(reauth: reauth)
+            }
         }
         .accentColor(.mwSecondary)
         .task {
@@ -36,14 +45,6 @@ struct EditProfileView: View {
         }
         .alert(isPresented: $vm.showErrorAlert) {
             Alert(title: Text("Error"), message: Text(vm.saveErrorMessage))
-        }
-        .sheet(isPresented: $vm.isReauthenticating) {
-            ReauthenticationView {
-                Task {
-                    await vm.reauthenticationSuccess()
-                    dismiss()
-                }
-            }
         }
         .loading(isShowing: vm.isSaving, text: "Saving...")
     }
