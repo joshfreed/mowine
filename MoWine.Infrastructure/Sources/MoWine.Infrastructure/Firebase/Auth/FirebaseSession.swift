@@ -125,6 +125,23 @@ public class FirebaseSession: Session {
             }
         }
     }
+
+    public func deleteAccount() async throws {
+        guard let authUser = Auth.auth().currentUser else {
+            throw SessionError.notLoggedIn
+        }
+
+        do {
+            try await authUser.delete()
+        } catch {
+            let nserror = error as NSError
+            if nserror.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                throw SessionError.requiresRecentLogin
+            } else {
+                throw error
+            }
+        }
+    }
 }
 
 extension FirebaseSession {

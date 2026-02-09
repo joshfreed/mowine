@@ -81,6 +81,8 @@ class MockSession: Session {
     func updateEmailAddress(_ emailAddress: String) async throws {}
 
     func reauthenticate(withEmail email: String, password: String) async throws {}
+
+    func deleteAccount() async throws {}
 }
 
 struct MockAuth: MoWineAuth {

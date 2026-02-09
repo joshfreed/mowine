@@ -13,14 +13,33 @@ struct EditProfileView: View {
     @State private var reauth = ReauthenticationController()
     @StateObject var vm = EditProfileViewModel()
     @Environment(\.dismiss) var dismiss
+    @State private var isShowingDeleteConfirmation: Bool = false
 
     var body: some View {
         NavigationView {
-            EditProfileFormView(
-                fullName: $vm.fullName,
-                emailAddress: $vm.emailAddress,
-                profilePicture: $vm.profilePicture
-            )
+            VStack {
+                EditProfileFormView(
+                    fullName: $vm.fullName,
+                    emailAddress: $vm.emailAddress,
+                    profilePicture: $vm.profilePicture
+                )
+                Button(action: {
+                    isShowingDeleteConfirmation.toggle()
+                }) {
+                    Text("Delete Acount...")
+                        .foregroundColor(.red)
+                }
+                .actionSheet(isPresented: $isShowingDeleteConfirmation, content: {
+                    ActionSheet(title: Text("Are you sure?"), message: Text("This will delete your entire account and all your data, including any saved wines."), buttons: [
+                        .destructive(Text("Delete"), action: {
+                            Task {
+                                _ = await vm.deleteAccount(using: reauth)
+                            }
+                        }),
+                        .cancel()
+                    ])
+                })
+            }
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(leading: Button("Cancel") {
                 dismiss()
@@ -47,6 +66,7 @@ struct EditProfileView: View {
             Alert(title: Text("Error"), message: Text(vm.saveErrorMessage))
         }
         .loading(isShowing: vm.isSaving, text: "Saving...")
+        .loading(isShowing: vm.isDeleting, text: "Deleting Account...")
     }
 }
 

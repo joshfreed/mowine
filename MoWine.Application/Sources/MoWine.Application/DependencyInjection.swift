@@ -26,6 +26,7 @@ public class DependencyInjection {
         container.register(.unique) { GetPublicProfileQueryHandler(userRepository: $0) }
         container.register(.unique) { GetUserCellarHandler(wineRepository: $0) }
         container.register(.unique) { SearchUsersQueryHandler(session: $0, userRepository: $1) }
+        container.register { DeleteAccountService(session: $0) }
 
         // Friends
         container.register(.unique) { GetMyFriendsQueryHandler(session: $0, userRepository: $1) }

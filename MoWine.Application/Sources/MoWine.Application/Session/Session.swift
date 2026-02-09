@@ -49,6 +49,9 @@ public protocol Session {
     
     /// Changes the user's login email address.
     func updateEmailAddress(_ emailAddress: String) async throws
+
+    /// Delete the currently logged in user.
+    func deleteAccount() async throws
 }
 
 public struct AuthState: Equatable {

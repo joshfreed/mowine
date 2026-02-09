@@ -36,10 +36,12 @@ class EditProfileViewModel: ObservableObject {
     }
 
     @Published var isSaving = false
+    @Published var isDeleting = false
     @Published var showErrorAlert = false
     @Published var saveErrorMessage: String = ""
     @Injected private var mediator: Mediator
     @Injected private var updateProfileCommandHandler: UpdateProfileCommandHandler
+    @Injected private var deleteAccountService: DeleteAccountService
 
     private let logger = Logger(category: .ui)
     private var hasChanges = false
@@ -86,6 +88,26 @@ class EditProfileViewModel: ObservableObject {
                 try await self.updateProfileCommandHandler.handle(command)
             }
             hasChanges = false
+            return true
+        } catch is CancellationError {
+            return false
+        } catch {
+            logger.error("\(error)")
+            CrashReporter.shared.record(error: error)
+            showErrorAlert = true
+            saveErrorMessage = error.localizedDescription
+            return false
+        }
+    }
+
+    func deleteAccount(using reauth: ReauthenticationController) async -> Bool {
+        isDeleting = true
+        defer { isDeleting = false }
+
+        do {
+            try await reauth.withReauthenticationRetry {
+                try await self.deleteAccountService.deleteAccount()
+            }
             return true
         } catch is CancellationError {
             return false
