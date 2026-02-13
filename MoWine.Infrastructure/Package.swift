@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,13 +14,13 @@ let package = Package(
             targets: ["MoWine.Infrastructure"]),
     ],
     dependencies: [
-        .package(name: "JFLib", url: "https://github.com/joshfreed/JFLib", from: "1.0.0"),
+        .package(url: "https://github.com/joshfreed/JFLib", from: "1.0.0"),
         .package(path: "../MoWine.Application"),
         .package(path: "../MoWine.Domain"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.0.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "11.0.0"),
         .package(url: "https://github.com/google/GoogleSignIn-iOS", from: "7.0.0"),
-        .package(name: "Dip", url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
+        .package(url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
     ],
     targets: [
         .target(
@@ -38,7 +38,6 @@ let package = Package(
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
 
                 .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
-                .product(name: "FirebaseAnalyticsSwift", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
                 .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),

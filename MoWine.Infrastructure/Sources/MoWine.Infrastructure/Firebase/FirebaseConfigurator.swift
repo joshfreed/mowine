@@ -11,7 +11,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseAnalytics
-import FirebaseAnalyticsSwift
 import FirebaseStorage
 import GoogleSignIn
 
