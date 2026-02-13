@@ -33,16 +33,12 @@ struct WineThumbnail: View {
     }
 }
 
-struct WineThumbnail_Previews: PreviewProvider {
-    static var previews: some View {
-        WineThumbnail(wineId: "W1")
-            .addPreviewEnvironment()
-            .addPreviewData()
-            .previewLayout(.sizeThatFits)
+#Preview(traits: .sizeThatFitsLayout) {
+    WineThumbnail(wineId: "W1")
+        .addPreviewEnvironment()
+        .addPreviewData()
 
-        WineThumbnail(wineId: "Z")
-            .addPreviewEnvironment()
-            .addPreviewData()
-            .previewLayout(.sizeThatFits)
-    }
+    WineThumbnail(wineId: "Z")
+        .addPreviewEnvironment()
+        .addPreviewData()
 }

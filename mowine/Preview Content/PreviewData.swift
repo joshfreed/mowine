@@ -69,4 +69,12 @@ fileprivate func logInAs(userId: String?) async throws {
     }
 }
 
+#else
+
+extension View {
+    func addPreviewData(userId: String? = nil) -> some View {
+        self
+    }
+}
+
 #endif

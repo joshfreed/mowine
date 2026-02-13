@@ -55,8 +55,6 @@ struct ReadOnlyEmailView: View {
     }
 }
 
-struct EmailReauthView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmailReauthView(vm: .make(password: "testing123", error: "Something went wrong!"), onSuccess: {})
-    }
+#Preview {
+    EmailReauthView(vm: .make(password: "testing123", error: "Something went wrong!"), onSuccess: {})
 }

@@ -11,8 +11,6 @@ import MoWine_Application
 import MoWine_Domain
 import MoWine_Infrastructure
 
-#if DEBUG
-
 extension EmailReauthViewModel {
     static func make(password: String? = nil, error: String? = nil) -> EmailReauthViewModel {
         let vm = EmailReauthViewModel()
@@ -25,5 +23,3 @@ extension EmailReauthViewModel {
         return vm
     }
 }
-
-#endif

@@ -33,10 +33,8 @@ struct WineCellarView: View {
     }
 }
 
-struct WineCellarView_Previews: PreviewProvider {
-    static var previews: some View {
-        WineCellarView(userId: "U1", vm: WineCellarViewModel())
-            .addPreviewEnvironment()
-            .addPreviewData()
-    }
+#Preview {
+    WineCellarView(userId: "U1", vm: WineCellarViewModel())
+        .addPreviewEnvironment()
+        .addPreviewData()
 }

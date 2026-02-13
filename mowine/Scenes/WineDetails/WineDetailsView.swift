@@ -36,10 +36,8 @@ struct WineDetailsView: View {
     }
 }
 
-struct WineDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        WineDetailsView(wineId: "W1")
-            .addPreviewEnvironment()
-            .addPreviewData()
-    }
+#Preview {
+    WineDetailsView(wineId: "W1")
+        .addPreviewEnvironment()
+        .addPreviewData()
 }

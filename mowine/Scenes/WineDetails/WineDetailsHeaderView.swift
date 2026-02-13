@@ -27,8 +27,8 @@ struct WineDetailsHeaderView: View {
     }
 }
 
-struct WineDetailsHeaderView_Previews: PreviewProvider {
-    static var wine = GetWineDetailsResponse(
+#Preview(traits: .sizeThatFitsLayout) {
+    let wine = GetWineDetailsResponse(
         id: "W1",
         name: "Woodbridge 2019",
         rating: 4,
@@ -38,10 +38,7 @@ struct WineDetailsHeaderView_Previews: PreviewProvider {
         location: ""
     )
 
-    static var previews: some View {
-        WineDetailsHeaderView(wine: wine)
-            .addPreviewEnvironment()
-            .addPreviewData()
-            .previewLayout(.sizeThatFits)
-    }
+    WineDetailsHeaderView(wine: wine)
+        .addPreviewEnvironment()
+        .addPreviewData()
 }

@@ -47,12 +47,10 @@ struct UserProfileView: View {
     }
 }
 
-struct UserProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            UserProfileView(userId: "U1")
-        }
-        .addPreviewEnvironment()
-        .addPreviewData()
+#Preview {
+    NavigationView {
+        UserProfileView(userId: "U1")
     }
+    .addPreviewEnvironment()
+    .addPreviewData()
 }

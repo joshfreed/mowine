@@ -64,10 +64,8 @@ struct EditWineView: View {
     }
 }
 
-struct EditWineView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditWineView(wineId: "W1")
-            .addPreviewEnvironment()
-            .addPreviewData()
-    }
+#Preview {
+    EditWineView(wineId: "W1")
+        .addPreviewEnvironment()
+        .addPreviewData()
 }

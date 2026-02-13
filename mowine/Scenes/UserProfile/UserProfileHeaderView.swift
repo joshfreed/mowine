@@ -27,17 +27,14 @@ struct UserProfileHeaderView: View {
     }
 }
 
-struct UserProfileHeaderView_Previews: PreviewProvider {
-    static var vm: UserProfileHeaderViewModel = {
+#Preview(traits: .sizeThatFitsLayout) {
+    let vm: UserProfileHeaderViewModel = {
         var vm = UserProfileHeaderViewModel()
         vm.fullName = "Barry Jones"
         return vm
     }()
 
-    static var previews: some View {
-        UserProfileHeaderView(vm: vm)
-            .addPreviewEnvironment()
-            .addPreviewData()
-            .previewLayout(.sizeThatFits)
-    }
+    UserProfileHeaderView(vm: vm)
+        .addPreviewEnvironment()
+        .addPreviewData()
 }

@@ -34,8 +34,8 @@ struct TopWinesList: View {
     }
 }
 
-struct TopWinesView_Previews: PreviewProvider {
-    static var vm: TopWinesViewModel = {
+#Preview {
+    let vm: TopWinesViewModel = {
         let vm = TopWinesViewModel()
         vm.topWines = [
             .init(id: "1", name: "First Wine", rating: 5, type: "Red")
@@ -43,15 +43,13 @@ struct TopWinesView_Previews: PreviewProvider {
         return vm
     }()
 
-    static var errorVm: TopWinesViewModel = {
+    let errorVm: TopWinesViewModel = {
         let vm = TopWinesViewModel()
         vm.errorLoadingWines = true
         return vm
     }()
 
-    static var previews: some View {
-        TopWinesView(vm: vm)
-            .addPreviewEnvironment()
-            .addPreviewData()
-    }
+    TopWinesView(vm: vm)
+        .addPreviewEnvironment()
+        .addPreviewData()
 }
