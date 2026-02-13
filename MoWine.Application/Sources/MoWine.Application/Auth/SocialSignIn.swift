@@ -25,7 +25,7 @@ public enum SocialProviderType {
     case google
 }
 
-public protocol SocialToken {}
+public protocol SocialToken: Sendable {}
 
 /// Retrieves user data from a social platform
 public protocol SocialSignInProvider {
