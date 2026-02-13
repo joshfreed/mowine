@@ -116,8 +116,8 @@ public class FirestoreUserRepository: UserRepository {
 
         try await withThrowingTaskGroup(of: DocumentSnapshot.self) { group in
             for userId in ids {
+                let query = self.db.collection("users").document(userId.asString)
                 group.addTask {
-                    let query = self.db.collection("users").document(userId.asString)
                     return try await query.getDocument()
                 }
             }

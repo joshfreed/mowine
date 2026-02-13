@@ -21,10 +21,9 @@ struct AppleToken: SocialToken {
     let fullName: PersonNameComponents?
 }
 
-fileprivate var currentNonce: String?
-
 public class SignInWithApple: NSObject, SocialSignInMethod, ASAuthorizationControllerDelegate {
     private var completion: ((Result<SocialToken, Error>) -> Void)!
+    private var currentNonce: String?
 
     private func signIn(completion: @escaping (Result<SocialToken, Error>) -> Void) {
         self.completion = completion

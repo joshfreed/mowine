@@ -15,6 +15,22 @@ public class MemoryWineRepository: WineRepository {
     var wines: [Wine] = []
 
     private var getWinesByUserSubjects: [UserId: CurrentValueSubject<[Wine], Error>] = [:]
+    private let completionDelay: TimeInterval = 0.5
+
+    private final class UncheckedSendableAction: @unchecked Sendable {
+        let action: () -> Void
+
+        init(_ action: @escaping () -> Void) {
+            self.action = action
+        }
+    }
+
+    private func invokeCompletionAfterDelay(_ action: @escaping () -> Void) {
+        let sendableAction = UncheckedSendableAction(action)
+        DispatchQueue.main.asyncAfter(deadline: .now() + completionDelay) {
+            sendableAction.action()
+        }
+    }
 
     public init() {}
 
@@ -43,7 +59,10 @@ public class MemoryWineRepository: WineRepository {
     }
 
     public func getWines(userId: UserId, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        completion(.success(wines.filter { $0.userId == userId }))
+        invokeCompletionAfterDelay { [weak self] in
+            guard let self else { return }
+            completion(.success(self.wines.filter { $0.userId == userId }))
+        }
         return FakeRegistration()
     }
 
@@ -70,7 +89,8 @@ public class MemoryWineRepository: WineRepository {
     }
 
     public func getWines(userId: UserId, wineType: WineType, completion: @escaping (Result<[Wine], Error>) -> ()) -> MoWineListenerRegistration {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        invokeCompletionAfterDelay { [weak self] in
+            guard let self else { return }
             let matched = self.wines.filter { $0.userId == userId && $0.type == wineType }
             completion(.success(matched))
         }

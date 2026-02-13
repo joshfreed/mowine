@@ -42,9 +42,7 @@ public class MemoryUserRepository: UserRepository {
             matches.append(contentsOf: m)
         }
 
-        return try await withCheckedThrowingContinuation { continuation in
-            continuation.resume(with: .success(matches))
-        }
+        return matches
     }
 
     public func getFriends(userId: UserId) -> AnyPublisher<[User], Error> {
