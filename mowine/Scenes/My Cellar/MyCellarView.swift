@@ -23,13 +23,13 @@ struct MyCellarView: View {
                         AddNewWineButton()
                     }
                 }
+                .searchable(text: $searchText)
+                .onChange(of: searchText) {
+                    searchResults = myCellar.search(searchText: searchText)
+                }
+                .analyticsScreen(name: "My Cellar", class: "MyCellarView")
         }
         .accentColor(.mwSecondary)
-        .searchable(text: $searchText)
-        .onChange(of: searchText) {
-            searchResults = myCellar.search(searchText: searchText)
-        }
-        .analyticsScreen(name: "My Cellar", class: "MyCellarView")
     }
 }
 
@@ -51,7 +51,9 @@ struct InnerCellarView: View {
 
 struct MyCellarView_Previews: PreviewProvider {
     static var previews: some View {
-        MyCellarView()
-            .addPreviewEnvironment()
+        TabView {
+            MyCellarView()
+                .addPreviewEnvironment()
+        }
     }
 }
