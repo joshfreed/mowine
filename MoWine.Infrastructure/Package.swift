@@ -18,7 +18,7 @@ let package = Package(
         .package(path: "../MoWine.Application"),
         .package(path: "../MoWine.Domain"),
         .package(url: "https://github.com/Quick/Nimble", from: "9.2.1"),
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "11.0.0"),
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "12.0.0"),
         .package(url: "https://github.com/google/GoogleSignIn-iOS", from: "7.0.0"),
         .package(url: "https://github.com/AliSoftware/Dip", from: "7.1.1"),
     ],

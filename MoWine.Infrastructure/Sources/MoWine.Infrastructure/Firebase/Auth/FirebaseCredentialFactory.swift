@@ -32,7 +32,7 @@ protocol FirebaseCredentialFactory {
 
 class AppleCredentialFactory: FirebaseCredentialFactory {
     func makeCredential(from token: AppleToken) -> AuthCredential {
-        OAuthProvider.credential(withProviderID: "apple.com", idToken: token.idTokenString, rawNonce: token.nonce)
+        OAuthProvider.appleCredential(withIDToken: token.idTokenString, rawNonce: token.nonce, fullName: token.fullName)
     }
 }
 
